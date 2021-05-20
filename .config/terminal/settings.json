@@ -1,0 +1,91 @@
+{
+    "$schema": "https://aka.ms/terminal-profiles-schema",
+    "actions": [
+        {
+            "command": "find",
+            "keys": "ctrl+shift+f"
+        },
+        {
+            "command": {
+                "action": "splitPane",
+                "split": "auto",
+                "splitMode": "duplicate"
+            },
+            "keys": "alt+shift+d"
+        }
+    ],
+    "copyFormatting": "none",
+    "copyOnSelect": false,
+    "defaultProfile": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
+    "profiles": {
+        "defaults": {
+            "acrylicOpacity": 0.5,
+            "bellStyle": "none",
+            "colorScheme": "Sundried",
+            "fontFace": "FiraCode NF",
+            "fontSize": 14,
+            "fontWeight": "semi-light",
+            "padding": "0",
+            "useAcrylic": true
+        },
+        "list": [
+            {
+                "commandline": "powershell.exe",
+                "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+                "hidden": true,
+                "name": "ps"
+            },
+            {
+                "commandline": "%SystemRoot%\\System32\\cmd.exe",
+                "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
+                "hidden": true,
+                "name": "cmd"
+            },
+            {
+                "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
+                "hidden": true,
+                "name": "azure",
+                "source": "Windows.Terminal.Azure"
+            },
+            {
+                "commandline": "C:/tools/cygwin/bin/fish.exe -i -l",
+                "guid": "{7ae619c4-aba3-41e0-b6bc-8f812b9c88d5}",
+                "hidden": false,
+                "name": "fish",
+                "closeOnExit": "always"
+            },
+            {
+                "guid": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
+                "hidden": false,
+                "name": "ubuntu",
+                "source": "Windows.Terminal.Wsl"
+            }
+        ]
+    },
+    "schemes": [
+        {
+            "background": "#1A1818",
+            "black": "#302B2A",
+            "blue": "#485B98",
+            "brightBlack": "#4D4E48",
+            "brightBlue": "#7999F7",
+            "brightCyan": "#FAD484",
+            "brightGreen": "#128C21",
+            "brightPurple": "#FD8AA1",
+            "brightRed": "#AA000C",
+            "brightWhite": "#FFFFFF",
+            "brightYellow": "#FC6A21",
+            "cursorColor": "#FFFFFF",
+            "cyan": "#9C814F",
+            "foreground": "#C9C9C9",
+            "green": "#587744",
+            "name": "Sundried",
+            "purple": "#864651",
+            "red": "#A7463D",
+            "selectionBackground": "#FFFFFF",
+            "white": "#C9C9C9",
+            "yellow": "#9D602A"
+        }
+    ],
+    "startOnUserLogin": true
+}

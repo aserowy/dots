@@ -1,0 +1,6 @@
+[user]
+    email = serowy@hotmail.com
+    name = Alexander Serowy
+
+[core]
+    editor = nvim
