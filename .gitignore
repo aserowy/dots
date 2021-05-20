@@ -1,4 +1,6 @@
-.local
-.ssh
+**
 
-fish_variables.x86_64
+!.config/
+!.gitconfig
+!.gitignore
+!.gitmodules
