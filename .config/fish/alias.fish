@@ -15,6 +15,7 @@ abbr -a gupa    git pull --rebase --autostash
 abbr -a ga      git add
 abbr -a gaa     git add --all
 abbr -a gc      git commit -v
+abbr -a gcsm    git commit -s -m
 
 abbr -a gp      git push
 abbr -a gpd     git push --dry-run
