@@ -1,3 +1,5 @@
+command_timeout = 999
+
 [time]
 disabled = false
 format = '[$time ]($style)'
