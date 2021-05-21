@@ -35,7 +35,6 @@ symbol = ' '
 symbol = ' '
 
 [git_branch]
-style = 'bold blue'
 symbol = ' '
 
 [git_status]
