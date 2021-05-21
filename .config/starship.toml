@@ -1,78 +1,94 @@
-command_timeout = 999
-
 [time]
 disabled = false
 format = '[$time ]($style)'
-time_format = "%T"
+time_format = '%T'
 
 [aws]
-symbol = "  "
+symbol = '  '
 
 [conda]
-symbol = " "
+symbol = ' '
 
 [dart]
-symbol = " "
+symbol = ' '
 
 [directory]
-read_only = " "
+read_only = ' '
 
 [docker_context]
-symbol = " "
+symbol = ' '
 
 [dotnet]
-symbol = ".NET "
+symbol = '.net '
 
 [elixir]
-symbol = " "
+symbol = ' '
 
 [elm]
-symbol = " "
+symbol = ' '
 
 [git_branch]
-symbol = " "
+symbol = ' '
+
+[git_status]
+format = '[$all_status$ahead_behind]($style)'
+
+ahead = '⇡$count '
+diverged = '⇡$ahead_count⇣$behind_count '
+behind = '⇣$count '
+
+stashed = '[*$count](yellow) '
+conflicted = '[~$count](red) '
+untracked = '[?$count](red) '
+modified = '[!$count](blue) '
+staged = '[+$count](green) '
+renamed = '[>$count](yellow) '
+deleted = '[-$count](red) '
 
 [golang]
-symbol = " "
+symbol = ' '
 
 [hg_branch]
-symbol = " "
+symbol = ' '
 
 [java]
-symbol = " "
+symbol = ' '
 
 [julia]
-symbol = " "
+symbol = ' '
+
+[lua]
+symbol = ' '
 
 [memory_usage]
-symbol = " "
+symbol = ' '
 
 [nim]
-symbol = " "
+symbol = ' '
 
 [nix_shell]
-symbol = " "
+symbol = ' '
 
 [package]
-symbol = " "
+symbol = ' '
 
 [perl]
-symbol = " "
+symbol = ' '
 
 [php]
-symbol = " "
+symbol = ' '
 
 [python]
-symbol = " "
+symbol = ' '
 
 [ruby]
-symbol = " "
+symbol = ' '
 
 [rust]
-symbol = " "
+symbol = ' '
 
 [scala]
-symbol = " "
+symbol = ' '
 
 [swift]
-symbol = "ﯣ "
+symbol = 'ﯣ '
