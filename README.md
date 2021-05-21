@@ -35,14 +35,30 @@ Set fish in your terminal of choice. I am using windows terminal. You can find m
 
 ### on ubuntu
 
+Install fish shell on your distribution described on <https://fishshell.com/>. For ubuntu (2021-05-21) you need to add the given repository.
+
+```sh
+sudo apt-add-repository ppa:fish-shell/release-3
+sudo apt-get update
+sudo apt-get install fish
+```
+
+Now install starship <https://starship.rs/> and set fish as your default shell.
+
+```sh
+sh -c "$(curl -fsSL https://starship.rs/install.sh)"
+```
+
+```sh
 chsh -s `which fish`
+```
 
 ### clone the repo
 
 Remove all files given and clone the repo into your home directory. If you don't want to remove all files, clone it into a temp folder and move all files into your home afterwards.
 
 ```sh
-git clone https://github.com/aserowy/dots.git .
+git clone git@github.com:aserowy/dots.git .
 ```
 
 The neovim configuration is used as a submodule of the repository of [NeoCode](https://github.com/aserowy/NeoCode/). To enable it, you have to initialze all submodules. Before running the git commands, make sure you have set up your github access (e.g. ssh) accordingly.
