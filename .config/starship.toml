@@ -1,3 +1,6 @@
+[character]
+success_symbol = '[ ](bold green)'
+
 [time]
 disabled = false
 format = '[$time ]($style)'
@@ -13,6 +16,7 @@ symbol = ' '
 symbol = ' '
 
 [directory]
+format = '  [$path]($style)[$read_only]($read_only_style) '
 read_only = ' '
 
 [docker_context]
@@ -28,22 +32,23 @@ symbol = ' '
 symbol = ' '
 
 [git_branch]
+style = 'bold blue'
 symbol = ' '
 
 [git_status]
 format = '[$all_status$ahead_behind]($style)'
 
 ahead = '[⇡$count](green) '
-diverged = '[⇡$ahead_count](green)[⇣$behind_count](red) '
 behind = '[⇣$count](red) '
+diverged = '[⇡$ahead_count](green)[⇣$behind_count](red) '
 
-stashed = '[*$count](yellow) '
 conflicted = '[~$count](red) '
-untracked = '[?$count](red) '
-modified = '[!$count](blue) '
-staged = '[+$count](green) '
+deleted = '[-$count](yellow) '
+modified = '[!$count](yellow) '
 renamed = '[>$count](yellow) '
-deleted = '[-$count](red) '
+staged = '[+$count](green) '
+stashed = '[*$count](blue) '
+untracked = '[?$count](blue) '
 
 [golang]
 symbol = ' '
