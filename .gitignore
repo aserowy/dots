@@ -8,3 +8,4 @@
 
 .ssh/*
 !.ssh/config
+!README.md
