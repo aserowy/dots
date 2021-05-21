@@ -1,7 +1,10 @@
-**
+*
 
 !.config/
 !.gitconfig
 !.gitignore
 !.gitmodules
+!.ssh/
+
+.ssh/*
 !.ssh/config
