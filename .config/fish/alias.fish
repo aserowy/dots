@@ -8,10 +8,10 @@ end
 abbr -a gf      git fetch
 
 abbr -a gco     git checkout
-abbr -a gcob     git checkout -b
+abbr -a gcob    git checkout -b
 
 abbr -a gpla    git pull --rebase --autostash
-abbr -a gsurm   git submodule update --remote --merge
+abbr -a gsur    git submodule update --remote --rebase
 
 abbr -a ga      git add
 abbr -a gaa     git add --all

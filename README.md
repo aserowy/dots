@@ -65,5 +65,5 @@ The neovim configuration is used as a submodule of the repository of [NeoCode](h
 
 ```sh
 git submodule init
-git submodule update --remote --merge
+git submodule update --remote --rebase
 ```
