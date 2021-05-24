@@ -1,5 +1,13 @@
 source ~/.config/fish/alias.fish
 
+# vi mode
+set -g fish_cursor_unknown block
+
+# https://github.com/fish-shell/fish-shell/issues/3481
+function fish_mode_prompt; end
+
+fish_vi_key_bindings
+
 # ssh
 eval (ssh-agent -c)
 

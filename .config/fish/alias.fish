@@ -18,10 +18,15 @@ abbr -a gaa     git add --all
 abbr -a gc      git commit -v
 abbr -a gcsm    git commit -s -m
 
+abbr -a gt      git tag
+abbr -a gta     git tag -a
+
 abbr -a grsh    git reset --hard
 
 abbr -a gp      git push
-abbr -a gpd     git push --dry-run
+abbr -a gpdr    git push --dry-run 
+abbr -a gpod    git push origin --delete
+abbr -a gpt     git push --tags
 
 abbr -a gst     git status
 abbr -a gd      git diff
