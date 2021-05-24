@@ -1,44 +1,40 @@
+Agent pid 20199
+Agent pid 20071
+
 # Dotfiles...
 
 ## aliases & abbraviations
 
-### git
-
-gf      git fetch
-
-gco     git checkout
-gcob    git checkout -b
-
-gpla    git pull --rebase --autostash
-gsur    git submodule update --remote --rebase
-
-ga      git add
-gaa     git add --all
-gc      git commit -v
-gcsm    git commit -s -m
-
-gt      git tag
-gta     git tag -a
-
-grsh    git reset --hard
-
-gp      git push
-gpdr    git push --dry-run 
-gpod    git push origin --delete
-gpt     git push --tags
-
-gst     git status
-gd      git diff
-
-### ls
-
-l='ls -l'
-la='ls -a'
-lla='ls -la'
-
-### misc
-
-rl='exec fish'
+| keys     | effect                                 |
+| -------- | -------------------------------------- |
+|          |                                        |
+| **git**  |                                        |
+| gf       | git fetch                              |
+| gco      | git checkout                           |
+| gcob     | git checkout -b                        |
+| gpla     | git pull --rebase --autostash          |
+| gsur     | git submodule update --remote --rebase |
+| ga       | git add                                |
+| gaa      | git add --all                          |
+| gc       | git commit -v                          |
+| gcsm     | git commit -s -m                       |
+| gt       | git tag                                |
+| gta      | git tag -a                             |
+| grsh     | git reset --hard                       |
+| gp       | git push                               |
+| gpdr     | git push --dry-run                     |
+| gpod     | git push origin --delete               |
+| gpt      | git push --tags                        |
+| gst      | git status                             |
+| gd       | git diff                               |
+|          |                                        |
+| **ls**   |                                        |
+| l        | 'ls -l'                                |
+| la       | 'ls -a'                                |
+| lla      | 'ls -la'                               |
+|          |                                        |
+| **misc** |                                        |
+| rl       | 'exec fish'                            |
 
 ## install
 
