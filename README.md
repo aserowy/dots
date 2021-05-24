@@ -1,7 +1,3 @@
-Agent pid 21891
-Agent pid 20199
-Agent pid 20071
-
 # Dotfiles...
 
 ## aliases & abbraviations
@@ -42,6 +38,8 @@ Agent pid 20071
 ### fonts
 
 To get usefull icons in shell and nvim, install your favorite nerd font from <https://www.nerdfonts.com/font-downloads>. My most beloved font is `FiraCode Nerd Font`. It is important to install all available font faces given.
+
+Set Fira as default font in your terminal.
 
 ### on windows
 
