@@ -1,3 +1,4 @@
+Agent pid 21891
 Agent pid 20199
 Agent pid 20071
 
@@ -29,12 +30,12 @@ Agent pid 20071
 | gd       | git diff                               |
 |          |                                        |
 | **ls**   |                                        |
-| l        | 'ls -l'                                |
-| la       | 'ls -a'                                |
-| lla      | 'ls -la'                               |
+| l        | ls -l                                  |
+| la       | ls -a                                  |
+| lla      | ls -la                                 |
 |          |                                        |
 | **misc** |                                        |
-| rl       | 'exec fish'                            |
+| rl       | exec fish                              |
 
 ## install
 
