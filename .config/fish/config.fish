@@ -8,10 +8,9 @@ function fish_mode_prompt; end
 set -g fish_cursor_unknown block
 
 # ssh
-# eval (ssh-agent -c)
-ps -ef | grep -v grep | grep "ssh-agent -c" >/dev/null
+ps -ef | grep -v grep | grep "ssh-agent" >/dev/null
 if test $status -ne 0
-     eval (ssh-agent -c) &>/dev/null
+    eval (ssh-agent -c) &>/dev/null
 end
 
 # neovim
