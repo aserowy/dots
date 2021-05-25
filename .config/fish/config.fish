@@ -1,3 +1,6 @@
+function fish_greeting
+end
+
 source ~/.config/fish/alias.fish
 
 # vi mode
