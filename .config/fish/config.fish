@@ -1,15 +1,18 @@
 source ~/.config/fish/alias.fish
 
 # vi mode
-set -g fish_cursor_unknown block
+fish_vi_key_bindings
 
 # https://github.com/fish-shell/fish-shell/issues/3481
 function fish_mode_prompt; end
-
-fish_vi_key_bindings
+set -g fish_cursor_unknown block
 
 # ssh
-eval (ssh-agent -c)
+# eval (ssh-agent -c)
+ps -ef | grep -v grep | grep "ssh-agent -c" >/dev/null
+if test $status -ne 0
+     eval (ssh-agent -c) &>/dev/null
+end
 
 # neovim
 if test -d c:/tools/cygwin/$HOME/.config/
