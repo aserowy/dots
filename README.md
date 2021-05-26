@@ -88,6 +88,14 @@ sh -c "$(curl -fsSL https://starship.rs/install.sh)"
 chsh -s `which fish`
 ```
 
+To prevent slow responses through authentication, add cygserver for caching purposes. The shell must run with elevated privileges!
+
+> <https://superuser.com/questions/877051/cygwin-from-windows-is-very-slow-laggy>
+
+```sh
+cygserver-config
+```
+
 ### clone the repo
 
 Remove all files given and clone the repo into your home directory. If you don't want to remove all files, clone it into a temp folder and move all files into your home afterwards.
