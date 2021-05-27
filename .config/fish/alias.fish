@@ -10,7 +10,7 @@ abbr -a gf      git fetch
 abbr -a gco     git checkout
 abbr -a gcob    git checkout -b
 
-abbr -a gpla    git pull --rebase --autostash
+abbr -a gpla    git pull --autostash --rebase
 abbr -a gsur    git submodule update --remote --rebase
 
 abbr -a ga      git add
