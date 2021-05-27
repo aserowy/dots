@@ -26,6 +26,7 @@ abbr -a grsh    git reset --hard
 abbr -a gp      git push
 abbr -a gpdr    git push --dry-run 
 abbr -a gpod    git push origin --delete
+abbr -a gpsu    git push --set-upstream origin
 abbr -a gpt     git push --tags
 
 abbr -a gst     git status
