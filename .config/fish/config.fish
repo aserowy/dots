@@ -16,6 +16,7 @@ end
 
 # sources
 source ~/.config/fish/alias.fish
+source ~/.config/fish/paths.fish
 
 # vi mode
 fish_vi_key_bindings
@@ -28,16 +29,6 @@ set -g fish_cursor_unknown block
 ps -ef | grep -v grep | grep 'ssh-agent' >/dev/null
 if test $status -ne 0
     eval (ssh-agent -c) &>/dev/null
-end
-
-# neovim
-if test -d c:/tools/cygwin/$HOME/.config/
-    set -x XDG_CONFIG_HOME c:/tools/cygwin/$HOME/.config/
-end
-
-# starship
-if test -d c:/tools/cygwin/$HOME/.config/
-    set -x STARSHIP_CONFIG c:/tools/cygwin/$HOME/.config/starship.toml
 end
 
 starship init fish | source

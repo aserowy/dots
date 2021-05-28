@@ -1,11 +1,10 @@
-*
+**
 
-!.config/
+!.config/**/*.fish
 !.gitconfig
 !.gitignore
 !.gitmodules
 !.ssh/
 
-.ssh/*
 !.ssh/config
 !README.md
