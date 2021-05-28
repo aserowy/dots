@@ -1,1 +1,0 @@
-export LANG=$(locale -uU)
