@@ -68,6 +68,14 @@ cyg-get clang curl fish git openssh
 
 Set fish in your terminal of choice. I am using windows terminal. You can find my configuration for copy & paste actions [here](./.config/terminal/settings.json).
 
+To prevent slow responses through authentication, add cygserver for caching purposes. The shell must run with elevated privileges!
+
+> <https://superuser.com/questions/877051/cygwin-from-windows-is-very-slow-laggy>
+
+```sh
+cygserver-config
+```
+
 ### on ubuntu
 
 Install fish shell on your distribution described on <https://fishshell.com/>. For ubuntu (2021-05-21) you need to add the given repository.
@@ -86,14 +94,6 @@ sh -c "$(curl -fsSL https://starship.rs/install.sh)"
 
 ```sh
 chsh -s `which fish`
-```
-
-To prevent slow responses through authentication, add cygserver for caching purposes. The shell must run with elevated privileges!
-
-> <https://superuser.com/questions/877051/cygwin-from-windows-is-very-slow-laggy>
-
-```sh
-cygserver-config
 ```
 
 ### clone the repo
