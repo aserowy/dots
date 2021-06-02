@@ -2,17 +2,55 @@
     "$schema": "https://aka.ms/terminal-profiles-schema",
     "actions": [
         {
-            "command": "find",
-            "keys": "ctrl+shift+f"
+            "command": {
+                "action": "moveFocus",
+                "direction": "down"
+            },
+            "keys": "alt+j"
+        },
+        {
+            "command": {
+                "action": "moveFocus",
+                "direction": "left"
+            },
+            "keys": "alt+h"
+        },
+        {
+            "command": {
+                "action": "moveFocus",
+                "direction": "right"
+            },
+            "keys": "alt+l"
+        },
+        {
+            "command": {
+                "action": "moveFocus",
+                "direction": "up"
+            },
+            "keys": "alt+k"
         },
         {
             "command": {
                 "action": "splitPane",
-                "split": "auto",
-                "splitMode": "duplicate"
+                "split": "vertical"
             },
-            "keys": "alt+shift+d"
-        }
+            "keys": "alt+v"
+        },
+        {
+            "command": {
+                "action": "splitPane",
+                "split": "horizontal"
+            },
+            "keys": "alt+x"
+        },
+        {
+            "command": "closePane",
+            "keys": "alt+c"
+        },
+        {
+            "command": "find",
+            "keys": "ctrl+shift+f"
+        },
     ],
     "copyFormatting": "none",
     "copyOnSelect": false,
