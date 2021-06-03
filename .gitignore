@@ -12,4 +12,6 @@
 .ssh/*
 !.ssh/config
 
+!.tmux.conf
+
 !README.md

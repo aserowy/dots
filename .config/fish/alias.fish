@@ -32,6 +32,13 @@ abbr -a gpt     git push --tags
 abbr -a gst     git status
 abbr -a gd      git diff
 
+# tmux
+abbr -a tl      tmux ls
+abbr -a tn      tmux new -s
+abbr -a ta      tmux attach -t
+abbr -a trs     tmux rename-session
+abbr -a tks     tmux kill-session
+
 # ls
 alias l='ls -l'
 alias la='ls -a'

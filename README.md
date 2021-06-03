@@ -1,5 +1,26 @@
 # Dotfiles...
 
+## tmux
+
+### bindings
+
+| keys                | effect              |
+| ------------------- | ------------------- |
+| <kbd>ctrl + h</kbd> | moves to left pane  |
+| <kbd>ctrl + j</kbd> | moves to lower pane |
+| <kbd>ctrl + k</kbd> | moves to upper pane |
+| <kbd>ctrl + l</kbd> | moves to right pane |
+
+### abbraviations
+
+| keys | effect              |
+| ---- | ------------------- |
+| tl   | tmux ls             |
+| tn   | tmux new -s         |
+| ta   | tmux attach -t      |
+| trs  | tmux rename-session |
+| tks  | tmux kill-session   |
+
 ## aliases & abbraviations
 
 | keys     | effect                                 |
@@ -63,7 +84,7 @@ RefreshEnv.cmd
 Make sure to install neovim nightly with the `--pre` suffix. Now install with cyg-get all missing packages into your cygwin environment.
 
 ```sh
-cyg-get clang curl fish git openssh
+cyg-get clang curl fish git openssh tmux
 ```
 
 Set fish in your terminal of choice. I am using windows terminal. You can find my configuration for copy & paste actions [here](./.config/terminal/settings.json).
@@ -77,6 +98,8 @@ cygserver-config
 ```
 
 ### on ubuntu
+
+> My workflow uses `tmux` as terminal multiplexer. It is installed on ubuntu by default! Make sure you have it in your disposal as well :).
 
 Install fish shell on your distribution described on <https://fishshell.com/>. For ubuntu (2021-05-21) you need to add the given repository.
 
