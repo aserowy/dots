@@ -2,14 +2,18 @@
 
 ## tmux
 
+The prefix changed to <kbd>ctrl + t</kbd> to overwrite the terminal key inside neovim while using tmux.
+
 ### bindings
 
-| keys                | effect              |
-| ------------------- | ------------------- |
-| <kbd>ctrl + h</kbd> | moves to left pane  |
-| <kbd>ctrl + j</kbd> | moves to lower pane |
-| <kbd>ctrl + k</kbd> | moves to upper pane |
-| <kbd>ctrl + l</kbd> | moves to right pane |
+| keys                  | effect                    |
+| --------------------- | ------------------------- |
+| <kbd>ctrl + t</kbd> v | split window vertically   |
+| <kbd>ctrl + t</kbd> s | split window horizontally |
+| <kbd>ctrl + j</kbd>   | moves to lower pane       |
+| <kbd>ctrl + j</kbd>   | moves to lower pane       |
+| <kbd>ctrl + k</kbd>   | moves to upper pane       |
+| <kbd>ctrl + l</kbd>   | moves to right pane       |
 
 ### abbraviations
 
