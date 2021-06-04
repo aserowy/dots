@@ -12,6 +12,9 @@
 .ssh/*
 !.ssh/config
 
+!.tmux/
+!.tmux/plugins/
+!.tmux/plugins/tpm
 !.tmux.conf
 
 !README.md
