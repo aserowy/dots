@@ -2,6 +2,6 @@
 	path = .config/nvim
 	url = git@github.com:aserowy/NeoCode.git
 	branch = main
-[submodule "/home/serowy/.tmux/plugins/tpm"]
-	path = /home/serowy/.tmux/plugins/tpm
+[submodule ".tmux/plugins/tpm"]
+	path = .tmux/plugins/tpm
 	url = git@github.com:tmux-plugins/tpm.git
