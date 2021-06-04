@@ -1,79 +1,98 @@
 {
-    "$schema": "https://aka.ms/terminal-profiles-schema",
-    "actions": [],
-    "copyFormatting": "none",
-    "copyOnSelect": false,
-    "defaultProfile": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
-    "profiles": {
-        "defaults": {
-            "acrylicOpacity": 0.5,
-            "bellStyle": "none",
-            "colorScheme": "Sundried",
-            "fontFace": "FiraCode NF",
-            "fontSize": 14,
-            "fontWeight": "semi-light",
-            "padding": "0",
-            "useAcrylic": true
-        },
-        "list": [
-            {
-                "commandline": "powershell.exe",
-                "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
-                "hidden": true,
-                "name": "ps"
-            },
-            {
-                "commandline": "%SystemRoot%\\System32\\cmd.exe",
-                "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
-                "hidden": true,
-                "name": "cmd"
-            },
-            {
-                "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
-                "hidden": true,
-                "name": "azure",
-                "source": "Windows.Terminal.Azure"
-            },
-            {
-                "commandline": "C:/tools/cygwin/bin/fish.exe -i -l",
-                "guid": "{7ae619c4-aba3-41e0-b6bc-8f812b9c88d5}",
-                "hidden": false,
-                "name": "fish",
-                "closeOnExit": "always"
-            },
-            {
-                "guid": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
-                "hidden": false,
-                "name": "ubuntu",
-                "source": "Windows.Terminal.Wsl",
-                "closeOnExit": "always"
-            }
-        ]
+  "$schema": "https://aka.ms/terminal-profiles-schema",
+  "actions": [],
+  "copyFormatting": "none",
+  "copyOnSelect": false,
+  "defaultProfile": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
+  "profiles": {
+    "defaults": {
+      "acrylicOpacity": 0.5,
+      "bellStyle": "none",
+      "colorScheme": "One Dark",
+      "fontFace": "FiraCode NF",
+      "fontSize": 14,
+      "fontWeight": "semi-light",
+      "padding": "0",
+      "useAcrylic": true
     },
-    "schemes": [
-        {
-            "background": "#1A1818",
-            "black": "#302B2A",
-            "blue": "#485B98",
-            "brightBlack": "#4D4E48",
-            "brightBlue": "#7999F7",
-            "brightCyan": "#FAD484",
-            "brightGreen": "#128C21",
-            "brightPurple": "#FD8AA1",
-            "brightRed": "#AA000C",
-            "brightWhite": "#FFFFFF",
-            "brightYellow": "#FC6A21",
-            "cursorColor": "#FFFFFF",
-            "cyan": "#9C814F",
-            "foreground": "#C9C9C9",
-            "green": "#587744",
-            "name": "Sundried",
-            "purple": "#864651",
-            "red": "#A7463D",
-            "selectionBackground": "#FFFFFF",
-            "white": "#C9C9C9",
-            "yellow": "#9D602A"
-        }
-    ],
-    "startOnUserLogin": true
+    "list": [
+      {
+        "commandline": "powershell.exe",
+        "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+        "hidden": true,
+        "name": "ps"
+      },
+      {
+        "commandline": "%SystemRoot%\\System32\\cmd.exe",
+        "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
+        "hidden": true,
+        "name": "cmd"
+      },
+      {
+        "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
+        "hidden": true,
+        "name": "azure",
+        "source": "Windows.Terminal.Azure"
+      },
+      {
+        "commandline": "C:/tools/cygwin/bin/fish.exe -i -l",
+        "guid": "{7ae619c4-aba3-41e0-b6bc-8f812b9c88d5}",
+        "hidden": false,
+        "name": "fish",
+        "closeOnExit": "always"
+      },
+      {
+        "guid": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
+        "hidden": false,
+        "name": "ubuntu",
+        "source": "Windows.Terminal.Wsl",
+        "closeOnExit": "always"
+      }
+    ]
+  },
+  "schemes": [
+    {
+      "background": "#1E2127",
+      "black": "#000000",
+      "blue": "#61AFEF",
+      "brightBlack": "#5C6370",
+      "brightBlue": "#61AFEF",
+      "brightCyan": "#56B6C2",
+      "brightGreen": "#98C379",
+      "brightPurple": "#C678DD",
+      "brightRed": "#E06C75",
+      "brightWhite": "#FFFFFF",
+      "brightYellow": "#D19A66",
+      "cyan": "#56B6C2",
+      "foreground": "#5C6370",
+      "green": "#98C379",
+      "name": "One Dark",
+      "purple": "#C678DD",
+      "red": "#E06C75",
+      "white": "#ABB2BF",
+      "yellow": "#D19A66"
+    },
+    {
+      "background": "#F9F9F9",
+      "black": "#000000",
+      "blue": "#4078F2",
+      "brightBlack": "#383A42",
+      "brightBlue": "#4078F2",
+      "brightCyan": "#0184BC",
+      "brightGreen": "#50A14F",
+      "brightPurple": "#A626A4",
+      "brightRed": "#E45649",
+      "brightWhite": "#FFFFFF",
+      "brightYellow": "#986801",
+      "cyan": "#0184BC",
+      "foreground": "#383A42",
+      "green": "#50A14F",
+      "name": "One Light",
+      "purple": "#A626A4",
+      "red": "#E45649",
+      "white": "#A0A1A7",
+      "yellow": "#986801"
+    }
+  ],
+  "startOnUserLogin": true
 }
