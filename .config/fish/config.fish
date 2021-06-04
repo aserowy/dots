@@ -18,11 +18,7 @@ end
 source ~/.config/fish/alias.fish
 source ~/.config/fish/paths.fish
 
-# vi mode
-fish_vi_key_bindings
-
-# https://github.com/fish-shell/fish-shell/issues/3481
-function fish_mode_prompt; end
+# settings
 set -g fish_cursor_unknown block
 
 # ssh

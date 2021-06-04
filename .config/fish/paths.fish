@@ -6,6 +6,8 @@ end
 # neovim
 if test -d c:/tools/cygwin/$HOME/.config/
     set -x XDG_CONFIG_HOME c:/tools/cygwin/$HOME/.config/
+else
+    set -x XDG_CONFIG_HOME ~/.config/
 end
 
 # starship
