@@ -2,6 +2,8 @@
 
 ## tmux
 
+> cheatsheet for tmux <https://gist.github.com/MohamedAlaa/2961058>
+
 The prefix changed to <kbd>ctrl + t</kbd> to overwrite the terminal key inside neovim while using tmux.
 
 ### bindings
