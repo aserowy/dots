@@ -19,14 +19,14 @@ The prefix changed to <kbd>ctrl + t</kbd> to overwrite the terminal key inside n
 
 ### abbraviations
 
-| keys | effect              |
-| ---- | ------------------- |
-| tl   | tmux ls             |
-| tn   | tmux new -s         |
-| ta   | tmux attach -t      |
-| trs  | tmux rename-session |
-| tks  | tmux kill-server    |
-| tkss | tmux kill-session   |
+| keys | effect               |
+| ---- | -------------------- |
+| tl   | tmux ls              |
+| tn   | tmux new -s          |
+| ta   | tmux attach -t       |
+| trs  | tmux rename-session  |
+| tks  | tmux kill-server     |
+| tkss | tmux kill-session -t |
 
 ## aliases & abbraviations
 

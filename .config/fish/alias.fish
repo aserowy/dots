@@ -38,7 +38,7 @@ abbr -a tn      tmux new -s
 abbr -a ta      tmux attach -t
 abbr -a trs     tmux rename-session
 abbr -a tks     tmux kill-server
-abbr -a tkss    tmux kill-session
+abbr -a tkss    tmux kill-session -t
 
 # ls
 alias l='ls -l'
