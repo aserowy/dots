@@ -33,6 +33,7 @@ abbr -a gst     git status
 abbr -a gd      git diff
 
 # tmux
+abbr -a t       tmux
 abbr -a tl      tmux ls
 abbr -a tn      tmux new -s
 abbr -a ta      tmux attach -t

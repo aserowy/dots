@@ -21,6 +21,7 @@ The prefix changed to <kbd>ctrl + t</kbd> to overwrite the terminal key inside n
 
 | keys | effect               |
 | ---- | -------------------- |
+| t    | tmux                 |
 | tl   | tmux ls              |
 | tn   | tmux new -s          |
 | ta   | tmux attach -t       |
