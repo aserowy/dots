@@ -25,7 +25,8 @@ The prefix changed to <kbd>ctrl + t</kbd> to overwrite the terminal key inside n
 | tn   | tmux new -s         |
 | ta   | tmux attach -t      |
 | trs  | tmux rename-session |
-| tks  | tmux kill-session   |
+| tks  | tmux kill-server    |
+| tkss | tmux kill-session   |
 
 ## aliases & abbraviations
 
