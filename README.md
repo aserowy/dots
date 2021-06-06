@@ -23,11 +23,12 @@ The prefix changed to <kbd>ctrl + t</kbd> to overwrite the terminal key inside n
 | ---- | -------------------- |
 | t    | tmux                 |
 | tl   | tmux ls              |
-| tn   | tmux new -s          |
+| ts   | tmux new -s          |
 | ta   | tmux attach -t       |
-| trs  | tmux rename-session  |
-| tks  | tmux kill-server     |
+| tad  | tmux attach -d -t    |
+| tksv | tmux kill-server     |
 | tkss | tmux kill-session -t |
+| trss | tmux rename-session  |
 
 ## aliases & abbraviations
 
@@ -55,12 +56,12 @@ The prefix changed to <kbd>ctrl + t</kbd> to overwrite the terminal key inside n
 | gd       | git diff                               |
 |          |                                        |
 | **ls**   |                                        |
-| l        | ls -l                                  |
+| ll       | ls -l                                  |
 | la       | ls -a                                  |
 | lla      | ls -la                                 |
 |          |                                        |
 | **misc** |                                        |
-| rl       | exec fish                              |
+| src      | -- sources zsh configuration again     |
 
 ## install
 
@@ -95,16 +96,6 @@ Make sure to install neovim nightly with the `--pre` suffix. Now install with cy
 cyg-get clang curl zsh git openssh tmux
 ```
 
-Set fish in your terminal of choice. I am using windows terminal. You can find my configuration for copy & paste actions [here](./.config/terminal/settings.json).
-
-To prevent slow responses through authentication, add cygserver for caching purposes. The shell must run with elevated privileges!
-
-> <https://superuser.com/questions/877051/cygwin-from-windows-is-very-slow-laggy>
-
-```sh
-cygserver-config
-```
-
 ### on ubuntu
 
 > My workflow uses `tmux` as terminal multiplexer. It is installed on ubuntu by default! Make sure you have it in your disposal as well :).
@@ -123,21 +114,24 @@ sh -c "$(curl -fsSL https://starship.rs/install.sh)"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
-```sh
+`````sh
+
 chsh -s $(which zsh)
-```
+    ```
 
 ### clone the repo
 
-Remove all files given and clone the repo into your home directory. If you don't want to remove all files, clone it into a temp folder and move all files into your home afterwards.
+    Remove all files given and clone the repo into your home directory. If you don't want to remove all files, clone it into a temp folder and move all files into your home afterwards.
 
-```sh
-git clone git@github.com:aserowy/dots.git .
-```
+    ```sh
+    git clone git@github.com:aserowy/dots.git .
+    ```
 
-The neovim configuration is used as a submodule of the repository of [NeoCode](https://github.com/aserowy/NeoCode/). To enable it, you have to initialze all submodules. Before running the git commands, make sure you have set up your github access (e.g. ssh) accordingly.
+    The neovim configuration is used as a submodule of the repository of [NeoCode](https://github.com/aserowy/NeoCode/). To enable it, you have to initialze all submodules. Before running the git commands, make sure you have set up your github access (e.g. ssh) accordingly.
 
-```sh
-git submodule init
-git submodule update --remote --rebase
-```
+    ```sh
+    git submodule init
+    git submodule update --remote --rebase
+    ```
+    ````
+`````
