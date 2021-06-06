@@ -28,6 +28,12 @@ alias gd="git diff"
 
 # tmux
 alias t="tmux"
+alias tl="tmux ls"
+alias ts="tmux new -s"
+alias ta="tmux attach -t"
+alias tad="tmux attach -d -t"
+alias tksv="tmux kill-server"
+alias tkss="tmux kill-session -t"
 alias trss="tmux rename-session"
 
 # ls

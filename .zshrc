@@ -11,7 +11,6 @@ plugins=(
   docker
   docker-compose
   ssh-agent
-  tmux
   zsh_reload
   zsh-vi-mode
 
