@@ -5,7 +5,7 @@ fi
 
 # neovim
 if [ -d "c:/tools/cygwin/$HOME/.config/" ]; then
-    export XDG_CONFIG_HOME=$("c:/tools/cygwin/$HOME/.config/")
+    export XDG_CONFIG_HOME=$("c:/tools/cygwin$HOME/.config/")
 fi
 
 # snap
@@ -15,7 +15,7 @@ fi
 
 # starship
 if [ -d "c:/tools/cygwin/$HOME/.config/" ]; then
-    export STARSHIP_CONFIG=$("c:/tools/cygwin/$HOME/.config/starship.toml")
+    export STARSHIP_CONFIG=$("c:/tools/cygwin$HOME/.config/starship.toml")
 fi
 
 export PATH
