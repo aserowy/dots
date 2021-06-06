@@ -1,9 +1,15 @@
 *
 
 !.config/
+
 !.config/fish/
 .config/fish/*
 !.config/fish/*.fish
+
+!.config/ohmyzsh/
+!.config/ohmyzsh/*
+!.config/ohmyzsh/plugins
+!.config/ohmyzsh/plugins/zsh-vi-mode
 
 !.gitconfig
 !.gitignore
@@ -16,5 +22,7 @@
 !.tmux/plugins/
 !.tmux/plugins/tpm
 !.tmux.conf
+
+!.zshrc
 
 !README.md

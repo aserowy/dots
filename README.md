@@ -92,7 +92,7 @@ RefreshEnv.cmd
 Make sure to install neovim nightly with the `--pre` suffix. Now install with cyg-get all missing packages into your cygwin environment.
 
 ```sh
-cyg-get clang curl fish git openssh tmux
+cyg-get clang curl zsh git openssh tmux
 ```
 
 Set fish in your terminal of choice. I am using windows terminal. You can find my configuration for copy & paste actions [here](./.config/terminal/settings.json).
@@ -109,22 +109,22 @@ cygserver-config
 
 > My workflow uses `tmux` as terminal multiplexer. It is installed on ubuntu by default! Make sure you have it in your disposal as well :).
 
-Install fish shell on your distribution described on <https://fishshell.com/>. For ubuntu (2021-05-21) you need to add the given repository.
+Install zsh on your distribution.
 
 ```sh
-sudo apt-add-repository ppa:fish-shell/release-3
 sudo apt-get update
-sudo apt-get install fish
+sudo apt-get install -y zsh
 ```
 
-Now install starship <https://starship.rs/> and set fish as your default shell.
+Now install starship (<https://starship.rs/>), ohmyzsh (<https://github.com/ohmyzsh/ohmyzsh/>), and set zsh as your default shell.
 
 ```sh
 sh -c "$(curl -fsSL https://starship.rs/install.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
 ```sh
-chsh -s `which fish`
+chsh -s $(which zsh)
 ```
 
 ### clone the repo
