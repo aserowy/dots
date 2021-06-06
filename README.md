@@ -114,24 +114,14 @@ sh -c "$(curl -fsSL https://starship.rs/install.sh)"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
-`````sh
-
+```sh
 chsh -s $(which zsh)
-    ```
+```
 
 ### clone the repo
 
-    Remove all files given and clone the repo into your home directory. If you don't want to remove all files, clone it into a temp folder and move all files into your home afterwards.
+Remove all files given and clone the repo into your home directory. If you don't want to remove all files, clone it into a temp folder and move all files into your home afterwards.
 
-    ```sh
-    git clone git@github.com:aserowy/dots.git .
-    ```
-
-    The neovim configuration is used as a submodule of the repository of [NeoCode](https://github.com/aserowy/NeoCode/). To enable it, you have to initialze all submodules. Before running the git commands, make sure you have set up your github access (e.g. ssh) accordingly.
-
-    ```sh
-    git submodule init
-    git submodule update --remote --rebase
-    ```
-    ````
-`````
+```sh
+git clone --recurse-submodules -j8 git@github.com:aserowy/dots.git .
+```
