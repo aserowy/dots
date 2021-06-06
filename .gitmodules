@@ -2,9 +2,11 @@
 	path = .config/nvim
 	url = git@github.com:aserowy/NeoCode.git
 	branch = main
-[submodule ".tmux/plugins/tpm"]
-	path = .tmux/plugins/tpm
-	url = git@github.com:tmux-plugins/tpm.git
 [submodule ".config/ohmyzsh/plugins/zsh-vi-mode"]
 	path = .config/ohmyzsh/plugins/zsh-vi-mode
 	url = git@github.com:jeffreytse/zsh-vi-mode.git
+	branch = master
+[submodule ".tmux/plugins/tpm"]
+	path = .tmux/plugins/tpm
+	url = git@github.com:tmux-plugins/tpm.git
+	branch = master
