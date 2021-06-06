@@ -11,6 +11,8 @@ plugins=(
   docker
   docker-compose
   ssh-agent
+  zsh-autosuggestions
+  zsh-completions
   zsh_reload
   zsh-vi-mode
 

@@ -2,6 +2,14 @@
 	path = .config/nvim
 	url = git@github.com:aserowy/NeoCode.git
 	branch = main
+[submodule ".config/ohmyzsh/plugins/zsh-autosuggestions"]
+	path = .config/ohmyzsh/plugins/zsh-autosuggestions
+	url = git@github.com:zsh-users/zsh-autosuggestions.git
+	branch = master
+[submodule ".config/ohmyzsh/plugins/zsh-completions"]
+	path = .config/ohmyzsh/plugins/zsh-completions
+	url = git@github.com:zsh-users/zsh-completions.git
+	branch = master
 [submodule ".config/ohmyzsh/plugins/zsh-syntax-highlighting"]
 	path = .config/ohmyzsh/plugins/zsh-syntax-highlighting
 	url = git@github.com:zsh-users/zsh-syntax-highlighting.git

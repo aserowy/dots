@@ -5,8 +5,11 @@
 !.config/ohmyzsh/
 !.config/ohmyzsh/*
 !.config/ohmyzsh/plugins
-!.config/ohmyzsh/plugins/zsh-vi-mode
+!.config/ohmyzsh/plugins/zsh-autosuggestions
+!.config/ohmyzsh/plugins/zsh-completions
 !.config/ohmyzsh/plugins/zsh-syntax-highlighting
+!.config/ohmyzsh/plugins/zsh-vi-mode
+
 
 !.gitconfig
 !.gitignore
