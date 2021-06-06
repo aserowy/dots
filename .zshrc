@@ -14,6 +14,9 @@ plugins=(
   tmux
   zsh_reload
   zsh-vi-mode
+
+  # must be the last sourced plugin
+  zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh

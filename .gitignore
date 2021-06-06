@@ -6,6 +6,7 @@
 !.config/ohmyzsh/*
 !.config/ohmyzsh/plugins
 !.config/ohmyzsh/plugins/zsh-vi-mode
+!.config/ohmyzsh/plugins/zsh-syntax-highlighting
 
 !.gitconfig
 !.gitignore
