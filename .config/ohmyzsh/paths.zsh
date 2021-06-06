@@ -4,8 +4,8 @@ if [ -d "$HOME/.cargo/bin" ]; then
 fi
 
 # neovim
-if [ -d "c:/tools/cygwin$HOME/.config/" ]; then
-    export XDG_CONFIG_HOME=$("c:/tools/cygwin$HOME/.config/")
+if [ -d "/cygdrive/c/tools/cygwin$HOME/.config/" ]; then
+    export XDG_CONFIG_HOME="/cygdrive/c/tools/cygwin$HOME/.config/"
 fi
 
 # snap
@@ -14,8 +14,8 @@ if [ -d "/snap/bin" ]; then
 fi
 
 # starship
-if [ -d "c:/tools/cygwin$HOME/.config/" ]; then
-    export STARSHIP_CONFIG=$("c:/tools/cygwin$HOME/.config/starship.toml")
+if [ -d "/cygdrive/c/tools/cygwin$HOME/.config/" ]; then
+    export STARSHIP_CONFIG="/cygdrive/c/tools/cygwin$HOME/.config/starship.toml"
 fi
 
 export PATH
