@@ -2,10 +2,6 @@
 
 !.config/
 
-!.config/fish/
-.config/fish/*
-!.config/fish/*.fish
-
 !.config/ohmyzsh/
 !.config/ohmyzsh/*
 !.config/ohmyzsh/plugins
