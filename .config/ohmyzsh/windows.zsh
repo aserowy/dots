@@ -3,6 +3,6 @@ if [ -d "/cygdrive/c/tools/cygwin$HOME/.config/" ]; then
     alias nvim="nvim -u C:/tools/cygwin$HOME/.config/nvim/init.lua"
 
     # starship
-    export STARSHIP_CONFIG="$HOME/.config/starship.toml"
+    export STARSHIP_CONFIG="C:/tools/cygwin$HOME/.config/starship.toml"
 fi
 

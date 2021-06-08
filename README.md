@@ -93,7 +93,13 @@ RefreshEnv.cmd
 Make sure to install neovim nightly with the `--pre` suffix. Now install with cyg-get all missing packages into your cygwin environment.
 
 ```sh
-cyg-get clang curl zsh git openssh tmux
+cyg-get clang curl zsh git openssh tmux dos2unix
+```
+
+Install ohmyzsh within your cygwin shell.
+
+```sh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
 ### on ubuntu

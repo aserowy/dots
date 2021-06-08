@@ -28,4 +28,9 @@ for configuration in "$ZSH_CUSTOM/"*.zsh; do
 done
 unset configuration
 
-eval "$(starship init zsh)"
+# TODO: https://github.com/starship/starship/issues/2449
+if [ -d "/cygdrive/c/tools/cygwin$HOME/.config/" ]; then
+    source <(starship init zsh --print-full-init | dos2unix)
+else
+    eval "$(starship init zsh)"
+fi
