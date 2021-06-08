@@ -25,7 +25,7 @@ read_only = ' '
 symbol = ' '
 
 [dotnet]
-format = '[$symbol($version )(什 $tfm )]($style)'
+format = '[$symbol($version )(什 $tfm)]($style)'
 symbol = '.net '
 
 [elixir]
