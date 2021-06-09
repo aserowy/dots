@@ -3,6 +3,8 @@ export ZSH="$HOME/.oh-my-zsh"
 ### Settings
 ZSH_CUSTOM="$HOME/.config/ohmyzsh"
 
+export EDITOR=nvim
+
 DISABLE_UPDATE_PROMPT="true"
 UPDATE_ZSH_DAYS=7
 

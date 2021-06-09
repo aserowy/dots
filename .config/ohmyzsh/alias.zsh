@@ -1,4 +1,6 @@
 # git
+alias g="git"
+
 alias gf="git fetch"
 
 alias gco="git checkout"
@@ -28,6 +30,7 @@ alias gd="git diff"
 
 # tmux
 alias t="tmux"
+
 alias tl="tmux ls"
 alias ts="tmux new -s"
 alias ta="tmux attach -t"
@@ -40,3 +43,7 @@ alias trss="tmux rename-session"
 alias ll="ls -l"
 alias la="ls -a"
 alias lla="ls -la"
+
+# nvim
+alias vim="nvim"
+alias vimdiff="nvim -d"
