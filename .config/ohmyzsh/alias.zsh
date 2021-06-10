@@ -1,3 +1,6 @@
+# string operations
+alias trim="sed -e 's/^[[:space:]]*//g' -e 's/[[:space:]]*\$//g'"
+
 # git
 alias g="git"
 
@@ -28,6 +31,26 @@ alias gpt="git push --tags"
 alias gst="git status"
 alias gd="git diff"
 
+# ls
+alias ll="ls -l"
+alias la="ls -a"
+alias lla="ls -la"
+
+# mstsc
+m() {
+    param=$(echo "$1" | trim)
+    echo "$param"
+    if [ -z "$param" ]; then
+        mstsc.exe &
+    else
+        mstsc.exe /v:"$param" &
+    fi
+}
+
+# nvim
+alias vim="nvim"
+alias vimdiff="nvim -d"
+
 # tmux
 alias t="tmux"
 
@@ -38,12 +61,3 @@ alias tad="tmux attach -d -t"
 alias tksv="tmux kill-server"
 alias tkss="tmux kill-session -t"
 alias trss="tmux rename-session"
-
-# ls
-alias ll="ls -l"
-alias la="ls -a"
-alias lla="ls -la"
-
-# nvim
-alias vim="nvim"
-alias vimdiff="nvim -d"
