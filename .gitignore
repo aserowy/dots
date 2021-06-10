@@ -4,6 +4,7 @@
 
 !.config/ohmyzsh/
 !.config/ohmyzsh/*
+!.config/ohmyzsh/completions/*
 !.config/ohmyzsh/plugins
 !.config/ohmyzsh/plugins/zsh-autosuggestions
 !.config/ohmyzsh/plugins/zsh-completions

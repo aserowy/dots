@@ -30,6 +30,12 @@ for configuration in "$ZSH_CUSTOM/"*.zsh; do
 done
 unset configuration
 
+### Load completions
+for configuration in "$ZSH_CUSTOM/completions/"*.zsh; do
+  source "${configuration}"
+done
+unset configuration
+
 # TODO: https://github.com/starship/starship/issues/2449
 if [ -d "/cygdrive/c/tools/cygwin$HOME/.config/" ]; then
     source <(starship init zsh --print-full-init | dos2unix)
