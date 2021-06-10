@@ -1,5 +1,28 @@
 # Dotfiles...
 
+## git
+
+| keys | effect                                 |
+| ---- | -------------------------------------- |
+| ga   | git add                                |
+| gaa  | git add --all                          |
+| gco  | git checkout                           |
+| gcob | git checkout -b                        |
+| gc   | git commit -v                          |
+| gcsm | git commit -s -m                       |
+| gd   | git diff                               |
+| gf   | git fetch                              |
+| gpla | git pull --rebase --autostash          |
+| gp   | git push                               |
+| gpdr | git push --dry-run                     |
+| gpod | git push origin --delete               |
+| gpt  | git push --tags                        |
+| grsh | git reset --hard                       |
+| gst  | git status                             |
+| gsur | git submodule update --remote --rebase |
+| gt   | git tag                                |
+| gta  | git tag -a                             |
+
 ## tmux
 
 > cheatsheet for tmux <https://gist.github.com/MohamedAlaa/2961058>
@@ -17,7 +40,7 @@ The prefix changed to <kbd>ctrl + t</kbd> to overwrite the terminal key inside n
 | <kbd>ctrl + k</kbd>   | moves to upper pane       |
 | <kbd>ctrl + l</kbd>   | moves to right pane       |
 
-### abbraviations
+### aliases
 
 | keys | effect               |
 | ---- | -------------------- |
@@ -30,38 +53,21 @@ The prefix changed to <kbd>ctrl + t</kbd> to overwrite the terminal key inside n
 | tkss | tmux kill-session -t |
 | trss | tmux rename-session  |
 
-## aliases & abbraviations
+## misc
 
-| keys     | effect                                 |
-| -------- | -------------------------------------- |
-|          |                                        |
-| **git**  |                                        |
-| gf       | git fetch                              |
-| gco      | git checkout                           |
-| gcob     | git checkout -b                        |
-| gpla     | git pull --rebase --autostash          |
-| gsur     | git submodule update --remote --rebase |
-| ga       | git add                                |
-| gaa      | git add --all                          |
-| gc       | git commit -v                          |
-| gcsm     | git commit -s -m                       |
-| gt       | git tag                                |
-| gta      | git tag -a                             |
-| grsh     | git reset --hard                       |
-| gp       | git push                               |
-| gpdr     | git push --dry-run                     |
-| gpod     | git push origin --delete               |
-| gpt      | git push --tags                        |
-| gst      | git status                             |
-| gd       | git diff                               |
-|          |                                        |
-| **ls**   |                                        |
-| ll       | ls -l                                  |
-| la       | ls -a                                  |
-| lla      | ls -la                                 |
-|          |                                        |
-| **misc** |                                        |
-| src      | -- sources zsh configuration again     |
+| keys              | effect                             |
+| ----------------- | ---------------------------------- |
+|                   |                                    |
+| **ls**            |                                    |
+| ll                | ls -l                              |
+| la                | ls -a                              |
+| lla               | ls -la                             |
+|                   |                                    |
+| **misc**          |                                    |
+| src               | -- sources zsh configuration again |
+|                   |                                    |
+| **mstsc**         |                                    |
+| m [ip (optional)] | mstsc.exe & or mstsc.exe /v:ip &   |
 
 ## install
 
@@ -120,14 +126,15 @@ sh -c "$(curl -fsSL https://starship.rs/install.sh)"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
-```sh
+    ```sh
+
 chsh -s $(which zsh)
 ```
 
 ### clone the repo
 
-Remove all files given and clone the repo into your home directory. If you don't want to remove all files, clone it into a temp folder and move all files into your home afterwards.
+    Remove all files given and clone the repo into your home directory. If you don't want to remove all files, clone it into a temp folder and move all files into your home afterwards.
 
-```sh
-git clone --recurse-submodules -j8 git@github.com:aserowy/dots.git .
-```
+    ```sh
+    git clone --recurse-submodules -j8 git@github.com:aserowy/dots.git .
+    ```
