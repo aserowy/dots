@@ -9,7 +9,7 @@
 | gaa  | git add --all                          |
 | gc   | git commit -v                          |
 | gcsm | git commit -s -m                       |
-| gcl  | git clone --recurse-submodules         |
+| gcl  | git clone --recurse-submodules -j8     |
 | gco  | git checkout                           |
 | gcob | git checkout -b                        |
 | gd   | git diff                               |
@@ -79,37 +79,6 @@ To get usefull icons in shell and nvim, install your favorite nerd font from <ht
 
 Set Fira as default font in your terminal.
 
-### on windows
-
-Follow the instructions on <https://chocolatey.org/install> and install choco.
-
-```sh
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-```
-
-Install the following packages with choco and make sure you do not have git for windows or llvm installed. Uninstall them at first otherwise.
-
-```sh
-cinst -y cygwin
-cinst -y cyg-get
-cinst -y neovim --pre
-cinst -y starship
-
-RefreshEnv.cmd
-```
-
-Make sure to install neovim nightly with the `--pre` suffix. Now install with cyg-get all missing packages into your cygwin environment.
-
-```sh
-cyg-get.bat clang curl zsh git openssh tmux dos2unix
-```
-
-Install ohmyzsh within your cygwin shell.
-
-```sh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-```
-
 ### on ubuntu
 
 > My workflow uses `tmux` as terminal multiplexer. It is installed on ubuntu by default! Make sure you have it in your disposal as well :).
@@ -128,10 +97,10 @@ sh -c "$(curl -fsSL https://starship.rs/install.sh)"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
-`````sh
+    `````sh
 
 chsh -s $(which zsh)
-    ```
+```
 
 ### clone the repo
 
@@ -140,5 +109,3 @@ chsh -s $(which zsh)
     ```sh
     git clone --recurse-submodules -j8 git@github.com:aserowy/dots.git .
     ```
-    ````
-`````
