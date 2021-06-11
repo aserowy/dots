@@ -4,12 +4,14 @@
 
 | keys | effect                                 |
 | ---- | -------------------------------------- |
+| g    | git                                    |
 | ga   | git add                                |
 | gaa  | git add --all                          |
-| gco  | git checkout                           |
-| gcob | git checkout -b                        |
 | gc   | git commit -v                          |
 | gcsm | git commit -s -m                       |
+| gcl  | git clone --recurse-submodules         |
+| gco  | git checkout                           |
+| gcob | git checkout -b                        |
 | gd   | git diff                               |
 | gf   | git fetch                              |
 | gpla | git pull --rebase --autostash          |
@@ -126,10 +128,10 @@ sh -c "$(curl -fsSL https://starship.rs/install.sh)"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
-    ```sh
+`````sh
 
 chsh -s $(which zsh)
-```
+    ```
 
 ### clone the repo
 
@@ -138,3 +140,5 @@ chsh -s $(which zsh)
     ```sh
     git clone --recurse-submodules -j8 git@github.com:aserowy/dots.git .
     ```
+    ````
+`````
