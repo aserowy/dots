@@ -16,7 +16,7 @@
 !.gitignore
 !.gitmodules
 
-.ssh/*
+!.ssh/
 !.ssh/config.template
 
 !.tmux/
