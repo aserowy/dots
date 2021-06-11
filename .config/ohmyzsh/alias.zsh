@@ -11,6 +11,9 @@ alias gcl="git clone --recurse-submodules -j8"
 alias gco="git checkout"
 alias gcob="git checkout -b"
 
+alias gb="git branch"
+alias gba="git branch -a"
+
 alias gpla="git pull --autostash --rebase"
 alias gsur="git submodule update --remote --rebase"
 
@@ -18,6 +21,8 @@ alias ga="git add"
 alias gaa="git add --all"
 alias gc="git commit -v"
 alias gcsm="git commit -s -m"
+
+alias gcp="git cherry-pick"
 
 alias gt="git tag"
 alias gta="git tag -a"
