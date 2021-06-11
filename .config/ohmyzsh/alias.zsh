@@ -6,6 +6,8 @@ alias g="git"
 
 alias gf="git fetch"
 
+alias gcl="git clone --recurse-submodules"
+
 alias gco="git checkout"
 alias gcob="git checkout -b"
 

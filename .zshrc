@@ -10,13 +10,14 @@ UPDATE_ZSH_DAYS=7
 
 ### Plugins
 plugins=(
-  docker
-  docker-compose
-  ssh-agent
-  zsh-autosuggestions
-  zsh-completions
-  zsh_reload
-  zsh-vi-mode
+    docker
+    docker-compose
+    git-auto-fetch
+    ssh-agent
+    zsh-autosuggestions
+    zsh-completions
+    zsh_reload
+    zsh-vi-mode
 
   # must be the last sourced plugin
   zsh-syntax-highlighting
@@ -26,13 +27,13 @@ source $ZSH/oh-my-zsh.sh
 
 ### Load custom configurations
 for configuration in "$ZSH_CUSTOM/"*.zsh; do
-  source "${configuration}"
+    source "${configuration}"
 done
 unset configuration
 
 ### Load completions
 for configuration in "$ZSH_CUSTOM/completions/"*.zsh; do
-  source "${configuration}"
+    source "${configuration}"
 done
 unset configuration
 

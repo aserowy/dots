@@ -17,7 +17,7 @@
 !.gitmodules
 
 .ssh/*
-!.ssh/config
+!.ssh/config.template
 
 !.tmux/
 !.tmux/plugins/
