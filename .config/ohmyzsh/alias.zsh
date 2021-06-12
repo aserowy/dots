@@ -3,6 +3,14 @@ alias update="sudo apt update && sudo apt -y upgrade"
 # string operations
 alias trim="sed -e 's/^[[:space:]]*//g' -e 's/[[:space:]]*\$//g'"
 
+#cargo
+alias c="cargo"
+alias ccy="cargo clippy"
+alias cfmt="cargo fmt"
+alias ct="cargo test"
+alias cb="cargo build"
+alias cbr="cargo build --release"
+ 
 # git
 alias g="git"
 
