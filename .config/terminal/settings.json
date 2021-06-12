@@ -35,13 +35,6 @@
         "source": "Windows.Terminal.Azure"
       },
       {
-        "commandline": "C:/tools/cygwin/bin/fish.exe -i -l",
-        "guid": "{7ae619c4-aba3-41e0-b6bc-8f812b9c88d5}",
-        "hidden": false,
-        "name": "fish",
-        "closeOnExit": "always"
-      },
-      {
         "guid": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
         "hidden": false,
         "name": "ubuntu",

@@ -1,3 +1,5 @@
+alias update="sudo apt update && sudo apt -y upgrade"
+
 # string operations
 alias trim="sed -e 's/^[[:space:]]*//g' -e 's/[[:space:]]*\$//g'"
 
