@@ -84,13 +84,11 @@ Set Fira as default font in your terminal.
 
 ### on ubuntu
 
-> My workflow uses `tmux` as terminal multiplexer. It is installed on ubuntu by default! Make sure you have it in your disposal as well :).
-
-Install zsh on your distribution.
+Install all dependencies in your distribution.
 
 ```sh
 sudo apt-get update
-sudo apt-get install -y zsh
+sudo apt-get install -y acpi curl git tmux zsh
 ```
 
 Now install starship (<https://starship.rs/>), ohmyzsh (<https://github.com/ohmyzsh/ohmyzsh/>), and set zsh as your default shell.
@@ -100,17 +98,24 @@ sh -c "$(curl -fsSL https://starship.rs/install.sh)"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
-`````sh
-
+```sh
 chsh -s $(which zsh)
-    ```
+```
+
+To get tmux thumbs running, you need to install cargo on your system as well.
+
+```sh
+curl https://sh.rustup.rs -sSf | sh
+```
 
 ### clone the repo
 
-    Remove all files given and clone the repo into your home directory. If you don't want to remove all files, clone it into a temp folder and move all files into your home afterwards.
+Remove all files given and clone the repo into your home directory. If you don't want to remove all files, clone it into a temp folder and move all files into your home afterwards.
 
-    ```sh
-    git clone --recurse-submodules -j8 git@github.com:aserowy/dots.git .
-    ```
-    ````
-`````
+```sh
+git clone --recurse-submodules -j8 git@github.com:aserowy/dots.git .
+```
+
+### last but not least
+
+Install all plugins in tmux `<kbd>ctrl + t</kbd> I`.
