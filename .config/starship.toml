@@ -95,14 +95,13 @@ time_format = '%T'
 description = "Display status of ohmyzsh git-auto-fetch plugin"
 # guard from https://github.com/ohmyzsh/ohmyzsh/blob/706b2f3765d41bee2853b17724888d1a3f6f00d9/plugins/git-auto-fetch/git-auto-fetch.plugin.zsh#L37
 command = """
-local guard="$(command git rev-parse --git-dir)/NO_AUTO_FETCH"
-if [[ -f "$guard" ]]; then
+if [[ -f "$(command git rev-parse --git-dir)/NO_AUTO_FETCH" ]]; then
     printf ""
 else
     printf " "
 fi
 """
-format = "[$output](red) "
+style = 'red'
 shell = ["bash","--norc","--noprofile"]
 when = 'git rev-parse --is-inside-work-tree 2> /dev/null'
 
