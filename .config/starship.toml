@@ -62,9 +62,9 @@ $character"""
 
 # settings
 [character]
-error_symbol = '[ ](bold red)'
-success_symbol = '[ ](bold green)'
-vicmd_symbol = '[ ](bold cyan)'
+error_symbol = '[](bold red)'
+success_symbol = '[](bold green)'
+vicmd_symbol = '[](bold cyan)'
 
 [directory]
 format = '  [$path]($style)[$read_only]($read_only_style) '
@@ -125,7 +125,7 @@ else
 fi
 printf "$GIT_REMOTE_SYMBOL "
 """
-format = "at [$output](cyan)  "
+format = "at [$output](bright-white)  "
 shell = ["bash","--norc","--noprofile"]
 when = 'git rev-parse --is-inside-work-tree 2> /dev/null'
 
