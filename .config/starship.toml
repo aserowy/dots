@@ -61,13 +61,8 @@ $shell\
 $character"""
 
 # settings
-[character]
-error_symbol = '[](bold red)'
-success_symbol = '[](bold green)'
-vicmd_symbol = '[](bold cyan)'
-
 [directory]
-format = '  [$path]($style)[$read_only]($read_only_style) '
+format = ' [$path]($style)[$read_only]($read_only_style) '
 read_only = ' '
 
 [git_status]
