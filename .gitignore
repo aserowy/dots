@@ -12,6 +12,10 @@
 !.config/ohmyzsh/plugins/zsh-vi-mode
 
 !.gitconfig
+
+!.github/
+!.github/*
+
 !.gitignore
 !.gitmodules
 
