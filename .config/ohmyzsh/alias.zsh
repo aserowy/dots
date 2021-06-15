@@ -23,6 +23,7 @@ alias gcob="git checkout -b"
 
 alias gb="git branch"
 alias gba="git branch -a"
+alias gbd="git branch -d"
 
 alias gpla="git pull --autostash --rebase"
 alias gsur="git submodule update --remote --rebase"
