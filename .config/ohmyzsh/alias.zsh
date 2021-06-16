@@ -26,10 +26,15 @@ alias gba="git branch -a"
 alias gbd="git branch -d"
 
 alias gpla="git pull --autostash --rebase"
+
+alias gm="git merge"
+alias gms="git merge --squash"
+
 alias gsur="git submodule update --remote --rebase"
 
 alias ga="git add"
 alias gaa="git add --all"
+
 alias gc="git commit -v"
 alias gcsm="git commit -s -m"
 
@@ -47,6 +52,7 @@ alias gpsu="git push --set-upstream origin"
 alias gpt="git push --tags"
 
 alias gst="git status"
+
 alias gd="git diff"
 
 # ls
