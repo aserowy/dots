@@ -36,14 +36,18 @@ The prefix changed to <kbd>ctrl + t</kbd> to overwrite the terminal key inside n
 
 ### bindings
 
-| keys                  | effect                    |
-| --------------------- | ------------------------- |
-| <kbd>ctrl + t</kbd> v | split window vertically   |
-| <kbd>ctrl + t</kbd> x | split window horizontally |
-| <kbd>ctrl + h</kbd>   | moves to left pane        |
-| <kbd>ctrl + j</kbd>   | moves to lower pane       |
-| <kbd>ctrl + k</kbd>   | moves to upper pane       |
-| <kbd>ctrl + l</kbd>   | moves to right pane       |
+| keys                  | effect                             |
+| --------------------- | ---------------------------------- |
+| <kbd>ctrl + t</kbd> v | split window vertically            |
+| <kbd>ctrl + t</kbd> x | split window horizontally          |
+| <kbd>ctrl + h</kbd>   | moves to left pane                 |
+| <kbd>ctrl + j</kbd>   | moves to lower pane                |
+| <kbd>ctrl + k</kbd>   | moves to upper pane                |
+| <kbd>ctrl + l</kbd>   | moves to right pane                |
+| <kbd>alt + h</kbd>    | in/decrease size by 5 to the left  |
+| <kbd>alt + j</kbd>    | in/decrease size by 5 down         |
+| <kbd>alt + k</kbd>    | in/decrease size by 5 up           |
+| <kbd>alt + l</kbd>    | in/decrease size by 5 to the right |
 
 ### aliases
 
@@ -91,12 +95,14 @@ sudo apt-get update
 sudo apt-get install -y acpi curl git tmux zsh
 ```
 
-Now install starship (<https://starship.rs/>), ohmyzsh (<https://github.com/ohmyzsh/ohmyzsh/>), and set zsh as your default shell.
+Now install starship (<https://starship.rs/>), ohmyzsh (<https://github.com/ohmyzsh/ohmyzsh/>),
 
 ```sh
 sh -c "$(curl -fsSL https://starship.rs/install.sh)"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
+
+ and set zsh as your default shell.
 
 ```sh
 chsh -s $(which zsh)
