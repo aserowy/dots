@@ -36,18 +36,18 @@ The prefix changed to <kbd>ctrl + t</kbd> to overwrite the terminal key inside n
 
 ### bindings
 
-| keys                  | effect                             |
-| --------------------- | ---------------------------------- |
-| <kbd>ctrl + t</kbd> v | split window vertically            |
-| <kbd>ctrl + t</kbd> x | split window horizontally          |
-| <kbd>ctrl + h</kbd>   | moves to left pane                 |
-| <kbd>ctrl + j</kbd>   | moves to lower pane                |
-| <kbd>ctrl + k</kbd>   | moves to upper pane                |
-| <kbd>ctrl + l</kbd>   | moves to right pane                |
-| <kbd>alt + h</kbd>    | in/decrease size by 5 to the left  |
-| <kbd>alt + j</kbd>    | in/decrease size by 5 down         |
-| <kbd>alt + k</kbd>    | in/decrease size by 5 up           |
-| <kbd>alt + l</kbd>    | in/decrease size by 5 to the right |
+| keys                  | effect                                                  |
+| --------------------- | ------------------------------------------------------- |
+| <kbd>ctrl + t</kbd> v | split window vertically                                 |
+| <kbd>ctrl + t</kbd> x | split window horizontally                               |
+| <kbd>ctrl + h</kbd>   | moves to left pane                                      |
+| <kbd>ctrl + j</kbd>   | moves to lower pane                                     |
+| <kbd>ctrl + k</kbd>   | moves to upper pane                                     |
+| <kbd>ctrl + l</kbd>   | moves to right pane                                     |
+| <kbd>alt + h</kbd>    | (not working in vim) in/decrease size by 5 to the left  |
+| <kbd>alt + j</kbd>    | (not working in vim) in/decrease size by 5 down         |
+| <kbd>alt + k</kbd>    | (not working in vim) in/decrease size by 5 up           |
+| <kbd>alt + l</kbd>    | (not working in vim) in/decrease size by 5 to the right |
 
 ### aliases
 
@@ -102,7 +102,7 @@ sh -c "$(curl -fsSL https://starship.rs/install.sh)"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
- and set zsh as your default shell.
+and set zsh as your default shell.
 
 ```sh
 chsh -s $(which zsh)
