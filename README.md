@@ -124,4 +124,4 @@ git clone --recurse-submodules -j8 git@github.com:aserowy/dots.git .
 
 ### last but not least
 
-Install all plugins in tmux `<kbd>ctrl + t</kbd> I`.
+Install all plugins in tmux <kbd>ctrl + t</kbd> <kbd>I</kbd>.
