@@ -26,6 +26,7 @@ $helm\
 $java\
 $julia\
 $kotlin\
+$lua\
 $nim\
 $nodejs\
 $ocaml\
@@ -52,7 +53,6 @@ $env_var\
 $crystal\
 $cmd_duration\
 $line_break\
-$lua\
 $jobs\
 $battery\
 $time\
