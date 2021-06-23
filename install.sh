@@ -15,3 +15,5 @@ git clone --branch cr-move-to-nix https://github.com/aserowy/dots.git ~/nix
 cd ~/.config
 rm -rf nixpkgs
 ln -s ~/nix nixpkgs
+
+home-manager switch
