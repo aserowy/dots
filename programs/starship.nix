@@ -13,9 +13,9 @@
     $kubernetes\
     $directory\
     $vcsh\
-    ${custom.giturl}\
+    \${custom.giturl}\
     $git_branch\
-    ${custom.gitautofetch}\
+    \${custom.gitautofetch}\
     $git_commit\
     $git_state\
     $git_status\
