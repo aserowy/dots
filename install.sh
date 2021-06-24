@@ -19,5 +19,7 @@ ln -s ~/nix nixpkgs
 cd ~/nix
 home-manager switch
 
-echo "~/.nix-profile/bin/zsh" | sudo tee -a /etc/shells
+if grep -q "~/.nix-profile/bin/zsh" "/etc/shells"; then
+    echo "~/.nix-profile/bin/zsh" | sudo tee -a /etc/shells
+fi
 sudo chsh -s ~/.nix-profile/bin/zsh $(whoami)
