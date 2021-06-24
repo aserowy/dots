@@ -12,7 +12,7 @@ nix-env -iA nixpkgs.git
 rm -rf ~/nix
 git clone --branch cr-move-to-nix https://github.com/aserowy/dots.git ~/nix
 
-nix-env --e nixpkgs.git
+nix-env -e nixpkgs.git
 
 cd ~/.config
 rm -rf nixpkgs
