@@ -1,10 +1,5 @@
 { config, lib, pkgs, ... }:
 {
-  programs.starship = {
-    enable = true;
-    enableZshIntegration = true;
-  };
-
   home.file.".config/starship.toml".text = ''
     format = """
     $username''\
@@ -206,4 +201,9 @@
     [swift]
     symbol = "ﯣ "
   '';
+  
+  programs.starship = {
+    enable = true;
+    enableZshIntegration = true;
+  };
 }
