@@ -20,4 +20,4 @@ cd ~/nix
 home-manager switch
 
 echo "~/.nix-profile/bin/zsh" | sudo tee -a /etc/shells
-chsh -s ~/.nix-profile/bin/zsh
+sudo chsh -s ~/.nix-profile/bin/zsh $(whoami)
