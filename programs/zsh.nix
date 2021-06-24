@@ -10,7 +10,7 @@
       if [[ ! -x "$nixos_version" ]]; then
         source ~/.nix-profile/etc/profile.d/nix.sh
 
-        export fpath=(~/.nix-profile/share/zsh/vendor-completions \${fpath})
+        export fpath=(~/.nix-profile/share/zsh/vendor-completions ''${fpath})
         export NIX_PATH="$HOME/.nix-defexpr/channels:$NIX_PATH"
 
         echo "non-nixos patches loaded"
