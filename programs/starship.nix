@@ -5,7 +5,7 @@
     enableZshIntegration = true;
   };
 
-  home.file."~/.config/starship.toml".text = ''
+  home.file.".config/starship.toml".text = ''
     format = """
     $username''\
     $hostname''\
