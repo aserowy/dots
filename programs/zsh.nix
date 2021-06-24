@@ -5,14 +5,16 @@
     enableAutosuggestions = true;
     enableCompletion = true;
     dotDir = ".config/zsh";
-        envExtra = ''
-        local nixos_version=`which nixos-version`
-        if [[ ! -x "$nixos_version" ]]; then
-          source ~/.nix-profile/etc/profile.d/nix.sh
-          export NIX_PATH="$HOME/.nix-defexpr/channels:$NIX_PATH"
+    envExtra = ''
+      local nixos_version=`which nixos-version`
+      if [[ ! -x "$nixos_version" ]]; then
+        source ~/.nix-profile/etc/profile.d/nix.sh
 
-          echo "non-nixos patches loaded"
-        fi
+        export fpath=(~/.nix-profile/share/zsh/vendor-completions \${fpath})
+        export NIX_PATH="$HOME/.nix-defexpr/channels:$NIX_PATH"
+
+        echo "non-nixos patches loaded"
+      fi
     '';
     history = {
       ignoreDups = true;
