@@ -13,7 +13,7 @@
     };
     oh-my-zsh = {
       enable = true;
-      plugins = [ "docker", "docker-compose", "git-auto-fetch", "ssh-agent" ];
+      plugins = [ "docker" "docker-compose" "git-auto-fetch" "ssh-agent" ];
     };
     plugins = [
       {
