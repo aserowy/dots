@@ -5,9 +5,7 @@
     userName = "aserowy";
     userEmail = "serowy@hotmail.com";
     extraConfig = {
-      core = {
-        editor = "nvim";
-      };
+      core.editor = "nvim";
     };
   };
 }
