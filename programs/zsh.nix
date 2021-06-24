@@ -22,8 +22,7 @@
           owner = "jeffreytse";
           repo = "zsh-vi-mode";
           rev = "v0.8.4";
-          sha256 = "0a1rvc03rl66v8rgzvxpq0vw55hxn5b9dkmhdqghvi2f4dvi8fzx
-";
+          sha256 = "0a1rvc03rl66v8rgzvxpq0vw55hxn5b9dkmhdqghvi2f4dvi8fzx";
           # sha256 = lib.fakeSha256;
         };
       }
