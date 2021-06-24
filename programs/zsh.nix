@@ -22,7 +22,7 @@
           owner = "zsh-users";
           repo = "zsh-syntax-highlighting";
           rev = "0e1bb14452e3fc66dcc81531212e1061e02c1a61";
-          sha256 = lib.fakeSha256;
+          sha256 = "09ncmyqlk9a3h470z0wgbkrznb5zyc9dj96011wm89rdxc1irxk2";
         };
       }
     ];
