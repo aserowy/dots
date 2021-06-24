@@ -4,9 +4,10 @@
     enable = true;
     userName = "aserowy";
     userEmail = "serowy@hotmail.com";
-    extraConfig = ''
-      [core]
+    extraConfig = {
+      core = {
         editor = nvim
-    '';
-  };
-}
+          };
+      };
+    };
+  }
