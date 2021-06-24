@@ -105,7 +105,7 @@
           fi;
         '';
         style = "red";
-        shell = [ "bash","--norc","--noprofile" ];
+        shell = [ "bash" "--norc" "--noprofile" ];
         when = "git rev-parse --is-inside-work-tree 2> /dev/null";
       };
 
@@ -129,7 +129,7 @@
           printf "$GIT_REMOTE_SYMBOL";
         '';
         format = "at [$output](bright-white) ";
-        shell = [ "bash","--norc","--noprofile" ];
+        shell = [ "bash" "--norc" "--noprofile" ];
         when = "git rev-parse --is-inside-work-tree 2> /dev/null";
       };
 
