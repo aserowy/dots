@@ -16,4 +16,8 @@ cd ~/.config
 rm -rf nixpkgs
 ln -s ~/nix nixpkgs
 
+cd ~/nix
 home-manager switch
+
+echo "~/.nix-profile/bin/zsh" | sudo tee -a /etc/shells
+chsh -s ~/.nix-profile/bin/zsh

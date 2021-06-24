@@ -17,6 +17,15 @@
     };
     plugins = [
       {
+        name = "zsh-vi-mode";
+        src = pkgs.fetchFromGitHub {
+          owner = "jeffreytse";
+          repo = "zsh-vi-mode";
+          rev = "v0.8.4";
+          sha256 = lib.fakeSha256;
+        };
+      }
+      {
         name = "zsh-syntax-highlighting";
         src = pkgs.fetchFromGitHub {
           owner = "zsh-users";
