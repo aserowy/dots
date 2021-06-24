@@ -1,68 +1,6 @@
 { config, lib, pkgs, ... }:
 {
   home.file.".config/starship.toml".text = ''
-    format = """
-    $username
-    $hostname
-    $shlvl
-    $kubernetes
-    $directory
-    $vcsh
-    ''${custom.giturl}
-    $git_branch
-    ''${custom.gitautofetch}
-    $git_commit
-    $git_state
-    $git_status
-    $hg_branch
-    $docker_context
-    $package
-    $cmake
-    $dart
-    $deno
-    $dotnet
-    $elixir
-    $elm
-    $erlang
-    $golang
-    $helm
-    $java
-    $julia
-    $kotlin
-    $lua
-    $nim
-    $nodejs
-    $ocaml
-    $perl
-    $php
-    $purescript
-    $python
-    $red
-    $ruby
-    $rust
-    $scala
-    $swift
-    $terraform
-    $vlang
-    $vagrant
-    $zig
-    $nix_shell
-    $conda
-    $memory_usage
-    $aws
-    $gcloud
-    $openstack
-    $env_var
-    $crystal
-    $cmd_duration
-    $line_break
-    $jobs
-    $battery
-    $time
-    $status
-    $shell
-    $character"""
-
     # settings
     [directory]
     format = " [$path]($style)[$read_only]($read_only_style) "
