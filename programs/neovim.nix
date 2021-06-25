@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, ... }:
 {
   nixpkgs.overlays = [
     (import (builtins.fetchTarball {
@@ -8,8 +8,7 @@
 
   home.file.".config/nvim/".source = ./neovim;
 
-  programs.neovim = {
-    enable = true;
-    package = pkgs.neovim-nightly;
-  };
+  home.packages = with pkgs; [
+    pkgs.neovim-nightly
+  ];
 }
