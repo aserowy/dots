@@ -1,5 +1,9 @@
 { config, pkgs, ... }:
 {
+  home.packages = with pkgs; [
+    pkgs.openssh
+  ];
+
   programs.ssh = {
     enable = true;
     matchBlocks = {

@@ -10,7 +10,7 @@ nix-shell '<home-manager>' -A install
 nix-env -iA nixpkgs.git
 
 rm -rf ~/nix
-git clone --branch cr-move-to-nix https://github.com/aserowy/dots.git ~/nix
+git clone --recurse-submodules -j8 --branch cr-move-to-nix https://github.com/aserowy/dots.git ~/nix
 
 nix-env --uninstall nixpkgs.git
 
@@ -20,6 +20,8 @@ ln -s ~/nix nixpkgs
 
 cd ~/nix
 home-manager switch
+
+git remote set-url origin git@github.com:aserowy/dots.git
 
 if ! grep -q "~/.nix-profile/bin/zsh" "/etc/shells"; then
     echo "~/.nix-profile/bin/zsh" | sudo tee -a /etc/shells
