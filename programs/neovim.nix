@@ -6,7 +6,10 @@
     }))
   ];
 
-  home.file.".config/nvim/".source = ./neovim;
+  home.file.".config/nvim/" = {
+    recursive = true;
+    source = ./neovim;
+  };
 
   home.packages = with pkgs; [
     pkgs.neovim-nightly
