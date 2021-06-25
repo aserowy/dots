@@ -1,0 +1,3 @@
+[submodule "programs/neovim"]
+	path = programs/neovim
+	url = https://github.com/aserowy/NeoCode.git

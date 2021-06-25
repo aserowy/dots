@@ -6,6 +6,8 @@
     }))
   ];
 
+  home.file.".config/nvim/".source = ./neovim;
+
   programs.neovim = {
     enable = true;
     package = pkgs.neovim-nightly;
