@@ -8,77 +8,78 @@
     escapeTime = 0;
     historyLimit = 5000;
     keyMode = "vi";
-    prefix = "C-[";
+    prefix = "C-t";
+    sensibleOnTop = false;
     terminal = "tmux-256color";
     extraConfig = ''
-        # terminal
-        set -ga terminal-overrides ",xterm*:TC"
-        setw -g xterm-keys on
+      # terminal
+      set -ga terminal-overrides ",xterm*:TC"
+      setw -g xterm-keys on
 
-        # controls
-        set -g mouse on
+      # controls
+      set -g mouse on
 
-        # title handling
-        setw -g automatic-rename on
-        set -g set-titles on
+      # title handling
+      setw -g automatic-rename on
+      set -g set-titles on
 
-        # activity
-        setw -g monitor-activity off
-        set -g visual-activity off
-        set -g visual-bell off
+      # activity
+      setw -g monitor-activity off
+      set -g visual-activity off
+      set -g visual-bell off
 
-        # misc
-        set -g display-time 4000
-        set -s focus-events on
+      # misc
+      set -g display-time 4000
+      set -s focus-events on
 
-        ##### THEMING
-        set -g window-style default
-        set -g status-style bg=default
+      ##### THEMING
+      set -g window-style default
+      set -g status-style bg=default
 
-        set -g status-left "\
-        #[fg=green, bg=default]#{?client_prefix,#[fg=red],}   #S \
-        #[fg=brightblack, bg=default]|"
+      set -g status-left "\
+      #[fg=green, bg=default]#{?client_prefix,#[fg=red],}   #S \
+      #[fg=brightblack, bg=default]|"
 
-        set -g window-status-separator "|"
-        set -g window-status-current-format "#[fg=brightwhite,bg=brightblack]  #W "
-        set -g window-status-format "#[fg=brightblack,bg=default]  #W "
+      set -g window-status-separator "|"
+      set -g window-status-current-format "#[fg=brightwhite,bg=brightblack]  #W "
+      set -g window-status-format "#[fg=brightblack,bg=default]  #W "
 
-        set -g status-right "\
-        #{battery_color_charge_fg} #{battery_icon_charge}\
-        #[fg=brightblack, bg=default] |\
-        #[fg=yellow]  #{continuum_status}\
-        #[fg=brightblack, bg=default] |\
-        #[fg=green]  %R\
-        #[fg=green] %F"
+      set -g status-right "\
+      #{battery_color_charge_fg} #{battery_icon_charge}\
+      #[fg=brightblack, bg=default] |\
+      #[fg=yellow]  #{continuum_status}\
+      #[fg=brightblack, bg=default] |\
+      #[fg=green]  %R\
+      #[fg=green] %F"
 
-        ##### BINDINGS
-        # windows
-        bind C-p previous-window
-        bind C-n next-window
+      ##### BINDINGS
+      # windows
+      bind C-p previous-window
+      bind C-n next-window
 
-        # panes
-        unbind '"'
-        bind x split-window -v -c "#{pane_current_path}"
+      # panes
+      unbind '"'
+      bind x split-window -v -c "#{pane_current_path}"
 
-        unbind %
-        bind v split-window -h -c "#{pane_current_path}"
+      unbind %
+      bind v split-window -h -c "#{pane_current_path}"
 
-        is_vim="ps -o state= -o comm= -t '#{pane_tty}' | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
+      is_vim="ps -o state= -o comm= -t '#{pane_tty}' | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
 
-        bind-key -n 'C-h' if-shell "$is_vim" 'send-keys C-h' { if -F '#{pane_at_left}' ''' 'select-pane - L' }
-      bind-key -n 'C-j' if-shell "$is_vim" 'send-keys C-j' { if -F '#{pane_at_bottom}' ''' 'select-pane -D' }
-      bind-key -n 'C-k' if-shell "$is_vim" 'send-keys C-k' { if -F '#{pane_at_top}' ''' 'select-pane -U' }
-      bind-key -n 'C-l' if-shell "$is_vim" 'send-keys C-l' { if -F '#{pane_at_right}' ''' 'select-pane -R' }
+      bind-key -n "C-h" if-shell "$is_vim" "send-keys C-h" { if -F "#{pane_at_left}" "" "select-pane -L" }
+      bind-key -n "C-j" if-shell "$is_vim" "send-keys C-j" { if -F "#{pane_at_bottom}" "" "select-pane -D" }
+      bind-key -n "C-k" if-shell "$is_vim" "send-keys C-k" { if -F "#{pane_at_top}" "" "select-pane -U" }
+      bind-key -n "C-l" if-shell "$is_vim" "send-keys C-l" { if -F "#{pane_at_right}" "" "select-pane -R" }
 
-      bind-key -T copy-mode-vi 'C-h' if -F '#{pane_at_left}' ''' 'select-pane -L'
-      bind-key -T copy-mode-vi 'C-j' if -F '#{pane_at_bottom}' ''' 'select-pane -D'
-      bind-key -T copy-mode-vi 'C-k' if -F '#{pane_at_top}' ''' 'select-pane -U'
-      bind-key -T copy-mode-vi 'C-l' if -F '#{pane_at_right}' ''' 'select-pane -R'
+      bind-key -T copy-mode-vi "C-h" if -F "#{pane_at_left}" "" "select-pane -L"
+      bind-key -T copy-mode-vi "C-j" if -F "#{pane_at_bottom}" "" "select-pane -D"
+      bind-key -T copy-mode-vi "C-k" if -F "#{pane_at_top}" "" "select-pane -U"
+      bind-key -T copy-mode-vi "C-l" if -F "#{pane_at_right}" "" "select-pane -R"
 
-      bind -n 'M-h' if-shell "$is_vim" 'send-keys M-h' 'resize-pane -L 1'
-      bind -n 'M-j' if-shell "$is_vim" 'send-keys M-j' 'resize-pane -D 1'
-      bind -n 'M-k' if-shell "$is_vim" 'send-keys M-k' 'resize-pane -U 1'
-      bind -n 'M-l' if-shell "$is_vim" 'send-keys M-l' 'resize-pane -R 1'
+      bind -n "M-h" if-shell "$is_vim" "send-keys M-h" "resize-pane -L 1"
+      bind -n "M-j" if-shell "$is_vim" "send-keys M-j" "resize-pane -D 1"
+      bind -n "M-k" if-shell "$is_vim" "send-keys M-k" "resize-pane -U 1"
+      bind -n "M-l" if-shell "$is_vim" "send-keys M-l" "resize-pane -R 1"
 
       bind-key -T copy-mode-vi M-h resize-pane -L 1
       bind-key -T copy-mode-vi M-j resize-pane -D 1
@@ -86,16 +87,15 @@
       bind-key -T copy-mode-vi M-l resize-pane -R 1
 
       # selection mode
-      bind-key -T copy-mode-vi 'v' send -X begin-selection
-      bind-key -T copy-mode-vi 'V' send -X select-line
+      bind-key -T copy-mode-vi "v" send -X begin-selection
+      bind-key -T copy-mode-vi "V" send -X select-line
 
       # yank
-      bind-key -T copy-mode-vi 'y' send -X copy-selection-and-cancel
-      bind-key -T copy-mode-vi 'r' send -X rectangle-toggle
+      bind-key -T copy-mode-vi "y" send -X copy-selection-and-cancel
+      bind-key -T copy-mode-vi "r" send -X rectangle-toggle
 
       # search
-      bind-key / copy-mode \;
-      send-key ?
+      bind-key / copy-mode \; send-key ?
     '';
     plugins = with pkgs; [
       {

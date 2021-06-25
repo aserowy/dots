@@ -1,5 +1,9 @@
 { config, pkgs, ... }:
 {
+  home.packages = with pkgs; [
+    pkgs.ncurses
+  ];
+
   imports = [
     ../programs/direnv.nix
     ../programs/starship.nix
