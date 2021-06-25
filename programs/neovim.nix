@@ -12,7 +12,7 @@
   };
 
   home.packages = with pkgs; [
-    pkgs.llvm
+    pkgs.gcc
     pkgs.neovim-nightly
   ];
 }
