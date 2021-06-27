@@ -1,7 +1,9 @@
 { config, pkgs, ... }:
 {
   home.packages = with pkgs; [
+    pkgs.curl
     pkgs.ncurses
+    pkgs.tree
   ];
 
   imports = [

@@ -22,6 +22,18 @@
       share = true;
       size = 9999;
     };
+    initExtra = ''
+      # mstsc
+      m() {
+          param=$(echo "$1" | trim)
+          echo "$param"
+          if [ -z "$param" ]; then
+              mstsc.exe &
+          else
+              mstsc.exe /v:"$param" &
+          fi
+      }
+    '';
     oh-my-zsh = {
       enable = true;
       plugins = [ "docker" "docker-compose" "git-auto-fetch" "ssh-agent" ];
@@ -114,17 +126,6 @@
       la = "ls -a";
       lla = "ls -la";
 
-      # mstsc
-      # m() {
-      #     param=$(echo "$1" | trim)
-      #     echo "$param"
-      #     if [ -z "$param" ]; then
-      #         mstsc.exe &
-      #     else
-      #         mstsc.exe /v:"$param" &
-      #     fi
-      # }
-
       # nvim
       vim = "nvim";
       vimdiff = "nvim -d";
@@ -139,6 +140,9 @@
       tksv = "tmux kill-server";
       tkss = "tmux kill-session -t";
       trss = "tmux rename-session";
+
+      tlb = "tmux list-buffers";
+      tcb = "tmux choose-buffer";
     };
   };
 }

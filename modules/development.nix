@@ -1,7 +1,6 @@
 { config, pkgs, ... }:
 {
   home.packages = with pkgs; [
-    pkgs.nixpkgs-fmt
   ];
 
   imports = [

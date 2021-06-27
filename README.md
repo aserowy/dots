@@ -40,18 +40,18 @@ The prefix changed to <kbd>ctrl + t</kbd> to overwrite the terminal key inside n
 
 ### bindings
 
-| keys                  | effect                                                  |
-| --------------------- | ------------------------------------------------------- |
-| <kbd>ctrl + t</kbd> v | split window vertically                                 |
-| <kbd>ctrl + t</kbd> x | split window horizontally                               |
-| <kbd>ctrl + h</kbd>   | moves to left pane                                      |
-| <kbd>ctrl + j</kbd>   | moves to lower pane                                     |
-| <kbd>ctrl + k</kbd>   | moves to upper pane                                     |
-| <kbd>ctrl + l</kbd>   | moves to right pane                                     |
-| <kbd>alt + h</kbd>    | (not working in vim) in/decrease size by 5 to the left  |
-| <kbd>alt + j</kbd>    | (not working in vim) in/decrease size by 5 down         |
-| <kbd>alt + k</kbd>    | (not working in vim) in/decrease size by 5 up           |
-| <kbd>alt + l</kbd>    | (not working in vim) in/decrease size by 5 to the right |
+| keys                             | effect                                                  |
+| -------------------------------- | ------------------------------------------------------- |
+| <kbd>ctrl + t</kbd> <kbd>v</kbd> | split window vertically                                 |
+| <kbd>ctrl + t</kbd> <kbd>x</kbd> | split window horizontally                               |
+| <kbd>ctrl + h</kbd>              | moves to left pane                                      |
+| <kbd>ctrl + j</kbd>              | moves to lower pane                                     |
+| <kbd>ctrl + k</kbd>              | moves to upper pane                                     |
+| <kbd>ctrl + l</kbd>              | moves to right pane                                     |
+| <kbd>alt + h</kbd>               | (not working in vim) in/decrease size by 5 to the left  |
+| <kbd>alt + j</kbd>               | (not working in vim) in/decrease size by 5 down         |
+| <kbd>alt + k</kbd>               | (not working in vim) in/decrease size by 5 up           |
+| <kbd>alt + l</kbd>               | (not working in vim) in/decrease size by 5 to the right |
 
 ### aliases
 
@@ -65,6 +65,8 @@ The prefix changed to <kbd>ctrl + t</kbd> to overwrite the terminal key inside n
 | tksv | tmux kill-server     |
 | tkss | tmux kill-session -t |
 | trss | tmux rename-session  |
+| tlb  | tmux list-buffers    |
+| tcb  | tmux choose-buffer   |
 
 ## misc
 
