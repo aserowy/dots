@@ -11,7 +11,7 @@ nix-env -iA nixpkgs.git
 
 rm -rf ~/nix
 git clone --recurse-submodules -j8 https://github.com/aserowy/dots.git ~/nix
-if [[ $? -ne 0 ]]; then
+if [ $? -ne 0 ]; then
     exit 1
 fi
 
@@ -23,7 +23,7 @@ ln -s ~/nix nixpkgs
 
 cd ~/nix
 home-manager switch
-if [[ $? -ne 0 ]]; then
+if [ $? -ne 0 ]; then
     exit 1
 fi
 
