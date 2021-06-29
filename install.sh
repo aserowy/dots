@@ -10,7 +10,7 @@ nix-shell '<home-manager>' -A install
 nix-env -iA nixpkgs.git
 
 rm -rf ~/nix
-git clone --recurse-submodules -j8 --branch cr-move-to-nix https://github.com/aserowy/dots.git ~/nix
+git clone --recurse-submodules -j8 https://github.com/aserowy/dots.git ~/nix
 
 nix-env --uninstall nixpkgs.git
 

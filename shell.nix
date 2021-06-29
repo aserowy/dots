@@ -6,6 +6,9 @@ mkShell rec {
     pkgs.nodePackages.prettier
   ];
   shellHook = ''
+    alias hms="home-manager switch"
+    alias nerb="nix-env --rollback"
+
     # format
     alias fmt="prettier --write README.md && nixpkgs-fmt ."
 
