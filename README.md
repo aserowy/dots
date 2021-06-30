@@ -110,5 +110,5 @@ curl -L https://raw.githubusercontent.com/aserowy/dots/main/install.sh | sh
 At the end, copy your ssh keys into `~/.ssh` and set the permissions to 600 for all keys and pubs.
 
 ```sh
-sudo chown 600 [file]
+sudo chmod 600 [file]
 ```
