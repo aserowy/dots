@@ -7,7 +7,7 @@ nix-channel --add https://github.com/nix-community/home-manager/archive/master.t
 nix-channel --update
 
 rm -rf ~/nix
-nix-shell -p nixpkgs.git --run "git clone --recurse-submodules -j8 https://github.com/aserowy/dots.git ~/nix"
+nix-shell -p git --run "git clone --recurse-submodules -j8 https://github.com/aserowy/dots.git ~/nix"
 if [ $? -ne 0 ]; then
     exit 1
 fi
