@@ -15,7 +15,7 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-nix-env --uninstall nixpkgs.git
+nix-env --rollback
 
 cd ~/.config
 rm -rf nixpkgs
