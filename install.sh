@@ -6,22 +6,18 @@ sudo chmod +x ~/.nix-profile/etc/profile.d/nix.sh
 nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
 nix-channel --update
 
-nix-shell '<home-manager>' -A install
-nix-env -iA nixpkgs.git
-
 rm -rf ~/nix
-git clone --recurse-submodules -j8 https://github.com/aserowy/dots.git ~/nix
+nix-shell -p nixpkgs.git --run "git clone --recurse-submodules -j8 https://github.com/aserowy/dots.git ~/nix"
 if [ $? -ne 0 ]; then
     exit 1
 fi
-
-nix-env --rollback
 
 cd ~/.config
 rm -rf nixpkgs
 ln -s ~/nix nixpkgs
 
 cd ~/nix
+nix-shell '<home-manager>' -A install
 home-manager switch
 if [ $? -ne 0 ]; then
     exit 1
