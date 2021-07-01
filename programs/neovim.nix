@@ -14,6 +14,7 @@
   home.packages = with pkgs; [
     pkgs.gcc
     pkgs.neovim-nightly
+    pkgs.ripgrep
     pkgs.unzip
   ];
 }
