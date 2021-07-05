@@ -7,5 +7,6 @@
     ../programs/git.nix
     ../programs/neovim.nix
     ../programs/ssh.nix
+    ../programs/vscode.nix
   ];
 }
