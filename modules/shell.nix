@@ -4,6 +4,8 @@
     pkgs.curl
     pkgs.ncurses
     pkgs.tree
+
+    pkgs.unixtools.watch
   ];
 
   imports = [
