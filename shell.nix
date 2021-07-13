@@ -6,15 +6,7 @@ mkShell rec {
     pkgs.nodePackages.prettier
   ];
   shellHook = ''
-    alias update="nix-channel --update && home-manager switch"
-    alias cleanup="nix-collect-garbage --delete-older-than 30d"
-    alias hms="home-manager switch"
-    alias nerb="nix-env --rollback"
-
     # format
     alias fmt="prettier --write README.md && nixpkgs-fmt ."
-
-    # format and build -> fab :)
-    alias fab="prettier --write README.md && nixpkgs-fmt . && home-manager build"
   '';
 }

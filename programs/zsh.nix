@@ -64,7 +64,12 @@
       VISUAL = "nvim";
     };
     shellAliases = {
-      update = "sudo apt update && sudo apt -y upgrade";
+      hmb = "home-manager build";
+      hms = "home-manager switch";
+      ncu = "nix-channel --update";
+      negc = "nix-collect-garbage --delete-older-than 30d";
+      nerb = "nix-env --rollback";
+      ns = "nix-shell";
 
       # string operations
       trim = "sed -e 's/^[[:space:]]*//g' -e 's/[[:space:]]*\$//g'";
