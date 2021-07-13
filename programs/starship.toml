@@ -1,6 +1,7 @@
 format = """
 $username\
 $hostname\
+$nix_shell\
 $shlvl\
 $kubernetes\
 $directory\
@@ -43,7 +44,6 @@ $terraform\
 $vlang\
 $vagrant\
 $zig\
-$nix_shell\
 $conda\
 $memory_usage\
 $aws\
@@ -172,7 +172,10 @@ symbol = ' '
 symbol = ' '
 
 [nix_shell]
-symbol = ' '
+format = '[$symbol$state]($style) '
+impure_msg = "[ ](bold red)"
+pure_msg = "[ ](bold green)"
+symbol = ''
 
 [package]
 symbol = ' '
