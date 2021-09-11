@@ -44,6 +44,7 @@ The prefix changed to <kbd>ctrl + t</kbd> to overwrite the terminal key inside n
 | -------------------------------- | ------------------------------------------------------- |
 | <kbd>ctrl + t</kbd> <kbd>v</kbd> | split window vertically                                 |
 | <kbd>ctrl + t</kbd> <kbd>x</kbd> | split window horizontally                               |
+| <kbd>ctrl + t</kbd> <kbd>w</kbd> | trigger tmux-easy-motion (bd-w)                         |
 | <kbd>ctrl + h</kbd>              | moves to left pane                                      |
 | <kbd>ctrl + j</kbd>              | moves to lower pane                                     |
 | <kbd>ctrl + k</kbd>              | moves to upper pane                                     |
