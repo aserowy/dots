@@ -10,3 +10,6 @@
 [submodule "programs/tmux/plugins/tmux-resurrect"]
 	path = programs/tmux/plugins/tmux-resurrect
 	url = https://github.com/tmux-plugins/tmux-resurrect
+[submodule "programs/tmux/plugins/tmux-easy-motion"]
+	path = programs/tmux/plugins/tmux-easy-motion
+	url = https://github.com/IngoMeyer441/tmux-easy-motion

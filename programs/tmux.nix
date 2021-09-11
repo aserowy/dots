@@ -9,6 +9,7 @@
   };
 
   home.packages = with pkgs; [
+    pkgs.python3Minimal
     pkgs.tmux
   ];
 }
