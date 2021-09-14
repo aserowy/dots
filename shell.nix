@@ -3,6 +3,7 @@ mkShell rec {
   name = "nix";
   buildInputs = [
     pkgs.nixpkgs-fmt
+    pkgs.nodePackages.markdownlint-cli
     pkgs.nodePackages.prettier
   ];
   shellHook = ''
