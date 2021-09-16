@@ -12,6 +12,7 @@
     ../programs/direnv.nix
     ../programs/starship.nix
     ../programs/tmux.nix
+    ../programs/wezterm.nix
     ../programs/zsh.nix
   ];
 }
