@@ -9,5 +9,8 @@ mkShell rec {
   shellHook = ''
     # format
     alias fmt="prettier --write README.md && nixpkgs-fmt ."
+
+    # update wezterm config
+    alias wu="cp ./programs/wezterm/wezterm.lua /mnt/c/Users/serow/.wezterm.lua"
   '';
 }
