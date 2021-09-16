@@ -76,7 +76,7 @@ return {
 
 	leader = { mods = "CTRL", key = "t" },
 	keys = {
-		{ mods = "LEADER", key = "n", action = "ShowLauncher" },
+		{ mods = "LEADER", key = "a", action = "ShowLauncher" },
 
 		{ mods = "LEADER", key = "w", action = "QuickSelect" },
 		{ mods = "LEADER", key = "/", action = wezterm.action({ Search = { CaseSensitiveString = "" } }) },
