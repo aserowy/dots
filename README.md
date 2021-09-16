@@ -1,4 +1,4 @@
-# Dotfiles...
+# Dotfiles
 
 ## structure
 
@@ -36,7 +36,8 @@ TODO: short introduction into the repository
 
 > cheatsheet for tmux <https://gist.github.com/MohamedAlaa/2961058>
 
-The prefix changed to <kbd>ctrl + t</kbd> to overwrite the terminal key inside neovim while using tmux.
+The prefix changed to <kbd>ctrl + t</kbd> to overwrite the terminal key inside
+neovim while using tmux.
 
 ### bindings
 
@@ -89,17 +90,19 @@ The prefix changed to <kbd>ctrl + t</kbd> to overwrite the terminal key inside n
 
 ### fonts
 
-To get usefull icons in shell and nvim, install your favorite nerd font from <https://www.nerdfonts.com/font-downloads>. My most beloved font is `FiraCode Nerd Font`. It is important to install all available font faces given.
+To get usefull icons in shell and nvim, install your favorite nerd font from
+<https://www.nerdfonts.com/font-downloads>. My most beloved font is `FiraCode
+Nerd Font`. It is important to install all available font faces given.
 
 Set the installed font as default in your terminal.
 
-### on ubuntu
+### on debian
 
 Install the specified dependencies in your distribution.
 
 ```sh
 sudo apt-get update
-sudo apt-get install -y curl xz-utils
+sudo apt-get install -y curl openssh-server xz-utils
 ```
 
 After these packages are installed run the install script with the following command.
@@ -108,8 +111,14 @@ After these packages are installed run the install script with the following com
 curl -L https://raw.githubusercontent.com/aserowy/dots/main/install.sh | sh
 ```
 
-At the end, copy your ssh keys into `~/.ssh` and set the permissions to 600 for all keys and pubs.
+At the end, copy your ssh keys into `~/.ssh` and set the permissions to 600 for
+all keys and pubs.
 
 ```sh
 sudo chmod 600 [file]
 ```
+
+### on windows for wsl 2
+
+Fix author and principal in <./assets/wsl\_init.xml> accordingly. Open the Task
+Scheduler and import the updated task definition.
