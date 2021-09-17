@@ -14,5 +14,6 @@ mkShell rec {
 
     # update wezterm config
     alias wu="cp ./programs/wezterm/wezterm.lua /mnt/c/Users/serow/.wezterm.lua"
+    alias wuy="cp ./programs/wezterm/wezterm.lua /mnt/c/Users/serowy/.wezterm.lua"
   '';
 }
