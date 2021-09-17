@@ -92,7 +92,7 @@ return {
 	-- key mappings
 	disable_default_key_bindings = true,
 
-	-- leader = { mods = "CTRL", key = "t" },
+	leader = { mods = "CTRL|ALT", key = "t" },
 	keys = {
 		{ mods = "LEADER", key = "a", action = "ShowLauncher" },
 
@@ -103,13 +103,13 @@ return {
 		{ mods = "LEADER", key = "v", action = wezterm.action({ SplitHorizontal = { domain = "CurrentPaneDomain" } }) },
 		{ mods = "LEADER", key = "x", action = wezterm.action({ SplitVertical = { domain = "CurrentPaneDomain" } }) },
 
-		{ mods = "LEADER|CTRL", key = "n", action = wezterm.action({ ActivateTabRelative = 1 }) },
-		{ mods = "LEADER|CTRL", key = "p", action = wezterm.action({ ActivateTabRelative = -1 }) },
+		{ mods = "LEADER", key = "n", action = wezterm.action({ ActivateTabRelative = 1 }) },
+		{ mods = "LEADER", key = "p", action = wezterm.action({ ActivateTabRelative = -1 }) },
 
-		{ mods = "LEADER|CTRL", key = "h", action = wezterm.action({ ActivatePaneDirection = "Left" }) },
-		{ mods = "LEADER|CTRL", key = "l", action = wezterm.action({ ActivatePaneDirection = "Right" }) },
-		{ mods = "LEADER|CTRL", key = "k", action = wezterm.action({ ActivatePaneDirection = "Up" }) },
-		{ mods = "LEADER|CTRL", key = "j", action = wezterm.action({ ActivatePaneDirection = "Down" }) },
+		{ mods = "LEADER", key = "h", action = wezterm.action({ ActivatePaneDirection = "Left" }) },
+		{ mods = "LEADER", key = "l", action = wezterm.action({ ActivatePaneDirection = "Right" }) },
+		{ mods = "LEADER", key = "k", action = wezterm.action({ ActivatePaneDirection = "Up" }) },
+		{ mods = "LEADER", key = "j", action = wezterm.action({ ActivatePaneDirection = "Down" }) },
 
 		{ mods = "CTRL|ALT", key = "h", action = wezterm.action({ AdjustPaneSize = { "Left", 1 } }) },
 		{ mods = "CTRL|ALT", key = "l", action = wezterm.action({ AdjustPaneSize = { "Right", 1 } }) },
@@ -119,8 +119,6 @@ return {
 		{ mods = "LEADER", key = "z", action = "TogglePaneZoomState" },
 
 		{ mods = "ALT", key = "Enter", action = "ToggleFullScreen" },
-
-		-- { mods = "CTRL", key = "d", action = wezterm.action({ CloseCurrentPane = { confirm = false } }) },
 
 		{ mods = "CTRL|SHIFT", key = "c", action = wezterm.action({ CopyTo = "Clipboard" }) },
 		{ mods = "CTRL|SHIFT", key = "v", action = wezterm.action({ PasteFrom = "Clipboard" }) },
