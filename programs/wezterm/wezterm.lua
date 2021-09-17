@@ -44,6 +44,8 @@ end)
 
 return {
 	-- domains
+	default_prog = { "wsl.exe" },
+
 	ssh_domains = {
 		{
 			name = "debian.wsl",
