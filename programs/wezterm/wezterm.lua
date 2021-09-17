@@ -2,16 +2,16 @@ local wezterm = require("wezterm")
 
 local colors = {
 	background = "#212121",
-	foreground = "#3d3d3d",
+	foreground = "#545454",
 	button = {
 		active = {
-			bg = "#134eb2",
-			text = "#efefef",
+			bg = "#82aaff",
+			text = "#ffffff",
 		},
 		inactive = {
-			bg = "#54a4f3",
-			text = "#d9d9d9",
-			hover = "#efefef",
+			bg = "#89ddff",
+			text = "#545454",
+			hover = "#c9c9c9",
 		},
 	},
 }
@@ -35,8 +35,10 @@ wezterm.on("update-right-status", function(window, pane)
 		{ Text = cwd },
 		{ Background = { Color = colors.foreground } },
 		{ Text = battery },
+		{ Foreground = { Color = colors.button.inactive.text } },
 		{ Background = { Color = colors.button.inactive.bg } },
 		{ Text = "  " .. date .. " " },
+		{ Foreground = { Color = colors.button.active.text } },
 		{ Background = { Color = colors.button.active.bg } },
 		{ Text = hostname },
 	}))
@@ -55,7 +57,7 @@ return {
 	},
 
 	-- theming
-	color_scheme = "MaterialDark",
+	color_scheme = "MaterialDarker",
 
 	colors = {
 		tab_bar = {
@@ -74,7 +76,7 @@ return {
 			},
 			new_tab = {
 				bg_color = colors.foreground,
-				fg_color = colors.button.inactive.text,
+				fg_color = colors.button.inactive.hover,
 			},
 			new_tab_hover = {
 				bg_color = colors.foreground,
