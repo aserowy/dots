@@ -1,5 +1,21 @@
 local wezterm = require("wezterm")
 
+local colors = {
+	background = "#101216",
+	foreground = "#3b5070",
+	button = {
+		active = {
+			bg = "#6ca4f8",
+			text = "#ffffff",
+		},
+		inactive = {
+			bg = "#2b7489",
+			text = "#c9d1d9",
+			hover = "#ffffff",
+		},
+	},
+}
+
 wezterm.on("update-right-status", function(window, pane)
 	local date = wezterm.strftime("%Y-%m-%d %H:%M")
 	local hostname = " " .. wezterm.hostname() .. " "
@@ -15,13 +31,13 @@ wezterm.on("update-right-status", function(window, pane)
 	end
 
 	window:set_right_status(wezterm.format({
-		{ Foreground = { Color = "#c9c9c9" } },
+		{ Foreground = { Color = colors.button.active.text } },
 		{ Text = cwd },
-		{ Background = { Color = "#302b2a" } },
+		{ Background = { Color = colors.foreground } },
 		{ Text = battery },
-		{ Background = { Color = "#9d602a" } },
+		{ Background = { Color = colors.button.inactive.bg } },
 		{ Text = "  " .. date .. " " },
-		{ Background = { Color = "#a7463d" } },
+		{ Background = { Color = colors.button.active.bg } },
 		{ Text = hostname },
 	}))
 end)
@@ -37,30 +53,30 @@ return {
 	},
 
 	-- theming
-	color_scheme = "Sundried",
+	color_scheme = "Github Dark",
 
 	colors = {
 		tab_bar = {
-			background = "#1a1818",
+			background = colors.background,
 			active_tab = {
-				bg_color = "#a7463d",
-				fg_color = "#c9c9c9",
+				bg_color = colors.button.active.bg,
+				fg_color = colors.button.active.text,
 			},
 			inactive_tab = {
-				bg_color = "#4d4e48",
-				fg_color = "#c9c9c9",
+				bg_color = colors.button.inactive.bg,
+				fg_color = colors.button.inactive.text,
 			},
 			inactive_tab_hover = {
-				bg_color = "#4d4e48",
-				fg_color = "#c9c9c9",
+				bg_color = colors.button.inactive.bg,
+				fg_color = colors.button.inactive.hover,
 			},
 			new_tab = {
-				bg_color = "#302b2a",
-				fg_color = "#808080",
+				bg_color = colors.foreground,
+				fg_color = colors.button.inactive.text,
 			},
 			new_tab_hover = {
-				bg_color = "#302b2a",
-				fg_color = "#c9c9c9",
+				bg_color = colors.foreground,
+				fg_color = colors.button.inactive.hover,
 			},
 		},
 	},

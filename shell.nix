@@ -5,6 +5,8 @@ mkShell rec {
     pkgs.nixpkgs-fmt
     pkgs.nodePackages.markdownlint-cli
     pkgs.nodePackages.prettier
+    pkgs.stylua
+    pkgs.sumneko-lua-language-server
   ];
   shellHook = ''
     # format
