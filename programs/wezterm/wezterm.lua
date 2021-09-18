@@ -2,14 +2,14 @@ local wezterm = require("wezterm")
 
 local colors = {
 	background = "#282c34",
-	foreground = "#474e5d",
+	foreground = "#c678dd",
 	button = {
 		active = {
 			bg = "#61afef",
 			text = "#dcdfe4",
 		},
 		inactive = {
-			bg = "#c678dd",
+			bg = "#474e5d",
 			text = "#dcdfe4",
 			hover = "#dcdfe4",
 		},
@@ -33,10 +33,10 @@ wezterm.on("update-right-status", function(window, pane)
 	window:set_right_status(wezterm.format({
 		{ Foreground = { Color = colors.button.active.text } },
 		{ Text = cwd },
-		{ Background = { Color = colors.foreground } },
+		{ Background = { Color = colors.button.inactive.bg } },
 		{ Text = battery },
 		{ Foreground = { Color = colors.button.inactive.text } },
-		{ Background = { Color = colors.button.inactive.bg } },
+		{ Background = { Color = colors.foreground } },
 		{ Text = "  " .. date .. " " },
 		{ Foreground = { Color = colors.button.active.text } },
 		{ Background = { Color = colors.button.active.bg } },
@@ -75,11 +75,11 @@ return {
 				fg_color = colors.button.inactive.hover,
 			},
 			new_tab = {
-				bg_color = colors.foreground,
+				bg_color = colors.button.inactive.bg,
 				fg_color = colors.button.inactive.hover,
 			},
 			new_tab_hover = {
-				bg_color = colors.foreground,
+				bg_color = colors.background,
 				fg_color = colors.button.inactive.hover,
 			},
 		},
