@@ -1,17 +1,17 @@
 local wezterm = require("wezterm")
 
 local colors = {
-	background = "#212121",
-	foreground = "#545454",
+	background = "#282c34",
+	foreground = "#474e5d",
 	button = {
 		active = {
-			bg = "#82aaff",
-			text = "#ffffff",
+			bg = "#61afef",
+			text = "#dcdfe4",
 		},
 		inactive = {
-			bg = "#89ddff",
-			text = "#545454",
-			hover = "#c9c9c9",
+			bg = "#c678dd",
+			text = "#dcdfe4",
+			hover = "#dcdfe4",
 		},
 	},
 }
@@ -57,7 +57,7 @@ return {
 	},
 
 	-- theming
-	color_scheme = "MaterialDarker",
+	color_scheme = "OneHalfDark",
 
 	colors = {
 		tab_bar = {
