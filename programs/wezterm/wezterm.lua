@@ -85,6 +85,14 @@ return {
 		},
 	},
 
+    -- overwrites background color for onedark transpancy
+	window_background_gradient = {
+		colors = {
+			"#0A0B0D",
+			"#0A0B0D",
+		},
+	},
+
 	window_background_opacity = 0.9,
 
 	-- font
