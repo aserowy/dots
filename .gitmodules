@@ -4,9 +4,6 @@
 [submodule "programs/tmux/plugins/tmux-continuum"]
 	path = programs/tmux/plugins/tmux-continuum
 	url = https://github.com/tmux-plugins/tmux-continuum
-[submodule "programs/tmux/plugins/tmux-battery"]
-	path = programs/tmux/plugins/tmux-battery
-	url = https://github.com/tmux-plugins/tmux-battery
 [submodule "programs/tmux/plugins/tmux-resurrect"]
 	path = programs/tmux/plugins/tmux-resurrect
 	url = https://github.com/tmux-plugins/tmux-resurrect
