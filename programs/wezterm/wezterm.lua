@@ -85,7 +85,12 @@ return {
 		},
 	},
 
-    -- overwrites background color for onedark transpancy
+	inactive_pane_hsb = {
+		saturation = 0.7,
+		brightness = 0.6,
+	},
+
+	-- overwrites background color for onedark transpancy
 	window_background_gradient = {
 		colors = {
 			"#0A0B0D",
