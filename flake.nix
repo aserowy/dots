@@ -11,8 +11,8 @@
 
   outputs = { self, nixpkgs, home-manager }: {
     homeConfigurations = {
-      serowy_desktop-nixos = home-manager.lib.homeManagerConfiguration {
-        configuration = import ./home.nix;
+      "serowy@desktop-nixos" = home-manager.lib.homeManagerConfiguration {
+        configuration = import ./environments/wsl.nix;
         system = "x86_64-linux";
         homeDirectory = "/home/serowy";
         username = "serowy";
