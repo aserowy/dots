@@ -4,15 +4,15 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    homeManager = {
+    home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, homeManager }: {
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager }: {
     homeConfigurations = {
-      "serowy@desktop-nixos" = homeManager.lib.homeManagerConfiguration {
+      "serowy_desktop-nixos" = home-manager.lib.homeManagerConfiguration {
         configuration = { config, pkgs, ... }:
           let
             overlay-unstable = final: prev: {
