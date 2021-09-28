@@ -12,7 +12,7 @@
 
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager }: {
     homeConfigurations = {
-      "serowy_desktop-nixos" = home-manager.lib.homeManagerConfiguration {
+      serowy_desktop-nixos = home-manager.lib.homeManagerConfiguration {
         configuration = { config, pkgs, ... }:
           let
             overlay-unstable = final: prev: {
