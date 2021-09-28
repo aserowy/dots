@@ -6,6 +6,6 @@
   };
 
   home.packages = with pkgs; [
-    pkgs.unstable.wezterm
+    pkgs.wezterm
   ];
 }
