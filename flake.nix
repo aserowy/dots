@@ -9,7 +9,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager }: {
+  outputs = { self, nixpkgs, home-manager, ... }: {
     homeConfigurations = {
       "serowy@desktop-nixos" = home-manager.lib.homeManagerConfiguration {
         configuration = import ./environments/wsl.nix;
