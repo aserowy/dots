@@ -7,7 +7,7 @@
 
   home.packages = with pkgs; [
     pkgs.gcc
-    pkgs.neovim
+    pkgs.unstable.neovim
     pkgs.ripgrep
     pkgs.unzip
   ];
