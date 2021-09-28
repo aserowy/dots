@@ -6,6 +6,7 @@
   };
 
   home.packages = with pkgs; [
+    pkgs.fzf
     pkgs.gcc
     pkgs.unstable.neovim
     pkgs.ripgrep
