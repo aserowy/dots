@@ -1,8 +1,5 @@
 { config, pkgs, ... }:
 {
-  home.packages = with pkgs; [
-  ];
-
   imports = [
     ../programs/git.nix
     ../programs/neovim-server.nix

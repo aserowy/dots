@@ -14,7 +14,7 @@
       "serowy@desktop-nixos" = with {
         home-manager = {
           useUserPackages = true;
-          users.serowy = import ./environments/wsl.nix;
+          users.serowy = import ./environments/desktop.nix;
         };
       }; home-manager.nixosModule;
     };
