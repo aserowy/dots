@@ -11,11 +11,12 @@
 
   outputs = { self, nixpkgs, home-manager, ... }: {
     nixosModules = {
-      "serowy@desktop-nixos" = { config, ... }: home-manager.nixosModule {
-        config = config;
-        home-manager.useUserPackages = true;
-        home-manager.users.serowy = import ./environments/wsl.nix;
-      };
+      "serowy@desktop-nixos" = with {
+        home-manager = {
+          useUserPackages = true;
+          users.serowy = import ./environments/wsl.nix;
+        };
+      }; home-manager.nixosModule;
     };
     homeConfigurations = {
       "serowy@DESKTOP-UVAKAQL" = home-manager.lib.homeManagerConfiguration {
