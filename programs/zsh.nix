@@ -12,8 +12,6 @@
 
         export fpath=(~/.nix-profile/share/zsh/vendor-completions ''${fpath})
         export NIX_PATH="$HOME/.nix-defexpr/channels:$NIX_PATH"
-
-        # echo "non-nixos patches loaded"
       fi
     '';
     history = {
@@ -64,11 +62,9 @@
       VISUAL = "nvim";
     };
     shellAliases = {
-      hmb = "home-manager build";
-      hms = "home-manager switch";
+      hms = "home-manager switch --flake ~/nix/";
       ncu = "nix-channel --update";
       negc = "nix-collect-garbage --delete-older-than 30d";
-      nerb = "nix-env --rollback";
       ns = "nix-shell";
 
       # string operations
