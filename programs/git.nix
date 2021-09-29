@@ -6,6 +6,7 @@
     userEmail = "serowy@hotmail.com";
     extraConfig = {
       core.editor = "nvim";
+      init.defaultBranch = "main";
     };
   };
 }
