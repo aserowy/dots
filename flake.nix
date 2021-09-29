@@ -22,8 +22,7 @@
       "serowy@DESKTOP-UVAKAQL" = home-manager.lib.homeManagerConfiguration {
         configuration = { config, pkgs, ... }: {
           imports = [
-            ./environments/wsl.nix
-            ./environments/work.nix
+            ./environments/wsl-work.nix
           ];
         };
         homeDirectory = "/home/serowy";
