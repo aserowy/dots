@@ -107,6 +107,8 @@ sudo apt-get install -y curl openssh-server xz-utils
 
 After these packages are installed run the install script with the following command.
 
+> For others to use: fork and change targets in flake.nix (user@system) accordingly.
+
 ```sh
 curl -L https://raw.githubusercontent.com/aserowy/dots/main/install.sh | sh
 ```

@@ -4,6 +4,13 @@ curl -L https://nixos.org/nix/install | sh
 sudo chmod +x ~/.nix-profile/etc/profile.d/nix.sh
 . ~/.nix-profile/etc/profile.d/nix.sh
 
+# activate flake support
+nix-env -iA nixpkgs.nixUnstable
+
+mkdir -p ~/.config/nix/
+echo 'experimental-features = nix-command flakes' | tee ~/.config/nix/nix.conf
+
+# add home manager channel
 nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
 nix-channel --update
 
@@ -21,7 +28,7 @@ ln -s ~/nix nixpkgs
 # install home manager and install from dotfiles
 cd ~/nix
 nix-shell '<home-manager>' -A install
-home-manager switch
+home-manager switch --flake ./
 if [ $? -ne 0 ]; then
     exit 1
 fi
