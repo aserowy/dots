@@ -11,9 +11,9 @@
 
   outputs = { self, nixpkgs, home-manager, ... }: {
     nixosModules = {
-      "serowy@desktop-nixos" = home-manager.nixosModule {
+      "serowy@desktop-nixos" = { config, ... }: home-manager.nixosModule {
+        config = config;
         home-manager.useUserPackages = true;
-
         home-manager.users.serowy = import ./environments/wsl.nix;
       };
     };
