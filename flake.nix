@@ -10,8 +10,27 @@
   };
 
   outputs = { self, nixpkgs, home-manager, ... }: {
+    nixosModules = {
+      "serowy@desktop-nixos" = {...}: home-manager.nixosModule {
+        home-manager.useUserPackages = true;
+
+        home-manager.users.serowy = import ./environments/wsl.nix;
+      };
+    };
     homeConfigurations = {
-      "serowy@desktop-nixos" = home-manager.lib.homeManagerConfiguration {
+      "serowy@DESKTOP-UVAKAQL" = home-manager.lib.homeManagerConfiguration {
+        configuration = { config, pkgs, ... }: {
+          imports = [
+            ./environments/wsl.nix
+            ./environments/work.nix
+          ];
+        };
+        homeDirectory = "/home/serowy";
+        stateVersion = "21.05";
+        system = "x86_64-linux";
+        username = "serowy";
+      };
+      "serowy@DESKTOP-2F0CTGF" = home-manager.lib.homeManagerConfiguration {
         configuration = { config, pkgs, ... }: {
           imports = [
             ./environments/wsl.nix
