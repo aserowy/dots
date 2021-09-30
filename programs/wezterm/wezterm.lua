@@ -44,12 +44,8 @@ wezterm.on("update-right-status", function(window, pane)
 	}))
 end)
 
-return {
+local M = {
 	-- domains
-    if wezterm.running_under_wsl() then
-        default_prog = { "wsl.exe" },
-    end
-
 	ssh_domains = {
 		{
 			name = "debian.wsl",
@@ -141,3 +137,9 @@ return {
 		{ mods = "CTRL|SHIFT", key = "v", action = wezterm.action({ PasteFrom = "Clipboard" }) },
 	},
 }
+
+if wezterm.running_under_wsl() then
+    M.default_prog = { "wsl.exe" }
+end
+
+return M
