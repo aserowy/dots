@@ -46,7 +46,9 @@ end)
 
 return {
 	-- domains
-	default_prog = { "wsl.exe" },
+    if wezterm.running_under_wsl() then
+        default_prog = { "wsl.exe" },
+    end
 
 	ssh_domains = {
 		{
