@@ -97,6 +97,7 @@
       gm = "git merge";
       gms = "git merge --squash";
 
+      gsui = "git submodule update --init --recursive";
       gsur = "git submodule update --remote --rebase";
 
       ga = "git add";
