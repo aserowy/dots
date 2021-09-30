@@ -99,7 +99,10 @@ local M = {
 	window_background_opacity = 0.9,
 
 	-- font
-	font = wezterm.font("FiraCode NF", { weight = "Thin" }),
+	font = wezterm.font_with_fallback(
+        { family = "FiraCode NF", weight = "Thin" },
+        { family = "FiraCode Nerd Font", weight = "Thin" },
+    ),
 	line_height = 1.1,
 
 	-- key mappings
