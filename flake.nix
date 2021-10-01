@@ -33,7 +33,8 @@
       "serowy@desktop-nixos" = home-manager.lib.homeManagerConfiguration {
         configuration = { config, pkgs, ... }: {
           imports = [
-            ./environments/allowunfree.nix
+            ./environments/include_homemanager.nix
+
             ./environments/desktop.nix
           ];
         };
