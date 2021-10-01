@@ -15,19 +15,17 @@ nix-channel --add https://github.com/nix-community/home-manager/archive/master.t
 nix-channel --update
 
 # clone dotfiles
-rm -rf ~/nix
-nix-shell -p git --run "git clone --recurse-submodules -j8 https://github.com/aserowy/dots.git ~/nix"
+rm -rf ~/src/dots/
+nix-shell -p git --run "git clone --recurse-submodules -j8 https://github.com/aserowy/dots.git ~/src/dots/"
 if [ $? -ne 0 ]; then
     exit 1
 fi
 
-cd ~/.config
-rm -rf nixpkgs
-ln -s ~/nix nixpkgs
-
 # install home manager and install from dotfiles
-cd ~/nix
+cd ~/src/dots/
 nix-shell '<home-manager>' -A install
+rm -rf ~/.config/nixpkgs/
+
 home-manager switch --flake ./
 if [ $? -ne 0 ]; then
     exit 1
