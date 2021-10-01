@@ -62,7 +62,7 @@
       VISUAL = "nvim";
     };
     shellAliases = {
-      hms = "home-manager switch --flake ~/nix/";
+      hms = "home-manager switch --flake ~/src/dots/";
       ncu = "nix-channel --update";
       negc = "nix-collect-garbage --delete-older-than 30d";
       ns = "nix-shell";
