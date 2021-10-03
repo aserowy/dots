@@ -18,7 +18,7 @@
 
           home-manager = {
             useUserPackages = true;
-            users.serowy = import ./home/environments/desktop.nix;
+            users.serowy = import ./environments/desktop.nix;
           };
         });
     };
