@@ -2,25 +2,25 @@
   description = "Home Manager configurations";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }: {
+  outputs = { self, home-manager, nixpkgs, nur, ... }: {
     nixosModules = {
       "serowy@desktop-nixos" = ({ config, utils, ... }: home-manager.nixosModule {
-          pkgs = nixpkgs;
-          lib = nixpkgs.lib;
-          inherit config utils;
+        pkgs = nixpkgs;
+        lib = nixpkgs.lib;
+        inherit config utils;
 
-          home-manager = {
-            useUserPackages = true;
-            users.serowy = import ./environments/desktop.nix;
-          };
-        });
+        home-manager = {
+          useUserPackages = true;
+          users.serowy = import ./environments/desktop.nix;
+        };
+      });
     };
     homeConfigurations = {
       "serowy@DESKTOP-2F0CTGF" = home-manager.lib.homeManagerConfiguration {

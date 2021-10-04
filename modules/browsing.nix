@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 {
   imports = [
-    ../programs/firefox.nix
+    pkgs.firefox
   ];
 }
