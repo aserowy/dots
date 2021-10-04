@@ -10,7 +10,7 @@
   };
 
   outputs = { self, home-manager, nixpkgs, nur, ... }: {
-    nixosModules = {
+    /* nixosModules = {
       "serowy@desktop-nixos" = ({ config, utils, ... }: home-manager.nixosModule {
         pkgs = nixpkgs;
         lib = nixpkgs.lib;
@@ -21,7 +21,7 @@
           users.serowy = import ./environments/desktop.nix;
         };
       });
-    };
+    }; */
     homeConfigurations = {
       "serowy@DESKTOP-2F0CTGF" = home-manager.lib.homeManagerConfiguration {
         configuration = { config, pkgs, ... }: {
