@@ -52,6 +52,11 @@ local M = {
 			remote_address = "localhost:2222",
 			username = "serowy",
 		},
+        {
+			name = "desktop-nixos",
+			remote_address = "192.168.178.53:2022",
+			username = "serowy",
+        },
 	},
 
 	-- theming
@@ -141,7 +146,7 @@ local M = {
 	},
 }
 
-if wezterm.running_under_wsl() then
+if wezterm.target_triple == "x86_64-pc-windows-msvc" then
     M.default_prog = { "wsl.exe" }
 end
 
