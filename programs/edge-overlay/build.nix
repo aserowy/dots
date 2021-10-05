@@ -32,11 +32,11 @@
 
 stdenv.mkDerivation rec {
   pname = "microsoft-edge-dev";
-  version = "90.0.782.0";
+  version = "96.0.1028.0";
 
   src = fetchurl {
     url = "https://packages.microsoft.com/repos/edge/pool/main/m/microsoft-edge-dev/microsoft-edge-dev_${version}-1_amd64.deb";
-    hash = "sha256-eLJWQnPK/0iHNAfamlhQ1CM4XwRHpCGae27CDY6kqUQ=";
+    hash = "sha256-f09Khcdl/l9Kl+a0qZ3aQIpKJGK9dPnqVkrmfr4r5nY=";
   };
 
   unpackCmd = ''
@@ -161,7 +161,7 @@ stdenv.mkDerivation rec {
         $out/opt/microsoft/msedge-dev/libsmartscreen.so
     '';
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     homepage = "https://www.microsoftedgeinsider.com/en-us/";
     description = "Microsoft's fork of Chromium web browser";
     license = licenses.unfree;

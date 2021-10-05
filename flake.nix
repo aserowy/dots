@@ -18,18 +18,20 @@
       ];
     in
     {
-      /* nixosModules = {
+      nixosModules = {
         "serowy@desktop-nixos" = ({ config, utils, ... }: home-manager.nixosModule {
-        pkgs = nixpkgs;
-        lib = nixpkgs.lib;
-        inherit config utils;
+          pkgs = nixpkgs;
+          lib = nixpkgs.lib;
+          inherit config utils;
 
-        home-manager = {
-        useUserPackages = true;
-        users.serowy = import ./environments/desktop.nix;
-        };
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+
+            users.serowy = import ./environments/desktop.nix;
+          };
         });
-        }; */
+      };
       homeConfigurations = {
         "serowy@DESKTOP-2F0CTGF" = home-manager.lib.homeManagerConfiguration {
           configuration = { config, pkgs, ... }: {
