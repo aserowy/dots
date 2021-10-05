@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 {
   imports = [
-    pkgs.firefox
+    ../programs/edge.nix
   ];
 }
