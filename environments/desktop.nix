@@ -3,6 +3,7 @@
   imports = [
     ./headless.nix
 
+    ../modules/administration-gui.nix
     ../modules/browsing.nix
     ../modules/collaboration.nix
     ../modules/development-gui.nix
