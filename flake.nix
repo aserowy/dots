@@ -18,6 +18,8 @@
       ];
     in
     {
+      devshell = ./.dev;
+
       nixosModules = {
         "serowy@desktop-nixos" = ({ config, utils, ... }: home-manager.nixosModule {
           pkgs = nixpkgs;
