@@ -14,7 +14,7 @@
     let
       nixpkgs.overlays = [
         nur.overlay
-        (import ./programs/edge-overlay)
+        (import ./pkgs)
       ];
     in
     {
