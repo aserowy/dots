@@ -2,3 +2,8 @@
 src.webpage = "https://packages.microsoft.com/repos/edge/pool/main/m/microsoft-edge-beta/"
 src.regex = "microsoft-edge-beta_(.*)-1_amd64\\.deb\">microsoft-edge-beta_"
 fetch.url = "https://packages.microsoft.com/repos/edge/pool/main/m/microsoft-edge-beta/microsoft-edge-beta_$ver-1_amd64.deb"
+
+[widevine-cdm]
+src.webpage = "https://dl.google.com/widevine-cdm/versions.txt"
+src.regex = "(.*)"
+fetch.url = "https://dl.google.com/widevine-cdm/$ver-linux-x64.zip"

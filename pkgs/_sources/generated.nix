@@ -9,4 +9,12 @@
       sha256 = "1k95jaxmwsd24xr2m9ywrcn21mcdkpdf6845n5lbkn3jvcbzjkvv";
     };
   };
+  widevine-cdm = {
+    pname = "widevine-cdm";
+    version = "4.10.2209.1";
+    src = fetchurl {
+      url = "https://dl.google.com/widevine-cdm/4.10.2209.1-linux-x64.zip";
+      sha256 = "1mnbxkazjyl3xgvpna9p9qiiyf08j4prdxry51wk8jj5ns6c2zcc";
+    };
+  };
 }
