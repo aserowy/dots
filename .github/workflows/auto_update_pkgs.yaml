@@ -21,6 +21,7 @@ jobs:
             experimental-features = nix-command flakes
 
       - name: update with nvfetcher
+        working-directory: pkgs
         run: nix develop --command nvfetcher --commit-changes
 
       # - name: check flake
