@@ -1,6 +1,7 @@
 name: "auto_update_pkgs"
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: "0 * * * *"
 
@@ -26,4 +27,4 @@ jobs:
       #   run: nix flake check
 
       - name: push changes
-        uses: ad-m/github-push-action@v0.6
+        uses: ad-m/github-push-action@v0.6.0
