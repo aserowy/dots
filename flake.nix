@@ -12,18 +12,22 @@
 
   outputs = { self, home-manager, nixpkgs, nur, ... }:
     let
-      nixpkgs.overlays = [
-        nur.overlay
-        (import ./pkgs)
-      ];
+      packages = with nixpkgs; {
+        inherit legacyPackages;
+
+        overlays = [
+          nur.overlay
+          (import ./pkgs)
+        ];
+      };
     in
     {
-      devShell.x86_64-linux = ./.dev;
+      devShell.x86_64-linux = import ./.dev { pkgs = packages.legacyPackages.x86_64-linux; };
 
-      nixosModules = {
+      /* nixosModules = {
         "serowy@desktop-nixos" = ({ config, utils, ... }: home-manager.nixosModule {
-          pkgs = nixpkgs;
-          lib = nixpkgs.lib;
+          pkgs = packages;
+          lib = packages.lib;
           inherit config utils;
 
           home-manager = {
@@ -33,7 +37,7 @@
             users.serowy = import ./environments/desktop.nix;
           };
         });
-      };
+      }; */
       homeConfigurations = {
         "serowy@DESKTOP-2F0CTGF" = home-manager.lib.homeManagerConfiguration {
           configuration = { config, pkgs, ... }: {

@@ -1,6 +1,5 @@
-{ pkgs, ... }:
-pkgs.mkShell {
-  buildInputs = with pkgs; [
+{ pkgs, ... }: with pkgs; mkShell {
+  buildInputs = [
     nvfetcher
   ];
 }
