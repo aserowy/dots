@@ -22,9 +22,10 @@ jobs:
 
       - name: update with nvfetcher
         run: |
+          nix develop
           cd ./pkgs
           echo $PWD
-          nix develop --command nvfetcher --commit-changes
+          nvfetcher --commit-changes
 
       # - name: check flake
       #   run: nix flake check
