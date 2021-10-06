@@ -18,7 +18,7 @@
       ];
     in
     {
-      devshell = ./.dev;
+      devShell.x86_64-linux = ./.dev;
 
       nixosModules = {
         "serowy@desktop-nixos" = ({ config, utils, ... }: home-manager.nixosModule {
