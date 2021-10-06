@@ -3,7 +3,7 @@ name: "auto_update_pkgs"
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 * * * *"
+    - cron: "* 0 * * *"
 
 jobs:
   update_pkgs:
@@ -29,3 +29,5 @@ jobs:
 
       - name: push changes
         uses: ad-m/github-push-action@v0.6.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
