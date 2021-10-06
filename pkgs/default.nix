@@ -14,5 +14,5 @@ in
     gconf = final.gnome2.GConf;
   };
 
-  widevine-cdm = final.callPackage ./widevine-cdm { };
+  widevine-cdm = final.callPackage ./widevine-cdm { inherit sources; };
 }
