@@ -23,7 +23,10 @@ jobs:
             experimental-features = nix-command flakes
 
       - name: update flake
-        run: nix flake update --commit-lock-file
+        run: |
+          git config --local user.email "serowy@hotmail.com"
+          git config --local user.name "serowy"
+          nix flake update --commit-lock-file
 
       - name: check flake
         run: nix flake check -v --show-trace
