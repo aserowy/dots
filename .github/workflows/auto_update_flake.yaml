@@ -25,7 +25,7 @@ jobs:
       - name: update flake
         run: |
           git config --local user.email "serowy@hotmail.com"
-          git config --local user.name "serowy"
+          git config --local user.name "aserowy"
           nix flake update --commit-lock-file
 
       - name: check flake
