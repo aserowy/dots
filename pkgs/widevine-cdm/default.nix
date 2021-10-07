@@ -1,3 +1,4 @@
+/* https://github.com/danielphan2003/flk/blob/main/pkgs/applications/networking/browsers/widevine-cdm/default.nix */
 { stdenv, lib, sources, patchelf, gcc, glib, nspr, nss, unzip }:
 let
   mkrpath = p: "${lib.makeSearchPathOutput "lib" "lib64" p}:${lib.makeLibraryPath p}";

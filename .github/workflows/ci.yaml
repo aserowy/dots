@@ -1,9 +1,12 @@
-name: "auto_update_pkgs"
+name: "ci"
 
 on:
-  workflow_dispatch:
-  schedule:
-    - cron: "* 0 * * *"
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   update_pkgs:
@@ -22,8 +25,8 @@ jobs:
           extra_nix_config: |
             experimental-features = nix-command flakes
 
-      - name: update with nvfetcher
-        run: nix develop --command nvfetcher -c ./pkgs/nvfetcher.toml -o ./pkgs/_sources --commit-changes
+      - name: update flake
+        run: nix flake update --recreate-lock-file --commit-lock-file
 
       - name: check flake
         run: nix flake check -v --show-trace
