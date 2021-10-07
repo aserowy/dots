@@ -7,3 +7,7 @@ updates:
     labels:
       - "chore"
       - "dependabot"
+  - package-ecosystem: "gitsubmodule"
+    directory: "/"
+    schedule:
+      interval: "daily"
