@@ -6,7 +6,7 @@ on:
     - cron: "* 2 * * *"
 
 jobs:
-  update_pkgs:
+  update_flake:
     runs-on: ubuntu-latest
     steps:
       - name: checkout

@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  update_pkgs:
+  check:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -28,9 +28,3 @@ jobs:
       - name: check flake
         run: nix flake check -v --show-trace
         timeout-minutes: 90
-
-      - name: push changes
-        uses: ad-m/github-push-action@v0.6.0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
