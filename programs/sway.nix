@@ -23,7 +23,6 @@
     waybar
     wl-clipboard
 
-    alacritty
     pavucontrol
     ranger
   ];
