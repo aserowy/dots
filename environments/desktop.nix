@@ -8,5 +8,6 @@
     ../modules/collaboration.nix
     ../modules/development-gui.nix
     ../modules/remote_access.nix
+    ../modules/sway.nix
   ];
 }

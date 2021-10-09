@@ -7,16 +7,19 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
     nur.url = "github:nix-community/NUR";
   };
 
-  outputs = { self, home-manager, nixpkgs, nur, ... }:
+  outputs = { self, home-manager, nixpkgs, nixpkgs-wayland, nur, ... }:
     let
       packages = with nixpkgs; {
         inherit legacyPackages;
 
         overlays = [
           nur.overlay
+          nixpkgs-wayland.overlay
+
           (import ./pkgs)
         ];
       };

@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "cachix": {
+      "locked": {
+        "lastModified": 1633625029,
+        "narHash": "sha256-Ia3kwnN9DhcskAIElLSKb4u/OK7nZU/P0TkaikAX790=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "781b1f8e3a2194e1e233cd62b4f2193e129a07f7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-21.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -36,13 +52,48 @@
         "type": "github"
       }
     },
+    "nixpkgs-wayland": {
+      "inputs": {
+        "cachix": "cachix",
+        "nixpkgs": "nixpkgs_2"
+      },
+      "locked": {
+        "lastModified": 1633696530,
+        "narHash": "sha256-oFb4SzDrQkJlLNK/1hj/UMZpKvyVRiQ/DsO9xHileyI=",
+        "owner": "nix-community",
+        "repo": "nixpkgs-wayland",
+        "rev": "79adc91cf2956f5658154d15288ed5e5ac7278ac",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nixpkgs-wayland",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1633528625,
+        "narHash": "sha256-AGj5q58eHACAe0RQGxObrGwMUsjMozTsiznhsLCYisQ=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "5e2018f7b383aeca6824a30c0cd1978c9532a46a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nur": {
       "locked": {
-        "lastModified": 1633744644,
-        "narHash": "sha256-aFSd9osCGQJjGmssRt5ysJNpnXcpVTGEzwcE1xhXcac=",
+        "lastModified": 1633700857,
+        "narHash": "sha256-rCyKY2nGLQktcC1XhLTWieto2dp8eZs9DpOd6visZek=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "a99baa2b37fef031f2b69f3376d1a59d55c6e41a",
+        "rev": "15f55a630eb6328008a134fe5ad8344e20d0faab",
         "type": "github"
       },
       "original": {
@@ -55,6 +106,7 @@
       "inputs": {
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
+        "nixpkgs-wayland": "nixpkgs-wayland",
         "nur": "nur"
       }
     }
