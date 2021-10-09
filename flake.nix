@@ -27,38 +27,11 @@
     {
       devShell.x86_64-linux = import ./.dev { pkgs = packages.legacyPackages.x86_64-linux; };
 
-      /* nixosModules = {
-        "serowy@desktop-nixos" = ({ config, utils, ... }: home-manager.nixosModule {
-          pkgs = packages;
-          lib = packages.lib;
-          inherit config utils;
-
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-
-            users.serowy = import ./environments/desktop.nix;
-          };
-        });
-      }; */
       homeConfigurations = {
         "serowy@DESKTOP-2F0CTGF" = home-manager.lib.homeManagerConfiguration {
           configuration = { config, pkgs, ... }: {
             imports = [
               ./environments/wsl.nix
-            ];
-          };
-          homeDirectory = "/home/serowy";
-          stateVersion = "21.05";
-          system = "x86_64-linux";
-          username = "serowy";
-        };
-        "serowy@desktop-nixos" = home-manager.lib.homeManagerConfiguration {
-          configuration = { config, pkgs, ... }: {
-            imports = [
-              ./environments/include_homemanager.nix
-
-              ./environments/desktop.nix
             ];
           };
           homeDirectory = "/home/serowy";
