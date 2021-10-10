@@ -4,6 +4,10 @@
     source = ./sway/sway.config;
   };
 
+  home.file.".config/swayidle/config" = {
+    source = ./sway/swayidle.config;
+  };
+
   home.file.".config/rofi/config.rasi" = {
     source = ./sway/rofi.config;
   };
@@ -19,6 +23,7 @@
   home.packages = with pkgs; [
     mako
     sway-unwrapped
+    swayidle
     rofi
     waybar
     wl-clipboard
