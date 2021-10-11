@@ -9,6 +9,7 @@
     sway-unwrapped
     swaybg
     swayidle
+    wallutils
     wl-clipboard
 
     pavucontrol
