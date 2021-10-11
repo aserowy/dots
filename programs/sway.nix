@@ -1,31 +1,18 @@
 { config, pkgs, ... }:
 {
   home.file.".config/sway/config" = {
-    source = ./sway/sway.config;
-  };
-
-  home.file.".config/rofi/config.rasi" = {
-    source = ./sway/rofi.config;
-  };
-
-  home.file.".config/waybar/config" = {
-    source = ./sway/waybar.config;
-  };
-
-  home.file.".config/waybar/style.css" = {
-    source = ./sway/waybar.css;
+    source = ./sway.config;
   };
 
   home.packages = with pkgs; [
     mako
     sway-unwrapped
+    swaybg
     swayidle
-    rofi
-    waybar
     wl-clipboard
 
     pavucontrol
-    ranger
+    xdg-desktop-portal-wlr
   ];
 
   programs.zsh.loginExtra = ''

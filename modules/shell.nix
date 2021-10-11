@@ -3,13 +3,13 @@
   home.packages = with pkgs; [
     pkgs.curl
     pkgs.ncurses
-    pkgs.tree
 
     pkgs.unixtools.watch
   ];
 
   imports = [
     ../programs/direnv.nix
+    ../programs/lf.nix
     ../programs/starship.nix
     ../programs/tmux.nix
     ../programs/wezterm.nix
