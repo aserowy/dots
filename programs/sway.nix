@@ -4,10 +4,6 @@
     source = ./sway/sway.config;
   };
 
-  home.file.".config/swayidle/config" = {
-    source = ./sway/swayidle.config;
-  };
-
   home.file.".config/rofi/config.rasi" = {
     source = ./sway/rofi.config;
   };

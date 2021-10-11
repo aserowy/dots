@@ -114,29 +114,29 @@ local M = {
 	disable_default_key_bindings = true,
 
 	keys = {
-		{ mods = "LEADER", key = "a", action = "ShowLauncher" },
+		{ mods = "LEADER|CTRL", key = "a", action = "ShowLauncher" },
 
-		{ mods = "LEADER", key = "w", action = "QuickSelect" },
-		{ mods = "LEADER", key = "/", action = wezterm.action({ Search = { CaseSensitiveString = "" } }) },
-		{ mods = "LEADER", key = "y", action = "ActivateCopyMode" },
+		{ mods = "LEADER|CTRL", key = "w", action = "QuickSelect" },
+		{ mods = "LEADER|CTRL", key = "/", action = wezterm.action({ Search = { CaseSensitiveString = "" } }) },
+		{ mods = "LEADER|CTRL", key = "y", action = "ActivateCopyMode" },
 
-		{ mods = "LEADER", key = "v", action = wezterm.action({ SplitHorizontal = { domain = "CurrentPaneDomain" } }) },
-		{ mods = "LEADER", key = "x", action = wezterm.action({ SplitVertical = { domain = "CurrentPaneDomain" } }) },
+		{ mods = "LEADER|CTRL", key = "v", action = wezterm.action({ SplitHorizontal = { domain = "CurrentPaneDomain" } }) },
+		{ mods = "LEADER|CTRL", key = "x", action = wezterm.action({ SplitVertical = { domain = "CurrentPaneDomain" } }) },
 
-		{ mods = "LEADER", key = "n", action = wezterm.action({ ActivateTabRelative = 1 }) },
-		{ mods = "LEADER", key = "p", action = wezterm.action({ ActivateTabRelative = -1 }) },
+		{ mods = "LEADER|CTRL", key = "n", action = wezterm.action({ ActivateTabRelative = 1 }) },
+		{ mods = "LEADER|CTRL", key = "p", action = wezterm.action({ ActivateTabRelative = -1 }) },
 
-		{ mods = "LEADER", key = "h", action = wezterm.action({ ActivatePaneDirection = "Left" }) },
-		{ mods = "LEADER", key = "l", action = wezterm.action({ ActivatePaneDirection = "Right" }) },
-		{ mods = "LEADER", key = "k", action = wezterm.action({ ActivatePaneDirection = "Up" }) },
-		{ mods = "LEADER", key = "j", action = wezterm.action({ ActivatePaneDirection = "Down" }) },
+		{ mods = "LEADER|CTRL", key = "h", action = wezterm.action({ ActivatePaneDirection = "Left" }) },
+		{ mods = "LEADER|CTRL", key = "l", action = wezterm.action({ ActivatePaneDirection = "Right" }) },
+		{ mods = "LEADER|CTRL", key = "k", action = wezterm.action({ ActivatePaneDirection = "Up" }) },
+		{ mods = "LEADER|CTRL", key = "j", action = wezterm.action({ ActivatePaneDirection = "Down" }) },
 
 		{ mods = "CTRL|ALT", key = "h", action = wezterm.action({ AdjustPaneSize = { "Left", 1 } }) },
 		{ mods = "CTRL|ALT", key = "l", action = wezterm.action({ AdjustPaneSize = { "Right", 1 } }) },
 		{ mods = "CTRL|ALT", key = "k", action = wezterm.action({ AdjustPaneSize = { "Up", 1 } }) },
 		{ mods = "CTRL|ALT", key = "j", action = wezterm.action({ AdjustPaneSize = { "Down", 1 } }) },
 
-		{ mods = "LEADER", key = "z", action = "TogglePaneZoomState" },
+		{ mods = "LEADER|CTRL", key = "z", action = "TogglePaneZoomState" },
 
 		{ mods = "ALT", key = "Enter", action = "ToggleFullScreen" },
 
