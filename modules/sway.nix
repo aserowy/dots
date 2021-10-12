@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 {
   imports = [
+    ../programs/dunst.nix
     ../programs/lf.nix
     ../programs/onedrive.nix
     ../programs/rofi.nix
