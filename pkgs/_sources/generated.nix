@@ -3,10 +3,10 @@
 {
   microsoft-edge-beta = {
     pname = "microsoft-edge-beta";
-    version = "95.0.1020.14";
+    version = "95.0.1020.20";
     src = fetchurl {
-      url = "https://packages.microsoft.com/repos/edge/pool/main/m/microsoft-edge-beta/microsoft-edge-beta_95.0.1020.14-1_amd64.deb";
-      sha256 = "1k95jaxmwsd24xr2m9ywrcn21mcdkpdf6845n5lbkn3jvcbzjkvv";
+      url = "https://packages.microsoft.com/repos/edge/pool/main/m/microsoft-edge-beta/microsoft-edge-beta_95.0.1020.20-1_amd64.deb";
+      sha256 = "1l9ywpx9cs9gwrx5kipmi4vkirnl7b0sz2pvavm5fyvd9lnhkyhn";
     };
   };
   widevine-cdm = {
