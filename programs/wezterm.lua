@@ -52,11 +52,11 @@ local M = {
 			remote_address = "localhost:2222",
 			username = "serowy",
 		},
-        {
+		{
 			name = "desktop-nixos",
 			remote_address = "192.168.178.53:2022",
 			username = "serowy",
-        },
+		},
 	},
 
 	-- theming
@@ -104,10 +104,6 @@ local M = {
 	window_background_opacity = 0.9,
 
 	-- font
-	font = wezterm.font_with_fallback({
-        { family = "FiraCode Nerd Font", weight = "Light", stretch = "Normal", italic = false},
-        { family = "FiraCode NF", weight = "Thin" },
-    }),
 	line_height = 1.1,
 
 	-- key mappings
@@ -120,8 +116,16 @@ local M = {
 		{ mods = "LEADER|CTRL", key = "/", action = wezterm.action({ Search = { CaseSensitiveString = "" } }) },
 		{ mods = "LEADER|CTRL", key = "y", action = "ActivateCopyMode" },
 
-		{ mods = "LEADER|CTRL", key = "v", action = wezterm.action({ SplitHorizontal = { domain = "CurrentPaneDomain" } }) },
-		{ mods = "LEADER|CTRL", key = "x", action = wezterm.action({ SplitVertical = { domain = "CurrentPaneDomain" } }) },
+		{
+			mods = "LEADER|CTRL",
+			key = "v",
+			action = wezterm.action({ SplitHorizontal = { domain = "CurrentPaneDomain" } }),
+		},
+		{
+			mods = "LEADER|CTRL",
+			key = "x",
+			action = wezterm.action({ SplitVertical = { domain = "CurrentPaneDomain" } }),
+		},
 
 		{ mods = "LEADER|CTRL", key = "n", action = wezterm.action({ ActivateTabRelative = 1 }) },
 		{ mods = "LEADER|CTRL", key = "p", action = wezterm.action({ ActivateTabRelative = -1 }) },
@@ -146,11 +150,21 @@ local M = {
 }
 
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
-    M.default_prog = { "wsl.exe" }
+	M.default_prog = { "wsl.exe" }
+
+	M.font = wezterm.font_with_fallback({
+		{ family = "FiraCode NF", weight = "Thin" },
+	})
 
 	M.leader = { mods = "CTRL|ALT", key = "t" }
 else
 	M.leader = { mods = "CTRL", key = "t" }
+
+	M.font = wezterm.font_with_fallback({
+		{ family = "FiraCode Nerd Font", weight = "Light", stretch = "Normal", italic = false },
+	})
+
+	M.hide_tab_bar_if_only_one_tab = true
 end
 
 return M

@@ -1,11 +1,10 @@
 { config, pkgs, ... }:
 {
-  home.file.".config/wezterm/" = {
-    recursive = true;
-    source = ./wezterm;
+  home.file.".config/wezterm/wezterm.lua" = {
+    source = ./wezterm.lua;
   };
 
   home.packages = with pkgs; [
-    pkgs.wezterm
+    wezterm
   ];
 }
