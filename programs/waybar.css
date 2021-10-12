@@ -2,19 +2,19 @@
 
 Color Pallete
 
-foreground:     '#abb2bf'
-background:     '#1f2227'
-alt-background: '#282c34'
-alt-foreground: '#1f2227'
+foreground:     '#dcdfe4'
+background:     '#282c34'
+alt-background: '#474e5d'
+alt-foreground: '#282c34'
 
 black:   '#282c34'
 red:     '#e06c75'
 green:   '#98c379'
 yellow:  '#e5c07b'
-blue:    '#81A1C1'
+blue:    '#61afef'
 magenta: '#c678dd'
 cyan:    '#56b6c2'
-white:   '#c8ccd4'
+white:   '#dcdfe4'
 
 */
 
@@ -29,9 +29,9 @@ white:   '#c8ccd4'
 }
 
 window#waybar {
-    background-color: #1f2227;
+    background-color: #282c34;
     background: transparent;
-    color: #c8ccd4;
+    color: #dcdfe4;
     transition-property: background-color;
     transition-duration: 0.5s;
     border-radius: 0;
@@ -41,8 +41,8 @@ window > box {
     margin-top: 26.5px;
     margin-left: 26.5px;
     margin-right: 26.5px;
-    background: #1f2227;
-    color: #c8ccd4;
+    background: #282c34;
+    color: #dcdfe4;
 }
 
 window#waybar.hidden {
@@ -55,7 +55,7 @@ label:focus {
 
 @keyframes blink {
     to {
-        background-color: #c8ccd4;
+        background-color: #dcdfe4;
         color: #282c34;
     }
 }
@@ -76,7 +76,7 @@ label:focus {
 #mpd {
     padding: 0 10px;
     margin: 4px 4px 4px 4px;
-    color: #1f2227;
+    color: #282c34;
 }
 
 #custom-launch {
@@ -87,8 +87,8 @@ label:focus {
     margin-top: 4px;
     margin-bottom: 4px;
     font-size: 17px;
-    background-color: #81a1c1;
-    color: #1f2227;
+    background-color: #61afef;
+    color: #282c34;
 }
 
 #workspaces button {
@@ -96,21 +96,21 @@ label:focus {
     background-color: transparent;
     border-radius: 10px;
     margin-left: 1px;
-    color: #c8ccd4;
+    color: #dcdfe4;
 }
 
 #workspaces button:hover {
-    background-color: #c8ccd4;
-    color: #1f2227;
+    background-color: #dcdfe4;
+    color: #282c34;
 }
 
 #workspaces button.focused {
-    background-color: #e06c75;
+    background-color: #dcdfe4;
     color: #282c34;
 }
 
 #workspaces button.urgent {
-    background-color: #e04753;
+    background-color: #e06c75;
 }
 
 #custom-spotify {
@@ -121,7 +121,7 @@ label:focus {
     font-size: 17px;
     font-weight: 500;
     background-color: #98c379;
-    color: #1f2227;
+    color: #282c34;
 }
 
 #pulseaudio {
@@ -129,25 +129,24 @@ label:focus {
 }
 
 #pulseaudio.muted {
-    background-color: #81a1c1;
+    background-color: #98c379;
     color: #282c34;
 }
 
-#backlight {
-    color: #e5c07b;
-}
-
 #network {
-    color: #81a1c1;
+    color: #61afef;
 }
 
 #battery {
     color: #e06c75;
 }
 
-#battery.charging,
+#battery.charging {
+    color: #e5c07b;
+}
+
 #battery.plugged {
-    color: #e06c75;
+    color: #98c379;
 }
 
 #battery.critical:not(.charging) {
@@ -172,5 +171,5 @@ label:focus {
     margin-bottom: 4px;
     font-size: 17px;
     background-color: #e06c75;
-    color: #1f2227;
+    color: #282c34;
 }
