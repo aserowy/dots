@@ -66,13 +66,13 @@ local M = {
 
 	colors = {
 		tab_bar = {
-			background = "#23272E",
+			background = "#21252b",
 			active_tab = {
 				bg_color = theme.background,
 				fg_color = theme.foreground,
 			},
 			inactive_tab = {
-				bg_color = "#23272E",
+				bg_color = "#21252b",
 				fg_color = theme.brights[1],
 			},
 			inactive_tab_hover = {
@@ -80,7 +80,7 @@ local M = {
 				fg_color = theme.foreground,
 			},
 			new_tab = {
-				bg_color = "#23272E",
+				bg_color = "#21252b",
 				fg_color = theme.brights[1],
 			},
 			new_tab_hover = {
@@ -89,6 +89,8 @@ local M = {
 			},
 		},
 	},
+
+    tab_bar_at_bottom = true,
 
 	inactive_pane_hsb = {
 		saturation = 0.7,
