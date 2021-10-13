@@ -52,7 +52,7 @@ $openstack\
 $env_var\
 $crystal\
 $cmd_duration\
-$line_break\
+$line_break \
 $jobs\
 $battery\
 $time\
@@ -62,7 +62,7 @@ $character"""
 
 # settings
 [directory]
-format = ' [$path]($style)[$read_only]($read_only_style) '
+format = '  [$path]($style)[$read_only]($read_only_style) '
 read_only = ' '
 
 [git_status]
@@ -173,8 +173,8 @@ symbol = ' '
 
 [nix_shell]
 format = '[$symbol$state]($style) '
-impure_msg = "[ ](bold red)"
-pure_msg = "[ ](bold green)"
+impure_msg = "[ ](bold red)"
+pure_msg = "[ ](bold green)"
 symbol = ''
 
 [package]

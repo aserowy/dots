@@ -93,16 +93,6 @@ local M = {
 		brightness = 0.6,
 	},
 
-	-- overwrites background color for onedark transpancy
-	window_background_gradient = {
-		colors = {
-			"#0A0B0D",
-			"#0A0B0D",
-		},
-	},
-
-	window_background_opacity = 0.9,
-
 	-- font
 	line_height = 1.1,
 
@@ -157,11 +147,21 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 	})
 
 	M.leader = { mods = "CTRL|ALT", key = "t" }
+
+	-- overwrites background color for onedark transpancy
+	M.window_background_gradient = {
+		colors = {
+			"#0A0B0D",
+			"#0A0B0D",
+		},
+	}
+
+	M.window_background_opacity = 0.9
 else
 	M.leader = { mods = "CTRL", key = "t" }
 
 	M.font = wezterm.font_with_fallback({
-		{ family = "FiraCode Nerd Font", weight = "Light", stretch = "Normal", italic = false },
+		{ family = "FiraCode Nerd Font Mono", weight = "Light", stretch = "Normal", italic = false },
 	})
 
 	M.hide_tab_bar_if_only_one_tab = true

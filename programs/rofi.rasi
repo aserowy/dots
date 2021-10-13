@@ -1,7 +1,6 @@
 configuration {
     lines: 5;
-    font: "Iosevka 13";
-    terminal: "alacritty";
+    terminal: "wezterm";
     location: 0;
     separator-style: "solid";
     show-icons: true;
@@ -11,38 +10,42 @@ configuration {
 
 @theme "/dev/null"
 
+* {
+    font: "FiraCode Nerd Font Mono 12";
+
+    background: #282c34;
+    foreground: #dcdfe4;
+    border: #61afef;
+    selected: #474e5d;
+
+    blue: #98c379;
+    red: #e06c75;
+
+    width: 600;
+}
+
 element-text, element-icon {
     background-color: inherit;
     text-color: inherit;
 }
 
-* {
-    bg-col: #1f2227;
-    border-col: #282c34;
-    selected-col: #282c34;
-    blue: #98c379;
-    fg-col: #81a1c1;
-    fg-col2: #e06c75;
-    width: 600;
-}
-
 window {
     padding: 20px;
     height: 480px;
-    border: 3px;
-    border-color: @border-col;
-    background-color: @bg-col;
+    border: 1px;
+    border-color: @border;
+    background-color: @background;
 }
 
 mainbox {
     padding: 5px;
     border-radius: 13px;
-    background-color: @bg-col;
+    background-color: @background;
 }
 
 inputbar {
     children: [prompt, entry];
-    background-color: @bg-col;
+    background-color: @background;
     border-radius: 5px;
     padding: 2px;
 }
@@ -50,7 +53,7 @@ inputbar {
 prompt {
     background-color: @blue;
     padding: 5px 5px 0px;
-    text-color: @bg-col;
+    text-color: @background;
     border-radius: 3px;
 }
 
@@ -61,28 +64,28 @@ textbox-prompt-colon {
 
 entry {
     padding: 6px;
-    text-color: @fg-col2;
-    background-color: @bg-col;
+    text-color: @red;
+    background-color: @background;
 }
 
 listview {
     border: 0px 0px 0px;
-    padding: 6px 0px 0px;
+    padding: 0px 0px 0px;
     columns: 2;
-    background-color: @bg-col;
+    background-color: @background;
 }
 
 element {
     padding: 5px;
-    background-color: @bg-col;
-    text-color: @fg-col;
+    background-color: @background;
+    text-color: @foreground;
 }
 
 element-icon {
-    size: 25px;
+    size: 20px;
 }
 
 element selected {
-    background-color: @selected-col;
-    text-color: @fg-col2;
+    background-color: @selected;
+    text-color: @red;
 }

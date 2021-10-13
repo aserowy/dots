@@ -1,29 +1,9 @@
-/*
-
-Color Pallete
-
-foreground:     '#dcdfe4'
-background:     '#282c34'
-alt-background: '#474e5d'
-alt-foreground: '#282c34'
-
-black:   '#282c34'
-red:     '#e06c75'
-green:   '#98c379'
-yellow:  '#e5c07b'
-blue:    '#61afef'
-magenta: '#c678dd'
-cyan:    '#56b6c2'
-white:   '#dcdfe4'
-
-*/
-
 * {
     border: 0px solid rgba(40, 44, 52, 0);
     border-radius: 2px;
-    font-family: Iosevka Nerd Font, Font Awesome, Arial, sans-serif;
-    font-weight: 700;
-    font-size: 13px;
+    font-family: FiraCode Nerd Font Mono;
+    font-size: 100%;
+    font-weight: 500;
     min-height: 0;
     padding: 1px;
 }
@@ -86,16 +66,15 @@ label:focus {
     padding-right: 10px;
     margin-top: 4px;
     margin-bottom: 4px;
-    font-size: 17px;
+    font-size: 1.5em;
     background-color: #61afef;
     color: #282c34;
 }
 
 #workspaces button {
-    padding: 5px 5px;
-    background-color: transparent;
-    border-radius: 10px;
     margin-left: 1px;
+    font-size: 1.5em;
+    background-color: transparent;
     color: #dcdfe4;
 }
 
@@ -105,12 +84,13 @@ label:focus {
 }
 
 #workspaces button.focused {
-    background-color: #dcdfe4;
-    color: #282c34;
+    background-color: #474e5d;
+    color: #e06c75;
 }
 
 #workspaces button.urgent {
     background-color: #e06c75;
+    color: #282c34;
 }
 
 #custom-spotify {
@@ -118,7 +98,7 @@ label:focus {
     padding-right: 10px;
     margin-top: 4px;
     margin-bottom: 4px;
-    font-size: 17px;
+    font-size: 1.5em;
     font-weight: 500;
     background-color: #98c379;
     color: #282c34;
@@ -138,11 +118,15 @@ label:focus {
 }
 
 #battery {
-    color: #e06c75;
+    color: #98c379;
+}
+
+#battery.warning {
+    color: #e5c07b;
 }
 
 #battery.charging {
-    color: #e5c07b;
+    color: #c678dd;
 }
 
 #battery.plugged {
@@ -166,10 +150,10 @@ label:focus {
     margin-right: 4px;
     margin-left: 11px;
     padding-left: 10px;
-    padding-right: 8px;
+    padding-right: 10px;
     margin-top: 4px;
     margin-bottom: 4px;
-    font-size: 17px;
+    font-size: 1.5em;
     background-color: #e06c75;
     color: #282c34;
 }
