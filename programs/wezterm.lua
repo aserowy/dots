@@ -1,20 +1,18 @@
 local wezterm = require("wezterm")
 
-local colors = {
+local onedark = {
+	foreground = "#ABB2BF",
 	background = "#282c34",
-	foreground = "#c678dd",
-	button = {
-		active = {
-			bg = "#61afef",
-			text = "#dcdfe4",
-		},
-		inactive = {
-			bg = "#474e5d",
-			text = "#dcdfe4",
-			hover = "#dcdfe4",
-		},
-	},
+	cursor_bg = "#828997",
+	cursor_border = "#828997",
+	cursor_fg = "#ABB2BF",
+	selection_bg = "#3E4451",
+	selection_fg = "#ABB2BF",
+	ansi = { "#3E4451", "#BE5046", "#98c379", "#D19A66", "#528BFF", "#c678dd", "#56b6c2", "#ABB2BF" },
+	brights = { "#5C6370", "#e06c75", "#98c379", "#e5c07b", "#61afef", "#c678dd", "#56b6c2", "#ABB2BF" },
 }
+
+local theme = onedark
 
 wezterm.on("update-right-status", function(window, pane)
 	local date = wezterm.strftime("%Y-%m-%d %H:%M")
@@ -31,15 +29,15 @@ wezterm.on("update-right-status", function(window, pane)
 	end
 
 	window:set_right_status(wezterm.format({
-		{ Foreground = { Color = colors.button.active.text } },
+		{ Foreground = { Color = theme.foreground } },
 		{ Text = cwd },
-		{ Background = { Color = colors.button.inactive.bg } },
+		{ Background = { Color = theme.brights[1] } },
 		{ Text = battery },
-		{ Foreground = { Color = colors.button.inactive.text } },
-		{ Background = { Color = colors.foreground } },
+		{ Foreground = { Color = theme.background } },
+		{ Background = { Color = theme.brights[6] } },
 		{ Text = "  " .. date .. " " },
-		{ Foreground = { Color = colors.button.active.text } },
-		{ Background = { Color = colors.button.active.bg } },
+		{ Foreground = { Color = theme.background } },
+		{ Background = { Color = theme.brights[5] } },
 		{ Text = hostname },
 	}))
 end)
@@ -60,30 +58,34 @@ local M = {
 	},
 
 	-- theming
-	color_scheme = "OneHalfDark",
+	color_scheme = "OneDark",
+
+	color_schemes = {
+		["OneDark"] = onedark,
+	},
 
 	colors = {
 		tab_bar = {
-			background = colors.background,
+			background = "#212836",
 			active_tab = {
-				bg_color = colors.button.active.bg,
-				fg_color = colors.button.active.text,
+				bg_color = theme.background,
+				fg_color = theme.foreground,
 			},
 			inactive_tab = {
-				bg_color = colors.button.inactive.bg,
-				fg_color = colors.button.inactive.text,
+				bg_color = "#212836",
+				fg_color = theme.brights[1],
 			},
 			inactive_tab_hover = {
-				bg_color = colors.button.inactive.bg,
-				fg_color = colors.button.inactive.hover,
+				bg_color = theme.brights[1],
+				fg_color = theme.foreground,
 			},
 			new_tab = {
-				bg_color = colors.button.inactive.bg,
-				fg_color = colors.button.inactive.hover,
+				bg_color = "#212836",
+				fg_color = theme.brights[1],
 			},
 			new_tab_hover = {
-				bg_color = colors.background,
-				fg_color = colors.button.inactive.hover,
+				bg_color = theme.brights[1],
+				fg_color = theme.foreground,
 			},
 		},
 	},
@@ -151,8 +153,8 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 	-- overwrites background color for onedark transpancy
 	M.window_background_gradient = {
 		colors = {
-			"#0A0B0D",
-			"#0A0B0D",
+			theme.background,
+			theme.background,
 		},
 	}
 

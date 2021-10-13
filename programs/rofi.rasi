@@ -14,9 +14,9 @@ configuration {
     font: "FiraCode Nerd Font Mono 12";
 
     background: #282c34;
-    foreground: #dcdfe4;
+    foreground: #ABB2BF;
     border: #61afef;
-    selected: #474e5d;
+    selected: #3E4451;
 
     blue: #98c379;
     red: #e06c75;

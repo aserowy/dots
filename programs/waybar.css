@@ -11,7 +11,7 @@
 window#waybar {
     background-color: #282c34;
     background: transparent;
-    color: #dcdfe4;
+    color: #ABB2BF;
     transition-property: background-color;
     transition-duration: 0.5s;
     border-radius: 0;
@@ -22,7 +22,7 @@ window > box {
     margin-left: 26.5px;
     margin-right: 26.5px;
     background: #282c34;
-    color: #dcdfe4;
+    color: #ABB2BF;
 }
 
 window#waybar.hidden {
@@ -35,7 +35,7 @@ label:focus {
 
 @keyframes blink {
     to {
-        background-color: #dcdfe4;
+        background-color: #ABB2BF;
         color: #282c34;
     }
 }
@@ -75,11 +75,11 @@ label:focus {
     margin-left: 1px;
     font-size: 1.5em;
     background-color: transparent;
-    color: #dcdfe4;
+    color: #ABB2BF;
 }
 
 #workspaces button:hover {
-    background-color: #dcdfe4;
+    background-color: #ABB2BF;
     color: #282c34;
 }
 
