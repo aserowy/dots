@@ -8,7 +8,7 @@ local onedark = {
 	cursor_fg = "#ABB2BF",
 	selection_bg = "#3E4451",
 	selection_fg = "#ABB2BF",
-	ansi = { "#3E4451", "#BE5046", "#98c379", "#D19A66", "#528BFF", "#c678dd", "#56b6c2", "#ABB2BF" },
+	ansi = { "#3E4451", "#e05252", "#98c379", "#e5c07b", "#61afef", "#c678dd", "#56b6c2", "#ABB2BF" },
 	brights = { "#5C6370", "#e06c75", "#98c379", "#e5c07b", "#61afef", "#c678dd", "#56b6c2", "#ABB2BF" },
 }
 
@@ -66,13 +66,13 @@ local M = {
 
 	colors = {
 		tab_bar = {
-			background = "#212836",
+			background = "#23272E",
 			active_tab = {
 				bg_color = theme.background,
 				fg_color = theme.foreground,
 			},
 			inactive_tab = {
-				bg_color = "#212836",
+				bg_color = "#23272E",
 				fg_color = theme.brights[1],
 			},
 			inactive_tab_hover = {
@@ -80,7 +80,7 @@ local M = {
 				fg_color = theme.foreground,
 			},
 			new_tab = {
-				bg_color = "#212836",
+				bg_color = "#23272E",
 				fg_color = theme.brights[1],
 			},
 			new_tab_hover = {
