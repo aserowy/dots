@@ -4,11 +4,14 @@
     source = ./sway.config;
   };
 
+  home.file.".config/sway/wallpaper.sh" = {
+    source = ./sway-wallpaper.sh;
+  };
+
   home.packages = with pkgs; [
     sway-unwrapped
     swaybg
     swayidle
-    wallutils
     wl-clipboard
 
     pavucontrol
@@ -20,29 +23,4 @@
       exec sway
     fi
   '';
-
-  systemd.user = {
-    startServices = "sd-switch";
-
-    services.wallpaper-refresh = {
-      Unit = {
-        Description = "Wallpaper refresh every hour";
-      };
-      Install = {
-        WantedBy = [ "default.target" ];
-      };
-      Service = {
-        ExecStart = "setrandom ~/onedrive/Wallpapers/";
-      };
-    };
-
-    timers.wallpaper-refresh = {
-      Install = {
-        WantedBy = [ "timers.target" ];
-      };
-      Timer = {
-        OnUnitActiveSec = "1h";
-      };
-    };
-  };
 }
