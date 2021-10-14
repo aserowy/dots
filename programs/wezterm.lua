@@ -98,6 +98,10 @@ local M = {
 	},
 
 	-- font
+	font = wezterm.font_with_fallback({
+		{ family = "FiraCode Nerd Font Mono", weight = "Light", stretch = "Normal", italic = false },
+	}),
+
 	line_height = 1.1,
 
 	-- key mappings
@@ -145,19 +149,9 @@ local M = {
 
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 	M.default_prog = { "wsl.exe" }
-
-	M.font = wezterm.font_with_fallback({
-		{ family = "FiraCode NF", weight = "Thin" },
-	})
-
 	M.leader = { mods = "CTRL|ALT", key = "t" }
 else
-	M.font = wezterm.font_with_fallback({
-		{ family = "FiraCode Nerd Font Mono", weight = "Light", stretch = "Normal", italic = false },
-	})
-
 	M.hide_tab_bar_if_only_one_tab = true
-
 	M.leader = { mods = "CTRL", key = "t" }
 end
 
