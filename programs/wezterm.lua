@@ -151,24 +151,14 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 	})
 
 	M.leader = { mods = "CTRL|ALT", key = "t" }
-
-	-- overwrites background color for onedark transpancy
-	M.window_background_gradient = {
-		colors = {
-			theme.background,
-			theme.background,
-		},
-	}
-
-	M.window_background_opacity = 0.9
 else
-	M.leader = { mods = "CTRL", key = "t" }
-
 	M.font = wezterm.font_with_fallback({
 		{ family = "FiraCode Nerd Font Mono", weight = "Light", stretch = "Normal", italic = false },
 	})
 
 	M.hide_tab_bar_if_only_one_tab = true
+
+	M.leader = { mods = "CTRL", key = "t" }
 end
 
 return M
