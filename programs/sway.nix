@@ -12,10 +12,13 @@
     sway-unwrapped
     swaybg
     swayidle
-    wl-clipboard
 
-    pavucontrol
+    xorg.xlsclients
+
+    glfw-wayland
+    libsForQt5.qt5.qtwayland
     xdg-desktop-portal-wlr
+    xwayland
   ];
 
   programs.zsh.loginExtra = ''

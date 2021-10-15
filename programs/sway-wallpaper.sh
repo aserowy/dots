@@ -1,8 +1,12 @@
 #!/bin/sh
 
-while true
-do
-      swaymsg output "*" bg "$(find ~/onedrive/Wallpapers -type f | shuf -n 1)" fill > /dev/null
+while true; do
+    PID=`pidof swaybg`
 
-      sleep 60m
+    swaybg --mode fill --image "$(find $HOME/onedrive/Wallpapers -type f | shuf -n 1)" &
+
+    sleep 5
+    kill $PID > /dev/null
+    
+    sleep 60m
 done
