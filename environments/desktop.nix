@@ -8,6 +8,7 @@
     ../modules/collaboration.nix
     ../modules/development-gui.nix
     ../modules/remote_access.nix
+    ../modules/spotify.nix
     ../modules/sway.nix
   ];
 }
