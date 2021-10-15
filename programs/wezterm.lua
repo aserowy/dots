@@ -8,7 +8,7 @@ local onedark = {
 	cursor_fg = "#ABB2BF",
 	selection_bg = "#3E4451",
 	selection_fg = "#ABB2BF",
-	ansi = { "#3E4451", "#e05252", "#98c379", "#e5c07b", "#61afef", "#c678dd", "#56b6c2", "#ABB2BF" },
+	ansi = { "#3E4451", "#e06c75", "#98c379", "#e5c07b", "#61afef", "#c678dd", "#56b6c2", "#ABB2BF" },
 	brights = { "#5C6370", "#e06c75", "#98c379", "#e5c07b", "#61afef", "#c678dd", "#56b6c2", "#ABB2BF" },
 }
 
