@@ -1,10 +1,10 @@
 { config, pkgs, ... }:
 {
   home.packages = with pkgs; [
-    pkgs.curl
-    pkgs.ncurses
+    curl
+    ncurses
 
-    pkgs.unixtools.watch
+    unixtools.watch
   ];
 
   imports = [
