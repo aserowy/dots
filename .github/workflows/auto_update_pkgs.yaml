@@ -27,6 +27,7 @@ jobs:
           git config --local user.email "serowy@hotmail.com"
           git config --local user.name "aserowy"
           nix develop --command nvfetcher -c ./pkgs/nvfetcher.toml -o ./pkgs/_sources --commit-changes
+          git commit -a -m "update shake"
 
       - name: check flake
         run: nix flake check -v --show-trace
