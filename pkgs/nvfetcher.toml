@@ -1,3 +1,8 @@
+[eww]
+src.github = "elkowar/eww"
+fetch.github = "elkowar/eww"
+cargo_lock = "Cargo.lock"
+
 [microsoft-edge-beta]
 src.webpage = "https://packages.microsoft.com/repos/edge/pool/main/m/microsoft-edge-beta/"
 src.regex = "microsoft-edge-beta_(.*)-1_amd64\\.deb\">microsoft-edge-beta_"
