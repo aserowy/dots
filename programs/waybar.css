@@ -1,6 +1,5 @@
 * {
   border: none;
-  border-radius: 2px;
   font-family: FiraCode Nerd Font Mono;
   font-size: 100%;
   font-weight: 500;
@@ -11,10 +10,11 @@ window#waybar {
 }
 
 window > box {
-  margin-top: 5px;
-  margin-left: 26px;
-  margin-right: 26px;
+  background-color: #23272e;
   color: #abb2bf;
+  margin-top: 26px;
+  margin-left: 13px;
+  margin-bottom: 26px;
 }
 
 .modules-left {
@@ -24,45 +24,26 @@ window > box {
 }
 
 .modules-right {
-  background-color: #282c34;
-  padding-left: 10px;
-}
-
-label:focus {
-  background-color: #282c34;
-}
-
-#battery,
-#cpu,
-#memory,
-#disk,
-#temperature,
-#backlight,
-#network,
-#pulseaudio,
-#workspaces,
-#clock,
-#tray,
-#mode,
-#idle_inhibitor,
-#mpd {
-  padding: 0 10px;
-  color: #282c34;
+    padding-bottom: 20px;
 }
 
 #custom-launch {
-  padding-left: 10px;
-  padding-right: 10px;
+  padding: 10px 0;
   font-size: 1.5em;
   background-color: #61afef;
   color: #282c34;
 }
 
+#custom-launch:hover {
+  background-color: #abb2bf;
+  color: #282c34;
+}
+
 #workspaces button {
-  margin-left: 1px;
-  font-size: 1.5em;
   background-color: transparent;
+  border-radius: 0;
   color: #abb2bf;
+  font-size: 1.5em;
 }
 
 #workspaces button:hover {
@@ -82,6 +63,7 @@ label:focus {
 
 #pulseaudio {
   color: #e5c07b;
+  font-size: 1.5em;
 }
 
 #pulseaudio.muted {
@@ -90,22 +72,17 @@ label:focus {
 
 #network {
   color: #61afef;
+  font-size: 1.5em;
+  padding-bottom: 20px;
 }
 
 #battery {
   color: #98c379;
+  font-size: 1.5em;
 }
 
 #battery.warning {
   color: #e5c07b;
-}
-
-#battery.charging {
-  color: #c678dd;
-}
-
-#battery.plugged {
-  color: #98c379;
 }
 
 @keyframes blink {
@@ -121,6 +98,10 @@ label:focus {
   animation-timing-function: linear;
   animation-iteration-count: infinite;
   animation-direction: alternate;
+}
+
+#battery.charging {
+  color: #c678dd;
 }
 
 #clock {
