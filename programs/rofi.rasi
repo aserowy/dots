@@ -13,10 +13,9 @@ configuration {
 * {
     font: "FiraCode Nerd Font Mono 12";
 
-    background: #282c34;
-    foreground: #ABB2BF;
-    border: #61afef;
-    selected: #3E4451;
+    background: #23272e;
+    foreground: #abb2bf;
+    selected: #3e4451;
 
     blue: #98c379;
     red: #e06c75;
@@ -32,21 +31,17 @@ element-text, element-icon {
 window {
     padding: 20px;
     height: 480px;
-    border: 1px;
-    border-color: @border;
     background-color: @background;
 }
 
 mainbox {
     padding: 5px;
-    border-radius: 13px;
     background-color: @background;
 }
 
 inputbar {
     children: [prompt, entry];
-    background-color: @background;
-    border-radius: 5px;
+    background-color: #282c34;
     padding: 2px;
 }
 
@@ -54,7 +49,6 @@ prompt {
     background-color: @blue;
     padding: 5px 5px 0px;
     text-color: @background;
-    border-radius: 3px;
 }
 
 textbox-prompt-colon {

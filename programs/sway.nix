@@ -4,6 +4,10 @@
     source = ./sway.config;
   };
 
+  home.file.".config/sway/gsettings.sh" = {
+    source = ./sway-gsettings.sh;
+  };
+
   home.file.".config/sway/wallpaper.sh" = {
     source = ./sway-wallpaper.sh;
   };
@@ -14,10 +18,6 @@
     swayidle
 
     xorg.xlsclients
-
-    glfw-wayland
-    libsForQt5.qt5.qtwayland
-    xdg-desktop-portal-wlr
     xwayland
   ];
 

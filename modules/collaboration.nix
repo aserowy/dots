@@ -1,25 +1,22 @@
 { config, pkgs, ... }:
 {
   home.packages = with pkgs; [
+    google-chrome
+
     (pkgs.writeShellScriptBin "discord" ''
       ${edge}/bin/microsoft-edge-beta \
-        --enable-features=UseOzonePlatform \
+        --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer \
         --ozone-platform=wayland \
-        --enable-features=WebRTCPipeWireCapturer \
         --app=https://www.discord.app \
         --new-window
     '')
 
     (pkgs.writeShellScriptBin "teams" ''
-      ${edge}/bin/microsoft-edge-beta \
-        --enable-features=UseOzonePlatform \
+      ${google-chrome}/bin/google-chrome-stable \
+        --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer \
         --ozone-platform=wayland \
-        --enable-features=WebRTCPipeWireCapturer \
         --new-window \
-        --inprivate \
-        https://teams.microsoft.com
-        # BUG: inprivate and app mode will not open anything
-        # --app=https://teams.microsoft.com 
+        --app=https://teams.microsoft.com 
     '')
 
     (pkgs.writeShellScriptBin "whatsapp" ''
