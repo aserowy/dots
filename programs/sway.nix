@@ -13,6 +13,7 @@
   };
 
   home.packages = with pkgs; [
+    alacritty
     sway-unwrapped
     swaybg
     swayidle
