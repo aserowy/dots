@@ -1,5 +1,11 @@
 { config, pkgs, ... }:
 {
+  home.packages = with pkgs; [
+    (pkgs.writeShellScriptBin "ncspot-standalone" ''
+      ${wezterm}/bin/wezterm start --class ncspot -- ncspot
+    '')
+  ];
+
   programs.ncspot = {
     enable = true;
     settings = {
