@@ -17,7 +17,7 @@ configuration {
     foreground: #abb2bf;
     selected: #3e4451;
 
-    blue: #98c379;
+    blue: #61afef;
     red: #e06c75;
 
     width: 600;
@@ -29,20 +29,16 @@ element-text, element-icon {
 }
 
 window {
-    padding: 20px;
-    height: 480px;
     background-color: @background;
 }
 
 mainbox {
-    padding: 5px;
     background-color: @background;
 }
 
 inputbar {
     children: [prompt, entry];
-    background-color: #282c34;
-    padding: 2px;
+    background-color: #abb2bf;
 }
 
 prompt {
@@ -58,7 +54,7 @@ textbox-prompt-colon {
 
 entry {
     padding: 6px;
-    text-color: @red;
+    text-color: @foreground;
     background-color: @background;
 }
 
@@ -81,5 +77,5 @@ element-icon {
 
 element selected {
     background-color: @selected;
-    text-color: @red;
+    text-color: @blue;
 }

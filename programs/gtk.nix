@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 let
   theme = "Materia-dark";
-  font = "FiraCode Nerd Font Mono 12";
+  font = "FiraCode Nerd Font Mono 10";
   cursor = "Paper";
   icon = "Paper";
 in
