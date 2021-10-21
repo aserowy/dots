@@ -73,10 +73,10 @@ bindsym $mod+Shift+r reload
 
 for_window [title="fzf-switcher"] floating enable
 
-bindsym $mod+r $HOME/.config/sway/scripts/rename_workspace.sh
-bindsym $mod+m $HOME/.config/sway/scripts/focus_by_mark.sh
-bindsym $mod+Shift+m $HOME/.config/sway/scripts/set_mark.sh
-bindsym $mod+w $HOME/.config/sway/scripts/focus_workspace.sh
+bindsym $mod+r exec $HOME/.config/sway/scripts/rename_workspace.sh
+bindsym $mod+m exec $HOME/.config/sway/scripts/focus_by_mark.sh
+bindsym $mod+Shift+m exec $HOME/.config/sway/scripts/set_mark.sh
+bindsym $mod+w exec $HOME/.config/sway/scripts/focus_workspace.sh
 
 ## Window
 

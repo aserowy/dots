@@ -9,6 +9,7 @@
     # TODO: style onedark in own .nix
     alacritty
     jq
+    pv
     sway-unwrapped
     swaybg
     swayidle

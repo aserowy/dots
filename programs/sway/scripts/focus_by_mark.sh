@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 IFS=$'\n'
 
 # check for env variable, if exists we are the
