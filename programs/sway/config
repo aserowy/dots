@@ -68,8 +68,13 @@ bindsym $mod+t exec $terminal
 
 ## Sway
 
-bindsym $mod+c kill
-bindsym $mod+r reload
+bindsym $mod+Shift+c kill
+bindsym $mod+Shift+r reload
+
+bindsym $mod+r $HOME/.config/sway/scripts/rename_workspace.sh
+bindsym $mod+m $HOME/.config/sway/scripts/focus_by_mark.sh
+bindsym $mod+Shift+m $HOME/.config/sway/scripts/set_mark.sh
+bindsym $mod+w $HOME/.config/sway/scripts/focus_workspace.sh
 
 ## Window
 
@@ -91,11 +96,6 @@ bindsym $mod+Shift+space floating toggle
 
 bindsym $mod+a focus parent
 
-## Scratchpad
-
-bindsym $mod+s scratchpad show
-bindsym $mod+Shift+s move container to scratchpad
-
 ## Workspaces
 
 bindsym $mod+1 workspace number 1
@@ -114,17 +114,18 @@ bindsym $mod+Shift+5 move container to workspace number 5
 
 bindsym $mod+z fullscreen
 
-bindsym $mod+$alt+$down resize grow height 5px
-bindsym $mod+$alt+$up resize shrink height 5px
-bindsym $mod+$alt+$left resize grow width 10px
-bindsym $mod+$alt+$right resize shrink width 10px
+bindsym $mod+$alt+$down resize grow height 25px
+bindsym $mod+$alt+$up resize shrink height 25px
+bindsym $mod+$alt+$left resize grow width 20px
+bindsym $mod+$alt+$right resize shrink width 20px
 
 # MUSIC
 
-bindsym $mod+m workspace music
-bindsym $mod+Shift+m move container to workspace music
+bindsym $mod+s workspace music
+bindsym $mod+Shift+s move container to workspace music
 
-assign [app_id="ncspot"] workspace music
+# FIX: wezterm --class does not set app_id
+assign [class="ncspot"] workspace music
 assign [app_id="pavucontrol"] workspace music
 
 bar {

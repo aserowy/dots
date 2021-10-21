@@ -1,15 +1,8 @@
 { config, pkgs, ... }:
 {
-  home.file.".config/sway/config" = {
-    source = ./sway.config;
-  };
-
-  home.file.".config/sway/gsettings.sh" = {
-    source = ./sway-gsettings.sh;
-  };
-
-  home.file.".config/sway/wallpaper.sh" = {
-    source = ./sway-wallpaper.sh;
+  home.file.".config/sway/" = {
+    recursive = true;
+    source = ./sway;
   };
 
   home.packages = with pkgs; [
@@ -22,9 +15,17 @@
     xwayland
   ];
 
-  programs.zsh.loginExtra = ''
-    if [[ "$(tty)" == /dev/tty1 ]]; then
-      exec sway
-    fi
-  '';
+  programs.zsh = {
+    initExtra = ''
+      # set sway mark
+      function sm() {
+        swaymsg mark $1
+      }
+    '';
+    loginExtra = ''
+      if [[ "$(tty)" == /dev/tty1 ]]; then
+        exec sway
+      fi
+    '';
+  };
 }

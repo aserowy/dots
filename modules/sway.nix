@@ -2,7 +2,7 @@
 {
   imports = [
     ../programs/dunst.nix
-    ../programs/eww.nix
+    #../programs/eww.nix
     ../programs/gtk.nix
     ../programs/lf.nix
     ../programs/onedrive.nix
