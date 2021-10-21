@@ -20,4 +20,4 @@ SR=true zsh -c "alacritty \
     -o window.padding.x=20 \
     -o window.padding.y=20 \
     --title "fzf-switcher" \
-    -e /home/louis/git/dotfiles/config/sway/scripts/sr"&
+    -e $HOME/.config/sway/scripts/set_mark.sh"&

@@ -1,6 +1,4 @@
-set $browser microsoft-edge-beta \
-    --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer \
-    --ozone-platform=wayland
+set $browser microsoft-edge-beta --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer --ozone-platform=wayland
 
 set $explorer wezterm start --class lf -- lf
 set $menu rofi -show run
@@ -34,8 +32,8 @@ exec ncspot-standalone
 
 default_border pixel 1
 
-for_window [class=".*"]     opacity .95
-for_window [app_id=".*"]    opacity .95
+for_window [class=".*"]     opacity .97
+for_window [app_id=".*"]    opacity .97
 
 client.focused          #61afef #61afef #61afef #61afef #61afef
 client.focused_inactive #282c34 #282c34 #282c34 #282c34 #282c34
@@ -47,7 +45,7 @@ gaps bottom 10
 gaps left 10
 gaps right 10
 
-gaps inner 10
+gaps inner 15
 
 # KEYBINDINGS
     
@@ -70,6 +68,8 @@ bindsym $mod+t exec $terminal
 
 bindsym $mod+Shift+c kill
 bindsym $mod+Shift+r reload
+
+for_window [title="fzf-switcher"] floating enable
 
 bindsym $mod+r $HOME/.config/sway/scripts/rename_workspace.sh
 bindsym $mod+m $HOME/.config/sway/scripts/focus_by_mark.sh
@@ -110,12 +110,12 @@ bindsym $mod+Shift+3 move container to workspace number 3
 bindsym $mod+Shift+4 move container to workspace number 4
 bindsym $mod+Shift+5 move container to workspace number 5
 
-## Layout stuff
+## Layout
 
 bindsym $mod+z fullscreen
 
-bindsym $mod+$alt+$down resize grow height 25px
-bindsym $mod+$alt+$up resize shrink height 25px
+bindsym $mod+$alt+$down resize grow height 5px
+bindsym $mod+$alt+$up resize shrink height 5px
 bindsym $mod+$alt+$left resize grow width 20px
 bindsym $mod+$alt+$right resize shrink width 20px
 

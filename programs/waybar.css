@@ -12,9 +12,9 @@ window#waybar {
 window > box {
   background-color: #23272e;
   color: #abb2bf;
-  margin-top: 25px;
+  margin-top: 20px;
   margin-left: 10px;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 }
 
 .modules-left {
