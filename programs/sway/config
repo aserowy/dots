@@ -40,12 +40,12 @@ client.focused_inactive #282c34 #282c34 #282c34 #282c34 #282c34
 client.urgent           #e06c75 #e06c75 #e06c75 #e06c75 #e06c75
 client.unfocused        #282c34 #282c34 #282c34 #282c34 #282c34
 
-gaps top 10
-gaps bottom 10
-gaps left 10
-gaps right 10
+gaps top 15
+gaps bottom 15
+gaps left 15
+gaps right 15
 
-gaps inner 15
+gaps inner 10
 
 # KEYBINDINGS
     
