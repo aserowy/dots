@@ -29,7 +29,7 @@ window > box {
 
 #custom-launch {
   padding: 10px 0;
-  font-size: 2em;
+  font-size: 2.25em;
   color: #61afef;
 }
 
@@ -40,7 +40,7 @@ window > box {
 
 #custom-spotify-metadata {
   padding-top: 10px;
-  font-size: 2em;
+  font-size: 2.25em;
   color: #98c379;
 }
 #custom-spotify-metadata:hover {
@@ -57,7 +57,7 @@ window > box {
 #custom-spotify-prev,
 #custom-spotify-next {
   color: #98c379;
-  font-size: 1.5em;
+  font-size: 1.75em;
 }
 #custom-spotify-next {
   padding-bottom: 10px;
