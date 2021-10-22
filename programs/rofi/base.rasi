@@ -1,0 +1,93 @@
+/* https://github.com/ethmtrgt/dotfiles */
+
+configuration {
+    drun-display-format: "{icon} {name}";
+    font: "FiraCode Nerd Font Mono 10";
+    modi: "run,drun";
+    show-icons: true;
+    icon-theme: "Paper";
+    terminal: "alacritty";
+}
+
+* {
+    accent: #61afef;
+    bg: #23272e;
+    bg-alt: #282c34;
+    bg-alt-2: #3e4451;
+    fg: #abb2bf;
+    fg-alt: #828997;
+    background-color: @bg;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    spacing: 0;
+}
+
+element {
+    border-radius: 6px;
+    padding: 8;
+    text-color: @fg-alt;
+}
+
+element-icon {
+    size: 36;
+    border: 0px;
+}
+
+element selected {
+    text-color: @fg;
+    background-color: @bg-alt-2;
+}
+
+element-text {
+    expand: true;
+    vertical-align: 0.5;
+}
+
+entry {
+    background-color: @bg-alt;
+    padding: 12;
+    text-color: @fg;
+}
+
+inputbar {
+    margin: 10;
+    border-radius: 6px;
+    children: [entry];
+}
+
+prompt {
+    enabled: true;
+    padding: 12 6 6 12;
+}
+
+message {
+    border: 1 0 0;
+    border-color: @accent;
+    padding: 24;
+}
+
+textbox {
+    text-color: @accent;
+}
+
+listview {
+    background-color: @bg;
+    columns: 1;
+    lines: 8;
+}
+
+mainbox {
+    border: 1px;
+    border-radius: 6px;
+    border-color: @accent;
+    background-color: @bg;
+    padding: 12;
+    children: [inputbar, message, listview];
+}
+
+window {
+    border-radius: 6px;
+    width: 40%;
+    transparency: "real";
+}

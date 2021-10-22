@@ -33,19 +33,16 @@ window > box {
   color: #61afef;
 }
 
-#custom-launch:hover {
-  background-color: #abb2bf;
-  color: #282c34;
+#custom-power {
+  padding-top: 10px;
+  font-size: 2.25em;
+  color: #e06c75;
 }
 
 #custom-spotify-metadata {
   padding-top: 10px;
   font-size: 2.25em;
   color: #98c379;
-}
-#custom-spotify-metadata:hover {
-  background-color: #abb2bf;
-  color: #282c34;
 }
 #custom-spotify-metadata.playing {
   color: #98c379;

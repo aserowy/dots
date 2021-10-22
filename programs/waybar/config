@@ -2,6 +2,7 @@
     "position": "left",
 
     "modules-left": [
+        "custom/power",
         "custom/launch",
         "custom/spotify-monitor",
         "custom/spotify-metadata",
@@ -38,7 +39,11 @@
     },
     "custom/launch": {
         "format": "",
-        "on-click": "rofi -show run"
+        "on-click": "~/.config/rofi/launcher.sh"
+    },
+    "custom/power": {
+        "format": "",
+        "on-click": "~/.config/rofi/powermenu.sh"
     },
     "custom/spotify-monitor": {
         "interval": 1,

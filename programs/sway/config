@@ -3,7 +3,7 @@ set $browser "microsoft-edge-beta \
     --ozone-platform=wayland"
 
 set $explorer wezterm start --class lf -- lf
-set $menu rofi -show run
+set $menu exec $HOME/.config/rofi/launcher.sh
 set $terminal wezterm
 
 # STARTUP

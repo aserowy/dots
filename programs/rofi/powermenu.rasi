@@ -1,0 +1,56 @@
+configuration {
+    drun-display-format: "{icon} {name}";
+    font: "FiraCode Nerd Font Mono 24";
+    modi: "window,run,drun";
+    show-icons: true;
+    icon-theme: "Paper";
+    terminal: "alacritty";
+}
+
+* {
+    accent: #61afef;
+    bg: #23272e;
+    bg-alt: #282c34;
+    bg-alt-2: #3e4451;
+    fg: #abb2bf;
+    fg-alt: #828997;
+    background-color: @bg;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    spacing: 0;
+}
+
+element {
+    horizontal-align: 0.5;
+    vertical-align: 0.5;
+    border-radius: 6px;
+    padding: 12px 0 12px 0;
+    text-color: @fg-alt;
+}
+
+element selected {
+    text-color: @accent;
+    background-color: @bg-alt-2;
+}
+
+listview {
+    cycle: true;
+    background-color: @bg;
+    columns: 5;
+    lines: 1;
+}
+
+mainbox {
+    border: 1;
+    border-radius: 6px;
+    border-color: @accent;
+    background-color: @bg;
+    padding: 12;
+    children: [listview];
+}
+
+window {
+    width: 440;
+    transparency: "real";
+}
