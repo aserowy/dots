@@ -4,6 +4,8 @@
     (pkgs.writeShellScriptBin "ncspot-standalone" ''
       ${wezterm}/bin/wezterm start --class ncspot -- ncspot
     '')
+
+    playerctl
   ];
 
   programs.ncspot = {
