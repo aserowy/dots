@@ -46,7 +46,9 @@
         "signal": 4
     },
     "custom/spotify-metadata": {
+        "exec": "~/.config/waybar/spotify/metadata.sh",
         "format": "",
+        "interval": "once",
         "on-click": "sway workspace music",
         "return-type": "json",
         "signal": 5
@@ -60,13 +62,17 @@
         "signal": 5
     },
     "custom/spotify-next": {
+        "exec": "~/.config/waybar/spotify/metadata.sh",
         "format": "ﭠ",
+        "interval": "once",
         "on-click": "~/.config/waybar/spotify/controls.sh next",
         "return-type": "json",
         "signal": 5
     },
     "custom/spotify-prev": {
+        "exec": "~/.config/waybar/spotify/metadata.sh",
         "format": "ﭢ",
+        "interval": "once",
         "on-click": "~/.config/waybar/spotify/controls.sh prev",
         "return-type": "json",
         "signal": 5

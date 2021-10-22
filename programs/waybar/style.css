@@ -28,7 +28,7 @@ window > box {
 }
 
 #custom-launch {
-  padding: 10px 0;
+  padding-top: 10px;
   font-size: 2.25em;
   color: #61afef;
 }
@@ -53,11 +53,14 @@ window > box {
 #custom-spotify-metadata.paused {
   color: #e5c07b;
 }
-#custom-spotify-play-pause,
+#custom-spotify-play-pause {
+  color: #98c379;
+  font-size: 1.75em;
+}
 #custom-spotify-prev,
 #custom-spotify-next {
   color: #98c379;
-  font-size: 1.75em;
+  font-size: 1.5em;
 }
 #custom-spotify-next {
   padding-bottom: 10px;
