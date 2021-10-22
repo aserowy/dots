@@ -74,10 +74,15 @@ bindsym $mod+Shift+r reload
 for_window [title="fzf-switcher"] floating enable
 
 bindsym $mod+r exec $HOME/.config/sway/scripts/rename_workspace.sh
-bindsym $mod+m exec $HOME/.config/sway/scripts/focus_by_mark.sh
-bindsym $mod+Shift+m exec $HOME/.config/sway/scripts/set_mark.sh
 bindsym $mod+w exec $HOME/.config/sway/scripts/focus_workspace.sh
 bindsym $mod+Shift+w exec $HOME/.config/sway/scripts/create_workspace.sh
+# TODO: script to move container to named workspace
+
+bindsym $mod+n workspace next_on_output
+bindsym $mod+p workspace prev_on_output
+
+bindsym $mod+m exec $HOME/.config/sway/scripts/focus_by_mark.sh
+bindsym $mod+Shift+m exec $HOME/.config/sway/scripts/set_mark.sh
 
 ## Window
 
@@ -98,20 +103,6 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+Shift+space floating toggle
 
 bindsym $mod+a focus parent
-
-## Workspaces
-
-bindsym $mod+1 workspace number 1
-bindsym $mod+2 workspace number 2
-bindsym $mod+3 workspace number 3
-bindsym $mod+4 workspace number 4
-bindsym $mod+5 workspace number 5
-
-bindsym $mod+Shift+1 move container to workspace number 1
-bindsym $mod+Shift+2 move container to workspace number 2
-bindsym $mod+Shift+3 move container to workspace number 3
-bindsym $mod+Shift+4 move container to workspace number 4
-bindsym $mod+Shift+5 move container to workspace number 5
 
 ## Layout
 

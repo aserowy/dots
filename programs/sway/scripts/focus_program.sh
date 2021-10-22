@@ -69,5 +69,5 @@ fifo=$fifo zsh -c "alacritty \
     -o window.padding.x=20 \
     -o window.padding.y=20 \
     --title "fzf-switcher" \
-    -e $HOME/.config/sway/scripts/focus_container.sh"&
+    -e $HOME/.config/sway/scripts/focus_program.sh"&
 echo -n $str > $fifo
