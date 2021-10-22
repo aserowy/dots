@@ -1,11 +1,8 @@
 { config, pkgs, ... }:
 {
-  home.file.".config/waybar/config" = {
-    source = ./waybar.config;
-  };
-
-  home.file.".config/waybar/style.css" = {
-    source = ./waybar.css;
+  home.file.".config/waybar/" = {
+    recursive = true;
+    source = ./waybar;
   };
 
   home.packages = with pkgs; [

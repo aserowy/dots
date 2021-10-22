@@ -24,18 +24,43 @@ window > box {
 }
 
 .modules-right {
-    padding-bottom: 20px;
+  padding-bottom: 20px;
 }
 
 #custom-launch {
   padding: 10px 0;
-  font-size: 1.5em;
+  font-size: 2em;
   color: #61afef;
 }
 
 #custom-launch:hover {
   background-color: #abb2bf;
   color: #282c34;
+}
+
+#custom-spotify-metadata {
+  padding-top: 10px;
+  font-size: 2em;
+  color: #98c379;
+}
+#custom-spotify-metadata:hover {
+  background-color: #abb2bf;
+  color: #282c34;
+}
+#custom-spotify-metadata.playing {
+  color: #98c379;
+}
+#custom-spotify-metadata.paused {
+  color: #e5c07b;
+}
+#custom-spotify-play-pause,
+#custom-spotify-prev,
+#custom-spotify-next {
+  color: #98c379;
+  font-size: 1.5em;
+}
+#custom-spotify-next {
+  padding-bottom: 10px;
 }
 
 #workspaces button {

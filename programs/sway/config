@@ -10,14 +10,8 @@ set $terminal wezterm
 
 # exec_always $HOME/.config/sway/gsettings.sh
 exec_always dbus-update-activation-environment --systemd \
-    DISPLAY \
-    SWAYSOCK \
-    GTK_IM_MODULE \
-    QT_IM_MODULE \
-    XMODIFIERS \
-    DBUS_SESSION_BUS_ADDRESS \
-    WAYLAND_DISPLAY \
-    XDG_CURRENT_DESKTOP=sway
+    DISPLAY SWAYSOCK GTK_IM_MODULE QT_IM_MODULE XMODIFIERS \
+    DBUS_SESSION_BUS_ADDRESS WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 
 exec $HOME/.config/sway/wallpaper.sh
 
@@ -78,8 +72,8 @@ bindsym $mod+w exec $HOME/.config/sway/scripts/focus_workspace.sh
 bindsym $mod+Shift+w exec $HOME/.config/sway/scripts/create_workspace.sh
 # TODO: script to move container to named workspace
 
-bindsym $mod+n workspace next_on_output
-bindsym $mod+p workspace prev_on_output
+bindsym $mod+n workspace prev_on_output
+bindsym $mod+p workspace next_on_output
 
 bindsym $mod+m exec $HOME/.config/sway/scripts/focus_by_mark.sh
 bindsym $mod+Shift+m exec $HOME/.config/sway/scripts/set_mark.sh

@@ -1,7 +1,14 @@
 {
     "position": "left",
 
-    "modules-left": ["custom/launch"],
+    "modules-left": [
+        "custom/launch",
+        "custom/spotify-monitor",
+        "custom/spotify-metadata",
+        "custom/spotify-prev",
+        "custom/spotify-play-pause",
+        "custom/spotify-next"
+    ],
     "modules-center": ["sway/workspaces"],
     "modules-right": [
         "backlight",
@@ -32,6 +39,37 @@
     "custom/launch": {
         "format": "",
         "on-click": "rofi -show run"
+    },
+    "custom/spotify-monitor": {
+        "interval": 1,
+        "exec": "~/.config/waybar/spotify/monitor.sh",
+        "signal": 4
+    },
+    "custom/spotify-metadata": {
+        "format": "",
+        "on-click": "sway workspace music",
+        "return-type": "json",
+        "signal": 5
+    },
+    "custom/spotify-play-pause": {
+        "exec": "~/.config/waybar/spotify/play-pause.sh",
+        "format": "{}",
+        "interval": "once",
+        "on-click": "~/.config/waybar/spotify/controls.sh",
+        "return-type": "json",
+        "signal": 5
+    },
+    "custom/spotify-next": {
+        "format": "ﭠ",
+        "on-click": "~/.config/waybar/spotify/controls.sh next",
+        "return-type": "json",
+        "signal": 5
+    },
+    "custom/spotify-prev": {
+        "format": "ﭢ",
+        "on-click": "~/.config/waybar/spotify/controls.sh prev",
+        "return-type": "json",
+        "signal": 5
     },
     "sway/workspaces": {
         "all-outputs": true,

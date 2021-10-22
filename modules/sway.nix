@@ -6,6 +6,7 @@
     #../programs/eww.nix
     ../programs/gtk.nix
     ../programs/lf.nix
+    ../programs/ncspot.nix
     ../programs/onedrive.nix
     ../programs/rofi.nix
     ../programs/sway.nix
