@@ -6,10 +6,9 @@
   };
 
   home.packages = with pkgs; [
-    # TODO: style onedark in own .nix
-    alacritty
     jq
     pv
+
     sway-unwrapped
     swaybg
     swayidle

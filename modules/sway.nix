@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 {
   imports = [
+    ../programs/alacritty.nix
     ../programs/dunst.nix
     #../programs/eww.nix
     ../programs/gtk.nix

@@ -30,8 +30,7 @@ window > box {
 #custom-launch {
   padding: 10px 0;
   font-size: 1.5em;
-  background-color: #61afef;
-  color: #282c34;
+  color: #61afef;
 }
 
 #custom-launch:hover {

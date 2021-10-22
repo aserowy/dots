@@ -10,6 +10,12 @@
     enable = true;
     settings = {
       gapless = true;
+      keybindings = {
+        "Ctrl+[" = "back";
+        "d" = "move down 5";
+        "u" = "move up 5";
+        "Shift+d" = "delete";
+      };
       notify = true;
       # BUG: https://github.com/hrkfdn/ncspot/issues/114
       theme = {
