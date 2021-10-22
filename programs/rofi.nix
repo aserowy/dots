@@ -1,7 +1,8 @@
 { config, pkgs, ... }:
 {
-  home.file.".config/rofi/config.rasi" = {
-    source = ./rofi.rasi;
+  home.file.".config/rofi/" = {
+    recursive = true;
+    source = ./rofi;
   };
 
   home.packages = with pkgs; [
