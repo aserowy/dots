@@ -22,7 +22,7 @@ exec onedrive --monitor
 exec swayidle -w -d \
     timeout 600 'systemctl suspend'
 
-exec ncspot-standalone
+exec spotify
 
 # STYLING
 
@@ -116,6 +116,7 @@ bindsym $mod+Shift+s move container to workspace music
 
 # FIX: wezterm --class does not set app_id
 assign [class="ncspot"] workspace music
+assign [class="spotify"] workspace music
 assign [app_id="pavucontrol"] workspace music
 
 bar {

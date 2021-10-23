@@ -1,6 +1,6 @@
 #!/bin/sh
 
-status=$(playerctl -p ncspot status)
+status=$(playerctl -p spotify status)
 
 if [[ -z $status ]] 
 then

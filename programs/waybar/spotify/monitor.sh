@@ -11,7 +11,7 @@ pkill -RTMIN+5 waybar
 
 # if spotify is running, trigger the
 # render of the "quit" element.
-if pgrep ncspot > /dev/null
+if pgrep spotify > /dev/null
 then
     pkill -RTMIN+6 waybar
 fi

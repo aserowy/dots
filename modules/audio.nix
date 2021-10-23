@@ -5,6 +5,6 @@
   ];
 
   imports = [
-    ../programs/ncspot.nix
+    ../programs/spotify.nix
   ];
 }

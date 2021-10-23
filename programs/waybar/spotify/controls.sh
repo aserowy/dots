@@ -1,6 +1,6 @@
 #!/bin/sh
 
-status=$(playerctl -p ncspot status)
+status=$(playerctl -p spotify status)
 
 if [[ -z $status ]] 
 then
@@ -9,7 +9,7 @@ fi
 
 if [[ $1 == "prev" ]]
 then
-   playerctl -p ncspot previous
+   playerctl -p spotify previous
    # we don't need to send a signal
    # ourselves, dunst is notified of
    # track changes and will do this instead.
@@ -18,7 +18,7 @@ fi
 
 if [[ $1 == "next" ]]
 then
-   playerctl -p ncspot next
+   playerctl -p spotify next
    # we don't need to send a signal
    # ourselves, dunst is notified of
    # track changes and will do this instead.
@@ -30,7 +30,7 @@ fi
 # waybar to update it's css.
 if [[ $status == "Playing" ]]
 then
-   playerctl -p ncspot pause
+   playerctl -p spotify pause
    sleep .1
    # trigger the monitor to resync all
    # spotify elements
@@ -40,7 +40,7 @@ fi
 
 if [[ $status == "Paused" ]]
 then
-   playerctl -p ncspot play
+   playerctl -p spotify play
    sleep .1
    # trigger the monitor to resync all
    # spotify elements
