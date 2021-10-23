@@ -3,11 +3,7 @@ set $browser "microsoft-edge-beta \
     --ozone-platform=wayland"
 
 set $explorer wezterm start --class lf -- lf
-
-set $menu exec rofi \
-    -config $HOME/.config/rofi/launcher.rasi \
-    -show drun 
-
+set $menu exec rofi -show drun 
 set $terminal wezterm
 
 # STARTUP
@@ -72,14 +68,16 @@ bindsym $mod+Shift+r reload
 for_window [title="fzf-switcher"] floating enable
 
 bindsym $mod+r exec $HOME/.config/sway/scripts/rename_workspace.sh
-bindsym $mod+w exec $HOME/.config/sway/scripts/focus_workspace.sh
+# TODO: consolidate all rofi calls into one launcher script
+bindsym $mod+w exec rofi -config ~/.config/rofi/list.rasi -modi workspace:$HOME/.config/rofi/focus_workspace.sh -show workspace
 bindsym $mod+Shift+w exec $HOME/.config/sway/scripts/create_workspace.sh
 # TODO: script to move container to named workspace
 
 bindsym $mod+n workspace prev_on_output
 bindsym $mod+p workspace next_on_output
 
-bindsym $mod+m exec $HOME/.config/sway/scripts/focus_by_mark.sh
+# TODO: consolidate all rofi calls into one launcher script
+bindsym $mod+m exec rofi -config ~/.config/rofi/list.rasi -modi mark:$HOME/.config/rofi/focus_by_mark.sh -show mark
 bindsym $mod+Shift+m exec $HOME/.config/sway/scripts/set_mark.sh
 
 ## Window

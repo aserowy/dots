@@ -1,0 +1,10 @@
+@import "base.rasi"
+
+#window {
+    width: 350px;
+}
+
+#listview {
+    columns: 1;
+    cycle: true;
+}

@@ -39,7 +39,7 @@
     },
     "custom/launch": {
         "format": "",
-        "on-click": "rofi -config ~/.config/rofi/launcher.rasi -show drun"
+        "on-click": "rofi -show drun"
     },
     "custom/power": {
         "format": "",

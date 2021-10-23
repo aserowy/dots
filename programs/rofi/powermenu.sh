@@ -2,7 +2,6 @@
 
 OPTIONS="⏻\tshutdown\n\treboot\n\tlock\n\tsuspend\n\tlogout"
 
-option=`echo -e $OPTIONS | awk '{print $1}' | tr -d '\r\n\t'`
 if [ "$@" ]
 then
 	case $@ in
