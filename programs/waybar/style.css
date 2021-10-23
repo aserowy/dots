@@ -11,6 +11,8 @@ window#waybar {
 
 window > box {
   background-color: #23272e;
+  border: 0;
+  border-radius: 6px;
   color: #abb2bf;
   margin-top: 25px;
   margin-left: 15px;

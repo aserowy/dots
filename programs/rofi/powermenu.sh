@@ -1,31 +1,24 @@
 #!/bin/sh
 
-shutdown="⏻"
-reboot=""
-lock=""
-suspend=""
-logout=""
+OPTIONS="⏻\tshutdown\n\treboot\n\tlock\n\tsuspend\n\tlogout"
 
-options="$shutdown\n$reboot\n$lock\n$suspend\n$logout"
-
-choice=$(echo -e "$options" | rofi -dmenu -config ~/.config/rofi/powermenu.rasi)
-
-case $choice in
-    $shutdown)
-        systemctl poweroff
-        ;;
-    $reboot)
-        systemctl reboot
-        ;;
-    $lock)
-        echo "lock" # will be replaced
-        ;;
-    $suspend)
-        systemctl suspend
-        ;;
-    $logout)
-        bspc quit
-        ;;
-esac
-
-$command
+option=`echo -e $OPTIONS | awk '{print $1}' | tr -d '\r\n\t'`
+if [ "$@" ]
+then
+	case $@ in
+        *shutdown)
+            systemctl poweroff
+            ;;
+        *reboot)
+            systemctl reboot
+            ;;
+        *suspend)
+            systemctl suspend
+            ;;
+        *logout)
+            swaymsg exit
+            ;;
+	esac
+else
+	echo -e $OPTIONS
+fi
