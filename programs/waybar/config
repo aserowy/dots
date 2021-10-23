@@ -9,10 +9,11 @@
         "custom/spotify-prev",
         "custom/spotify-play-pause",
         "custom/spotify-next",
-        "custom/grimshot"
     ],
     "modules-center": ["sway/workspaces"],
     "modules-right": [
+        "custom/recorder"
+        "custom/grimshot"
         "backlight",
         "pulseaudio",
         "battery",
@@ -52,6 +53,16 @@
     "custom/power": {
         "format": "",
         "on-click": "rofi -config ~/.config/rofi/powermenu.rasi -modi power:~/.config/rofi/powermenu.sh -show power"
+    },
+    "custom/recorder": {
+        "format": "",
+        "tooltip": false,
+        "interval": "once",
+        "return-type": "json",
+        "exec": "~/.config/waybar/recorder/monitor.sh",
+        "on-click": "~/.config/waybar/recorder/start.sh",
+        "on-click-right": "~/.config/waybar/recorder/stop.sh",
+        "signal": 8
     },
     "custom/spotify-monitor": {
         "interval": 1,

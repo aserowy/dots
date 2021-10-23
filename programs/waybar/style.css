@@ -30,8 +30,8 @@ window > box {
 }
 
 #custom-grimshot {
-  padding-top: 10px;
-  font-size: 2.25em;
+  padding-bottom: 10px;
+  font-size: 1.5em;
   color: #c678dd;
 }
 
@@ -44,6 +44,14 @@ window > box {
 #custom-power {
   padding-top: 10px;
   font-size: 2.25em;
+  color: #e06c75;
+}
+
+#custom-recorder {
+  font-size: 1.5em;
+  color: #56b6c2;
+}
+#custom-recorder.recording {
   color: #e06c75;
 }
 
