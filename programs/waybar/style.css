@@ -29,6 +29,12 @@ window > box {
   padding-bottom: 20px;
 }
 
+#custom-grimshot {
+  padding-top: 10px;
+  font-size: 2.25em;
+  color: #c678dd;
+}
+
 #custom-launch {
   padding-top: 10px;
   font-size: 2.25em;
@@ -57,9 +63,6 @@ window > box {
 }
 #custom-spotify-play-pause.paused {
   color: #e5c07b;
-}
-#custom-spotify-next {
-  padding-bottom: 10px;
 }
 
 #workspaces button {

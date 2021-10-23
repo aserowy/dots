@@ -8,7 +8,8 @@
         "custom/spotify-metadata",
         "custom/spotify-prev",
         "custom/spotify-play-pause",
-        "custom/spotify-next"
+        "custom/spotify-next",
+        "custom/grimshot"
     ],
     "modules-center": ["sway/workspaces"],
     "modules-right": [
@@ -36,6 +37,13 @@
     "clock#mins": {
         "interval": 1,
         "format": "{:%M}",
+    },
+    "custom/grimshot": {
+        "format": "",
+        "tooltip": false,
+        "on-click": "grimshot --notify save output - | swappy -f -",
+        "on-click-middle": "grimshot --notify save window - | swappy -f -",
+        "on-click-right": "grimshot --notify save area - | swappy -f -"
     },
     "custom/launch": {
         "format": "",
