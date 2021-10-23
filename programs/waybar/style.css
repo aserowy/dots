@@ -46,15 +46,15 @@ window > box {
   font-size: 2.25em;
   color: #98c379;
 }
-#custom-spotify-metadata.playing {
-  color: #98c379;
-}
-#custom-spotify-metadata.paused {
-  color: #e5c07b;
-}
 #custom-spotify-play-pause {
   color: #98c379;
   font-size: 1.75em;
+}
+#custom-spotify-play-pause.playing {
+  color: #98c379;
+}
+#custom-spotify-play-pause.paused {
+  color: #e5c07b;
 }
 #custom-spotify-prev,
 #custom-spotify-next {

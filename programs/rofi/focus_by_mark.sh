@@ -10,7 +10,7 @@ done
 
 if [ "$@" ]
 then
-    swaymsg "[con_mark=\b$@\b]" focus
+    swaymsg "[con_mark=\b$@\b]" focus >/dev/null 2>&1
 else
 	echo -e $OPTIONS
 fi

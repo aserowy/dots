@@ -9,12 +9,12 @@ fi
 
 if [[ $status == "Playing" ]]
 then
-   echo "{\"class\": \"playing\", \"text\": \"\", \"tooltip\": \"$album\"}"
+   echo "{\"class\": \"playing\", \"text\": \"\", \"tooltip\": \"$album\"}"
    exit
 fi
 
 if [[ $status == "Paused" ]]
 then
-   echo "{\"class\": \"paused\", \"text\": \"\", \"tooltip\": \"$album\"}"
+   echo "{\"class\": \"paused\", \"text\": \"契\", \"tooltip\": \"$album\"}"
    exit
 fi

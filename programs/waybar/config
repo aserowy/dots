@@ -68,7 +68,7 @@
     },
     "custom/spotify-next": {
         "exec": "~/.config/waybar/spotify/metadata.sh",
-        "format": "ﭠ",
+        "format": "怜",
         "interval": "once",
         "on-click": "~/.config/waybar/spotify/controls.sh next",
         "return-type": "json",
@@ -76,7 +76,7 @@
     },
     "custom/spotify-prev": {
         "exec": "~/.config/waybar/spotify/metadata.sh",
-        "format": "ﭢ",
+        "format": "玲",
         "interval": "once",
         "on-click": "~/.config/waybar/spotify/controls.sh prev",
         "return-type": "json",

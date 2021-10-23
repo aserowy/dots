@@ -6,7 +6,7 @@
       global = {
         alignment = "center";
         always_run_script = "true";
-        corner_radius = 0;
+        corner_radius = 6;
         follow = "none";
         font = "FiraCode Nerd Font Mono 10";
         format = "<b>%s</b>\\n%b";
