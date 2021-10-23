@@ -1,11 +1,11 @@
 @import "base.rasi"
 
-window {
-    width: 350;
+#window {
+    width: 350px;
 }
 
-listview {
+#listview {
+    columns: 1;
     cycle: true;
-    columns: 4;
-    lines: 1;
+    lines: 4;
 }

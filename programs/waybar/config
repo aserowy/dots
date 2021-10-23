@@ -39,11 +39,11 @@
     },
     "custom/launch": {
         "format": "",
-        "on-click": "rofi -show drun -config ~/.config/rofi/launcher.rasi"
+        "on-click": "rofi -config ~/.config/rofi/launcher.rasi -show drun"
     },
     "custom/power": {
         "format": "",
-        "on-click": "rofi -modi power:$HOME/.config/rofi/power.sh ~/.config/rofi/powermenu.sh -show power"
+        "on-click": "rofi -config ~/.config/rofi/powermenu.rasi -modi power:~/.config/rofi/powermenu.sh -show power"
     },
     "custom/spotify-monitor": {
         "interval": 1,
