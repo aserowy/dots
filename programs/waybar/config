@@ -12,8 +12,8 @@
     ],
     "modules-center": ["sway/workspaces"],
     "modules-right": [
-        "custom/recorder",
         "custom/grimshot",
+        "custom/recorder",
         "backlight",
         "pulseaudio",
         "battery",
@@ -40,7 +40,7 @@
         "format": "{:%M}",
     },
     "custom/grimshot": {
-        "format": "",
+        "format": "",
         "tooltip": false,
         "on-click": "grimshot --notify save output - | swappy -f -",
         "on-click-middle": "grimshot --notify save window - | swappy -f -",
