@@ -47,7 +47,7 @@ window > box {
   color: #abb2bf;
 }
 #custom-recorder.recording {
-  color: #61afef;
+  color: #e06c75;
 }
 
 #custom-spotify-metadata {
@@ -62,7 +62,7 @@ window > box {
   font-size: 1.125em;
 }
 #custom-spotify-play-pause.playing {
-  color: #61afef;
+  color: #98c379;
 }
 #custom-spotify-play-pause.paused {
   color: #abb2bf;
