@@ -62,6 +62,7 @@ bindsym $mod+t exec $terminal
 
 ## Sway
 
+bindsym $mod+q exec rofi -config ~/.config/rofi/powermenu.rasi -modi power:~/.config/rofi/powermenu.sh -show power
 bindsym $mod+Shift+c kill
 bindsym $mod+Shift+r reload
 

@@ -39,7 +39,7 @@ window > box {
 #custom-power {
   padding-top: 10px;
   font-size: 2.25em;
-  color: #abb2bf;
+  color: #fff;
 }
 
 #custom-recorder {
@@ -55,17 +55,14 @@ window > box {
   font-size: 2.25em;
   color: #abb2bf;
 }
+#custom-spotify-metadata.playing {
+  color: #fff;
+}
 #custom-spotify-play-pause,
 #custom-spotify-prev,
 #custom-spotify-next {
   color: #abb2bf;
   font-size: 1.125em;
-}
-#custom-spotify-play-pause.playing {
-  color: #98c379;
-}
-#custom-spotify-play-pause.paused {
-  color: #abb2bf;
 }
 
 #workspaces button {

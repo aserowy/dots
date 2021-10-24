@@ -9,6 +9,7 @@
     ../modules/collaboration.nix
     ../modules/daw.nix
     ../modules/development-gui.nix
+    ../modules/gaming.nix
     ../modules/remote_access.nix
     ../modules/sway.nix
   ];
