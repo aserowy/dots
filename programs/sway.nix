@@ -8,6 +8,7 @@
   home.packages = with pkgs; [
     jq
     pv
+    wf-recorder
 
     sway-unwrapped
     swaybg

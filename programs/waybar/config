@@ -12,8 +12,8 @@
     ],
     "modules-center": ["sway/workspaces"],
     "modules-right": [
-        "custom/recorder"
-        "custom/grimshot"
+        "custom/recorder",
+        "custom/grimshot",
         "backlight",
         "pulseaudio",
         "battery",
