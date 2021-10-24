@@ -30,47 +30,46 @@ window > box {
 }
 
 #custom-grimshot {
-  padding-bottom: 10px;
   font-size: 1.5em;
-  color: #c678dd;
+  color: #abb2bf;
 }
 
 #custom-launch {
   padding-top: 10px;
   font-size: 2.25em;
-  color: #61afef;
+  color: #abb2bf;
 }
 
 #custom-power {
   padding-top: 10px;
   font-size: 2.25em;
-  color: #e06c75;
+  color: #61afef;
 }
 
 #custom-recorder {
   font-size: 1.5em;
-  color: #56b6c2;
+  color: #abb2bf;
 }
 #custom-recorder.recording {
-  color: #e06c75;
+  color: #61afef;
 }
 
 #custom-spotify-metadata {
   padding-top: 10px;
   font-size: 2.25em;
-  color: #98c379;
+  color: #abb2bf;
 }
 #custom-spotify-play-pause,
 #custom-spotify-prev,
 #custom-spotify-next {
-  color: #98c379;
+  color: #abb2bf;
   font-size: 1.125em;
 }
 #custom-spotify-play-pause.playing {
-  color: #98c379;
+  color: #61afef;
 }
 #custom-spotify-play-pause.paused {
-  color: #e5c07b;
+  color: #abb2bf;
 }
 
 #workspaces button {
@@ -87,7 +86,7 @@ window > box {
 
 #workspaces button.focused {
   background-color: #474e5d;
-  color: #e06c75;
+  color: #61afef;
 }
 
 #workspaces button.urgent {
@@ -96,7 +95,7 @@ window > box {
 }
 
 #pulseaudio {
-  color: #e5c07b;
+  color: #abb2bf;
   font-size: 1.5em;
 }
 
@@ -105,18 +104,14 @@ window > box {
 }
 
 #network {
-  color: #61afef;
+  color: #abb2bf;
   font-size: 1.5em;
   padding-bottom: 20px;
 }
 
 #battery {
-  color: #98c379;
+  color: #abb2bf;
   font-size: 1.5em;
-}
-
-#battery.warning {
-  color: #e5c07b;
 }
 
 @keyframes blink {
@@ -135,9 +130,9 @@ window > box {
 }
 
 #battery.charging {
-  color: #c678dd;
+  color: #abb2bf;
 }
 
 #clock {
-  color: #98c379;
+  color: #61afef;
 }
