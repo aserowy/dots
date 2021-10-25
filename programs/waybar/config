@@ -60,8 +60,7 @@
         "interval": "once",
         "return-type": "json",
         "exec": "~/.config/waybar/recorder/monitor.sh",
-        "on-click": "~/.config/waybar/recorder/start.sh",
-        "on-click-right": "~/.config/waybar/recorder/stop.sh",
+        "on-click": "~/.config/waybar/recorder/toggle.sh",
         "signal": 8
     },
     "custom/spotify-monitor": {
