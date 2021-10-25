@@ -113,11 +113,10 @@ bindsym $mod+$alt+$right resize shrink width 20px
 # MUSIC
 
 bindsym $mod+s workspace music
-bindsym $mod+Shift+s move container to workspace music
 
 # FIX: wezterm --class does not set app_id
 assign [class="ncspot"] workspace music
-assign [class="spotify"] workspace music
+assign [app_id="spotify"] workspace music
 assign [app_id="pavucontrol"] workspace music
 
 bar {

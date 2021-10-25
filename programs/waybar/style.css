@@ -56,7 +56,7 @@ window > box {
   color: #abb2bf;
 }
 #custom-spotify-metadata.playing {
-  color: #fff;
+  color: #61afef;
 }
 #custom-spotify-play-pause,
 #custom-spotify-prev,
@@ -79,8 +79,8 @@ window > box {
 }
 
 #workspaces button.focused {
-  box-shadow: inset 3px 0 #fff;
-  color: #fff;
+  box-shadow: inset 3px 0 #61afef;
+  color: #61afef;
 }
 
 #workspaces button.urgent {
