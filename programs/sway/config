@@ -70,8 +70,8 @@ for_window [title="fzf-switcher"] floating enable
 
 bindsym $mod+r exec $HOME/.config/sway/scripts/rename_workspace.sh
 bindsym $mod+w exec $HOME/.config/rofi/launch.sh workspace
-bindsym $mod+Shift+w exec $HOME/.config/sway/scripts/create_workspace.sh
-# TODO: script to move container to named workspace
+bindsym $mod+Shift+w exec $HOME/.config/rofi/launch.sh move
+bindsym $mod+a exec $HOME/.config/sway/scripts/create_workspace.sh
 
 bindsym $mod+n workspace prev_on_output
 bindsym $mod+p workspace next_on_output
@@ -97,7 +97,7 @@ bindsym $mod+Shift+$right move right
 bindsym $mod+space focus mode_toggle
 bindsym $mod+Shift+space floating toggle
 
-bindsym $mod+a focus parent
+bindsym $mod+u focus parent
 
 ## Layout
 

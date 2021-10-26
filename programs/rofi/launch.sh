@@ -9,6 +9,9 @@ then
         mark)
             rofi -config ~/.config/rofi/list.rasi -modi mark:$HOME/.config/rofi/focus_by_mark.sh -show mark
         ;;
+        move)
+            rofi -config ~/.config/rofi/list.rasi -modi move:$HOME/.config/rofi/move_to_workspace.sh -show move
+        ;;
         power)
             rofi -config ~/.config/rofi/powermenu.rasi -modi power:~/.config/rofi/powermenu.sh -show power
         ;;
