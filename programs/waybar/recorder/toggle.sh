@@ -1,7 +1,5 @@
 #!/bin/sh
 
-# TODO: script to toggle recording
-
 if pgrep wf-recorder &> /dev/null
 then
     pkill -SIGINT wf-recorder && notify-send ' screen cap ended'

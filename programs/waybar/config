@@ -52,7 +52,7 @@
     },
     "custom/power": {
         "format": "",
-        "on-click": "rofi -config ~/.config/rofi/powermenu.rasi -modi power:~/.config/rofi/powermenu.sh -show power"
+        "on-click": "~/.config/rofi/launch.sh power"
     },
     "custom/recorder": {
         "format": "",
@@ -110,7 +110,11 @@
             "music": "",
             "social": "",
             "urgent": "",
-        }
+        },
+        "persistent_workspaces": {
+            "music": [],
+            "social": [],
+        },
     },
     "network": {
         "format-wifi": "直",
