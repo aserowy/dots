@@ -28,9 +28,6 @@ exec spotify
 
 default_border pixel 1
 
-for_window [class=".*"]     opacity .97
-for_window [app_id=".*"]    opacity .97
-
 client.focused          #61afef #61afef #61afef #61afef #61afef
 client.focused_inactive #282c34 #282c34 #282c34 #282c34 #282c34
 client.urgent           #e06c75 #e06c75 #e06c75 #e06c75 #e06c75
