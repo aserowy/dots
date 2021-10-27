@@ -4,7 +4,6 @@
     ../programs/alacritty.nix
     ../programs/dunst.nix
     #../programs/eww.nix
-    ../programs/gnome-keyring.nix
     ../programs/grimshot.nix
     ../programs/gtk.nix
     ../programs/lf.nix
