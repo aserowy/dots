@@ -5,6 +5,6 @@
   programs.home-manager.enable = true;
 
   imports = [
-    ./headless.nix
+    ../shell/headless
   ];
 }

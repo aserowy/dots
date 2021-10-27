@@ -110,7 +110,10 @@ bindsym $mod+s workspace music
 
 # FIX: wezterm --class does not set app_id
 assign [class="ncspot"] workspace music
+
 assign [app_id="spotify"] workspace music
+for_window [class="Spotify"] floating enable
+
 assign [app_id="pavucontrol"] workspace music
 
 bar {
