@@ -1,5 +1,6 @@
 { config, pkgs, ... }:
 {
+  # TODO: package extensions with nvfetcher
   # settings sync will take care of extensions..
   # because not all extensions are packages.
 
@@ -62,25 +63,26 @@
         "key" = "ctrl+h";
         "command" = "vscode-neovim.send";
         "when" = "!sideBarFocus && !panelFocus && neovim.mode == 'normal'";
-        "args" = "<C-w>h";
+        # FIX: this does not work! "args" = "<C-w>h" must pass
+        "args" = { key = "<C-w>h"; };
       }
       {
         "key" = "ctrl+l";
         "command" = "vscode-neovim.send";
         "when" = "!sideBarFocus && !panelFocus && neovim.mode == 'normal'";
-        "args" = "<C-w>l";
+        "args" = { key = "<C-w>l"; };
       }
       {
         "key" = "ctrl+k";
         "command" = "vscode-neovim.send";
         "when" = "!sideBarFocus && !panelFocus && neovim.mode == 'normal'";
-        "args" = "<C-w>k";
+        "args" = { key = "<C-w>k"; };
       }
       {
         "key" = "ctrl+j";
         "command" = "vscode-neovim.send";
         "when" = "!sideBarFocus && !panelFocus && neovim.mode == 'normal'";
-        "args" = "<C-w>j";
+        "args" = { key = "<C-w>j"; };
       }
 
       # buffer
