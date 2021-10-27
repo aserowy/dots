@@ -1,12 +1,12 @@
 [submodule "programs/neovim"]
-	path = programs/neovim
+	path = shell/headless/neovim
 	url = https://github.com/aserowy/NeoCode.git
 [submodule "programs/tmux/plugins/tmux-continuum"]
-	path = programs/tmux/plugins/tmux-continuum
+	path = shell/headless/tmux/plugins/tmux-continuum
 	url = https://github.com/tmux-plugins/tmux-continuum
 [submodule "programs/tmux/plugins/tmux-resurrect"]
-	path = programs/tmux/plugins/tmux-resurrect
+	path = shell/headless/tmux/plugins/tmux-resurrect
 	url = https://github.com/tmux-plugins/tmux-resurrect
 [submodule "programs/tmux/plugins/tmux-easy-motion"]
-	path = programs/tmux/plugins/tmux-easy-motion
+	path = shell/headless/tmux/plugins/tmux-easy-motion
 	url = https://github.com/IngoMeyer441/tmux-easy-motion
