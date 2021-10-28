@@ -11,30 +11,37 @@ fetch.url = "https://packages.microsoft.com/repos/edge/pool/main/m/microsoft-edg
 [vscode-extensions-keyboard-quickfix]
 src.vsmarketplace = "pascalsenn.keyboard-quickfix"
 fetch.vsmarketplace = "pascalsenn.keyboard-quickfix"
+passthru = { name = "keyboard-quickfix", publisher = "pascalsenn" }
 
 [vscode-extensions-material-theme]
 src.vsmarketplace = "zhuangtongfa.material-theme"
 fetch.vsmarketplace = "zhuangtongfa.material-theme"
+passthru = { name = "material-theme", publisher = "zhuangtongfa" }
 
 [vscode-extensions-remote-containers]
 src.vsmarketplace = "ms-vscode-remote.remote-containers"
 fetch.vsmarketplace = "ms-vscode-remote.remote-containers"
+passthru = { name = "remote-containers", publisher = "ms-vscode-remote" }
 
 [vscode-extensions-remote-wsl]
 src.vsmarketplace = "ms-vscode-remote.remote-wsl"
 fetch.vsmarketplace = "ms-vscode-remote.remote-wsl"
+passthru = { name = "remote-wsl", publisher = "ms-vscode-remote" }
 
 [vscode-extensions-todo-tree]
 src.vsmarketplace = "gruntfuggly.todo-tree"
 fetch.vsmarketplace = "gruntfuggly.todo-tree"
+passthru = { name = "todo-tree", publisher = "gruntfuggly" }
 
 [vscode-extensions-vscode-neovim]
 src.vsmarketplace = "asvetliakov.vscode-neovim"
 fetch.vsmarketplace = "asvetliakov.vscode-neovim"
+passthru = { name = "vscode-neovim", publisher = "asvetliakov" }
 
 [vscode-extensions-vscode-icons]
 src.vsmarketplace = "vscode-icons-team.vscode-icons"
 fetch.vsmarketplace = "vscode-icons-team.vscode-icons"
+passthru = { name = "vscode-icons", publisher = "vscode-icons-team" }
 
 [widevine-cdm]
 src.webpage = "https://dl.google.com/widevine-cdm/versions.txt"
