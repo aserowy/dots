@@ -1,25 +1,30 @@
 final: prev:
 let
-  inherit (prev.lib) mapAttrs removePrefix;
+  inherit (final.lib) mapAttrs removePrefix;
 
+  # import nvfetcher sources
   imported = import ./_sources/generated.nix { inherit (final) fetchurl fetchgit; };
 
-  sources = mapAttrs
+  fetches = mapAttrs
     (pname: meta: meta // { version = removePrefix "v" meta.version; })
     imported;
 in
 {
   edge = final.callPackage ./edge {
-    inherit sources;
     gconf = final.gnome2.GConf;
+    sources = fetches;
   };
 
   eww = final.callPackage ./eww {
-    inherit sources;
+    inherit fetches;
     makeRustPlatform = (final.pkgs.makeRustPlatform {
       inherit (final.fenix.latest) cargo rustc;
     });
   };
 
-  widevine-cdm = final.callPackage ./widevine-cdm { inherit sources; };
+  #vscode-extensions = channels.latest.vscode-extensions // (packageSets "vscode-extensions");
+
+  widevine-cdm = final.callPackage ./widevine-cdm {
+   sources = fetches;
+  };
 }

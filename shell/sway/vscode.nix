@@ -1,11 +1,17 @@
 { config, pkgs, ... }:
 {
-  # TODO: package extensions with nvfetcher
-  # settings sync will take care of extensions..
-  # because not all extensions are packages.
-
   programs.vscode = {
     enable = true;
+#    extensions = with pkgs.vscode-extensions; attrValues ({
+#      inherit
+#        keyboard-quickfix
+#        material-theme
+#        remote-containers
+#        remote-wsl
+#        todo-tree
+#        vscode-neovim
+#        vscode-icons;
+#    } { });
     keybindings = [
       # general
       {
@@ -63,26 +69,25 @@
         "key" = "ctrl+h";
         "command" = "vscode-neovim.send";
         "when" = "!sideBarFocus && !panelFocus && neovim.mode == 'normal'";
-        # FIX: this does not work! "args" = "<C-w>h" must pass
-        "args" = { key = "<C-w>h"; };
+        "args" =  "<C-w>h";
       }
       {
         "key" = "ctrl+l";
         "command" = "vscode-neovim.send";
         "when" = "!sideBarFocus && !panelFocus && neovim.mode == 'normal'";
-        "args" = { key = "<C-w>l"; };
+        "args" =  "<C-w>l";
       }
       {
         "key" = "ctrl+k";
         "command" = "vscode-neovim.send";
         "when" = "!sideBarFocus && !panelFocus && neovim.mode == 'normal'";
-        "args" = { key = "<C-w>k"; };
+        "args" =  "<C-w>k";
       }
       {
         "key" = "ctrl+j";
         "command" = "vscode-neovim.send";
         "when" = "!sideBarFocus && !panelFocus && neovim.mode == 'normal'";
-        "args" = { key = "<C-w>j"; };
+        "args" =  "<C-w>j";
       }
 
       # buffer
@@ -385,7 +390,7 @@
       "zenMode.restore" = false;
 
       ## custom settings (not neocode related)
-      
+
       "workbench.colorTheme" = "One Dark Pro";
 
       # font

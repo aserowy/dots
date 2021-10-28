@@ -27,6 +27,62 @@
       sha256 = "1srv1nr3aqlpc9gr5735zy0b4l2xd7m2rplg296fx3gnkkj7q6zj";
     };
   };
+  vscode-extensions-keyboard-quickfix = {
+    pname = "vscode-extensions-keyboard-quickfix";
+    version = "0.0.6";
+    src = fetchurl {
+      url = "https://pascalsenn.gallery.vsassets.io/_apis/public/gallery/publisher/pascalsenn/extension/keyboard-quickfix/0.0.6/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      sha256 = "18v34xjb8r6pngz5rc9cx14fz6j3ws8r1a0nnwi52i9dm07wvbh4";
+    };
+  };
+  vscode-extensions-material-theme = {
+    pname = "vscode-extensions-material-theme";
+    version = "3.13.2";
+    src = fetchurl {
+      url = "https://zhuangtongfa.gallery.vsassets.io/_apis/public/gallery/publisher/zhuangtongfa/extension/material-theme/3.13.2/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      sha256 = "1pb96xdm8342i1l4xp7wdbpfv353pjf6l0c3xkgw0lgfzvd0xshy";
+    };
+  };
+  vscode-extensions-remote-containers = {
+    pname = "vscode-extensions-remote-containers";
+    version = "0.203.0";
+    src = fetchurl {
+      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.203.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      sha256 = "0msac1majfr9dk3r36sppgmk1n5zym9xxl2s4041ajba7nks7z9f";
+    };
+  };
+  vscode-extensions-remote-wsl = {
+    pname = "vscode-extensions-remote-wsl";
+    version = "0.58.4";
+    src = fetchurl {
+      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-wsl/0.58.4/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      sha256 = "0kcdg54qfyxws3syh2ylphym087fhj1lfngkbi17hq76380kbj66";
+    };
+  };
+  vscode-extensions-todo-tree = {
+    pname = "vscode-extensions-todo-tree";
+    version = "0.0.214";
+    src = fetchurl {
+      url = "https://gruntfuggly.gallery.vsassets.io/_apis/public/gallery/publisher/gruntfuggly/extension/todo-tree/0.0.214/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      sha256 = "0rwxjnrl44rnhx3183037k6435xs4772p58a37azl5cahsyav1hk";
+    };
+  };
+  vscode-extensions-vscode-icons = {
+    pname = "vscode-extensions-vscode-icons";
+    version = "11.6.0";
+    src = fetchurl {
+      url = "https://vscode-icons-team.gallery.vsassets.io/_apis/public/gallery/publisher/vscode-icons-team/extension/vscode-icons/11.6.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      sha256 = "07mp6q7xy9r53b1bh8gaw6kz64m4bzyxzm095105vv1p5l78b3lf";
+    };
+  };
+  vscode-extensions-vscode-neovim = {
+    pname = "vscode-extensions-vscode-neovim";
+    version = "0.0.82";
+    src = fetchurl {
+      url = "https://asvetliakov.gallery.vsassets.io/_apis/public/gallery/publisher/asvetliakov/extension/vscode-neovim/0.0.82/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      sha256 = "17f0jzg9vdbqdjnnc5i1q28ij2kckvvxi7fw9szmyy754f074jb1";
+    };
+  };
   widevine-cdm = {
     pname = "widevine-cdm";
     version = "4.10.2209.1";

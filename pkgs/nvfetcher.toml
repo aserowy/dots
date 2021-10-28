@@ -8,6 +8,34 @@ src.webpage = "https://packages.microsoft.com/repos/edge/pool/main/m/microsoft-e
 src.regex = "microsoft-edge-beta_(.*)-1_amd64\\.deb\">microsoft-edge-beta_"
 fetch.url = "https://packages.microsoft.com/repos/edge/pool/main/m/microsoft-edge-beta/microsoft-edge-beta_$ver-1_amd64.deb"
 
+[vscode-extensions-keyboard-quickfix]
+src.vsmarketplace = "pascalsenn.keyboard-quickfix"
+fetch.vsmarketplace = "pascalsenn.keyboard-quickfix"
+
+[vscode-extensions-material-theme]
+src.vsmarketplace = "zhuangtongfa.material-theme"
+fetch.vsmarketplace = "zhuangtongfa.material-theme"
+
+[vscode-extensions-remote-containers]
+src.vsmarketplace = "ms-vscode-remote.remote-containers"
+fetch.vsmarketplace = "ms-vscode-remote.remote-containers"
+
+[vscode-extensions-remote-wsl]
+src.vsmarketplace = "ms-vscode-remote.remote-wsl"
+fetch.vsmarketplace = "ms-vscode-remote.remote-wsl"
+
+[vscode-extensions-todo-tree]
+src.vsmarketplace = "gruntfuggly.todo-tree"
+fetch.vsmarketplace = "gruntfuggly.todo-tree"
+
+[vscode-extensions-vscode-neovim]
+src.vsmarketplace = "asvetliakov.vscode-neovim"
+fetch.vsmarketplace = "asvetliakov.vscode-neovim"
+
+[vscode-extensions-vscode-icons]
+src.vsmarketplace = "vscode-icons-team.vscode-icons"
+fetch.vsmarketplace = "vscode-icons-team.vscode-icons"
+
 [widevine-cdm]
 src.webpage = "https://dl.google.com/widevine-cdm/versions.txt"
 src.regex = "(.*)"
