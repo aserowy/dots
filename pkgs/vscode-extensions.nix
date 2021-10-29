@@ -41,6 +41,9 @@ let
       runHook preInstall
 
       mkdir -p "$out/$installPrefix"
+      mv extension.vsixmanifest "$out/$installPrefix/.vsixmanifest"
+
+      cd extension
       find . -mindepth 1 -maxdepth 1 | xargs -d'\n' mv -t "$out/$installPrefix/"
 
       runHook postInstall
