@@ -1,6 +1,8 @@
 final: prev:
 let
-  inherit (final.lib) mapAttrs removePrefix;
+  inherit (final.lib) filterAttrs hasPrefix mapAttrs mapAttrs' nameValuePair removePrefix;
+
+  helper = import ./vscode-extensions.nix { inherit (final) stdenv fetchurl unzip; };
 
   # import nvfetcher sources
   imported = import ./_sources/generated.nix { inherit (final) fetchurl fetchgit; };
@@ -8,6 +10,25 @@ let
   fetches = mapAttrs
     (pname: meta: meta // { version = removePrefix "v" meta.version; })
     imported;
+
+  # set package sets for extensions
+  packageSets = packageSet:
+    let
+      prefix = "${packageSet}-";
+
+      packageBuilder = {
+        "vscode-extensions" = helper.extensionFromVscodeMarketplace;
+      }.${packageSet};
+
+      packages = mapAttrs'
+        (name: value: nameValuePair (removePrefix prefix name) (value))
+        (filterAttrs (name: value: hasPrefix prefix name) fetches);
+    in
+    mapAttrs
+      (n: v: packageBuilder {
+        inherit (v) name publisher src version;
+      })
+      packages;
 in
 {
   edge = final.callPackage ./edge {
@@ -22,9 +43,9 @@ in
     });
   };
 
-  #vscode-extensions = channels.latest.vscode-extensions // (packageSets "vscode-extensions");
+  vscode-extensions = (packageSets "vscode-extensions");
 
   widevine-cdm = final.callPackage ./widevine-cdm {
-   sources = fetches;
+    sources = fetches;
   };
 }

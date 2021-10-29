@@ -2,16 +2,15 @@
 {
   programs.vscode = {
     enable = true;
-#    extensions = with pkgs.vscode-extensions; attrValues ({
-#      inherit
-#        keyboard-quickfix
-#        material-theme
-#        remote-containers
-#        remote-wsl
-#        todo-tree
-#        vscode-neovim
-#        vscode-icons;
-#    } { });
+    extensions = with pkgs.vscode-extensions; [
+      keyboard-quickfix
+      material-theme
+      remote-containers
+      remote-wsl
+      todo-tree
+      vscode-neovim
+      vscode-icons
+    ];
     keybindings = [
       # general
       {
@@ -69,25 +68,25 @@
         "key" = "ctrl+h";
         "command" = "vscode-neovim.send";
         "when" = "!sideBarFocus && !panelFocus && neovim.mode == 'normal'";
-        "args" =  "<C-w>h";
+        "args" = "<C-w>h";
       }
       {
         "key" = "ctrl+l";
         "command" = "vscode-neovim.send";
         "when" = "!sideBarFocus && !panelFocus && neovim.mode == 'normal'";
-        "args" =  "<C-w>l";
+        "args" = "<C-w>l";
       }
       {
         "key" = "ctrl+k";
         "command" = "vscode-neovim.send";
         "when" = "!sideBarFocus && !panelFocus && neovim.mode == 'normal'";
-        "args" =  "<C-w>k";
+        "args" = "<C-w>k";
       }
       {
         "key" = "ctrl+j";
         "command" = "vscode-neovim.send";
         "when" = "!sideBarFocus && !panelFocus && neovim.mode == 'normal'";
-        "args" =  "<C-w>j";
+        "args" = "<C-w>j";
       }
 
       # buffer
