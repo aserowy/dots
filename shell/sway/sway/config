@@ -15,12 +15,8 @@ exec_always dbus-update-activation-environment --systemd \
 
 exec $HOME/.config/sway/wallpaper.sh
 
-exec dunst
 exec eww daemon
 exec onedrive --monitor
-
-exec swayidle -w -d \
-    timeout 600 'systemctl suspend'
 
 exec spotify
 
