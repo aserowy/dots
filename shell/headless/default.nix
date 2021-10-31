@@ -11,6 +11,7 @@
 
   imports = [
     ./direnv.nix
+    ./docker.nix
     ./git.nix
     ./lf.nix
     ./ncspot.nix
