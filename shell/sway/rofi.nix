@@ -4,8 +4,4 @@
     recursive = true;
     source = ./rofi;
   };
-
-  home.packages = with pkgs; [
-    rofi
-  ];
 }

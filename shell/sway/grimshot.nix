@@ -11,9 +11,4 @@
       text_font=sans-serif
     '';
   };
-
-  home.packages = with pkgs; [
-    swappy
-    sway-contrib.grimshot
-  ];
 }

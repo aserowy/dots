@@ -4,8 +4,4 @@
     recursive = true;
     source = ./waybar;
   };
-
-  home.packages = with pkgs; [
-    waybar
-  ];
 }
