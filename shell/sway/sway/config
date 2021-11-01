@@ -9,14 +9,7 @@ set $terminal wezterm
 # STARTUP
 
 exec_always $HOME/.config/sway/gsettings.sh
-exec_always dbus-update-activation-environment --systemd \
-    DISPLAY SWAYSOCK GTK_IM_MODULE QT_IM_MODULE XMODIFIERS \
-    DBUS_SESSION_BUS_ADDRESS WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
-
 exec $HOME/.config/sway/wallpaper.sh
-
-exec eww daemon
-exec onedrive --monitor
 
 exec spotify
 

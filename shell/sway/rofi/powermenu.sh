@@ -1,6 +1,6 @@
 #!/bin/sh
 
-OPTIONS="⏻\tshutdown\n\treboot\n\tlock\n\tsuspend\n\tlogout"
+OPTIONS="\tsuspend\n⏻\tshutdown\n\treboot\n\tlock\n\tlogout"
 
 if [ "$@" ]
 then
