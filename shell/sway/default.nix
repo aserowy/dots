@@ -3,7 +3,6 @@
   home.packages = with pkgs; [
     ardour
     gparted
-    pavucontrol
     remmina
   ];
 
@@ -12,13 +11,9 @@
     ./edge.nix
     ./grimshot.nix
     ./gtk.nix
-    ./lf.nix
     ./onedrive.nix
-    ./spotify.nix
     ./sway.nix
     ./teams.nix
     ./vscode.nix
-    ./waybar.nix
-    ./wezterm.nix
   ];
 }
