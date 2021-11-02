@@ -7,7 +7,6 @@
   ];
 
   imports = [
-    ./alacritty.nix
     ./grimshot.nix
     ./gtk.nix
     ./onedrive.nix
