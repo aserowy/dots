@@ -14,7 +14,6 @@
     ./gtk.nix
     ./lf.nix
     ./onedrive.nix
-    ./rofi.nix
     ./spotify.nix
     ./sway.nix
     ./teams.nix
