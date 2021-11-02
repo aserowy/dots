@@ -21,10 +21,10 @@
   };
   microsoft-edge-beta = {
     pname = "microsoft-edge-beta";
-    version = "95.0.1020.40";
+    version = "96.0.1054.8";
     src = fetchurl {
-      url = "https://packages.microsoft.com/repos/edge/pool/main/m/microsoft-edge-beta/microsoft-edge-beta_95.0.1020.40-1_amd64.deb";
-      sha256 = "1lhylwqb1mqv19vcfv42j5x3pnzdsxq7skvqg95dd4bykxw1f792";
+      url = "https://packages.microsoft.com/repos/edge/pool/main/m/microsoft-edge-beta/microsoft-edge-beta_96.0.1054.8-1_amd64.deb";
+      sha256 = "0pqi27kpykd952c0kp90w6k8fkrfaasr3sd14lyisk7vaxx3wa1r";
     };
   };
   vscode-extensions-keyboard-quickfix = {
