@@ -8,7 +8,6 @@
 
   imports = [
     ./alacritty.nix
-    ./edge.nix
     ./grimshot.nix
     ./gtk.nix
     ./onedrive.nix
