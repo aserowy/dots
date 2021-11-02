@@ -9,7 +9,6 @@
 
   imports = [
     ./alacritty.nix
-    ./dunst.nix
     ./edge.nix
     ./grimshot.nix
     ./gtk.nix
