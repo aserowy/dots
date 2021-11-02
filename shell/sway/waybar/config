@@ -48,11 +48,11 @@
     },
     "custom/launch": {
         "format": "",
-        "on-click": "rofi -show drun"
+        "on-click": "/etc/rofi/launch.sh drun"
     },
     "custom/power": {
         "format": "",
-        "on-click": "~/.config/rofi/launch.sh power"
+        "on-click": "/etc/rofi/launch.sh power"
     },
     "custom/recorder": {
         "format": "",
