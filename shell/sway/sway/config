@@ -105,7 +105,14 @@ for_window [class="Spotify"] floating enable
 
 assign [app_id="pavucontrol"] workspace music
 
+# WAYBAR
+
 bar {
         swaybar_command waybar
     }
 }
+
+# SESSION TARGET
+
+include /etc/sway/config.d/*
+exec "dbus-update-activation-environment --systemd --all; systemctl --user import-environment; systemctl --user start sway-session.target"

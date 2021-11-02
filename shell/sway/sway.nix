@@ -8,10 +8,10 @@
   programs.zsh = {
     loginExtra = ''
       if [[ "$(tty)" == /dev/tty1 ]]; then
-        dbus-update-activation-environment --systemd --all
-        dbus-update-activation-environment --systemd XDG_CURRENT_DESKTOP=sway
+        export XDG_CURRENT_DESKTOP=sway
+        export XDG_SESSION_TYPE=wayland
 
-        exec systemctl --user start sway.service
+        exec sway
       fi
     '';
   };
