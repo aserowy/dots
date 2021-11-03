@@ -7,10 +7,11 @@
   ];
 
   imports = [
+    ../shared/gtk.nix
+    ../shared/onedrive.nix
+    ../shared/vscode.nix
+
     ./grimshot.nix
-    ./gtk.nix
-    ./onedrive.nix
     ./teams.nix
-    ./vscode.nix
   ];
 }
