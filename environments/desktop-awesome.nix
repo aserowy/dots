@@ -2,6 +2,6 @@
 {
   imports = [
     ../shell/headless
-    ../shell/i3
+    ../shell/awesome
   ];
 }
