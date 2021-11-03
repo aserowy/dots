@@ -10,7 +10,6 @@
     ./grimshot.nix
     ./gtk.nix
     ./onedrive.nix
-    ./sway.nix
     ./teams.nix
     ./vscode.nix
   ];
