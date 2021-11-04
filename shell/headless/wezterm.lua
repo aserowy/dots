@@ -102,6 +102,7 @@ local M = {
 		{ family = "FiraCode Nerd Font Mono", weight = "Light", stretch = "Normal", italic = false },
 	}),
 
+    font_size = 11.0;
 	line_height = 1.2,
 
 	-- key mappings
