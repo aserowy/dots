@@ -49,20 +49,20 @@
   };
   vscode-extensions-remote-containers = {
     pname = "vscode-extensions-remote-containers";
-    version = "0.205.0";
+    version = "0.205.1";
     src = fetchurl {
-      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.205.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      sha256 = "18mr7sy2dkf795i19ycvcpm4agrwfq42zrbi5kvj0lrmkfiw0ni6";
+      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.205.1/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      sha256 = "1sciyp24p75k1h1hxr43pjnj9hh5ldxv9a2fbc45y7l0vrxk48lg";
     };
     name = "remote-containers";
     publisher = "ms-vscode-remote";
   };
   vscode-extensions-remote-wsl = {
     pname = "vscode-extensions-remote-wsl";
-    version = "0.58.4";
+    version = "0.58.5";
     src = fetchurl {
-      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-wsl/0.58.4/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      sha256 = "0kcdg54qfyxws3syh2ylphym087fhj1lfngkbi17hq76380kbj66";
+      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-wsl/0.58.5/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      sha256 = "1ciqa7k3j6s08747rcmjpr6y6llxczkgvifwmmz1khxrgbdp6df9";
     };
     name = "remote-wsl";
     publisher = "ms-vscode-remote";
@@ -99,10 +99,10 @@
   };
   widevine-cdm = {
     pname = "widevine-cdm";
-    version = "4.10.2209.1";
+    version = "4.10.2391.0";
     src = fetchurl {
-      url = "https://dl.google.com/widevine-cdm/4.10.2209.1-linux-x64.zip";
-      sha256 = "1mnbxkazjyl3xgvpna9p9qiiyf08j4prdxry51wk8jj5ns6c2zcc";
+      url = "https://dl.google.com/widevine-cdm/4.10.2391.0-linux-x64.zip";
+      sha256 = "1ni18sfdbh9scfz3axwm47xfvgqx202svf6psgn6zvmsq39zq0gf";
     };
   };
 }
