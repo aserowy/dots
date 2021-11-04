@@ -27,6 +27,18 @@
       sha256 = "0pqi27kpykd952c0kp90w6k8fkrfaasr3sd14lyisk7vaxx3wa1r";
     };
   };
+  picom = {
+    pname = "picom";
+    version = "fade045eadf171d2c732820d6ebde7d1943a1397";
+    src = fetchgit {
+      url = "https://github.com/yshui/picom";
+      rev = "fade045eadf171d2c732820d6ebde7d1943a1397";
+      fetchSubmodules = false;
+      deepClone = false;
+      leaveDotGit = false;
+      sha256 = "0xdwda3k2fgz65633ynshbcrs5p6c8zslk8m1dahw1zymmkqpy3w";
+    };
+  };
   vscode-extensions-keyboard-quickfix = {
     pname = "vscode-extensions-keyboard-quickfix";
     version = "0.0.6";
