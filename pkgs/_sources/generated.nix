@@ -29,14 +29,14 @@
   };
   picom = {
     pname = "picom";
-    version = "fade045eadf171d2c732820d6ebde7d1943a1397";
+    version = "c4107bb6cc17773fdc6c48bb2e475ef957513c7a";
     src = fetchgit {
-      url = "https://github.com/yshui/picom";
-      rev = "fade045eadf171d2c732820d6ebde7d1943a1397";
+      url = "https://github.com/ibhagwan/picom";
+      rev = "c4107bb6cc17773fdc6c48bb2e475ef957513c7a";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
-      sha256 = "0xdwda3k2fgz65633ynshbcrs5p6c8zslk8m1dahw1zymmkqpy3w";
+      sha256 = "035fbvb678zvpm072bzzpk8h63npmg5shkrzv4gfj89qd824a5fn";
     };
   };
   vscode-extensions-keyboard-quickfix = {

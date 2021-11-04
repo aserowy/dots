@@ -9,8 +9,8 @@ src.regex = "microsoft-edge-beta_(.*)-1_amd64\\.deb\">microsoft-edge-beta_"
 fetch.url = "https://packages.microsoft.com/repos/edge/pool/main/m/microsoft-edge-beta/microsoft-edge-beta_$ver-1_amd64.deb"
 
 [picom]
-src.git = "https://github.com/yshui/picom"
-fetch.github = "yshui/picom"
+src.git = "https://github.com/ibhagwan/picom"
+fetch.github = "ibhagwan/picom"
 
 [vscode-extensions-keyboard-quickfix]
 src.vsmarketplace = "pascalsenn.keyboard-quickfix"
