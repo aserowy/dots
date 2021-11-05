@@ -2,6 +2,7 @@
 {
   home.packages = with pkgs; [
     ardour
+    gnome.gnome-screenshot
     gparted
     remmina
     teams

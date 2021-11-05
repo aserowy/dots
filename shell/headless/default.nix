@@ -6,6 +6,7 @@
     curl
     ncurses
     psmisc
+    thefuck
 
     unixtools.watch
   ];
