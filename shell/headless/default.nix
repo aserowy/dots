@@ -5,6 +5,7 @@
     bottom
     curl
     ncurses
+    psmisc
 
     unixtools.watch
   ];
