@@ -39,6 +39,30 @@
       sha256 = "035fbvb678zvpm072bzzpk8h63npmg5shkrzv4gfj89qd824a5fn";
     };
   };
+  spicetify-cli = {
+    pname = "spicetify-cli";
+    version = "v2.7.2";
+    src = fetchgit {
+      url = "https://github.com/khanhas/spicetify-cli";
+      rev = "v2.7.2";
+      fetchSubmodules = false;
+      deepClone = false;
+      leaveDotGit = false;
+      sha256 = "1231fwnkycjcmypg2ygmsbg0wnwhnk3dinbsff8sg79rldn31dnr";
+    };
+  };
+  spicetify-themes = {
+    pname = "spicetify-themes";
+    version = "5046217e28084f7eaf69543f1f7c1b7c276496cc";
+    src = fetchgit {
+      url = "https://github.com/morpheusthewhite/spicetify-themes";
+      rev = "5046217e28084f7eaf69543f1f7c1b7c276496cc";
+      fetchSubmodules = false;
+      deepClone = false;
+      leaveDotGit = false;
+      sha256 = "13c8zy9skmr594jd4wxg5drgn627w70m6s6j4xifvbp08q28h8kn";
+    };
+  };
   vscode-extensions-keyboard-quickfix = {
     pname = "vscode-extensions-keyboard-quickfix";
     version = "0.0.6";

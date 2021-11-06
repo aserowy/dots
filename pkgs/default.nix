@@ -45,6 +45,23 @@ in
     });
   };
 
+  picom = prev.picom.overrideAttrs (oldAttrs: rec {
+    inherit (final.sources.picom) pname version src;
+  });
+
+  spicetify-cli = with prev; spicetify-cli.overrideAttrs (_: {
+    inherit (fetches.spicetify-cli) pname version src;
+    postInstall = ''
+      cp -r ./jsHelper ./Themes ./Extensions ./CustomApps ./globals.d.ts ./css-map.json $out/bin
+    '';
+  });
+
+  spicetify-themes = final.callPackage ./spicetify-themes { 
+    sources = fetches;
+  };
+
+  spotify-spicetified = final.callPackage ./spotify-spicetified { };
+
   vscode-extensions = (packageSets "vscode-extensions");
 
   widevine-cdm = final.callPackage ./widevine-cdm {
