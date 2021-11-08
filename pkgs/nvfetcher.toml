@@ -17,8 +17,8 @@ src.github = "khanhas/spicetify-cli"
 fetch.github = "khanhas/spicetify-cli"
 
 [spicetify-themes]
-src.git = "https://github.com/morpheusthewhite/spicetify-themes"
-fetch.github = "morpheusthewhite/spicetify-themes"
+src.git = "https://github.com/aserowy/spicetify-themes"
+fetch.github = "aserowy/spicetify-themes"
 
 [vscode-extensions-keyboard-quickfix]
 src.vsmarketplace = "pascalsenn.keyboard-quickfix"

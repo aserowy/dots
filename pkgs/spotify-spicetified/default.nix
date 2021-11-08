@@ -66,7 +66,7 @@ spotify-unwrapped.overrideAttrs (o: {
     mkdir -p Themes Extensions CustomApps
 
     find ${spicetify-themes}/ -maxdepth 1 -type d -exec ln -s {} Themes \;
-
+    
     ${spicetifyLnCommands}
 
     cat <<EOT >> "$SPICETIFY_CONFIG/$(spicetify-cli -c)"
