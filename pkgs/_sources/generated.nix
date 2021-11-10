@@ -41,26 +41,26 @@
   };
   spicetify-cli = {
     pname = "spicetify-cli";
-    version = "v2.7.2";
+    version = "v2.7.3";
     src = fetchgit {
       url = "https://github.com/khanhas/spicetify-cli";
-      rev = "v2.7.2";
+      rev = "v2.7.3";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
-      sha256 = "1231fwnkycjcmypg2ygmsbg0wnwhnk3dinbsff8sg79rldn31dnr";
+      sha256 = "112b25xdxds5h37askzj13n3nw45v3qii3g8bm1nm1akd9kc3pdb";
     };
   };
   spicetify-themes = {
     pname = "spicetify-themes";
-    version = "5046217e28084f7eaf69543f1f7c1b7c276496cc";
+    version = "708fd36a1e62f9a4aa233c97db3847ce7528a506";
     src = fetchgit {
       url = "https://github.com/morpheusthewhite/spicetify-themes";
-      rev = "5046217e28084f7eaf69543f1f7c1b7c276496cc";
+      rev = "708fd36a1e62f9a4aa233c97db3847ce7528a506";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
-      sha256 = "13c8zy9skmr594jd4wxg5drgn627w70m6s6j4xifvbp08q28h8kn";
+      sha256 = "02lw3zgsm2dcmm91ah587mbzpipq188m5kjdx23z00jda7a9qvvm";
     };
   };
   vscode-extensions-keyboard-quickfix = {
@@ -85,10 +85,10 @@
   };
   vscode-extensions-remote-containers = {
     pname = "vscode-extensions-remote-containers";
-    version = "0.205.1";
+    version = "0.205.2";
     src = fetchurl {
-      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.205.1/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      sha256 = "1sciyp24p75k1h1hxr43pjnj9hh5ldxv9a2fbc45y7l0vrxk48lg";
+      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.205.2/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      sha256 = "049l6xm328ij6jzinrznrnnd9fij4rliq9lv5833jh4a5yzv8i69";
     };
     name = "remote-containers";
     publisher = "ms-vscode-remote";
