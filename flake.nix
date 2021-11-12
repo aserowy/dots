@@ -25,17 +25,6 @@
       devShell.x86_64-linux = import ./.dev { pkgs = packages.legacyPackages.x86_64-linux; };
 
       homeConfigurations = {
-        "serowy@DESKTOP-2F0CTGF" = home-manager.lib.homeManagerConfiguration {
-          configuration = { config, pkgs, ... }: {
-            imports = [
-              ./environments/wsl.nix
-            ];
-          };
-          homeDirectory = "/home/serowy";
-          stateVersion = "21.05";
-          system = "x86_64-linux";
-          username = "serowy";
-        };
         "serowy@DESKTOP-UVAKAQL" = home-manager.lib.homeManagerConfiguration {
           configuration = { config, pkgs, ... }: {
             imports = [
