@@ -68,7 +68,7 @@
       VISUAL = "nvim";
     };
     shellAliases = {
-      fu = "fuck"
+      fu = "fuck";
 
       hms = "home-manager switch --flake ~/src/dots/";
       ncu = "nix-channel --update";
