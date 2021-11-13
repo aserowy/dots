@@ -1,5 +1,9 @@
 { config, pkgs, lib, ... }:
 {
+  home.packages = with pkgs; [
+    thefuck
+  ];
+
   programs.zsh = {
     enable = true;
     enableAutosuggestions = true;
@@ -13,6 +17,8 @@
         export fpath=(~/.nix-profile/share/zsh/vendor-completions ''${fpath})
         export NIX_PATH="$HOME/.nix-defexpr/channels:$NIX_PATH"
       fi
+
+      eval $(thefuck --alias)
     '';
     history = {
       ignoreDups = true;
@@ -62,6 +68,8 @@
       VISUAL = "nvim";
     };
     shellAliases = {
+      fu = "fuck"
+
       hms = "home-manager switch --flake ~/src/dots/";
       ncu = "nix-channel --update";
       negc = "nix-collect-garbage --delete-older-than 30d";
