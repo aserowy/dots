@@ -149,6 +149,7 @@ local M = {
 }
 
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
+	M.default_prog = { "powershell.exe" }
 	M.leader = { mods = "CTRL|ALT", key = "t" }
 else
 	M.leader = { mods = "CTRL", key = "t" }
