@@ -90,6 +90,7 @@ local M = {
 		},
 	},
 
+	hide_tab_bar_if_only_one_tab = true,
     tab_bar_at_bottom = true,
 
 	inactive_pane_hsb = {
@@ -148,10 +149,8 @@ local M = {
 }
 
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
-	M.default_prog = { "wsl.exe" }
 	M.leader = { mods = "CTRL|ALT", key = "t" }
 else
-	M.hide_tab_bar_if_only_one_tab = true
 	M.leader = { mods = "CTRL", key = "t" }
 end
 
