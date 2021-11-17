@@ -13,6 +13,6 @@ mkShell rec {
     alias fmt="prettier --write README.md && nixpkgs-fmt ."
 
     # update wezterm config
-    alias wu="cp ./shell/headless/wezterm.lua /mnt/c/Users/serowy/.wezterm.lua"
+    alias uw="cp ./shell/headless/wezterm.lua /mnt/c/Users/serowy/.wezterm.lua && cp ./shell/headless/alacritty.yml /mnt/c/Users/serowy/AppData/Roaming/alacritty/alacritty.yml"
   '';
 }
