@@ -21,10 +21,10 @@
   };
   microsoft-edge-beta = {
     pname = "microsoft-edge-beta";
-    version = "96.0.1054.24";
+    version = "96.0.1054.26";
     src = fetchurl {
-      url = "https://packages.microsoft.com/repos/edge/pool/main/m/microsoft-edge-beta/microsoft-edge-beta_96.0.1054.24-1_amd64.deb";
-      sha256 = "1r86w0m1098xpyw2pn3v468xib4pmjk6445infkrf70w9wqjq7ys";
+      url = "https://packages.microsoft.com/repos/edge/pool/main/m/microsoft-edge-beta/microsoft-edge-beta_96.0.1054.26-1_amd64.deb";
+      sha256 = "1yciqng728a60bjfkcj3wi7sndpp0a1a742n3c0yxw5yf3gy0zcg";
     };
   };
   picom = {
@@ -53,14 +53,14 @@
   };
   spicetify-themes = {
     pname = "spicetify-themes";
-    version = "5c0a523e54b35333ed8d10ac94dd5a97a5a26908";
+    version = "82ea57a5e4388535e98d3a97edf4e28053983b20";
     src = fetchgit {
       url = "https://github.com/morpheusthewhite/spicetify-themes";
-      rev = "5c0a523e54b35333ed8d10ac94dd5a97a5a26908";
+      rev = "82ea57a5e4388535e98d3a97edf4e28053983b20";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
-      sha256 = "0z86gnq5zxzk3a2anljvzq75hm8gc6x349arx1ia52yxjqsrqkmn";
+      sha256 = "0xpznvgjy7gcc09v67rw7x92mvd64vgp5k1rqsg6s5kai48gfw64";
     };
   };
   vscode-extensions-keyboard-quickfix = {
