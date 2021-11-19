@@ -34,4 +34,6 @@ font:
   normal:
     family: 'FiraCode Nerd Font Mono'
     style: Light
+  offset:
+    y: 2
   size: 12
