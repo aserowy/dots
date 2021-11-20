@@ -50,11 +50,6 @@ local M = {
 			remote_address = "localhost:2222",
 			username = "serowy",
 		},
-		{
-			name = "desktop-nixos",
-			remote_address = "192.168.178.53:2022",
-			username = "serowy",
-		},
 	},
 
 	-- theming
@@ -91,7 +86,7 @@ local M = {
 	},
 
 	hide_tab_bar_if_only_one_tab = true,
-    tab_bar_at_bottom = true,
+	tab_bar_at_bottom = true,
 
 	inactive_pane_hsb = {
 		saturation = 0.7,
@@ -103,10 +98,12 @@ local M = {
 		{ family = "FiraCode Nerd Font Mono", weight = "Light", stretch = "Normal", italic = false },
 	}),
 
-    font_size = 12.0;
+	font_size = 12.0,
 
 	-- key mappings
 	disable_default_key_bindings = true,
+
+	leader = { mods = "CTRL|ALT", key = "t" },
 
 	keys = {
 		{ mods = "LEADER|CTRL", key = "a", action = "ShowLauncher" },
@@ -150,9 +147,6 @@ local M = {
 
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 	M.default_prog = { "pwsh.exe" }
-	M.leader = { mods = "CTRL|ALT", key = "t" }
-else
-	M.leader = { mods = "CTRL", key = "t" }
 end
 
 return M
