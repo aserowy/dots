@@ -395,6 +395,7 @@
       ## custom settings (not neocode related)
 
       "workbench.colorTheme" = "One Dark Pro";
+      "editor.guides.bracketPairs" = true;
 
       # font
       "editor.codeLensFontSize" = 10;
