@@ -1,6 +1,7 @@
 { config, pkgs, lib, ... }:
 {
   home.packages = with pkgs; [
+    exa
     thefuck
   ];
 
@@ -69,6 +70,7 @@
     };
     shellAliases = {
       fu = "fuck";
+      ls = "exa";
 
       hms = "home-manager switch --flake ~/src/dots/";
       ncu = "nix-channel --update";
