@@ -2,10 +2,12 @@
 {
   home.packages = with pkgs; [
     acpi
+    bat
     bottom
     curl
     ncurses
     psmisc
+    tokei
 
     unixtools.watch
   ];
