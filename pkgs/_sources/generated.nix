@@ -53,14 +53,14 @@
   };
   spicetify-themes = {
     pname = "spicetify-themes";
-    version = "8d45864cd9e4c8eb2181bbfb96587a83d4b2c2f4";
+    version = "0bbdb305f9a6fb1d983c45223c8296b75aa250ad";
     src = fetchgit {
       url = "https://github.com/morpheusthewhite/spicetify-themes";
-      rev = "8d45864cd9e4c8eb2181bbfb96587a83d4b2c2f4";
+      rev = "0bbdb305f9a6fb1d983c45223c8296b75aa250ad";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
-      sha256 = "0q9dm8d7i2hpj94kykf50px7632yrf5v9slwc5xxpb78zwqcrnrn";
+      sha256 = "09lli5zj5zihp9k3zlblgiy75nks71cvpkr6nx9p1mygdm0nxikz";
     };
   };
   vscode-extensions-keyboard-quickfix = {
@@ -115,10 +115,10 @@
   };
   vscode-extensions-vscode-icons = {
     pname = "vscode-extensions-vscode-icons";
-    version = "11.7.0";
+    version = "11.8.0";
     src = fetchurl {
-      url = "https://vscode-icons-team.gallery.vsassets.io/_apis/public/gallery/publisher/vscode-icons-team/extension/vscode-icons/11.7.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      sha256 = "06a0br8szsf3i72hhq233p08b5zp7wdb8nn29h1gblhgzmv1p830";
+      url = "https://vscode-icons-team.gallery.vsassets.io/_apis/public/gallery/publisher/vscode-icons-team/extension/vscode-icons/11.8.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      sha256 = "147d5cba3jdfgjp22a5vvvp83z79mmmkd36hgplv7cgklfmnbdis";
     };
     name = "vscode-icons";
     publisher = "vscode-icons-team";
