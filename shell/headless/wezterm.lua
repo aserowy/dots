@@ -93,6 +93,13 @@ local M = {
 		brightness = 0.6,
 	},
 
+	window_padding = {
+		left = 0,
+		right = 0,
+		top = 0,
+		bottom = 0,
+	},
+
 	-- font
 	font = wezterm.font_with_fallback({
 		{ family = "FiraCode Nerd Font Mono", weight = "Light", stretch = "Normal", italic = false },
@@ -130,11 +137,6 @@ local M = {
 		{ mods = "LEADER", key = "l", action = wezterm.action({ ActivatePaneDirection = "Right" }) },
 		{ mods = "LEADER", key = "k", action = wezterm.action({ ActivatePaneDirection = "Up" }) },
 		{ mods = "LEADER", key = "j", action = wezterm.action({ ActivatePaneDirection = "Down" }) },
-
-		--[[ { mods = "CTRL|ALT", key = "h", action = wezterm.action({ AdjustPaneSize = { "Left", 1 } }) },
-		{ mods = "CTRL|ALT", key = "l", action = wezterm.action({ AdjustPaneSize = { "Right", 1 } }) },
-		{ mods = "CTRL|ALT", key = "k", action = wezterm.action({ AdjustPaneSize = { "Up", 1 } }) },
-		{ mods = "CTRL|ALT", key = "j", action = wezterm.action({ AdjustPaneSize = { "Down", 1 } }) }, ]]
 
 		{ mods = "LEADER", key = "z", action = "TogglePaneZoomState" },
 
