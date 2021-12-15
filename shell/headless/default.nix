@@ -17,6 +17,7 @@
     ./docker.nix
     ./git.nix
     ./lf.nix
+    ./mcfly.nix
     ./ncspot.nix
     ./neovim.nix
     ./pandoc.nix
