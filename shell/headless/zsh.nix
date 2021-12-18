@@ -38,8 +38,6 @@
       }
 
       eval $(thefuck --alias)
-
-      eval bindkey "^r" mcfly-history-widget
     '';
     oh-my-zsh = {
       enable = true;

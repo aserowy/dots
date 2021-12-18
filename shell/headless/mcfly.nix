@@ -5,4 +5,10 @@
     enableZshIntegration = true;
     keyScheme = "vim";
   };
+
+  programs.zsh = {
+    initExtra = ''
+      eval bindkey "^r" mcfly-history-widget
+    '';
+  };
 }
