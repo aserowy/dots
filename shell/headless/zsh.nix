@@ -18,8 +18,6 @@
         export fpath=(~/.nix-profile/share/zsh/vendor-completions ''${fpath})
         export NIX_PATH="$HOME/.nix-defexpr/channels:$NIX_PATH"
       fi
-
-      eval $(thefuck --alias)
     '';
     history = {
       ignoreDups = true;
@@ -38,6 +36,10 @@
               mstsc.exe /v:"$param" &
           fi
       }
+
+      eval $(thefuck --alias)
+
+      eval bindkey "^r" mcfly-history-widget
     '';
     oh-my-zsh = {
       enable = true;
@@ -51,7 +53,6 @@
           repo = "zsh-vi-mode";
           rev = "v0.8.4";
           sha256 = "0a1rvc03rl66v8rgzvxpq0vw55hxn5b9dkmhdqghvi2f4dvi8fzx";
-          # sha256 = lib.fakeSha256;
         };
       }
       {
