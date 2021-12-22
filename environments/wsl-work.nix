@@ -16,6 +16,7 @@
       identityFile = " ~/.ssh/devops_also_rsa";
       extraOptions = {
         HostKeyAlgorithms = "+ssh-rsa";
+        PubkeyAcceptedKeyTypes = "ssh-rsa";
       };
     };
     "vs-ssh.visualstudio.com" = {
@@ -25,6 +26,7 @@
       identityFile = " ~/.ssh/devops_also_rsa";
       extraOptions = {
         HostKeyAlgorithms = "+ssh-rsa";
+        PubkeyAcceptedKeyTypes = "ssh-rsa";
       };
     };
   };
