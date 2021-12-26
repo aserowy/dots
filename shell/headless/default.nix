@@ -26,6 +26,7 @@
     ./tmux.nix
     ./vscode-server.nix
     ./wezterm.nix
+    ./zoxide.nix
     ./zsh.nix
   ];
 }
