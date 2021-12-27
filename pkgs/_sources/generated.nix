@@ -53,14 +53,14 @@
   };
   spicetify-themes = {
     pname = "spicetify-themes";
-    version = "0187e60799c74770b3ef0919f7cfa733156406a3";
+    version = "1d9ef3902aa79659ce0a6884d0f1249f07174918";
     src = fetchgit {
       url = "https://github.com/morpheusthewhite/spicetify-themes";
-      rev = "0187e60799c74770b3ef0919f7cfa733156406a3";
+      rev = "1d9ef3902aa79659ce0a6884d0f1249f07174918";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
-      sha256 = "0i7mh9ql75dxkn1ffknd8kkdq13bnl0icwpr5pswf76phgpcgydh";
+      sha256 = "0bhixyln8fzgfw2n681pxlavkn83hhpsz4m8pcyxxf0lbvdyfc1g";
     };
   };
   vscode-extensions-keyboard-quickfix = {
@@ -75,10 +75,10 @@
   };
   vscode-extensions-material-theme = {
     pname = "vscode-extensions-material-theme";
-    version = "3.13.7";
+    version = "3.13.8";
     src = fetchurl {
-      url = "https://zhuangtongfa.gallery.vsassets.io/_apis/public/gallery/publisher/zhuangtongfa/extension/material-theme/3.13.7/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      sha256 = "0ijqlascyglxzvmwdp10zrgsfnz46igijyxddl8sy6zfkzxx5f0j";
+      url = "https://zhuangtongfa.gallery.vsassets.io/_apis/public/gallery/publisher/zhuangtongfa/extension/material-theme/3.13.8/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      sha256 = "0ngx1i0xhxnr9vdmx077vxzrn287hzfjnjg7k2kqiq5yz325q08g";
     };
     name = "material-theme";
     publisher = "zhuangtongfa";
