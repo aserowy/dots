@@ -3,7 +3,7 @@ name: "auto_update_pkgs"
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 22 * * *"
+    - cron: "0 19 * * *"
 
 jobs:
   update_pkgs:
