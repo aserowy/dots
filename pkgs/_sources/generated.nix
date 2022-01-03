@@ -53,14 +53,14 @@
   };
   spicetify-themes = {
     pname = "spicetify-themes";
-    version = "1d9ef3902aa79659ce0a6884d0f1249f07174918";
+    version = "de39c9fad631f830aa912325e3c1afb1d5cb9f73";
     src = fetchgit {
       url = "https://github.com/morpheusthewhite/spicetify-themes";
-      rev = "1d9ef3902aa79659ce0a6884d0f1249f07174918";
+      rev = "de39c9fad631f830aa912325e3c1afb1d5cb9f73";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
-      sha256 = "0bhixyln8fzgfw2n681pxlavkn83hhpsz4m8pcyxxf0lbvdyfc1g";
+      sha256 = "0k8vz3wxf5yx5bq8hdscjywblbdlbli2ddifqrs6v3200rayd5jf";
     };
   };
   vscode-extensions-keyboard-quickfix = {
