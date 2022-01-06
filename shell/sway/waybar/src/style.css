@@ -1,0 +1,131 @@
+* {
+  border: none;
+  font-family: FiraCode Nerd Font Mono;
+  font-size: 100%;
+  font-weight: 500;
+}
+
+window#waybar {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+window > box {
+  background-color: #23272e;
+  border: 0;
+  color: #abb2bf;
+}
+
+.modules-left {
+}
+
+.modules-center {
+}
+
+.modules-right {
+  padding-bottom: 20px;
+}
+
+#custom-grimshot {
+  font-size: 1.5em;
+  color: #abb2bf;
+}
+
+#custom-launch {
+  padding-top: 10px;
+  font-size: 2.25em;
+  color: #abb2bf;
+}
+
+#custom-power {
+  padding-top: 10px;
+  font-size: 2.25em;
+  color: #fff;
+}
+
+#custom-recorder {
+  font-size: 1.5em;
+  color: #abb2bf;
+}
+#custom-recorder.recording {
+  color: #e06c75;
+}
+
+#custom-spotify-metadata {
+  padding-top: 10px;
+  font-size: 2.25em;
+  color: #abb2bf;
+}
+#custom-spotify-metadata.playing {
+  color: #61afef;
+}
+#custom-spotify-play-pause,
+#custom-spotify-prev,
+#custom-spotify-next {
+  color: #abb2bf;
+  font-size: 1.125em;
+}
+
+#workspaces button {
+  border-radius: 0;
+  /* Use box-shadow instead of border so the text isn't offset */
+  box-shadow: inset 0 -3px transparent;
+  color: #abb2bf;
+  font-size: 1.5em;
+}
+
+#workspaces button:hover {
+  background: transparent;
+  color: #fff;
+}
+
+#workspaces button.focused {
+  box-shadow: inset 3px 0 #61afef;
+  color: #61afef;
+}
+
+#workspaces button.urgent {
+  color: #e06c75;
+}
+
+#pulseaudio {
+  color: #abb2bf;
+  font-size: 1.5em;
+}
+
+#pulseaudio.muted {
+  color: #e06c75;
+}
+
+#network {
+  color: #abb2bf;
+  font-size: 1.5em;
+  padding-bottom: 20px;
+}
+
+#battery {
+  color: #abb2bf;
+  font-size: 1.5em;
+}
+
+@keyframes blink {
+  to {
+    color: #abb2bf;
+  }
+}
+
+#battery.critical:not(.charging) {
+  color: #e06c75;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#battery.charging {
+  color: #abb2bf;
+}
+
+#clock {
+  color: #fff;
+}
