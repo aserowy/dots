@@ -2,7 +2,7 @@
 {
   home.file.".config/nvim/" = {
     recursive = true;
-    source = ./neovim;
+    source = pkgs.sources.neocode.src;
   };
 
   home.packages = with pkgs; [

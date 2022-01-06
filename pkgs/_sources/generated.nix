@@ -27,6 +27,18 @@
       sha256 = "0xcasmg17dyhpw97jd203q9cffsm8l4gf646c3zsla71yv6r6xaj";
     };
   };
+  neocode = {
+    pname = "neocode";
+    version = "09b5ce5f88cfd665844fbc470be5e6fcd90c2fd2";
+    src = fetchgit {
+      url = "https://github.com/aserowy/neocode";
+      rev = "09b5ce5f88cfd665844fbc470be5e6fcd90c2fd2";
+      fetchSubmodules = false;
+      deepClone = false;
+      leaveDotGit = false;
+      sha256 = "1xhsy58nqszn29min1dymi5m9xqbyvliy5kw79nz3rxxxqszph9p";
+    };
+  };
   picom = {
     pname = "picom";
     version = "c4107bb6cc17773fdc6c48bb2e475ef957513c7a";
