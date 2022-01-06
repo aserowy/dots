@@ -78,7 +78,7 @@
     autoUpgrade = {
       enable = true;
       allowReboot = true;
-      flake = "github:aserowy/nixos";
+      flake = "github:aserowy/dots";
       flags = [
         "--recreate-lock-file"
         "--no-write-lock-file"
