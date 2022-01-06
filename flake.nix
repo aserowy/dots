@@ -4,23 +4,16 @@
   inputs = {
     fenix.url = "github:nix-community/fenix";
     hardware.url = "github:NixOS/nixos-hardware/master";
-
-    home = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
+    home.url = "github:nix-community/home-manager";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nur.url = "github:nix-community/NUR";
   };
 
-  outputs = { fenix, hardware, home, nixpkgs, nur, ... }:
+  outputs = { fenix, hardware, home, nixpkgs, ... }:
     let
       packages = with nixpkgs; {
         inherit legacyPackages;
 
         overlays = [
-          nur.overlay
           (import ./pkgs)
         ];
       };
@@ -31,17 +24,14 @@
         homeConfigurations = {
           "serowy@DESKTOP-UVAKAQL" = home.lib.homeManagerConfiguration {
             configuration = { config, pkgs, ... }: {
+              nixpkgs.overlays = [
+                (import ./pkgs)
+              ];
               imports = [
                 ./home/environments/wsl-work.nix
               ];
             };
             homeDirectory = "/home/serowy";
-            pkgs = import nixpkgs {
-              overlays = [
-                (import ./pkgs)
-              ];
-              system = "x86_64-linux";
-            };
             stateVersion = "21.05";
             system = "x86_64-linux";
             username = "serowy";
