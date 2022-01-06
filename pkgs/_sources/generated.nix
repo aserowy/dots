@@ -29,14 +29,14 @@
   };
   neocode = {
     pname = "neocode";
-    version = "09b5ce5f88cfd665844fbc470be5e6fcd90c2fd2";
+    version = "65f57655dd7122fef8e960b5b5d3125582aad494";
     src = fetchgit {
       url = "https://github.com/aserowy/neocode";
-      rev = "09b5ce5f88cfd665844fbc470be5e6fcd90c2fd2";
+      rev = "65f57655dd7122fef8e960b5b5d3125582aad494";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
-      sha256 = "1xhsy58nqszn29min1dymi5m9xqbyvliy5kw79nz3rxxxqszph9p";
+      sha256 = "1mr9vy6i9zll3izvpmyjh2wlzq2zmcmcj1c8x3ihjsahw54lhfsw";
     };
   };
   picom = {
@@ -123,10 +123,10 @@
   };
   vscode-extensions-material-theme = {
     pname = "vscode-extensions-material-theme";
-    version = "3.13.9";
+    version = "3.13.10";
     src = fetchurl {
-      url = "https://zhuangtongfa.gallery.vsassets.io/_apis/public/gallery/publisher/zhuangtongfa/extension/material-theme/3.13.9/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      sha256 = "0k12hb9vsgrvwpfyrc7qx51yrapdw8b0l1pafdzb84przzb8vlbg";
+      url = "https://zhuangtongfa.gallery.vsassets.io/_apis/public/gallery/publisher/zhuangtongfa/extension/material-theme/3.13.10/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      sha256 = "1hjiv8dmrj5pj67fzvclx5z0zp9nr4pg44lfz43wliq3n8rzsgfy";
     };
     name = "material-theme";
     publisher = "zhuangtongfa";
