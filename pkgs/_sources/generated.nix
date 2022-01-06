@@ -75,6 +75,42 @@
       sha256 = "0k8vz3wxf5yx5bq8hdscjywblbdlbli2ddifqrs6v3200rayd5jf";
     };
   };
+  tmux-continuum = {
+    pname = "tmux-continuum";
+    version = "912149820bf48a3a128732854815009352dd2598";
+    src = fetchgit {
+      url = "https://github.com/tmux-plugins/tmux-continuum";
+      rev = "912149820bf48a3a128732854815009352dd2598";
+      fetchSubmodules = false;
+      deepClone = false;
+      leaveDotGit = false;
+      sha256 = "178wzmj75mpylqdfrdashl27r5cg523wygg1pn88kdlj6nnlmck5";
+    };
+  };
+  tmux-easy-motion = {
+    pname = "tmux-easy-motion";
+    version = "21fd252c3c916dd421b02c9e5bf3f141a9dff2d6";
+    src = fetchgit {
+      url = "https://github.com/IngoMeyer441/tmux-easy-motion";
+      rev = "21fd252c3c916dd421b02c9e5bf3f141a9dff2d6";
+      fetchSubmodules = false;
+      deepClone = false;
+      leaveDotGit = false;
+      sha256 = "0zh89abbyqhc5fkrwcabflrq3iql2nkdinw1ihh1pqvkdhzrjpz2";
+    };
+  };
+  tmux-resurrect = {
+    pname = "tmux-resurrect";
+    version = "027960ad25895701a8fbc0a1eb4a8cb477452d20";
+    src = fetchgit {
+      url = "https://github.com/tmux-plugins/tmux-resurrect";
+      rev = "027960ad25895701a8fbc0a1eb4a8cb477452d20";
+      fetchSubmodules = false;
+      deepClone = false;
+      leaveDotGit = false;
+      sha256 = "07sc0a7l3f2j01ynrm2sxsn6pz05im1bfzmff29sh1qqrrp1w2zb";
+    };
+  };
   vscode-extensions-keyboard-quickfix = {
     pname = "vscode-extensions-keyboard-quickfix";
     version = "0.0.6";

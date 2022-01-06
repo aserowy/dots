@@ -24,6 +24,18 @@ fetch.github = "khanhas/spicetify-cli"
 src.git = "https://github.com/morpheusthewhite/spicetify-themes"
 fetch.github = "morpheusthewhite/spicetify-themes"
 
+[tmux-continuum]
+src.git = "https://github.com/tmux-plugins/tmux-continuum"
+fetch.github = "tmux-plugins/tmux-continuum"
+
+[tmux-resurrect]
+src.git = "https://github.com/tmux-plugins/tmux-resurrect"
+fetch.github = "tmux-plugins/tmux-resurrect"
+
+[tmux-easy-motion]
+src.git = "https://github.com/IngoMeyer441/tmux-easy-motion"
+fetch.github = "IngoMeyer441/tmux-easy-motion"
+
 [vscode-extensions-keyboard-quickfix]
 src.vsmarketplace = "pascalsenn.keyboard-quickfix"
 fetch.vsmarketplace = "pascalsenn.keyboard-quickfix"
