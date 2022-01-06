@@ -1,11 +1,9 @@
 { config, pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
-    lf
-    wezterm
+    jq
+    rofi
   ];
 
-  imports = [
-    ../shared/clamav.nix
-  ];
+  environment.etc.rofi.source = ./src;
 }

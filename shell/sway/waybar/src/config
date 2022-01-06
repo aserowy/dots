@@ -1,0 +1,143 @@
+{
+    "position": "left",
+
+    "modules-left": [
+        "custom/power",
+        "custom/launch",
+        "custom/spotify-monitor",
+        "custom/spotify-metadata",
+        "custom/spotify-prev",
+        "custom/spotify-play-pause",
+        "custom/spotify-next",
+    ],
+    "modules-center": ["sway/workspaces"],
+    "modules-right": [
+        "custom/grimshot",
+        "custom/recorder",
+        "backlight",
+        "pulseaudio",
+        "battery",
+        "network",
+        "clock#hour",
+        "clock#mins",
+    ],
+
+    "battery": {
+        "interval": 60,
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon}",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "clock#hour": {
+        "interval": 1,
+        "format": "{:%H}",
+    },
+    "clock#mins": {
+        "interval": 1,
+        "format": "{:%M}",
+    },
+    "custom/grimshot": {
+        "format": "",
+        "tooltip": false,
+        "on-click": "grimshot --notify save output - | swappy -f -",
+        "on-click-middle": "grimshot --notify save window - | swappy -f -",
+        "on-click-right": "grimshot --notify save area - | swappy -f -"
+    },
+    "custom/launch": {
+        "format": "",
+        "on-click": "/etc/rofi/launch.sh drun"
+    },
+    "custom/power": {
+        "format": "",
+        "on-click": "/etc/rofi/launch.sh power"
+    },
+    "custom/recorder": {
+        "format": "",
+        "tooltip": false,
+        "interval": "once",
+        "return-type": "json",
+        "exec": "/etc/xdg/waybar/recorder/monitor.sh",
+        "on-click": "/etc/xdg/waybar/recorder/toggle.sh",
+        "signal": 8
+    },
+    "custom/spotify-monitor": {
+        "interval": 1,
+        "exec": "/etc/xdg/waybar/spotify/monitor.sh",
+        "signal": 4
+    },
+    "custom/spotify-metadata": {
+        "exec": "/etc/xdg/waybar/spotify/metadata.sh",
+        "format": "",
+        "interval": "once",
+        "on-click": "sway workspace music",
+        "return-type": "json",
+        "signal": 5
+    },
+    "custom/spotify-play-pause": {
+        "exec": "/etc/xdg/waybar/spotify/play-pause.sh",
+        "format": "{}",
+        "interval": "once",
+        "on-click": "/etc/xdg/waybar/spotify/controls.sh",
+        "return-type": "json",
+        "signal": 5
+    },
+    "custom/spotify-next": {
+        "exec": "/etc/xdg/waybar/spotify/metadata.sh",
+        "format": "怜",
+        "interval": "once",
+        "on-click": "/etc/xdg/waybar/spotify/controls.sh next",
+        "return-type": "json",
+        "signal": 5
+    },
+    "custom/spotify-prev": {
+        "exec": "/etc/xdg/waybar/spotify/metadata.sh",
+        "format": "玲",
+        "interval": "once",
+        "on-click": "/etc/xdg/waybar/spotify/controls.sh prev",
+        "return-type": "json",
+        "signal": 5
+    },
+    "sway/workspaces": {
+        "all-outputs": true,
+        "disable-scroll": true,
+        "format": "{icon}",
+        "format-icons": {
+            "default": "",
+            "focused": "",
+            "music": "",
+            "social": "",
+            "urgent": "",
+        },
+        "persistent_workspaces": {
+            "music": [],
+            "social": [],
+        },
+    },
+    "network": {
+        "format-wifi": "直",
+        "format-ethernet": "直",
+        "format-linked": "",
+        "format-disconnected": "睊",
+    },
+    "pulseaudio": {
+        "scroll-step": 5,
+        "format": "{icon}",
+        "format-bluetooth": "{icon}",
+        "format-bluetooth-muted": "婢",
+        "format-muted": "婢",
+        "format-icons": {
+            "phone": "",
+            "headphone": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol",
+        "states": {
+            "low": 0,
+            "mid": 50,
+            "high": 90
+        }
+    },
+}

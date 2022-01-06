@@ -1,11 +1,8 @@
 { config, pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
-    lf
-    wezterm
+    waybar
   ];
 
-  imports = [
-    ../shared/clamav.nix
-  ];
+  environment.etc."xdg/waybar".source = ./src;
 }
