@@ -29,14 +29,14 @@
   };
   neocode = {
     pname = "neocode";
-    version = "65f57655dd7122fef8e960b5b5d3125582aad494";
+    version = "7d1792dfb670baffe28bfaddf06b63151bdf5de6";
     src = fetchgit {
       url = "https://github.com/aserowy/neocode";
-      rev = "65f57655dd7122fef8e960b5b5d3125582aad494";
+      rev = "7d1792dfb670baffe28bfaddf06b63151bdf5de6";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
-      sha256 = "1mr9vy6i9zll3izvpmyjh2wlzq2zmcmcj1c8x3ihjsahw54lhfsw";
+      sha256 = "06wc5s7syfx8gh11snbj14vl6j3biqnj9fbk3hd3hyrhkl5gxmgn";
     };
   };
   picom = {
@@ -133,10 +133,10 @@
   };
   vscode-extensions-remote-containers = {
     pname = "vscode-extensions-remote-containers";
-    version = "0.210.0";
+    version = "0.210.1";
     src = fetchurl {
-      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.210.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      sha256 = "0s74dvgw3prrs86qb9j4i8y697mrd180qf3wnsypq8r14nqlsxs1";
+      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.210.1/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      sha256 = "1nfdg7i9hq6vqqm723hzrh7v00fw4cgcq7ml10rgidsg4yv7xby4";
     };
     name = "remote-containers";
     publisher = "ms-vscode-remote";
