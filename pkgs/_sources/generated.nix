@@ -29,14 +29,14 @@
   };
   neocode = {
     pname = "neocode";
-    version = "17af59ea906733bf403dea3a580492f88bdb8206";
+    version = "6df49959136cb3ee352c9c904cb2d7cd88329100";
     src = fetchgit {
       url = "https://github.com/aserowy/neocode";
-      rev = "17af59ea906733bf403dea3a580492f88bdb8206";
+      rev = "6df49959136cb3ee352c9c904cb2d7cd88329100";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
-      sha256 = "00k6ja8kki27ilzb9n96jw3cm240ciwf8x69iafcd42lnvms0xd0";
+      sha256 = "1q1qnp9mc9ifl6xrczhxylyrla98gcmzqqzaypj6jm0nlfrj3akw";
     };
   };
   picom = {
@@ -65,14 +65,14 @@
   };
   spicetify-themes = {
     pname = "spicetify-themes";
-    version = "c01f9260389aeacfba1c598716eeac2b64cf21ca";
+    version = "f6522b4eb26cf3fd012e35f886a9508ff6b2c19c";
     src = fetchgit {
       url = "https://github.com/morpheusthewhite/spicetify-themes";
-      rev = "c01f9260389aeacfba1c598716eeac2b64cf21ca";
+      rev = "f6522b4eb26cf3fd012e35f886a9508ff6b2c19c";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
-      sha256 = "0drpm2282lbk21qka0dmmdcwdjw1n8dhjh55qxk9zk9fzs4ayr2r";
+      sha256 = "0xbijygfffb5hvprlf2pkbgyishsp4prglbn4zx97417904b9xmq";
     };
   };
   tmux-continuum = {
