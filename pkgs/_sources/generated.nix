@@ -29,14 +29,14 @@
   };
   neocode = {
     pname = "neocode";
-    version = "6df49959136cb3ee352c9c904cb2d7cd88329100";
+    version = "7033d71041b5fe899936d07cd0d55ab9fea5be9c";
     src = fetchgit {
       url = "https://github.com/aserowy/neocode";
-      rev = "6df49959136cb3ee352c9c904cb2d7cd88329100";
+      rev = "7033d71041b5fe899936d07cd0d55ab9fea5be9c";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
-      sha256 = "1q1qnp9mc9ifl6xrczhxylyrla98gcmzqqzaypj6jm0nlfrj3akw";
+      sha256 = "1inqlvc93g5sg5bx4wxisbj8ayxxm8hc6aw3g7chv1wn5ycmfsc0";
     };
   };
   picom = {
@@ -65,14 +65,14 @@
   };
   spicetify-themes = {
     pname = "spicetify-themes";
-    version = "f6522b4eb26cf3fd012e35f886a9508ff6b2c19c";
+    version = "acaad8c633a7c20f6722e685ae2e948e331a8cb1";
     src = fetchgit {
       url = "https://github.com/morpheusthewhite/spicetify-themes";
-      rev = "f6522b4eb26cf3fd012e35f886a9508ff6b2c19c";
+      rev = "acaad8c633a7c20f6722e685ae2e948e331a8cb1";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
-      sha256 = "0xbijygfffb5hvprlf2pkbgyishsp4prglbn4zx97417904b9xmq";
+      sha256 = "0ddq4y37q4dslyi54rqs988qbpxl28jhl13m95xq9mjg08yqrpzn";
     };
   };
   tmux-continuum = {
@@ -133,10 +133,10 @@
   };
   vscode-extensions-remote-containers = {
     pname = "vscode-extensions-remote-containers";
-    version = "0.210.1";
+    version = "0.211.0";
     src = fetchurl {
-      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.210.1/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      sha256 = "1nfdg7i9hq6vqqm723hzrh7v00fw4cgcq7ml10rgidsg4yv7xby4";
+      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.211.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      sha256 = "0w3j7wfkbk6lnij4wc3khdhz28y3js058llw1q055cdysln6ayaj";
     };
     name = "remote-containers";
     publisher = "ms-vscode-remote";
