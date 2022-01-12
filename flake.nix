@@ -9,9 +9,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
+    neocode = {
+      url = "github:aserowy/neocode";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { fenix, hardware, home, nixpkgs, ... }:
+  outputs = { fenix, hardware, home, nixpkgs, neocode, ... }:
     let
       packages = with nixpkgs; {
         inherit legacyPackages;
@@ -28,6 +33,7 @@
         "serowy@DESKTOP-UVAKAQL" = home.lib.homeManagerConfiguration {
           configuration = { config, pkgs, ... }: {
             nixpkgs.overlays = [
+              (final: prev: { neocode = neocode; })
               (import ./pkgs)
             ];
             imports = [
@@ -48,6 +54,7 @@
             {
               nixpkgs.overlays = [
                 fenix.overlay
+                (final: prev: { neocode = neocode; })
                 (import ./pkgs)
               ];
             }
@@ -73,6 +80,7 @@
             {
               nixpkgs.overlays = [
                 fenix.overlay
+                (final: prev: { neocode = neocode; })
                 (import ./pkgs)
               ];
             }
@@ -98,6 +106,7 @@
             {
               nixpkgs.overlays = [
                 fenix.overlay
+                (final: prev: { neocode = neocode; })
                 (import ./pkgs)
               ];
             }

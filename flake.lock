@@ -19,13 +19,28 @@
         "type": "github"
       }
     },
+    "flake-utils": {
+      "locked": {
+        "lastModified": 1638122382,
+        "narHash": "sha256-sQzZzAbvKEqN9s0bzWuYmRaA03v40gaJ4+iL1LXjaeI=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "74f7e4319258e287b0f9cb95426c9853b282730b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "hardware": {
       "locked": {
-        "lastModified": 1641826906,
-        "narHash": "sha256-bYlz8xXXiEP/LSBzSsUesJ0fv7kj2yhbOIsbpioUHU4=",
+        "lastModified": 1641934522,
+        "narHash": "sha256-9vqROtkAnxkFk6TwnDFY9eD1M2Oiaskn5BxXTZQeQag=",
         "owner": "NixOS",
         "repo": "nixos-hardware",
-        "rev": "c9ede9e7312d63e6f2c92bdb27138369f989cdfd",
+        "rev": "d7a12fcc071bff59bd0ead589c975d802952a064",
         "type": "github"
       },
       "original": {
@@ -42,16 +57,37 @@
         ]
       },
       "locked": {
-        "lastModified": 1641915897,
-        "narHash": "sha256-C5Vw7B8BKA/kr9tWVYjEdD3AjstXFqoxkkzrOwfQZxk=",
+        "lastModified": 1641937533,
+        "narHash": "sha256-IJbR1nNV6v/ruWv9iUFi9/qa8tFLmMhbVjzvhSWCWJY=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "5209ea0d8c77399ec4987590e9738953f15f8d80",
+        "rev": "d07df8d9a80a4a34ea881bee7860ae437c5d44a5",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
         "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "neocode": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1641891430,
+        "narHash": "sha256-gGlXmS+Whw3ZeYMrwyCqvXuF5NKxc9JXebq8kdim2MY=",
+        "owner": "aserowy",
+        "repo": "neocode",
+        "rev": "7033d71041b5fe899936d07cd0d55ab9fea5be9c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "aserowy",
+        "repo": "neocode",
         "type": "github"
       }
     },
@@ -92,6 +128,7 @@
         "fenix": "fenix",
         "hardware": "hardware",
         "home": "home",
+        "neocode": "neocode",
         "nixpkgs": "nixpkgs_2"
       }
     },

@@ -1,8 +1,8 @@
-{ config, pkgs, ... }:
+{ config, pkgs, neocode, ... }:
 {
   home.file.".config/nvim/" = {
     recursive = true;
-    source = pkgs.sources.neocode.src;
+    source = pkgs.neocode;
   };
 
   home.packages = with pkgs; [

@@ -8,10 +8,6 @@ src.webpage = "https://packages.microsoft.com/repos/edge/pool/main/m/microsoft-e
 src.regex = "microsoft-edge-beta_(.*)-1_amd64\\.deb\">microsoft-edge-beta_"
 fetch.url = "https://packages.microsoft.com/repos/edge/pool/main/m/microsoft-edge-beta/microsoft-edge-beta_$ver-1_amd64.deb"
 
-[neocode]
-src.git = "https://github.com/aserowy/neocode"
-fetch.github = "aserowy/neocode"
-
 [picom]
 src.git = "https://github.com/ibhagwan/picom"
 fetch.github = "ibhagwan/picom"
