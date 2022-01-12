@@ -27,18 +27,6 @@
       sha256 = "0xcasmg17dyhpw97jd203q9cffsm8l4gf646c3zsla71yv6r6xaj";
     };
   };
-  neocode = {
-    pname = "neocode";
-    version = "7033d71041b5fe899936d07cd0d55ab9fea5be9c";
-    src = fetchgit {
-      url = "https://github.com/aserowy/neocode";
-      rev = "7033d71041b5fe899936d07cd0d55ab9fea5be9c";
-      fetchSubmodules = false;
-      deepClone = false;
-      leaveDotGit = false;
-      sha256 = "1inqlvc93g5sg5bx4wxisbj8ayxxm8hc6aw3g7chv1wn5ycmfsc0";
-    };
-  };
   picom = {
     pname = "picom";
     version = "c4107bb6cc17773fdc6c48bb2e475ef957513c7a";
@@ -143,10 +131,10 @@
   };
   vscode-extensions-remote-wsl = {
     pname = "vscode-extensions-remote-wsl";
-    version = "0.63.13";
+    version = "0.64.0";
     src = fetchurl {
-      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-wsl/0.63.13/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      sha256 = "06m5if4fmsjasj7p25whwwx4hr15ypwnwd8shpznxgb7mr869ix4";
+      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-wsl/0.64.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      sha256 = "0jkd1f2866qy6ln27g977g5m5sc04gdw7l0ch5kr6fcfvrmg30xr";
     };
     name = "remote-wsl";
     publisher = "ms-vscode-remote";
