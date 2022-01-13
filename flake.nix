@@ -18,23 +18,18 @@
 
   outputs = { fenix, hardware, home, nixpkgs, neocode, ... }:
     let
-      packages = with nixpkgs; {
-        inherit legacyPackages;
-
-        overlays = [
-          (import ./pkgs)
-        ];
-      };
+      neocode-overlay = (final: prev: { neocode = neocode; });
     in
     {
-      devShell.x86_64-linux = import ./.dev { pkgs = packages.legacyPackages.x86_64-linux; };
+      devShell.x86_64-linux = import ./.dev { pkgs = nixpkgs.legacyPackages.x86_64-linux; };
 
       homeConfigurations = {
         "serowy@DESKTOP-UVAKAQL" = home.lib.homeManagerConfiguration {
           configuration = { config, pkgs, ... }: {
             nixpkgs.overlays = [
-              (final: prev: { neocode = neocode; })
               (import ./pkgs)
+
+              neocode-overlay
             ];
             imports = [
               ./home/environments/wsl-work.nix
@@ -54,8 +49,9 @@
             {
               nixpkgs.overlays = [
                 fenix.overlay
-                (final: prev: { neocode = neocode; })
                 (import ./pkgs)
+
+                neocode-overlay
               ];
             }
 
@@ -80,8 +76,9 @@
             {
               nixpkgs.overlays = [
                 fenix.overlay
-                (final: prev: { neocode = neocode; })
                 (import ./pkgs)
+
+                neocode-overlay
               ];
             }
 
@@ -106,8 +103,9 @@
             {
               nixpkgs.overlays = [
                 fenix.overlay
-                (final: prev: { neocode = neocode; })
                 (import ./pkgs)
+
+                neocode-overlay
               ];
             }
 
