@@ -111,10 +111,10 @@
   };
   vscode-extensions-material-theme = {
     pname = "vscode-extensions-material-theme";
-    version = "3.13.10";
+    version = "3.13.11";
     src = fetchurl {
-      url = "https://zhuangtongfa.gallery.vsassets.io/_apis/public/gallery/publisher/zhuangtongfa/extension/material-theme/3.13.10/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      sha256 = "1hjiv8dmrj5pj67fzvclx5z0zp9nr4pg44lfz43wliq3n8rzsgfy";
+      url = "https://zhuangtongfa.gallery.vsassets.io/_apis/public/gallery/publisher/zhuangtongfa/extension/material-theme/3.13.11/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      sha256 = "1xxy0cmq8wm5gr0i23h7cc24vcpw2gdxi85n6f1nfgv8793gjia7";
     };
     name = "material-theme";
     publisher = "zhuangtongfa";
@@ -141,10 +141,10 @@
   };
   vscode-extensions-todo-tree = {
     pname = "vscode-extensions-todo-tree";
-    version = "0.0.214";
+    version = "0.0.215";
     src = fetchurl {
-      url = "https://gruntfuggly.gallery.vsassets.io/_apis/public/gallery/publisher/gruntfuggly/extension/todo-tree/0.0.214/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      sha256 = "0rwxjnrl44rnhx3183037k6435xs4772p58a37azl5cahsyav1hk";
+      url = "https://gruntfuggly.gallery.vsassets.io/_apis/public/gallery/publisher/gruntfuggly/extension/todo-tree/0.0.215/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      sha256 = "0lyaijsvi1gqidpn8mnnfc0qsnd7an8qg5p2m7l24c767gllkbsq";
     };
     name = "todo-tree";
     publisher = "gruntfuggly";
