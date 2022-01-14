@@ -18,7 +18,7 @@
 
   outputs = { fenix, hardware, home, nixpkgs, neocode, ... }:
     let
-      neocode-overlay = (final: prev: { neocode = neocode; });
+      neocode-overlay = system: (final: prev: { neocode = neocode.defaultPackage.${system}; });
     in
     {
       devShell.x86_64-linux = import ./.dev { pkgs = nixpkgs.legacyPackages.x86_64-linux; };
@@ -29,7 +29,7 @@
             nixpkgs.overlays = [
               (import ./pkgs)
 
-              neocode-overlay
+              (neocode-overlay "x86_64-linux")
             ];
             imports = [
               ./home/environments/wsl-work.nix
@@ -51,7 +51,7 @@
                 fenix.overlay
                 (import ./pkgs)
 
-                neocode-overlay
+                (neocode-overlay "x86_64-linux")
               ];
             }
 
@@ -78,7 +78,7 @@
                 fenix.overlay
                 (import ./pkgs)
 
-                neocode-overlay
+                (neocode-overlay "x86_64-linux")
               ];
             }
 
@@ -105,7 +105,7 @@
                 fenix.overlay
                 (import ./pkgs)
 
-                neocode-overlay
+                (neocode-overlay "aarch64-linux")
               ];
             }
 
