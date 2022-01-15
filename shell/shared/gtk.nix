@@ -7,6 +7,12 @@
     lxappearance
   ];
 
+  qt5 = {
+    enable = true;
+    platformTheme = "gtk2";
+    style = "gtk2";
+  };
+
   xdg = {
     portal = {
       enable = true;
