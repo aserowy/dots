@@ -111,10 +111,10 @@
   };
   vscode-extensions-material-theme = {
     pname = "vscode-extensions-material-theme";
-    version = "3.13.11";
+    version = "3.13.16";
     src = fetchurl {
-      url = "https://zhuangtongfa.gallery.vsassets.io/_apis/public/gallery/publisher/zhuangtongfa/extension/material-theme/3.13.11/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      sha256 = "1xxy0cmq8wm5gr0i23h7cc24vcpw2gdxi85n6f1nfgv8793gjia7";
+      url = "https://zhuangtongfa.gallery.vsassets.io/_apis/public/gallery/publisher/zhuangtongfa/extension/material-theme/3.13.16/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      sha256 = "0py8dw36vds95pgi3nc2zkxaylxlhcr61ww4l2crgc641m4n59q4";
     };
     name = "material-theme";
     publisher = "zhuangtongfa";
