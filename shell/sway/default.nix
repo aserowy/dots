@@ -2,6 +2,8 @@
 {
   environment.systemPackages = with pkgs; [
     edge
+    /* FIX: netflix is not running on edge */
+    firefox
     lf
     pavucontrol
     sway-contrib.grimshot
