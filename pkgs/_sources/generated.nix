@@ -111,20 +111,20 @@
   };
   vscode-extensions-material-theme = {
     pname = "vscode-extensions-material-theme";
-    version = "3.13.16";
+    version = "3.13.17";
     src = fetchurl {
-      url = "https://zhuangtongfa.gallery.vsassets.io/_apis/public/gallery/publisher/zhuangtongfa/extension/material-theme/3.13.16/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      sha256 = "0py8dw36vds95pgi3nc2zkxaylxlhcr61ww4l2crgc641m4n59q4";
+      url = "https://zhuangtongfa.gallery.vsassets.io/_apis/public/gallery/publisher/zhuangtongfa/extension/material-theme/3.13.17/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      sha256 = "100riqnvc2j315i1lvnwxmgga17s369xxvds5skgnk2yi2xnm2g9";
     };
     name = "material-theme";
     publisher = "zhuangtongfa";
   };
   vscode-extensions-remote-containers = {
     pname = "vscode-extensions-remote-containers";
-    version = "0.215.0";
+    version = "0.216.0";
     src = fetchurl {
-      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.215.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      sha256 = "1ibl2vckf3ni76052l7kv1hlg3r8glyvjbaq2w6bvgn1nzr71g2f";
+      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.216.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      sha256 = "01l4xdp8lfhrpq52cvyvxni8qlz2v053802ck5ml0k4cs90mw2vj";
     };
     name = "remote-containers";
     publisher = "ms-vscode-remote";
