@@ -41,14 +41,14 @@
   };
   spicetify-cli = {
     pname = "spicetify-cli";
-    version = "v2.8.4";
+    version = "v2.8.5";
     src = fetchgit {
       url = "https://github.com/khanhas/spicetify-cli";
-      rev = "v2.8.4";
+      rev = "v2.8.5";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
-      sha256 = "0frm9bjiw3aa7dd83gff4hn0dyy8nzww7vsax6s2dxxbb8r65hss";
+      sha256 = "0gxnsik1j7sh4n1pm0f100rxj6w041vyl3cr46hvry7864lja8kh";
     };
   };
   spicetify-themes = {
