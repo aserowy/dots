@@ -18,11 +18,7 @@
 
   nix = {
     package = pkgs.nixFlakes;
-    useSandbox = true;
-    autoOptimiseStore = true;
     readOnlyStore = false;
-    allowedUsers = [ "@wheel" ];
-    trustedUsers = [ "@wheel" ];
     extraOptions = ''
       experimental-features = nix-command flakes
       keep-outputs = true
@@ -36,6 +32,12 @@
     optimise = {
       automatic = true;
       dates = [ "weekly" ];
+    };
+    settings = {
+      allowed-users = [ "@wheel" ];
+      auto-optimise-store = true;
+      sandbox = true;
+      trusted-users = [ "@wheel" ];
     };
   };
 
