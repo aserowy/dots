@@ -41,7 +41,7 @@
     '';
     oh-my-zsh = {
       enable = true;
-      plugins = [ "cargo" "docker" "docker-compose" "git-auto-fetch" "ssh-agent" ];
+      plugins = [ "docker" "docker-compose" "git-auto-fetch" "rust" "ssh-agent" ];
     };
     plugins = [
       {
