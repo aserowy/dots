@@ -2,6 +2,7 @@
 {
   imports = [
     ../base.nix
+    ../printing.nix
 
     ./hardware-configuration.nix
   ];
