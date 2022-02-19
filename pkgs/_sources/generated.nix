@@ -53,14 +53,14 @@
   };
   spicetify-themes = {
     pname = "spicetify-themes";
-    version = "cab870eba282a509a34f2f107185c52188891c7f";
+    version = "fb9002cafc06d3293eefaf69bd865e512f99d150";
     src = fetchgit {
       url = "https://github.com/morpheusthewhite/spicetify-themes";
-      rev = "cab870eba282a509a34f2f107185c52188891c7f";
+      rev = "fb9002cafc06d3293eefaf69bd865e512f99d150";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
-      sha256 = "0zbmagqbzj8i97xd68z118s5h71wbabm9ym1g5df00fsbav6c8az";
+      sha256 = "1js1xhk4sx9k6bvdcppxj70dj5a9anjzzf9i8dh6i3m35m46r068";
     };
   };
   tmux-continuum = {
@@ -111,10 +111,10 @@
   };
   vscode-extensions-material-theme = {
     pname = "vscode-extensions-material-theme";
-    version = "3.13.19";
+    version = "3.13.20";
     src = fetchurl {
-      url = "https://zhuangtongfa.gallery.vsassets.io/_apis/public/gallery/publisher/zhuangtongfa/extension/material-theme/3.13.19/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      sha256 = "1j99x7axa4h9250qx05r2d3yv6biiiw6275zg5b0xvkv4l8s1ff3";
+      url = "https://zhuangtongfa.gallery.vsassets.io/_apis/public/gallery/publisher/zhuangtongfa/extension/material-theme/3.13.20/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      sha256 = "0jmw8f012mqzbaivz219l4k879sishjac5475fxi93j5gip3sa80";
     };
     name = "material-theme";
     publisher = "zhuangtongfa";
