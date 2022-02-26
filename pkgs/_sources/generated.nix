@@ -21,10 +21,10 @@
   };
   microsoft-edge-beta = {
     pname = "microsoft-edge-beta";
-    version = "99.0.1150.21";
+    version = "99.0.1150.25";
     src = fetchurl {
-      url = "https://packages.microsoft.com/repos/edge/pool/main/m/microsoft-edge-beta/microsoft-edge-beta_99.0.1150.21-1_amd64.deb";
-      sha256 = "1dj0q3vk6ydvbgiwsqh83hgdy0fmvzlldjwmx7qsv5i5k01g24qv";
+      url = "https://packages.microsoft.com/repos/edge/pool/main/m/microsoft-edge-beta/microsoft-edge-beta_99.0.1150.25-1_amd64.deb";
+      sha256 = "1lrb779la8f7dy42fb0kmqlbf0xghsz9q9nkckc8il2gziwg828f";
     };
   };
   picom = {
