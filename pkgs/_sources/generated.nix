@@ -21,10 +21,10 @@
   };
   microsoft-edge-beta = {
     pname = "microsoft-edge-beta";
-    version = "99.0.1150.25";
+    version = "99.0.1150.30";
     src = fetchurl {
-      url = "https://packages.microsoft.com/repos/edge/pool/main/m/microsoft-edge-beta/microsoft-edge-beta_99.0.1150.25-1_amd64.deb";
-      sha256 = "1lrb779la8f7dy42fb0kmqlbf0xghsz9q9nkckc8il2gziwg828f";
+      url = "https://packages.microsoft.com/repos/edge/pool/main/m/microsoft-edge-beta/microsoft-edge-beta_99.0.1150.30-1_amd64.deb";
+      sha256 = "0vibyf6xi7czss3dz32knvgiqsch34mcmqi5cggddrb7w36g4avj";
     };
   };
   picom = {
@@ -121,10 +121,10 @@
   };
   vscode-extensions-remote-containers = {
     pname = "vscode-extensions-remote-containers";
-    version = "0.224.1";
+    version = "0.225.0";
     src = fetchurl {
-      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.224.1/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      sha256 = "1iilqcjb62lwh07w1nlq5ak8ax5w6lyjxp29nax0c83gfzkb53bb";
+      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.225.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      sha256 = "0przrrdvax24b4vn2b52ns1q4prwad6d7wyjl25s5kzd3f6nv9b4";
     };
     name = "remote-containers";
     publisher = "ms-vscode-remote";
