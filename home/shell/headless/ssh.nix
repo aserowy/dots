@@ -25,12 +25,6 @@
         identitiesOnly = true;
         identityFile = " ~/.ssh/internal_serowy_ed25519";
       };
-      "homeassistant-test" = {
-        hostname = "homeassistant-test";
-        user = "serowy";
-        identitiesOnly = true;
-        identityFile = " ~/.ssh/internal_serowy_ed25519";
-      };
 
 
       "ssh.dev.azure.com" = {
