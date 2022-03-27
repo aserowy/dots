@@ -41,26 +41,26 @@
   };
   spicetify-cli = {
     pname = "spicetify-cli";
-    version = "v2.9.3";
+    version = "v2.9.4";
     src = fetchgit {
       url = "https://github.com/khanhas/spicetify-cli";
-      rev = "v2.9.3";
+      rev = "v2.9.4";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
-      sha256 = "11cjq1siw799smfqahdvzsnn97rbwlplaf0c4qdvla2x7m9kw56k";
+      sha256 = "0c4lcrs84c85g3f6gs6nlcr2pnffx3crj54nz8757apxcs71nybl";
     };
   };
   spicetify-themes = {
     pname = "spicetify-themes";
-    version = "4234413e8e37ac8b057e042f0df94c71a85ca2f2";
+    version = "565c810f1e46f49eed3c0f83dcfc254654919939";
     src = fetchgit {
       url = "https://github.com/morpheusthewhite/spicetify-themes";
-      rev = "4234413e8e37ac8b057e042f0df94c71a85ca2f2";
+      rev = "565c810f1e46f49eed3c0f83dcfc254654919939";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
-      sha256 = "1j8j7sjwl2jvvx4b8mck9cbgks5ks60n7sq0gpf9zbz12a6gcs1m";
+      sha256 = "1a53pc8i64p9lp1i6ih6gfsgaybdxl97hx7fzw35g551ls2d4fd8";
     };
   };
   tmux-continuum = {
