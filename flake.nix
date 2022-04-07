@@ -61,7 +61,7 @@
 
             ./system/workstation
             ./shell/i3
-            ./users/serowy.nix
+            ./users/serowy_with_docker.nix
 
             home.nixosModule
             {
