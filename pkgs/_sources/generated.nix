@@ -21,10 +21,10 @@
   };
   microsoft-edge-beta = {
     pname = "microsoft-edge-beta";
-    version = "100.0.1185.27";
+    version = "101.0.1210.14";
     src = fetchurl {
-      url = "https://packages.microsoft.com/repos/edge/pool/main/m/microsoft-edge-beta/microsoft-edge-beta_100.0.1185.27-1_amd64.deb";
-      sha256 = "00xavvzsp1m0lvsq7q7z3hb5n24h70bv3b1pmnnskz4qpcm1r8qm";
+      url = "https://packages.microsoft.com/repos/edge/pool/main/m/microsoft-edge-beta/microsoft-edge-beta_101.0.1210.14-1_amd64.deb";
+      sha256 = "1n7z4bi0n9srh8646d480wcill5pjavz84m4sdwm81lg8m1x6kbg";
     };
   };
   picom = {
@@ -41,26 +41,26 @@
   };
   spicetify-cli = {
     pname = "spicetify-cli";
-    version = "v2.9.4";
+    version = "v2.9.5";
     src = fetchgit {
       url = "https://github.com/khanhas/spicetify-cli";
-      rev = "v2.9.4";
+      rev = "v2.9.5";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
-      sha256 = "0c4lcrs84c85g3f6gs6nlcr2pnffx3crj54nz8757apxcs71nybl";
+      sha256 = "19pnkcsg0qpmhqd0placd7l8xkrwys5lznqmv5m6l3n1d0nwdb72";
     };
   };
   spicetify-themes = {
     pname = "spicetify-themes";
-    version = "3310f8e51efe6e3edfba1d0687c43d2b4581b504";
+    version = "7617cea2a862b63232b5e2ad92bf7d2a164804f1";
     src = fetchgit {
       url = "https://github.com/morpheusthewhite/spicetify-themes";
-      rev = "3310f8e51efe6e3edfba1d0687c43d2b4581b504";
+      rev = "7617cea2a862b63232b5e2ad92bf7d2a164804f1";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
-      sha256 = "0wp99dfyn8p3sj736cn0m5i5cjhxkf0sx7i44dqmdzla7cqfn8yk";
+      sha256 = "1y6q7bknnv6nj8y8kfanf09qmxiag393c4v77n03nlhrvhlkq61w";
     };
   };
   tmux-continuum = {
@@ -89,14 +89,14 @@
   };
   tmux-resurrect = {
     pname = "tmux-resurrect";
-    version = "027960ad25895701a8fbc0a1eb4a8cb477452d20";
+    version = "6050d2d8d8a9052c6a30e88fa27e6d5e3844e52a";
     src = fetchgit {
       url = "https://github.com/tmux-plugins/tmux-resurrect";
-      rev = "027960ad25895701a8fbc0a1eb4a8cb477452d20";
+      rev = "6050d2d8d8a9052c6a30e88fa27e6d5e3844e52a";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
-      sha256 = "07sc0a7l3f2j01ynrm2sxsn6pz05im1bfzmff29sh1qqrrp1w2zb";
+      sha256 = "0xbdlyn4xrfw9l1v8iw63azp1hmvl98z0idr11207hv8y319q5zj";
     };
   };
   vscode-extensions-keyboard-quickfix = {
@@ -121,10 +121,10 @@
   };
   vscode-extensions-remote-containers = {
     pname = "vscode-extensions-remote-containers";
-    version = "0.232.4";
+    version = "0.232.6";
     src = fetchurl {
-      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.232.4/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      sha256 = "0cznn5pba51p3nhjf2qn3lp6l9gvjp1qmp4zdbmpcfy5zpw8gmpr";
+      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.232.6/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      sha256 = "1jl9053x25bl095b6465i2cjqn3d06dmdy3z2mqhmazb0ihbd0rf";
     };
     name = "remote-containers";
     publisher = "ms-vscode-remote";
@@ -171,10 +171,10 @@
   };
   widevine-cdm = {
     pname = "widevine-cdm";
-    version = "4.10.2391.0";
+    version = "4.10.2449.0";
     src = fetchurl {
-      url = "https://dl.google.com/widevine-cdm/4.10.2391.0-linux-x64.zip";
-      sha256 = "1ni18sfdbh9scfz3axwm47xfvgqx202svf6psgn6zvmsq39zq0gf";
+      url = "https://dl.google.com/widevine-cdm/4.10.2449.0-linux-x64.zip";
+      sha256 = "045dik5bi8smldmfnzkw5lj34kpxwgjk0vjv8gdaczj2fcmrg6sx";
     };
   };
 }
