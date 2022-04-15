@@ -12,7 +12,6 @@
     opacityRules = [
       "100:_NET_WM_STATE@:32a = '_NET_WM_STATE_FULLSCREEN'"
 
-      "100:class_g = 'gw2-64.exe'"
       "80:class_g = 'Polybar'"
       "100:class_g = 'Spotify'"
       "100:class_g = 'Wine'"
@@ -23,7 +22,7 @@
       blur-kern = "3x3box";
       corner-radius = 6;
       frame-opacity = 0.9;
-      unredir-if-possible = false;
+      unredir-if-possible = true;
     };
     shadow = true;
     vSync = true;
