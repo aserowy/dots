@@ -21,10 +21,10 @@
   };
   microsoft-edge-beta = {
     pname = "microsoft-edge-beta";
-    version = "101.0.1210.14";
+    version = "101.0.1210.19";
     src = fetchurl {
-      url = "https://packages.microsoft.com/repos/edge/pool/main/m/microsoft-edge-beta/microsoft-edge-beta_101.0.1210.14-1_amd64.deb";
-      sha256 = "1n7z4bi0n9srh8646d480wcill5pjavz84m4sdwm81lg8m1x6kbg";
+      url = "https://packages.microsoft.com/repos/edge/pool/main/m/microsoft-edge-beta/microsoft-edge-beta_101.0.1210.19-1_amd64.deb";
+      sha256 = "1kgc19ryw69xiqppz90d6sa45g99hzkh7x5yk9d3xlh1gc1xn54p";
     };
   };
   picom = {
@@ -53,14 +53,14 @@
   };
   spicetify-themes = {
     pname = "spicetify-themes";
-    version = "0d36944b848fa19715bda0d7364cfad472faee9f";
+    version = "f9f5c0a6c84fb7add962090d0b1aceb63c2f6986";
     src = fetchgit {
       url = "https://github.com/morpheusthewhite/spicetify-themes";
-      rev = "0d36944b848fa19715bda0d7364cfad472faee9f";
+      rev = "f9f5c0a6c84fb7add962090d0b1aceb63c2f6986";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
-      sha256 = "09npwirqksv8sxnz48iwcrkzpkz35xcprd3w9pjjc3qykvlh78xg";
+      sha256 = "1rnimrzmkg7lx34ihcyzdharlhd5vdjzvgqkm5sybq9fa2gyzv3d";
     };
   };
   tmux-continuum = {
@@ -151,10 +151,10 @@
   };
   vscode-extensions-vscode-icons = {
     pname = "vscode-extensions-vscode-icons";
-    version = "11.10.0";
+    version = "11.11.0";
     src = fetchurl {
-      url = "https://vscode-icons-team.gallery.vsassets.io/_apis/public/gallery/publisher/vscode-icons-team/extension/vscode-icons/11.10.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      sha256 = "0n96jdmqqh2v7mni4qv08qjxyhp8h82ck9rhmwnxp66ni5ybmj63";
+      url = "https://vscode-icons-team.gallery.vsassets.io/_apis/public/gallery/publisher/vscode-icons-team/extension/vscode-icons/11.11.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      sha256 = "0qd9y0rb1j70iha8gqkxv2xvds6n4db8p0h8arlqcsfayljkn5v6";
     };
     name = "vscode-icons";
     publisher = "vscode-icons-team";
