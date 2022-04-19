@@ -9,7 +9,12 @@ exec --no-startup-id /etc/i3/scripts/wallpaper.sh
 
 # STYLING
 
-for_window [class=".*"] border pixel 0
+### for use with picom
+# for_window [class=".*"] border pixel 0
+
+### for use without picom
+font pango:FiraCode Nerd Font Mono 10
+for_window [class=".*"] border pixel 2
 
 gaps outer 5
 gaps inner 20

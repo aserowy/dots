@@ -22,7 +22,7 @@
 
     ./i3
     /* ./lightdm.nix */
-    ./picom.nix
+    /* ./picom.nix */
     ./polybar
   ];
 
