@@ -13,8 +13,14 @@ exec --no-startup-id /etc/i3/scripts/wallpaper.sh
 # for_window [class=".*"] border pixel 0
 
 ### for use without picom
+# class                 border  backgr. text    indi.   child_border
+client.focused          #61afef #3e4451 #abb2bf #61afef #56b6c2
+client.focused_inactive #5c6370 #3e4451 #abb2bf #484E50 #5F676A
+client.unfocused        #5c6370 #3e4451 #abb2bf #23272e #23272e
+client.urgent           #5c6370 #3e4451 #abb2bf #e06c75 #e06c75
+client.placeholder      #23272e #3e4451 #abb2bf #23272e #23272e
 font pango:FiraCode Nerd Font Mono 10
-for_window [class=".*"] border pixel 2
+for_window [class=".*"] border pixel 1
 
 gaps outer 5
 gaps inner 20
