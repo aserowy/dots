@@ -21,10 +21,10 @@
   };
   microsoft-edge-beta = {
     pname = "microsoft-edge-beta";
-    version = "101.0.1210.19";
+    version = "101.0.1210.26";
     src = fetchurl {
-      url = "https://packages.microsoft.com/repos/edge/pool/main/m/microsoft-edge-beta/microsoft-edge-beta_101.0.1210.19-1_amd64.deb";
-      sha256 = "1kgc19ryw69xiqppz90d6sa45g99hzkh7x5yk9d3xlh1gc1xn54p";
+      url = "https://packages.microsoft.com/repos/edge/pool/main/m/microsoft-edge-beta/microsoft-edge-beta_101.0.1210.26-1_amd64.deb";
+      sha256 = "1b73fiw2vrdx7b94dy0x6ml1cjrx6xfpj28p1xi7pfq5nd10i0qh";
     };
   };
   picom = {
@@ -41,14 +41,14 @@
   };
   spicetify-cli = {
     pname = "spicetify-cli";
-    version = "v2.9.5";
+    version = "v2.9.6";
     src = fetchgit {
       url = "https://github.com/khanhas/spicetify-cli";
-      rev = "v2.9.5";
+      rev = "v2.9.6";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
-      sha256 = "19pnkcsg0qpmhqd0placd7l8xkrwys5lznqmv5m6l3n1d0nwdb72";
+      sha256 = "11zacxsxphr2vpbk3c47pzlinmi7xk6f7x6dp98asrgh32j0xhc3";
     };
   };
   spicetify-themes = {
