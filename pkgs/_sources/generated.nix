@@ -21,10 +21,10 @@
   };
   microsoft-edge-beta = {
     pname = "microsoft-edge-beta";
-    version = "101.0.1210.26";
+    version = "101.0.1210.31";
     src = fetchurl {
-      url = "https://packages.microsoft.com/repos/edge/pool/main/m/microsoft-edge-beta/microsoft-edge-beta_101.0.1210.26-1_amd64.deb";
-      sha256 = "1b73fiw2vrdx7b94dy0x6ml1cjrx6xfpj28p1xi7pfq5nd10i0qh";
+      url = "https://packages.microsoft.com/repos/edge/pool/main/m/microsoft-edge-beta/microsoft-edge-beta_101.0.1210.31-1_amd64.deb";
+      sha256 = "0f477hk0d4v3fwp4yzcsbbvc0slw2pc986ssjd2283q5skgv3a49";
     };
   };
   picom = {
@@ -161,10 +161,10 @@
   };
   vscode-extensions-vscode-neovim = {
     pname = "vscode-extensions-vscode-neovim";
-    version = "0.0.83";
+    version = "0.0.84";
     src = fetchurl {
-      url = "https://asvetliakov.gallery.vsassets.io/_apis/public/gallery/publisher/asvetliakov/extension/vscode-neovim/0.0.83/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      sha256 = "1giybf12p0h0fm950w9bwvzdk77771zfkylrqs9h0lhbdzr92qbl";
+      url = "https://asvetliakov.gallery.vsassets.io/_apis/public/gallery/publisher/asvetliakov/extension/vscode-neovim/0.0.84/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      sha256 = "042z6qi5y6n8znnf23w1r0rn1i8pc8s253vc3jh3i8nqfjkx02x5";
     };
     name = "vscode-neovim";
     publisher = "asvetliakov";
