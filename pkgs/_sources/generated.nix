@@ -53,14 +53,14 @@
   };
   spicetify-themes = {
     pname = "spicetify-themes";
-    version = "65443477b367fdb4ad66046c4858c338a00b3863";
+    version = "95fd6ed8e98e456bed015cbe8a76253cd17064d2";
     src = fetchgit {
       url = "https://github.com/morpheusthewhite/spicetify-themes";
-      rev = "65443477b367fdb4ad66046c4858c338a00b3863";
+      rev = "95fd6ed8e98e456bed015cbe8a76253cd17064d2";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
-      sha256 = "1bkjz0icnxbyxzkirrnxny653anxvy9i7pyyd61jmak6scj5h3p3";
+      sha256 = "1jbh8d9f23ls65jm1jmjhvjjp615w526sn0zfwq958lwys5gh5d3";
     };
   };
   tmux-continuum = {
@@ -131,10 +131,10 @@
   };
   vscode-extensions-remote-wsl = {
     pname = "vscode-extensions-remote-wsl";
-    version = "0.66.0";
+    version = "0.66.2";
     src = fetchurl {
-      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-wsl/0.66.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      sha256 = "1j80md7l27azi8qapkj7xygqj3jj8z7nczhjwkrwmvx90qjmlasy";
+      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-wsl/0.66.2/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      sha256 = "04km6bkifxg5yf84817z4cnn92lm8m56y9cjbix5y94nhsncx5ny";
     };
     name = "remote-wsl";
     publisher = "ms-vscode-remote";
