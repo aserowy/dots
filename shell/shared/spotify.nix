@@ -3,7 +3,8 @@
   environment.systemPackages = with pkgs; [
     playerctl
 
-    (spotify-spicetified.override {
+    spotify
+    /* (spotify-spicetified.override {
       theme = "Dribbblish";
 
       colorScheme = "onedark";
@@ -32,6 +33,6 @@
         xpui.js_find_8008 = ,(\w+=)32,
         xpui.js_repl_8008 = ,''${1}56,
       '';
-    })
+    }) */
   ];
 }

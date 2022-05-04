@@ -14,7 +14,7 @@ exec --no-startup-id /etc/i3/scripts/wallpaper.sh
 
 ### for use without picom
 # class                 border  backgr. text    indi.   child_border
-client.focused          #61afef #3e4451 #abb2bf #61afef #61afef
+client.focused          #61afef #3e4451 #abb2bf #98c379 #61afef
 client.focused_inactive #5c6370 #3e4451 #abb2bf #5c6370 #5c6370
 client.unfocused        #5c6370 #3e4451 #abb2bf #23272e #23272e
 client.urgent           #5c6370 #3e4451 #abb2bf #e06c75 #e06c75
@@ -101,6 +101,7 @@ bindsym $mod+$alt+$right resize shrink width 20px
 # GAMING
 
 for_window [title="MTGA"] move container to workspace "mtga", floating disable, focus
+for_window [class="gw2-64.exe" tiling] move container to workspace "gw", focus, move left, move left, move left, resize grow width 700px
 
 # MUSIC
 
