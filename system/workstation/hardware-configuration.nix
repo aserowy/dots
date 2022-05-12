@@ -32,6 +32,9 @@
 
     opengl = {
       enable = lib.mkDefault true;
+      extraPackages = with pkgs; [
+        amdvlk
+      ];
       driSupport = true;
     };
   };
