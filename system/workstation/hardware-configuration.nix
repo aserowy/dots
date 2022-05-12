@@ -6,7 +6,7 @@
     ];
 
   boot.initrd.availableKernelModules = [ "ehci_pci" "ahci" "xhci_pci" "firewire_ohci" "usbhid" "usb_storage" "sd_mod" "sr_mod" ];
-  boot.initrd.kernelModules = [ "dm-snapshot" "i915" ];
+  boot.initrd.kernelModules = [ "amdgpu" "dm-snapshot" "i915" ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
@@ -30,10 +30,9 @@
   hardware = {
     cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
-    nvidia.package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
-
     opengl = {
       enable = lib.mkDefault true;
+      driSupport = true;
     };
   };
 }

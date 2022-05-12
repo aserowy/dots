@@ -35,7 +35,7 @@
       socketActivation = true;
     };
 
-    xserver.videoDrivers = [ "nvidia" ];
+    xserver.videoDrivers = [ "amdgpu" ];
   };
 
   virtualisation = {
