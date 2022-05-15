@@ -1,3 +1,4 @@
+# update with: 
 final: prev:
 let
   inherit (final.lib) filterAttrs hasPrefix mapAttrs mapAttrs' nameValuePair removePrefix;
@@ -58,8 +59,4 @@ in
   spotify-spicetified = final.callPackage ./spotify-spicetified { };
 
   vscode-extensions = (packageSets "vscode-extensions");
-
-  widevine-cdm = final.callPackage ./widevine-cdm {
-    sources = fetches;
-  };
 }

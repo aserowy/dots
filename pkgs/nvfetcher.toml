@@ -3,11 +3,6 @@ src.github = "elkowar/eww"
 fetch.github = "elkowar/eww"
 cargo_lock = "Cargo.lock"
 
-[microsoft-edge-beta]
-src.webpage = "https://packages.microsoft.com/repos/edge/pool/main/m/microsoft-edge-beta/"
-src.regex = "microsoft-edge-beta_(.*)-1_amd64\\.deb\">microsoft-edge-beta_"
-fetch.url = "https://packages.microsoft.com/repos/edge/pool/main/m/microsoft-edge-beta/microsoft-edge-beta_$ver-1_amd64.deb"
-
 [picom]
 src.git = "https://github.com/ibhagwan/picom"
 fetch.github = "ibhagwan/picom"
@@ -67,7 +62,3 @@ src.vsmarketplace = "vscode-icons-team.vscode-icons"
 fetch.vsmarketplace = "vscode-icons-team.vscode-icons"
 passthru = { name = "vscode-icons", publisher = "vscode-icons-team" }
 
-[widevine-cdm]
-src.webpage = "https://dl.google.com/widevine-cdm/versions.txt"
-src.regex = "(.*)"
-fetch.url = "https://dl.google.com/widevine-cdm/$ver-linux-x64.zip"

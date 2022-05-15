@@ -1,4 +1,4 @@
-set $browser microsoft-edge-beta
+set $browser microsoft-edge
 set $explorer wezterm start --class lf -- lf
 set $menu exec /etc/rofi/launch.sh drun 
 set $terminal wezterm

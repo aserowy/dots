@@ -33,7 +33,7 @@ in
       [global]
       alignment="center"
       always_run_script="true"
-      browser="${pkgs.edge}/microsoft-edge-beta"
+      browser="${pkgs.microsoft-edge}/microsoft-edge"
       corner_radius=6
       dmenu="${pkgs.rofi}/bin/rofi -dmenu"
       follow="none"
