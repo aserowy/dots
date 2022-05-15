@@ -118,5 +118,3 @@ bar {
 # SESSION TARGET
 
 include /etc/sway/config.d/*
-
-exec swaymsg "workspace dots"
