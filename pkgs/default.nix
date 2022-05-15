@@ -33,11 +33,6 @@ in
 {
   sources = final.callPackage (import ./_sources/generated.nix) { };
 
-  edge = final.callPackage ./edge {
-    gconf = final.gnome2.GConf;
-    sources = fetches;
-  };
-
   eww = final.callPackage ./eww {
     inherit fetches;
     makeRustPlatform = (final.pkgs.makeRustPlatform {
