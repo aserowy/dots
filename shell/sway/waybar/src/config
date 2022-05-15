@@ -106,14 +106,12 @@
         "format": "{icon}",
         "format-icons": {
             "default": "",
+            "dots": "",
             "focused": "",
+            "gaming": "",
             "music": "",
             "social": "",
             "urgent": "",
-        },
-        "persistent_workspaces": {
-            "music": [],
-            "social": [],
         },
     },
     "network": {

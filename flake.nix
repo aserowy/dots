@@ -60,7 +60,7 @@
             }
 
             ./system/workstation
-            ./shell/i3
+            ./shell/sway
             ./users/serowy_with_docker.nix
 
             home.nixosModule
