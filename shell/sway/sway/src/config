@@ -10,6 +10,11 @@ input "1133:49970:Logitech_Gaming_Mouse_G502" {
     pointer_accel 0.4
 }
 
+input "12851:25345:Ducky_Ducky_One2_Mini_RGB" {
+    # compose on right alt to be able to write äöüß
+    xkb_options "compose:ralt"
+}
+
 # STARTUP
 
 exec_always /etc/sway/scripts/gsettings.sh

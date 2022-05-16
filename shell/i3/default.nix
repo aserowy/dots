@@ -42,5 +42,8 @@
     gnome.gnome-keyring.enable = true;
 
     onedrive.enable = true;
+
+    # compose on right alt to be able to write äöüß
+    xserver.xkbOptions = "compose:ralt";
   };
 }

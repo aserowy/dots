@@ -68,9 +68,6 @@
       passwordAuthentication = false;
       ports = [ 2022 ];
     };
-
-    # compose on right alt to be able to write äöüß
-    xserver.xkbOptions = "compose:ralt";
   };
 
   system = {
