@@ -71,6 +71,8 @@ window > box {
   box-shadow: inset 0 -3px transparent;
   color: #abb2bf;
   font-size: 1.5em;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 #workspaces button:hover {

@@ -101,7 +101,6 @@
         "signal": 5
     },
     "sway/workspaces": {
-        "all-outputs": true,
         "disable-scroll": true,
         "format": "{icon}",
         "format-icons": {
@@ -109,7 +108,6 @@
             "dots": "",
             "focused": "",
             "gaming": "",
-            "music": "",
             "social": "",
             "urgent": "",
             "work": "",
