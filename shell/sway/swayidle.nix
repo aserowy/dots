@@ -12,7 +12,9 @@
     path = [ pkgs.bash ];
     serviceConfig = {
       ExecStart = '' ${pkgs.swayidle}/bin/swayidle -w -d \
-        timeout 600 'systemctl suspend'
+        timeout 600 'swaymsg "output * dpms off"' \
+            resume 'swaymsg "output * dpms on"' \
+        timeout 1200 'systemctl suspend'
       '';
     };
   };
