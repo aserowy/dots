@@ -1,8 +1,9 @@
 { config, pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
-    microsoft-edge
+    clipman
     lf
+    microsoft-edge
     pavucontrol
     sway-contrib.grimshot
     wezterm

@@ -19,6 +19,7 @@ input "12851:25345:Ducky_Ducky_One2_Mini_RGB" {
 
 exec_always /etc/sway/scripts/gsettings.sh
 exec /etc/sway/scripts/wallpaper.sh
+exec wl-paste -t text --watch clipman store --no-persist
 
 # STYLING
 
