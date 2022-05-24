@@ -1,0 +1,271 @@
+{
+    "eww": {
+        "cargoLocks": null,
+        "extract": null,
+        "name": "eww",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "elkowar",
+            "repo": "eww",
+            "rev": "v0.2.0",
+            "sha256": "sha256-HS2D9J+4Bo88cS8BJ4ce7RUyXG/VoK/N28KlH/hgHxQ=",
+            "type": "github"
+        },
+        "version": "v0.2.0"
+    },
+    "picom": {
+        "cargoLocks": null,
+        "extract": null,
+        "name": "picom",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "ibhagwan",
+            "repo": "picom",
+            "rev": "c4107bb6cc17773fdc6c48bb2e475ef957513c7a",
+            "sha256": "sha256-1hVFBGo4Ieke2T9PqMur1w4D0bz/L3FAvfujY9Zergw=",
+            "type": "github"
+        },
+        "version": "c4107bb6cc17773fdc6c48bb2e475ef957513c7a"
+    },
+    "spicetify-cli": {
+        "cargoLocks": null,
+        "extract": null,
+        "name": "spicetify-cli",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "khanhas",
+            "repo": "spicetify-cli",
+            "rev": "v2.9.9",
+            "sha256": "sha256-n/wR9aXr4NFxSBpqefPYHpgVJJD9diK77E2lVs3F1Kg=",
+            "type": "github"
+        },
+        "version": "v2.9.9"
+    },
+    "spicetify-themes": {
+        "cargoLocks": null,
+        "extract": null,
+        "name": "spicetify-themes",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "morpheusthewhite",
+            "repo": "spicetify-themes",
+            "rev": "d99f4a84ee9f15d9309413afa554c2cc2cacba79",
+            "sha256": "sha256-Jxpk83R+fYWzkY9LtvQJTvLYUxYiYHClAbQzvgiCjzs=",
+            "type": "github"
+        },
+        "version": "d99f4a84ee9f15d9309413afa554c2cc2cacba79"
+    },
+    "tmux-continuum": {
+        "cargoLocks": null,
+        "extract": null,
+        "name": "tmux-continuum",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "tmux-plugins",
+            "repo": "tmux-continuum",
+            "rev": "fc2f31d79537a5b349f55b74c8ca69abaac1ddbb",
+            "sha256": "sha256-S1YuZHX4SnSVlMZKv/a87/qj0seRdaWyOXz5ONCVIRo=",
+            "type": "github"
+        },
+        "version": "fc2f31d79537a5b349f55b74c8ca69abaac1ddbb"
+    },
+    "tmux-easy-motion": {
+        "cargoLocks": null,
+        "extract": null,
+        "name": "tmux-easy-motion",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "IngoMeyer441",
+            "repo": "tmux-easy-motion",
+            "rev": "21fd252c3c916dd421b02c9e5bf3f141a9dff2d6",
+            "sha256": "sha256-4l+ZP2xz4xsgjIHb2KYVFMeBM3VLMZ6nKwxiv5ZKCH4=",
+            "type": "github"
+        },
+        "version": "21fd252c3c916dd421b02c9e5bf3f141a9dff2d6"
+    },
+    "tmux-resurrect": {
+        "cargoLocks": null,
+        "extract": null,
+        "name": "tmux-resurrect",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "tmux-plugins",
+            "repo": "tmux-resurrect",
+            "rev": "ca6468e2deef11efadfe3a62832ae67742505432",
+            "sha256": "sha256-dkiIbTPIn3ampK7LItndOL69cMVfuJyOIQZL4lt58jQ=",
+            "type": "github"
+        },
+        "version": "ca6468e2deef11efadfe3a62832ae67742505432"
+    },
+    "vscode-extensions-keyboard-quickfix": {
+        "cargoLocks": null,
+        "extract": null,
+        "name": "vscode-extensions-keyboard-quickfix",
+        "passthru": {
+            "name": "keyboard-quickfix",
+            "publisher": "pascalsenn"
+        },
+        "pinned": false,
+        "src": {
+            "name": "keyboard-quickfix-0.0.6.zip",
+            "sha256": "sha256-BK7ND6gtRVEitxaokJHmQ5rvSOgssVz+s9dktGQnY6M=",
+            "type": "url",
+            "url": "https://pascalsenn.gallery.vsassets.io/_apis/public/gallery/publisher/pascalsenn/extension/keyboard-quickfix/0.0.6/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+        },
+        "version": "0.0.6"
+    },
+    "vscode-extensions-live-share": {
+        "cargoLocks": null,
+        "extract": null,
+        "name": "vscode-extensions-live-share",
+        "passthru": {
+            "name": "vsliveshare",
+            "publisher": "MS-vsliveshare"
+        },
+        "pinned": false,
+        "src": {
+            "name": "vsliveshare-1.0.5582.zip",
+            "sha256": "sha256-b+vjxsi3LSZ5ORufSgOV7U6IvNBYX//JFz8voXRICPc=",
+            "type": "url",
+            "url": "https://MS-vsliveshare.gallery.vsassets.io/_apis/public/gallery/publisher/MS-vsliveshare/extension/vsliveshare/1.0.5582/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+        },
+        "version": "1.0.5582"
+    },
+    "vscode-extensions-material-theme": {
+        "cargoLocks": null,
+        "extract": null,
+        "name": "vscode-extensions-material-theme",
+        "passthru": {
+            "name": "material-theme",
+            "publisher": "zhuangtongfa"
+        },
+        "pinned": false,
+        "src": {
+            "name": "material-theme-3.13.29.zip",
+            "sha256": "sha256-DEQ8g6wCs742ItP7JeEgNMpxMM9OSi5oGHbQzBVOpCI=",
+            "type": "url",
+            "url": "https://zhuangtongfa.gallery.vsassets.io/_apis/public/gallery/publisher/zhuangtongfa/extension/material-theme/3.13.29/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+        },
+        "version": "3.13.29"
+    },
+    "vscode-extensions-remote-containers": {
+        "cargoLocks": null,
+        "extract": null,
+        "name": "vscode-extensions-remote-containers",
+        "passthru": {
+            "name": "remote-containers",
+            "publisher": "ms-vscode-remote"
+        },
+        "pinned": false,
+        "src": {
+            "name": "remote-containers-0.236.1.zip",
+            "sha256": "sha256-kdoaDiXfPn6XIkPUZdVNPzeac6o3Sfzq4oz1iQrwzms=",
+            "type": "url",
+            "url": "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.236.1/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+        },
+        "version": "0.236.1"
+    },
+    "vscode-extensions-remote-wsl": {
+        "cargoLocks": null,
+        "extract": null,
+        "name": "vscode-extensions-remote-wsl",
+        "passthru": {
+            "name": "remote-wsl",
+            "publisher": "ms-vscode-remote"
+        },
+        "pinned": false,
+        "src": {
+            "name": "remote-wsl-0.66.3.zip",
+            "sha256": "sha256-Cgg5kszLWBrHYqA/SNhJwmfUg2oG53427diw8jtUVFM=",
+            "type": "url",
+            "url": "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-wsl/0.66.3/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+        },
+        "version": "0.66.3"
+    },
+    "vscode-extensions-todo-tree": {
+        "cargoLocks": null,
+        "extract": null,
+        "name": "vscode-extensions-todo-tree",
+        "passthru": {
+            "name": "todo-tree",
+            "publisher": "gruntfuggly"
+        },
+        "pinned": false,
+        "src": {
+            "name": "todo-tree-0.0.215.zip",
+            "sha256": "sha256-WK9J6TvmMCLoqeKWh5FVp1mNAXPWVmRvi/iFuLWMylM=",
+            "type": "url",
+            "url": "https://gruntfuggly.gallery.vsassets.io/_apis/public/gallery/publisher/gruntfuggly/extension/todo-tree/0.0.215/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+        },
+        "version": "0.0.215"
+    },
+    "vscode-extensions-vscode-icons": {
+        "cargoLocks": null,
+        "extract": null,
+        "name": "vscode-extensions-vscode-icons",
+        "passthru": {
+            "name": "vscode-icons",
+            "publisher": "vscode-icons-team"
+        },
+        "pinned": false,
+        "src": {
+            "name": "vscode-icons-11.12.0.zip",
+            "sha256": "sha256-jyc6m6lfwSYt5xg2H5TGdxheKptho87C7eN4xuU5IYg=",
+            "type": "url",
+            "url": "https://vscode-icons-team.gallery.vsassets.io/_apis/public/gallery/publisher/vscode-icons-team/extension/vscode-icons/11.12.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+        },
+        "version": "11.12.0"
+    },
+    "vscode-extensions-vscode-neovim": {
+        "cargoLocks": null,
+        "extract": null,
+        "name": "vscode-extensions-vscode-neovim",
+        "passthru": {
+            "name": "vscode-neovim",
+            "publisher": "asvetliakov"
+        },
+        "pinned": false,
+        "src": {
+            "name": "vscode-neovim-0.0.85.zip",
+            "sha256": "sha256-i8QGM7P9C3TbmrmelxX3TfMt8T7FdicJTVCp4TPLJZo=",
+            "type": "url",
+            "url": "https://asvetliakov.gallery.vsassets.io/_apis/public/gallery/publisher/asvetliakov/extension/vscode-neovim/0.0.85/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+        },
+        "version": "0.0.85"
+    }
+}

@@ -32,6 +32,11 @@ src.vsmarketplace = "pascalsenn.keyboard-quickfix"
 fetch.vsmarketplace = "pascalsenn.keyboard-quickfix"
 passthru = { name = "keyboard-quickfix", publisher = "pascalsenn" }
 
+[vscode-extensions-live-share]
+src.vsmarketplace = "MS-vsliveshare.vsliveshare"
+fetch.vsmarketplace = "MS-vsliveshare.vsliveshare"
+passthru = { name = "vsliveshare", publisher = "MS-vsliveshare" }
+
 [vscode-extensions-material-theme]
 src.vsmarketplace = "zhuangtongfa.material-theme"
 fetch.vsmarketplace = "zhuangtongfa.material-theme"

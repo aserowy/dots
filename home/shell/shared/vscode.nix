@@ -8,6 +8,7 @@
     enable = true;
     extensions = with pkgs.vscode-extensions; [
       keyboard-quickfix
+      live-share
       material-theme
       remote-containers
       remote-wsl
