@@ -74,33 +74,6 @@
           ];
         };
 
-        desktop-nuc = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            {
-              nixpkgs.overlays = [
-                fenix.overlay
-                (import ./pkgs)
-
-                (neocode-overlay { system = "x86_64-linux"; })
-              ];
-            }
-
-            ./system/intel_nuc
-            ./shell/i3
-            ./users/serowy.nix
-
-            home.nixosModule
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                users.serowy = import ./home/environments/i3.nix;
-              };
-            }
-          ];
-        };
-
         homeassistant = nixpkgs.lib.nixosSystem {
           system = "aarch64-linux";
           modules = [

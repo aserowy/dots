@@ -1,5 +1,7 @@
 { config, pkgs, ... }:
 {
+  home.stateVersion = "22.05";
+
   environment.systemPackages = with pkgs; [
     lf
     wezterm
