@@ -25,7 +25,7 @@
       });
     in
     {
-      devShell.x86_64-linux = import ./.dev { pkgs = nixpkgs.legacyPackages.x86_64-linux; };
+      devShells.x86_64-linux.default = import ./.dev { pkgs = nixpkgs.legacyPackages.x86_64-linux; };
 
       homeConfigurations = {
         "serowy@DESKTOP-UVAKAQL" = home.lib.homeManagerConfiguration {
