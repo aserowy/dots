@@ -34,13 +34,6 @@ in
 {
   sources = final.callPackage (import ./_sources/generated.nix) { };
 
-  eww = final.callPackage ./eww {
-    inherit fetches;
-    makeRustPlatform = (final.pkgs.makeRustPlatform {
-      inherit (final.fenix.latest) cargo rustc;
-    });
-  };
-
   picom = prev.picom.overrideAttrs (oldAttrs: rec {
     inherit (final.sources.picom) pname version src;
   });

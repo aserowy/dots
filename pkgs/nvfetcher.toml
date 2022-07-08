@@ -1,8 +1,3 @@
-[eww]
-src.github = "elkowar/eww"
-fetch.github = "elkowar/eww"
-cargo_lock = "Cargo.lock"
-
 [picom]
 src.git = "https://github.com/ibhagwan/picom"
 fetch.github = "ibhagwan/picom"
