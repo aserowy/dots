@@ -30,14 +30,17 @@ exec wl-paste -t text --watch clipman store --no-persist
 
 # STYLING
 
+font pango:monospace 0
+
+default_border pixel 1
+default_floating_border pixel 1
+
 # class                 border  backgr. text    indi.   child_border
 client.focused          #61afef #3e4451 #abb2bf #98c379 #61afef
 client.focused_inactive #5c6370 #3e4451 #abb2bf #5c6370 #5c6370
 client.unfocused        #5c6370 #3e4451 #abb2bf #23272e #23272e
 client.urgent           #5c6370 #3e4451 #abb2bf #e06c75 #e06c75
 client.placeholder      #23272e #3e4451 #abb2bf #23272e #23272e
-font pango:FiraCode Nerd Font Mono 10
-for_window [class=".*"] border pixel 1
 
 gaps outer 5
 gaps inner 20
@@ -124,8 +127,7 @@ for_window [class="Spotify"] move scratchpad
 # WAYBAR
 
 bar {
-        swaybar_command waybar
-    }
+    swaybar_command waybar
 }
 
 # SESSION TARGET
