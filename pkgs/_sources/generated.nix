@@ -47,13 +47,13 @@
   };
   tmux-easy-motion = {
     pname = "tmux-easy-motion";
-    version = "21fd252c3c916dd421b02c9e5bf3f141a9dff2d6";
+    version = "69b15746dcee17e7a857311636d29c09f73346f3";
     src = fetchFromGitHub ({
       owner = "IngoMeyer441";
       repo = "tmux-easy-motion";
-      rev = "21fd252c3c916dd421b02c9e5bf3f141a9dff2d6";
+      rev = "69b15746dcee17e7a857311636d29c09f73346f3";
       fetchSubmodules = false;
-      sha256 = "sha256-4l+ZP2xz4xsgjIHb2KYVFMeBM3VLMZ6nKwxiv5ZKCH4=";
+      sha256 = "sha256-YedReOqQzmcSn4Cv/kFPUQ3FaaA9EsTllAABlEznyys=";
     });
   };
   tmux-resurrect = {
@@ -102,11 +102,11 @@
   };
   vscode-extensions-remote-containers = {
     pname = "vscode-extensions-remote-containers";
-    version = "0.241.2";
+    version = "0.242.0";
     src = fetchurl {
-      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.241.2/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "remote-containers-0.241.2.zip";
-      sha256 = "sha256-pw0m2oMjeW4DFhbHB8OST9kJ3/cPtT2DR9GQXTlSluc=";
+      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.242.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "remote-containers-0.242.0.zip";
+      sha256 = "sha256-cLHa0E0izNu2QYQBQ0qUlCIXsJmvc7Q6kgR6F3hnMX8=";
     };
     name = "remote-containers";
     publisher = "ms-vscode-remote";
