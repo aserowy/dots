@@ -12,7 +12,6 @@
   imports = [
     ../shared/alacritty.nix
     ../shared/clamav.nix
-    ../shared/discord.nix
     ../shared/dunst.nix
     ../shared/gtk.nix
     ../shared/lutris.nix

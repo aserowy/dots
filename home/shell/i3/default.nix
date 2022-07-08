@@ -4,6 +4,7 @@
 
   home.packages = with pkgs; [
     ardour
+    discord
     gnome.gnome-screenshot
     gparted
     remmina

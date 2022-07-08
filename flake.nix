@@ -68,7 +68,7 @@
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                users.serowy = import ./home/environments/i3.nix;
+                users.serowy = import ./home/environments/sway.nix;
               };
             }
           ];

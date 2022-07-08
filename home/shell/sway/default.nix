@@ -15,5 +15,6 @@
 
     ./grimshot.nix
     ./teams.nix
+    ./discord.nix
   ];
 }
