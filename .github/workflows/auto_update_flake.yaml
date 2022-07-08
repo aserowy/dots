@@ -23,16 +23,13 @@ jobs:
 
       - name: update flake
         run: |
-          git config --local user.email "serowy@hotmail.com"
-          git config --local user.name "aserowy"
-          nix flake update --commit-lock-file
+          nix flake update
 
       - name: check flake
         run: nix flake check -v --show-trace
         timeout-minutes: 90
 
-      - name: push changes
-        uses: ad-m/github-push-action@v0.6.0
+      - name: commit and push changes
+        uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
+          commit_message: updated shake

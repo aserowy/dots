@@ -25,13 +25,13 @@ jobs:
         run: |
           git config --local user.email "serowy@hotmail.com"
           git config --local user.name "aserowy"
-          nix develop --command nvfetcher -c ./pkgs/nvfetcher.toml -o ./pkgs/_sources --commit-changes
-          git add --all
+          nix develop --command nvfetcher -c ./pkgs/nvfetcher.toml -o ./pkgs/_sources
 
       - name: check flake
         run: nix flake check -v --show-trace
         timeout-minutes: 90
 
-      - uses: stefanzweifel/git-auto-commit-action@v4
+      - name: commit and push changes
+        uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: updated shake
