@@ -135,11 +135,11 @@
   };
   vscode-extensions-vscode-icons = {
     pname = "vscode-extensions-vscode-icons";
-    version = "11.12.0";
+    version = "11.13.0";
     src = fetchurl {
-      url = "https://vscode-icons-team.gallery.vsassets.io/_apis/public/gallery/publisher/vscode-icons-team/extension/vscode-icons/11.12.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "vscode-icons-11.12.0.zip";
-      sha256 = "sha256-jyc6m6lfwSYt5xg2H5TGdxheKptho87C7eN4xuU5IYg=";
+      url = "https://vscode-icons-team.gallery.vsassets.io/_apis/public/gallery/publisher/vscode-icons-team/extension/vscode-icons/11.13.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "vscode-icons-11.13.0.zip";
+      sha256 = "sha256-OoJJy6h7hnMWT/wt0lFr22dc+/LWvs4sjAmOVdYCV9s=";
     };
     name = "vscode-icons";
     publisher = "vscode-icons-team";
