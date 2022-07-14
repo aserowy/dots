@@ -4,6 +4,7 @@
 
   home.packages = with pkgs; [
     ardour
+    discord
     gparted
     remmina
   ];
@@ -15,6 +16,5 @@
 
     ./grimshot.nix
     ./teams.nix
-    ./discord.nix
   ];
 }
