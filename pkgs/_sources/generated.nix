@@ -36,13 +36,13 @@
   };
   tmux-continuum = {
     pname = "tmux-continuum";
-    version = "26afaffb2ca24633c93d99840f554127d31e6ff0";
+    version = "3e4bc35da41f956c873aea716c97555bf1afce5d";
     src = fetchFromGitHub ({
       owner = "tmux-plugins";
       repo = "tmux-continuum";
-      rev = "26afaffb2ca24633c93d99840f554127d31e6ff0";
+      rev = "3e4bc35da41f956c873aea716c97555bf1afce5d";
       fetchSubmodules = false;
-      sha256 = "sha256-XJh1noQXBRmFmWXM9iJiR+Qh6d5gABqY/YZWbqsrJ/Q=";
+      sha256 = "sha256-Z10DPP5svAL6E8ZETcosmj25RkA1DTBhn3AkJ7TDyN8=";
     });
   };
   tmux-easy-motion = {
@@ -146,11 +146,11 @@
   };
   vscode-extensions-vscode-neovim = {
     pname = "vscode-extensions-vscode-neovim";
-    version = "0.0.87";
+    version = "0.0.88";
     src = fetchurl {
-      url = "https://asvetliakov.gallery.vsassets.io/_apis/public/gallery/publisher/asvetliakov/extension/vscode-neovim/0.0.87/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "vscode-neovim-0.0.87.zip";
-      sha256 = "sha256-FQc0QtzDRdxY6qVTx3ZpSU6CLTS/uQR3lgWy0/Scmb4=";
+      url = "https://asvetliakov.gallery.vsassets.io/_apis/public/gallery/publisher/asvetliakov/extension/vscode-neovim/0.0.88/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "vscode-neovim-0.0.88.zip";
+      sha256 = "sha256-sGF4q7jzPxeXaT17K91DFVx8We8K/I4AXjKWtt0N5MI=";
     };
     name = "vscode-neovim";
     publisher = "asvetliakov";
