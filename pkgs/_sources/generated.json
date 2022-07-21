@@ -31,11 +31,11 @@
             "name": null,
             "owner": "khanhas",
             "repo": "spicetify-cli",
-            "rev": "v2.10.2",
-            "sha256": "sha256-chaCz4+RXPUP/MZymxA0h1ATuWYRgru3JMELiWPEBcE=",
+            "rev": "v2.11.1",
+            "sha256": "sha256-NX3qbnnbV2mLxBQCjfl7xNicyir6usi2uYGw6Yij/ho=",
             "type": "github"
         },
-        "version": "v2.10.2"
+        "version": "v2.11.1"
     },
     "spicetify-themes": {
         "cargoLocks": null,
@@ -50,11 +50,11 @@
             "name": null,
             "owner": "morpheusthewhite",
             "repo": "spicetify-themes",
-            "rev": "86f72355ffefe7461ca28edf7f9491b404a7d0d3",
-            "sha256": "sha256-NBqTfB0IA4ziphEZ+b1CSOf26p+AALWrvrKgWXhv2q0=",
+            "rev": "0dd8243d4e25f142c3f62a8d3da8f6647dbf64e4",
+            "sha256": "sha256-SOD2t7R1o+mWQ/+w/vE5UL/9CfJQOMiY6qdelaTMLUo=",
             "type": "github"
         },
-        "version": "86f72355ffefe7461ca28edf7f9491b404a7d0d3"
+        "version": "0dd8243d4e25f142c3f62a8d3da8f6647dbf64e4"
     },
     "tmux-continuum": {
         "cargoLocks": null,
