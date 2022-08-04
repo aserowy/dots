@@ -50,11 +50,11 @@
             "name": null,
             "owner": "morpheusthewhite",
             "repo": "spicetify-themes",
-            "rev": "02572216ba80979a15f9d65d80fb9888208f2666",
-            "sha256": "sha256-i0Xt8EOCNl6/ei32Gf94Fp8km+U8Y/sPEv0gHfq/mO0=",
+            "rev": "5d3d42f913467f413be9b0159f5df5023adf89af",
+            "sha256": "sha256-69S6EHJO6bDGqMXLxApF7S+KJXiRMj+g47JV6DiTeU4=",
             "type": "github"
         },
-        "version": "02572216ba80979a15f9d65d80fb9888208f2666"
+        "version": "5d3d42f913467f413be9b0159f5df5023adf89af"
     },
     "tmux-continuum": {
         "cargoLocks": null,
@@ -140,12 +140,12 @@
         },
         "pinned": false,
         "src": {
-            "name": "vsliveshare-1.0.5669.zip",
-            "sha256": "sha256-hL0FtkTTc9QTfckTdSrsZEO/kG3MbAmDRjcBjNZqcBU=",
+            "name": "vsliveshare-1.0.5679.zip",
+            "sha256": "sha256-2oMjx8lDCyiczZyK0moh1oPQo+yTHUBpZdonmItCZQQ=",
             "type": "url",
-            "url": "https://MS-vsliveshare.gallery.vsassets.io/_apis/public/gallery/publisher/MS-vsliveshare/extension/vsliveshare/1.0.5669/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+            "url": "https://MS-vsliveshare.gallery.vsassets.io/_apis/public/gallery/publisher/MS-vsliveshare/extension/vsliveshare/1.0.5679/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
-        "version": "1.0.5669"
+        "version": "1.0.5679"
     },
     "vscode-extensions-material-theme": {
         "cargoLocks": null,
