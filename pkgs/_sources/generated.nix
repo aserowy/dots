@@ -102,11 +102,11 @@
   };
   vscode-extensions-remote-containers = {
     pname = "vscode-extensions-remote-containers";
-    version = "0.243.0";
+    version = "0.244.0";
     src = fetchurl {
-      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.243.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "remote-containers-0.243.0.zip";
-      sha256 = "sha256-idDmCZCQu3d3z47HjlFLd5Nwrruez1BP3pnPYOV49SQ=";
+      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.244.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "remote-containers-0.244.0.zip";
+      sha256 = "sha256-j1qw3NXztMXntvVEJZbCiaSqLjK78ZqK7iJNMCpx2VQ=";
     };
     name = "remote-containers";
     publisher = "ms-vscode-remote";
@@ -135,11 +135,11 @@
   };
   vscode-extensions-vscode-icons = {
     pname = "vscode-extensions-vscode-icons";
-    version = "11.14.0";
+    version = "11.15.0";
     src = fetchurl {
-      url = "https://vscode-icons-team.gallery.vsassets.io/_apis/public/gallery/publisher/vscode-icons-team/extension/vscode-icons/11.14.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "vscode-icons-11.14.0.zip";
-      sha256 = "sha256-mS2prMfjqDfMvX/nGkd2Q7Xjwg0GwyENFpwl0yMgduk=";
+      url = "https://vscode-icons-team.gallery.vsassets.io/_apis/public/gallery/publisher/vscode-icons-team/extension/vscode-icons/11.15.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "vscode-icons-11.15.0.zip";
+      sha256 = "sha256-LsqdEcDLhS8UJBn7jdKDC+PTq3bPOl8n3c6cwuN7Z84=";
     };
     name = "vscode-icons";
     publisher = "vscode-icons-team";
