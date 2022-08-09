@@ -80,11 +80,11 @@
   };
   vscode-extensions-live-share = {
     pname = "vscode-extensions-live-share";
-    version = "1.0.5679";
+    version = "1.0.5683";
     src = fetchurl {
-      url = "https://MS-vsliveshare.gallery.vsassets.io/_apis/public/gallery/publisher/MS-vsliveshare/extension/vsliveshare/1.0.5679/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "vsliveshare-1.0.5679.zip";
-      sha256 = "sha256-2oMjx8lDCyiczZyK0moh1oPQo+yTHUBpZdonmItCZQQ=";
+      url = "https://MS-vsliveshare.gallery.vsassets.io/_apis/public/gallery/publisher/MS-vsliveshare/extension/vsliveshare/1.0.5683/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "vsliveshare-1.0.5683.zip";
+      sha256 = "sha256-PZxDDCsLLMzdPdEtZiooeB8goo++TQs3jXg76xdv0VQ=";
     };
     name = "vsliveshare";
     publisher = "MS-vsliveshare";
