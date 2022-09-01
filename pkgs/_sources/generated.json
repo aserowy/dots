@@ -31,11 +31,11 @@
             "name": null,
             "owner": "khanhas",
             "repo": "spicetify-cli",
-            "rev": "v2.12.0",
-            "sha256": "sha256-QJfR6DtsblNCTssT2tvli6FNFzK9+lqyRLSTQXOH4Ok=",
+            "rev": "v2.13.0",
+            "sha256": "sha256-XsYZoJDSaAp+oMTy5YWM9aM+TCNkqF5WXBhU/axcEVk=",
             "type": "github"
         },
-        "version": "v2.12.0"
+        "version": "v2.13.0"
     },
     "spicetify-themes": {
         "cargoLocks": null,
@@ -140,12 +140,12 @@
         },
         "pinned": false,
         "src": {
-            "name": "vsliveshare-1.0.5696.zip",
-            "sha256": "sha256-017sdHHraUHlCLiFsI2JbK1PepeCr2G/qSTy5jqeuuM=",
+            "name": "vsliveshare-1.0.5705.zip",
+            "sha256": "sha256-4Tv97WqrFSk7Mtcq6vF0NnsggVj9HPKFV+GKgX15ogM=",
             "type": "url",
-            "url": "https://MS-vsliveshare.gallery.vsassets.io/_apis/public/gallery/publisher/MS-vsliveshare/extension/vsliveshare/1.0.5696/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+            "url": "https://MS-vsliveshare.gallery.vsassets.io/_apis/public/gallery/publisher/MS-vsliveshare/extension/vsliveshare/1.0.5705/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
-        "version": "1.0.5696"
+        "version": "1.0.5705"
     },
     "vscode-extensions-material-theme": {
         "cargoLocks": null,
@@ -174,12 +174,12 @@
         },
         "pinned": false,
         "src": {
-            "name": "remote-containers-0.250.0.zip",
-            "sha256": "sha256-/y+h+eOwbUF8pS2OIV7Go/FHUfZqFB5SHVYJ8P0+7Mc=",
+            "name": "remote-containers-0.252.0.zip",
+            "sha256": "sha256-pXd2IjbRwYgUAGVIMLE9mQwR8mG/x0MoMfK8zVh3Mvs=",
             "type": "url",
-            "url": "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.250.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+            "url": "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.252.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
-        "version": "0.250.0"
+        "version": "0.252.0"
     },
     "vscode-extensions-remote-wsl": {
         "cargoLocks": null,
