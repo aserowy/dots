@@ -115,8 +115,7 @@ bindsym $mod+$alt+$right resize shrink width 20px
 
 # GAMING
 
-for_window [title="MTGA"] move container to workspace "mtga", floating disable, focus
-for_window [class="gw2-64.exe" tiling] move container to workspace "gw", focus, move left, move left, move left, resize grow width 700px
+for_window [class="gw2-64.exe" tiling] move container to workspace "gw", focus
 
 # MUSIC
 
