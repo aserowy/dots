@@ -14,13 +14,13 @@
   };
   spicetify-cli = {
     pname = "spicetify-cli";
-    version = "v2.13.0";
+    version = "v2.13.1";
     src = fetchFromGitHub ({
       owner = "khanhas";
       repo = "spicetify-cli";
-      rev = "v2.13.0";
+      rev = "v2.13.1";
       fetchSubmodules = false;
-      sha256 = "sha256-XsYZoJDSaAp+oMTy5YWM9aM+TCNkqF5WXBhU/axcEVk=";
+      sha256 = "sha256-YgT4HlVqm58CEGoc/bNjo0xEzoNIcTpKGZkSdhcAgis=";
     });
   };
   spicetify-themes = {
@@ -80,11 +80,11 @@
   };
   vscode-extensions-live-share = {
     pname = "vscode-extensions-live-share";
-    version = "1.0.5711";
+    version = "1.0.5719";
     src = fetchurl {
-      url = "https://MS-vsliveshare.gallery.vsassets.io/_apis/public/gallery/publisher/MS-vsliveshare/extension/vsliveshare/1.0.5711/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "vsliveshare-1.0.5711.zip";
-      sha256 = "sha256-V3qifWxQmJ2jxyaG50N4A4+/YVITSuSCg37VNP9gsZU=";
+      url = "https://MS-vsliveshare.gallery.vsassets.io/_apis/public/gallery/publisher/MS-vsliveshare/extension/vsliveshare/1.0.5719/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "vsliveshare-1.0.5719.zip";
+      sha256 = "sha256-CXcVj+7JX+ZuYme3jEFTuWrQJvDmKWLazrgh4hOqfGQ=";
     };
     name = "vsliveshare";
     publisher = "MS-vsliveshare";
