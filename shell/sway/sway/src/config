@@ -28,6 +28,12 @@ exec_always /etc/sway/scripts/gsettings.sh
 exec /etc/sway/scripts/wallpaper.sh
 exec wl-paste -t text --watch clipman store --no-persist
 
+# Don't allow applications to inhibit shortcuts, i.e. grab total control of the
+# keyboard. Chrome currently abuses this by enabling it for all "--app=..."
+# shortcuts.
+
+seat * shortcuts_inhibitor disable
+
 # STYLING
 
 font pango:monospace 0

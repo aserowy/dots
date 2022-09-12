@@ -1,8 +1,10 @@
 { config, pkgs, ... }:
 {
   home.packages = with pkgs; [
+    google-chrome
+
     (pkgs.writeShellScriptBin "teams" ''
-      ${microsoft-edge}/bin/microsoft-edge \
+      ${google-chrome}/bin/google-chrome-stable \
         --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer \
         --ozone-platform=wayland \
         --new-window \
