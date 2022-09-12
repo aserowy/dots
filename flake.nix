@@ -29,20 +29,23 @@
 
       homeConfigurations = {
         "serowy@DESKTOP-UVAKAQL" = home.lib.homeManagerConfiguration {
-          configuration = { config, pkgs, ... }: {
-            nixpkgs.overlays = [
-              (import ./pkgs)
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
 
-              (neocode-overlay { system = "x86_64-linux"; })
-            ];
-            imports = [
-              ./home/environments/wsl-work.nix
-            ];
-          };
-          homeDirectory = "/home/serowy";
-          stateVersion = "21.05";
-          system = "x86_64-linux";
-          username = "serowy";
+          modules = [
+            {
+              nixpkgs.overlays = [
+                (import ./pkgs)
+
+                (neocode-overlay { system = "x86_64-linux"; })
+              ];
+            }
+            {
+              home.homeDirectory = "/home/serowy";
+              home.stateVersion = "22.05";
+              home.username = "serowy";
+            }
+            ./home/environments/wsl-work.nix
+          ];
         };
       };
 
