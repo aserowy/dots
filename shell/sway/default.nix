@@ -23,7 +23,7 @@
 
     ./tuigreeter.nix
     ./sway
-    ./swayidle.nix
+    /* ./swayidle.nix */
     ./waybar
   ];
 
