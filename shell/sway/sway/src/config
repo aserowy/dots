@@ -121,6 +121,7 @@ bindsym $mod+$alt+$right resize shrink width 20px
 
 # GAMING
 
+for_window [title="Lutris" tiling] move container to workspace "gaming", focus
 for_window [class="gw2-64.exe" tiling] move container to workspace "gw", focus
 
 # MUSIC
