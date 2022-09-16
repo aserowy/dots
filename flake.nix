@@ -47,6 +47,25 @@
             ./home/environments/wsl-work.nix
           ];
         };
+        "serowy@UIN01PC013901" = home.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+
+          modules = [
+            {
+              nixpkgs.overlays = [
+                (import ./pkgs)
+
+                (neocode-overlay { system = "x86_64-linux"; })
+              ];
+            }
+            {
+              home.homeDirectory = "/home/serowy";
+              home.stateVersion = "22.05";
+              home.username = "serowy";
+            }
+            ./home/environments/wsl-ui.nix
+          ];
+        };
       };
 
       nixosConfigurations = {
