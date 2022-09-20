@@ -11,6 +11,7 @@
     extraConfig = {
       core.editor = "nvim";
       init.defaultBranch = "main";
+      push.autoSetupRemote = "true";
     };
   };
 }
