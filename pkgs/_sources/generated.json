@@ -107,11 +107,11 @@
             "name": null,
             "owner": "tmux-plugins",
             "repo": "tmux-resurrect",
-            "rev": "75458f91c805268496029633baac63d30d2e79cc",
-            "sha256": "sha256-QZhlLFl8KKBbd8V6AYs0AZEGFmjQJmy6VJZF9pDVD+I=",
+            "rev": "88297b4c3abcd3a15c874a85cf3586aa7f536e1a",
+            "sha256": "sha256-jLDncwNDX166yeJF++SZsWoW9AthjUxZiXtFN8YaB2g=",
             "type": "github"
         },
-        "version": "75458f91c805268496029633baac63d30d2e79cc"
+        "version": "88297b4c3abcd3a15c874a85cf3586aa7f536e1a"
     },
     "vscode-extensions-keyboard-quickfix": {
         "cargoLocks": null,
