@@ -174,12 +174,12 @@
         },
         "pinned": false,
         "src": {
-            "name": "remote-containers-0.252.0.zip",
-            "sha256": "sha256-pXd2IjbRwYgUAGVIMLE9mQwR8mG/x0MoMfK8zVh3Mvs=",
+            "name": "remote-containers-0.253.0.zip",
+            "sha256": "sha256-TwVpWc2B5cgo0xKGNNhaf5N/WA776ZmvjMC7V4glNCQ=",
             "type": "url",
-            "url": "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.252.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+            "url": "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.253.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
-        "version": "0.252.0"
+        "version": "0.253.0"
     },
     "vscode-extensions-remote-wsl": {
         "cargoLocks": null,
@@ -191,12 +191,12 @@
         },
         "pinned": false,
         "src": {
-            "name": "remote-wsl-0.66.3.zip",
-            "sha256": "sha256-Cgg5kszLWBrHYqA/SNhJwmfUg2oG53427diw8jtUVFM=",
+            "name": "remote-wsl-0.72.0.zip",
+            "sha256": "sha256-wVsEhVpO614KzrRUvh0yRoSkswUFLlvbphmbR4BFabA=",
             "type": "url",
-            "url": "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-wsl/0.66.3/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+            "url": "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-wsl/0.72.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
-        "version": "0.66.3"
+        "version": "0.72.0"
     },
     "vscode-extensions-todo-tree": {
         "cargoLocks": null,
@@ -225,12 +225,12 @@
         },
         "pinned": false,
         "src": {
-            "name": "vscode-icons-11.17.0.zip",
-            "sha256": "sha256-WZE/nAc8YAipCRQHxi4VqyEfj3RwFHOedaaaeJPAqck=",
+            "name": "vscode-icons-11.18.0.zip",
+            "sha256": "sha256-aP3YIS6tAmY0iG2sHTt3W1KTihpnKRk0mc7cmKxFx2Y=",
             "type": "url",
-            "url": "https://vscode-icons-team.gallery.vsassets.io/_apis/public/gallery/publisher/vscode-icons-team/extension/vscode-icons/11.17.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+            "url": "https://vscode-icons-team.gallery.vsassets.io/_apis/public/gallery/publisher/vscode-icons-team/extension/vscode-icons/11.18.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
-        "version": "11.17.0"
+        "version": "11.18.0"
     },
     "vscode-extensions-vscode-neovim": {
         "cargoLocks": null,
