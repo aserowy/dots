@@ -17,7 +17,7 @@
   };
 
   nix = {
-    package = pkgs.nixFlakes;
+    package = pkgs.nixVersions.stable;
     readOnlyStore = false;
     extraOptions = ''
       experimental-features = nix-command flakes

@@ -7,7 +7,7 @@ in
 {
   home.packages = with pkgs; [
     libappindicator-gtk3
-    xdg_utils
+    xdg-utils
   ];
 
   gtk = {
