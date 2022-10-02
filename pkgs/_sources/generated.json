@@ -225,12 +225,12 @@
         },
         "pinned": false,
         "src": {
-            "name": "vscode-icons-11.18.0.zip",
-            "sha256": "sha256-aP3YIS6tAmY0iG2sHTt3W1KTihpnKRk0mc7cmKxFx2Y=",
+            "name": "vscode-icons-11.19.0.zip",
+            "sha256": "sha256-JFyfXjFaWJrZM2nEya+tRUJCNt56qV/1PA+4b+1SFO8=",
             "type": "url",
-            "url": "https://vscode-icons-team.gallery.vsassets.io/_apis/public/gallery/publisher/vscode-icons-team/extension/vscode-icons/11.18.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+            "url": "https://vscode-icons-team.gallery.vsassets.io/_apis/public/gallery/publisher/vscode-icons-team/extension/vscode-icons/11.19.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
-        "version": "11.18.0"
+        "version": "11.19.0"
     },
     "vscode-extensions-vscode-neovim": {
         "cargoLocks": null,
