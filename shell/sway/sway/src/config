@@ -52,7 +52,7 @@ gaps outer 5
 gaps inner 20
 
 # KEYBINDINGS
-    
+
 set $mod Mod4
 set $alt Mod1
 

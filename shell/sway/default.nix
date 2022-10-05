@@ -19,7 +19,7 @@
     ../shared/spotify.nix
 
     # FIX: needs config under home
-    #./kanshi.nix
+    /* ./kanshi.nix */
 
     ./tuigreeter.nix
     ./sway
