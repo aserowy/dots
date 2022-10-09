@@ -88,8 +88,6 @@ bindsym $mod+Shift+m exec /etc/sway/scripts/set_mark.sh
 
 bindsym $mod+s scratchpad show
 
-workspace_auto_back_and_forth yes
-
 ## Window
 
 bindsym $mod+v splith
