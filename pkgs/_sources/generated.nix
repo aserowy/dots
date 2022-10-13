@@ -80,11 +80,11 @@
   };
   vscode-extensions-live-share = {
     pname = "vscode-extensions-live-share";
-    version = "1.0.5733";
+    version = "1.0.5735";
     src = fetchurl {
-      url = "https://MS-vsliveshare.gallery.vsassets.io/_apis/public/gallery/publisher/MS-vsliveshare/extension/vsliveshare/1.0.5733/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "vsliveshare-1.0.5733.zip";
-      sha256 = "sha256-KbD77j+ZRedMo3iX/dAu17vOSZBZaVpjzOw6rgBZ85w=";
+      url = "https://MS-vsliveshare.gallery.vsassets.io/_apis/public/gallery/publisher/MS-vsliveshare/extension/vsliveshare/1.0.5735/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "vsliveshare-1.0.5735.zip";
+      sha256 = "sha256-oKFnX7/SFKjHD4Il1k2R+CTOz37W+EPsfNE/GEgIrG0=";
     };
     name = "vsliveshare";
     publisher = "MS-vsliveshare";
@@ -146,11 +146,11 @@
   };
   vscode-extensions-vscode-neovim = {
     pname = "vscode-extensions-vscode-neovim";
-    version = "0.0.89";
+    version = "0.0.92";
     src = fetchurl {
-      url = "https://asvetliakov.gallery.vsassets.io/_apis/public/gallery/publisher/asvetliakov/extension/vscode-neovim/0.0.89/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "vscode-neovim-0.0.89.zip";
-      sha256 = "sha256-4cCaMw7joaXeq+dk5cPZz6/zXDlxWeP/3IjkgSmmRvs=";
+      url = "https://asvetliakov.gallery.vsassets.io/_apis/public/gallery/publisher/asvetliakov/extension/vscode-neovim/0.0.92/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "vscode-neovim-0.0.92.zip";
+      sha256 = "sha256-3PT6fQXzDXDwH36mqhjCwYIN4SHOMxXyiOjwlWghpg0=";
     };
     name = "vscode-neovim";
     publisher = "asvetliakov";
