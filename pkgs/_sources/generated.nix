@@ -58,13 +58,13 @@
   };
   tmux-resurrect = {
     pname = "tmux-resurrect";
-    version = "88297b4c3abcd3a15c874a85cf3586aa7f536e1a";
+    version = "a2ddfb96b94bb64a7a2e3f5fa2a7c57dce8ad579";
     src = fetchFromGitHub ({
       owner = "tmux-plugins";
       repo = "tmux-resurrect";
-      rev = "88297b4c3abcd3a15c874a85cf3586aa7f536e1a";
+      rev = "a2ddfb96b94bb64a7a2e3f5fa2a7c57dce8ad579";
       fetchSubmodules = false;
-      sha256 = "sha256-jLDncwNDX166yeJF++SZsWoW9AthjUxZiXtFN8YaB2g=";
+      sha256 = "sha256-DFDdTMwRQXk9g3OlP/3JAw5iPaeK4Cks06QFZVP6iL0=";
     });
   };
   vscode-extensions-keyboard-quickfix = {
@@ -146,11 +146,11 @@
   };
   vscode-extensions-vscode-neovim = {
     pname = "vscode-extensions-vscode-neovim";
-    version = "0.0.92";
+    version = "0.0.93";
     src = fetchurl {
-      url = "https://asvetliakov.gallery.vsassets.io/_apis/public/gallery/publisher/asvetliakov/extension/vscode-neovim/0.0.92/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "vscode-neovim-0.0.92.zip";
-      sha256 = "sha256-3PT6fQXzDXDwH36mqhjCwYIN4SHOMxXyiOjwlWghpg0=";
+      url = "https://asvetliakov.gallery.vsassets.io/_apis/public/gallery/publisher/asvetliakov/extension/vscode-neovim/0.0.93/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "vscode-neovim-0.0.93.zip";
+      sha256 = "sha256-lRNuFjD4XGsjfwzLLZVpYb9GKR3qIVLn+2S77S+ur8M=";
     };
     name = "vscode-neovim";
     publisher = "asvetliakov";
