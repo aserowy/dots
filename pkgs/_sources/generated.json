@@ -31,11 +31,11 @@
             "name": null,
             "owner": "khanhas",
             "repo": "spicetify-cli",
-            "rev": "v2.14.0",
-            "sha256": "sha256-iaaf5ZHaHSEkQdxqZtsc6K/3+x6gAfvgQoWWYWcFeV4=",
+            "rev": "v2.14.1",
+            "sha256": "sha256-262tnSKX6M9ggm4JIs0pANeq2JSNYzKkTN8awpqLyMM=",
             "type": "github"
         },
-        "version": "v2.14.0"
+        "version": "v2.14.1"
     },
     "spicetify-themes": {
         "cargoLocks": null,
