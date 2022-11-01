@@ -174,12 +174,12 @@
         },
         "pinned": false,
         "src": {
-            "name": "remote-containers-0.262.0.zip",
-            "sha256": "sha256-L7RRc4IiIfFSiiBj+0t/y0XOVa901PjcFiOvZe/hWpM=",
+            "name": "remote-containers-0.262.1.zip",
+            "sha256": "sha256-Wv0owmHlwK8EwH/8z6LxVwcPR/qd4RYD5my4sfRndX8=",
             "type": "url",
-            "url": "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.262.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+            "url": "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.262.1/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
-        "version": "0.262.0"
+        "version": "0.262.1"
     },
     "vscode-extensions-remote-wsl": {
         "cargoLocks": null,
