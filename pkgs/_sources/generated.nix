@@ -124,11 +124,11 @@
   };
   vscode-extensions-todo-tree = {
     pname = "vscode-extensions-todo-tree";
-    version = "0.0.219";
+    version = "0.0.220";
     src = fetchurl {
-      url = "https://gruntfuggly.gallery.vsassets.io/_apis/public/gallery/publisher/gruntfuggly/extension/todo-tree/0.0.219/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "todo-tree-0.0.219.zip";
-      sha256 = "sha256-hV92FSwoIShvoVCxIR4h7qAFAZITE3L1mxNrWkd0y8Y=";
+      url = "https://gruntfuggly.gallery.vsassets.io/_apis/public/gallery/publisher/gruntfuggly/extension/todo-tree/0.0.220/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "todo-tree-0.0.220.zip";
+      sha256 = "sha256-U7aY2/ESz9f8foBjydy1G/bWd7CLNyIjDWE3pytZfxo=";
     };
     name = "todo-tree";
     publisher = "gruntfuggly";
