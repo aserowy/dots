@@ -16,7 +16,7 @@
     ../shared/dunst.nix
     ../shared/gtk.nix
     ../shared/lutris.nix
-    ../shared/rofi
+    ../shared/rofi/rofi-wayland.nix
     ../shared/spotify.nix
 
     # FIX: needs config under home
