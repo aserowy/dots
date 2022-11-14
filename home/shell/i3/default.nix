@@ -1,13 +1,7 @@
 { config, pkgs, ... }:
 {
-  home.stateVersion = "22.05";
-
   home.packages = with pkgs; [
-    ardour
-    discord
     gnome.gnome-screenshot
-    gparted
-    remmina
     teams
   ];
 
