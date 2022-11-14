@@ -4,7 +4,7 @@ if [ "$@" ]
 then
     case "$@" in
         drun)
-            rofi -config /etc/rofi/config.rasi -show drun
+            rofi -config /etc/rofi/config.rasi -modi drun -show drun
         ;;
         mark)
             rofi -config /etc/rofi/list.rasi -modi mark:/etc/rofi/focus_by_mark.sh -show mark
