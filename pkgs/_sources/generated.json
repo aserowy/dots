@@ -140,12 +140,12 @@
         },
         "pinned": false,
         "src": {
-            "name": "vsliveshare-1.0.5762.zip",
-            "sha256": "sha256-mwp3DvvekkPymYesnMt6zYolX4IG20/jtOTyALZdKas=",
+            "name": "vsliveshare-1.0.5776.zip",
+            "sha256": "sha256-BamhVT1fmgpDKhoBTYdwIvuWUbHzF363WnKLz2ql3Lo=",
             "type": "url",
-            "url": "https://MS-vsliveshare.gallery.vsassets.io/_apis/public/gallery/publisher/MS-vsliveshare/extension/vsliveshare/1.0.5762/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+            "url": "https://MS-vsliveshare.gallery.vsassets.io/_apis/public/gallery/publisher/MS-vsliveshare/extension/vsliveshare/1.0.5776/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
-        "version": "1.0.5762"
+        "version": "1.0.5776"
     },
     "vscode-extensions-material-theme": {
         "cargoLocks": null,
