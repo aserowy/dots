@@ -2,8 +2,6 @@
     "position": "left",
 
     "modules-left": [
-        "custom/power",
-        "custom/launch",
         "custom/spotify-monitor",
         "custom/spotify-metadata",
         "custom/spotify-prev",
@@ -46,14 +44,6 @@
         "on-click-middle": "grimshot --notify save window - | swappy -f -",
         "on-click-right": "grimshot --notify save area - | swappy -f -"
     },
-    "custom/launch": {
-        "format": "",
-        "on-click": "/etc/rofi/launch.sh drun"
-    },
-    "custom/power": {
-        "format": "",
-        "on-click": "/etc/rofi/launch.sh power"
-    },
     "custom/recorder": {
         "format": "",
         "tooltip": false,
@@ -72,7 +62,7 @@
         "exec": "/etc/xdg/waybar/spotify/metadata.sh",
         "format": "",
         "interval": "once",
-        "on-click": "sway workspace music",
+        "on-click": "scratchpad show",
         "return-type": "json",
         "signal": 5
     },
