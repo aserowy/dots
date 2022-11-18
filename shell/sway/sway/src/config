@@ -132,6 +132,10 @@ exec spotify
 
 for_window [class="Spotify"] move scratchpad
 
+# NOTES
+
+for_window [class="obsidian" tiling] move container to workspace "notes", focus
+
 # WAYBAR
 
 bar {
