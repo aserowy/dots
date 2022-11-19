@@ -101,7 +101,7 @@
           modules = [
             {
               nixpkgs.overlays = [
-                fenix.overlay
+                fenix.overlays.default
                 (import ./pkgs)
 
                 (neocode-overlay { system = "aarch64-linux"; syncBuild = true; })
