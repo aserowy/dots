@@ -3,7 +3,7 @@
   font-family: FiraCode Nerd Font Mono;
   font-size: 100%;
   font-weight: 500;
-  text-shadow: 1px 1px 3px #000000;
+  text-shadow: 2px 2px 3px #000000;
 }
 
 window#waybar {
@@ -16,6 +16,7 @@ window > box {
 }
 
 .modules-left {
+  padding-top: 20px;
 }
 
 .modules-center {
@@ -27,10 +28,12 @@ window > box {
 
 #custom-grimshot {
   font-size: 1.5em;
+  padding: 0;
   color: #fff;
 }
 #custom-recorder {
   font-size: 1.5em;
+  padding: 0;
   color: #fff;
 }
 #custom-recorder.recording {
@@ -39,6 +42,7 @@ window > box {
 
 #custom-spotify-metadata {
   font-size: 2.25em;
+  padding: 0;
   color: #fff;
 }
 #custom-spotify-metadata.playing {
@@ -78,6 +82,7 @@ window > box {
 
 #pulseaudio {
   font-size: 1.5em;
+  padding: 0;
   color: #fff;
 }
 
@@ -87,12 +92,14 @@ window > box {
 
 #network {
   font-size: 1.5em;
+  padding: 0;
   padding-bottom: 20px;
   color: #fff;
 }
 
 #battery {
   font-size: 1.5em;
+  padding: 0;
   color: #fff;
 }
 
