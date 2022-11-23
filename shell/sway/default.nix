@@ -8,6 +8,7 @@
     pavucontrol
     sway-contrib.grimshot
     wezterm
+    wl-clipboard
   ];
 
   imports = [
