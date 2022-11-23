@@ -94,6 +94,8 @@ bindsym $mod+s scratchpad show
 
 ## Window
 
+mouse_warping none
+
 bindsym $mod+v splith
 bindsym $mod+x splitv
 
