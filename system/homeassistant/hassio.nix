@@ -78,6 +78,7 @@
       ];
       volumes = [
         "/srv/influxdb:/var/lib/influxdb2"
+        "/srv/influxdb/config.yml:/etc/influxdb2/config.yml"
       ];
     };
 
