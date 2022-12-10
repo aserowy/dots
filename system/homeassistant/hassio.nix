@@ -82,6 +82,22 @@
       ];
     };
 
+    "grafana" = {
+      image = "grafana/grafana-oss:latest";
+      environment = {
+        "GF_PATHS_CONFIG" = "/var/lib/grafana/grafana.ini";
+      };
+      extraOptions = [
+        "--network=ha-network"
+      ];
+      volumes = [
+        "/srv/grafana:/var/lib/grafana"
+      ];
+      ports = [
+        "8126:3000"
+      ];
+    };
+
     "home-assistant" = {
       image = "homeassistant/home-assistant:stable";
       extraOptions = [
