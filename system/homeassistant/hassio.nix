@@ -55,6 +55,22 @@
       ];
     };
 
+    "mariadb" = {
+      image = "mariadb:latest";
+      environment = {
+        "MARIADB_DATABASE" = "homeassistant";
+        "MARIADB_USER" = "homeassistant";
+        "MARIADB_PASSWORD_FILE" = "/var/lib/mysql/user_password";
+        "MARIADB_ROOT_PASSWORD_FILE" = "/var/lib/mysql/root_password";
+      };
+      extraOptions = [
+        "--network=ha-network"
+      ];
+      volumes = [
+        "/srv/mariadb:/var/lib/mysql"
+      ];
+    };
+
     "home-assistant" = {
       image = "homeassistant/home-assistant:stable";
       extraOptions = [
@@ -63,6 +79,7 @@
       ];
       dependsOn = [
         "mosquitto"
+        "mariadb"
       ];
       ports = [
         "80:8123"
@@ -73,6 +90,7 @@
         "/etc/localtime:/etc/localtime:ro"
       ];
     };
+
     "docker2mqtt" = {
       image = "serowy/docker2mqtt:latest";
       extraOptions = [
