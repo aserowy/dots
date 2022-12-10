@@ -71,6 +71,16 @@
       ];
     };
 
+    "influxdb" = {
+      image = "influxdb:latest";
+      extraOptions = [
+        "--network=ha-network"
+      ];
+      volumes = [
+        "/srv/influxdb:/var/lib/influxdb2"
+      ];
+    };
+
     "home-assistant" = {
       image = "homeassistant/home-assistant:stable";
       extraOptions = [
@@ -78,8 +88,9 @@
         "--device=/dev/serial/by-id/usb-EnOcean_GmbH_EnOcean_USB_300_DC_FT50B8B0-if00-port0:/dev/serial/by-id/usb-EnOcean_GmbH_EnOcean_USB_300_DC_FT50B8B0-if00-port0"
       ];
       dependsOn = [
-        "mosquitto"
+        "influxdb"
         "mariadb"
+        "mosquitto"
       ];
       ports = [
         "80:8123"
