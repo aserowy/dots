@@ -90,6 +90,9 @@
       extraOptions = [
         "--network=ha-network"
       ];
+      dependsOn = [
+        "influxdb"
+      ];
       volumes = [
         "/srv/grafana:/var/lib/grafana"
       ];
