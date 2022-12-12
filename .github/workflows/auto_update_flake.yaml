@@ -25,7 +25,7 @@ jobs:
         run: |
           git config --local user.email "serowy@hotmail.com"
           git config --local user.name "aserowy"
-          nix flake update --commit-lock-file
+          nix flake update
 
       - name: check flake
         run: nix flake check -v --show-trace
@@ -33,3 +33,5 @@ jobs:
 
       - name: commit and push changes
         uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: updated flake inputs
