@@ -50,11 +50,11 @@
             "name": null,
             "owner": "morpheusthewhite",
             "repo": "spicetify-themes",
-            "rev": "e84ae3f7a64a2f849f4a219ec549715ec4d3f2c3",
-            "sha256": "sha256-nZ3Go3SpAVMz9IKquN2UeKCrxMCKT6W8bsMKZGG7cew=",
+            "rev": "ad22edee6a3d7880302fe1f1ec3371f5c6eb4561",
+            "sha256": "sha256-dhWMtIylZ5QakObgFxEv3EPQbV4kIiVLaEa/URt+Qi0=",
             "type": "github"
         },
-        "version": "e84ae3f7a64a2f849f4a219ec549715ec4d3f2c3"
+        "version": "ad22edee6a3d7880302fe1f1ec3371f5c6eb4561"
     },
     "tmux-continuum": {
         "cargoLocks": null,
