@@ -6,6 +6,7 @@
 
     ./borgbackup.nix
     ./hassio.nix
+    ./telegraf.nix
   ];
 
   boot.loader.raspberryPi.firmwareConfig = "dtparam=sd_poll_once=on";
