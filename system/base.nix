@@ -83,7 +83,7 @@
         "--no-write-lock-file"
         "-L"
       ];
-      dates = "daily";
+      dates = "03:45";
     };
   };
 
