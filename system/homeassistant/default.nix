@@ -5,6 +5,7 @@
     ./hardware-configuration.nix
 
     ./borgbackup.nix
+    ./fan-pwm.nix
     ./hassio.nix
     ./telegraf.nix
   ];
