@@ -74,7 +74,7 @@
     wantedBy = [ "multi-user.target" ];
     path = [ pkgs.bash ];
     serviceConfig = {
-      ExecStart = "python3 /etc/fan-control.py";
+      ExecStart = "${pkgs.python3Minimal}/bin/python /etc/fan-control.py";
     };
   };
 }
