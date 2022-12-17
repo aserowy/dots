@@ -5,9 +5,6 @@
 
     daemon = {
       enable = true;
-      settings = {
-        ConcurrentDatabaseReload = false;
-      };
     };
   };
 }
