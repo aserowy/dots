@@ -1,7 +1,12 @@
 { config, pkgs, ... }:
+let
+    python-packaged = pkgs.python310.withPackages (p: with p; [
+        rpi-gpio
+    ]);
+in
 {
   environment.systemPackages = with pkgs; [
-    pkgs.python3Minimal
+    python-packaged
   ];
 
   environment.etc."fan-control.py" = {
@@ -14,10 +19,10 @@
 
       IO.setwarnings(False)
       IO.setmode (IO.BCM)
-      IO.setup(14,IO.OUT)
+      IO.setup(18,IO.OUT)
 
-      # Set GPIO14 as a PWM output, with 100Hz frequency (this should match your fans specified PWM frequency)
-      fan = IO.PWM(14,100)
+      # Set GPIO18 as a PWM output, with 100Hz frequency (this should match your fans specified PWM frequency)
+      fan = IO.PWM(18,100)
       fan.start(0)
 
       minTemp = 25
@@ -72,9 +77,8 @@
   systemd.services.fan-control = {
     description = "fan pwm control";
     wantedBy = [ "multi-user.target" ];
-    path = [ pkgs.bash ];
     serviceConfig = {
-      ExecStart = "${pkgs.python3Minimal}/bin/python /etc/fan-control.py";
+      ExecStart = "${python-packaged}/bin/python /etc/fan-control.py";
     };
   };
 }
