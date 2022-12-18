@@ -10,6 +10,15 @@ in
     python-packaged
   ];
 
+  systemd.services.fan-control = {
+    description = "fan pwm control";
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      ExecStart = "${python-packaged}/bin/python /etc/fan-control.py";
+    };
+    path = [ pkgs.libraspberrypi ];
+  };
+
   environment.etc."fan-control.py" = {
     text = ''
       import RPi.GPIO as IO
@@ -73,13 +82,5 @@ in
 
           time.sleep(5)
     '';
-  };
-
-  systemd.services.fan-control = {
-    description = "fan pwm control";
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      ExecStart = "${python-packaged}/bin/python /etc/fan-control.py";
-    };
   };
 }
