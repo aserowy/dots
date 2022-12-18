@@ -1,11 +1,12 @@
 { config, pkgs, ... }:
 let
-    python-packaged = pkgs.python310.withPackages (p: with p; [
-        rpi-gpio
-    ]);
+  python-packaged = pkgs.python310.withPackages (p: with p; [
+    rpi-gpio
+  ]);
 in
 {
   environment.systemPackages = with pkgs; [
+    libraspberrypi
     python-packaged
   ];
 
