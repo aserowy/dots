@@ -69,9 +69,8 @@
   };
 
   virtualisation.oci-containers.containers = {
-    "mosquitto" = {
+    mosquitto = {
       image = "eclipse-mosquitto:latest";
-      user = "service-mosquitto";
       extraOptions = [
         "--network=ha-network"
       ];
@@ -82,9 +81,8 @@
       ];
     };
 
-    "zigbee2mqtt" = {
+    zigbee2mqtt = {
       image = "koenkk/zigbee2mqtt:latest";
-      user = "service-zigbee";
       environment = {
         "TZ" = "Europe/Berlin";
       };
@@ -104,9 +102,8 @@
       ];
     };
 
-    "mariadb" = {
+    mariadb = {
       image = "mariadb:latest";
-      user = "service-mariadb";
       environment = {
         "MARIADB_DATABASE" = "homeassistant";
         "MARIADB_USER" = "homeassistant";
@@ -135,9 +132,8 @@
       ];
     };
 
-    "grafana" = {
+    grafana = {
       image = "grafana/grafana-oss:latest";
-      user = "service-grafana";
       environment = {
         "GF_PATHS_CONFIG" = "/var/lib/grafana/grafana.ini";
       };
@@ -155,9 +151,8 @@
       ];
     };
 
-    "home-assistant" = {
+    home-assistant = {
       image = "homeassistant/home-assistant:stable";
-      user = "service-hassio";
       extraOptions = [
         "--network=ha-network"
         "--device=/dev/serial/by-id/usb-EnOcean_GmbH_EnOcean_USB_300_DC_FT50B8B0-if00-port0:/dev/serial/by-id/usb-EnOcean_GmbH_EnOcean_USB_300_DC_FT50B8B0-if00-port0"
@@ -177,9 +172,8 @@
       ];
     };
 
-    "docker2mqtt" = {
+    docker2mqtt = {
       image = "serowy/docker2mqtt:latest";
-      user = "service-docker";
       extraOptions = [
         "--network=ha-network"
       ];
@@ -193,9 +187,8 @@
       ];
     };
 
-    "pihole" = {
+    pihole = {
       image = "pihole/pihole:latest";
-      user = "service-pihole";
       environment = {
         "TZ" = "Europe/Berlin";
         # Run docker logs pihole | grep random to find your random pass.
@@ -216,9 +209,8 @@
       ];
     };
 
-    "watchtower" = {
+    watchtower = {
       image = "containrrr/watchtower:latest";
-      user = "service-watchtower";
       environment = {
         "WATCHTOWER_CLEANUP" = "true";
         "WATCHTOWER_INCLUDE_RESTARTING" = "true";
@@ -231,4 +223,13 @@
       ];
     };
   };
+
+  systemd.services.docker-mosquitto.serviceConfig.User = "service-mosquitto";
+  systemd.services.docker-zigbee2mqtt.serviceConfig.User = "service-zigbee";
+  systemd.services.docker-mariadb.serviceConfig.User = "service-mariadb";
+  systemd.services.docker-grafana.serviceConfig.User = "service-grafana";
+  systemd.services.docker-assistant.serviceConfig.User = "service-hassio";
+  systemd.services.docker-docker2mqtt.serviceConfig.User = "service-docker";
+  systemd.services.docker-pihole.serviceConfig.User = "service-pihole";
+  systemd.services.docker-watchtower.serviceConfig.User = "service-watchtower";
 }
