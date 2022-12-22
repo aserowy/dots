@@ -21,9 +21,46 @@
       '';
   };
 
+  users.users = {
+    service-mosquitto = {
+      isSystemUser = true;
+    };
+    service-zigbee = {
+      isSystemUser = true;
+    };
+    service-mariadb = {
+      isSystemUser = true;
+    };
+    service-influxdb = {
+      isSystemUser = true;
+    };
+    service-grafana = {
+      isSystemUser = true;
+    };
+    service-hassio = {
+      isSystemUser = true;
+    };
+    service-docker = {
+      isSystemUser = true;
+      extraGroups = [
+        "docker"
+      ];
+    };
+    service-pihole = {
+      isSystemUser = true;
+    };
+    service-watchtower = {
+      isSystemUser = true;
+      extraGroups = [
+        "docker"
+      ];
+    };
+  };
+
   virtualisation.oci-containers.containers = {
     "mosquitto" = {
       image = "eclipse-mosquitto:latest";
+      user = "service-mosquitto";
       extraOptions = [
         "--network=ha-network"
       ];
@@ -36,6 +73,7 @@
 
     "zigbee2mqtt" = {
       image = "koenkk/zigbee2mqtt:latest";
+      user = "service-zigbee";
       environment = {
         "TZ" = "Europe/Berlin";
       };
@@ -57,6 +95,7 @@
 
     "mariadb" = {
       image = "mariadb:latest";
+      user = "service-mariadb";
       environment = {
         "MARIADB_DATABASE" = "homeassistant";
         "MARIADB_USER" = "homeassistant";
@@ -87,7 +126,7 @@
 
     "grafana" = {
       image = "grafana/grafana-oss:latest";
-      user = "root";
+      user = "service-grafana";
       environment = {
         "GF_PATHS_CONFIG" = "/var/lib/grafana/grafana.ini";
       };
@@ -107,6 +146,7 @@
 
     "home-assistant" = {
       image = "homeassistant/home-assistant:stable";
+      user = "service-hassio";
       extraOptions = [
         "--network=ha-network"
         "--device=/dev/serial/by-id/usb-EnOcean_GmbH_EnOcean_USB_300_DC_FT50B8B0-if00-port0:/dev/serial/by-id/usb-EnOcean_GmbH_EnOcean_USB_300_DC_FT50B8B0-if00-port0"
@@ -128,6 +168,7 @@
 
     "docker2mqtt" = {
       image = "serowy/docker2mqtt:latest";
+      user = "service-docker";
       extraOptions = [
         "--network=ha-network"
       ];
@@ -143,6 +184,7 @@
 
     "pihole" = {
       image = "pihole/pihole:latest";
+      user = "service-pihole";
       environment = {
         "TZ" = "Europe/Berlin";
         # Run docker logs pihole | grep random to find your random pass.
@@ -165,6 +207,7 @@
 
     "watchtower" = {
       image = "containrrr/watchtower:latest";
+      user = "service-watchtower";
       environment = {
         "WATCHTOWER_CLEANUP" = "true";
         "WATCHTOWER_INCLUDE_RESTARTING" = "true";
