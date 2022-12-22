@@ -21,36 +21,47 @@
       '';
   };
 
+  users.groups.service-restricted = {};
+
   users.users = {
     service-mosquitto = {
       isSystemUser = true;
+      group = "service-restricted";
     };
     service-zigbee = {
       isSystemUser = true;
+      group = "service-restricted";
     };
     service-mariadb = {
       isSystemUser = true;
+      group = "service-restricted";
     };
     service-influxdb = {
       isSystemUser = true;
+      group = "service-restricted";
     };
     service-grafana = {
       isSystemUser = true;
+      group = "service-restricted";
     };
     service-hassio = {
       isSystemUser = true;
+      group = "service-restricted";
     };
     service-docker = {
       isSystemUser = true;
+      group = "service-restricted";
       extraGroups = [
         "docker"
       ];
     };
     service-pihole = {
       isSystemUser = true;
+      group = "service-restricted";
     };
     service-watchtower = {
       isSystemUser = true;
+      group = "service-restricted";
       extraGroups = [
         "docker"
       ];
