@@ -71,11 +71,6 @@
       fu = "fuck";
       ls = "exa";
 
-      hms = "home-manager switch --flake ~/src/dots/";
-      ncu = "nix-channel --update";
-      negc = "nix-collect-garbage --delete-older-than 30d";
-      ns = "nix-shell";
-
       # string operations
       trim = "sed -e 's/^[[:space:]]*//g' -e 's/[[:space:]]*\$//g'";
 
