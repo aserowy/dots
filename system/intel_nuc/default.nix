@@ -3,6 +3,10 @@
   imports = [
     ../base.nix
     ./hardware-configuration.nix
+
+    ../homeassistant/borgbackup.nix
+    ../homeassistant/hassio.nix
+    ../homeassistant/telegraf.nix
   ];
 
   boot = {
@@ -13,8 +17,11 @@
   };
 
   networking = {
-    hostName = "desktop-nuc";
+    hostName = "homeassistant-nuc";
     interfaces.eno1.useDHCP = true;
+
+    # enables wifi with: nmcli device wifi connect <SSID> password <PASS>
+    networkmanager.enable = true;
   };
 
   services = {

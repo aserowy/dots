@@ -96,6 +96,33 @@
           ];
         };
 
+        homeassistant-nuc = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            {
+              nixpkgs.overlays = [
+                fenix.overlays.default
+                (import ./pkgs)
+
+                (neocode-overlay { system =  "x86_64-linux"; })
+              ];
+            }
+
+            ./system/intel_nuc
+            ./shell/headless
+            ./users/serowy.nix
+
+            home.nixosModule
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users.serowy = import ./home/environments/headless.nix;
+              };
+            }
+          ];
+        };
+
         homeassistant = nixpkgs.lib.nixosSystem {
           system = "aarch64-linux";
           modules = [
