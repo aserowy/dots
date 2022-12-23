@@ -228,7 +228,7 @@
   systemd.services.docker-zigbee2mqtt.serviceConfig.User = "service-zigbee";
   systemd.services.docker-mariadb.serviceConfig.User = "service-mariadb";
   systemd.services.docker-grafana.serviceConfig.User = "service-grafana";
-  systemd.services.docker-assistant.serviceConfig.User = "service-hassio";
+  systemd.services.docker-home-assistant.serviceConfig.User = "service-hassio";
   systemd.services.docker-docker2mqtt.serviceConfig.User = "service-docker";
   systemd.services.docker-pihole.serviceConfig.User = "service-pihole";
   systemd.services.docker-watchtower.serviceConfig.User = "service-watchtower";
