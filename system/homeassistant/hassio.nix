@@ -21,53 +21,6 @@
       '';
   };
 
-  users.groups.service-restricted = {};
-
-  users.users = {
-    service-mosquitto = {
-      isSystemUser = true;
-      group = "service-restricted";
-    };
-    service-zigbee = {
-      isSystemUser = true;
-      group = "service-restricted";
-    };
-    service-mariadb = {
-      isSystemUser = true;
-      group = "service-restricted";
-    };
-    service-influxdb = {
-      isSystemUser = true;
-      group = "service-restricted";
-    };
-    service-grafana = {
-      isSystemUser = true;
-      group = "service-restricted";
-    };
-    service-hassio = {
-      isSystemUser = true;
-      group = "service-restricted";
-    };
-    service-docker = {
-      isSystemUser = true;
-      group = "service-restricted";
-      extraGroups = [
-        "docker"
-      ];
-    };
-    service-pihole = {
-      isSystemUser = true;
-      group = "service-restricted";
-    };
-    service-watchtower = {
-      isSystemUser = true;
-      group = "service-restricted";
-      extraGroups = [
-        "docker"
-      ];
-    };
-  };
-
   virtualisation.oci-containers.containers = {
     mosquitto = {
       image = "eclipse-mosquitto:latest";
@@ -172,20 +125,20 @@
       ];
     };
 
-    docker2mqtt = {
+    /* docker2mqtt = {
       image = "serowy/docker2mqtt:latest";
       extraOptions = [
-        "--network=ha-network"
+      "--network=ha-network"
       ];
       dependsOn = [
-        "mosquitto"
+      "mosquitto"
       ];
       volumes = [
-        "/srv/docker2mqtt/config:/docker2mqtt/config"
-        "/srv/docker2mqtt/logs:/docker2mqtt/logs"
-        "/var/run/docker.sock:/var/run/docker.sock"
+      "/srv/docker2mqtt/config:/docker2mqtt/config"
+      "/srv/docker2mqtt/logs:/docker2mqtt/logs"
+      "/var/run/docker.sock:/var/run/docker.sock"
       ];
-    };
+      }; */
 
     pihole = {
       image = "pihole/pihole:latest";
@@ -193,6 +146,9 @@
         "TZ" = "Europe/Berlin";
         # Run docker logs pihole | grep random to find your random pass.
         # WEBPASSWORD: <pw>
+      };
+      environment = {
+        "DNSMASQ_USER" = "root";
       };
       extraOptions = [
         "--cap-add=NET_ADMIN"
@@ -223,13 +179,4 @@
       ];
     };
   };
-
-  systemd.services.docker-mosquitto.serviceConfig.User = "service-mosquitto";
-  systemd.services.docker-zigbee2mqtt.serviceConfig.User = "service-zigbee";
-  systemd.services.docker-mariadb.serviceConfig.User = "service-mariadb";
-  systemd.services.docker-grafana.serviceConfig.User = "service-grafana";
-  systemd.services.docker-home-assistant.serviceConfig.User = "service-hassio";
-  systemd.services.docker-docker2mqtt.serviceConfig.User = "service-docker";
-  systemd.services.docker-pihole.serviceConfig.User = "service-pihole";
-  systemd.services.docker-watchtower.serviceConfig.User = "service-watchtower";
 }
