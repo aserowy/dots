@@ -25,6 +25,12 @@
         identitiesOnly = true;
         identityFile = " ~/.ssh/internal_serowy_ed25519";
       };
+      "homeassistant-nuc" = {
+        hostname = "homeassistant-nuc";
+        user = "serowy";
+        identitiesOnly = true;
+        identityFile = " ~/.ssh/internal_serowy_ed25519";
+      };
 
 
       "ssh.dev.azure.com" = {
