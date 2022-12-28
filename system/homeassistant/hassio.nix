@@ -87,6 +87,7 @@
 
     grafana = {
       image = "grafana/grafana-oss:latest";
+      user = "root";
       environment = {
         "GF_PATHS_CONFIG" = "/var/lib/grafana/grafana.ini";
       };
