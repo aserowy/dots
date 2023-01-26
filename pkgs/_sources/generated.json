@@ -1,6 +1,7 @@
 {
     "picom": {
         "cargoLocks": null,
+        "date": "2021-11-03",
         "extract": null,
         "name": "picom",
         "passthru": null,
@@ -20,6 +21,7 @@
     },
     "spicetify-cli": {
         "cargoLocks": null,
+        "date": null,
         "extract": null,
         "name": "spicetify-cli",
         "passthru": null,
@@ -39,6 +41,7 @@
     },
     "spicetify-themes": {
         "cargoLocks": null,
+        "date": "2023-01-23",
         "extract": null,
         "name": "spicetify-themes",
         "passthru": null,
@@ -50,14 +53,15 @@
             "name": null,
             "owner": "morpheusthewhite",
             "repo": "spicetify-themes",
-            "rev": "e552c2c3a55978b79b1878b3274fa74cfe7a728b",
-            "sha256": "sha256-6+gOaj6AJ44WtBiF5XATOsvoSr6x3ZsUTdr9FNiYRoQ=",
+            "rev": "f8c91b681feb3389b3c12c6a70424aba84b3afd2",
+            "sha256": "sha256-ZuwaQhJ6dCuhw0bW5kB3vxH3GfDPM7y3l//5F6xRyV0=",
             "type": "github"
         },
-        "version": "e552c2c3a55978b79b1878b3274fa74cfe7a728b"
+        "version": "f8c91b681feb3389b3c12c6a70424aba84b3afd2"
     },
     "tmux-continuum": {
         "cargoLocks": null,
+        "date": "2022-07-19",
         "extract": null,
         "name": "tmux-continuum",
         "passthru": null,
@@ -77,6 +81,7 @@
     },
     "tmux-easy-motion": {
         "cargoLocks": null,
+        "date": "2022-07-08",
         "extract": null,
         "name": "tmux-easy-motion",
         "passthru": null,
@@ -96,6 +101,7 @@
     },
     "tmux-resurrect": {
         "cargoLocks": null,
+        "date": "2022-10-22",
         "extract": null,
         "name": "tmux-resurrect",
         "passthru": null,
@@ -115,6 +121,7 @@
     },
     "vscode-extensions-keyboard-quickfix": {
         "cargoLocks": null,
+        "date": null,
         "extract": null,
         "name": "vscode-extensions-keyboard-quickfix",
         "passthru": {
@@ -132,6 +139,7 @@
     },
     "vscode-extensions-live-share": {
         "cargoLocks": null,
+        "date": null,
         "extract": null,
         "name": "vscode-extensions-live-share",
         "passthru": {
@@ -140,15 +148,16 @@
         },
         "pinned": false,
         "src": {
-            "name": "vsliveshare-1.0.5797.zip",
-            "sha256": "sha256-yXHhHNufeGZI9D8e0bPFQZRFY/5ePSJ8aTNlldBpVyU=",
+            "name": "vsliveshare-1.0.5823.zip",
+            "sha256": "sha256-K0Qv8mjYWMcdfj2suneqU7rtQOSSVm5UG98y9EV1Zmk=",
             "type": "url",
-            "url": "https://MS-vsliveshare.gallery.vsassets.io/_apis/public/gallery/publisher/MS-vsliveshare/extension/vsliveshare/1.0.5797/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+            "url": "https://MS-vsliveshare.gallery.vsassets.io/_apis/public/gallery/publisher/MS-vsliveshare/extension/vsliveshare/1.0.5823/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
-        "version": "1.0.5797"
+        "version": "1.0.5823"
     },
     "vscode-extensions-material-theme": {
         "cargoLocks": null,
+        "date": null,
         "extract": null,
         "name": "vscode-extensions-material-theme",
         "passthru": {
@@ -166,6 +175,7 @@
     },
     "vscode-extensions-remote-containers": {
         "cargoLocks": null,
+        "date": null,
         "extract": null,
         "name": "vscode-extensions-remote-containers",
         "passthru": {
@@ -174,15 +184,16 @@
         },
         "pinned": false,
         "src": {
-            "name": "remote-containers-0.269.0.zip",
-            "sha256": "sha256-8HY46AKbAU5W01BN4iwCUSFqTXfRbC937Gy0kvPTmn4=",
+            "name": "remote-containers-0.273.0.zip",
+            "sha256": "sha256-m3C31ZU9ijcVYnzrm8eA7E1eQE0X8yUpCPQx8ZUoDVA=",
             "type": "url",
-            "url": "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.269.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+            "url": "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.273.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
-        "version": "0.269.0"
+        "version": "0.273.0"
     },
     "vscode-extensions-remote-wsl": {
         "cargoLocks": null,
+        "date": null,
         "extract": null,
         "name": "vscode-extensions-remote-wsl",
         "passthru": {
@@ -191,15 +202,16 @@
         },
         "pinned": false,
         "src": {
-            "name": "remote-wsl-0.72.0.zip",
-            "sha256": "sha256-wVsEhVpO614KzrRUvh0yRoSkswUFLlvbphmbR4BFabA=",
+            "name": "remote-wsl-0.75.1.zip",
+            "sha256": "sha256-uXv+pLhwvXMjYOlks6SvUs39cuJ7gMlRsiSChE+GjU0=",
             "type": "url",
-            "url": "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-wsl/0.72.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+            "url": "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-wsl/0.75.1/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
-        "version": "0.72.0"
+        "version": "0.75.1"
     },
     "vscode-extensions-todo-tree": {
         "cargoLocks": null,
+        "date": null,
         "extract": null,
         "name": "vscode-extensions-todo-tree",
         "passthru": {
@@ -208,15 +220,16 @@
         },
         "pinned": false,
         "src": {
-            "name": "todo-tree-0.0.220.zip",
-            "sha256": "sha256-U7aY2/ESz9f8foBjydy1G/bWd7CLNyIjDWE3pytZfxo=",
+            "name": "todo-tree-0.0.222.zip",
+            "sha256": "sha256-b5CqOR5UwWli+vHLvhuuklIUdXdNTt4MD1fvNSn1qsM=",
             "type": "url",
-            "url": "https://gruntfuggly.gallery.vsassets.io/_apis/public/gallery/publisher/gruntfuggly/extension/todo-tree/0.0.220/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+            "url": "https://gruntfuggly.gallery.vsassets.io/_apis/public/gallery/publisher/gruntfuggly/extension/todo-tree/0.0.222/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
-        "version": "0.0.220"
+        "version": "0.0.222"
     },
     "vscode-extensions-vscode-icons": {
         "cargoLocks": null,
+        "date": null,
         "extract": null,
         "name": "vscode-extensions-vscode-icons",
         "passthru": {
@@ -225,15 +238,16 @@
         },
         "pinned": false,
         "src": {
-            "name": "vscode-icons-12.0.1.zip",
-            "sha256": "sha256-zxKD+8PfuaBaNoxTP1IHwG+25v0hDkYBj4RPn7mSzzU=",
+            "name": "vscode-icons-12.2.0.zip",
+            "sha256": "sha256-PxM+20mkj7DpcdFuExUFN5wldfs7Qmas3CnZpEFeRYs=",
             "type": "url",
-            "url": "https://vscode-icons-team.gallery.vsassets.io/_apis/public/gallery/publisher/vscode-icons-team/extension/vscode-icons/12.0.1/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+            "url": "https://vscode-icons-team.gallery.vsassets.io/_apis/public/gallery/publisher/vscode-icons-team/extension/vscode-icons/12.2.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
-        "version": "12.0.1"
+        "version": "12.2.0"
     },
     "vscode-extensions-vscode-neovim": {
         "cargoLocks": null,
+        "date": null,
         "extract": null,
         "name": "vscode-extensions-vscode-neovim",
         "passthru": {

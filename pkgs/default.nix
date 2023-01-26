@@ -6,7 +6,7 @@ let
   helper = import ./vscode-extensions.nix { inherit (final) stdenv fetchurl unzip; };
 
   # import nvfetcher sources
-  imported = import ./_sources/generated.nix { inherit (final) fetchgit fetchurl fetchFromGitHub; };
+  imported = import ./_sources/generated.nix { inherit (final) fetchgit fetchurl fetchFromGitHub dockerTools; };
 
   fetches = mapAttrs
     (pname: meta: meta // { version = removePrefix "v" meta.version; })
