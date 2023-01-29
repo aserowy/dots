@@ -85,21 +85,6 @@ disabled = false
 format = '[$time ]($style)'
 time_format = '%T'
 
-# customs
-[custom.gitautofetch]
-description = "Display status of ohmyzsh git-auto-fetch plugin"
-# guard from https://github.com/ohmyzsh/ohmyzsh/blob/706b2f3765d41bee2853b17724888d1a3f6f00d9/plugins/git-auto-fetch/git-auto-fetch.plugin.zsh#L37
-command = """
-if [[ -f "$(command git rev-parse --git-dir)/NO_AUTO_FETCH" ]]; then
-    printf ""
-else
-    printf " "
-fi
-"""
-style = 'red'
-shell = ["bash","--norc","--noprofile"]
-when = 'git rev-parse --is-inside-work-tree 2> /dev/null'
-
 [custom.giturl]
 description = "Display symbol for remote Git server"
 command = """

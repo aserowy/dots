@@ -19,9 +19,9 @@
     ./docker.nix
     ./git.nix
     ./lf.nix
-    ./mcfly.nix
     ./ncspot.nix
     ./neovim.nix
+    ./nushell.nix
     ./pandoc.nix
     ./ssh.nix
     ./starship.nix
