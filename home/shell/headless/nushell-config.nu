@@ -1,6 +1,8 @@
 let-env config = {
   show_banner: false
 
+  edit_mode: vi
+
   # hook for direnv
   hooks: {
     pre_prompt: [{
