@@ -405,7 +405,7 @@
       "editor.fontLigatures" = true;
 
       # terminal
-      "terminal.integrated.defaultProfile.linux" = "zsh";
+      "terminal.integrated.defaultProfile.linux" = "nu";
 
       # lsp
       "[home-assistant]" = {

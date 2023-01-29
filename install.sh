@@ -35,10 +35,10 @@ fi
 git remote set-url origin git@github.com:aserowy/dots.git
 
 # set standard shell for current user
-if ! grep -q "~/.nix-profile/bin/zsh" "/etc/shells"; then
-    echo "~/.nix-profile/bin/zsh" | sudo tee -a /etc/shells
+if ! grep -q "~/.nix-profile/bin/nu" "/etc/shells"; then
+    echo "~/.nix-profile/bin/nu" | sudo tee -a /etc/shells
 fi
-sudo chsh -s ~/.nix-profile/bin/zsh $(whoami)
+sudo chsh -s ~/.nix-profile/bin/nu $(whoami)
 
 # setup ssh daemon
 sudo systemctl enable ssh
