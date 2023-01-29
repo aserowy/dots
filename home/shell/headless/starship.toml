@@ -61,6 +61,11 @@ $status\
 $character"""
 
 # settings
+
+[character]
+# using indicator of nu for better vi integration 
+disabled = true
+
 [directory]
 format = ' [$path]($style)[$read_only]($read_only_style) '
 read_only = ' '
