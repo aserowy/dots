@@ -1,6 +1,7 @@
 let-env config = {
   show_banner: false
 
+  # hook for direnv
   hooks: {
     pre_prompt: [{
       code: "
@@ -10,8 +11,22 @@ let-env config = {
       "
     }]
   }
+
+  ls: {
+    clickable_links: true
+    use_ls_colors: true
+  }
+
+  table: {
+    mode: rounded
+    trim: {
+      methodology: wrapping
+      wrapping_try_keep_words: true
+    }
+  }
 }
 
+# loading ssh-agent into env
 ssh-agent -c | lines | first 2 | parse "setenv {name} {value};" | transpose -i -r -d | load-env
 
 source ~/.cache/starship/init.nu
