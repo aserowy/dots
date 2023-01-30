@@ -12,6 +12,9 @@
     nushell
   ];
 
-  home.file.".config/nushell/config.nu".source = ./nushell-config.nu;
-  home.file.".config/nushell/env.nu".source = ./nushell-env.nu;
+  home = {
+    file.".config/nushell/config.nu".source = ./nushell-config.nu;
+    file.".config/nushell/env.nu".source = ./nushell-env.nu;
+    file.".config/nushell/scripts".source = ./nushell;
+  };
 }

@@ -28,6 +28,13 @@ let-env config = {
   }
 }
 
+# git
+use git-completions.nu *
+source git-aliases.nu
+
+# ls
+source ls-aliases.nu
+
 # loading ssh-agent into env
 ssh-agent -c | lines | first 2 | parse "setenv {name} {value};" | transpose -i -r -d | load-env
 
