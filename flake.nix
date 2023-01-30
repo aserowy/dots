@@ -47,7 +47,7 @@
             ./home/environments/wsl-work.nix
           ];
         };
-        "serowy@UIN01PC013901" = home.lib.homeManagerConfiguration {
+        "uitdeveloper@UIN01PC013901" = home.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
 
           modules = [
@@ -59,9 +59,9 @@
               ];
             }
             {
-              home.homeDirectory = "/home/serowy";
+              home.homeDirectory = "/home/uitdeveloper";
               home.stateVersion = "22.05";
-              home.username = "serowy";
+              home.username = "uitdeveloper";
             }
             ./home/environments/wsl-ui.nix
           ];

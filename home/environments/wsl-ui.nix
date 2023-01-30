@@ -8,6 +8,5 @@
     ../shell/headless
   ];
 
-  programs.ssh.matchBlocks = {
-  };
+  programs.ssh.matchBlocks = { };
 }
