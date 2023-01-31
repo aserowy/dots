@@ -10,6 +10,7 @@
     userEmail = "serowy@hotmail.com";
     extraConfig = {
       core.editor = "nvim";
+      credential.useHttpPath = "true";
       init.defaultBranch = "main";
       push.autoSetupRemote = "true";
     };
