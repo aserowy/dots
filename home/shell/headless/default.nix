@@ -10,6 +10,7 @@
     ncurses
     psmisc
     tokei
+    tree
 
     unixtools.watch
   ];
