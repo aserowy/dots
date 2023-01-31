@@ -28,6 +28,9 @@ let-env config = {
   }
 }
 
+# cat
+use cat-aliases.nu
+
 # git
 use git-completions.nu *
 source git-aliases.nu
