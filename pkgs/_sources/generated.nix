@@ -62,15 +62,15 @@
   };
   tmux-resurrect = {
     pname = "tmux-resurrect";
-    version = "a2ddfb96b94bb64a7a2e3f5fa2a7c57dce8ad579";
+    version = "6df04051fe14032d1825fba8fee51d9e9dc8de40";
     src = fetchFromGitHub ({
       owner = "tmux-plugins";
       repo = "tmux-resurrect";
-      rev = "a2ddfb96b94bb64a7a2e3f5fa2a7c57dce8ad579";
+      rev = "6df04051fe14032d1825fba8fee51d9e9dc8de40";
       fetchSubmodules = false;
-      sha256 = "sha256-DFDdTMwRQXk9g3OlP/3JAw5iPaeK4Cks06QFZVP6iL0=";
+      sha256 = "sha256-6Q6jwYMAO0Itt1nunJuts3rxVwl6oz0rHIjNDEUTpmw=";
     });
-    date = "2022-10-22";
+    date = "2023-01-31";
   };
   vscode-extensions-keyboard-quickfix = {
     pname = "vscode-extensions-keyboard-quickfix";
