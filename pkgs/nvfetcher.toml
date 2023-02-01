@@ -1,14 +1,14 @@
-[picom]
-src.git = "https://github.com/ibhagwan/picom"
-fetch.github = "ibhagwan/picom"
+[git-credential-manager]
+src.github = "GitCredentialManager/git-credential-manager"
+fetch.github = "GitCredentialManager/git-credential-manager"
 
 [spicetify-cli]
-src.github = "khanhas/spicetify-cli"
-fetch.github = "khanhas/spicetify-cli"
+src.github = "spicetify/spicetify-cli"
+fetch.github = "spicetify/spicetify-cli"
 
 [spicetify-themes]
-src.git = "https://github.com/morpheusthewhite/spicetify-themes"
-fetch.github = "morpheusthewhite/spicetify-themes"
+src.git = "https://github.com/spicetify/spicetify-themes"
+fetch.github = "spicetify/spicetify-themes"
 
 [tmux-continuum]
 src.git = "https://github.com/tmux-plugins/tmux-continuum"

@@ -34,10 +34,6 @@ in
 {
   sources = final.callPackage (import ./_sources/generated.nix) { };
 
-  picom = prev.picom.overrideAttrs (oldAttrs: rec {
-    inherit (final.sources.picom) pname version src;
-  });
-
   spicetify-cli = with prev; spicetify-cli.overrideAttrs (_: {
     inherit (fetches.spicetify-cli) pname version src;
     postInstall = ''

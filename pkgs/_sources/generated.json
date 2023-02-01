@@ -1,9 +1,9 @@
 {
-    "picom": {
+    "git-credential-manager": {
         "cargoLocks": null,
-        "date": "2021-11-03",
+        "date": null,
         "extract": null,
-        "name": "picom",
+        "name": "git-credential-manager",
         "passthru": null,
         "pinned": false,
         "src": {
@@ -11,13 +11,13 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "owner": "ibhagwan",
-            "repo": "picom",
-            "rev": "c4107bb6cc17773fdc6c48bb2e475ef957513c7a",
-            "sha256": "sha256-1hVFBGo4Ieke2T9PqMur1w4D0bz/L3FAvfujY9Zergw=",
+            "owner": "GitCredentialManager",
+            "repo": "git-credential-manager",
+            "rev": "v2.0.886",
+            "sha256": "sha256-zRjDdykb0WD+2HoyvTJawBMKlCfm3Aoig76IDiBdVA0=",
             "type": "github"
         },
-        "version": "c4107bb6cc17773fdc6c48bb2e475ef957513c7a"
+        "version": "v2.0.886"
     },
     "spicetify-cli": {
         "cargoLocks": null,
@@ -31,7 +31,7 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "owner": "khanhas",
+            "owner": "spicetify",
             "repo": "spicetify-cli",
             "rev": "v2.16.0",
             "sha256": "sha256-ybmjcEgvYtoPam4BUW5tH28fZ5ilDxNR4EHn4eXgQ7A=",
@@ -41,7 +41,7 @@
     },
     "spicetify-themes": {
         "cargoLocks": null,
-        "date": "2023-01-23",
+        "date": "2023-02-01",
         "extract": null,
         "name": "spicetify-themes",
         "passthru": null,
@@ -51,13 +51,13 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "owner": "morpheusthewhite",
+            "owner": "spicetify",
             "repo": "spicetify-themes",
-            "rev": "f8c91b681feb3389b3c12c6a70424aba84b3afd2",
-            "sha256": "sha256-ZuwaQhJ6dCuhw0bW5kB3vxH3GfDPM7y3l//5F6xRyV0=",
+            "rev": "5d5eca15aee706a9d4b115e44fba428326eba980",
+            "sha256": "sha256-cJH7hQerXPktMKbk72c2zC9Dibs4WQI0+bD76R7j/44=",
             "type": "github"
         },
-        "version": "f8c91b681feb3389b3c12c6a70424aba84b3afd2"
+        "version": "5d5eca15aee706a9d4b115e44fba428326eba980"
     },
     "tmux-continuum": {
         "cargoLocks": null,
