@@ -359,6 +359,11 @@
       "extensions.closeExtensionDetailsOnViewChange" = true;
       "extensions.ignoreRecommendations" = true;
 
+      "dev.containers.defaultExtensions" = [
+        "Gruntfuggly.todo-tree"
+        "pascalsenn.keyboard-quickfix"
+      ];
+
       "vsicons.dontShowNewVersionMessage" = true;
 
       "vscode-neovim.highlightGroups.unknownHighlight" = "vim";
