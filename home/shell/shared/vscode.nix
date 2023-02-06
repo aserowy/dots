@@ -387,7 +387,6 @@
 
       # todo
       "todo-tree.filtering.includeHiddenFiles" = true;
-      "todo-tree.general.enableFileWatcher" = true;
       "todo-tree.tree.expanded" = true;
       "todo-tree.tree.flat" = true;
       "todo-tree.tree.buttons.filter" = false;
