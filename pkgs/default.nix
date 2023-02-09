@@ -34,6 +34,10 @@ in
 {
   sources = final.callPackage (import ./_sources/generated.nix) { };
 
+  git-credential-manager = final.callPackage ./git-credential-manager {
+    sources = fetches;
+  };
+
   spicetify-cli = with prev; spicetify-cli.overrideAttrs (_: {
     inherit (fetches.spicetify-cli) pname version src;
     postInstall = ''
