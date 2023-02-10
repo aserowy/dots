@@ -359,6 +359,11 @@
       "extensions.closeExtensionDetailsOnViewChange" = true;
       "extensions.ignoreRecommendations" = true;
 
+      "dev.containers.defaultExtensions" = [
+        "Gruntfuggly.todo-tree"
+        "pascalsenn.keyboard-quickfix"
+      ];
+
       "vsicons.dontShowNewVersionMessage" = true;
 
       "vscode-neovim.highlightGroups.unknownHighlight" = "vim";
@@ -382,7 +387,6 @@
 
       # todo
       "todo-tree.filtering.includeHiddenFiles" = true;
-      "todo-tree.general.enableFileWatcher" = true;
       "todo-tree.tree.expanded" = true;
       "todo-tree.tree.flat" = true;
       "todo-tree.tree.buttons.filter" = false;

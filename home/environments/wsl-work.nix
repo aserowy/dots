@@ -1,6 +1,9 @@
 { config, pkgs, ... }:
 {
-  nixpkgs.config.allowUnfree = true;
+  /* nixpkgs.config.allowUnfree = true; */
+
+  # FIX: https://github.com/nix-community/home-manager/issues/2942
+  nixpkgs.config.allowUnfreePredicate = (pkg: true);
 
   programs.home-manager.enable = true;
 
@@ -8,6 +11,5 @@
     ../shell/headless
   ];
 
-  programs.ssh.matchBlocks = {
-  };
+  programs.ssh.matchBlocks = { };
 }
