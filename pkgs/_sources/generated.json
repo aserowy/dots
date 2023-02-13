@@ -202,12 +202,12 @@
         },
         "pinned": false,
         "src": {
-            "name": "remote-wsl-0.75.1.zip",
-            "sha256": "sha256-uXv+pLhwvXMjYOlks6SvUs39cuJ7gMlRsiSChE+GjU0=",
+            "name": "remote-wsl-0.75.2.zip",
+            "sha256": "sha256-oKC5vDHDFdrwMqbICQS3b5ZDxf49vbSlrq1VVnzgKVc=",
             "type": "url",
-            "url": "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-wsl/0.75.1/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+            "url": "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-wsl/0.75.2/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
-        "version": "0.75.1"
+        "version": "0.75.2"
     },
     "vscode-extensions-todo-tree": {
         "cargoLocks": null,
