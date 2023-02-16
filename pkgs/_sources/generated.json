@@ -148,12 +148,12 @@
         },
         "pinned": false,
         "src": {
-            "name": "vsliveshare-1.0.5828.zip",
-            "sha256": "sha256-zUCHrib3sz/UErBE4ebN83ng3OmhGrcTSnlQMaVN09c=",
+            "name": "vsliveshare-1.0.5831.zip",
+            "sha256": "sha256-QViwZBxem0z62BLhA0zbFdQL3SfoUKZQx6X+Am1lkT0=",
             "type": "url",
-            "url": "https://MS-vsliveshare.gallery.vsassets.io/_apis/public/gallery/publisher/MS-vsliveshare/extension/vsliveshare/1.0.5828/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+            "url": "https://MS-vsliveshare.gallery.vsassets.io/_apis/public/gallery/publisher/MS-vsliveshare/extension/vsliveshare/1.0.5831/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
-        "version": "1.0.5828"
+        "version": "1.0.5831"
     },
     "vscode-extensions-material-theme": {
         "cargoLocks": null,
@@ -202,12 +202,12 @@
         },
         "pinned": false,
         "src": {
-            "name": "remote-wsl-0.75.2.zip",
-            "sha256": "sha256-oKC5vDHDFdrwMqbICQS3b5ZDxf49vbSlrq1VVnzgKVc=",
+            "name": "remote-wsl-0.76.0.zip",
+            "sha256": "sha256-YM0hXmQUe/9UEBYaFEMFLrXEBz/7qQ9/kwBconhyOAM=",
             "type": "url",
-            "url": "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-wsl/0.75.2/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+            "url": "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-wsl/0.76.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
-        "version": "0.75.2"
+        "version": "0.76.0"
     },
     "vscode-extensions-todo-tree": {
         "cargoLocks": null,
