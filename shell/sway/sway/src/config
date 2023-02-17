@@ -20,6 +20,7 @@ input type:keyboard {
 
 # OUTPUTS
 
+output DP-1 position 0 0
 output DP-2 transform 270
 
 # STARTUP
