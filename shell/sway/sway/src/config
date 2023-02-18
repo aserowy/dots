@@ -83,8 +83,8 @@ bindsym $mod+r exec /etc/sway/scripts/rename_workspace.sh
 bindsym $mod+w exec /etc/rofi/launch.sh workspace
 bindsym $mod+Shift+w exec /etc/rofi/launch.sh move
 
-bindsym $mod+n workspace next
-bindsym $mod+p workspace prev
+bindsym $mod+n exec /etc/sway/scripts/focus_workspace.nu next
+bindsym $mod+p exec /etc/sway/scripts/focus_workspace.nu prev
 
 bindsym $mod+m exec /etc/rofi/launch.sh mark
 bindsym $mod+Shift+m exec /etc/sway/scripts/set_mark.sh
