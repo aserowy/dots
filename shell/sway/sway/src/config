@@ -3,7 +3,7 @@ set $browser "microsoft-edge \
     --ozone-platform=wayland"
 
 set $explorer wezterm start --class lf -- lf
-set $menu exec /etc/rofi/launch.sh drun 
+set $menu exec /etc/rofi/launch.nu drun 
 set $terminal wezterm
 
 # INPUTS
@@ -73,15 +73,15 @@ bindsym $mod+t exec $terminal
 
 ## Sway
 
-bindsym $mod+q exec /etc/rofi/launch.sh power
+bindsym $mod+q exec /etc/rofi/launch.nu power
 bindsym $mod+Shift+c kill
 bindsym $mod+Shift+r reload
 
 for_window [title="fzf-switcher"] floating enable
 
 bindsym $mod+r exec /etc/sway/scripts/rename_workspace.sh
-bindsym $mod+w exec /etc/rofi/launch.sh workspace
-bindsym $mod+Shift+w exec /etc/rofi/launch.sh move
+bindsym $mod+w exec /etc/rofi/launch.nu workspace
+bindsym $mod+Shift+w exec /etc/rofi/launch.nu move
 
 bindsym $mod+n exec /etc/sway/scripts/focus_workspace.nu next
 bindsym $mod+p exec /etc/sway/scripts/focus_workspace.nu prev

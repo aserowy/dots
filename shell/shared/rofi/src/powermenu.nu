@@ -26,9 +26,10 @@ def main [command_name: string = ''] {
     } else {
         let command = ($valid_commands
             | where name == $command_name
-            | first)
+            | first
+            | get command)
         
-        run-external --redirect-stdout --redirect-stderr $command | ignore
+        run-external --redirect-stdout --redirect-stderr 'sh' '-c' $command | ignore
     }
 }
 
@@ -39,4 +40,3 @@ def get_current_wm [] {
         $wm_i3
     }
 }
-
