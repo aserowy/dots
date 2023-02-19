@@ -16,7 +16,7 @@ then
             rofi -config /etc/rofi/powermenu.rasi -modi power:/etc/rofi/powermenu.sh -show power
         ;;
         workspace)
-            rofi -config /etc/rofi/list.rasi -modi workspace:/etc/rofi/focus_workspace.sh -show workspace
+            rofi -config /etc/rofi/list.rasi -modi workspace:/etc/rofi/focus_by_name.nu -show workspace
         ;;
     esac
     

@@ -13,8 +13,8 @@ def main [direction: string] {
         | where output == $output
         | select name focused
         | if $direction == 'prev' {
-            sort-by name --ignore-case --natural } else {
-            sort-by name --ignore-case --natural --reverse })
+            sort-by name --natural } else {
+            sort-by name --natural --reverse })
 
     let workspaces = ($workspaces
         | prepend { name: ($workspaces | last | get name) focused: false })
