@@ -6,11 +6,8 @@ then
         drun)
             rofi -config /etc/rofi/config.rasi -modi drun -show drun
         ;;
-        mark)
-            rofi -config /etc/rofi/list.rasi -modi mark:/etc/rofi/focus_by_mark.sh -show mark
-        ;;
         move)
-            rofi -config /etc/rofi/list.rasi -modi move:/etc/rofi/move_to_workspace.sh -show move
+            rofi -config /etc/rofi/list.rasi -modi move:/etc/rofi/move_by_name.nu -show move
         ;;
         power)
             rofi -config /etc/rofi/powermenu.rasi -modi power:/etc/rofi/powermenu.sh -show power
