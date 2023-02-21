@@ -1,15 +1,20 @@
 { config, pkgs, ... }:
 {
-  environment.systemPackages = with pkgs; [
-    bottles
-    clipman
-    lf
-    microsoft-edge
-    pavucontrol
-    sway-contrib.grimshot
-    wezterm
-    wl-clipboard
-  ];
+  environment = {
+    /* sets ozone wayland support for all chromium based applications */
+    sessionVariables.NIXOS_OZONE_WL = "1";
+
+    systemPackages = with pkgs; [
+      bottles
+      clipman
+      lf
+      microsoft-edge
+      pavucontrol
+      sway-contrib.grimshot
+      wezterm
+      wl-clipboard
+    ];
+  };
 
   imports = [
     ../shared/alacritty.nix
