@@ -10,6 +10,13 @@ let-env config = {
         let direnv = (direnv export json | from json)
         let direnv = if ($direnv | length) == 1 { $direnv } else { {} }
         $direnv | load-env
+
+        let hooks = (env | where name == 'nushellHook')
+        if ($hooks | length) > 0 {
+            ($hooks | first | get raw | save --force .direnv/nushellHook.nu)
+
+            source .direnv/nushellHook.nu
+        }
       "
     }]
   }
