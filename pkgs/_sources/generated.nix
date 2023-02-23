@@ -25,15 +25,15 @@
   };
   spicetify-themes = {
     pname = "spicetify-themes";
-    version = "5d5eca15aee706a9d4b115e44fba428326eba980";
+    version = "a547f3d28cac8122d5a1c9f5e7f64f44b48a9280";
     src = fetchFromGitHub ({
       owner = "spicetify";
       repo = "spicetify-themes";
-      rev = "5d5eca15aee706a9d4b115e44fba428326eba980";
+      rev = "a547f3d28cac8122d5a1c9f5e7f64f44b48a9280";
       fetchSubmodules = false;
-      sha256 = "sha256-cJH7hQerXPktMKbk72c2zC9Dibs4WQI0+bD76R7j/44=";
+      sha256 = "sha256-87afREB/TLqs4rObsDPG/PaM5A5keB3GbXTATWcqMN0=";
     });
-    date = "2023-02-01";
+    date = "2023-02-23";
   };
   tmux-continuum = {
     pname = "tmux-continuum";
@@ -84,11 +84,11 @@
   };
   vscode-extensions-live-share = {
     pname = "vscode-extensions-live-share";
-    version = "1.0.5831";
+    version = "1.0.5832";
     src = fetchurl {
-      url = "https://MS-vsliveshare.gallery.vsassets.io/_apis/public/gallery/publisher/MS-vsliveshare/extension/vsliveshare/1.0.5831/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "vsliveshare-1.0.5831.zip";
-      sha256 = "sha256-QViwZBxem0z62BLhA0zbFdQL3SfoUKZQx6X+Am1lkT0=";
+      url = "https://MS-vsliveshare.gallery.vsassets.io/_apis/public/gallery/publisher/MS-vsliveshare/extension/vsliveshare/1.0.5832/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "vsliveshare-1.0.5832.zip";
+      sha256 = "sha256-vGurC+9d63PGgyXEVtVqruSDsObDjShpoxHD7EswSuk=";
     };
     name = "vsliveshare";
     publisher = "MS-vsliveshare";
