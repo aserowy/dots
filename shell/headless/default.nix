@@ -6,8 +6,9 @@
     wezterm
   ];
 
-  programs.ssh = { 
-    askPassword = "${pkgs.systemd}/bin/systemd-ask-password";
-    enableAskPassword = true;
+  programs.ssh = {
+    enableAskPassword = false;
+    kbdInteractiveAuthentication = false;
+    permitRootLogin = false;
   };
 }
