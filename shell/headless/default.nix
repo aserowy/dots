@@ -5,10 +5,4 @@
     smartmontools
     wezterm
   ];
-
-  programs.ssh = {
-    enableAskPassword = false;
-    kbdInteractiveAuthentication = false;
-    permitRootLogin = false;
-  };
 }
