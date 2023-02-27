@@ -16,9 +16,10 @@
     useDHCP = false;
   };
 
+  boot.readOnlyNixStore = false;
+
   nix = {
     package = pkgs.nixVersions.stable;
-    readOnlyStore = false;
     extraOptions = ''
       experimental-features = nix-command flakes
       keep-outputs = true
