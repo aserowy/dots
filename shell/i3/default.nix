@@ -1,7 +1,6 @@
 { config, pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
-    microsoft-edge
     lf
     pavucontrol
     wezterm
@@ -12,14 +11,13 @@
     ../shared/alacritty.nix
     ../shared/clamav.nix
     ../shared/dunst.nix
+    ../shared/edge.nix
     ../shared/gtk.nix
     ../shared/lutris.nix
     ../shared/rofi
     ../shared/spotify.nix
 
     ./i3
-    /* ./lightdm.nix */
-    /* ./picom.nix */
     ./polybar
   ];
 

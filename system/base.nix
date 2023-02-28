@@ -16,9 +16,10 @@
     useDHCP = false;
   };
 
+  boot.readOnlyNixStore = false;
+
   nix = {
     package = pkgs.nixVersions.stable;
-    readOnlyStore = false;
     extraOptions = ''
       experimental-features = nix-command flakes
       keep-outputs = true
@@ -64,8 +65,10 @@
 
     openssh = {
       enable = true;
-      permitRootLogin = "no";
-      passwordAuthentication = false;
+      settings = {
+        permitRootLogin = "no";
+        passwordAuthentication = false;
+      };
       ports = [ 2022 ];
     };
   };

@@ -14,26 +14,26 @@
   };
   spicetify-cli = {
     pname = "spicetify-cli";
-    version = "v2.16.1";
+    version = "v2.16.2";
     src = fetchFromGitHub ({
       owner = "spicetify";
       repo = "spicetify-cli";
-      rev = "v2.16.1";
+      rev = "v2.16.2";
       fetchSubmodules = false;
-      sha256 = "sha256-Pq8HjmWSfBgieSJejrlw+FiRdq9NxryYPcw++Pdjsuk=";
+      sha256 = "sha256-13JWceuiNz1FxgVVQ2KV88zYLIBkEVeTfPF5eEK1oe8=";
     });
   };
   spicetify-themes = {
     pname = "spicetify-themes";
-    version = "5d5eca15aee706a9d4b115e44fba428326eba980";
+    version = "a547f3d28cac8122d5a1c9f5e7f64f44b48a9280";
     src = fetchFromGitHub ({
       owner = "spicetify";
       repo = "spicetify-themes";
-      rev = "5d5eca15aee706a9d4b115e44fba428326eba980";
+      rev = "a547f3d28cac8122d5a1c9f5e7f64f44b48a9280";
       fetchSubmodules = false;
-      sha256 = "sha256-cJH7hQerXPktMKbk72c2zC9Dibs4WQI0+bD76R7j/44=";
+      sha256 = "sha256-87afREB/TLqs4rObsDPG/PaM5A5keB3GbXTATWcqMN0=";
     });
-    date = "2023-02-01";
+    date = "2023-02-23";
   };
   tmux-continuum = {
     pname = "tmux-continuum";
@@ -84,11 +84,11 @@
   };
   vscode-extensions-live-share = {
     pname = "vscode-extensions-live-share";
-    version = "1.0.5828";
+    version = "1.0.5832";
     src = fetchurl {
-      url = "https://MS-vsliveshare.gallery.vsassets.io/_apis/public/gallery/publisher/MS-vsliveshare/extension/vsliveshare/1.0.5828/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "vsliveshare-1.0.5828.zip";
-      sha256 = "sha256-zUCHrib3sz/UErBE4ebN83ng3OmhGrcTSnlQMaVN09c=";
+      url = "https://MS-vsliveshare.gallery.vsassets.io/_apis/public/gallery/publisher/MS-vsliveshare/extension/vsliveshare/1.0.5832/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "vsliveshare-1.0.5832.zip";
+      sha256 = "sha256-vGurC+9d63PGgyXEVtVqruSDsObDjShpoxHD7EswSuk=";
     };
     name = "vsliveshare";
     publisher = "MS-vsliveshare";
@@ -106,33 +106,33 @@
   };
   vscode-extensions-remote-containers = {
     pname = "vscode-extensions-remote-containers";
-    version = "0.278.0";
+    version = "0.281.0";
     src = fetchurl {
-      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.278.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "remote-containers-0.278.0.zip";
-      sha256 = "sha256-FRh3h8Jscnz1/nP+GkhaR9+r6B+5NvCKvoAvjcJvYRU=";
+      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.281.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "remote-containers-0.281.0.zip";
+      sha256 = "sha256-97aGoqs/4msSVfKZokCK4MWUJOp9izOY3rSom3I9DNg=";
     };
     name = "remote-containers";
     publisher = "ms-vscode-remote";
   };
   vscode-extensions-remote-wsl = {
     pname = "vscode-extensions-remote-wsl";
-    version = "0.75.1";
+    version = "0.76.1";
     src = fetchurl {
-      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-wsl/0.75.1/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "remote-wsl-0.75.1.zip";
-      sha256 = "sha256-uXv+pLhwvXMjYOlks6SvUs39cuJ7gMlRsiSChE+GjU0=";
+      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-wsl/0.76.1/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "remote-wsl-0.76.1.zip";
+      sha256 = "sha256-ijMDQ0gmgzNBgNNsvUh5v0kX5NEIdWiX/2344LfmcCw=";
     };
     name = "remote-wsl";
     publisher = "ms-vscode-remote";
   };
   vscode-extensions-todo-tree = {
     pname = "vscode-extensions-todo-tree";
-    version = "0.0.223";
+    version = "0.0.224";
     src = fetchurl {
-      url = "https://gruntfuggly.gallery.vsassets.io/_apis/public/gallery/publisher/gruntfuggly/extension/todo-tree/0.0.223/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "todo-tree-0.0.223.zip";
-      sha256 = "sha256-hWks3fuWqp3/UhxnUFDyNN6S2SUR9SjbaoMkXBf3pVo=";
+      url = "https://gruntfuggly.gallery.vsassets.io/_apis/public/gallery/publisher/gruntfuggly/extension/todo-tree/0.0.224/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "todo-tree-0.0.224.zip";
+      sha256 = "sha256-ObFmzAaOlbtWC31JRYR/1y+JK1h22SVDPPRWWqPzrQs=";
     };
     name = "todo-tree";
     publisher = "gruntfuggly";

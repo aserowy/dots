@@ -91,6 +91,7 @@
         "signal": 5
     },
     "sway/workspaces": {
+        "alphabetical_sort": true,
         "disable-scroll": true,
         "format": "{icon}",
         "format-icons": {

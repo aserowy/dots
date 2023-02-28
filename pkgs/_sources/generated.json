@@ -33,15 +33,15 @@
             "name": null,
             "owner": "spicetify",
             "repo": "spicetify-cli",
-            "rev": "v2.16.1",
-            "sha256": "sha256-Pq8HjmWSfBgieSJejrlw+FiRdq9NxryYPcw++Pdjsuk=",
+            "rev": "v2.16.2",
+            "sha256": "sha256-13JWceuiNz1FxgVVQ2KV88zYLIBkEVeTfPF5eEK1oe8=",
             "type": "github"
         },
-        "version": "v2.16.1"
+        "version": "v2.16.2"
     },
     "spicetify-themes": {
         "cargoLocks": null,
-        "date": "2023-02-01",
+        "date": "2023-02-23",
         "extract": null,
         "name": "spicetify-themes",
         "passthru": null,
@@ -53,11 +53,11 @@
             "name": null,
             "owner": "spicetify",
             "repo": "spicetify-themes",
-            "rev": "5d5eca15aee706a9d4b115e44fba428326eba980",
-            "sha256": "sha256-cJH7hQerXPktMKbk72c2zC9Dibs4WQI0+bD76R7j/44=",
+            "rev": "a547f3d28cac8122d5a1c9f5e7f64f44b48a9280",
+            "sha256": "sha256-87afREB/TLqs4rObsDPG/PaM5A5keB3GbXTATWcqMN0=",
             "type": "github"
         },
-        "version": "5d5eca15aee706a9d4b115e44fba428326eba980"
+        "version": "a547f3d28cac8122d5a1c9f5e7f64f44b48a9280"
     },
     "tmux-continuum": {
         "cargoLocks": null,
@@ -148,12 +148,12 @@
         },
         "pinned": false,
         "src": {
-            "name": "vsliveshare-1.0.5828.zip",
-            "sha256": "sha256-zUCHrib3sz/UErBE4ebN83ng3OmhGrcTSnlQMaVN09c=",
+            "name": "vsliveshare-1.0.5832.zip",
+            "sha256": "sha256-vGurC+9d63PGgyXEVtVqruSDsObDjShpoxHD7EswSuk=",
             "type": "url",
-            "url": "https://MS-vsliveshare.gallery.vsassets.io/_apis/public/gallery/publisher/MS-vsliveshare/extension/vsliveshare/1.0.5828/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+            "url": "https://MS-vsliveshare.gallery.vsassets.io/_apis/public/gallery/publisher/MS-vsliveshare/extension/vsliveshare/1.0.5832/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
-        "version": "1.0.5828"
+        "version": "1.0.5832"
     },
     "vscode-extensions-material-theme": {
         "cargoLocks": null,
@@ -184,12 +184,12 @@
         },
         "pinned": false,
         "src": {
-            "name": "remote-containers-0.278.0.zip",
-            "sha256": "sha256-FRh3h8Jscnz1/nP+GkhaR9+r6B+5NvCKvoAvjcJvYRU=",
+            "name": "remote-containers-0.281.0.zip",
+            "sha256": "sha256-97aGoqs/4msSVfKZokCK4MWUJOp9izOY3rSom3I9DNg=",
             "type": "url",
-            "url": "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.278.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+            "url": "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.281.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
-        "version": "0.278.0"
+        "version": "0.281.0"
     },
     "vscode-extensions-remote-wsl": {
         "cargoLocks": null,
@@ -202,12 +202,12 @@
         },
         "pinned": false,
         "src": {
-            "name": "remote-wsl-0.75.1.zip",
-            "sha256": "sha256-uXv+pLhwvXMjYOlks6SvUs39cuJ7gMlRsiSChE+GjU0=",
+            "name": "remote-wsl-0.76.1.zip",
+            "sha256": "sha256-ijMDQ0gmgzNBgNNsvUh5v0kX5NEIdWiX/2344LfmcCw=",
             "type": "url",
-            "url": "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-wsl/0.75.1/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+            "url": "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-wsl/0.76.1/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
-        "version": "0.75.1"
+        "version": "0.76.1"
     },
     "vscode-extensions-todo-tree": {
         "cargoLocks": null,
@@ -220,12 +220,12 @@
         },
         "pinned": false,
         "src": {
-            "name": "todo-tree-0.0.223.zip",
-            "sha256": "sha256-hWks3fuWqp3/UhxnUFDyNN6S2SUR9SjbaoMkXBf3pVo=",
+            "name": "todo-tree-0.0.224.zip",
+            "sha256": "sha256-ObFmzAaOlbtWC31JRYR/1y+JK1h22SVDPPRWWqPzrQs=",
             "type": "url",
-            "url": "https://gruntfuggly.gallery.vsassets.io/_apis/public/gallery/publisher/gruntfuggly/extension/todo-tree/0.0.223/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+            "url": "https://gruntfuggly.gallery.vsassets.io/_apis/public/gallery/publisher/gruntfuggly/extension/todo-tree/0.0.224/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
-        "version": "0.0.223"
+        "version": "0.0.224"
     },
     "vscode-extensions-vscode-icons": {
         "cargoLocks": null,
