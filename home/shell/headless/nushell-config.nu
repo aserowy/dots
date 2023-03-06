@@ -7,9 +7,11 @@ let-env config = {
   hooks: {
     pre_prompt: [{
       code: "
-        let direnv = (direnv export json | from json)
-        let direnv = if ($direnv | length) == 1 { $direnv } else { {} }
-        $direnv | load-env
+        try {
+            let direnv = (direnv export json | from json)
+            let direnv = if ($direnv | length) == 1 { $direnv } else { {} }
+            $direnv | load-env
+        }
       "
     }]
   }
@@ -39,7 +41,9 @@ source git-aliases.nu
 source ls-aliases.nu
 
 # loading ssh-agent into env
-ssh-agent -c | lines | first 2 | parse "setenv {name} {value};" | transpose -i -r -d | load-env
+try {
+    ssh-agent -c | lines | first 2 | parse "setenv {name} {value};" | transpose -i -r -d | load-env
+}
 
 source ~/.cache/starship/init.nu
 source ~/.cache/zoxide/init.nu

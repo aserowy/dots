@@ -11,7 +11,9 @@ let-env ENV_CONVERSIONS = {
 }
 
 # adding nix bin to path for wsl
-let-env PATH = ($env.PATH | split row (char esep) | append $"($env.HOME)/.nix-profile/bin")
+if (env | any { |e| $e.name == "PATH"}) {
+    let-env PATH = ($env.PATH | split row (char esep) | append $"($env.HOME)/.nix-profile/bin")
+}
 
 # Directories to search for scripts when calling source or use
 let-env NU_LIB_DIRS = [
