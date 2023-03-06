@@ -101,7 +101,7 @@
     },
     "tmux-resurrect": {
         "cargoLocks": null,
-        "date": "2023-01-31",
+        "date": "2023-03-06",
         "extract": null,
         "name": "tmux-resurrect",
         "passthru": null,
@@ -113,11 +113,11 @@
             "name": null,
             "owner": "tmux-plugins",
             "repo": "tmux-resurrect",
-            "rev": "6df04051fe14032d1825fba8fee51d9e9dc8de40",
-            "sha256": "sha256-6Q6jwYMAO0Itt1nunJuts3rxVwl6oz0rHIjNDEUTpmw=",
+            "rev": "cff343cf9e81983d3da0c8562b01616f12e8d548",
+            "sha256": "sha256-FcSjYyWjXM1B+WmiK2bqUNJYtH7sJBUsY2IjSur5TjY=",
             "type": "github"
         },
-        "version": "6df04051fe14032d1825fba8fee51d9e9dc8de40"
+        "version": "cff343cf9e81983d3da0c8562b01616f12e8d548"
     },
     "vscode-extensions-keyboard-quickfix": {
         "cargoLocks": null,
@@ -148,12 +148,12 @@
         },
         "pinned": false,
         "src": {
-            "name": "vsliveshare-1.0.5832.zip",
-            "sha256": "sha256-vGurC+9d63PGgyXEVtVqruSDsObDjShpoxHD7EswSuk=",
+            "name": "vsliveshare-1.0.5834.zip",
+            "sha256": "sha256-+KfivY8W1VtUxhdXuUKI5e1elo6Ert1Tsf4xVXsKB3Y=",
             "type": "url",
-            "url": "https://MS-vsliveshare.gallery.vsassets.io/_apis/public/gallery/publisher/MS-vsliveshare/extension/vsliveshare/1.0.5832/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+            "url": "https://MS-vsliveshare.gallery.vsassets.io/_apis/public/gallery/publisher/MS-vsliveshare/extension/vsliveshare/1.0.5834/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
-        "version": "1.0.5832"
+        "version": "1.0.5834"
     },
     "vscode-extensions-material-theme": {
         "cargoLocks": null,

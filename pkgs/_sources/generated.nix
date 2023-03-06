@@ -61,15 +61,15 @@
   };
   tmux-resurrect = {
     pname = "tmux-resurrect";
-    version = "6df04051fe14032d1825fba8fee51d9e9dc8de40";
+    version = "cff343cf9e81983d3da0c8562b01616f12e8d548";
     src = fetchFromGitHub ({
       owner = "tmux-plugins";
       repo = "tmux-resurrect";
-      rev = "6df04051fe14032d1825fba8fee51d9e9dc8de40";
+      rev = "cff343cf9e81983d3da0c8562b01616f12e8d548";
       fetchSubmodules = false;
-      sha256 = "sha256-6Q6jwYMAO0Itt1nunJuts3rxVwl6oz0rHIjNDEUTpmw=";
+      sha256 = "sha256-FcSjYyWjXM1B+WmiK2bqUNJYtH7sJBUsY2IjSur5TjY=";
     });
-    date = "2023-01-31";
+    date = "2023-03-06";
   };
   vscode-extensions-keyboard-quickfix = {
     pname = "vscode-extensions-keyboard-quickfix";
@@ -84,11 +84,11 @@
   };
   vscode-extensions-live-share = {
     pname = "vscode-extensions-live-share";
-    version = "1.0.5832";
+    version = "1.0.5834";
     src = fetchurl {
-      url = "https://MS-vsliveshare.gallery.vsassets.io/_apis/public/gallery/publisher/MS-vsliveshare/extension/vsliveshare/1.0.5832/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "vsliveshare-1.0.5832.zip";
-      sha256 = "sha256-vGurC+9d63PGgyXEVtVqruSDsObDjShpoxHD7EswSuk=";
+      url = "https://MS-vsliveshare.gallery.vsassets.io/_apis/public/gallery/publisher/MS-vsliveshare/extension/vsliveshare/1.0.5834/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "vsliveshare-1.0.5834.zip";
+      sha256 = "sha256-+KfivY8W1VtUxhdXuUKI5e1elo6Ert1Tsf4xVXsKB3Y=";
     };
     name = "vsliveshare";
     publisher = "MS-vsliveshare";
