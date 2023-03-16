@@ -1,6 +1,7 @@
 format = """
 $username\
 $hostname\
+$os\
 $shell\
 $nix_shell\
 $shlvl\
@@ -167,6 +168,18 @@ format = '[$symbol$state]($style) '
 impure_msg = "[](bold red)"
 pure_msg = "[](bold green)"
 symbol = ''
+
+[os]
+disabled = false
+
+[os.symbols]
+Debian = " "
+Linux = " "
+NixOS = " "
+Raspbian = " "
+Ubuntu = " "
+Unknown = " "
+Windows = " "
 
 [package]
 symbol = ' '
