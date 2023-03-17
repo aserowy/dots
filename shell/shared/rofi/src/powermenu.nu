@@ -34,7 +34,7 @@ def main [command_name: string = ''] {
 }
 
 def get_current_wm [] {
-    if (env | any { |e| $e.name == 'WAYLAND_DISPLAY'}) {
+    if 'WAYLAND_DISPLAY' in $env {
         $wm_sway
     } else {
         $wm_i3

@@ -19,7 +19,7 @@ def main [workspace_name: string = ''] {
 }
 
 def get_workspaces [] {
-    if (env | any { |e| $e.name == 'WAYLAND_DISPLAY'}) {
+    if 'WAYLAND_DISPLAY' in $env {
         (swaymsg -t get_workspaces -r)
     } else {
         (i3-msg -t get_workspaces)
@@ -27,7 +27,7 @@ def get_workspaces [] {
 }
 
 def focus_workspace [name: string] {
-    if (env | any { |e| $e.name == 'WAYLAND_DISPLAY'}) {
+    if 'WAYLAND_DISPLAY' in $env {
         run-external --redirect-stdout --redirect-stderr 'swaymsg' workspace $name | ignore
     } else {
         run-external --redirect-stdout --redirect-stderr 'i3-msg' workspace $name | ignore

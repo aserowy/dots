@@ -1,7 +1,7 @@
 alias gf = git fetch
 alias gcl = git clone --recurse-submodules -j8
 alias gco = git checkout
-alias gcob = git checkout -b
+old-alias gcob = git checkout -b
 alias gb = git branch
 alias gba = git branch --all
 alias gbd = git branch --delete
