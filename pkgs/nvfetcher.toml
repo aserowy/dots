@@ -52,6 +52,11 @@ src.vsmarketplace = "gruntfuggly.todo-tree"
 fetch.vsmarketplace = "gruntfuggly.todo-tree"
 passthru = { name = "todo-tree", publisher = "gruntfuggly" }
 
+[vscode-extensions-vscode-direnv]
+src.vsmarketplace = "cab404.vscode-direnv"
+fetch.vsmarketplace = "cab404.vscode-direnv"
+passthru = { name = "vscode-direnv", publisher = "cab404" }
+
 [vscode-extensions-vscode-neovim]
 src.vsmarketplace = "asvetliakov.vscode-neovim"
 fetch.vsmarketplace = "asvetliakov.vscode-neovim"

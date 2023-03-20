@@ -13,6 +13,7 @@
       remote-containers
       remote-wsl
       todo-tree
+      vscode-direnv
       vscode-neovim
       vscode-icons
     ];

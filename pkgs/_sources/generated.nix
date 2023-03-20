@@ -137,6 +137,17 @@
     name = "todo-tree";
     publisher = "gruntfuggly";
   };
+  vscode-extensions-vscode-direnv = {
+    pname = "vscode-extensions-vscode-direnv";
+    version = "1.0.0";
+    src = fetchurl {
+      url = "https://cab404.gallery.vsassets.io/_apis/public/gallery/publisher/cab404/extension/vscode-direnv/1.0.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "vscode-direnv-1.0.0.zip";
+      sha256 = "sha256-+nLH+T9v6TQCqKZw6HPN/ZevQ65FVm2SAo2V9RecM3Y=";
+    };
+    name = "vscode-direnv";
+    publisher = "cab404";
+  };
   vscode-extensions-vscode-icons = {
     pname = "vscode-extensions-vscode-icons";
     version = "12.2.0";
