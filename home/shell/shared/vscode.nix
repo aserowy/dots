@@ -361,7 +361,6 @@
       "extensions.ignoreRecommendations" = true;
 
       "dev.containers.defaultExtensions" = [
-        "cab404.vscode-direnv"
         "Gruntfuggly.todo-tree"
         "pascalsenn.keyboard-quickfix"
       ];
