@@ -11,7 +11,7 @@ let-env ENV_CONVERSIONS = {
 }
 
 # adding nix bin to path for wsl
-if ($env | any { |e| $e.name == "PATH"}) {
+if 'PATH' in $env {
     let-env PATH = ($env.PATH | split row (char esep) | append $"($env.HOME)/.nix-profile/bin")
 }
 
