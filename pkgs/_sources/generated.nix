@@ -117,11 +117,11 @@
   };
   vscode-extensions-remote-wsl = {
     pname = "vscode-extensions-remote-wsl";
-    version = "0.77.0";
+    version = "0.78.0";
     src = fetchurl {
-      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-wsl/0.77.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "remote-wsl-0.77.0.zip";
-      sha256 = "sha256-fNEdfQUDc6m2UHCQx2qRKj8RBvvEdB3l53suzLElZuA=";
+      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-wsl/0.78.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "remote-wsl-0.78.0.zip";
+      sha256 = "sha256-lo4QPlTWfP4fAeWTLR8v8gg8hDU/mwGRoygUMvMMZ0o=";
     };
     name = "remote-wsl";
     publisher = "ms-vscode-remote";
