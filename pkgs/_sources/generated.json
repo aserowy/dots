@@ -119,6 +119,60 @@
         },
         "version": "cff343cf9e81983d3da0c8562b01616f12e8d548"
     },
+    "vscode-extensions-crates": {
+        "cargoLocks": null,
+        "date": null,
+        "extract": null,
+        "name": "vscode-extensions-crates",
+        "passthru": {
+            "name": "crates",
+            "publisher": "serayuzgur"
+        },
+        "pinned": false,
+        "src": {
+            "name": "crates-0.5.10.zip",
+            "sha256": "sha256-bY/dphiEPPgTg1zMjvxx4b0Ska2XggRucnZxtbppcLU=",
+            "type": "url",
+            "url": "https://serayuzgur.gallery.vsassets.io/_apis/public/gallery/publisher/serayuzgur/extension/crates/0.5.10/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+        },
+        "version": "0.5.10"
+    },
+    "vscode-extensions-errorlens": {
+        "cargoLocks": null,
+        "date": null,
+        "extract": null,
+        "name": "vscode-extensions-errorlens",
+        "passthru": {
+            "name": "errorlens",
+            "publisher": "usernamehw"
+        },
+        "pinned": false,
+        "src": {
+            "name": "errorlens-3.8.0.zip",
+            "sha256": "sha256-T2YTEbeC22/B5BlBBrBATLv95HQC5xGab+KnCMzI1vc=",
+            "type": "url",
+            "url": "https://usernamehw.gallery.vsassets.io/_apis/public/gallery/publisher/usernamehw/extension/errorlens/3.8.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+        },
+        "version": "3.8.0"
+    },
+    "vscode-extensions-even-better-toml": {
+        "cargoLocks": null,
+        "date": null,
+        "extract": null,
+        "name": "vscode-extensions-even-better-toml",
+        "passthru": {
+            "name": "even-better-toml",
+            "publisher": "tamasfe"
+        },
+        "pinned": false,
+        "src": {
+            "name": "even-better-toml-0.19.0.zip",
+            "sha256": "sha256-MqSQarNThbEf1wHDTf1yA46JMhWJN46b08c7tV6+1nU=",
+            "type": "url",
+            "url": "https://tamasfe.gallery.vsassets.io/_apis/public/gallery/publisher/tamasfe/extension/even-better-toml/0.19.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+        },
+        "version": "0.19.0"
+    },
     "vscode-extensions-keyboard-quickfix": {
         "cargoLocks": null,
         "date": null,
@@ -209,6 +263,24 @@
         },
         "version": "0.78.0"
     },
+    "vscode-extensions-rust-analyzer": {
+        "cargoLocks": null,
+        "date": null,
+        "extract": null,
+        "name": "vscode-extensions-rust-analyzer",
+        "passthru": {
+            "name": "rust-analyzer",
+            "publisher": "rust-lang"
+        },
+        "pinned": false,
+        "src": {
+            "name": "rust-analyzer-0.4.1460.zip",
+            "sha256": "sha256-0pFpu7E6Md4tpBhBLolxFDNKDNyg1KR/wFB5EfEhpOU=",
+            "type": "url",
+            "url": "https://rust-lang.gallery.vsassets.io/_apis/public/gallery/publisher/rust-lang/extension/rust-analyzer/0.4.1460/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+        },
+        "version": "0.4.1460"
+    },
     "vscode-extensions-todo-tree": {
         "cargoLocks": null,
         "date": null,
@@ -262,6 +334,24 @@
             "url": "https://vscode-icons-team.gallery.vsassets.io/_apis/public/gallery/publisher/vscode-icons-team/extension/vscode-icons/12.2.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
         "version": "12.2.0"
+    },
+    "vscode-extensions-vscode-lldb": {
+        "cargoLocks": null,
+        "date": null,
+        "extract": null,
+        "name": "vscode-extensions-vscode-lldb",
+        "passthru": {
+            "name": "vscode-lldb",
+            "publisher": "vadimcn"
+        },
+        "pinned": false,
+        "src": {
+            "name": "vscode-lldb-1.9.0.zip",
+            "sha256": "sha256-V2lf6T1xIgdhylGs1POFDq9CgbOz1XWYBFWejcViZQQ=",
+            "type": "url",
+            "url": "https://vadimcn.gallery.vsassets.io/_apis/public/gallery/publisher/vadimcn/extension/vscode-lldb/1.9.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+        },
+        "version": "1.9.0"
     },
     "vscode-extensions-vscode-neovim": {
         "cargoLocks": null,

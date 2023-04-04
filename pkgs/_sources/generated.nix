@@ -71,6 +71,39 @@
     });
     date = "2023-03-06";
   };
+  vscode-extensions-crates = {
+    pname = "vscode-extensions-crates";
+    version = "0.5.10";
+    src = fetchurl {
+      url = "https://serayuzgur.gallery.vsassets.io/_apis/public/gallery/publisher/serayuzgur/extension/crates/0.5.10/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "crates-0.5.10.zip";
+      sha256 = "sha256-bY/dphiEPPgTg1zMjvxx4b0Ska2XggRucnZxtbppcLU=";
+    };
+    name = "crates";
+    publisher = "serayuzgur";
+  };
+  vscode-extensions-errorlens = {
+    pname = "vscode-extensions-errorlens";
+    version = "3.8.0";
+    src = fetchurl {
+      url = "https://usernamehw.gallery.vsassets.io/_apis/public/gallery/publisher/usernamehw/extension/errorlens/3.8.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "errorlens-3.8.0.zip";
+      sha256 = "sha256-T2YTEbeC22/B5BlBBrBATLv95HQC5xGab+KnCMzI1vc=";
+    };
+    name = "errorlens";
+    publisher = "usernamehw";
+  };
+  vscode-extensions-even-better-toml = {
+    pname = "vscode-extensions-even-better-toml";
+    version = "0.19.0";
+    src = fetchurl {
+      url = "https://tamasfe.gallery.vsassets.io/_apis/public/gallery/publisher/tamasfe/extension/even-better-toml/0.19.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "even-better-toml-0.19.0.zip";
+      sha256 = "sha256-MqSQarNThbEf1wHDTf1yA46JMhWJN46b08c7tV6+1nU=";
+    };
+    name = "even-better-toml";
+    publisher = "tamasfe";
+  };
   vscode-extensions-keyboard-quickfix = {
     pname = "vscode-extensions-keyboard-quickfix";
     version = "0.0.6";
@@ -126,6 +159,17 @@
     name = "remote-wsl";
     publisher = "ms-vscode-remote";
   };
+  vscode-extensions-rust-analyzer = {
+    pname = "vscode-extensions-rust-analyzer";
+    version = "0.4.1460";
+    src = fetchurl {
+      url = "https://rust-lang.gallery.vsassets.io/_apis/public/gallery/publisher/rust-lang/extension/rust-analyzer/0.4.1460/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "rust-analyzer-0.4.1460.zip";
+      sha256 = "sha256-0pFpu7E6Md4tpBhBLolxFDNKDNyg1KR/wFB5EfEhpOU=";
+    };
+    name = "rust-analyzer";
+    publisher = "rust-lang";
+  };
   vscode-extensions-todo-tree = {
     pname = "vscode-extensions-todo-tree";
     version = "0.0.224";
@@ -158,6 +202,17 @@
     };
     name = "vscode-icons";
     publisher = "vscode-icons-team";
+  };
+  vscode-extensions-vscode-lldb = {
+    pname = "vscode-extensions-vscode-lldb";
+    version = "1.9.0";
+    src = fetchurl {
+      url = "https://vadimcn.gallery.vsassets.io/_apis/public/gallery/publisher/vadimcn/extension/vscode-lldb/1.9.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "vscode-lldb-1.9.0.zip";
+      sha256 = "sha256-V2lf6T1xIgdhylGs1POFDq9CgbOz1XWYBFWejcViZQQ=";
+    };
+    name = "vscode-lldb";
+    publisher = "vadimcn";
   };
   vscode-extensions-vscode-neovim = {
     pname = "vscode-extensions-vscode-neovim";

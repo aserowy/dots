@@ -7,13 +7,18 @@
   programs.vscode = {
     enable = true;
     extensions = with pkgs.vscode-extensions; [
+      crates
+      errorlens
+      even-better-toml
       keyboard-quickfix
       live-share
       material-theme
       remote-containers
       remote-wsl
+      rust-analyzer
       todo-tree
       vscode-direnv
+      vscode-lldb
       vscode-neovim
       vscode-icons
     ];
