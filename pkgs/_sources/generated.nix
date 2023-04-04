@@ -161,11 +161,11 @@
   };
   vscode-extensions-rust-analyzer = {
     pname = "vscode-extensions-rust-analyzer";
-    version = "0.4.1460";
+    version = "0.4.1462";
     src = fetchurl {
-      url = "https://rust-lang.gallery.vsassets.io/_apis/public/gallery/publisher/rust-lang/extension/rust-analyzer/0.4.1460/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "rust-analyzer-0.4.1460.zip";
-      sha256 = "sha256-0pFpu7E6Md4tpBhBLolxFDNKDNyg1KR/wFB5EfEhpOU=";
+      url = "https://rust-lang.gallery.vsassets.io/_apis/public/gallery/publisher/rust-lang/extension/rust-analyzer/0.4.1462/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "rust-analyzer-0.4.1462.zip";
+      sha256 = "sha256-5nmfpRZ92LtS6jTNYC0a7TTIHkSaJvWV0S6fiKxV71Q=";
     };
     name = "rust-analyzer";
     publisher = "rust-lang";
