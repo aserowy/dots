@@ -2,6 +2,7 @@
 
 def main [user: string] {
     run-external "home-manager" "switch" "--flake" "~/src/dots/"
+    run-external "nix-collect-garbage" "-d"
 
     let home =  $"/mnt/c/Users/($user)"
     mkdir $"($home)/.config/"
