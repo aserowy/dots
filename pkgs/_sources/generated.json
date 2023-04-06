@@ -130,12 +130,12 @@
         },
         "pinned": false,
         "src": {
-            "name": "crates-0.5.10.zip",
-            "sha256": "sha256-bY/dphiEPPgTg1zMjvxx4b0Ska2XggRucnZxtbppcLU=",
+            "name": "crates-0.5.11.zip",
+            "sha256": "sha256-CuUc68SRJWbnChLJjHqZwPbzptxG85qHJ53IrAZc2zc=",
             "type": "url",
-            "url": "https://serayuzgur.gallery.vsassets.io/_apis/public/gallery/publisher/serayuzgur/extension/crates/0.5.10/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+            "url": "https://serayuzgur.gallery.vsassets.io/_apis/public/gallery/publisher/serayuzgur/extension/crates/0.5.11/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
-        "version": "0.5.10"
+        "version": "0.5.11"
     },
     "vscode-extensions-errorlens": {
         "cargoLocks": null,
@@ -274,12 +274,12 @@
         },
         "pinned": false,
         "src": {
-            "name": "rust-analyzer-0.4.1464.zip",
-            "sha256": "sha256-EKuGUgczA+Ab2X0PDKW2P6PsNirQx/PsJL48hT5vb80=",
+            "name": "rust-analyzer-0.4.1465.zip",
+            "sha256": "sha256-/Mq7F/1Nt0q/hLcQZLvzNXq6HhUZVXoNy1ED9eEk3ik=",
             "type": "url",
-            "url": "https://rust-lang.gallery.vsassets.io/_apis/public/gallery/publisher/rust-lang/extension/rust-analyzer/0.4.1464/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+            "url": "https://rust-lang.gallery.vsassets.io/_apis/public/gallery/publisher/rust-lang/extension/rust-analyzer/0.4.1465/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
-        "version": "0.4.1464"
+        "version": "0.4.1465"
     },
     "vscode-extensions-todo-tree": {
         "cargoLocks": null,
