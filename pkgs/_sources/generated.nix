@@ -84,11 +84,11 @@
   };
   vscode-extensions-errorlens = {
     pname = "vscode-extensions-errorlens";
-    version = "3.8.0";
+    version = "3.9.0";
     src = fetchurl {
-      url = "https://usernamehw.gallery.vsassets.io/_apis/public/gallery/publisher/usernamehw/extension/errorlens/3.8.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "errorlens-3.8.0.zip";
-      sha256 = "sha256-T2YTEbeC22/B5BlBBrBATLv95HQC5xGab+KnCMzI1vc=";
+      url = "https://usernamehw.gallery.vsassets.io/_apis/public/gallery/publisher/usernamehw/extension/errorlens/3.9.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "errorlens-3.9.0.zip";
+      sha256 = "sha256-GFMVELwM9ugCNeaq51mibZf0V4hRGate1L3WOgMYAQQ=";
     };
     name = "errorlens";
     publisher = "usernamehw";
@@ -161,11 +161,11 @@
   };
   vscode-extensions-rust-analyzer = {
     pname = "vscode-extensions-rust-analyzer";
-    version = "0.4.1465";
+    version = "0.4.1468";
     src = fetchurl {
-      url = "https://rust-lang.gallery.vsassets.io/_apis/public/gallery/publisher/rust-lang/extension/rust-analyzer/0.4.1465/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "rust-analyzer-0.4.1465.zip";
-      sha256 = "sha256-/Mq7F/1Nt0q/hLcQZLvzNXq6HhUZVXoNy1ED9eEk3ik=";
+      url = "https://rust-lang.gallery.vsassets.io/_apis/public/gallery/publisher/rust-lang/extension/rust-analyzer/0.4.1468/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "rust-analyzer-0.4.1468.zip";
+      sha256 = "sha256-Q0dkYLJBu/bFvHy9WEeultT2nzFccQSrVQoMFu/LFK8=";
     };
     name = "rust-analyzer";
     publisher = "rust-lang";
