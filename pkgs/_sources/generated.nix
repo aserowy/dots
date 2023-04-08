@@ -14,13 +14,13 @@
   };
   spicetify-cli = {
     pname = "spicetify-cli";
-    version = "v2.17.0";
+    version = "v2.17.1";
     src = fetchFromGitHub ({
       owner = "spicetify";
       repo = "spicetify-cli";
-      rev = "v2.17.0";
+      rev = "v2.17.1";
       fetchSubmodules = false;
-      sha256 = "sha256-ALmxC4prrWCtFvUo2xRcMbhpibC1I9leh9whhV16qo4=";
+      sha256 = "sha256-hgLJVD3JEehQjPO5T54xk5JxbcVyiBu4PXV+EdOczag=";
     });
   };
   spicetify-themes = {
@@ -161,11 +161,11 @@
   };
   vscode-extensions-rust-analyzer = {
     pname = "vscode-extensions-rust-analyzer";
-    version = "0.4.1468";
+    version = "0.4.1469";
     src = fetchurl {
-      url = "https://rust-lang.gallery.vsassets.io/_apis/public/gallery/publisher/rust-lang/extension/rust-analyzer/0.4.1468/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "rust-analyzer-0.4.1468.zip";
-      sha256 = "sha256-Q0dkYLJBu/bFvHy9WEeultT2nzFccQSrVQoMFu/LFK8=";
+      url = "https://rust-lang.gallery.vsassets.io/_apis/public/gallery/publisher/rust-lang/extension/rust-analyzer/0.4.1469/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "rust-analyzer-0.4.1469.zip";
+      sha256 = "sha256-GicAOFE+342tK2N6yiIEJOLVmKQW6nzjHU3/zcXaEfA=";
     };
     name = "rust-analyzer";
     publisher = "rust-lang";
