@@ -202,12 +202,12 @@
         },
         "pinned": false,
         "src": {
-            "name": "vsliveshare-1.0.5834.zip",
-            "sha256": "sha256-+KfivY8W1VtUxhdXuUKI5e1elo6Ert1Tsf4xVXsKB3Y=",
+            "name": "vsliveshare-1.0.5857.zip",
+            "sha256": "sha256-8LdN8B7loLOf76Vuq6zsUP8Eh8wDhH9o4kGh1KuWfiA=",
             "type": "url",
-            "url": "https://MS-vsliveshare.gallery.vsassets.io/_apis/public/gallery/publisher/MS-vsliveshare/extension/vsliveshare/1.0.5834/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+            "url": "https://MS-vsliveshare.gallery.vsassets.io/_apis/public/gallery/publisher/MS-vsliveshare/extension/vsliveshare/1.0.5857/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
-        "version": "1.0.5834"
+        "version": "1.0.5857"
     },
     "vscode-extensions-material-theme": {
         "cargoLocks": null,
@@ -274,12 +274,12 @@
         },
         "pinned": false,
         "src": {
-            "name": "rust-analyzer-0.4.1470.zip",
-            "sha256": "sha256-qQ9aRe/4u97MabvtuekBrXvNitU+SQ55PoN9vjGG3EA=",
+            "name": "rust-analyzer-0.4.1473.zip",
+            "sha256": "sha256-omjxCxTjctY6EooTAQXyUti3/qMR/mmqvsx38iER6NI=",
             "type": "url",
-            "url": "https://rust-lang.gallery.vsassets.io/_apis/public/gallery/publisher/rust-lang/extension/rust-analyzer/0.4.1470/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+            "url": "https://rust-lang.gallery.vsassets.io/_apis/public/gallery/publisher/rust-lang/extension/rust-analyzer/0.4.1473/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
-        "version": "0.4.1470"
+        "version": "0.4.1473"
     },
     "vscode-extensions-todo-tree": {
         "cargoLocks": null,
@@ -292,12 +292,12 @@
         },
         "pinned": false,
         "src": {
-            "name": "todo-tree-0.0.224.zip",
-            "sha256": "sha256-ObFmzAaOlbtWC31JRYR/1y+JK1h22SVDPPRWWqPzrQs=",
+            "name": "todo-tree-0.0.225.zip",
+            "sha256": "sha256-WJKXwZjshWK9YcGcog690zyb2gVOFeBrdvyknKlxcMc=",
             "type": "url",
-            "url": "https://gruntfuggly.gallery.vsassets.io/_apis/public/gallery/publisher/gruntfuggly/extension/todo-tree/0.0.224/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+            "url": "https://gruntfuggly.gallery.vsassets.io/_apis/public/gallery/publisher/gruntfuggly/extension/todo-tree/0.0.225/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
-        "version": "0.0.224"
+        "version": "0.0.225"
     },
     "vscode-extensions-vscode-direnv": {
         "cargoLocks": null,
@@ -328,12 +328,12 @@
         },
         "pinned": false,
         "src": {
-            "name": "vscode-icons-12.2.0.zip",
-            "sha256": "sha256-PxM+20mkj7DpcdFuExUFN5wldfs7Qmas3CnZpEFeRYs=",
+            "name": "vscode-icons-12.3.0.zip",
+            "sha256": "sha256-72MAYjXz8kYCgeQm3Lf799VWXvPWtkfkfWORGAaZOW4=",
             "type": "url",
-            "url": "https://vscode-icons-team.gallery.vsassets.io/_apis/public/gallery/publisher/vscode-icons-team/extension/vscode-icons/12.2.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+            "url": "https://vscode-icons-team.gallery.vsassets.io/_apis/public/gallery/publisher/vscode-icons-team/extension/vscode-icons/12.3.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
-        "version": "12.2.0"
+        "version": "12.3.0"
     },
     "vscode-extensions-vscode-lldb": {
         "cargoLocks": null,
