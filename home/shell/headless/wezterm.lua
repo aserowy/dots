@@ -100,7 +100,7 @@ local M = {
     font_size = 12.0,
     -- key mappings
     disable_default_key_bindings = true,
-    leader = { mods = "CTRL|ALT", key = "t" },
+    leader = { mods = "CTRL", key = "c" },
     keys = {
         { mods = "LEADER", key = "a", action = "ShowLauncher" },
 
@@ -125,7 +125,6 @@ local M = {
         { mods = "LEADER",     key = "l",     action = wezterm.action({ ActivatePaneDirection = "Right" }) },
         { mods = "LEADER",     key = "k",     action = wezterm.action({ ActivatePaneDirection = "Up" }) },
         { mods = "LEADER",     key = "j",     action = wezterm.action({ ActivatePaneDirection = "Down" }) },
-        { mods = "LEADER",     key = "z",     action = "TogglePaneZoomState" },
         { mods = "ALT",        key = "Enter", action = "ToggleFullScreen" },
         { mods = "CTRL|SHIFT", key = "c",     action = wezterm.action({ CopyTo = "Clipboard" }) },
         { mods = "CTRL|SHIFT", key = "v",     action = wezterm.action({ PasteFrom = "Clipboard" }) },
