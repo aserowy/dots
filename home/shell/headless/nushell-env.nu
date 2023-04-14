@@ -26,11 +26,7 @@ let-env NU_LIB_DIRS = [
 # ]
 
 mkdir ~/.cache/starship
-# BUG: https://github.com/starship/starship/issues/5063
-starship init nu
-| str replace --string 'PROMPT_COMMAND = {' 'PROMPT_COMMAND = { ||'
-| str replace --string 'PROMPT_COMMAND_RIGHT = {' 'PROMPT_COMMAND_RIGHT = { ||'
-| save ~/.cache/starship/init.nu --force
+starship init nu | save ~/.cache/starship/init.nu --force
 
 mkdir ~/.cache/zoxide
 zoxide init nushell | save -f ~/.cache/zoxide/init.nu --force
