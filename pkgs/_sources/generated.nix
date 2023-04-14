@@ -150,22 +150,22 @@
   };
   vscode-extensions-remote-wsl = {
     pname = "vscode-extensions-remote-wsl";
-    version = "0.78.1";
+    version = "0.78.2";
     src = fetchurl {
-      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-wsl/0.78.1/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "remote-wsl-0.78.1.zip";
-      sha256 = "sha256-vgql9gEwFDiDxNPTF5cynkV34wcNGctJwkC4WuinVGw=";
+      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-wsl/0.78.2/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "remote-wsl-0.78.2.zip";
+      sha256 = "sha256-9Gh9zq3AHHdHd8uR4O6MLOxJEuaD3xE0zrd3S3nHk/Y=";
     };
     name = "remote-wsl";
     publisher = "ms-vscode-remote";
   };
   vscode-extensions-rust-analyzer = {
     pname = "vscode-extensions-rust-analyzer";
-    version = "0.4.1475";
+    version = "0.4.1477";
     src = fetchurl {
-      url = "https://rust-lang.gallery.vsassets.io/_apis/public/gallery/publisher/rust-lang/extension/rust-analyzer/0.4.1475/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "rust-analyzer-0.4.1475.zip";
-      sha256 = "sha256-CMyFMTySQ6sj/2KvQnYrCC5Fv6SpQCOEDhveEsL1vYw=";
+      url = "https://rust-lang.gallery.vsassets.io/_apis/public/gallery/publisher/rust-lang/extension/rust-analyzer/0.4.1477/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "rust-analyzer-0.4.1477.zip";
+      sha256 = "sha256-bQgD6lT6czl0Aqqd66W3NCXlNd6buBC3z0AV5HvCgv4=";
     };
     name = "rust-analyzer";
     publisher = "rust-lang";
