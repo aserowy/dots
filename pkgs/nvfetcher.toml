@@ -73,11 +73,6 @@ fetch.vsmarketplace = "usernamehw.errorlens"
 passthru = { name = "errorlens", publisher = "usernamehw" }
 
 # rust
-[vscode-extensions-rust-analyzer]
-src.vsmarketplace = "rust-lang.rust-analyzer"
-fetch.vsmarketplace = "rust-lang.rust-analyzer"
-passthru = { name = "rust-analyzer", publisher = "rust-lang" }
-
 [vscode-extensions-even-better-toml]
 src.vsmarketplace = "tamasfe.even-better-toml"
 fetch.vsmarketplace = "tamasfe.even-better-toml"

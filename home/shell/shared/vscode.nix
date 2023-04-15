@@ -15,7 +15,7 @@
       material-theme
       remote-containers
       remote-wsl
-      rust-analyzer
+      # pkgs.vscode-extensions.matklad.rust-analyzer
       todo-tree
       vscode-direnv
       vscode-lldb
