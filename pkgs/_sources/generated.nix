@@ -14,13 +14,13 @@
   };
   spicetify-cli = {
     pname = "spicetify-cli";
-    version = "v2.17.1";
+    version = "v2.17.2";
     src = fetchFromGitHub ({
       owner = "spicetify";
       repo = "spicetify-cli";
-      rev = "v2.17.1";
+      rev = "v2.17.2";
       fetchSubmodules = false;
-      sha256 = "sha256-hgLJVD3JEehQjPO5T54xk5JxbcVyiBu4PXV+EdOczag=";
+      sha256 = "sha256-WVatvMdCp4BeCe5+hz933OAJIKaR4ChR22nVrl8tmIc=";
     });
   };
   spicetify-themes = {
@@ -158,17 +158,6 @@
     };
     name = "remote-wsl";
     publisher = "ms-vscode-remote";
-  };
-  vscode-extensions-rust-analyzer = {
-    pname = "vscode-extensions-rust-analyzer";
-    version = "0.4.1477";
-    src = fetchurl {
-      url = "https://rust-lang.gallery.vsassets.io/_apis/public/gallery/publisher/rust-lang/extension/rust-analyzer/0.4.1477/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "rust-analyzer-0.4.1477.zip";
-      sha256 = "sha256-bQgD6lT6czl0Aqqd66W3NCXlNd6buBC3z0AV5HvCgv4=";
-    };
-    name = "rust-analyzer";
-    publisher = "rust-lang";
   };
   vscode-extensions-todo-tree = {
     pname = "vscode-extensions-todo-tree";

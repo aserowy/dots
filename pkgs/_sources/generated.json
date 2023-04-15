@@ -33,11 +33,11 @@
             "name": null,
             "owner": "spicetify",
             "repo": "spicetify-cli",
-            "rev": "v2.17.1",
-            "sha256": "sha256-hgLJVD3JEehQjPO5T54xk5JxbcVyiBu4PXV+EdOczag=",
+            "rev": "v2.17.2",
+            "sha256": "sha256-WVatvMdCp4BeCe5+hz933OAJIKaR4ChR22nVrl8tmIc=",
             "type": "github"
         },
-        "version": "v2.17.1"
+        "version": "v2.17.2"
     },
     "spicetify-themes": {
         "cargoLocks": null,
@@ -262,24 +262,6 @@
             "url": "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-wsl/0.78.2/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
         "version": "0.78.2"
-    },
-    "vscode-extensions-rust-analyzer": {
-        "cargoLocks": null,
-        "date": null,
-        "extract": null,
-        "name": "vscode-extensions-rust-analyzer",
-        "passthru": {
-            "name": "rust-analyzer",
-            "publisher": "rust-lang"
-        },
-        "pinned": false,
-        "src": {
-            "name": "rust-analyzer-0.4.1477.zip",
-            "sha256": "sha256-bQgD6lT6czl0Aqqd66W3NCXlNd6buBC3z0AV5HvCgv4=",
-            "type": "url",
-            "url": "https://rust-lang.gallery.vsassets.io/_apis/public/gallery/publisher/rust-lang/extension/rust-analyzer/0.4.1477/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
-        },
-        "version": "0.4.1477"
     },
     "vscode-extensions-todo-tree": {
         "cargoLocks": null,
