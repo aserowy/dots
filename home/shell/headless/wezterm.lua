@@ -44,13 +44,14 @@ end)
 
 local M = {
 	-- domains
-	ssh_domains = {
-		{
-			name = "debian.wsl",
-			remote_address = "localhost:2222",
-			username = "serowy",
-		},
-	},
+	-- ssh_domains = {
+	-- 	{
+	-- 		name = "debian.wsl",
+	-- 		remote_address = "localhost:2222",
+	-- 		username = "serowy",
+	-- 	},
+	-- },
+
 	-- theming
 	color_scheme = "OneDark",
 	color_schemes = {
@@ -82,7 +83,6 @@ local M = {
 		},
 	},
 	hide_tab_bar_if_only_one_tab = true,
-	tab_bar_at_bottom = true,
 	inactive_pane_hsb = {
 		saturation = 0.7,
 		brightness = 0.6,
@@ -102,31 +102,19 @@ local M = {
 	disable_default_key_bindings = true,
 	leader = { mods = "CTRL", key = "c" },
 	keys = {
-		{
-			key = "c",
-			mods = "LEADER|CTRL",
-			action = wezterm.action.SendKey({ key = "c", mods = "CTRL" }),
-		},
+		{ mods = "LEADER|CTRL", key = "c", action = wezterm.action.SendKey({ key = "c", mods = "CTRL" }) },
+
+		{ mods = "CTRL|SHIFT", key = "p", action = wezterm.action.ActivateCommandPalette },
 		{ mods = "LEADER", key = "a", action = "ShowLauncher" },
 		{ mods = "LEADER", key = "w", action = "QuickSelect" },
 		{ mods = "LEADER", key = "/", action = wezterm.action({ Search = { CaseSensitiveString = "" } }) },
 		{ mods = "LEADER", key = "y", action = "ActivateCopyMode" },
 		{
-			key = "p",
-			mods = "CTRL|SHIFT",
-			action = wezterm.action.ActivateCommandPalette,
-		},
-
-		{
 			mods = "LEADER",
 			key = "v",
 			action = wezterm.action({ SplitHorizontal = { domain = "CurrentPaneDomain" } }),
 		},
-		{
-			mods = "LEADER",
-			key = "x",
-			action = wezterm.action({ SplitVertical = { domain = "CurrentPaneDomain" } }),
-		},
+		{ mods = "LEADER", key = "x", action = wezterm.action({ SplitVertical = { domain = "CurrentPaneDomain" } }) },
 
 		{ mods = "LEADER", key = "n", action = wezterm.action({ ActivateTabRelative = 1 }) },
 		{ mods = "LEADER", key = "p", action = wezterm.action({ ActivateTabRelative = -1 }) },
@@ -138,7 +126,7 @@ local M = {
 		{ mods = "CTRL|ALT", key = "l", action = wezterm.action.AdjustPaneSize({ "Right", 1 }) },
 		{ mods = "CTRL|ALT", key = "k", action = wezterm.action.AdjustPaneSize({ "Up", 1 }) },
 		{ mods = "CTRL|ALT", key = "j", action = wezterm.action.AdjustPaneSize({ "Down", 1 }) },
-		{ mods = "ALT", key = "Enter", action = "ToggleFullScreen" },
+		{ mods = "CTRL|ALT", key = "Enter", action = "ToggleFullScreen" },
 		{ mods = "CTRL|SHIFT", key = "c", action = wezterm.action({ CopyTo = "Clipboard" }) },
 		{ mods = "CTRL|SHIFT", key = "v", action = wezterm.action({ PasteFrom = "Clipboard" }) },
 	},
