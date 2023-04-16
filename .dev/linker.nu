@@ -19,6 +19,6 @@ def link_wezterm [] {
 
 def unlink_wezterm [] {
     rm ~/.config/wezterm/wezterm.lua
-    run-external --redirect-stderr "ln" "-s" "~/.config/wezterm/wezterm.lua" $"($env.PWD)/home/shell/headless/wezterm.lua" 
+    mv --force ~/.config/wezterm/wezterm.lua_unlinked ~/.config/wezterm/wezterm.lua
 }
 
