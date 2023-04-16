@@ -104,7 +104,7 @@ local M = {
     keys = {
         { mods = "LEADER|CTRL", key = "c", action = wezterm.action.SendKey({ key = "c", mods = "CTRL" }) },
         { mods = "CTRL|SHIFT",  key = "p", action = wezterm.action.ActivateCommandPalette },
-        { mods = "LEADER|CTRL", key = "l", action = "ShowLauncher" },
+        { mods = "LEADER|CTRL", key = "f", action = "ShowLauncher" },
         { mods = "LEADER|CTRL", key = "/", action = wezterm.action({ Search = { CaseSensitiveString = "" } }) },
         { mods = "LEADER|CTRL", key = "y", action = "ActivateCopyMode" },
         {
