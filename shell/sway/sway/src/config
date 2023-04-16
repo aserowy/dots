@@ -87,6 +87,7 @@ bindsym $mod+n exec /etc/sway/scripts/focus_workspace.nu next
 bindsym $mod+p exec /etc/sway/scripts/focus_workspace.nu prev
 
 bindsym $mod+s scratchpad show
+bindsym $mod+Shift+s move scratchpad
 
 ## Window
 
@@ -123,12 +124,6 @@ bindsym $mod+$alt+$right resize shrink width 20px
 
 for_window [title="Lutris" tiling] move container to workspace "gaming", focus
 for_window [class="gw2-64.exe" tiling] move container to workspace "gw", focus
-
-# MUSIC
-
-exec spotify
-
-for_window [class="Spotify"] move scratchpad
 
 # NOTES
 
