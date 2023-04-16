@@ -98,6 +98,7 @@ local M = {
         { family = "FiraCode Nerd Font", weight = "Regular", stretch = "Normal", italic = false },
     }),
     font_size = 10.0,
+    line_height = 1.1,
     -- key mappings
     disable_default_key_bindings = true,
     leader = { mods = "CTRL", key = "c" },
