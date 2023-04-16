@@ -44,13 +44,13 @@ end)
 
 local M = {
     -- domains
-    -- ssh_domains = {
-    -- 	{
-    -- 		name = "debian.wsl",
-    -- 		remote_address = "localhost:2222",
-    -- 		username = "serowy",
-    -- 	},
-    -- },
+    ssh_domains = {
+    	{
+    		name = "homeassistant",
+    		remote_address = "homeassistant:2022",
+    		username = "serowy",
+    	},
+    },
 
     -- theming
     color_scheme = "OneDark",
