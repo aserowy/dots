@@ -84,11 +84,11 @@
   };
   vscode-extensions-errorlens = {
     pname = "vscode-extensions-errorlens";
-    version = "3.9.0";
+    version = "3.10.0";
     src = fetchurl {
-      url = "https://usernamehw.gallery.vsassets.io/_apis/public/gallery/publisher/usernamehw/extension/errorlens/3.9.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "errorlens-3.9.0.zip";
-      sha256 = "sha256-GFMVELwM9ugCNeaq51mibZf0V4hRGate1L3WOgMYAQQ=";
+      url = "https://usernamehw.gallery.vsassets.io/_apis/public/gallery/publisher/usernamehw/extension/errorlens/3.10.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "errorlens-3.10.0.zip";
+      sha256 = "sha256-8TYDV9cAjms2Nse5U9rGi+qy4V+nTx5i5F4muQNkL6s=";
     };
     name = "errorlens";
     publisher = "usernamehw";
@@ -117,11 +117,11 @@
   };
   vscode-extensions-live-share = {
     pname = "vscode-extensions-live-share";
-    version = "1.0.5857";
+    version = "1.0.5862";
     src = fetchurl {
-      url = "https://MS-vsliveshare.gallery.vsassets.io/_apis/public/gallery/publisher/MS-vsliveshare/extension/vsliveshare/1.0.5857/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "vsliveshare-1.0.5857.zip";
-      sha256 = "sha256-8LdN8B7loLOf76Vuq6zsUP8Eh8wDhH9o4kGh1KuWfiA=";
+      url = "https://MS-vsliveshare.gallery.vsassets.io/_apis/public/gallery/publisher/MS-vsliveshare/extension/vsliveshare/1.0.5862/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "vsliveshare-1.0.5862.zip";
+      sha256 = "sha256-GCmlFYkCBl2wdTauiBQOmgF0OpQ7/UDF+tVL8jB2QjI=";
     };
     name = "vsliveshare";
     publisher = "MS-vsliveshare";
