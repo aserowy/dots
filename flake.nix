@@ -10,14 +10,13 @@
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    chrome-pwa.url = "github:aserowy/nixos-chrome-pwa";
     neocode = {
       url = "github:aserowy/neocode";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { fenix, hardware, home, nixpkgs, chrome-pwa, neocode, ... }:
+  outputs = { fenix, hardware, home, nixpkgs, neocode, ... }:
     let
       neocode-overlay = { system, syncBuild ? false }: (final: prev: {
         neocode = neocode.defaultPackage.${system}.override {
@@ -73,7 +72,6 @@
         desktop-workstation = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
-            chrome-pwa.nixosModule
             {
               nixpkgs.overlays = [
                 fenix.overlays.default
@@ -106,7 +104,7 @@
                 fenix.overlays.default
                 (import ./pkgs)
 
-                (neocode-overlay { system = "x86_64-linux"; })
+                (neocode-overlay { system =  "x86_64-linux"; })
               ];
             }
 

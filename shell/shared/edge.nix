@@ -1,7 +1,5 @@
 { config, pkgs, ... }:
 {
-  services.chrome-pwa.enable = true;
-
   environment = {
     sessionVariables = {
       /* set edge as default browser for electron apps */
