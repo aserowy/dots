@@ -1,8 +1,26 @@
 {
   "nodes": {
+    "chrome-pwa": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1662039232,
+        "narHash": "sha256-hzEjp/ENDpdAqHPfZL6w0ugMxidgOSPTA4K5TNjLvWA=",
+        "owner": "aserowy",
+        "repo": "nixos-chrome-pwa",
+        "rev": "2b4cab0dde278b40d3774c87ef18074cb1b9707f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "aserowy",
+        "repo": "nixos-chrome-pwa",
+        "type": "github"
+      }
+    },
     "fenix": {
       "inputs": {
-        "nixpkgs": "nixpkgs",
+        "nixpkgs": "nixpkgs_2",
         "rust-analyzer-src": "rust-analyzer-src"
       },
       "locked": {
@@ -93,6 +111,20 @@
     },
     "nixpkgs": {
       "locked": {
+        "lastModified": 1655361562,
+        "narHash": "sha256-chPaIIhmdL6jdZWpf/K6yQCsuBNOYuMqbJsNpLfrdTE=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "0b59d075675dc28bf9ebab466033280096c8d4fe",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "type": "indirect"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
         "lastModified": 1681465517,
         "narHash": "sha256-EasJh15/jcJNAHtq2SGbiADRXteURAnQbj1NqBoKkzU=",
         "owner": "nixos",
@@ -107,7 +139,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_2": {
+    "nixpkgs_3": {
       "locked": {
         "lastModified": 1681557730,
         "narHash": "sha256-j2E3639kS3Qop2jQPyqWCdenZNaqIdxfoTvAHnGuAGI=",
@@ -125,11 +157,12 @@
     },
     "root": {
       "inputs": {
+        "chrome-pwa": "chrome-pwa",
         "fenix": "fenix",
         "hardware": "hardware",
         "home": "home",
         "neocode": "neocode",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs_3"
       }
     },
     "rust-analyzer-src": {
