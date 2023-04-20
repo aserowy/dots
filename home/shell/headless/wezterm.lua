@@ -45,13 +45,12 @@ end)
 local M = {
     -- domains
     ssh_domains = {
-    	{
-    		name = "homeassistant",
-    		remote_address = "homeassistant:2022",
-    		username = "serowy",
-    	},
+        {
+            name = "homeassistant",
+            remote_address = "homeassistant:2022",
+            username = "serowy",
+        },
     },
-
     -- theming
     color_scheme = "OneDark",
     color_schemes = {
@@ -120,19 +119,20 @@ local M = {
             action = wezterm.action({ SplitVertical = { domain = "CurrentPaneDomain" } }),
         },
 
+        { mods = "CTRL|ALT",    key = "Enter", action = "ToggleFullScreen" },
+        { mods = "CTRL|ALT",    key = "h",     action = wezterm.action.AdjustPaneSize({ "Left", 1 }) },
+        { mods = "CTRL|ALT",    key = "l",     action = wezterm.action.AdjustPaneSize({ "Right", 1 }) },
+        { mods = "CTRL|ALT",    key = "k",     action = wezterm.action.AdjustPaneSize({ "Up", 1 }) },
+        { mods = "CTRL|ALT",    key = "j",     action = wezterm.action.AdjustPaneSize({ "Down", 1 }) },
+        { mods = "CTRL|SHIFT",  key = "c",     action = wezterm.action({ CopyTo = "Clipboard" }) },
+        { mods = "CTRL|SHIFT",  key = "v",     action = wezterm.action({ PasteFrom = "Clipboard" }) },
         { mods = "LEADER|CTRL", key = "n",     action = wezterm.action({ ActivateTabRelative = 1 }) },
         { mods = "LEADER|CTRL", key = "p",     action = wezterm.action({ ActivateTabRelative = -1 }) },
         { mods = "LEADER|CTRL", key = "h",     action = wezterm.action({ ActivatePaneDirection = "Left" }) },
         { mods = "LEADER|CTRL", key = "l",     action = wezterm.action({ ActivatePaneDirection = "Right" }) },
         { mods = "LEADER|CTRL", key = "k",     action = wezterm.action({ ActivatePaneDirection = "Up" }) },
         { mods = "LEADER|CTRL", key = "j",     action = wezterm.action({ ActivatePaneDirection = "Down" }) },
-        { mods = "CTRL|ALT",    key = "h",     action = wezterm.action.AdjustPaneSize({ "Left", 1 }) },
-        { mods = "CTRL|ALT",    key = "l",     action = wezterm.action.AdjustPaneSize({ "Right", 1 }) },
-        { mods = "CTRL|ALT",    key = "k",     action = wezterm.action.AdjustPaneSize({ "Up", 1 }) },
-        { mods = "CTRL|ALT",    key = "j",     action = wezterm.action.AdjustPaneSize({ "Down", 1 }) },
-        { mods = "CTRL|ALT",    key = "Enter", action = "ToggleFullScreen" },
-        { mods = "CTRL|SHIFT",  key = "c",     action = wezterm.action({ CopyTo = "Clipboard" }) },
-        { mods = "CTRL|SHIFT",  key = "v",     action = wezterm.action({ PasteFrom = "Clipboard" }) },
+        { mods = "LEADER|CTRL", key = "z",     action = "TogglePaneZoomState" },
     },
 }
 
