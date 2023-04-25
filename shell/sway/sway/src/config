@@ -1,4 +1,4 @@
-set $browser "microsoft-edge \
+set $browser "microsoft-edge-beta \
     --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer \
     --ozone-platform=wayland"
 
