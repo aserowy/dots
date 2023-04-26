@@ -25,15 +25,15 @@
   };
   spicetify-themes = {
     pname = "spicetify-themes";
-    version = "a629afc82d3e3086a28e83f002495d2e61c6ea1e";
+    version = "4f10f4f7a6e679b05c0c8d9eac6043ca80aea063";
     src = fetchFromGitHub ({
       owner = "spicetify";
       repo = "spicetify-themes";
-      rev = "a629afc82d3e3086a28e83f002495d2e61c6ea1e";
+      rev = "4f10f4f7a6e679b05c0c8d9eac6043ca80aea063";
       fetchSubmodules = false;
-      sha256 = "sha256-s3G1AwbOe8493hEjHaEAnTeCbrPwexN4cb915kqFJ3c=";
+      sha256 = "sha256-te7XstT98m5dwnJ9iBs54OMR61DTKqzEGtEBW2SsBpc=";
     });
-    date = "2023-04-21";
+    date = "2023-04-26";
   };
   tmux-continuum = {
     pname = "tmux-continuum";
@@ -84,11 +84,11 @@
   };
   vscode-extensions-errorlens = {
     pname = "vscode-extensions-errorlens";
-    version = "3.10.0";
+    version = "3.10.1";
     src = fetchurl {
-      url = "https://usernamehw.gallery.vsassets.io/_apis/public/gallery/publisher/usernamehw/extension/errorlens/3.10.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "errorlens-3.10.0.zip";
-      sha256 = "sha256-8TYDV9cAjms2Nse5U9rGi+qy4V+nTx5i5F4muQNkL6s=";
+      url = "https://usernamehw.gallery.vsassets.io/_apis/public/gallery/publisher/usernamehw/extension/errorlens/3.10.1/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "errorlens-3.10.1.zip";
+      sha256 = "sha256-Qqxju5/fb9h58G8pRmnmlRCknh5DuFYoYFfjtpIG0eA=";
     };
     name = "errorlens";
     publisher = "usernamehw";
@@ -117,11 +117,11 @@
   };
   vscode-extensions-live-share = {
     pname = "vscode-extensions-live-share";
-    version = "1.0.5862";
+    version = "1.0.5864";
     src = fetchurl {
-      url = "https://MS-vsliveshare.gallery.vsassets.io/_apis/public/gallery/publisher/MS-vsliveshare/extension/vsliveshare/1.0.5862/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "vsliveshare-1.0.5862.zip";
-      sha256 = "sha256-GCmlFYkCBl2wdTauiBQOmgF0OpQ7/UDF+tVL8jB2QjI=";
+      url = "https://MS-vsliveshare.gallery.vsassets.io/_apis/public/gallery/publisher/MS-vsliveshare/extension/vsliveshare/1.0.5864/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "vsliveshare-1.0.5864.zip";
+      sha256 = "sha256-UdI9iRvI/BaZj8ihFBCTFJGLZXxS3CtmoDw8JBPbzLY=";
     };
     name = "vsliveshare";
     publisher = "MS-vsliveshare";
