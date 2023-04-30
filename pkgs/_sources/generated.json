@@ -328,12 +328,12 @@
         },
         "pinned": false,
         "src": {
-            "name": "vscode-lldb-1.9.0.zip",
-            "sha256": "sha256-V2lf6T1xIgdhylGs1POFDq9CgbOz1XWYBFWejcViZQQ=",
+            "name": "vscode-lldb-1.9.1.zip",
+            "sha256": "sha256-P3C66+n+LXx3GOS1ui/LUreEPX3Um8vtf/XZzPXd9cg=",
             "type": "url",
-            "url": "https://vadimcn.gallery.vsassets.io/_apis/public/gallery/publisher/vadimcn/extension/vscode-lldb/1.9.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+            "url": "https://vadimcn.gallery.vsassets.io/_apis/public/gallery/publisher/vadimcn/extension/vscode-lldb/1.9.1/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
-        "version": "1.9.0"
+        "version": "1.9.1"
     },
     "vscode-extensions-vscode-neovim": {
         "cargoLocks": null,

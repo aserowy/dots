@@ -194,11 +194,11 @@
   };
   vscode-extensions-vscode-lldb = {
     pname = "vscode-extensions-vscode-lldb";
-    version = "1.9.0";
+    version = "1.9.1";
     src = fetchurl {
-      url = "https://vadimcn.gallery.vsassets.io/_apis/public/gallery/publisher/vadimcn/extension/vscode-lldb/1.9.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "vscode-lldb-1.9.0.zip";
-      sha256 = "sha256-V2lf6T1xIgdhylGs1POFDq9CgbOz1XWYBFWejcViZQQ=";
+      url = "https://vadimcn.gallery.vsassets.io/_apis/public/gallery/publisher/vadimcn/extension/vscode-lldb/1.9.1/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "vscode-lldb-1.9.1.zip";
+      sha256 = "sha256-P3C66+n+LXx3GOS1ui/LUreEPX3Um8vtf/XZzPXd9cg=";
     };
     name = "vscode-lldb";
     publisher = "vadimcn";
