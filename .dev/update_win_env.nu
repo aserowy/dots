@@ -16,4 +16,9 @@ def main [user: string] {
     cp ./home/shell/headless/nushell/* $"($nushell_path)/scripts"
     cp ./home/shell/headless/nushell-env.nu $"($nushell_path)/env.nu"
     cp ./home/shell/headless/nushell-config.nu $"($nushell_path)/config.nu"
+
+    let nvim_path = $"($home)/AppData/Local/nvim"
+
+    rm -p -r $"($nvim_path)/*"
+    cp -r ~/.config/nvim/* $nvim_path
 }
