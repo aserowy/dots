@@ -17,7 +17,7 @@ if "PATH" in $env {
 
 # Directories to search for scripts when calling source or use
 let-env NU_LIB_DIRS = [
-    $"($env.HOME)/.config/nushell/scripts"
+    ($nu.default-config-dir | path join 'scripts')
 ]
 
 # Directories to search for plugin binaries when calling register
