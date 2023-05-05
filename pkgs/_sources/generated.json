@@ -41,7 +41,7 @@
     },
     "spicetify-themes": {
         "cargoLocks": null,
-        "date": "2023-04-26",
+        "date": "2023-05-05",
         "extract": null,
         "name": "spicetify-themes",
         "passthru": null,
@@ -53,11 +53,11 @@
             "name": null,
             "owner": "spicetify",
             "repo": "spicetify-themes",
-            "rev": "4f10f4f7a6e679b05c0c8d9eac6043ca80aea063",
-            "sha256": "sha256-te7XstT98m5dwnJ9iBs54OMR61DTKqzEGtEBW2SsBpc=",
+            "rev": "e945db43cb51e8036a4b3412540eb18182618d2c",
+            "sha256": "sha256-1ZmavROvKdC2234wZwb2mY0ZwYMwxlPAJK9Tj4kUQ+A=",
             "type": "github"
         },
-        "version": "4f10f4f7a6e679b05c0c8d9eac6043ca80aea063"
+        "version": "e945db43cb51e8036a4b3412540eb18182618d2c"
     },
     "tmux-continuum": {
         "cargoLocks": null,
