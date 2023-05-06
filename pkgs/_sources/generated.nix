@@ -84,11 +84,11 @@
   };
   vscode-extensions-errorlens = {
     pname = "vscode-extensions-errorlens";
-    version = "3.10.1";
+    version = "3.11.0";
     src = fetchurl {
-      url = "https://usernamehw.gallery.vsassets.io/_apis/public/gallery/publisher/usernamehw/extension/errorlens/3.10.1/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "errorlens-3.10.1.zip";
-      sha256 = "sha256-Qqxju5/fb9h58G8pRmnmlRCknh5DuFYoYFfjtpIG0eA=";
+      url = "https://usernamehw.gallery.vsassets.io/_apis/public/gallery/publisher/usernamehw/extension/errorlens/3.11.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "errorlens-3.11.0.zip";
+      sha256 = "sha256-dOIjRCoBUHEPhSteFVC1XhAeKYnBKDBgjX1Ju4EmuIM=";
     };
     name = "errorlens";
     publisher = "usernamehw";
