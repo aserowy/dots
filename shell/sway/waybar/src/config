@@ -27,7 +27,7 @@
             "critical": 15
         },
         "format": "{icon}",
-        "format-icons": ["", "", "", "", ""]
+        "format-icons": ["󰂎", "󱊡", "󱊢", "󱊣", "󱈑"]
     },
     "clock#hour": {
         "interval": 1,
@@ -38,14 +38,14 @@
         "format": "{:%M}",
     },
     "custom/grimshot": {
-        "format": "",
+        "format": "󰹑",
         "tooltip": false,
         "on-click": "grimshot --notify save output - | swappy -f -",
         "on-click-middle": "grimshot --notify save window - | swappy -f -",
         "on-click-right": "grimshot --notify save area - | swappy -f -"
     },
     "custom/recorder": {
-        "format": "",
+        "format": "󰕧",
         "tooltip": false,
         "interval": "once",
         "return-type": "json",
@@ -60,7 +60,7 @@
     },
     "custom/spotify-metadata": {
         "exec": "/etc/xdg/waybar/spotify/metadata.sh",
-        "format": "",
+        "format": "󰓇",
         "interval": "once",
         "on-click": "scratchpad show",
         "return-type": "json",
@@ -76,7 +76,7 @@
     },
     "custom/spotify-next": {
         "exec": "/etc/xdg/waybar/spotify/metadata.sh",
-        "format": "怜",
+        "format": "󰒭",
         "interval": "once",
         "on-click": "/etc/xdg/waybar/spotify/controls.sh next",
         "return-type": "json",
@@ -84,7 +84,7 @@
     },
     "custom/spotify-prev": {
         "exec": "/etc/xdg/waybar/spotify/metadata.sh",
-        "format": "玲",
+        "format": "󰒮",
         "interval": "once",
         "on-click": "/etc/xdg/waybar/spotify/controls.sh prev",
         "return-type": "json",
@@ -95,32 +95,32 @@
         "disable-scroll": true,
         "format": "{icon}",
         "format-icons": {
-            "default": "",
-            "dots": "",
-            "focused": "",
-            "gaming": "",
-            "notes": "ﴬ",
-            "social": "",
-            "urgent": "",
-            "work": "",
+            "default": "󰝥",
+            "dots": "󰛄",
+            "focused": "󰻂",
+            "gaming": "󰺵",
+            "notes": "󰠮",
+            "social": "󰅻",
+            "urgent": "󰀨",
+            "work": "󰃖",
         },
     },
     "network": {
-        "format-wifi": "直",
-        "format-ethernet": "直",
-        "format-linked": "",
-        "format-disconnected": "睊",
+        "format-wifi": "󰖩",
+        "format-ethernet": "󰈀",
+        "format-linked": "󰌷",
+        "format-disconnected": "󰖪",
     },
     "pulseaudio": {
         "scroll-step": 5,
         "format": "{icon}",
         "format-bluetooth": "{icon}",
-        "format-bluetooth-muted": "婢",
-        "format-muted": "婢",
+        "format-bluetooth-muted": "󰝟",
+        "format-muted": "󰝟",
         "format-icons": {
-            "phone": "",
-            "headphone": "",
-            "default": ["", "", ""]
+            "phone": "󰏲",
+            "headphone": "󰋋",
+            "default": ["", "󰖀", "󰕾"]
         },
         "on-click": "pavucontrol",
         "states": {
