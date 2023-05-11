@@ -11,5 +11,13 @@
     ../shell/headless
   ];
 
-  programs.ssh.matchBlocks = { };
+
+  programs = {
+    git = {
+      extraConfig = {
+        credential.helper = "/mnt/c/Users/serowy/scoop/shims/git-credential-manager.exe";
+      };
+    };
+    ssh.matchBlocks = { };
+  };
 }
