@@ -3,13 +3,13 @@
 {
   git-credential-manager = {
     pname = "git-credential-manager";
-    version = "v2.0.935";
+    version = "v2.1.2";
     src = fetchFromGitHub ({
       owner = "GitCredentialManager";
       repo = "git-credential-manager";
-      rev = "v2.0.935";
+      rev = "v2.1.2";
       fetchSubmodules = false;
-      sha256 = "sha256-lnki00WzcAm5GuX79J143bOOeJsrB7gMB/IdCh9G11o=";
+      sha256 = "sha256-PeQ9atSCgSvduAcqY2CnNJH3ucvoInduA5i8dPUJiHo=";
     });
   };
   spicetify-cli = {

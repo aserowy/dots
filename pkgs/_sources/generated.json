@@ -13,11 +13,11 @@
             "name": null,
             "owner": "GitCredentialManager",
             "repo": "git-credential-manager",
-            "rev": "v2.0.935",
-            "sha256": "sha256-lnki00WzcAm5GuX79J143bOOeJsrB7gMB/IdCh9G11o=",
+            "rev": "v2.1.2",
+            "sha256": "sha256-PeQ9atSCgSvduAcqY2CnNJH3ucvoInduA5i8dPUJiHo=",
             "type": "github"
         },
-        "version": "v2.0.935"
+        "version": "v2.1.2"
     },
     "spicetify-cli": {
         "cargoLocks": null,
