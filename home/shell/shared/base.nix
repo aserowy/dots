@@ -6,7 +6,6 @@
     ardour
     discord
     gparted
-    obsidian
     remmina
   ];
 }
