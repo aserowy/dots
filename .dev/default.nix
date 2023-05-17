@@ -7,8 +7,4 @@
     sumneko-lua-language-server
     rnix-lsp
   ];
-  shellHook = ''
-    # format
-    alias fmt="prettier --write README.md && nixpkgs-fmt ."
-  '';
 }

@@ -100,6 +100,7 @@ local M = {
     font_size = 10.0,
     line_height = 1.1,
     -- key mappings
+    use_ime = true,
     disable_default_key_bindings = true,
     leader = { mods = "CTRL", key = "c" },
     keys = {

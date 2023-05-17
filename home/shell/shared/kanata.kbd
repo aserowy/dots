@@ -1,0 +1,34 @@
+(defcfg
+  process-unmapped-keys yes
+)
+
+(defsrc
+  esc  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '         ret
+  lsft z    x    c    v    b    n    m    ,    .    /              rsft
+  lctl lmet lalt           spc                 ralt      rmet      rctl
+)
+
+(deflayer qwerty
+  esc  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  @dk3 a    s    d    f    g    h    j    k    l    ;    '         ret
+  lsft z    x    c    v    b    n    m    ,    .    /              rsft
+  lctl lmet lalt           spc                 sldr      rmet      rctl
+)
+
+(deflayer ducky3
+  grv  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del
+  XX   XX   XX   XX   XX   XX   XX   XX   ins  brk  pgup home XX   XX
+  XX   XX   XX   XX   XX   XX   XX   XX   up   pgdn end  XX        XX
+  XX   XX   XX   XX   XX   XX   XX   XX   lft  down rght           XX
+  XX   XX   XX             XX                  XX        XX        XX
+)
+
+(defalias 
+    dk3 (layer-while-held ducky3)
+)
+
+(defseq "ß" (s s))
+(deffakekeys "ß" (macro (unicode ß)))
