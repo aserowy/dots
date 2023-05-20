@@ -100,7 +100,6 @@ local M = {
     font_size = 10.0,
     line_height = 1.1,
     -- key mappings
-    use_ime = true,
     disable_default_key_bindings = true,
     leader = { mods = "CTRL", key = "c" },
     keys = {
@@ -127,6 +126,7 @@ local M = {
         { mods = "CTRL|ALT",    key = "j",     action = wezterm.action.AdjustPaneSize({ "Down", 1 }) },
         { mods = "CTRL|SHIFT",  key = "c",     action = wezterm.action({ CopyTo = "Clipboard" }) },
         { mods = "CTRL|SHIFT",  key = "v",     action = wezterm.action({ PasteFrom = "Clipboard" }) },
+        { mods = "CTRL|SHIFT",  key = "u",     action = wezterm.action.CharSelect({ copy_on_select = false }) },
         { mods = "LEADER|CTRL", key = "n",     action = wezterm.action({ ActivateTabRelative = 1 }) },
         { mods = "LEADER|CTRL", key = "p",     action = wezterm.action({ ActivateTabRelative = -1 }) },
         { mods = "LEADER|CTRL", key = "h",     action = wezterm.action({ ActivatePaneDirection = "Left" }) },
