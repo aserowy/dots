@@ -5,6 +5,6 @@
     nvfetcher
     stylua
     sumneko-lua-language-server
-    rnix-lsp
+    nil
   ];
 }
