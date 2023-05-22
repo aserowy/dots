@@ -1,9 +1,9 @@
 { config, pkgs, ... }:
 {
-  home = {
-    file.".config/kanata.kbd".source = ./kanata.kbd;
+  environment = {
+    etc."kanata.kbd".source = ./kanata.kbd;
 
-    packages = with pkgs; [
+    systemPackages = with pkgs; [
       kanata
     ];
   };
@@ -36,7 +36,7 @@
       # Environment=HOME=/path/to/home/folder
       Environment = [ "DISPLAY=:0" ];
       Type = "simple";
-      ExecStart = "${pkgs.kanata}/bin/kanata --cfg ~/.config/kanata.kbd";
+      ExecStart = "${pkgs.kanata}/bin/kanata --cfg /etc/kanata.kbd";
       Restart = "no";
     };
 

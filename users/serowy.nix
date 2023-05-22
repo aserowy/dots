@@ -1,8 +1,6 @@
 { pkgs, ... }:
 {
   users = {
-    # groups.uinput = { };
-
     users.serowy = {
       createHome = true;
       extraGroups = [
@@ -11,10 +9,6 @@
         "networkmanager"
         "video"
         "wheel"
-
-        # kanata relevant
-        # "input"
-        # "uinput"
       ];
       group = "users";
       home = "/home/serowy";

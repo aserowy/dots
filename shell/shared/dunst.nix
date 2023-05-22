@@ -24,12 +24,12 @@ let
   });
 in
 {
-  environment.systemPackages = with pkgs; [
-    dunst
-  ];
+  environment = {
+    systemPackages = with pkgs; [
+      dunst
+    ];
 
-  environment.etc."dunst/dunstrc" = {
-    text = ''
+    etc."dunst/dunstrc".text = ''
       [global]
       alignment="center"
       always_run_script="true"
@@ -85,4 +85,3 @@ in
     wantedBy = [ "sway-session.target" ];
   };
 }
-
