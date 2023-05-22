@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
   environment = {
     /* sets ozone wayland support for all chromium based applications */
@@ -20,7 +20,7 @@
     ../shared/dunst.nix
     ../shared/edge.nix
     ../shared/gtk.nix
-    ../shared/kanata.nix
+    # ../shared/kanata.nix
     ../shared/lutris.nix
     ../shared/rofi/rofi-wayland.nix
     ../shared/spotify.nix
