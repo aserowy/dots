@@ -21,7 +21,7 @@
 (deflayer ducky3
   grv  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del
   XX   XX   XX   XX   XX   XX   XX   XX   ins  brk  pgup home XX   XX
-  XX   XX   XX   XX   XX   XX   XX   XX   up   pgdn end  XX        XX
+  XX   XX   XX   XX   XX   XX   XX   XX   XX   up   pgdn end       XX
   XX   XX   XX   XX   XX   XX   XX   XX   lft  down rght           XX
   XX   XX   XX             XX                  XX        XX        XX
 )
