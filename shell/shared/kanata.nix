@@ -10,19 +10,11 @@
 
   hardware.uinput.enable = true;
 
-  services.udev.extraRules = ''
-    KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
-  '';
-
-  users = {
-    groups.uinput = { };
-
-    # TODO: user agnostic?
-    users.serowy.extraGroups = [
-      "input"
-      "uinput"
-    ];
-  };
+  # TODO: user agnostic?
+  users.users.serowy.extraGroups = [
+    "input"
+    "uinput"
+  ];
 
   systemd.user.services.kanata = {
     description = "kanata keyboard remapper";
