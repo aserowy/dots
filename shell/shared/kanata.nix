@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
   environment = {
     etc."kanata.kbd".source = ./kanata.kbd;
@@ -8,7 +8,7 @@
     ];
   };
 
-  boot.extraModulePackages = with config.boot.kernelPackages; [ uinput ];
+  hardware.uinput.enable = true;
 
   services.udev.extraRules = ''
     KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
@@ -25,23 +25,19 @@
   };
 
   systemd.user.services.kanata = {
-    Unit = {
-      Description = "kanata keyboard remapper";
-      Documentation = "https://github.com/jtroo/kanata";
+    description = "kanata keyboard remapper";
+    documentation = [ "https://github.com/jtroo/kanata" ];
+    # Environment=PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin
+    # Environment=DISPLAY=:0
+    # Environment=HOME=/path/to/home/folder
+    environment = {
+      DISPLAY = ":0";
     };
-
-    Service = {
-      # Environment=PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin
-      # Environment=DISPLAY=:0
-      # Environment=HOME=/path/to/home/folder
-      Environment = [ "DISPLAY=:0" ];
-      Type = "simple";
+    serviceConfig = {
       ExecStart = "${pkgs.kanata}/bin/kanata --cfg /etc/kanata.kbd";
+      Type = "simple";
       Restart = "no";
     };
-
-    Install = {
-      WantedBy = "default.target";
-    };
+    wantedBy = [ "default.target" ];
   };
 }
