@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 {
   systemd.services.init-docker-ha-network = {
     description = "Create the network bridge ha-network for home-assistant.";

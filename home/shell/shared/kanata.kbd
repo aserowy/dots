@@ -36,9 +36,9 @@
 (defseq "€" (c =))
 (deffakekeys "€" (macro (unicode €)))
 
-(defseq "Ä" (S-a))
-(deffakekeys "Ä" (macro (unicode Ä)))
-
+;;(defseq "Ä" (S-a))
+;;(deffakekeys "Ä" (macro (unicode Ä)))
+;;
 ;;(defseq "Ö" (lsft ' O))
 ;;(deffakekeys "Ö" (macro (unicode Ö)))
 ;;
