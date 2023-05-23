@@ -97,7 +97,6 @@ local M = {
         },
     },
     use_fancy_tab_bar = false,
-    hide_tab_bar_if_only_one_tab = true,
     inactive_pane_hsb = {
         saturation = 0.7,
         brightness = 0.6,
@@ -133,7 +132,18 @@ local M = {
             key = "x",
             action = wezterm.action({ SplitVertical = { domain = "CurrentPaneDomain" } }),
         },
-        { mods = "LEADER|CTRL", key = "r",     action = wezterm.action({ ActivateTabRelative = 1 }) },
+        {
+            mods = "LEADER|CTRL",
+            key = "r",
+            action = wezterm.action.PromptInputLine({
+                description = "Enter new name for tab",
+                action = wezterm.action_callback(function(window, _, line)
+                    if line then
+                        window:active_tab():set_title(line)
+                    end
+                end),
+            }),
+        },
 
         { mods = "CTRL|ALT",    key = "Enter", action = "ToggleFullScreen" },
         { mods = "CTRL|ALT",    key = "h",     action = wezterm.action.AdjustPaneSize({ "Left", 1 }) },
