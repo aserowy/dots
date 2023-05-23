@@ -44,13 +44,13 @@ let-env config = {
 }
 
 # cat
-use cat-aliases.nu
+source cat-aliases.nu
 
 # git
-use git-aliases.nu
+source git-aliases.nu
 
 # ls
-use ls-aliases.nu
+source ls-aliases.nu
 
 # loading ssh-agent into env
 try {
