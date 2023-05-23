@@ -1,7 +1,20 @@
+let-env PATH = ($env.PATH | prepend "/home/serowy/.config/carapace/bin")
+
+let carapace_completer = {|spans|
+  carapace $spans.0 nushell $spans | from json
+}
+
 let-env config = {
   show_banner: false
 
   edit_mode: vi
+
+  completions: {
+    external: {
+      enable: true
+      completer: $carapace_completer
+    }
+  }
 
   # hook for direnv
   hooks: {
@@ -34,11 +47,10 @@ let-env config = {
 use cat-aliases.nu
 
 # git
-use git-completions.nu *
-source git-aliases.nu
+use git-aliases.nu
 
 # ls
-source ls-aliases.nu
+use ls-aliases.nu
 
 # loading ssh-agent into env
 try {

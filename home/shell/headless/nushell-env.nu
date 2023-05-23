@@ -20,13 +20,8 @@ let-env NU_LIB_DIRS = [
     ($nu.default-config-dir | path join 'scripts')
 ]
 
-# Directories to search for plugin binaries when calling register
-# let-env NU_PLUGIN_DIRS = [
-#     ($nu.config-path | path dirname | path join 'plugins')
-# ]
-
 mkdir ~/.cache/starship
-starship init nu | save ~/.cache/starship/init.nu --force
+starship init nu | save --force ~/.cache/starship/init.nu
 
 mkdir ~/.cache/zoxide
-zoxide init nushell | save -f ~/.cache/zoxide/init.nu --force
+zoxide init nushell | save --force ~/.cache/zoxide/init.nu

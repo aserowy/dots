@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ pkgs, ... }:
 {
   imports = [
     ./direnv.nix
@@ -8,6 +8,7 @@
   ];
 
   home.packages = with pkgs; [
+    carapace
     exa
     nushell
   ];
