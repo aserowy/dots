@@ -42,6 +42,21 @@ wezterm.on("update-right-status", function(window, pane)
     }))
 end)
 
+-- function(tab, tabs, panes, config, hover, max_width)
+wezterm.on("format-tab-title", function(tab, _, _, _, _, max_width)
+    local title = tab.tab_title
+    if not title or #title == 0 then
+        title = tab.active_pane.title
+    end
+
+    local name = string.sub(title, 1, max_width)
+    local padding = max_width - #name
+    local pad_left = math.floor(padding / 2)
+    local pad_right = math.ceil(padding / 2)
+
+    return string.rep(" ", pad_left) .. name .. string.rep(" ", pad_right)
+end)
+
 local M = {
     -- domains
     ssh_domains = {
@@ -118,6 +133,7 @@ local M = {
             key = "x",
             action = wezterm.action({ SplitVertical = { domain = "CurrentPaneDomain" } }),
         },
+        { mods = "LEADER|CTRL", key = "r",     action = wezterm.action({ ActivateTabRelative = 1 }) },
 
         { mods = "CTRL|ALT",    key = "Enter", action = "ToggleFullScreen" },
         { mods = "CTRL|ALT",    key = "h",     action = wezterm.action.AdjustPaneSize({ "Left", 1 }) },
