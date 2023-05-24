@@ -10,13 +10,12 @@ def main [user: string] {
     cp ./home/shell/headless/wezterm.lua $"($home)/.wezterm.lua"
     cp ./home/shell/headless/starship.toml $"($home)/.config/"
 
-    # FIX: till carapace hits scoop
-    # let nushell_path = $"($home)/AppData/Roaming/nushell"
-    # mkdir $"($nushell_path)/scripts"
-    # ---
-    # cp ./home/shell/headless/nushell/* $"($nushell_path)/scripts"
-    # cp ./home/shell/headless/nushell-env.nu $"($nushell_path)/env.nu"
-    # cp ./home/shell/headless/nushell-config.nu $"($nushell_path)/config.nu"
+    let nushell_path = $"($home)/AppData/Roaming/nushell"
+    mkdir $"($nushell_path)/scripts"
+
+    cp ./home/shell/headless/nushell/* $"($nushell_path)/scripts"
+    cp ./home/shell/headless/nushell-env.nu $"($nushell_path)/env.nu"
+    cp ./home/shell/headless/nushell-config.nu $"($nushell_path)/config.nu"
 
     let nvim_path = $"($home)/AppData/Local/nvim"
 
