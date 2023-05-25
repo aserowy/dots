@@ -2,7 +2,7 @@
 {
   imports = [
     ./serowy.nix
-  ]; 
+  ];
 
   users = {
     users.serowy = {

@@ -87,8 +87,8 @@ neovim while using tmux.
 ### fonts
 
 To get usefull icons in shell and nvim, install your favorite nerd font from
-<https://www.nerdfonts.com/font-downloads>. My most beloved font is `FiraCode
-Nerd Font`. It is important to install all available font faces given.
+<https://www.nerdfonts.com/font-downloads>. My most beloved font is
+`FiraCode Nerd Font`. It is important to install all available font faces given.
 
 Set the installed font as default in your terminal.
 
@@ -101,9 +101,11 @@ sudo apt-get update
 sudo apt-get install -y curl openssh-server xz-utils
 ```
 
-After these packages are installed run the install script with the following command.
+After these packages are installed run the install script with the following
+command.
 
-> For others to use: fork and change targets in flake.nix (user@system) accordingly.
+> For others to use: fork and change targets in flake.nix (user@system)
+> accordingly.
 
 ```sh
 curl -L https://raw.githubusercontent.com/aserowy/dots/main/install.sh | sh

@@ -41,7 +41,7 @@ in
     '';
   });
 
-  spicetify-themes = final.callPackage ./spicetify-themes { 
+  spicetify-themes = final.callPackage ./spicetify-themes {
     sources = fetches;
   };
 

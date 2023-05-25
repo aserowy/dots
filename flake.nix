@@ -104,7 +104,7 @@
                 fenix.overlays.default
                 (import ./pkgs)
 
-                (neocode-overlay { system =  "x86_64-linux"; })
+                (neocode-overlay { system = "x86_64-linux"; })
               ];
             }
 
@@ -154,3 +154,4 @@
       };
     };
 }
+

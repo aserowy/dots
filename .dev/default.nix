@@ -1,9 +1,8 @@
 { pkgs, ... }: with pkgs; mkShell {
   buildInputs = [
+    deno
     nil
     nixpkgs-fmt
-    nodePackages.markdownlint-cli
-    nodePackages.prettier
     nvfetcher
     stylua
     sumneko-lua-language-server
