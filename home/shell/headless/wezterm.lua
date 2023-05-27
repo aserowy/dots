@@ -164,7 +164,7 @@ local M = {
 }
 
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
-    M.default_prog = { "pwsh.exe" }
+    M.default_prog = { "nu.exe" }
 end
 
 return M
