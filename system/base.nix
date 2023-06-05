@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
   environment = {
     systemPackages = with pkgs; [
@@ -63,11 +63,12 @@
       HandlePowerKey=suspend
     '';
 
+    # FIX: https://github.com/NixOS/nixpkgs/issues/234683
     openssh = {
       enable = true;
       settings = {
-        permitRootLogin = "no";
-        passwordAuthentication = false;
+        PermitRootLogin = "no";
+        PasswordAuthentication = false;
       };
       ports = [ 2022 ];
     };
