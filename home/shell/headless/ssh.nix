@@ -1,7 +1,7 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
   home.packages = with pkgs; [
-    pkgs.openssh
+    openssh
   ];
 
   programs.ssh = {
