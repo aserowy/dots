@@ -1,6 +1,7 @@
 { pkgs, ... }:
 {
   imports = [
+    ./carapace.nix
     ./direnv.nix
     ./fzf.nix
     ./starship.nix
@@ -8,7 +9,6 @@
   ];
 
   home.packages = with pkgs; [
-    carapace
     exa
     nushell
   ];

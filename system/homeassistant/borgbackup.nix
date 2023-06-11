@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ ... }:
 {
   /*
     https://christine.website/blog/borg-backup-2021-01-09
