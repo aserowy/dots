@@ -1,4 +1,4 @@
-name: gi
+name: gt
 commands:
   - name: fa
     description: Fetch remote changes
@@ -25,10 +25,15 @@ commands:
     group: git
     run: "[git, log]"
 
-  - name: cm
-    description: Record changes to the repository
+  - name: aa
+    description: Stage all changes
     group: git
-    run: "[git, commit, -s]"
+    run: "[git, add, --all]"
+
+  - name: cm
+    description: Commit changes to the repository
+    group: git
+    run: "[git, commit, -s, -m]"
 
   - name: pu
     description: Update remote refs along with associated objects

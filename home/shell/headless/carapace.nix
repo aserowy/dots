@@ -5,6 +5,6 @@
   ];
 
   home = {
-    file.".config/carapace/specs/g.yaml".source = ./carapace/g-spec.yml;
+    file.".config/carapace/specs/gt.yaml".source = ./carapace/gt-spec.yml;
   };
 }
