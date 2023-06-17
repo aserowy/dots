@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ ... }:
 {
   imports = [
     ../base.nix
@@ -36,6 +36,20 @@
     };
 
     xserver.videoDrivers = [ "amdgpu" ];
+  };
+
+  system = {
+    autoUpgrade = {
+      enable = true;
+      allowReboot = true;
+      flake = "github:aserowy/dots";
+      flags = [
+        "--recreate-lock-file"
+        "--no-write-lock-file"
+        "-L"
+      ];
+      dates = "03:45";
+    };
   };
 
   virtualisation = {

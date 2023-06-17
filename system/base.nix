@@ -77,18 +77,6 @@
   system = {
     # Did you read the comment?
     stateVersion = "21.05";
-
-    autoUpgrade = {
-      enable = true;
-      allowReboot = true;
-      flake = "github:aserowy/dots";
-      flags = [
-        "--recreate-lock-file"
-        "--no-write-lock-file"
-        "-L"
-      ];
-      dates = "03:45";
-    };
   };
 
   time.timeZone = "Europe/Berlin";
