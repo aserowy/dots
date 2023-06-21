@@ -25,15 +25,15 @@
   };
   spicetify-themes = {
     pname = "spicetify-themes";
-    version = "96d6cc6e6caba407a4c2acc2e0c1fb4a2acad583";
+    version = "1eb8d413945d542825e08faec087d931e4e73fa8";
     src = fetchFromGitHub {
       owner = "spicetify";
       repo = "spicetify-themes";
-      rev = "96d6cc6e6caba407a4c2acc2e0c1fb4a2acad583";
+      rev = "1eb8d413945d542825e08faec087d931e4e73fa8";
       fetchSubmodules = false;
-      sha256 = "sha256-ZsQthQGQvhpWWMzUCHdpDcCFmCi2pAzvCQp1uCFau/0=";
+      sha256 = "sha256-Uytrb3qw/Qer7GAIdYFV0JWR2qT5BiiKm7+gfAwdokw=";
     };
-    date = "2023-06-05";
+    date = "2023-06-21";
   };
   tmux-continuum = {
     pname = "tmux-continuum";
