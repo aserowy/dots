@@ -1,14 +1,13 @@
-alias gf = git fetch
+alias gfe = git fetch
+alias gfea = git fetch --all
 alias gcl = git clone --recurse-submodules -j8
-alias gba = git branch --all
-alias gpla = git pull --autostash --rebase
-alias gsui = git submodule update --init --recursive
-alias gsur = git submodule update --remote --rebase
-alias gaa = git add --all
-alias gcmsm = git commit -s -m
-alias grsh = git reset --hard
+alias gco = git checkout
+alias gbr = git branch
+alias gpl = git pull --autostash --rebase
+alias gada = git add --all
+alias gcm = git commit -s -m
+alias grs = git reset
 alias gpu = git push
-alias gput = git push --tags
 alias gst = git status
-alias gd = git diff
+alias gdf = git diff
 
