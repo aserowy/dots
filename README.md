@@ -1,33 +1,5 @@
 # Dotfiles
 
-## git
-
-| keys | effect                                 |
-| ---- | -------------------------------------- |
-| g    | git                                    |
-| ga   | git add                                |
-| gaa  | git add --all                          |
-| gb   | git branch                             |
-| gba  | git branch -a                          |
-| gc   | git commit -v                          |
-| gcsm | git commit -s -m                       |
-| gcl  | git clone --recurse-submodules -j8     |
-| gco  | git checkout                           |
-| gcob | git checkout -b                        |
-| gcp  | git cherry-pick                        |
-| gd   | git diff                               |
-| gf   | git fetch                              |
-| gpla | git pull --rebase --autostash          |
-| gp   | git push                               |
-| gpdr | git push --dry-run                     |
-| gpod | git push origin --delete               |
-| gpt  | git push --tags                        |
-| grsh | git reset --hard                       |
-| gst  | git status                             |
-| gsur | git submodule update --remote --rebase |
-| gt   | git tag                                |
-| gta  | git tag -a                             |
-
 ## tmux
 
 > cheatsheet for tmux <https://gist.github.com/MohamedAlaa/2961058>
@@ -50,37 +22,6 @@ neovim while using tmux.
 | <kbd>alt + j</kbd>               | (not working in vim) in/decrease size by 5 down         |
 | <kbd>alt + k</kbd>               | (not working in vim) in/decrease size by 5 up           |
 | <kbd>alt + l</kbd>               | (not working in vim) in/decrease size by 5 to the right |
-
-### aliases
-
-| keys | effect               |
-| ---- | -------------------- |
-| t    | tmux                 |
-| tl   | tmux ls              |
-| ts   | tmux new -s          |
-| ta   | tmux attach -t       |
-| tad  | tmux attach -d -t    |
-| tksv | tmux kill-server     |
-| tkss | tmux kill-session -t |
-| trss | tmux rename-session  |
-| tlb  | tmux list-buffers    |
-| tcb  | tmux choose-buffer   |
-
-## misc
-
-| keys              | effect                             |
-| ----------------- | ---------------------------------- |
-|                   |                                    |
-| **ls**            |                                    |
-| ll                | ls -l                              |
-| la                | ls -a                              |
-| lla               | ls -la                             |
-|                   |                                    |
-| **misc**          |                                    |
-| src               | -- sources zsh configuration again |
-|                   |                                    |
-| **mstsc**         |                                    |
-| m [ip (optional)] | mstsc.exe & or mstsc.exe /v:ip &   |
 
 ## install nixpkgs
 

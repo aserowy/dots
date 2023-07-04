@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
   home.stateVersion = "22.05";
 
@@ -30,6 +30,5 @@
     ./vscode-server.nix
     ./wezterm.nix
     ./zoxide.nix
-    /* ./zsh.nix */
   ];
 }
