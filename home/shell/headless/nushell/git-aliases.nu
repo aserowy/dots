@@ -7,7 +7,10 @@ alias gpl = git pull --autostash --rebase
 alias gada = git add --all
 alias gcm = git commit -s -m
 alias grs = git reset
+alias gta = git tag
+alias gtam = git tag -a -m
 alias gpu = git push
+alias gput = git push --tags
 alias gst = git status
 alias gdf = git diff
 
