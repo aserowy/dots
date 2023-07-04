@@ -23,7 +23,7 @@
     ./ncspot.nix
     ./neovim.nix
     ./nushell.nix
-    ./pandoc.nix
+    # ./pandoc.nix
     ./ssh.nix
     ./starship.nix
     ./tmux.nix

@@ -1,7 +1,7 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
   home.packages = with pkgs; [
-    pkgs.pandoc
-    pkgs.texlive.combined.scheme-small
+    pandoc
+    texlive.combined.scheme-small
   ];
 }
