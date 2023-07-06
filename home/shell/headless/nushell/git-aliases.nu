@@ -10,7 +10,7 @@ alias grs = git reset
 alias gta = git tag
 alias gtam = git tag -a -m
 alias gpu = git push
-alias gpu = git push --tags
+alias gput = git push --tags
 alias gst = git status
 alias gdf = git diff
 
