@@ -1,18 +1,7 @@
-let carapace_completer = {|spans|
-  carapace $spans.0 nushell $spans | from json
-}
-
 let-env config = {
   show_banner: false
 
   edit_mode: vi
-
-  completions: {
-    external: {
-      enable: true
-      completer: $carapace_completer
-    }
-  }
 
   # hook for direnv
   hooks: {
@@ -55,5 +44,6 @@ try {
     ssh-agent -c | lines | first 2 | parse "setenv {name} {value};" | transpose -i -r -d | load-env
 }
 
+source ~/.cache/carapace/init.nu
 source ~/.cache/starship/init.nu
 source ~/.cache/zoxide/init.nu

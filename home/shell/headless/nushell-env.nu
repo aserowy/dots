@@ -20,6 +20,9 @@ let-env NU_LIB_DIRS = [
     ($nu.default-config-dir | path join 'scripts')
 ]
 
+mkdir ~/.cache/carapace
+carapace _carapace nushell | save --force ~/.cache/carapace/init.nu
+
 mkdir ~/.cache/starship
 starship init nu | save --force ~/.cache/starship/init.nu
 
