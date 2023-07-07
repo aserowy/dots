@@ -3,13 +3,13 @@
 {
   git-credential-manager = {
     pname = "git-credential-manager";
-    version = "v2.1.2";
+    version = "v2.2.1";
     src = fetchFromGitHub {
       owner = "GitCredentialManager";
       repo = "git-credential-manager";
-      rev = "v2.1.2";
+      rev = "v2.2.1";
       fetchSubmodules = false;
-      sha256 = "sha256-PeQ9atSCgSvduAcqY2CnNJH3ucvoInduA5i8dPUJiHo=";
+      sha256 = "sha256-mev5qy/71ZUXe48eYrkk0qRCyW0GQExE4ekN2k8PHPM=";
     };
   };
   spicetify-cli = {
@@ -25,15 +25,15 @@
   };
   spicetify-themes = {
     pname = "spicetify-themes";
-    version = "ad73783e05824f362676162897a150af73ba6a19";
+    version = "0e6d8928599f083e1a128ddc1e0edb70c024b02e";
     src = fetchFromGitHub {
       owner = "spicetify";
       repo = "spicetify-themes";
-      rev = "ad73783e05824f362676162897a150af73ba6a19";
+      rev = "0e6d8928599f083e1a128ddc1e0edb70c024b02e";
       fetchSubmodules = false;
-      sha256 = "sha256-fBymBYqxnYvlIlnHhM/B1OUOh8QKQeZsU9Ag2rY1g1U=";
+      sha256 = "sha256-mx9EhdLvfq3QalJAlIRaL1ZUoM0PJ/iay1hkE70ePuc=";
     };
-    date = "2023-06-29";
+    date = "2023-07-07";
   };
   tmux-continuum = {
     pname = "tmux-continuum";
@@ -205,11 +205,11 @@
   };
   vscode-extensions-vscode-neovim = {
     pname = "vscode-extensions-vscode-neovim";
-    version = "0.2.0";
+    version = "0.3.1";
     src = fetchurl {
-      url = "https://asvetliakov.gallery.vsassets.io/_apis/public/gallery/publisher/asvetliakov/extension/vscode-neovim/0.2.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "vscode-neovim-0.2.0.zip";
-      sha256 = "sha256-CXb2Hq50HEbcGG48IlLHdRsrtT2PBzhAHhSjYyoMYnM=";
+      url = "https://asvetliakov.gallery.vsassets.io/_apis/public/gallery/publisher/asvetliakov/extension/vscode-neovim/0.3.1/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "vscode-neovim-0.3.1.zip";
+      sha256 = "sha256-uqcfrfGFEprmg0ifMooBEPlIdVpL4AR3m8Wvwl70G2o=";
     };
     name = "vscode-neovim";
     publisher = "asvetliakov";

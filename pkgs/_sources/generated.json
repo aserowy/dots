@@ -13,11 +13,11 @@
             "name": null,
             "owner": "GitCredentialManager",
             "repo": "git-credential-manager",
-            "rev": "v2.1.2",
-            "sha256": "sha256-PeQ9atSCgSvduAcqY2CnNJH3ucvoInduA5i8dPUJiHo=",
+            "rev": "v2.2.1",
+            "sha256": "sha256-mev5qy/71ZUXe48eYrkk0qRCyW0GQExE4ekN2k8PHPM=",
             "type": "github"
         },
-        "version": "v2.1.2"
+        "version": "v2.2.1"
     },
     "spicetify-cli": {
         "cargoLocks": null,
@@ -41,7 +41,7 @@
     },
     "spicetify-themes": {
         "cargoLocks": null,
-        "date": "2023-06-29",
+        "date": "2023-07-07",
         "extract": null,
         "name": "spicetify-themes",
         "passthru": null,
@@ -53,11 +53,11 @@
             "name": null,
             "owner": "spicetify",
             "repo": "spicetify-themes",
-            "rev": "ad73783e05824f362676162897a150af73ba6a19",
-            "sha256": "sha256-fBymBYqxnYvlIlnHhM/B1OUOh8QKQeZsU9Ag2rY1g1U=",
+            "rev": "0e6d8928599f083e1a128ddc1e0edb70c024b02e",
+            "sha256": "sha256-mx9EhdLvfq3QalJAlIRaL1ZUoM0PJ/iay1hkE70ePuc=",
             "type": "github"
         },
-        "version": "ad73783e05824f362676162897a150af73ba6a19"
+        "version": "0e6d8928599f083e1a128ddc1e0edb70c024b02e"
     },
     "tmux-continuum": {
         "cargoLocks": null,
@@ -346,11 +346,11 @@
         },
         "pinned": false,
         "src": {
-            "name": "vscode-neovim-0.2.0.zip",
-            "sha256": "sha256-CXb2Hq50HEbcGG48IlLHdRsrtT2PBzhAHhSjYyoMYnM=",
+            "name": "vscode-neovim-0.3.1.zip",
+            "sha256": "sha256-uqcfrfGFEprmg0ifMooBEPlIdVpL4AR3m8Wvwl70G2o=",
             "type": "url",
-            "url": "https://asvetliakov.gallery.vsassets.io/_apis/public/gallery/publisher/asvetliakov/extension/vscode-neovim/0.2.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+            "url": "https://asvetliakov.gallery.vsassets.io/_apis/public/gallery/publisher/asvetliakov/extension/vscode-neovim/0.3.1/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
-        "version": "0.2.0"
+        "version": "0.3.1"
     }
 }
