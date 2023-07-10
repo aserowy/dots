@@ -95,11 +95,11 @@
   };
   vscode-extensions-even-better-toml = {
     pname = "vscode-extensions-even-better-toml";
-    version = "0.19.0";
+    version = "0.19.1";
     src = fetchurl {
-      url = "https://tamasfe.gallery.vsassets.io/_apis/public/gallery/publisher/tamasfe/extension/even-better-toml/0.19.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "even-better-toml-0.19.0.zip";
-      sha256 = "sha256-MqSQarNThbEf1wHDTf1yA46JMhWJN46b08c7tV6+1nU=";
+      url = "https://tamasfe.gallery.vsassets.io/_apis/public/gallery/publisher/tamasfe/extension/even-better-toml/0.19.1/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "even-better-toml-0.19.1.zip";
+      sha256 = "sha256-YwOhudEq/q4/VHCZVPJ2ST+P2aqhEgqt3JAb3bSMrRI=";
     };
     name = "even-better-toml";
     publisher = "tamasfe";
@@ -139,11 +139,11 @@
   };
   vscode-extensions-remote-containers = {
     pname = "vscode-extensions-remote-containers";
-    version = "0.300.0";
+    version = "0.301.0";
     src = fetchurl {
-      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.300.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "remote-containers-0.300.0.zip";
-      sha256 = "sha256-qCIT3B1ggaEh3bFup+YZQ3vDSONbtGvXmOi9T3RkbOc=";
+      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.301.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "remote-containers-0.301.0.zip";
+      sha256 = "sha256-yh3HwJxaK3Jb4ggeyR6Pxd0O+HaqD/w/Kj3wfkaBO/E=";
     };
     name = "remote-containers";
     publisher = "ms-vscode-remote";
