@@ -3,13 +3,13 @@
 {
   git-credential-manager = {
     pname = "git-credential-manager";
-    version = "v2.2.1";
+    version = "v2.2.2";
     src = fetchFromGitHub {
       owner = "GitCredentialManager";
       repo = "git-credential-manager";
-      rev = "v2.2.1";
+      rev = "v2.2.2";
       fetchSubmodules = false;
-      sha256 = "sha256-mev5qy/71ZUXe48eYrkk0qRCyW0GQExE4ekN2k8PHPM=";
+      sha256 = "sha256-XXtir/sSjJ1rpv3UQHM3Kano/fMBch/sm8ZtYwGyFyQ=";
     };
   };
   spicetify-cli = {
@@ -25,15 +25,15 @@
   };
   spicetify-themes = {
     pname = "spicetify-themes";
-    version = "0e6d8928599f083e1a128ddc1e0edb70c024b02e";
+    version = "559505d488aba1926376c033241ba0dfdb24b51d";
     src = fetchFromGitHub {
       owner = "spicetify";
       repo = "spicetify-themes";
-      rev = "0e6d8928599f083e1a128ddc1e0edb70c024b02e";
+      rev = "559505d488aba1926376c033241ba0dfdb24b51d";
       fetchSubmodules = false;
-      sha256 = "sha256-mx9EhdLvfq3QalJAlIRaL1ZUoM0PJ/iay1hkE70ePuc=";
+      sha256 = "sha256-pRHnGJv8K+gQrlalQmYAIfeWoVUQ2ui/MP7lzXNkR24=";
     };
-    date = "2023-07-07";
+    date = "2023-07-13";
   };
   tmux-continuum = {
     pname = "tmux-continuum";
@@ -95,11 +95,11 @@
   };
   vscode-extensions-even-better-toml = {
     pname = "vscode-extensions-even-better-toml";
-    version = "0.19.1";
+    version = "0.19.2";
     src = fetchurl {
-      url = "https://tamasfe.gallery.vsassets.io/_apis/public/gallery/publisher/tamasfe/extension/even-better-toml/0.19.1/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "even-better-toml-0.19.1.zip";
-      sha256 = "sha256-YwOhudEq/q4/VHCZVPJ2ST+P2aqhEgqt3JAb3bSMrRI=";
+      url = "https://tamasfe.gallery.vsassets.io/_apis/public/gallery/publisher/tamasfe/extension/even-better-toml/0.19.2/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "even-better-toml-0.19.2.zip";
+      sha256 = "sha256-JKj6noi2dTe02PxX/kS117ZhW8u7Bhj4QowZQiJKP2E=";
     };
     name = "even-better-toml";
     publisher = "tamasfe";
