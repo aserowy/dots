@@ -73,22 +73,22 @@
   };
   vscode-extensions-crates = {
     pname = "vscode-extensions-crates";
-    version = "0.5.11";
+    version = "0.6.0";
     src = fetchurl {
-      url = "https://serayuzgur.gallery.vsassets.io/_apis/public/gallery/publisher/serayuzgur/extension/crates/0.5.11/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "crates-0.5.11.zip";
-      sha256 = "sha256-CuUc68SRJWbnChLJjHqZwPbzptxG85qHJ53IrAZc2zc=";
+      url = "https://serayuzgur.gallery.vsassets.io/_apis/public/gallery/publisher/serayuzgur/extension/crates/0.6.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "crates-0.6.0.zip";
+      sha256 = "sha256-7LZEk8+s9VNFIpaMQixXcMQtMIs5ZEq3QT/LPUBoHyA=";
     };
     name = "crates";
     publisher = "serayuzgur";
   };
   vscode-extensions-errorlens = {
     pname = "vscode-extensions-errorlens";
-    version = "3.11.1";
+    version = "3.12.0";
     src = fetchurl {
-      url = "https://usernamehw.gallery.vsassets.io/_apis/public/gallery/publisher/usernamehw/extension/errorlens/3.11.1/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "errorlens-3.11.1.zip";
-      sha256 = "sha256-yCX+imIaSww3LJ/v3ofs3qBVAXVkTT2Njha8oaqrAX8=";
+      url = "https://usernamehw.gallery.vsassets.io/_apis/public/gallery/publisher/usernamehw/extension/errorlens/3.12.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "errorlens-3.12.0.zip";
+      sha256 = "sha256-G5+We49/f5UwYqoBovegRK+UOT6KPZo85cvoDjD1Mu4=";
     };
     name = "errorlens";
     publisher = "usernamehw";
