@@ -1,6 +1,7 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
+    bottles-unwrapped
     lutris
   ];
 
