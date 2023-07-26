@@ -33,11 +33,11 @@
             "name": null,
             "owner": "spicetify",
             "repo": "spicetify-cli",
-            "rev": "v2.22.0",
-            "sha256": "sha256-+evDMYNo4Io0RAP5EkjA7h4QCLg21v4vLLloLZiSh0E=",
+            "rev": "v2.22.1",
+            "sha256": "sha256-EbTmxnUk2taAKWPNuoVcKybKgdvPegFjz/ImTIabZ7Q=",
             "type": "github"
         },
-        "version": "v2.22.0"
+        "version": "v2.22.1"
     },
     "spicetify-themes": {
         "cargoLocks": null,
@@ -346,11 +346,11 @@
         },
         "pinned": false,
         "src": {
-            "name": "vscode-neovim-0.3.2.zip",
-            "sha256": "sha256-kt9aUDYoMfNVKDS5IJkQ2SF5Nz96YcY345pu41aw+z4=",
+            "name": "vscode-neovim-0.4.0.zip",
+            "sha256": "sha256-9b9q43WUZzP3ZSWAzxqIoiZzEZSPt+E2JCpKanM//h0=",
             "type": "url",
-            "url": "https://asvetliakov.gallery.vsassets.io/_apis/public/gallery/publisher/asvetliakov/extension/vscode-neovim/0.3.2/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+            "url": "https://asvetliakov.gallery.vsassets.io/_apis/public/gallery/publisher/asvetliakov/extension/vscode-neovim/0.4.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
-        "version": "0.3.2"
+        "version": "0.4.0"
     }
 }
