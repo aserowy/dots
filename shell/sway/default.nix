@@ -33,7 +33,7 @@
   fonts = {
     fontDir.enable = true;
     enableGhostscriptFonts = true;
-    fonts = with pkgs; [
+    packages = with pkgs; [
       powerline-fonts
       nerdfonts
     ];
