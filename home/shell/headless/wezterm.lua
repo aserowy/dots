@@ -25,7 +25,7 @@ wezterm.on("update-right-status", function(window, pane)
 
     local battery = ""
     for _, b in ipairs(wezterm.battery_info()) do
-        battery = "  " .. string.format("%.0f%%", b.state_of_charge * 100) .. " "
+        battery = "  " .. string.format("%.0f%%", b.state_of_charge * 100) .. " "
     end
 
     window:set_right_status(wezterm.format({
@@ -35,7 +35,7 @@ wezterm.on("update-right-status", function(window, pane)
         { Text = battery },
         { Foreground = { Color = theme.background } },
         { Background = { Color = theme.brights[6] } },
-        { Text = "  " .. date .. " " },
+        { Text = "  " .. date .. " " },
         { Foreground = { Color = theme.background } },
         { Background = { Color = theme.brights[5] } },
         { Text = hostname },
