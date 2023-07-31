@@ -1,18 +1,14 @@
-let-env config = {
+$env.config = {
   show_banner: false
 
   edit_mode: vi
 
   # hook for direnv
   hooks: {
-    pre_prompt: [{
-      code: "
-        try {
-            let direnv = (direnv export json | from json)
-            let direnv = if ($direnv | length) == 1 { $direnv } else { {} }
-            $direnv | load-env
-        }
-      "
+    pre_prompt: [{ ||
+      let direnv = (direnv export json | from json)
+      let direnv = if ($direnv | length) == 1 { $direnv } else { {} }
+      $direnv | load-env
     }]
   }
 
@@ -41,7 +37,13 @@ source ls-aliases.nu
 
 # loading ssh-agent into env
 try {
-    ssh-agent -c | lines | first 2 | parse "setenv {name} {value};" | transpose -i -r -d | load-env
+    ssh-agent -c
+    | lines
+    | first 2
+    | parse "setenv {name} {value};"
+    | transpose -r
+    | into record
+    | load-env
 }
 
 source ~/.cache/carapace/init.nu
