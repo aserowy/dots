@@ -21,17 +21,10 @@ $env.NU_LIB_DIRS = [
 ]
 
 mkdir ~/.cache/carapace
-carapace _carapace nushell
-| str replace 'let-env ' '$env.' --string --all
-| save --force ~/.cache/carapace/init.nu
+carapace _carapace nushell | save --force ~/.cache/carapace/init.nu
 
 mkdir ~/.cache/starship
-starship init nu
-| str replace 'let-env ' '$env.' --string --all
-| save --force ~/.cache/starship/init.nu
+starship init nu | save --force ~/.cache/starship/init.nu
 
 mkdir ~/.cache/zoxide
-zoxide init nushell
-| str replace 'length' 'str length' --string
-| str replace 'let-env ' '$env.' --string --all
-| save --force ~/.cache/zoxide/init.nu
+zoxide init nushell | save --force ~/.cache/zoxide/init.nu
