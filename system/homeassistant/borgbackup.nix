@@ -22,9 +22,9 @@
     ];
     prune.keep = {
       within = "1d";
-      daily = 7;
-      weekly = 4;
-      monthly = 6;
+      daily = 3;
+      weekly = 2;
+      monthly = 1;
     };
     repo = "kuji7rr6@kuji7rr6.repo.borgbase.com:repo";
     startAt = "daily";
