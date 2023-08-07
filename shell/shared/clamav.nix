@@ -6,7 +6,7 @@
     daemon = {
       enable = true;
       settings = {
-        ExcludePath = "^~/games/";
+        ExcludePath = "^/home/serowy/games/";
       };
     };
   };
