@@ -33,11 +33,11 @@
             "name": null,
             "owner": "spicetify",
             "repo": "spicetify-cli",
-            "rev": "v2.22.1",
-            "sha256": "sha256-EbTmxnUk2taAKWPNuoVcKybKgdvPegFjz/ImTIabZ7Q=",
+            "rev": "v2.22.2",
+            "sha256": "sha256-86ktRfBY7q83KGrc/JF1gIcIJxuScqIr27QPcl1U8vc=",
             "type": "github"
         },
-        "version": "v2.22.1"
+        "version": "v2.22.2"
     },
     "spicetify-themes": {
         "cargoLocks": null,
