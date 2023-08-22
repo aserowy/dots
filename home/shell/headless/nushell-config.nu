@@ -6,9 +6,11 @@ $env.config = {
   # hook for direnv
   hooks: {
     pre_prompt: [{ ||
-      let direnv = (direnv export json | from json)
-      let direnv = if ($direnv | length) == 1 { $direnv } else { {} }
-      $direnv | load-env
+      try {
+        let direnv = (direnv export json | from json)
+        let direnv = if ($direnv | length) == 1 { $direnv } else { {} }
+        $direnv | load-env
+      }
     }]
   }
 
