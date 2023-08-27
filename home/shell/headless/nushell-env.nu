@@ -22,7 +22,7 @@ $env.NU_LIB_DIRS = [
 
 mkdir ~/.cache/carapace
 carapace _carapace nushell
-| str replace 'carapace $spans.0 nushell $spans | from json' "# if the current command is an alias, get it's expansion\n  let expanded_alias = (scope aliases | where name == $spans.0 | get -i 0 | get -i expansion)\n\n  # overwrite\n  let spans = (if $expanded_alias != null  {\n    # put the first word of the expanded alias first in the span\n    $spans | skip 1 | prepend ($expanded_alias | split words)\n  } else {\n    $spans\n  })\n\n  carapace $spans.0 nushell $spans | from json" --string
+| str replace 'carapace $spans.0 nushell $spans | from json' "# if the current command is an alias, get it's expansion\n  let expanded_alias = (scope aliases | where name == $spans.0 | get -i 0 | get -i expansion)\n\n  # overwrite\n  let spans = (if $expanded_alias != null  {\n    # put the first word of the expanded alias first in the span\n    $spans | skip 1 | prepend ($expanded_alias | split words)\n  } else {\n    $spans\n  })\n\n  carapace $spans.0 nushell $spans | from json"
 | save --force ~/.cache/carapace/init.nu
 
 mkdir ~/.cache/starship
