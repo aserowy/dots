@@ -19,9 +19,25 @@ def main [direction: string] {
     let workspaces = ($workspaces
         | prepend { name: ($workspaces | last | get name) focused: false })
 
-    let next = ($workspaces 
-        | each while { |workspace| if $workspace.focused != true { $workspace.name }}
-        | last)
+    # let next = ($workspaces 
+    #     | each while { |workspace| if $workspace.focused != true { $workspace.name }}
+    #     | last)
+
+    let next_index = 0
+    loop {
+        if ($workspaces | length) >= ($next_index + 1) {
+            break
+        }
+
+        let workspace = ($workspaces | get $next_index)
+        if $workspace.focused == true {
+            break
+        }
+
+        $next_index = $next_index + 1
+    }
+
+    let next = ($workspaces | get $next_index).name
 
     run-external --redirect-stderr 'swaymsg' workspace $next
 }
