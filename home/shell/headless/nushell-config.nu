@@ -20,6 +20,7 @@ $env.config = {
   }
 
   table: {
+    header_on_separator: true
     mode: rounded
     trim: {
       methodology: wrapping
