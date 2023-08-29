@@ -19,6 +19,7 @@
     ./direnv.nix
     ./docker.nix
     ./git.nix
+    ./gitui.nix
     ./lf.nix
     ./ncspot.nix
     ./neovim.nix
