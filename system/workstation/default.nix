@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   imports = [
     ../base.nix
@@ -34,6 +34,9 @@
       pulse.enable = true;
       socketActivation = true;
     };
+
+    # to enable working with qmk on this pc
+    udev.packages = [ pkgs.qmk-udev-rules ];
 
     xserver.videoDrivers = [ "amdgpu" ];
   };
