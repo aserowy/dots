@@ -48,6 +48,10 @@
     };
   };
 
+  i18n.inputMethod = {
+    enabled = "ibus";
+  };
+
   programs.dconf.enable = true;
 
   security.rtkit.enable = true;
