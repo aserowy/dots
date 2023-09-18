@@ -7,8 +7,8 @@
   home.file.".config/nvim/" = {
     recursive = true;
     source = pkgs.neocode.override {
-      theme = "github";
-      style = "dark_dimmed";
+      theme = "onedark";
+      style = "darker";
     };
   };
 
