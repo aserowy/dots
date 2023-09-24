@@ -6,11 +6,22 @@ $env.config = {
   # hook for direnv
   hooks: {
     pre_prompt: [{ ||
-      try {
-        let direnv = (direnv export json | from json)
-        let direnv = if ($direnv | length) == 1 { $direnv } else { {} }
-        $direnv | load-env
-      }
+        let direnv = (direnv export json | from json | default {})
+        if ($direnv | is-empty) {
+            return
+        }
+        $direnv
+        | items {|key, value|
+          {
+             key: $key
+             value: (if $key in $env.ENV_CONVERSIONS {
+               do ($env.ENV_CONVERSIONS | get $key | get from_string) $value
+             } else {
+                 $value
+             })
+          }}
+        | transpose -ird
+        | load-env
     }]
   }
 
