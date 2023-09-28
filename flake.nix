@@ -28,6 +28,25 @@
       devShells.x86_64-linux.default = import ./.dev { pkgs = nixpkgs.legacyPackages.x86_64-linux; };
 
       homeConfigurations = {
+        "macos_test" = home.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+
+          modules = [
+            {
+              nixpkgs.overlays = [
+                (import ./pkgs)
+
+                (neocode-overlay { system = "aarch64-darwin"; })
+              ];
+            }
+            {
+              home.homeDirectory = "/home/serowy";
+              home.stateVersion = "22.05";
+              home.username = "serowy";
+            }
+            ./home/environments/wsl-work.nix
+          ];
+        };
         "serowy@DESKTOP-UVAKAQL" = home.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
 
