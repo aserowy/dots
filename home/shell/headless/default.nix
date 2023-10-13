@@ -3,13 +3,10 @@
   home.stateVersion = "22.05";
 
   home.packages = with pkgs; [
-    acpi
     bat
     bottom
     curl
     ncurses
-    psmisc
-    tokei
     tree
 
     unixtools.watch
@@ -21,10 +18,8 @@
     ./git.nix
     ./gitui.nix
     ./lf.nix
-    ./ncspot.nix
     ./neovim.nix
     ./nushell.nix
-    # ./pandoc.nix
     ./ssh.nix
     ./starship.nix
     ./tmux.nix

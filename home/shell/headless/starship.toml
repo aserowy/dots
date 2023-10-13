@@ -151,6 +151,7 @@ disabled = false
 [os.symbols]
 Debian = "󰣚 "
 Linux = "󰌽 "
+Macos = " "
 NixOS = "󱄅 "
 Raspbian = "󰐿 "
 Ubuntu = "󰕈 "

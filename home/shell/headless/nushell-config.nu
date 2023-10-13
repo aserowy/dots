@@ -40,15 +40,6 @@ $env.config = {
   }
 }
 
-# cat
-source cat-aliases.nu
-
-# git
-source git-aliases.nu
-
-# ls
-source ls-aliases.nu
-
 # loading ssh-agent into env
 try {
     ssh-agent -c

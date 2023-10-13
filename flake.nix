@@ -25,10 +25,13 @@
       });
     in
     {
-      devShells.x86_64-linux.default = import ./.dev { pkgs = nixpkgs.legacyPackages.x86_64-linux; };
+      devShells = {
+        aarch64-darwin.default = import ./.dev { pkgs = nixpkgs.legacyPackages.aarch64-darwin; };
+        x86_64-linux.default = import ./.dev { pkgs = nixpkgs.legacyPackages.x86_64-linux; };
+      };
 
       homeConfigurations = {
-        "macos_test" = home.lib.homeManagerConfiguration {
+        "alexander.serowy@CR345Q2G4C" = home.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.aarch64-darwin;
 
           modules = [
@@ -40,11 +43,11 @@
               ];
             }
             {
-              home.homeDirectory = "/home/serowy";
+              home.homeDirectory = "/Users/alexander.serowy";
               home.stateVersion = "22.05";
-              home.username = "serowy";
+              home.username = "alexander.serowy";
             }
-            ./home/environments/wsl-work.nix
+            ./home/environments/macos-work.nix
           ];
         };
         "serowy@DESKTOP-UVAKAQL" = home.lib.homeManagerConfiguration {
