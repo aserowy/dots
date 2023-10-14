@@ -3,7 +3,6 @@
   imports = [
     ./carapace.nix
     ./direnv.nix
-    ./fzf.nix
     ./starship.nix
     ./zoxide.nix
   ];

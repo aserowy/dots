@@ -1,8 +1,8 @@
 # TODO: modulize systems/modules
-# TODO: add modules into systems/hosts; remove module imports from flake
 # TODO: modulize home/modules
 # TODO: flatten home/modules
 # TODO: add modules into home/profiles
+# TODO: add modules into systems/hosts; remove module imports from flake
 {
   description = "NixOS configurations";
 

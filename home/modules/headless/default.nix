@@ -18,7 +18,6 @@
     ./git.nix
     ./gitui.nix
     ./lf.nix
-    ./neovim.nix
     ./nushell.nix
     ./ssh.nix
     ./starship.nix
