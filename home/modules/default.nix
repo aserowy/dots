@@ -4,5 +4,6 @@
     ./fzf
     ./neovim
     ./nushell
+    ./wezterm
   ];
 }

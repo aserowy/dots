@@ -8,7 +8,6 @@
     ./ssh.nix
     ./tmux.nix
     ./vscode-server.nix
-    ./wezterm.nix
   ];
 
   home.stateVersion = "22.05";
