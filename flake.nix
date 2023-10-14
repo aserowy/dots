@@ -104,7 +104,15 @@
 
             ./system/workstation
             ./shell/sway
-            ./users/serowy_with_docker.nix
+
+            {
+              imports = [ ./users ];
+
+              config.users.serowy = {
+                enable = true;
+                dockerGroupMember = true;
+              };
+            }
 
             home.nixosModule
             {
@@ -131,8 +139,13 @@
 
             ./system/intel_nuc
             ./shell/headless
-            ./users/serowy.nix
+            {
+              imports = [ ./users ];
 
+              config.users.serowy = {
+                enable = true;
+              };
+            }
             home.nixosModule
             {
               home-manager = {
@@ -160,8 +173,13 @@
 
             ./system/homeassistant
             ./shell/headless
-            ./users/serowy.nix
+            {
+              imports = [ ./users ];
 
+              config.users.serowy = {
+                enable = true;
+              };
+            }
             home.nixosModule
             {
               home-manager = {

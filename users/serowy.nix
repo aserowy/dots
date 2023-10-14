@@ -1,8 +1,24 @@
-{ pkgs, ... }:
+{ config, lib, pkgs, ... }:
+with lib;
+
+let
+  cnfg = config.users.serowy;
+in
 {
-  users = {
-    users.serowy = {
-      createHome = true;
+  options.users.serowy = {
+    enable = mkEnableOption "serowy user";
+
+    dockerGroupMember = mkOption {
+      type = types.bool;
+      default = false;
+      description = ''
+        If enabled, the user gets added to the docker group.
+      '';
+    };
+  };
+
+  config =
+    let
       extraGroups = [
         "audio"
         "disk"
@@ -10,12 +26,23 @@
         "video"
         "wheel"
       ];
-      group = "users";
-      home = "/home/serowy";
-      isNormalUser = true;
-      openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAoChM+zDcZalCCTTF4NTeNyBcrbLBs8b0vBTp/EW1nX serowy" ];
-      shell = pkgs.nushell;
-      uid = 1000;
-    };
-  };
+    in
+    mkIf cnfg.enable
+      {
+        users = {
+          users.serowy = {
+            createHome = true;
+            extraGroups =
+              if cnfg.dockerGroupMember
+              then extraGroups ++ [ "docker" ]
+              else extraGroups;
+            group = "users";
+            home = "/home/serowy";
+            isNormalUser = true;
+            openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAoChM+zDcZalCCTTF4NTeNyBcrbLBs8b0vBTp/EW1nX serowy" ];
+            shell = pkgs.nushell;
+            uid = 1000;
+          };
+        };
+      };
 }
