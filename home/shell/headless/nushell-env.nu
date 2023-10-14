@@ -10,9 +10,9 @@ $env.ENV_CONVERSIONS = {
   }
 }
 
-# adding nix bin to path for wsl
+# adding nix bin to path for wsl and macos
 if "PATH" in $env {
-    $env.PATH = ($env.PATH | split row (char esep) | append $"($env.HOME)/.nix-profile/bin")
+    $env.PATH = ($env.PATH | split row (char esep) | prepend $"($env.HOME)/.nix-profile/bin")
 }
 
 # Directories to search for scripts when calling source or use
