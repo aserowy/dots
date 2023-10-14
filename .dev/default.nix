@@ -3,8 +3,7 @@
     deno
     nil
     nixpkgs-fmt
-    # FIX: https://github.com/NixOS/nixpkgs/issues/249962
-    # nvfetcher
+    nvfetcher
     stylua
     sumneko-lua-language-server
   ];

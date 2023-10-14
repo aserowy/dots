@@ -9,7 +9,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
     neocode = {
       url = "github:aserowy/neocode";
       inputs.nixpkgs.follows = "nixpkgs";
