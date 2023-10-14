@@ -1,13 +1,8 @@
 { ... }:
 {
   imports = [
-    ../modules
     ../modules/headless
     ../modules/sway
+    ./base.nix
   ];
-
-  config.home = {
-    fzf.enable = true;
-    neovim.enable = true;
-  };
 }

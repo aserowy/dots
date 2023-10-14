@@ -6,12 +6,7 @@
   programs.home-manager.enable = true;
 
   imports = [
-    ../modules
     ../modules/headless
+    ./base.nix
   ];
-
-  config.home = {
-    fzf.enable = true;
-    neovim.enable = true;
-  };
 }

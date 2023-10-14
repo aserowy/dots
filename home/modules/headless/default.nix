@@ -1,5 +1,16 @@
 { pkgs, ... }:
 {
+  imports = [
+    ./docker.nix
+    ./git.nix
+    ./gitui.nix
+    ./lf.nix
+    ./ssh.nix
+    ./tmux.nix
+    ./vscode-server.nix
+    ./wezterm.nix
+  ];
+
   home.stateVersion = "22.05";
 
   home.packages = with pkgs; [
@@ -10,20 +21,5 @@
     tree
 
     unixtools.watch
-  ];
-
-  imports = [
-    ./direnv.nix
-    ./docker.nix
-    ./git.nix
-    ./gitui.nix
-    ./lf.nix
-    ./nushell.nix
-    ./ssh.nix
-    ./starship.nix
-    ./tmux.nix
-    ./vscode-server.nix
-    ./wezterm.nix
-    ./zoxide.nix
   ];
 }

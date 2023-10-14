@@ -6,15 +6,9 @@
   programs.home-manager.enable = true;
 
   imports = [
-    ../modules
-    ../modules/headless
     ../modules/macos
+    ./base.nix
   ];
-
-  config.home = {
-    fzf.enable = true;
-    neovim.enable = true;
-  };
 
   programs = {
     ssh.matchBlocks = { };
