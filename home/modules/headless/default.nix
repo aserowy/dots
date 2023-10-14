@@ -4,7 +4,6 @@
     ./docker.nix
     ./git.nix
     ./gitui.nix
-    ./lf.nix
     ./ssh.nix
     ./tmux.nix
     ./vscode-server.nix
