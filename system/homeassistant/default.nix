@@ -1,7 +1,7 @@
-{ config, pkgs, ... }:
+{ ... }:
 {
   imports = [
-    ../base.nix
+    ../shared/base.nix
     ./hardware-configuration.nix
 
     ./borgbackup.nix

@@ -1,8 +1,8 @@
 { pkgs, ... }:
 {
   imports = [
-    ../base.nix
-    ../printing.nix
+    ../shared/base.nix
+    ../shared/printing.nix
 
     ./hardware-configuration.nix
   ];
