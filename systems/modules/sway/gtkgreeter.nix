@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 let
   gtkConfig = pkgs.writeText "greeter-gtk-config" ''
     window {

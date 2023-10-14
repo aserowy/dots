@@ -46,7 +46,7 @@
               home.stateVersion = "22.05";
               home.username = "alexander.serowy";
             }
-            ./home/environments/macos-work.nix
+            ./home/profiles/macos-work.nix
           ];
         };
         "serowy@DESKTOP-UVAKAQL" = home.lib.homeManagerConfiguration {
@@ -65,7 +65,7 @@
               home.stateVersion = "22.05";
               home.username = "serowy";
             }
-            ./home/environments/wsl-work.nix
+            ./home/profiles/wsl-work.nix
           ];
         };
         "uitdeveloper@UIN01PC013901" = home.lib.homeManagerConfiguration {
@@ -84,11 +84,12 @@
               home.stateVersion = "22.05";
               home.username = "uitdeveloper";
             }
-            ./home/environments/wsl-ui.nix
+            ./home/profiles/wsl-ui.nix
           ];
         };
       };
 
+      # TODO: system -> modules, hosts; home -> modules, profiles
       nixosConfigurations = {
         desktop-workstation = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
@@ -102,8 +103,8 @@
               ];
             }
 
-            ./system/workstation
-            ./shell/sway
+            ./systems/hosts/workstation
+            ./systems/modules/sway
 
             {
               imports = [ ./users ];
@@ -119,7 +120,7 @@
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                users.serowy = import ./home/environments/sway.nix;
+                users.serowy = import ./home/profiles/sway.nix;
               };
             }
           ];
@@ -137,8 +138,8 @@
               ];
             }
 
-            ./system/intel_nuc
-            ./shell/headless
+            ./systems/hosts/intel_nuc
+            ./systems/modules/headless
             {
               imports = [ ./users ];
 
@@ -151,7 +152,7 @@
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                users.serowy = import ./home/environments/headless.nix;
+                users.serowy = import ./home/profiles/headless.nix;
               };
             }
           ];
@@ -171,8 +172,8 @@
 
             hardware.nixosModules.raspberry-pi-4
 
-            ./system/homeassistant
-            ./shell/headless
+            ./systems/hosts/homeassistant
+            ./systems/modules/headless
             {
               imports = [ ./users ];
 
@@ -185,7 +186,7 @@
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                users.serowy = import ./home/environments/headless.nix;
+                users.serowy = import ./home/profiles/headless.nix;
               };
             }
           ];

@@ -7,8 +7,8 @@
   programs.home-manager.enable = true;
 
   imports = [
-    ../shell/headless
-    ../shell/macos
+    ../modules/headless
+    ../modules/macos
   ];
 
   programs = {
