@@ -1,3 +1,8 @@
+# TODO: modulize systems/modules
+# TODO: add modules into systems/hosts; remove module imports from flake
+# TODO: modulize home/modules
+# TODO: flatten home/modules
+# TODO: add modules into home/profiles
 {
   description = "NixOS configurations";
 
@@ -89,7 +94,6 @@
         };
       };
 
-      # TODO: system -> modules, hosts; home -> modules, profiles
       nixosConfigurations = {
         desktop-workstation = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
