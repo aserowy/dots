@@ -14,26 +14,26 @@
   };
   spicetify-cli = {
     pname = "spicetify-cli";
-    version = "v2.22.2";
+    version = "v2.24.2";
     src = fetchFromGitHub {
       owner = "spicetify";
       repo = "spicetify-cli";
-      rev = "v2.22.2";
+      rev = "v2.24.2";
       fetchSubmodules = false;
-      sha256 = "sha256-86ktRfBY7q83KGrc/JF1gIcIJxuScqIr27QPcl1U8vc=";
+      sha256 = "sha256-jzEtXmlpt6foldLW57ZcpevX8CDc+c8iIynT5nOD9qY=";
     };
   };
   spicetify-themes = {
     pname = "spicetify-themes";
-    version = "7e9e898124c96f115dc61fb91d0499ae81f56892";
+    version = "62e2f6d22a02db38567983c7501bf8d87890cfc9";
     src = fetchFromGitHub {
       owner = "spicetify";
       repo = "spicetify-themes";
-      rev = "7e9e898124c96f115dc61fb91d0499ae81f56892";
+      rev = "62e2f6d22a02db38567983c7501bf8d87890cfc9";
       fetchSubmodules = false;
-      sha256 = "sha256-fnUINAgBCaklVDR2JsyvnN0ekBJ/sOnUNnKStug2txs=";
+      sha256 = "sha256-udfdPEwruIStQJ6OQY2bvtkdjdi4/XFKQueM2cWSWa8=";
     };
-    date = "2023-08-17";
+    date = "2023-10-13";
   };
   tmux-continuum = {
     pname = "tmux-continuum";
@@ -49,15 +49,15 @@
   };
   tmux-easy-motion = {
     pname = "tmux-easy-motion";
-    version = "69b15746dcee17e7a857311636d29c09f73346f3";
+    version = "f4ae57d2f4d030afc866a6d074e22573515159a0";
     src = fetchFromGitHub {
       owner = "IngoMeyer441";
       repo = "tmux-easy-motion";
-      rev = "69b15746dcee17e7a857311636d29c09f73346f3";
+      rev = "f4ae57d2f4d030afc866a6d074e22573515159a0";
       fetchSubmodules = false;
-      sha256 = "sha256-YedReOqQzmcSn4Cv/kFPUQ3FaaA9EsTllAABlEznyys=";
+      sha256 = "sha256-uzvv/m0sN/cqKt85VL5UcBYQFEFZ5GJphPSlSMN9uvo=";
     };
-    date = "2022-07-08";
+    date = "2023-09-20";
   };
   tmux-resurrect = {
     pname = "tmux-resurrect";
@@ -73,25 +73,25 @@
   };
   vscode-extensions-crates = {
     pname = "vscode-extensions-crates";
-    version = "0.6.0";
+    version = "0.6.3";
     src = fetchurl {
-      url = "https://serayuzgur.gallery.vsassets.io/_apis/public/gallery/publisher/serayuzgur/extension/crates/0.6.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "crates-0.6.0.zip";
-      sha256 = "sha256-7LZEk8+s9VNFIpaMQixXcMQtMIs5ZEq3QT/LPUBoHyA=";
+      url = "https://serayuzgur.gallery.vsassets.io/_apis/public/gallery/publisher/serayuzgur/extension/crates/0.6.3/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "crates-0.6.3.zip";
+      sha256 = "sha256-vVTFnWd1JWDPP2hwZ0Sz8fsfgEar9GYf+kH/tPpU1Mo=";
     };
-    name = "crates";
     publisher = "serayuzgur";
+    name = "crates";
   };
   vscode-extensions-errorlens = {
     pname = "vscode-extensions-errorlens";
-    version = "3.13.0";
+    version = "3.14.0";
     src = fetchurl {
-      url = "https://usernamehw.gallery.vsassets.io/_apis/public/gallery/publisher/usernamehw/extension/errorlens/3.13.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "errorlens-3.13.0.zip";
-      sha256 = "sha256-HslBfJsKDUGq+xdCBfYlxsWJ4xOB9flfyO2aUCqwmYM=";
+      url = "https://usernamehw.gallery.vsassets.io/_apis/public/gallery/publisher/usernamehw/extension/errorlens/3.14.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "errorlens-3.14.0.zip";
+      sha256 = "sha256-SBTpEt722VeocWjVsfjhqFeFaDXjEKAGlWMzSFxx4Ew=";
     };
-    name = "errorlens";
     publisher = "usernamehw";
+    name = "errorlens";
   };
   vscode-extensions-even-better-toml = {
     pname = "vscode-extensions-even-better-toml";
@@ -101,8 +101,8 @@
       name = "even-better-toml-0.19.2.zip";
       sha256 = "sha256-JKj6noi2dTe02PxX/kS117ZhW8u7Bhj4QowZQiJKP2E=";
     };
-    name = "even-better-toml";
     publisher = "tamasfe";
+    name = "even-better-toml";
   };
   vscode-extensions-keyboard-quickfix = {
     pname = "vscode-extensions-keyboard-quickfix";
@@ -112,8 +112,8 @@
       name = "keyboard-quickfix-0.0.6.zip";
       sha256 = "sha256-BK7ND6gtRVEitxaokJHmQ5rvSOgssVz+s9dktGQnY6M=";
     };
-    name = "keyboard-quickfix";
     publisher = "pascalsenn";
+    name = "keyboard-quickfix";
   };
   vscode-extensions-live-share = {
     pname = "vscode-extensions-live-share";
@@ -123,8 +123,8 @@
       name = "vsliveshare-1.0.5883.zip";
       sha256 = "sha256-BNxLINcbat2F4PHCrKHKIuMpXW1q9aP2SDb0oIv48v0=";
     };
-    name = "vsliveshare";
     publisher = "MS-vsliveshare";
+    name = "vsliveshare";
   };
   vscode-extensions-material-theme = {
     pname = "vscode-extensions-material-theme";
@@ -134,30 +134,30 @@
       name = "material-theme-3.16.0.zip";
       sha256 = "sha256-6Fh2E/U3nVRpE/YtdYA3pFx1v/xVFzYVrpVEmVcX7xM=";
     };
-    name = "material-theme";
     publisher = "zhuangtongfa";
+    name = "material-theme";
   };
   vscode-extensions-remote-containers = {
     pname = "vscode-extensions-remote-containers";
-    version = "0.306.0";
+    version = "0.318.0";
     src = fetchurl {
-      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.306.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "remote-containers-0.306.0.zip";
-      sha256 = "sha256-e/NIjUScCsIsWC0LbBtyd4ptwdqLqoa89ZpJtVdBvW8=";
+      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.318.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "remote-containers-0.318.0.zip";
+      sha256 = "sha256-mhNp7mAxcf/3wMeMTMiYyEtlY+KgSx9BZutTdtgB5dY=";
     };
-    name = "remote-containers";
     publisher = "ms-vscode-remote";
+    name = "remote-containers";
   };
   vscode-extensions-remote-wsl = {
     pname = "vscode-extensions-remote-wsl";
-    version = "0.81.0";
+    version = "0.81.8";
     src = fetchurl {
-      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-wsl/0.81.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "remote-wsl-0.81.0.zip";
-      sha256 = "sha256-DJyCA3IbRZ/QnOsO+yuaWubvm7m/o7EW9fbZKxkV4Ko=";
+      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-wsl/0.81.8/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "remote-wsl-0.81.8.zip";
+      sha256 = "sha256-ZR87G2Rxh+DZiyLeQMyOeagIP5VfTo/ZE0qw6B4r/BA=";
     };
-    name = "remote-wsl";
     publisher = "ms-vscode-remote";
+    name = "remote-wsl";
   };
   vscode-extensions-todo-tree = {
     pname = "vscode-extensions-todo-tree";
@@ -167,8 +167,8 @@
       name = "todo-tree-0.0.226.zip";
       sha256 = "sha256-Fj9cw+VJ2jkTGUclB1TLvURhzQsaryFQs/+f2RZOLHs=";
     };
-    name = "todo-tree";
     publisher = "gruntfuggly";
+    name = "todo-tree";
   };
   vscode-extensions-vscode-direnv = {
     pname = "vscode-extensions-vscode-direnv";
@@ -178,8 +178,8 @@
       name = "vscode-direnv-1.0.0.zip";
       sha256 = "sha256-+nLH+T9v6TQCqKZw6HPN/ZevQ65FVm2SAo2V9RecM3Y=";
     };
-    name = "vscode-direnv";
     publisher = "cab404";
+    name = "vscode-direnv";
   };
   vscode-extensions-vscode-icons = {
     pname = "vscode-extensions-vscode-icons";
@@ -189,29 +189,29 @@
       name = "vscode-icons-12.5.0.zip";
       sha256 = "sha256-PrOakITVBJKaGqlhbWNSY2eh4R8fiBd2hEdWzN3lCjs=";
     };
-    name = "vscode-icons";
     publisher = "vscode-icons-team";
+    name = "vscode-icons";
   };
   vscode-extensions-vscode-lldb = {
     pname = "vscode-extensions-vscode-lldb";
-    version = "1.9.2";
+    version = "1.10.0";
     src = fetchurl {
-      url = "https://vadimcn.gallery.vsassets.io/_apis/public/gallery/publisher/vadimcn/extension/vscode-lldb/1.9.2/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "vscode-lldb-1.9.2.zip";
-      sha256 = "sha256-TxHILZ0862gnWPrh9ut3dqCcGHrWMgUfYCkOjygMcVk=";
+      url = "https://vadimcn.gallery.vsassets.io/_apis/public/gallery/publisher/vadimcn/extension/vscode-lldb/1.10.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "vscode-lldb-1.10.0.zip";
+      sha256 = "sha256-RAKv7ESw0HG/avBOPE1CTr0THsB7UWx0haJVd/Dm9Gg=";
     };
-    name = "vscode-lldb";
     publisher = "vadimcn";
+    name = "vscode-lldb";
   };
   vscode-extensions-vscode-neovim = {
     pname = "vscode-extensions-vscode-neovim";
-    version = "0.4.2";
+    version = "0.9.0";
     src = fetchurl {
-      url = "https://asvetliakov.gallery.vsassets.io/_apis/public/gallery/publisher/asvetliakov/extension/vscode-neovim/0.4.2/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "vscode-neovim-0.4.2.zip";
-      sha256 = "sha256-4LglfVA302bPYu4mSOWZw+Tpm7ZUVJSZTIA0XWHdZd0=";
+      url = "https://asvetliakov.gallery.vsassets.io/_apis/public/gallery/publisher/asvetliakov/extension/vscode-neovim/0.9.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "vscode-neovim-0.9.0.zip";
+      sha256 = "sha256-BoaPc+OmySF52nfOd2mG+XjtTFjC37uikZU7oyEEsac=";
     };
-    name = "vscode-neovim";
     publisher = "asvetliakov";
+    name = "vscode-neovim";
   };
 }
