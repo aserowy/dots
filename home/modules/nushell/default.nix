@@ -10,7 +10,14 @@ in
   config = mkIf cnfg.enable {
     home = {
       packages = with pkgs; [
+        bat
+        bottom
         carapace
+        curl
+        ncurses
+        tree
+
+        unixtools.watch
       ];
 
       file.".config/starship.toml".source = ./starship.toml;
