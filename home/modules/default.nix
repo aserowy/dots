@@ -5,6 +5,7 @@
     ./neovim
     ./lf
     ./nushell
+    ./tmux
     ./wezterm
   ];
 }

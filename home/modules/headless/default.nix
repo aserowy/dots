@@ -5,7 +5,6 @@
     ./git.nix
     ./gitui.nix
     ./ssh.nix
-    ./tmux.nix
     ./vscode-server.nix
   ];
 
