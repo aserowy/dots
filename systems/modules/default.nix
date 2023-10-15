@@ -3,6 +3,7 @@
   imports = [
     ./alacritty
     ./dunst
+    ./edge
     ./lutris
     ./rofi
     ./sway

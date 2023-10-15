@@ -47,6 +47,7 @@ in
     system.modules = {
       alacritty.enable = true;
       dunst.enable = true;
+      edge.enable = true;
       rofi.enable = true;
       waybar.enable = true;
     };
