@@ -1,9 +1,18 @@
-{ ... }:
+{ pkgs, ... }:
 {
   imports = [
     ./base.nix
     ./modules/sway-old
   ];
+
+  fonts = {
+    fontDir.enable = true;
+    enableGhostscriptFonts = true;
+    packages = with pkgs; [
+      powerline-fonts
+      nerdfonts
+    ];
+  };
 
   programs = {
     seahorse.enable = true;
