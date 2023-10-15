@@ -2,10 +2,10 @@
 with lib;
 
 let
-  cnfg = config.home.tmux;
+  cnfg = config.home.modules.tmux;
 in
 {
-  options.home.tmux.enable = mkEnableOption "tmux";
+  options.home.modules.tmux.enable = mkEnableOption "tmux";
 
   config = mkIf cnfg.enable {
     home = {

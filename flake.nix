@@ -113,7 +113,7 @@
             {
               imports = [ ./users ];
 
-              config.users.serowy = {
+              users.serowy = {
                 enable = true;
                 dockerGroupMember = true;
               };
@@ -147,7 +147,7 @@
             {
               imports = [ ./users ];
 
-              config.users.serowy = {
+              users.serowy = {
                 enable = true;
               };
             }
@@ -181,7 +181,7 @@
             {
               imports = [ ./users ];
 
-              config.users.serowy = {
+              users.serowy = {
                 enable = true;
               };
             }

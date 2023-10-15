@@ -2,10 +2,10 @@
 with lib;
 
 let
-  cnfg = config.home.nushell;
+  cnfg = config.home.modules.nushell;
 in
 {
-  options.home.nushell.enable = mkEnableOption "nushell";
+  options.home.modules.nushell.enable = mkEnableOption "nushell";
 
   config = mkIf cnfg.enable {
     home = {

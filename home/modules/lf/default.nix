@@ -2,10 +2,10 @@
 with lib;
 
 let
-  cnfg = config.home.lf;
+  cnfg = config.home.modules.lf;
 in
 {
-  options.home.lf.enable = mkEnableOption "lf";
+  options.home.modules.lf.enable = mkEnableOption "lf";
 
   config = mkIf cnfg.enable {
     home = {

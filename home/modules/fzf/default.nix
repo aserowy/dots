@@ -2,10 +2,10 @@
 with lib;
 
 let
-  cnfg = config.home.fzf;
+  cnfg = config.home.modules.fzf;
 in
 {
-  options.home.fzf.enable = mkEnableOption "fzf";
+  options.home.modules.fzf.enable = mkEnableOption "fzf";
 
   config = mkIf cnfg.enable {
     programs.fzf = {

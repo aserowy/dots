@@ -2,14 +2,20 @@
 with lib;
 
 let
-  cnfg = config.home.neovim;
+  cnfg = config.home.modules.neovim;
 in
 {
   # TODO: remove overlay and use options instead (flake nix)
-  options.home.neovim.enable = mkEnableOption "neovim";
+  options.home.modules.neovim.enable = mkEnableOption "neovim";
+
+  imports = [
+    ../fzf
+  ];
 
   config = mkIf cnfg.enable {
     home = {
+      modules.fzf.enable = true;
+
       file.".config/nvim/" = {
         recursive = true;
         source = pkgs.neocode.override {
@@ -25,10 +31,6 @@ in
         ripgrep
         unzip
       ];
-    };
-
-    programs.fzf = {
-      enable = true;
     };
   };
 }

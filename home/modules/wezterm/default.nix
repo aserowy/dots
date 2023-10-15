@@ -2,10 +2,10 @@
 with lib;
 
 let
-  cnfg = config.home.wezterm;
+  cnfg = config.home.modules.wezterm;
 in
 {
-  options.home.wezterm.enable = mkEnableOption "wezterm";
+  options.home.modules.wezterm.enable = mkEnableOption "wezterm";
 
   config = mkIf cnfg.enable {
     home = {

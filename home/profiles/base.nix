@@ -4,7 +4,7 @@
     ../modules
   ];
 
-  config.home = {
+  home.modules = {
     fzf.enable = true;
     lf.enable = true;
     neovim.enable = true;
