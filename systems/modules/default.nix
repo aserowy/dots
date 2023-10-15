@@ -2,6 +2,7 @@
 {
   imports = [
     ./alacritty
+    ./dunst
     ./lutris
     ./rofi
     ./sway
