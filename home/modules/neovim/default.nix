@@ -5,8 +5,17 @@ let
   cnfg = config.home.modules.neovim;
 in
 {
-  # TODO: remove overlay and use options instead (flake nix)
-  options.home.modules.neovim.enable = mkEnableOption "neovim";
+  options.home.modules.neovim = {
+    enable = mkEnableOption "neovim";
+
+    parallelTsBuild = mkOption {
+      type = types.bool;
+      default = true;
+      description = ''
+        If disabled, the build process for treesitter languages will work sequentially.
+      '';
+    };
+  };
 
   config = mkIf cnfg.enable {
     home = {
@@ -17,6 +26,8 @@ in
         source = pkgs.neocode.override {
           theme = "onedark";
           style = "darker";
+
+          syncBuild = !cnfg.parallelTsBuild;
         };
       };
 
