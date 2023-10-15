@@ -44,6 +44,8 @@ in
           gcl = "git clone --recurse-submodules -j8";
           gco = "git checkout";
           gcm = "git commit -s -m";
+          gcma = "git commit --all -s -m";
+          gcmam = "git commit --amend";
           gdf = "git diff";
           gfe = "git fetch";
           gfea = "git fetch --all";
