@@ -1,51 +1,19 @@
-{ pkgs, ... }:
-{
-  environment = {
-    /* sets ozone wayland support for all chromium based applications */
-    sessionVariables.NIXOS_OZONE_WL = "1";
+{ config, lib, pkgs, ... }:
+with lib;
 
-    systemPackages = with pkgs; [
-      clipman
-      lf
-      pavucontrol
-      sway-contrib.grimshot
-      wezterm
-      wl-clipboard
-    ];
-  };
+let
+  cnfg = config.system.modules.sway;
+in
+{
+  options.system.modules.sway.enable = mkEnableOption "sway";
 
   imports = [
-    ../shared/alacritty.nix
-    ../shared/clamav.nix
-    ../shared/dunst.nix
-    ../shared/edge.nix
-    ../shared/gtk.nix
-    ../shared/lutris.nix
-    ../shared/rofi/rofi-wayland.nix
-    ../shared/spotify.nix
-
-    ./tuigreeter.nix
-    ./sway
-    ./waybar
+    ../alacritty
   ];
 
-  fonts = {
-    fontDir.enable = true;
-    enableGhostscriptFonts = true;
-    packages = with pkgs; [
-      powerline-fonts
-      nerdfonts
-    ];
-  };
-
-  programs = {
-    seahorse.enable = true;
-    steam.enable = true;
-  };
-
-  services = {
-    gnome.gnome-keyring.enable = true;
-
-    onedrive.enable = true;
+  config = mkIf cnfg.enable {
+    system.modules = {
+      alacritty.enable = true;
+    };
   };
 }

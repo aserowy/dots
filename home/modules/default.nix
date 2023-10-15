@@ -6,8 +6,8 @@
     ./git
     ./grimshot
     ./gtk
-    ./neovim
     ./lf
+    ./neovim
     ./nushell
     ./onedrive
     ./ssh

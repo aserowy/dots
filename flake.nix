@@ -104,8 +104,8 @@
               ];
             }
 
-            ./systems/hosts/workstation
-            ./systems/modules/sway
+            ./hosts/workstation
+            ./systems/profiles/workstation.nix
 
             {
               imports = [ ./users ];
@@ -139,8 +139,8 @@
               ];
             }
 
-            ./systems/hosts/intel_nuc
-            ./systems/modules/headless
+            ./hosts/homeassistant-nuc
+            ./systems/profiles/homeassistant.nix
             {
               imports = [ ./users ];
 
@@ -173,8 +173,8 @@
 
             hardware.nixosModules.raspberry-pi-4
 
-            ./systems/hosts/homeassistant
-            ./systems/modules/headless
+            ./hosts/homeassistant
+            ./systems/profiles/homeassistant.nix
             {
               imports = [ ./users ];
 

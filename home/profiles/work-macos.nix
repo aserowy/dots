@@ -50,5 +50,4 @@
   programs = {
     ssh.matchBlocks = { };
   };
-
 }
