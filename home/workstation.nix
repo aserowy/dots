@@ -21,6 +21,7 @@
       gparted
       obsidian
       remmina
+      spotify
     ];
   };
 }

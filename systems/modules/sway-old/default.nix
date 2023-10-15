@@ -15,13 +15,10 @@
   };
 
   imports = [
-    ../shared/clamav.nix
     ../shared/dunst.nix
     ../shared/edge.nix
     ../shared/gtk.nix
-    ../shared/lutris.nix
     ../shared/rofi/rofi-wayland.nix
-    ../shared/spotify.nix
 
     ./tuigreeter.nix
     ./sway
