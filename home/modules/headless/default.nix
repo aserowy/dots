@@ -2,8 +2,6 @@
 {
   imports = [
     ./docker.nix
-    ./git.nix
-    ./gitui.nix
     ./ssh.nix
     ./vscode-server.nix
   ];

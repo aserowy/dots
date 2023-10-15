@@ -2,6 +2,7 @@
 {
   imports = [
     ./fzf
+    ./git
     ./neovim
     ./lf
     ./nushell
