@@ -2,7 +2,7 @@
 {
   imports = [
     ./base.nix
-    ../modules/sway-old
+    ./modules/sway-old
   ];
 
   programs = {

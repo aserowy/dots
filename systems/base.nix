@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   imports = [
-    ../modules
+    ./modules
   ];
 
   environment.systemPackages = with pkgs; [

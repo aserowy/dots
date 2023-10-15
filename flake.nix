@@ -48,7 +48,7 @@
               home.stateVersion = "22.05";
               home.username = "alexander.serowy";
             }
-            ./home/profiles/work-macos.nix
+            ./home/work-macos.nix
           ];
         };
         "serowy@DESKTOP-UVAKAQL" = home.lib.homeManagerConfiguration {
@@ -67,7 +67,7 @@
               home.stateVersion = "22.05";
               home.username = "serowy";
             }
-            ./home/profiles/work-wsl.nix
+            ./home/work-wsl.nix
           ];
         };
         "uitdeveloper@UIN01PC013901" = home.lib.homeManagerConfiguration {
@@ -86,7 +86,7 @@
               home.stateVersion = "22.05";
               home.username = "uitdeveloper";
             }
-            ./home/profiles/ui.nix
+            ./home/ui.nix
           ];
         };
       };
@@ -105,7 +105,7 @@
             }
 
             ./hosts/workstation
-            ./systems/profiles/workstation.nix
+            ./systems/workstation.nix
 
             {
               imports = [ ./users ];
@@ -121,7 +121,7 @@
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                users.serowy = import ./home/profiles/workstation.nix;
+                users.serowy = import ./home/workstation.nix;
               };
             }
           ];
@@ -140,7 +140,7 @@
             }
 
             ./hosts/homeassistant-nuc
-            ./systems/profiles/homeassistant.nix
+            ./systems/homeassistant.nix
             {
               imports = [ ./users ];
 
@@ -153,7 +153,7 @@
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                users.serowy = import ./home/profiles/homeassistant.nix;
+                users.serowy = import ./home/homeassistant.nix;
               };
             }
           ];
@@ -174,7 +174,7 @@
             hardware.nixosModules.raspberry-pi-4
 
             ./hosts/homeassistant
-            ./systems/profiles/homeassistant.nix
+            ./systems/homeassistant.nix
             {
               imports = [ ./users ];
 
@@ -187,7 +187,7 @@
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                users.serowy = import ./home/profiles/homeassistant.nix;
+                users.serowy = import ./home/homeassistant.nix;
               };
             }
           ];
