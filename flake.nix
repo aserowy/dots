@@ -95,7 +95,7 @@
       };
 
       nixosConfigurations = {
-        desktop-workstation = nixpkgs.lib.nixosSystem {
+        workstation = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
             {
