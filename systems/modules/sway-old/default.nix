@@ -16,7 +16,6 @@
     ../shared/gtk.nix
     ../shared/rofi/rofi-wayland.nix
 
-    ./tuigreeter.nix
     ./waybar
   ];
 }

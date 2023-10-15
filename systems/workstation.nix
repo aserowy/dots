@@ -39,5 +39,6 @@
   system.modules = {
     lutris.enable = true;
     sway.enable = true;
+    tuigreet.enable = true;
   };
 }

@@ -4,5 +4,6 @@
     ./alacritty
     ./lutris
     ./sway
+    ./tuigreet
   ];
 }
