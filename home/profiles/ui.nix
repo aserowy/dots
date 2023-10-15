@@ -6,14 +6,13 @@
   programs.home-manager.enable = true;
 
   imports = [
-    ../modules/headless
     ./base.nix
   ];
 
   programs = {
     git = {
       extraConfig = {
-        credential.helper = "/mnt/c/Users/serowy/scoop/shims/git-credential-manager.exe";
+        credential.helper = "/mnt/c/Users/ee03927_admin/scoop/shims/git-credential-manager.exe";
       };
     };
     ssh.matchBlocks = { };

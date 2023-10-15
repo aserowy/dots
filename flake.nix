@@ -51,7 +51,7 @@
               home.stateVersion = "22.05";
               home.username = "alexander.serowy";
             }
-            ./home/profiles/macos-work.nix
+            ./home/profiles/work-macos.nix
           ];
         };
         "serowy@DESKTOP-UVAKAQL" = home.lib.homeManagerConfiguration {
@@ -70,7 +70,7 @@
               home.stateVersion = "22.05";
               home.username = "serowy";
             }
-            ./home/profiles/wsl-work.nix
+            ./home/profiles/work-wsl.nix
           ];
         };
         "uitdeveloper@UIN01PC013901" = home.lib.homeManagerConfiguration {
@@ -89,7 +89,7 @@
               home.stateVersion = "22.05";
               home.username = "uitdeveloper";
             }
-            ./home/profiles/wsl-ui.nix
+            ./home/profiles/ui.nix
           ];
         };
       };
@@ -124,7 +124,7 @@
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                users.serowy = import ./home/profiles/sway.nix;
+                users.serowy = import ./home/profiles/workstation.nix;
               };
             }
           ];
@@ -156,7 +156,7 @@
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                users.serowy = import ./home/profiles/headless.nix;
+                users.serowy = import ./home/profiles/homeassistant.nix;
               };
             }
           ];
@@ -190,7 +190,7 @@
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                users.serowy = import ./home/profiles/headless.nix;
+                users.serowy = import ./home/profiles/homeassistant.nix;
               };
             }
           ];

@@ -1,7 +1,8 @@
 { ... }:
 {
   imports = [
-    ../modules/headless
     ./base.nix
   ];
+
+  home.modules.docker.enable = true;
 }

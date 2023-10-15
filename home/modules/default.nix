@@ -1,6 +1,7 @@
 { ... }:
 {
   imports = [
+    ./docker
     ./fzf
     ./git
     ./neovim
@@ -8,6 +9,7 @@
     ./nushell
     ./ssh
     ./tmux
+    ./vscode-server
     ./wezterm
   ];
 }
