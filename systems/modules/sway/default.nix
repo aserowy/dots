@@ -9,6 +9,7 @@ in
 
   imports = [
     ../alacritty
+    ../waybar
   ];
 
   config = mkIf cnfg.enable {
@@ -50,6 +51,7 @@ in
 
     system.modules = {
       alacritty.enable = true;
+      waybar.enable = true;
     };
 
     systemd.user = {

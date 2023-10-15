@@ -5,5 +5,6 @@
     ./lutris
     ./sway
     ./tuigreet
+    ./waybar
   ];
 }
