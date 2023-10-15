@@ -8,10 +8,6 @@ in
   # TODO: remove overlay and use options instead (flake nix)
   options.home.modules.neovim.enable = mkEnableOption "neovim";
 
-  imports = [
-    ../fzf
-  ];
-
   config = mkIf cnfg.enable {
     home = {
       modules.fzf.enable = true;

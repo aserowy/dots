@@ -7,11 +7,6 @@ in
 {
   options.system.modules.sway.enable = mkEnableOption "sway";
 
-  imports = [
-    ../alacritty
-    ../waybar
-  ];
-
   config = mkIf cnfg.enable {
     environment = {
       etc = {
@@ -51,6 +46,7 @@ in
 
     system.modules = {
       alacritty.enable = true;
+      rofi.enable = true;
       waybar.enable = true;
     };
 
