@@ -9,6 +9,7 @@ in
 
   config = mkIf cnfg.enable {
     home.packages = with pkgs; [
+      docker-compose
       lazydocker
     ];
   };

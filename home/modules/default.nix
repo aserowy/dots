@@ -9,6 +9,7 @@
     ./nushell
     ./ssh
     ./tmux
+    ./vscode
     ./vscode-server
     ./wezterm
   ];
