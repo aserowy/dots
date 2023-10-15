@@ -7,6 +7,7 @@
     ./neovim
     ./lf
     ./nushell
+    ./onedrive
     ./ssh
     ./tmux
     ./vscode

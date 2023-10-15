@@ -8,6 +8,7 @@
   home = {
     modules = {
       docker.enable = true;
+      onedrive.enable = true;
       vscode.enable = true;
     };
 
