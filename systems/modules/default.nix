@@ -2,6 +2,7 @@
 {
   imports = [
     ./alacritty
+    ./lutris
     ./sway
   ];
 }
