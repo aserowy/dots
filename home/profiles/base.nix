@@ -13,6 +13,7 @@
       lf.enable = true;
       neovim.enable = true;
       nushell.enable = true;
+      ssh.enable = true;
       wezterm.enable = true;
     };
   };
