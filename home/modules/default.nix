@@ -4,6 +4,7 @@
     ./docker
     ./fzf
     ./git
+    ./gtk
     ./neovim
     ./lf
     ./nushell
@@ -13,5 +14,6 @@
     ./vscode
     ./vscode-server
     ./wezterm
+    ./xdg
   ];
 }

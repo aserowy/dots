@@ -15,7 +15,7 @@
   };
 
   networking = {
-    hostName = "desktop-workstation";
+    hostName = "workstation";
     interfaces.eno1.useDHCP = true;
   };
 
