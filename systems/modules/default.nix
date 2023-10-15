@@ -4,6 +4,7 @@
     ./alacritty
     ./dunst
     ./edge
+    ./gtk
     ./lutris
     ./rofi
     ./sway

@@ -2,7 +2,6 @@
 {
   imports = [
     ./base.nix
-    ./modules/sway-old
   ];
 
   fonts = {
@@ -37,6 +36,7 @@
   };
 
   system.modules = {
+    gtk.enable = true;
     lutris.enable = true;
     sway.enable = true;
     tuigreet.enable = true;
