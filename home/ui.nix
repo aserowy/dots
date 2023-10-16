@@ -11,7 +11,6 @@
 
   home = {
     homeDirectory = "/home/uitdeveloper";
-    stateVersion = "22.05";
     username = "uitdeveloper";
   };
 
