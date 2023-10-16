@@ -3,15 +3,14 @@
   # FIX: https://github.com/nix-community/home-manager/issues/2942
   nixpkgs.config.allowUnfreePredicate = (pkg: true);
 
-  programs.home-manager.enable = true;
-
   imports = [
     ./base.nix
   ];
 
-  fonts.fontconfig.enable = true;
-
   home = {
+    homeDirectory = "/Users/alexander.serowy";
+    username = "alexander.serowy";
+
     modules = {
       docker.enable = true;
       vscode.enable = true;
@@ -47,7 +46,11 @@
       '';
   };
 
+  fonts.fontconfig.enable = true;
+
   programs = {
+    home-manager.enable = true;
+
     ssh.matchBlocks = { };
   };
 }

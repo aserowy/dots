@@ -32,12 +32,6 @@
               (import ./pkgs)
             ];
           }
-
-          {
-            home.homeDirectory = "/Users/alexander.serowy";
-            home.stateVersion = "22.05";
-            home.username = "alexander.serowy";
-          }
           ./home/work-macos.nix
         ];
       };
@@ -50,12 +44,6 @@
               neocode.overlays.default
               (import ./pkgs)
             ];
-          }
-
-          {
-            home.homeDirectory = "/home/serowy";
-            home.stateVersion = "22.05";
-            home.username = "serowy";
           }
           ./home/work-wsl.nix
         ];
@@ -70,7 +58,6 @@
               (import ./pkgs)
             ];
           }
-
           ./home/ui.nix
         ];
       };
