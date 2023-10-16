@@ -50,6 +50,7 @@
     tuigreet = {
       enable = true;
       command = "sway";
+      # command = "Hyprland";
     };
   };
 }

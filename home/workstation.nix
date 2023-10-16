@@ -10,6 +10,7 @@
       grimshot.enable = true;
       gtk.enable = true;
       onedrive.enable = true;
+      # hyprland.enable = true;
       teams.enable = true;
       vscode.enable = true;
       xdg.enable = true;

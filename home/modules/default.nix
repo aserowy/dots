@@ -6,6 +6,7 @@
     ./git
     ./grimshot
     ./gtk
+    ./hyprland
     ./lf
     ./neovim
     ./nushell
