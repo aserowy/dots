@@ -32,6 +32,7 @@
               (import ./pkgs)
             ];
           }
+
           {
             home.homeDirectory = "/Users/alexander.serowy";
             home.stateVersion = "22.05";
@@ -50,6 +51,7 @@
               (import ./pkgs)
             ];
           }
+
           {
             home.homeDirectory = "/home/serowy";
             home.stateVersion = "22.05";
@@ -68,11 +70,7 @@
               (import ./pkgs)
             ];
           }
-          {
-            home.homeDirectory = "/home/uitdeveloper";
-            home.stateVersion = "22.05";
-            home.username = "uitdeveloper";
-          }
+
           ./home/ui.nix
         ];
       };
@@ -92,7 +90,6 @@
 
           ./hosts/workstation
           ./systems/workstation.nix
-
           {
             imports = [ ./users ];
 
@@ -101,7 +98,6 @@
               dockerGroupMember = true;
             };
           }
-
           home.nixosModule
           {
             home-manager = {

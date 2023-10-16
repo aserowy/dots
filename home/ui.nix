@@ -9,6 +9,12 @@
     ./base.nix
   ];
 
+  home = {
+    homeDirectory = "/home/uitdeveloper";
+    stateVersion = "22.05";
+    username = "uitdeveloper";
+  };
+
   programs = {
     git = {
       extraConfig = {
