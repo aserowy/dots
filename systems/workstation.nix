@@ -39,6 +39,10 @@
     gtk.enable = true;
     lutris.enable = true;
     sway.enable = true;
+    swaybg = {
+      enable = true;
+      enableSwayIntegration = true;
+    };
     tuigreet.enable = true;
   };
 }

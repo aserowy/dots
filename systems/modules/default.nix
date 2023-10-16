@@ -8,6 +8,7 @@
     ./lutris
     ./rofi
     ./sway
+    ./swaybg
     ./tuigreet
     ./waybar
   ];

@@ -21,7 +21,6 @@ output DP-2 transform 270
 # STARTUP
 
 exec_always /etc/sway/scripts/gsettings.sh
-exec /etc/sway/scripts/wallpaper.sh
 exec wl-paste -t text --watch clipman store --no-persist
 
 # Don't allow applications to inhibit shortcuts, i.e. grab total control of the
