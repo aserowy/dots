@@ -67,20 +67,9 @@ in
 
       system.modules = {
         alacritty.enable = true;
-        dunst.enable = true;
         edge.enable = true;
         rofi.enable = true;
         waybar.enable = true;
-      };
-
-      systemd.user = {
-        targets.sway-session = {
-          description = "Sway compositor session";
-          documentation = [ "man:systemd.special(7)" ];
-          bindsTo = [ "graphical-session.target" ];
-          wants = [ "graphical-session-pre.target" ];
-          after = [ "graphical-session-pre.target" ];
-        };
       };
     };
 }

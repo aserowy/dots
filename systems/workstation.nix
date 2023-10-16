@@ -36,6 +36,10 @@
   };
 
   system.modules = {
+    dunst = {
+      enable = true;
+      enableSwayIntegration = true;
+    };
     gtk.enable = true;
     lutris.enable = true;
     sway.enable = true;

@@ -5,7 +5,17 @@ let
   cnfg = config.system.modules.dunst;
 in
 {
-  options.system.modules.dunst.enable = mkEnableOption "dunst";
+  options.system.modules.dunst = {
+    enable = mkEnableOption "dunst";
+
+    enableSwayIntegration = mkOption {
+      type = types.bool;
+      default = false;
+      description = ''
+        If enabled, the dunst daemon gets started while running sway.
+      '';
+    };
+  };
 
   config =
     let
@@ -83,15 +93,9 @@ in
         '';
       };
 
-      systemd.user.services.dunst = {
-        description = "Dunst notification daemon";
-        partOf = [ "graphical-session.target" ];
-        serviceConfig = {
-          BusName = "org.freedesktop.Notifications";
-          ExecStart = "${pkgs.dunst}/bin/dunst -conf /etc/dunst/dunstrc";
-          Type = "dbus";
-        };
-        wantedBy = [ "sway-session.target" ];
-      };
+      system.modules.sway.additionalConfig = mkIf cnfg.enableSwayIntegration ''
+        # Start dunst daemon to enable notifications
+        exec dunst -conf /etc/dunst/dunstrc
+      '';
     };
 }
