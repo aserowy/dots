@@ -6,12 +6,12 @@ let wm_i3 = 'i3'
 
 let predefined = [
     [name wm command];
-    ["⏻\tshutdown" $wm_all 'systemctl poweroff']
-    ["\treboot" $wm_all 'systemctl reboot']
-    ["\tsuspend" $wm_all 'systemctl suspend']
-    ["\tlock" $wm_i3 'dm-tool lock']
-    ["\tlogout" $wm_i3 'i3-msg exit']
-    ["\tlogout" $wm_sway 'swaymsg exit']
+    ["⏻  shutdown" $wm_all 'systemctl poweroff']
+    ["  reboot" $wm_all 'systemctl reboot']
+    ["  suspend" $wm_all 'systemctl suspend']
+    ["  lock" $wm_i3 'dm-tool lock']
+    ["  logout" $wm_i3 'i3-msg exit']
+    ["  logout" $wm_sway 'swaymsg exit']
 ]
 
 def main [command_name: string = ''] {
