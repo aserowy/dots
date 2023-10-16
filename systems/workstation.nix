@@ -39,7 +39,7 @@
     gtk.enable = true;
     lutris.enable = true;
     sway.enable = true;
-    swaybg = {
+    swww = {
       enable = true;
       enableSwayIntegration = true;
     };

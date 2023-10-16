@@ -9,6 +9,7 @@
     ./rofi
     ./sway
     ./swaybg
+    ./swww
     ./tuigreet
     ./waybar
   ];

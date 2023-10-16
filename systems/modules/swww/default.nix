@@ -2,17 +2,17 @@
 with lib;
 
 let
-  cnfg = config.system.modules.swaybg;
+  cnfg = config.system.modules.swww;
 in
 {
-  options.system.modules.swaybg = {
-    enable = mkEnableOption "swaybg";
+  options.system.modules.swww = {
+    enable = mkEnableOption "swww";
 
     enableSwayIntegration = mkOption {
       type = types.bool;
       default = false;
       description = ''
-        If enabled, the swaybg script gets added to sways config.
+        If enabled, the swww script gets added to sways config.
       '';
     };
   };
@@ -20,16 +20,16 @@ in
   config = mkIf cnfg.enable {
     environment = {
       etc = {
-        "swaybg/wallpaper.sh".source = ./swaybg-wallpaper.sh;
+        "swww/wallpaper.sh".source = ./swww-wallpaper.sh;
       };
 
       systemPackages = with pkgs; [
-        swaybg
+        swww
       ];
     };
 
     system.modules.sway.additionalConfig = mkIf cnfg.enableSwayIntegration ''
-      exec /etc/swaybg/wallpaper.sh
+      exec /etc/swww/wallpaper.sh ~/onedrive/Wallpapers/
     '';
   };
 }

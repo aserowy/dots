@@ -25,11 +25,13 @@ in
       environment = {
         etc = {
           "sway/config".source = builtins.toFile "sway-config" ''
-            ${swayConfig}
-
             # additional config
 
             ${cnfg.additionalConfig}
+
+            # sway config
+
+            ${swayConfig}
           '';
 
           "sway/config.d/99_systemd_target.conf".source = ./systemd_target.conf;
@@ -68,7 +70,6 @@ in
         dunst.enable = true;
         edge.enable = true;
         rofi.enable = true;
-        swaybg.enable = true;
         waybar.enable = true;
       };
 
