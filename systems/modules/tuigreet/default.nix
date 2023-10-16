@@ -5,7 +5,17 @@ let
   cnfg = config.system.modules.tuigreet;
 in
 {
-  options.system.modules.tuigreet.enable = mkEnableOption "tuigreet";
+  options.system.modules.tuigreet = {
+    enable = mkEnableOption "tuigreet";
+
+    command = mkOption {
+      type = types.str;
+      default = "";
+      description = ''
+        Command that gets executed after successful authentification.
+      '';
+    };
+  };
 
   config = mkIf cnfg.enable {
     boot.kernelParams = [ "console=tty1" ];
@@ -18,7 +28,7 @@ in
       enable = true;
       settings = {
         default_session = {
-          command = "${lib.makeBinPath [pkgs.greetd.tuigreet] }/tuigreet --time --cmd sway";
+          command = "${lib.makeBinPath [pkgs.greetd.tuigreet]}/tuigreet --time --cmd ${cnfg.command}";
           user = "greeter";
         };
       };

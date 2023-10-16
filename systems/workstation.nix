@@ -43,6 +43,9 @@
       enable = true;
       enableSwayIntegration = true;
     };
-    tuigreet.enable = true;
+    tuigreet = {
+      enable = true;
+      command = "sway";
+    };
   };
 }
