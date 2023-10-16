@@ -13,12 +13,8 @@ if [[ $# -lt 1 ]] || [[ ! -d $1   ]]; then
 fi
 
 # Edit below to control the images transition
-export SWWW_TRANSITION_FPS=60
-export SWWW_TRANSITION_STEP=2
-export SWWW_TRANSITION_TYPE='random'
-
-# Start swww daemon
-swww-daemon
+export SWWW_TRANSITION='wipe'
+export SWWW_TRANSITION_ANGLE=30
 
 # This controls (in seconds) when to switch to the next image
 INTERVAL=300

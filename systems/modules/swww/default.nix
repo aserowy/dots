@@ -29,7 +29,9 @@ in
     };
 
     system.modules.sway.additionalConfig = mkIf cnfg.enableSwayIntegration ''
-      exec /etc/swww/wallpaper.sh ~/onedrive/Wallpapers/
+      # Start swww daemon and cycle through random wallpaper
+      exec swww init
+      exec bash /etc/swww/wallpaper.sh ~/onedrive/Wallpapers/
     '';
   };
 }
