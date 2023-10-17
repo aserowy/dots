@@ -2,10 +2,10 @@
 with lib;
 
 let
-  cnfg = config.system.modules.dunst;
+  cnfg = config.home.modules.dunst;
 in
 {
-  options.system.modules.dunst = {
+  options.home.modules.dunst = {
     enable = mkEnableOption "dunst";
 
     enableSwayIntegration = mkOption {
@@ -43,12 +43,12 @@ in
       });
     in
     mkIf cnfg.enable {
-      environment = {
-        systemPackages = with pkgs; [
+      home = {
+        packages = with pkgs; [
           dunst
         ];
 
-        etc."dunst/dunstrc".text = ''
+        file.".config/dunst/dunstrc".text = ''
           [global]
           alignment="center"
           always_run_script="true"
@@ -93,9 +93,9 @@ in
         '';
       };
 
-      system.modules.sway.additionalConfig = mkIf cnfg.enableSwayIntegration ''
+      home.modules.sway.additionalConfig = mkIf cnfg.enableSwayIntegration ''
         # Start dunst daemon to enable notifications
-        exec dunst -conf /etc/dunst/dunstrc
+        exec dunst -conf ~/.config/dunst/dunstrc
       '';
     };
 }

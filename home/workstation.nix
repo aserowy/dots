@@ -6,6 +6,17 @@
 
   home = {
     modules = {
+      dunst = {
+        enable = true;
+        enableSwayIntegration = true;
+      };
+      lutris.enable = true;
+      sway.enable = true;
+      swww = {
+        enable = true;
+        enableSwayIntegration = true;
+      };
+
       docker.enable = true;
       grimshot.enable = true;
       gtk.enable = true;

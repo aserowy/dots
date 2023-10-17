@@ -1,6 +1,16 @@
 { ... }:
 {
   imports = [
+    ./alacritty
+    ./dunst
+    ./edge
+    ./lutris
+    ./rofi
+    ./sway
+    ./swaybg
+    ./swww
+    ./waybar
+
     ./docker
     ./fzf
     ./git

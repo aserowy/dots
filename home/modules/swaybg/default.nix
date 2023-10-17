@@ -2,10 +2,10 @@
 with lib;
 
 let
-  cnfg = config.system.modules.swaybg;
+  cnfg = config.home.modules.swaybg;
 in
 {
-  options.system.modules.swaybg = {
+  options.home.modules.swaybg = {
     enable = mkEnableOption "swaybg";
 
     enableSwayIntegration = mkOption {
@@ -18,18 +18,16 @@ in
   };
 
   config = mkIf cnfg.enable {
-    environment = {
-      etc = {
-        "swaybg/wallpaper.sh".source = ./swaybg-wallpaper.sh;
-      };
+    home = {
+      file.".config/swaybg/wallpaper.sh".source = ./swaybg-wallpaper.sh;
 
-      systemPackages = with pkgs; [
+      packages = with pkgs; [
         swaybg
       ];
     };
 
-    system.modules.sway.additionalConfig = mkIf cnfg.enableSwayIntegration ''
-      exec /etc/swaybg/wallpaper.sh
+    home.modules.sway.additionalConfig = mkIf cnfg.enableSwayIntegration ''
+      exec ~/.config/swaybg/wallpaper.sh
     '';
   };
 }

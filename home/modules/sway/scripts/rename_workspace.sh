@@ -21,4 +21,4 @@ SR=true sh -c "alacritty \
     -o window.padding.y=20 \
     --title "fzf-switcher" \
     --config-file "/etc/alacritty.yaml" \
-    -e /etc/sway/scripts/rename_workspace.sh"&
+    -e ~/.config/sway/scripts/rename_workspace.sh"&

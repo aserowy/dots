@@ -35,18 +35,15 @@
     onedrive.enable = true;
   };
 
+
+  # TODO: lutris specific, but unable to set with home manager?
+  systemd.user.extraConfig = ''
+    DefaultLimitNOFILE=1048576
+  '';
+
+
   system.modules = {
-    dunst = {
-      enable = true;
-      enableSwayIntegration = true;
-    };
     gtk.enable = true;
-    lutris.enable = true;
-    sway.enable = true;
-    swww = {
-      enable = true;
-      enableSwayIntegration = true;
-    };
     tuigreet = {
       enable = true;
       command = "sway";

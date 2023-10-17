@@ -5,7 +5,7 @@ set $browser "microsoft-edge-beta \
     --ozone-platform=wayland"
 
 set $explorer wezterm start --class lf -- lf
-set $menu exec /etc/rofi/launch.nu drun 
+set $menu exec ~/.config/rofi/launch.nu drun 
 set $terminal wezterm
 
 # INPUTS
@@ -22,7 +22,7 @@ output DP-2 transform 270
 
 # STARTUP
 
-exec_always /etc/sway/scripts/gsettings.sh
+exec_always ~/.config/sway/scripts/gsettings.sh
 exec wl-paste -t text --watch clipman store --no-persist
 
 # Don't allow applications to inhibit shortcuts, i.e. grab total control of the
@@ -69,18 +69,18 @@ bindsym $mod+t exec $terminal
 
 ## Sway
 
-bindsym $mod+q exec /etc/rofi/launch.nu power
+bindsym $mod+q exec ~/.config/rofi/launch.nu power
 bindsym $mod+Shift+c kill
 bindsym $mod+Shift+r reload
 
 for_window [title="fzf-switcher"] floating enable
 
-bindsym $mod+r exec /etc/sway/scripts/rename_workspace.sh
-bindsym $mod+w exec /etc/rofi/launch.nu workspace
-bindsym $mod+Shift+w exec /etc/rofi/launch.nu move
+bindsym $mod+r exec ~/.config/sway/scripts/rename_workspace.sh
+bindsym $mod+w exec ~/.config/rofi/launch.nu workspace
+bindsym $mod+Shift+w exec ~/.config/rofi/launch.nu move
 
-bindsym $mod+n exec /etc/sway/scripts/focus_workspace.nu next
-bindsym $mod+p exec /etc/sway/scripts/focus_workspace.nu prev
+bindsym $mod+n exec ~/.config/sway/scripts/focus_workspace.nu next
+bindsym $mod+p exec ~/.config/sway/scripts/focus_workspace.nu prev
 
 bindsym $mod+s scratchpad show
 bindsym $mod+Shift+s move scratchpad
@@ -133,4 +133,4 @@ bar {
 
 # SESSION TARGET
 
-include /etc/sway/config.d/*
+include ~/.config/sway/config.d/*

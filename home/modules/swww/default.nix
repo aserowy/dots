@@ -2,10 +2,10 @@
 with lib;
 
 let
-  cnfg = config.system.modules.swww;
+  cnfg = config.home.modules.swww;
 in
 {
-  options.system.modules.swww = {
+  options.home.modules.swww = {
     enable = mkEnableOption "swww";
 
     enableSwayIntegration = mkOption {
@@ -18,20 +18,18 @@ in
   };
 
   config = mkIf cnfg.enable {
-    environment = {
-      etc = {
-        "swww/wallpaper.sh".source = ./swww-wallpaper.sh;
-      };
+    home = {
+      file.".config/swww/wallpaper.sh".source = ./swww-wallpaper.sh;
 
-      systemPackages = with pkgs; [
+      packages = with pkgs; [
         swww
       ];
     };
 
-    system.modules.sway.additionalConfig = mkIf cnfg.enableSwayIntegration ''
+    home.modules.sway.additionalConfig = mkIf cnfg.enableSwayIntegration ''
       # Start swww daemon and cycle through random wallpaper
       exec swww init
-      exec bash /etc/swww/wallpaper.sh ~/onedrive/Wallpapers/
+      exec bash ~/.config/swww/wallpaper.sh ~/onedrive/Wallpapers/
     '';
   };
 }
