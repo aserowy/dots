@@ -21,6 +21,7 @@
       swww = {
         enable = true;
         enableSwayIntegration = true;
+        enableHyprlandIntegration = true;
       };
       teams.enable = true;
       vscode.enable = true;

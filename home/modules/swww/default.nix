@@ -15,6 +15,14 @@ in
         If enabled, the swww script gets added to sways config.
       '';
     };
+
+    enableHyprlandIntegration = mkOption {
+      type = types.bool;
+      default = false;
+      description = ''
+        If enabled, the swww script gets added to hyprland config.
+      '';
+    };
   };
 
   config = mkIf cnfg.enable {
@@ -30,6 +38,12 @@ in
       # Start swww daemon and cycle through random wallpaper
       exec swww init
       exec bash ~/.config/swww/wallpaper.sh ~/onedrive/Wallpapers/
+    '';
+
+    home.modules.hyprland.additionalConfig = mkIf cnfg.enableHyprlandIntegration ''
+      # Start swww daemon and cycle through random wallpaper
+      exec-once=swww init
+      exec-once=bash ~/.config/swww/wallpaper.sh ~/onedrive/Wallpapers/
     '';
   };
 }

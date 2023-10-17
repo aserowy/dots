@@ -15,6 +15,14 @@ in
         If enabled, the swaybg script gets added to sways config.
       '';
     };
+
+    enableHyprlandIntegration = mkOption {
+      type = types.bool;
+      default = false;
+      description = ''
+        If enabled, the swaybg script gets added to hyprland config.
+      '';
+    };
   };
 
   config = mkIf cnfg.enable {
@@ -27,6 +35,10 @@ in
     };
 
     home.modules.sway.additionalConfig = mkIf cnfg.enableSwayIntegration ''
+      exec ~/.config/swaybg/wallpaper.sh
+    '';
+
+    home.modules.hyprland.additionalConfig = mkIf cnfg.enableHyprlandIntegration ''
       exec ~/.config/swaybg/wallpaper.sh
     '';
   };
