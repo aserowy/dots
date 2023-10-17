@@ -55,8 +55,8 @@
       gtk.enable = true;
       tuigreet = {
         enable = true;
-        command = "sway";
-        # command = "Hyprland";
+        # command = "sway";
+        command = "Hyprland";
       };
       xdg.enable = true;
     };

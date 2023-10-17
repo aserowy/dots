@@ -17,7 +17,7 @@
       hyprland.enable = true;
       lutris.enable = true;
       onedrive.enable = true;
-      sway.enable = true;
+      # sway.enable = true;
       swww = {
         enable = true;
         enableSwayIntegration = true;

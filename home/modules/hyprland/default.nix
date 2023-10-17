@@ -22,7 +22,7 @@ in {
     in
     mkIf cnfg.enable {
       home = {
-        file.".config/hypr/hyprland.config".source = builtins.toFile "hyprland-config" ''
+        file.".config/hypr/hyprland.conf".source = builtins.toFile "hyprland-config" ''
           # additional config
 
           ${cnfg.additionalConfig}
