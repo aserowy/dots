@@ -12,7 +12,7 @@ in
       type = types.lines;
       default = "";
       description = ''
-        Extra commands that are appended to sway config.
+        Extra commands that are prepended to sway config.
       '';
     };
   };

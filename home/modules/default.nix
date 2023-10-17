@@ -2,30 +2,29 @@
 {
   imports = [
     ./alacritty
+    ./docker
     ./dunst
     ./edge
-    ./lutris
-    ./rofi
-    ./sway
-    ./swaybg
-    ./swww
-    ./waybar
-
-    ./docker
     ./fzf
     ./git
     ./grimshot
     ./gtk
     ./hyprland
     ./lf
+    ./lutris
     ./neovim
     ./nushell
     ./onedrive
+    ./rofi
     ./ssh
+    ./sway
+    ./swaybg
+    ./swww
     ./teams
     ./tmux
     ./vscode
     ./vscode-server
+    ./waybar
     ./wezterm
     ./xdg
   ];

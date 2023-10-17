@@ -15,6 +15,14 @@ in
         If enabled, the dunst daemon gets started while running sway.
       '';
     };
+
+    enableHyprlandIntegration = mkOption {
+      type = types.bool;
+      default = false;
+      description = ''
+        If enabled, the dunst daemon gets started while running hyprland.
+      '';
+    };
   };
 
   config =
@@ -96,6 +104,11 @@ in
       home.modules.sway.additionalConfig = mkIf cnfg.enableSwayIntegration ''
         # Start dunst daemon to enable notifications
         exec dunst -conf ~/.config/dunst/dunstrc
+      '';
+
+      home.modules.hyprland.additionalConfig = mkIf cnfg.enableHyprlandIntegration ''
+        # Start dunst daemon to enable notifications
+        exec-once=dunst -conf ~/.config/dunst/dunstrc
       '';
     };
 }
