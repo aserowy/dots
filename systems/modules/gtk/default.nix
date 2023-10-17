@@ -20,16 +20,5 @@ in
       platformTheme = "gtk2";
       style = "gtk2";
     };
-
-    xdg = {
-      portal = {
-        enable = true;
-        extraPortals = with pkgs; [
-          xdg-desktop-portal-gtk
-          xdg-desktop-portal-kde
-        ];
-        wlr.enable = true;
-      };
-    };
   };
 }

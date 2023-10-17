@@ -58,6 +58,7 @@
         command = "sway";
         # command = "Hyprland";
       };
+      xdg.enable = true;
     };
 
     onedrive.enable = true;
