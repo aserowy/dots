@@ -22,10 +22,6 @@ in {
     in
     mkIf cnfg.enable {
       home = {
-        packages = with pkgs; [
-          hyprland
-        ];
-
         file.".config/hypr/hyprland.config".source = builtins.toFile "hyprland-config" ''
           # additional config
 
@@ -35,6 +31,19 @@ in {
 
           ${hyprlandConfig}
         '';
+
+        packages = with pkgs; [
+          hyprland
+        ];
+
+        sessionVariables = {
+          # INFO: sets ozone wayland support for all chromium based applications
+          NIXOS_OZONE_WL = "1";
+          SDL_VIDEODRIVER = "wayland";
+          XDG_CURRENT_DESKTOP = "Hyprland";
+          XDG_SESSION_DESKTOP = "Hyprland";
+          XDG_SESSION_TYPE = "wayland";
+        };
       };
     };
 }

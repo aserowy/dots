@@ -108,7 +108,7 @@ in
 
       home.modules.hyprland.additionalConfig = mkIf cnfg.enableHyprlandIntegration ''
         # Start dunst daemon to enable notifications
-        exec-once=dunst -conf ~/.config/dunst/dunstrc
+        exec-once = dunst -conf ~/.config/dunst/dunstrc
       '';
     };
 }

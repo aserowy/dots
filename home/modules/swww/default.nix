@@ -42,8 +42,8 @@ in
 
     home.modules.hyprland.additionalConfig = mkIf cnfg.enableHyprlandIntegration ''
       # Start swww daemon and cycle through random wallpaper
-      exec-once=swww init
-      exec-once=bash ~/.config/swww/wallpaper.sh ~/onedrive/Wallpapers/
+      exec-once = swww init
+      exec-once = bash ~/.config/swww/wallpaper.sh ~/onedrive/Wallpapers/
     '';
   };
 }

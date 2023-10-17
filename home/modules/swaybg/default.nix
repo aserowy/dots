@@ -39,7 +39,7 @@ in
     '';
 
     home.modules.hyprland.additionalConfig = mkIf cnfg.enableHyprlandIntegration ''
-      exec ~/.config/swaybg/wallpaper.sh
+      exec-once = ~/.config/swaybg/wallpaper.sh
     '';
   };
 }

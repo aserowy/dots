@@ -1,6 +1,3 @@
-# {[345320:345320:1017/140335.250983:ERROR:screen_capture_portal_interface.cc(78)] Failed to request the session subscription.
-# [345320:345320:1017/140335.251000:ERROR:base_capturer_pipewire.cc(81)] ScreenCastPortal failed: 3
-
 { config, lib, pkgs, ... }:
 with lib;
 
