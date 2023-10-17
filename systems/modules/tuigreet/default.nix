@@ -2,10 +2,10 @@
 with lib;
 
 let
-  cnfg = config.system.modules.tuigreet;
+  cnfg = config.services.modules.tuigreet;
 in
 {
-  options.system.modules.tuigreet = {
+  options.services.modules.tuigreet = {
     enable = mkEnableOption "tuigreet";
 
     command = mkOption {

@@ -2,6 +2,7 @@
 {
   imports = [
     ../shared/base.nix
+
     ./hardware-configuration.nix
 
     ../homeassistant/borgbackup.nix
@@ -27,13 +28,5 @@
   services = {
     # lsblk --discard to ensure ssd supports trim (disc-gran and disc-max should be non zero)
     fstrim.enable = true;
-  };
-
-  virtualisation = {
-    docker = {
-      enable = true;
-      autoPrune.enable = true;
-      enableOnBoot = true;
-    };
   };
 }

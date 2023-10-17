@@ -1,9 +1,28 @@
 { pkgs, ... }:
 {
+  imports = [
+    ../modules
+  ];
+
+  boot = {
+    readOnlyNixStore = false;
+    tmp.cleanOnBoot = true;
+  };
+
   environment = {
+    defaultPackages = [ ];
+
     systemPackages = with pkgs; [
+      acpi
+      lf
       mkpasswd
+      smartmontools
+      wezterm
     ];
+  };
+
+  i18n.inputMethod = {
+    enabled = "ibus";
   };
 
   networking = {
@@ -11,12 +30,10 @@
       enable = true;
       allowedTCPPorts = [ 80 443 2022 ];
       allowedUDPPorts = [ 53 ];
-      allowPing = true;
+      allowPing = false;
     };
     useDHCP = false;
   };
-
-  boot.readOnlyNixStore = false;
 
   nix = {
     package = pkgs.nixVersions.stable;
@@ -48,13 +65,14 @@
     };
   };
 
-  i18n.inputMethod = {
-    enabled = "ibus";
-  };
-
   programs.dconf.enable = true;
 
-  security.rtkit.enable = true;
+  security = {
+    rtkit.enable = true;
+
+    sudo.enable = false;
+    doas.enable = true;
+  };
 
   services = {
     dbus = {
@@ -84,4 +102,12 @@
   };
 
   time.timeZone = "Europe/Berlin";
+
+  virtualisation = {
+    docker = {
+      enable = true;
+      autoPrune.enable = true;
+      enableOnBoot = true;
+    };
+  };
 }

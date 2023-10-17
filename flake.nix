@@ -32,6 +32,7 @@
               (import ./pkgs)
             ];
           }
+
           ./home/work-macos.nix
         ];
       };
@@ -45,6 +46,7 @@
               (import ./pkgs)
             ];
           }
+
           ./home/work-wsl.nix
         ];
       };
@@ -58,6 +60,7 @@
               (import ./pkgs)
             ];
           }
+
           ./home/ui.nix
         ];
       };
@@ -75,8 +78,7 @@
             ];
           }
 
-          ./hosts/workstation
-          ./systems/workstation.nix
+          ./systems/workstation
           {
             imports = [ ./users ];
 
@@ -107,8 +109,7 @@
             ];
           }
 
-          ./hosts/homeassistant-nuc
-          ./systems/homeassistant.nix
+          ./systems/homeassistant-nuc
           {
             imports = [ ./users ];
 
@@ -140,8 +141,7 @@
 
           hardware.nixosModules.raspberry-pi-4
 
-          ./hosts/homeassistant
-          ./systems/homeassistant.nix
+          ./systems/homeassistant
           {
             imports = [ ./users ];
 

@@ -2,10 +2,10 @@
 with lib;
 
 let
-  cnfg = config.system.modules.gtk;
+  cnfg = config.services.modules.gtk;
 in
 {
-  options.system.modules.gtk.enable = mkEnableOption "gtk";
+  options.services.modules.gtk.enable = mkEnableOption "gtk";
 
   config = mkIf cnfg.enable {
     environment.systemPackages = with pkgs; [

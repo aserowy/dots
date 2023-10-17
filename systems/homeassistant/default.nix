@@ -2,6 +2,7 @@
 {
   imports = [
     ../shared/base.nix
+
     ./hardware-configuration.nix
 
     ./borgbackup.nix
@@ -20,13 +21,5 @@
 
     # enables wifi with: nmcli device wifi connect <SSID> password <PASS>
     networkmanager.enable = true;
-  };
-
-  virtualisation = {
-    docker = {
-      enable = true;
-      autoPrune.enable = true;
-      enableOnBoot = true;
-    };
   };
 }

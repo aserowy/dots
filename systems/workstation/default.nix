@@ -14,15 +14,53 @@
     };
   };
 
+  fonts = {
+    fontDir.enable = true;
+    enableGhostscriptFonts = true;
+    packages = with pkgs; [
+      powerline-fonts
+      nerdfonts
+    ];
+  };
+
   networking = {
     hostName = "workstation";
     interfaces.eno1.useDHCP = true;
   };
 
+  programs = {
+    seahorse.enable = true;
+    steam.enable = true;
+  };
+
   services = {
+    clamav = {
+      updater.enable = true;
+
+      daemon = {
+        enable = true;
+        settings = {
+          ExcludePath = "^/home/serowy/games/";
+        };
+      };
+    };
+
     # lsblk --discard to ensure ssd supports trim
     # (disc-gran and disc-max should be non zero)
     fstrim.enable = true;
+
+    gnome.gnome-keyring.enable = true;
+
+    modules = {
+      gtk.enable = true;
+      tuigreet = {
+        enable = true;
+        command = "sway";
+        # command = "Hyprland";
+      };
+    };
+
+    onedrive.enable = true;
 
     pipewire = {
       enable = true;
@@ -55,11 +93,8 @@
     };
   };
 
-  virtualisation = {
-    docker = {
-      enable = true;
-      autoPrune.enable = true;
-      enableOnBoot = true;
-    };
-  };
+  # TODO: lutris specific, but unable to set with home manager?
+  systemd.user.extraConfig = ''
+    DefaultLimitNOFILE=1048576
+  '';
 }
