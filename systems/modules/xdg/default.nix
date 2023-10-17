@@ -14,8 +14,6 @@ in
         extraPortals = with pkgs; [
           xdg-desktop-portal-gtk
           xdg-desktop-portal-hyprland
-
-          libsForQt5.xdg-desktop-portal-kde
         ];
         wlr.enable = true;
       };
