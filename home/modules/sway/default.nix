@@ -23,6 +23,11 @@ in
   config =
     let
       swayConfig = builtins.readFile ./config;
+
+      swayPackage = pkgs.sway.override {
+        withGtkWrapper = true;
+      };
+
     in
     mkIf cnfg.enable {
       home = {
@@ -52,7 +57,7 @@ in
           clipman
           lf
           pv
-          sway-unwrapped
+          swayPackage
           wezterm
           wf-recorder
           wl-clipboard
