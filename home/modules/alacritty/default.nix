@@ -9,11 +9,11 @@ in
 
   config = mkIf cnfg.enable {
     home = {
+      file.".config/alacritty/alacritty.yaml".source = ./alacritty.yaml;
+
       packages = with pkgs; [
         alacritty
       ];
-
-      file.".config/alacritty/alacritty.yaml".source = ./alacritty.yaml;
     };
   };
 }

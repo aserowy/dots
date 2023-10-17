@@ -15,7 +15,9 @@ in
         carapace
         curl
         ncurses
+        starship
         tree
+        zoxide
 
         unixtools.watch
       ];
@@ -26,6 +28,7 @@ in
     programs = {
       direnv = {
         enable = true;
+        enableNushellIntegration = false;
         nix-direnv = {
           enable = true;
         };
@@ -35,6 +38,11 @@ in
         enable = true;
         configFile.source = ./nushell-config.nu;
         envFile.source = ./nushell-env.nu;
+        # FIX: https://github.com/nix-community/home-manager/issues/4313
+        environmentVariables =
+          builtins.mapAttrs
+            (name: value: "\"${builtins.toString value}\"")
+            config.home.sessionVariables;
         shellAliases = {
           cat = "bat";
 
@@ -61,14 +69,6 @@ in
           ll = "ls -l";
           lla = "ls -la";
         };
-      };
-
-      starship = {
-        enable = true;
-      };
-
-      zoxide = {
-        enable = true;
       };
     };
   };

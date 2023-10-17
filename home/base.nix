@@ -5,7 +5,7 @@
   ];
 
   home = {
-    stateVersion = "22.05";
+    stateVersion = "23.11";
 
     modules = {
       fzf.enable = true;
