@@ -22,15 +22,19 @@ in {
     in
     mkIf cnfg.enable {
       home = {
-        file.".config/hypr/hyprland.conf".source = builtins.toFile "hyprland-config" ''
-          # additional config
+        file = {
+          ".config/hypr/hyprland.conf".source = builtins.toFile "hyprland-config" ''
+            # additional config
 
-          ${cnfg.additionalConfig}
+            ${cnfg.additionalConfig}
 
-          # hyprland config
+            # hyprland config
 
-          ${hyprlandConfig}
-        '';
+            ${hyprlandConfig}
+          '';
+
+          ".config/hypr/scripts".source = ./scripts;
+        };
 
         modules = {
           edge.enable = true;
