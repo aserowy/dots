@@ -113,15 +113,6 @@ bindsym $mod+$alt+$up resize shrink height 20px
 bindsym $mod+$alt+$left resize grow width 20px
 bindsym $mod+$alt+$right resize shrink width 20px
 
-# GAMING
-
-for_window [title="Lutris" tiling] move container to workspace "gaming", focus
-for_window [class="gw2-64.exe" tiling] move container to workspace "gw", focus
-
-# NOTES
-
-for_window [class="obsidian" tiling] move container to workspace "notes", focus
-
 # WAYBAR
 
 bar {
