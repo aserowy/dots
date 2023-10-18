@@ -1,22 +1,19 @@
 #!/usr/bin/env nu
 
 let wm_all = 'all'
+let wm_hypr = 'Hyprland'
 let wm_sway = 'sway'
-let wm_i3 = 'i3'
 
-let predefined = [
+let commands = [
     [name wm command];
     ["⏻  shutdown" $wm_all 'systemctl poweroff']
     ["  reboot" $wm_all 'systemctl reboot']
     ["  suspend" $wm_all 'systemctl suspend']
-    ["  lock" $wm_i3 'dm-tool lock']
-    ["  logout" $wm_i3 'i3-msg exit']
-    ["  logout" $wm_sway 'swaymsg exit']
 ]
 
 def main [command_name: string = ''] {
     let current_wm = (get_current_wm)
-    let valid_commands = ($predefined
+    let valid_commands = ($commands
         | where wm == $current_wm or wm == $wm_all)
 
     if $command_name == '' {
@@ -34,9 +31,5 @@ def main [command_name: string = ''] {
 }
 
 def get_current_wm [] {
-    if 'WAYLAND_DISPLAY' in $env {
-        $wm_sway
-    } else {
-        $wm_i3
-    }
+    $env.XDG_CURRENT_DESKTOP
 }

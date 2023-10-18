@@ -1,35 +1,25 @@
 #!/usr/bin/env nu
 
-let predefined = [dots gaming notes social work]
+use list_workspaces_by_name.nu *
 
 def main [workspace_name: string = ''] {
-
-    let workspaces = (get_workspaces
-        | from json 
-        | get name
-        | append $predefined
-        | uniq
-        | sort --ignore-case --natural)
+    let wm = (get_current_wm)
+    let workspaces = (get_workspaces_by_name)
 
     if $workspace_name == '' {
-        ($workspaces | str join "\n")
+        $workspaces
     } else {
-        move_to_workspace $workspace_name
+        move_to_workspace $wm $workspace_name
     }
 }
 
-def get_workspaces [] {
-    if 'WAYLAND_DISPLAY' in $env {
-        (swaymsg -t get_workspaces -r)
-    } else {
-        (i3-msg -t get_workspaces)
+def move_to_workspace [wm: string, name: string] {
+    match $wm {
+        'Hyprland' => { run-external --redirect-stdout --redirect-stderr 'hyprctl' dispatch movetoworkspace $"name:($name)" | ignore },
+        'sway' => { run-external --redirect-stdout --redirect-stderr 'swaymsg' move container to workspace $name | ignore }
     }
 }
 
-def move_to_workspace [name: string] {
-    if 'WAYLAND_DISPLAY' in $env {
-        run-external --redirect-stdout --redirect-stderr 'swaymsg' move container to workspace $name | ignore
-    } else {
-        run-external --redirect-stdout --redirect-stderr 'i3-msg' move container to workspace $name | ignore
-    }
+def get_current_wm [] {
+    $env.XDG_CURRENT_DESKTOP
 }

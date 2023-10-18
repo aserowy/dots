@@ -32,6 +32,11 @@ in {
           ${hyprlandConfig}
         '';
 
+        modules = {
+          edge.enable = true;
+          rofi.enable = true;
+        };
+
         packages = with pkgs; [
           hyprland
         ];

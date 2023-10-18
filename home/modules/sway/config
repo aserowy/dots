@@ -1,9 +1,6 @@
 # PROGRAMS
 
-set $browser "microsoft-edge-beta \
-    --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer \
-    --ozone-platform=wayland"
-
+set $browser microsoft-edge-beta
 set $explorer wezterm start --class lf -- lf
 set $menu exec ~/.config/rofi/launch.nu drun 
 set $terminal wezterm
