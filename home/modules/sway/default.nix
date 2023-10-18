@@ -46,17 +46,16 @@ in
         modules = {
           alacritty.enable = true;
           edge.enable = true;
+          lf.enable = true;
           rofi.enable = true;
           waybar.enable = true;
+          wezterm.enable = true;
         };
 
         packages = with pkgs; [
           clipman
-          lf
           pv
           swayPackage
-          wezterm
-          wf-recorder
           wl-clipboard
 
           xorg.xlsclients

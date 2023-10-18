@@ -38,12 +38,16 @@ in {
 
         modules = {
           edge.enable = true;
+          lf.enable = true;
           rofi.enable = true;
           waybar.enable = true;
+          wezterm.enable = true;
         };
 
         packages = with pkgs; [
+          clipman
           hyprland
+          wl-clipboard
         ];
 
         sessionVariables = {
