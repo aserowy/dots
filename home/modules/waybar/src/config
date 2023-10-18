@@ -1,5 +1,6 @@
 {
     "position": "left",
+    "width": 50,
 
     "modules-left": [
         "custom/spotify-monitor",
@@ -8,7 +9,10 @@
         "custom/spotify-play-pause",
         "custom/spotify-next",
     ],
-    "modules-center": ["sway/workspaces"],
+    "modules-center": [
+        "hyprland/workspaces",
+        "sway/workspaces"
+    ],
     "modules-right": [
         "custom/grimshot",
         "custom/recorder",
@@ -89,6 +93,20 @@
         "on-click": "~/.config/waybar/spotify/controls.sh prev",
         "return-type": "json",
         "signal": 5
+    },
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "format-icons": {
+            "default": "󰝥",
+            "dots": "󰟒",
+            "focused": "󰪥",
+            "gaming": "󰖹",
+            "notes": "󰛿",
+            "social": "󰀉",
+            "urgent": "󰵚",
+            "work": "󰸥",
+        },
+        "sort-by": "name",
     },
     "sway/workspaces": {
         "alphabetical_sort": true,

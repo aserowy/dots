@@ -72,6 +72,11 @@ window > box {
   color: #abb2bf;
 }
 
+#workspaces button.active {
+  box-shadow: inset 3px 0 #61afef;
+  color: #61afef;
+}
+
 #workspaces button.focused {
   box-shadow: inset 3px 0 #61afef;
   color: #61afef;
