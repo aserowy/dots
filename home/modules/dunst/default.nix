@@ -10,7 +10,7 @@ in
 
     enableSwayIntegration = mkOption {
       type = types.bool;
-      default = false;
+      default = true;
       description = ''
         If enabled, the dunst daemon gets started while running sway.
       '';
@@ -18,7 +18,7 @@ in
 
     enableHyprlandIntegration = mkOption {
       type = types.bool;
-      default = false;
+      default = true;
       description = ''
         If enabled, the dunst daemon gets started while running hyprland.
       '';

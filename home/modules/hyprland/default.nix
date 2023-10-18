@@ -35,6 +35,7 @@ in {
         modules = {
           edge.enable = true;
           rofi.enable = true;
+          waybar.enable = true;
         };
 
         packages = with pkgs; [

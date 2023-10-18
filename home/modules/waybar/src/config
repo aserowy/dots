@@ -49,17 +49,17 @@
         "tooltip": false,
         "interval": "once",
         "return-type": "json",
-        "exec": "/etc/xdg/waybar/recorder/monitor.sh",
-        "on-click": "/etc/xdg/waybar/recorder/toggle.sh",
+        "exec": "~/.config/waybar/recorder/monitor.sh",
+        "on-click": "~/.config/waybar/recorder/toggle.sh",
         "signal": 8
     },
     "custom/spotify-monitor": {
         "interval": 1,
-        "exec": "/etc/xdg/waybar/spotify/monitor.sh",
+        "exec": "~/.config/waybar/spotify/monitor.sh",
         "signal": 4
     },
     "custom/spotify-metadata": {
-        "exec": "/etc/xdg/waybar/spotify/metadata.sh",
+        "exec": "~/.config/waybar/spotify/metadata.sh",
         "format": "󰓇",
         "interval": "once",
         "on-click": "scratchpad show",
@@ -67,26 +67,26 @@
         "signal": 5
     },
     "custom/spotify-play-pause": {
-        "exec": "/etc/xdg/waybar/spotify/play-pause.sh",
+        "exec": "~/.config/waybar/spotify/play-pause.sh",
         "format": "{}",
         "interval": "once",
-        "on-click": "/etc/xdg/waybar/spotify/controls.sh",
+        "on-click": "~/.config/waybar/spotify/controls.sh",
         "return-type": "json",
         "signal": 5
     },
     "custom/spotify-next": {
-        "exec": "/etc/xdg/waybar/spotify/metadata.sh",
+        "exec": "~/.config/waybar/spotify/metadata.sh",
         "format": "󰒭",
         "interval": "once",
-        "on-click": "/etc/xdg/waybar/spotify/controls.sh next",
+        "on-click": "~/.config/waybar/spotify/controls.sh next",
         "return-type": "json",
         "signal": 5
     },
     "custom/spotify-prev": {
-        "exec": "/etc/xdg/waybar/spotify/metadata.sh",
+        "exec": "~/.config/waybar/spotify/metadata.sh",
         "format": "󰒮",
         "interval": "once",
-        "on-click": "/etc/xdg/waybar/spotify/controls.sh prev",
+        "on-click": "~/.config/waybar/spotify/controls.sh prev",
         "return-type": "json",
         "signal": 5
     },
