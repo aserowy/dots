@@ -8,7 +8,6 @@
     modules = {
       docker.enable = true;
       dunst.enable = true;
-      grimshot.enable = true;
       gtk.enable = true;
       hyprland.enable = true;
       lutris.enable = true;

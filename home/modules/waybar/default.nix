@@ -9,17 +9,18 @@ in
 
   config = mkIf cnfg.enable {
     home = {
+      file.".config/waybar".source = ./src;
+
+      modules.swappy.enable = true;
+
       packages = with pkgs; [
         jq
         pavucontrol
         playerctl
         sway-contrib.grimshot
-        swappy
         waybar
         wf-recorder
       ];
-
-      file.".config/waybar".source = ./src;
     };
   };
 }

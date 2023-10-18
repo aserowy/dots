@@ -7,7 +7,6 @@
     ./edge
     ./fzf
     ./git
-    ./grimshot
     ./gtk
     ./hyprland
     ./lf
@@ -17,6 +16,7 @@
     ./onedrive
     ./rofi
     ./ssh
+    ./swappy
     ./sway
     ./swaybg
     ./swww
