@@ -9,6 +9,8 @@ in
 
   config = mkIf cnfg.enable {
     home = {
+      # FIX: sleep 0.1 in config is a workaround for
+      # https://github.com/Alexays/Waybar/issues/1850
       file.".config/waybar".source = ./src;
 
       modules.swappy.enable = true;

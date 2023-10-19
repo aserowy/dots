@@ -44,9 +44,9 @@
     "custom/grimshot": {
         "format": "󰹑",
         "tooltip": false,
-        "on-click": "grimshot --notify save output - | swappy -f -",
-        "on-click-middle": "grimshot --notify save window - | swappy -f -",
-        "on-click-right": "grimshot --notify save area - | swappy -f -"
+        "on-click": "sleep 0.1 && grimshot --notify save output - | swappy -f -",
+        "on-click-middle": "sleep 0.1 && grimshot --notify save window - | swappy -f -",
+        "on-click-right": "sleep 0.1 && grimshot --notify save area - | swappy -f -"
     },
     "custom/recorder": {
         "format": "󰕧",
@@ -54,7 +54,7 @@
         "interval": "once",
         "return-type": "json",
         "exec": "~/.config/waybar/recorder/monitor.sh",
-        "on-click": "~/.config/waybar/recorder/toggle.sh",
+        "on-click": "sleep 0.1 && ~/.config/waybar/recorder/toggle.sh",
         "signal": 8
     },
     "custom/spotify-monitor": {
@@ -74,7 +74,7 @@
         "exec": "~/.config/waybar/spotify/play-pause.sh",
         "format": "{}",
         "interval": "once",
-        "on-click": "~/.config/waybar/spotify/controls.sh",
+        "on-click": "sleep 0.1 && ~/.config/waybar/spotify/controls.sh",
         "return-type": "json",
         "signal": 5
     },
@@ -82,7 +82,7 @@
         "exec": "~/.config/waybar/spotify/metadata.sh",
         "format": "󰒭",
         "interval": "once",
-        "on-click": "~/.config/waybar/spotify/controls.sh next",
+        "on-click": "sleep 0.1 && ~/.config/waybar/spotify/controls.sh next",
         "return-type": "json",
         "signal": 5
     },
@@ -90,7 +90,7 @@
         "exec": "~/.config/waybar/spotify/metadata.sh",
         "format": "󰒮",
         "interval": "once",
-        "on-click": "~/.config/waybar/spotify/controls.sh prev",
+        "on-click": "sleep 0.1 && ~/.config/waybar/spotify/controls.sh prev",
         "return-type": "json",
         "signal": 5
     },
@@ -140,7 +140,7 @@
             "headphone": "󰋋",
             "default": ["", "󰖀", "󰕾"]
         },
-        "on-click": "pavucontrol",
+        "on-click": "sleep 0.1 && pavucontrol",
         "states": {
             "low": 0,
             "mid": 50,
