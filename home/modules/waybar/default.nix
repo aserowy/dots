@@ -15,7 +15,7 @@ in
 
       # TODO: modulize wl-clipboard and clipman
       # TODO: add clipman rofi as icon to waybar
-      # TODO: refactor grimshot window into nu script
+      # TODO: refactor grimshot into nu script with slurp
       # "on-click-middle": "sleep 0.1 && grimshot --notify save window - | swappy -f -",
       # swaymsg -t get_tree | jq -r '.. | select(.focused?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | grim -g - screenshot.png
       # hyprctl -j activewindow | jq -r '"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"' | grim -g - screenshot.png
