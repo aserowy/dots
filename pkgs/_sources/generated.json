@@ -310,12 +310,12 @@
         },
         "pinned": false,
         "src": {
-            "name": "vscode-icons-12.5.0.zip",
-            "sha256": "sha256-PrOakITVBJKaGqlhbWNSY2eh4R8fiBd2hEdWzN3lCjs=",
+            "name": "vscode-icons-12.6.0.zip",
+            "sha256": "sha256-SylhhaPiuz0dxrb1NmatAr8rby5IsrJ16eQh2sQWFzQ=",
             "type": "url",
-            "url": "https://vscode-icons-team.gallery.vsassets.io/_apis/public/gallery/publisher/vscode-icons-team/extension/vscode-icons/12.5.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+            "url": "https://vscode-icons-team.gallery.vsassets.io/_apis/public/gallery/publisher/vscode-icons-team/extension/vscode-icons/12.6.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
-        "version": "12.5.0"
+        "version": "12.6.0"
     },
     "vscode-extensions-vscode-lldb": {
         "cargoLocks": null,
