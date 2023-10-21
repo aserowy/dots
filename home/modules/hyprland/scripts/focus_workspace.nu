@@ -1,19 +1,12 @@
 #!/usr/bin/env nu
 
 def main [direction: string] {
-    let active_workspace = (hyprctl activewindow -j
-        | from json
-        | get workspace.id)
-
-    let output = (hyprctl workspaces -j
-        | from json
-        | where id == $active_workspace
-        | get monitor
-        | first)
+    let active_workspace = (hyprctl activeworkspace -j
+        | from json)
 
     let workspaces = (hyprctl workspaces -j
         | from json
-        | where monitor == $output
+        | where monitor == $active_workspace.monitor
         | select name id
         | if $direction == 'prev' {
             sort-by name --natural } else {
@@ -25,7 +18,7 @@ def main [direction: string] {
         | prepend { name: ($workspaces | last | get name) id: 0 })
 
     let next = ($workspaces 
-        | take until { |workspace| $workspace.id == $active_workspace }
+        | take until { |workspace| $workspace.id == $active_workspace.id }
         | last)
 
     run-external --redirect-stderr 'hyprctl' dispatch workspace $"name:($next.name)"
