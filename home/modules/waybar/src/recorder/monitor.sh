@@ -1,4 +1,5 @@
 #!/bin/sh
+
 if pgrep wf-recorder &> /dev/null
 then
    echo '{"class": "recording"}'

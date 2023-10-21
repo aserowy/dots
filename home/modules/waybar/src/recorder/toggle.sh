@@ -2,11 +2,10 @@
 
 if pgrep wf-recorder &> /dev/null
 then
-    pkill -SIGINT wf-recorder && notify-send ' screen cap ended'
+    pkill -SIGINT wf-recorder
     sleep .1
 else
-    wf-recorder -o $(swaymsg -r -t get_outputs  | jq -r '.[] | select(.focused == true).name') -f $HOME/videos/$(date -Is).mp4 &> /dev/null &
-    notify-send ' screen cap started'
+    wf-recorder -g "$(slurp -o)" -f ~/videos/$(date -Is).mp4 &> /dev/null &
     sleep .1
 fi 
 

@@ -45,8 +45,7 @@
         "format": "󰹑",
         "tooltip": false,
         "on-click": "sleep 0.1 && grimshot --notify save output - | swappy -f -",
-        "on-click-middle": "sleep 0.1 && grimshot --notify save window - | swappy -f -",
-        "on-click-right": "sleep 0.1 && grimshot --notify save area - | swappy -f -"
+        "on-click-right": "sleep 0.1 && grimshot --notify save window - | swappy -f -"
     },
     "custom/recorder": {
         "format": "󰕧",
@@ -66,7 +65,6 @@
         "exec": "~/.config/waybar/spotify/metadata.sh",
         "format": "󰓇",
         "interval": "once",
-        "on-click": "scratchpad show",
         "return-type": "json",
         "signal": 5
     },
