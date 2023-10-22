@@ -37,6 +37,7 @@ in {
         };
 
         modules = {
+          clipman.enable = true;
           edge.enable = true;
           lf.enable = true;
           rofi.enable = true;
@@ -45,10 +46,10 @@ in {
         };
 
         packages = with pkgs; [
-          # TODO: modulize wl-clipboard and clipman
-          clipman
           hyprland
-          wl-clipboard
+
+          xorg.xlsclients
+          xwayland
         ];
 
         sessionVariables = {

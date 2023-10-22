@@ -2,6 +2,7 @@
 {
   imports = [
     ./alacritty
+    ./clipman
     ./docker
     ./dunst
     ./edge

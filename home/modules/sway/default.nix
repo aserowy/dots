@@ -44,6 +44,7 @@ in
         };
 
         modules = {
+          clipman.enable = true;
           edge.enable = true;
           lf.enable = true;
           rofi.enable = true;
@@ -52,10 +53,7 @@ in
         };
 
         packages = with pkgs; [
-          clipman
-          pv
           swayPackage
-          wl-clipboard
 
           xorg.xlsclients
           xwayland
