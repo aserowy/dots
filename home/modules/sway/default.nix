@@ -15,6 +15,14 @@ in
         Extra commands that are prepended to sway config.
       '';
     };
+
+    swaybarCommand = mkOption {
+      type = types.str;
+      default = "";
+      description = ''
+        Command that is used to start status bar with swaybar_command.
+      '';
+    };
   };
 
   config =
@@ -25,6 +33,8 @@ in
         withGtkWrapper = true;
       };
 
+      swaybarCommand = mkIf cnfg.swaybarCommand != ""
+        "swaybar_command ${cnfg.swaybarCommand}";
     in
     mkIf cnfg.enable {
       home = {
@@ -37,6 +47,14 @@ in
             # sway config
 
             ${swayConfig}
+
+            # bar and systemd_target
+
+            bar {
+                ${swaybarCommand}
+            }
+
+            include ~/.config/sway/config.d/*
           '';
 
           ".config/sway/config.d/99_systemd_target.conf".source = ./systemd_target.conf;

@@ -5,7 +5,25 @@ let
   cnfg = config.home.modules.waybar;
 in
 {
-  options.home.modules.waybar.enable = mkEnableOption "waybar";
+  options.home.modules.waybar = {
+    enable = mkEnableOption "waybar";
+
+    enableSwayIntegration = mkOption {
+      type = types.bool;
+      default = true;
+      description = ''
+        If enabled, waybar gets initialized while starting sway.
+      '';
+    };
+
+    enableHyprlandIntegration = mkOption {
+      type = types.bool;
+      default = true;
+      description = ''
+        If enabled, waybar gets initialized while starting hyprland.
+      '';
+    };
+  };
 
   config = mkIf cnfg.enable {
     home = {
@@ -34,5 +52,14 @@ in
         wf-recorder
       ];
     };
+
+    home.modules.sway.swaybarCommand = mkIf cnfg.enableSwayIntegration ''
+      waybar
+    '';
+
+    home.modules.hyprland.additionalConfig = mkIf cnfg.enableHyprlandIntegration ''
+      # Start waybar as status bar
+      exec-once = waybar
+    '';
   };
 }

@@ -86,7 +86,6 @@
       HandlePowerKey=suspend
     '';
 
-    # FIX: https://github.com/NixOS/nixpkgs/issues/234683
     openssh = {
       enable = true;
       settings = {
