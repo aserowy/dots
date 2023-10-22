@@ -3,12 +3,20 @@
 if pgrep wf-recorder &> /dev/null
 then
     pkill -SIGINT wf-recorder
+
+    while [ pgrep wf-recorder &> /dev/null ]
+    do
+        sleep .1
+    done
 else
     area=$(slurp -o)
     wf-recorder -g "$area" -f ~/videos/$(date -Is).mp4 &> /dev/null &
-fi 
 
-sleep .25
+    while [ ! pgrep wf-recorder &> /dev/null ]
+    do
+        sleep .1
+    done
+fi 
 
 # send signal to update monitor 
 pkill -RTMIN+8 waybar
