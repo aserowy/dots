@@ -27,6 +27,11 @@ window > box {
   padding-bottom: 20px;
 }
 
+#custom-clipman {
+  font-size: 1.5em;
+  padding: 0;
+  color: #fff;
+}
 #custom-grimshot {
   font-size: 1.5em;
   padding: 0;

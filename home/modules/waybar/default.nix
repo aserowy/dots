@@ -20,7 +20,10 @@ in
       # swaymsg -t get_tree | jq -r '.. | select(.focused?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | grim -g - screenshot.png
       # hyprctl -j activewindow | jq -r '"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"' | grim -g - screenshot.png
 
-      modules.swappy.enable = true;
+      modules = {
+        rofi.enable = true;
+        swappy.enable = true;
+      };
 
       packages = with pkgs; [
         jq

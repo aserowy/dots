@@ -14,6 +14,7 @@
         "sway/workspaces"
     ],
     "modules-right": [
+        "custom/clipman",
         "custom/grimshot",
         "custom/recorder",
         "backlight",
@@ -40,6 +41,11 @@
     "clock#mins": {
         "interval": 1,
         "format": "{:%M}",
+    },
+    "custom/clipman": {
+        "format": "󱉫",
+        "tooltip": false,
+        "on-click": "sleep 0.1 && clipman pick -t rofi",
     },
     "custom/grimshot": {
         "format": "󰹑",
