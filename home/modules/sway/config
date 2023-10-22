@@ -72,7 +72,7 @@ bindsym $mod+Shift+r reload
 
 for_window [title="fzf-switcher"] floating enable
 
-bindsym $mod+r exec ~/.config/sway/scripts/rename_workspace.sh
+bindsym $mod+r exec ~/.config/rofi/launch.nu rename
 bindsym $mod+w exec ~/.config/rofi/launch.nu workspace
 bindsym $mod+Shift+w exec ~/.config/rofi/launch.nu move
 

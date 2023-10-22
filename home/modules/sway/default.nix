@@ -44,7 +44,6 @@ in
         };
 
         modules = {
-          alacritty.enable = true;
           edge.enable = true;
           lf.enable = true;
           rofi.enable = true;
