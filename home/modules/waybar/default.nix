@@ -13,8 +13,6 @@ in
       # https://github.com/Alexays/Waybar/issues/1850
       file.".config/waybar".source = ./src;
 
-      # TODO: modulize wl-clipboard and clipman
-      # TODO: add clipman rofi as icon to waybar
       # TODO: refactor grimshot into nu script with slurp
       # "on-click-middle": "sleep 0.1 && grimshot --notify save window - | swappy -f -",
       # swaymsg -t get_tree | jq -r '.. | select(.focused?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | grim -g - screenshot.png

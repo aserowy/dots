@@ -45,6 +45,7 @@ in {
         };
 
         packages = with pkgs; [
+          # TODO: modulize wl-clipboard and clipman
           clipman
           hyprland
           wl-clipboard
