@@ -14,6 +14,9 @@
     };
   };
 
+  # INFO: sets ozone wayland support for all chromium based applications
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
   fonts = {
     fontDir.enable = true;
     enableGhostscriptFonts = true;

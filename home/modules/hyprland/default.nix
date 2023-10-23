@@ -53,8 +53,6 @@ in {
         ];
 
         sessionVariables = {
-          # INFO: sets ozone wayland support for all chromium based applications
-          NIXOS_OZONE_WL = "1";
           SDL_VIDEODRIVER = "wayland";
           XDG_CURRENT_DESKTOP = "Hyprland";
           XDG_SESSION_DESKTOP = "Hyprland";
