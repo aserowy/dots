@@ -17,6 +17,3 @@ else
         sleep .1
     done
 fi 
-
-# send signal to update monitor 
-pkill -RTMIN+8 waybar

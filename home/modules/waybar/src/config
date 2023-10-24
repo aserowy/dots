@@ -16,6 +16,7 @@
     "modules-right": [
         "custom/clipman",
         "custom/grim",
+        "custom/recorder-monitor",
         "custom/recorder",
         "backlight",
         "pulseaudio",
@@ -54,18 +55,22 @@
         "on-click-middle": "sleep 0.1 && ~/.config/grim/screenshot.nu window",
         "on-click-right": "sleep 0.1 && ~/.config/grim/screenshot.nu area"
     },
+    "custom/recorder-monitor": {
+        "interval": 1,
+        "exec": "pkill -RTMIN+8 waybar",
+    },
     "custom/recorder": {
         "format": "󰕧",
         "tooltip": false,
         "interval": "once",
         "return-type": "json",
-        "exec": "~/.config/waybar/recorder/monitor.sh",
+        "exec": "~/.config/waybar/recorder/metadata.sh",
         "on-click": "sleep 0.1 && ~/.config/waybar/recorder/toggle.sh",
         "signal": 8
     },
     "custom/spotify-monitor": {
         "interval": 1,
-        "exec": "~/.config/waybar/spotify/monitor.sh",
+        "exec": "pkill -RTMIN+5 waybar",
         "signal": 4
     },
     "custom/spotify-metadata": {
