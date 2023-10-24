@@ -11,6 +11,10 @@ in
     home = {
       file.".config/grim".source = ./src;
 
+      modules = {
+        swappy.enable = true;
+      };
+
       packages = with pkgs; [
         grim
         jq

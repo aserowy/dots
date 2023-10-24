@@ -35,11 +35,9 @@ in
         clipman.enable = true;
         grim.enable = true;
         rofi.enable = true;
-        swappy.enable = true;
       };
 
       packages = with pkgs; [
-        jq
         pavucontrol
         playerctl
         slurp
