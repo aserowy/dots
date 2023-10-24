@@ -8,6 +8,7 @@
     ./edge
     ./fzf
     ./git
+    ./grim
     ./gtk
     ./hyprland
     ./lf

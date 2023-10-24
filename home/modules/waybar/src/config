@@ -15,7 +15,7 @@
     ],
     "modules-right": [
         "custom/clipman",
-        "custom/grimshot",
+        "custom/grim",
         "custom/recorder",
         "backlight",
         "pulseaudio",
@@ -47,11 +47,12 @@
         "tooltip": false,
         "on-click": "sleep 0.1 && clipman pick -t rofi",
     },
-    "custom/grimshot": {
+    "custom/grim": {
         "format": "󰹑",
         "tooltip": false,
-        "on-click": "sleep 0.1 && grimshot --notify save output - | swappy -f -",
-        "on-click-right": "sleep 0.1 && grimshot --notify save window - | swappy -f -"
+        "on-click": "sleep 0.1 && ~/.config/grim/screenshot.nu output",
+        "on-click-middle": "sleep 0.1 && ~/.config/grim/screenshot.nu window",
+        "on-click-right": "sleep 0.1 && ~/.config/grim/screenshot.nu area"
     },
     "custom/recorder": {
         "format": "󰕧",
