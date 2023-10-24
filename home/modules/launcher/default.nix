@@ -2,10 +2,10 @@
 with lib;
 
 let
-  cnfg = config.home.modules.rofi;
+  cnfg = config.home.modules.launcher;
 in
 {
-  options.home.modules.rofi.enable = mkEnableOption "rofi";
+  options.home.modules.launcher.enable = mkEnableOption "launcher";
 
   config = mkIf cnfg.enable {
     home = {

@@ -2,11 +2,11 @@
 with lib;
 
 let
-  cnfg = config.home.modules.clipman;
+  cnfg = config.home.modules.clipboard;
 in
 {
-  options.home.modules.clipman = {
-    enable = mkEnableOption "clipman";
+  options.home.modules.clipboard = {
+    enable = mkEnableOption "clipboard";
 
     enableSwayIntegration = mkOption {
       type = types.bool;

@@ -32,9 +32,9 @@ in
       file.".config/waybar".source = ./src;
 
       modules = {
-        clipman.enable = true;
-        grim.enable = true;
-        rofi.enable = true;
+        clipboard.enable = true;
+        screenshot.enable = true;
+        launcher.enable = true;
       };
 
       packages = with pkgs; [

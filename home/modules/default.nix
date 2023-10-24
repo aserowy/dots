@@ -2,13 +2,12 @@
 {
   imports = [
     ./alacritty
-    ./clipman
+    ./clipboard
     ./docker
     ./dunst
     ./edge
     ./fzf
     ./git
-    ./grim
     ./gtk
     ./hyprland
     ./lf
@@ -16,7 +15,8 @@
     ./neovim
     ./nushell
     ./onedrive
-    ./rofi
+    ./launcher
+    ./screenshot
     ./ssh
     ./swappy
     ./sway

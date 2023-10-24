@@ -37,10 +37,10 @@ in {
         };
 
         modules = {
-          clipman.enable = true;
+          clipboard.enable = true;
           edge.enable = true;
+          launcher.enable = true;
           lf.enable = true;
-          rofi.enable = true;
           waybar.enable = true;
           wezterm.enable = true;
         };

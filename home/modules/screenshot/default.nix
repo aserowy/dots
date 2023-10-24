@@ -2,14 +2,14 @@
 with lib;
 
 let
-  cnfg = config.home.modules.grim;
+  cnfg = config.home.modules.screenshot;
 in
 {
-  options.home.modules.grim.enable = mkEnableOption "grim";
+  options.home.modules.screenshot.enable = mkEnableOption "screenshot";
 
   config = mkIf cnfg.enable {
     home = {
-      file.".config/grim".source = ./src;
+      file.".config/screenshot".source = ./src;
 
       modules = {
         swappy.enable = true;
