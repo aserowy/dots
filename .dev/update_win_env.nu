@@ -7,17 +7,15 @@ def main [user: string] {
     let home =  $"/mnt/c/Users/($user)"
     mkdir $"($home)/.config/"
 
-    cp ./home/modules/wezterm/wezterm.lua $"($home)/.wezterm.lua"
+    rm $"($home)/.wezterm.lua"
+    cp ~/.config/wezterm/wezterm.lua $"($home)/.wezterm.lua"
     cp ./home/modules/nushell/starship.toml $"($home)/.config/"
 
     let nushell_path = $"($home)/AppData/Roaming/nushell"
-    mkdir $"($nushell_path)/scripts"
-
-    cp ./home/modules/nushell/nushell-env.nu $"($nushell_path)/env.nu"
-    cp ./home/modules/nushell/nushell-config.nu $"($nushell_path)/config.nu"
+    rm -p -r $"($nushell_path)/*"
+    cp ~/.config/nushell/* $nushell_path
 
     let nvim_path = $"($home)/AppData/Local/nvim"
-
     rm -p -r $"($nvim_path)/*"
     cp -r ~/.config/nvim/* $nvim_path
 }
