@@ -26,10 +26,7 @@
     ];
   };
 
-  networking = {
-    hostName = "workstation";
-    interfaces.eno1.useDHCP = true;
-  };
+  networking.hostName = "workstation";
 
   programs = {
     seahorse.enable = true;
@@ -97,8 +94,18 @@
     };
   };
 
-  # TODO: lutris specific, but unable to set with home manager?
-  systemd.user.extraConfig = ''
-    DefaultLimitNOFILE=1048576
-  '';
+  systemd = {
+    network = {
+      enable = true;
+      networks."10-lan" = {
+        matchConfig.Name = "eno1";
+        networkConfig.DHCP = "ipv4";
+      };
+    };
+
+    # TODO: lutris specific, but unable to set with home manager?
+    user.extraConfig = ''
+      DefaultLimitNOFILE=1048576
+    '';
+  };
 }
