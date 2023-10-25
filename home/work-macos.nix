@@ -13,7 +13,6 @@
 
     modules = {
       docker.enable = true;
-      vscode.enable = true;
     };
 
     packages = with pkgs; [

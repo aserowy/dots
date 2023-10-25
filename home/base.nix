@@ -14,7 +14,6 @@
       neovim.enable = true;
       nushell.enable = true;
       ssh.enable = true;
-      vscode-server.enable = true;
       wezterm.enable = true;
     };
   };

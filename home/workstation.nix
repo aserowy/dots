@@ -15,7 +15,6 @@
       # sway.enable = true;
       swww.enable = true;
       teams.enable = true;
-      vscode.enable = true;
       xdg.enable = true;
     };
 
