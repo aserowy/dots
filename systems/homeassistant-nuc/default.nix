@@ -19,7 +19,6 @@
 
   networking = {
     hostName = "homeassistant-nuc";
-    interfaces.eno1.useDHCP = true;
 
     # enables wifi with: nmcli device wifi connect <SSID> password <PASS>
     networkmanager.enable = true;
@@ -28,5 +27,13 @@
   services = {
     # lsblk --discard to ensure ssd supports trim (disc-gran and disc-max should be non zero)
     fstrim.enable = true;
+  };
+
+  systemd.network = {
+    enable = true;
+    networks."10-lan" = {
+      matchConfig.Name = "eno1";
+      networkConfig.DHCP = "ipv4";
+    };
   };
 }
