@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }:
 with lib;
 
+# TODO: meta package? Thus, module?
 let
   cnfg = config.home.components.docker;
 in

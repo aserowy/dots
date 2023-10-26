@@ -56,6 +56,7 @@ in
           dunst
         ];
 
+        # TODO: change to module launcher: add opts for browser and launcher
         file.".config/dunst/dunstrc".text = ''
           [global]
           alignment="center"

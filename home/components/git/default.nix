@@ -17,6 +17,7 @@ in
     };
   };
 
+  # TODO: seperate gitui in own component
   config = mkIf cnfg.enable {
     programs = {
       git = {
