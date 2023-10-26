@@ -4,7 +4,7 @@
     ./clipboard
     ./gtk
     ./hyprland
-    ./neovim
+    ./neocode
     ./screenshot
     ./sway
     ./teams

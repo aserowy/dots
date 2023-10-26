@@ -2,11 +2,11 @@
 with lib;
 
 let
-  cnfg = config.home.modules.neovim;
+  cnfg = config.home.modules.neocode;
 in
 {
-  options.home.modules.neovim = {
-    enable = mkEnableOption "neovim";
+  options.home.modules.neocode = {
+    enable = mkEnableOption "neocode";
 
     parallelTsBuild = mkOption {
       type = types.bool;

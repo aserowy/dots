@@ -11,7 +11,7 @@
     };
 
     modules = {
-      neovim.parallelTsBuild = false;
+      neocode.parallelTsBuild = false;
     };
   };
 }

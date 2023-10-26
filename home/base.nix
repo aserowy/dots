@@ -19,7 +19,7 @@
     };
 
     modules = {
-      neovim.enable = true;
+      neocode.enable = true;
     };
   };
 }
