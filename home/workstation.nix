@@ -5,15 +5,16 @@
   ];
 
   home = {
-    modules = {
+    components = {
       docker.enable = true;
       dunst.enable = true;
+      onedrive.enable = true;
+      swww.enable = true;
+    };
+
+    modules = {
       gtk.enable = true;
       hyprland.enable = true;
-      lutris.enable = true;
-      onedrive.enable = true;
-      # sway.enable = true;
-      swww.enable = true;
       teams.enable = true;
       xdg.enable = true;
     };
@@ -22,6 +23,7 @@
       ardour
       discord
       gparted
+      lutris
       obsidian
       remmina
       spotify

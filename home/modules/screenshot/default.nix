@@ -11,7 +11,7 @@ in
     home = {
       file.".config/screenshot".source = ./src;
 
-      modules = {
+      components = {
         swappy.enable = true;
       };
 

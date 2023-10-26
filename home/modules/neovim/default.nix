@@ -19,7 +19,7 @@ in
 
   config = mkIf cnfg.enable {
     home = {
-      modules.fzf.enable = true;
+      components.fzf.enable = true;
 
       file.".config/nvim/" = {
         recursive = true;

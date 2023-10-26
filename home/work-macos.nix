@@ -11,7 +11,7 @@
     homeDirectory = "/Users/alexander.serowy";
     username = "alexander.serowy";
 
-    modules = {
+    components = {
       docker.enable = true;
     };
 

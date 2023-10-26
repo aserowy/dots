@@ -27,6 +27,8 @@ in
 
   config = mkIf cnfg.enable {
     home = {
+      components.rofi.enable = true;
+
       # FIX: sleep 0.1 in config is a workaround for
       # https://github.com/Alexays/Waybar/issues/1850
       file.".config/waybar".source = ./src;
@@ -34,7 +36,6 @@ in
       modules = {
         clipboard.enable = true;
         screenshot.enable = true;
-        launcher.enable = true;
       };
 
       packages = with pkgs; [

@@ -38,6 +38,13 @@ in
     in
     mkIf cnfg.enable {
       home = {
+        components = {
+          edge.enable = true;
+          rofi.enable = true;
+          lf.enable = true;
+          wezterm.enable = true;
+        };
+
         file = {
           ".config/sway/config".source = builtins.toFile "sway-config" ''
             # additional config
@@ -63,11 +70,7 @@ in
 
         modules = {
           clipboard.enable = true;
-          edge.enable = true;
-          launcher.enable = true;
-          lf.enable = true;
           waybar.enable = true;
-          wezterm.enable = true;
         };
 
         packages = with pkgs; [

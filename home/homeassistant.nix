@@ -4,9 +4,14 @@
     ./base.nix
   ];
 
-  home.modules = {
-    docker.enable = true;
-    neovim.parallelTsBuild = false;
-    tmux.enable = true;
+  home = {
+    components = {
+      docker.enable = true;
+      tmux.enable = true;
+    };
+
+    modules = {
+      neovim.parallelTsBuild = false;
+    };
   };
 }

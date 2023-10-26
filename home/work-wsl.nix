@@ -11,7 +11,7 @@
     homeDirectory = "/home/serowy";
     username = "serowy";
 
-    modules.docker.enable = true;
+    components.docker.enable = true;
   };
 
   programs = {

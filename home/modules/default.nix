@@ -1,33 +1,14 @@
 { ... }:
 {
   imports = [
-    ./alacritty
     ./clipboard
-    ./docker
-    ./dunst
-    ./edge
-    ./fzf
-    ./git
     ./gtk
     ./hyprland
-    ./lf
-    ./lutris
     ./neovim
-    ./nushell
-    ./onedrive
-    ./launcher
     ./screenshot
-    ./ssh
-    ./swappy
     ./sway
-    ./swaybg
-    ./swww
     ./teams
-    ./tmux
-    ./vscode
-    ./vscode-server
     ./waybar
-    ./wezterm
     ./xdg
   ];
 }

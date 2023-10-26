@@ -22,6 +22,13 @@ in {
     in
     mkIf cnfg.enable {
       home = {
+        components = {
+          edge.enable = true;
+          lf.enable = true;
+          rofi.enable = true;
+          wezterm.enable = true;
+        };
+
         file = {
           ".config/hypr/hyprland.conf".source = builtins.toFile "hyprland-config" ''
             # additional config
@@ -38,11 +45,7 @@ in {
 
         modules = {
           clipboard.enable = true;
-          edge.enable = true;
-          launcher.enable = true;
-          lf.enable = true;
           waybar.enable = true;
-          wezterm.enable = true;
         };
 
         packages = with pkgs; [
