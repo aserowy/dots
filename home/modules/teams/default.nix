@@ -9,12 +9,15 @@ in
 
   config = mkIf cnfg.enable {
     home.packages = with pkgs; [
-      google-chrome
+      (google-chrome.override {
+        commandLineArgs = [
+          "--enable-features=UseOzonePlatform,WebRTCPipeWireCapturer"
+          "--ozone-platform-hint=auto"
+        ];
+      })
 
       (pkgs.writeShellScriptBin "teams" ''
         ${google-chrome}/bin/google-chrome-stable \
-          --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer \
-          --ozone-platform=wayland \
           --new-window \
           --app=https://teams.microsoft.com 
       '')
