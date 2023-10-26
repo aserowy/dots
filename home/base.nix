@@ -11,6 +11,7 @@
     components = {
       fzf.enable = true;
       git.enable = true;
+      gitui.enable = true;
       lf.enable = true;
       nushell.enable = true;
       ssh.enable = true;
