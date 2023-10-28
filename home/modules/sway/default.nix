@@ -70,6 +70,7 @@ in
 
         modules = {
           clipboard.enable = true;
+          notification.enable = true;
           waybar.enable = true;
         };
 

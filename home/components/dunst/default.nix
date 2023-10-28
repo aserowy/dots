@@ -8,6 +8,20 @@ in
   options.home.components.dunst = {
     enable = mkEnableOption "dunst";
 
+    browserPath = mkOption {
+      type = types.str;
+      description = ''
+        Sets the browser setting in dunstrc.
+      '';
+    };
+
+    dmenuCommand = mkOption {
+      type = types.str;
+      description = ''
+        Sets the dmenu setting in dunstrc.
+      '';
+    };
+
     enableSwayIntegration = mkOption {
       type = types.bool;
       default = true;
@@ -56,14 +70,13 @@ in
           dunst
         ];
 
-        # TODO: change to module launcher: add opts for browser and launcher
         file.".config/dunst/dunstrc".text = ''
           [global]
           alignment="center"
           always_run_script="true"
-          browser="${pkgs.microsoft-edge-beta}/microsoft-edge-beta"
+          browser="${cnfg.browserPath}"
           corner_radius=6
-          dmenu="${pkgs.rofi}/bin/rofi -dmenu"
+          dmenu="${cnfg.dmenuCommand}"
           follow="none"
           font="FiraCode Nerd Font Mono 10"
           format="<b>%s</b>\n%b"

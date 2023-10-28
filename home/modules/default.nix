@@ -5,6 +5,7 @@
     ./gtk
     ./hyprland
     ./neocode
+    ./notification
     ./screenshot
     ./sway
     ./teams

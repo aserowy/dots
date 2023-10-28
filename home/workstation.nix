@@ -7,7 +7,6 @@
   home = {
     components = {
       docker.enable = true;
-      dunst.enable = true;
       onedrive.enable = true;
       swww.enable = true;
     };

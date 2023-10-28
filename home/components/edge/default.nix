@@ -5,7 +5,17 @@ let
   cnfg = config.home.components.edge;
 in
 {
-  options.home.components.edge.enable = mkEnableOption "edge";
+  options.home.components.edge = {
+    enable = mkEnableOption "edge";
+
+    enableDunstIntegration = mkOption {
+      type = types.bool;
+      default = true;
+      description = ''
+        If enabled, edge gets set as default browser in dunst.
+      '';
+    };
+  };
 
   config = mkIf cnfg.enable {
     home = {
@@ -31,5 +41,8 @@ in
         };
       };
     };
+
+    home.components.dunst.browserPath = mkIf cnfg.enableDunstIntegration
+      "${pkgs.microsoft-edge-beta}/microsoft-edge-beta";
   };
 }
