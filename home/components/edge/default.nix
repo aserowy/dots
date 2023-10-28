@@ -21,7 +21,7 @@ in
     home = {
       sessionVariables = {
         /* set edge as default browser for electron apps */
-        DEFAULT_BROWSER = "${pkgs.microsoft-edge-beta}/microsoft-edge";
+        DEFAULT_BROWSER = "${pkgs.microsoft-edge-beta}/bin/microsoft-edge-beta";
       };
 
       packages = with pkgs; [
@@ -43,6 +43,6 @@ in
     };
 
     home.components.dunst.browserPath = mkIf cnfg.enableDunstIntegration
-      "${pkgs.microsoft-edge-beta}/microsoft-edge-beta";
+      "${pkgs.microsoft-edge-beta}/bin/microsoft-edge-beta";
   };
 }
