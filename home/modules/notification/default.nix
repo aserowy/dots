@@ -10,10 +10,14 @@ in {
     home = {
       components = {
         dunst.enable = true;
-        edge.enable = true;
+
+        edge = {
+          enable = true;
+          enableDunstIntegration = true;
+        };
+
         rofi.enable = true;
 
-        chrome.enableDunstIntegration = false;
       };
     };
   };

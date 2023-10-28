@@ -39,7 +39,6 @@ in
     mkIf cnfg.enable {
       home = {
         components = {
-          edge.enable = true;
           rofi.enable = true;
           lf.enable = true;
           wezterm.enable = true;
@@ -69,6 +68,7 @@ in
         };
 
         modules = {
+          browser.enable = true;
           clipboard.enable = true;
           notification.enable = true;
           waybar.enable = true;

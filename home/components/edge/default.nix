@@ -10,25 +10,25 @@ in
 
     enableDunstIntegration = mkOption {
       type = types.bool;
-      default = true;
+      default = false;
       description = ''
         If enabled, edge gets set as default browser in dunst.
       '';
     };
 
-    setDefaultBrowserSessionVariable = mkOption {
+    enableXdgAssociations = mkOption {
       type = types.bool;
-      default = true;
+      default = false;
       description = ''
-        If enabled, edge gets set as default browser with DEFAULT_BROWSER.
+        If enabled, edge gets set as default browser in xdg.
       '';
     };
 
-    enableXdgAssociations = mkOption {
+    setDefaultBrowserSessionVariable = mkOption {
       type = types.bool;
-      default = true;
+      default = false;
       description = ''
-        If enabled, edge gets set as default browser in xdg.
+        If enabled, edge gets set as default browser with DEFAULT_BROWSER.
       '';
     };
   };
@@ -41,7 +41,7 @@ in
     home.components.dunst.browserPath = mkIf cnfg.enableDunstIntegration
       "${pkgs.microsoft-edge-beta}/bin/microsoft-edge-beta";
 
-    /* set edge as default browser for electron apps */
+    # INFO: set edge as default browser for electron apps
     home.sessionVariables.DEFAULT_BROWSER = mkIf cnfg.setDefaultBrowserSessionVariable
       "${pkgs.microsoft-edge-beta}/bin/microsoft-edge-beta";
 

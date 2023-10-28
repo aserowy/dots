@@ -1,6 +1,7 @@
 { ... }:
 {
   imports = [
+    ./browser
     ./clipboard
     ./gtk
     ./hyprland
