@@ -17,7 +17,6 @@ in {
         };
 
         rofi.enable = true;
-
       };
     };
   };

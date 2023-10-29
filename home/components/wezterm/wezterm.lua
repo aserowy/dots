@@ -161,6 +161,23 @@ local M = {
         { mods = "LEADER|CTRL", key = "j",     action = wezterm.action({ ActivatePaneDirection = "Down" }) },
         { mods = "LEADER|CTRL", key = "z",     action = "TogglePaneZoomState" },
     },
+    mouse_bindings = {
+        {
+            event = { Up = { streak = 1, button = "Left" } },
+            mods = "CTRL",
+            action = wezterm.action.OpenLinkAtMouseCursor,
+        },
+        {
+            event = { Down = { streak = 1, button = { WheelUp = 1 } } },
+            mods = "CTRL",
+            action = wezterm.action.IncreaseFontSize,
+        },
+        {
+            event = { Down = { streak = 1, button = { WheelDown = 1 } } },
+            mods = "CTRL",
+            action = wezterm.action.DecreaseFontSize,
+        },
+    },
 }
 
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then

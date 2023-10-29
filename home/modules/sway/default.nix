@@ -29,10 +29,6 @@ in
     let
       swayConfig = builtins.readFile ./config;
 
-      swayPackage = pkgs.sway.override {
-        withGtkWrapper = true;
-      };
-
       swaybarCommand = mkIf cnfg.swaybarCommand != ""
         "swaybar_command ${cnfg.swaybarCommand}";
     in
@@ -75,7 +71,9 @@ in
         };
 
         packages = with pkgs; [
-          swayPackage
+          (sway.override {
+            withGtkWrapper = true;
+          })
 
           xorg.xlsclients
           xwayland
