@@ -9,7 +9,7 @@ def main [user: string] {
 
     rm $"($home)/.wezterm.lua"
     cp ~/.config/wezterm/wezterm.lua $"($home)/.wezterm.lua"
-    cp ./home/modules/nushell/starship.toml $"($home)/.config/"
+    cp ./home/components/nushell/starship.toml $"($home)/.config/"
 
     let nushell_path = $"($home)/AppData/Roaming/nushell"
     rm -p -r $"($nushell_path)/*"
