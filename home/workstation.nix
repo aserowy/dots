@@ -22,7 +22,12 @@
       ardour
       discord
       gparted
-      lutris
+      (lutris.override {
+        extraPkgs = pkgs: [
+          winePackages.staging
+          wine64Packages.staging
+        ];
+      })
       obsidian
       remmina
       spotify
