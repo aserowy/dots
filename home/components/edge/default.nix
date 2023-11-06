@@ -35,7 +35,12 @@ in
 
   config = mkIf cnfg.enable {
     home.packages = with pkgs; [
-      microsoft-edge-beta
+      (microsoft-edge-beta.override {
+        commandLineArgs = [
+          "--enable-features=UseOzonePlatform,WebRTCPipeWireCapturer"
+          "--ozone-platform-hint=auto"
+        ];
+      })
     ];
 
     home.components.dunst.browserPath = mkIf cnfg.enableDunstIntegration
