@@ -3,24 +3,24 @@
 {
   git-credential-manager = {
     pname = "git-credential-manager";
-    version = "v2.3.2";
+    version = "v2.4.1";
     src = fetchFromGitHub {
       owner = "GitCredentialManager";
       repo = "git-credential-manager";
-      rev = "v2.3.2";
+      rev = "v2.4.1";
       fetchSubmodules = false;
-      sha256 = "sha256-vfv6dCmTuDsh6MaD2HAKlxZtQGVE0B5HJZPnoAUwUnM=";
+      sha256 = "sha256-Uf0EXaGM4k9Aanz16B9xA2EcseXTI9lLCws/ZVNb3e8=";
     };
   };
   spicetify-cli = {
     pname = "spicetify-cli";
-    version = "v2.25.3";
+    version = "v2.26.0";
     src = fetchFromGitHub {
       owner = "spicetify";
       repo = "spicetify-cli";
-      rev = "v2.25.3";
+      rev = "v2.26.0";
       fetchSubmodules = false;
-      sha256 = "sha256-xEikizbHK32vnldP0jBEOtNwG/R2KpkS9dX4eMabh2E=";
+      sha256 = "sha256-3u55Pcd4VNgWGyu/IVsrMqm8E4H9y4Bvt3JMyIL/KXo=";
     };
   };
   spicetify-themes = {

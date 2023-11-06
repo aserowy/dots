@@ -13,11 +13,11 @@
             "name": null,
             "owner": "GitCredentialManager",
             "repo": "git-credential-manager",
-            "rev": "v2.3.2",
-            "sha256": "sha256-vfv6dCmTuDsh6MaD2HAKlxZtQGVE0B5HJZPnoAUwUnM=",
+            "rev": "v2.4.1",
+            "sha256": "sha256-Uf0EXaGM4k9Aanz16B9xA2EcseXTI9lLCws/ZVNb3e8=",
             "type": "github"
         },
-        "version": "v2.3.2"
+        "version": "v2.4.1"
     },
     "spicetify-cli": {
         "cargoLocks": null,
@@ -33,11 +33,11 @@
             "name": null,
             "owner": "spicetify",
             "repo": "spicetify-cli",
-            "rev": "v2.25.3",
-            "sha256": "sha256-xEikizbHK32vnldP0jBEOtNwG/R2KpkS9dX4eMabh2E=",
+            "rev": "v2.26.0",
+            "sha256": "sha256-3u55Pcd4VNgWGyu/IVsrMqm8E4H9y4Bvt3JMyIL/KXo=",
             "type": "github"
         },
-        "version": "v2.25.3"
+        "version": "v2.26.0"
     },
     "spicetify-themes": {
         "cargoLocks": null,
