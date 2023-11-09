@@ -1,6 +1,8 @@
 #!/usr/bin/env nu
 
 def main [direction: string] {
+    let specials = [special]
+
     let active_workspace = (hyprctl activeworkspace -j
         | from json)
 
@@ -8,6 +10,7 @@ def main [direction: string] {
         | from json
         | where monitor == $active_workspace.monitor
         | select name id
+        | filter {|wrkspc| ($specials | all {|| $in != $wrkspc.name })}
         | if $direction == 'prev' {
             sort-by name --natural } else {
             sort-by name --natural --reverse })
