@@ -14,13 +14,13 @@
   };
   spicetify-cli = {
     pname = "spicetify-cli";
-    version = "v2.27.0";
+    version = "v2.27.1";
     src = fetchFromGitHub {
       owner = "spicetify";
       repo = "spicetify-cli";
-      rev = "v2.27.0";
+      rev = "v2.27.1";
       fetchSubmodules = false;
-      sha256 = "sha256-5WIITzm9yZWB847WHL+okwpULdwHegtZfvsVrAzwTO0=";
+      sha256 = "sha256-Z+paJAuzUnCdCSx2UHg1HV14vDo3jWsyUrcbEnvqTm0=";
     };
   };
   spicetify-themes = {
@@ -139,11 +139,11 @@
   };
   vscode-extensions-remote-containers = {
     pname = "vscode-extensions-remote-containers";
-    version = "0.322.0";
+    version = "0.324.0";
     src = fetchurl {
-      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.322.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "remote-containers-0.322.0.zip";
-      sha256 = "sha256-xrtQKm+Cp0gunJte7sxWCvI4FHreh+5VffyMMFxbK0c=";
+      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.324.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "remote-containers-0.324.0.zip";
+      sha256 = "sha256-IJGl2kcGItpwYE3KB5ACF7x5ZfXD1nJsOnQ0FAxDlp4=";
     };
     publisher = "ms-vscode-remote";
     name = "remote-containers";
@@ -205,11 +205,11 @@
   };
   vscode-extensions-vscode-neovim = {
     pname = "vscode-extensions-vscode-neovim";
-    version = "0.9.1";
+    version = "1.0.0";
     src = fetchurl {
-      url = "https://asvetliakov.gallery.vsassets.io/_apis/public/gallery/publisher/asvetliakov/extension/vscode-neovim/0.9.1/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "vscode-neovim-0.9.1.zip";
-      sha256 = "sha256-G1DIwZQ+WjE8gXW9u4B1bKoYBNVL/j+tYj9s56bI5pg=";
+      url = "https://asvetliakov.gallery.vsassets.io/_apis/public/gallery/publisher/asvetliakov/extension/vscode-neovim/1.0.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "vscode-neovim-1.0.0.zip";
+      sha256 = "sha256-/3KLcRiiBAmPJ0o0bKBoWgiJjxK2qZizIE95ADTVU/o=";
     };
     publisher = "asvetliakov";
     name = "vscode-neovim";
