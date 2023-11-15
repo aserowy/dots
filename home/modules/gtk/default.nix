@@ -10,7 +10,7 @@ in
   config =
     let
       theme = "Materia-dark";
-      font = "FiraCode Nerd Font Mono";
+      font = "Inter";
       icon = "Paper";
     in
     mkIf cnfg.enable {
