@@ -7,6 +7,14 @@ in {
   options.home.modules.hyprland = {
     enable = mkEnableOption "hyprland";
 
+    defaultTerminal = mkOption {
+      type = types.str;
+      default = "wezterm";
+      description = ''
+        Sets default terminal in hyprland.
+      '';
+    };
+
     additionalConfig = mkOption {
       type = types.lines;
       default = "";
@@ -25,17 +33,23 @@ in {
         components = {
           lf.enable = true;
           rofi.enable = true;
-          wezterm.enable = true;
+
+          # wezterm.enable = true;
+          foot = {
+            enable = true;
+            enableAsHyprlandDefaultTerminal = true;
+          };
         };
 
         file = {
           ".config/hypr/hyprland.conf".source = builtins.toFile "hyprland-config" ''
-            # additional config
+            # programs
+            $terminal = ${cnfg.defaultTerminal}
 
+            # additional config
             ${cnfg.additionalConfig}
 
             # hyprland config
-
             ${hyprlandConfig}
           '';
 
