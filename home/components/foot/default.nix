@@ -13,7 +13,7 @@ in
       settings = {
         main = {
           dpi-aware = "yes";
-          font = "Inconsolata:size=9";
+          font = "GoMonoNerdFont:size=10";
           term = "xterm-256color";
         };
       };
