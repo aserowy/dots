@@ -8,6 +8,7 @@ in {
     enable = mkEnableOption "hyprland";
 
     defaultTerminal = mkOption {
+      # TODO: change from Script to package
       type = types.str;
       default = "wezterm";
       description = ''
