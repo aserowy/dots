@@ -6,6 +6,7 @@
     ./docker
     ./dunst
     ./edge
+    ./foot
     ./fzf
     ./git
     ./gitui

@@ -7,6 +7,7 @@
   home = {
     components = {
       docker.enable = true;
+      foot.enable = true;
       onedrive.enable = true;
       swww.enable = true;
     };
