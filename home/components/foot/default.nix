@@ -13,7 +13,7 @@ in
       settings = {
         main = {
           dpi-aware = "yes";
-          font = "GoMonoNerdFont:size=10";
+          font = "UbuntuMonoNerdFont:size=11";
           term = "xterm-256color";
         };
       };
