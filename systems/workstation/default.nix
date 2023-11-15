@@ -21,6 +21,7 @@
     fontDir.enable = true;
     enableGhostscriptFonts = true;
     packages = with pkgs; [
+      inter
       powerline-fonts
       nerdfonts
     ];

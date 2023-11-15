@@ -78,7 +78,7 @@ in
           corner_radius=6
           dmenu="${cnfg.dmenuCommand}"
           follow="none"
-          font="FiraCode Nerd Font Mono 10"
+          font="Inter 10"
           format="<b>%s</b>\n%b"
           frame_color="#23272e"
           frame_width=10
