@@ -3,18 +3,18 @@
 use workspace.nu *
 
 def main [workspace_name: string = ''] {
-    let wm = (get_current_wm)
-
     if $workspace_name == '' {
         (get_workspace_names_with_defaults | str join "\n")
     } else {
-        move_to_workspace $wm $workspace_name
+        move_to_workspace $workspace_name
     }
 }
 
-def move_to_workspace [wm: string, name: string] {
+def move_to_workspace [name: string] {
+    let wm = (get_current_wm)
+
     match $wm {
-        'Hyprland' => { run-external --redirect-stdout --redirect-stderr 'hyprctl' dispatch movetoworkspace $"name:($name)" | ignore },
+        'Hyprland' => { (create_or_focus_hypr_ws_with 'movetoworkspace' $name) },
         'sway' => { run-external --redirect-stdout --redirect-stderr 'swaymsg' move container to workspace $name | ignore }
     }
 }

@@ -21,9 +21,9 @@ def main [workspace_name: string = ''] {
     }
 }
 
-def rename_workspace [wm: string, id: string, name: string] {
+def rename_workspace [wm: string, id: int, name: string] {
     match $wm {
-        'Hyprland' => { run-external --redirect-stdout --redirect-stderr 'hyprctl' dispatch renameworkspace $id $name | ignore },
+        'Hyprland' => { (rename_hypr_ws $id $name) },
         'sway' => { run-external --redirect-stdout --redirect-stderr 'sawy' rename workspace to $name | ignore }
     }
 }
