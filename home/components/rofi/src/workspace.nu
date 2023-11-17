@@ -65,25 +65,32 @@ export def create_or_focus_hypr_ws_with [verb: string, name: string] {
         run-external --redirect-stdout --redirect-stderr 'hyprctl' dispatch $verb $id
             | ignore 
 
-        (rename_hypr_ws $id $name)
+        run-external --redirect-stdout --redirect-stderr 'hyprctl' dispatch renameworkspace $id $name
+            | ignore 
+
+        # FIX: remove pkill after waybar sorts ws after renaming
+        run-external --redirect-stdout --redirect-stderr 'pkill' '-SIGUSR2' 'waybar'
     }
 }
 
 export def rename_hypr_ws [id: int, name: string] {
-    run-external --redirect-stdout --redirect-stderr 'hyprctl' dispatch renameworkspace $id $name
-        | ignore 
+    # FIX: rework to move windows with correct layout
+    let window_count = (hyprctl activeworkspace -j | from json).windows
 
-    # FIX: remove pkill after waybar sorts ws after renaming
-    run-external --redirect-stdout --redirect-stderr 'pkill' '-SIGUSR2' 'waybar'
+    for i in 1..$window_count {
+        (create_or_focus_hypr_ws_with 'movetoworkspacesilent' $name)
+    }
+
+    (create_or_focus_hypr_ws_with 'workspace' $name)
 }
 
 def get_hypr_workspace_id_by_name [workspaces: list<any>, name: string] {
-    mut min = 1;
+    mut min = 100;
     mut max = 2147483647;
 
     let sorted = ($workspaces
         | select id name
-        | where id > 0
+        | where id >= $min
         | append {id: 0, name: $name}
         | sort-by name --ignore-case --natural)
     
