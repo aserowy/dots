@@ -75,9 +75,12 @@ export def create_or_focus_hypr_ws_with [verb: string, name: string] {
 
 export def rename_hypr_ws [id: int, name: string] {
     # FIX: rework to move windows with correct layout
-    let window_count = (hyprctl activeworkspace -j | from json).windows
+    while true {
+        let window_count = (hyprctl activeworkspace -j | from json).windows
+        if $window_count == 0 {
+            break
+        }
 
-    for i in 1..$window_count {
         (create_or_focus_hypr_ws_with 'movetoworkspacesilent' $name)
     }
 
