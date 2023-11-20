@@ -9,9 +9,9 @@ in
 
   config =
     let
-      theme = "Materia-dark";
+      theme = "Qogir";
       font = "Inter";
-      icon = "Paper";
+      icon = "Qogir";
     in
     mkIf cnfg.enable {
       home.packages = with pkgs; [
@@ -26,11 +26,11 @@ in
         };
         iconTheme = {
           name = icon;
-          package = pkgs.paper-icon-theme;
+          package = pkgs.qogir-icon-theme;
         };
         theme = {
           name = theme;
-          package = pkgs.materia-theme;
+          package = pkgs.qogir-theme;
         };
       };
     };
