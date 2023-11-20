@@ -12,6 +12,7 @@
     ./gitui
     ./lf
     ./nushell
+    ./obsidian
     ./onedrive
     ./rofi
     ./ssh
