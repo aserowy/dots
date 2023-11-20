@@ -135,7 +135,7 @@ symbol = '󰟓 '
 
 [hostname]
 ssh_symbol = ' '
-format = '[$symbol$hostname]($style) '
+format = '[$ssh_symbol$hostname]($style) '
 
 [hg_branch]
 symbol = '󰘬 '
