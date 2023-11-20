@@ -20,6 +20,8 @@
     networkmanager.enable = true;
   };
 
+  services.resolved.enable = false;
+
   systemd.network = {
     enable = true;
     networks = {
