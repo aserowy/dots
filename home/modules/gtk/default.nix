@@ -9,13 +9,13 @@ in
 
   config =
     let
-      theme = "Qogir";
+      theme = "Fluent-Dark-compact";
       font = "Inter";
-      icon = "Qogir";
+      icon = "Fluent";
     in
     mkIf cnfg.enable {
       home.packages = with pkgs; [
-        libappindicator-gtk3
+        gnome.gnome-tweaks
       ];
 
       gtk = {
@@ -26,11 +26,17 @@ in
         };
         iconTheme = {
           name = icon;
-          package = pkgs.qogir-icon-theme;
+          package = pkgs.fluent-icon-theme;
         };
         theme = {
           name = theme;
-          package = pkgs.qogir-theme;
+          package = pkgs.fluent-gtk-theme;
+        };
+        gtk3.extraConfig = {
+          gtk-application-prefer-dark-theme = 1;
+        };
+        gtk4.extraConfig = {
+          gtk-application-prefer-dark-theme = 1;
         };
       };
     };
