@@ -133,6 +133,10 @@ symbol = '󰘬 '
 [golang]
 symbol = '󰟓 '
 
+[hostname]
+ssh_symbol = ' '
+format = '[$symbol$hostname]($style) '
+
 [hg_branch]
 symbol = '󰘬 '
 
@@ -173,3 +177,6 @@ bash_indicator = '󱆃'
 nu_indicator = '󰎑'
 powershell_indicator = '󰨊'
 zsh_indicator = '󱐋'
+
+[username]
+format = '[$user]($style)'

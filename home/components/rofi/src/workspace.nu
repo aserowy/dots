@@ -68,7 +68,7 @@ export def create_or_focus_hypr_ws_with [verb: string, name: string] {
         run-external --redirect-stdout --redirect-stderr 'hyprctl' dispatch renameworkspace $id $name
             | ignore 
 
-        # FIX: remove pkill after waybar sorts ws after renaming
+        # FIX: after https://github.com/Alexays/Waybar/pull/2679 gets merged
         run-external --redirect-stdout --redirect-stderr 'pkill' '-SIGUSR2' 'waybar'
     }
 }
