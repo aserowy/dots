@@ -179,4 +179,4 @@ powershell_indicator = '󰨊'
 zsh_indicator = '󱐋'
 
 [username]
-format = '[$user]($style)'
+format = '[$user]($style) '

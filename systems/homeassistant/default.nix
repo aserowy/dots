@@ -32,5 +32,6 @@
         networkConfig.DHCP = "ipv4";
       };
     };
+    wait-online.ignoredInterfaces = [ "eth0" ];
   };
 }
