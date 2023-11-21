@@ -17,7 +17,10 @@
     hostName = "homeassistant";
 
     # enables wifi with: nmcli device wifi connect <SSID> password <PASS>
-    networkmanager.enable = true;
+    networkmanager = {
+      enable = true;
+      insertNameservers = [ "127.0.0.1" ];
+    };
   };
 
   services.resolved.enable = false;
