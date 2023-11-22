@@ -64,6 +64,7 @@ in
           gpu = "git push";
           gput = "git push --tags";
           grs = "git reset";
+          grsh = "git reset --hard";
           gst = "git status";
           gta = "git tag";
           gtam = "git tag -a -m";
