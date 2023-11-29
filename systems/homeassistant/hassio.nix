@@ -151,6 +151,8 @@
       };
       extraOptions = [
         "--cap-add=NET_ADMIN"
+        "--dns 127.0.0.1"
+        "--network=ha-network"
       ];
       ports = [
         "53:53/tcp"
