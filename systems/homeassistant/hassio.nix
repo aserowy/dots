@@ -147,6 +147,7 @@
         # WEBPASSWORD: <pw>
       };
       environment = {
+        "CORS_HOSTS" = "dns.smart.home";
         "DNSMASQ_USER" = "root";
       };
       extraOptions = [
