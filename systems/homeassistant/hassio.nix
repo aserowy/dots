@@ -22,6 +22,19 @@
   };
 
   virtualisation.oci-containers.containers = {
+    nginx = {
+      image = "nginx:latest";
+      extraOptions = [
+        "--network=ha-network"
+      ];
+      ports = [
+        "8080:80"
+      ];
+      volumes = [
+        "/srv/nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro"
+      ];
+    };
+
     mosquitto = {
       image = "eclipse-mosquitto:latest";
       extraOptions = [
@@ -71,7 +84,7 @@
       ];
     };
 
-    "influxdb" = {
+    influxdb = {
       image = "influxdb:latest";
       extraOptions = [
         "--network=ha-network"
@@ -125,21 +138,6 @@
         "/etc/localtime:/etc/localtime:ro"
       ];
     };
-
-    /* docker2mqtt = {
-      image = "serowy/docker2mqtt:latest";
-      extraOptions = [
-      "--network=ha-network"
-      ];
-      dependsOn = [
-      "mosquitto"
-      ];
-      volumes = [
-      "/srv/docker2mqtt/config:/docker2mqtt/config"
-      "/srv/docker2mqtt/logs:/docker2mqtt/logs"
-      "/var/run/docker.sock:/var/run/docker.sock"
-      ];
-      }; */
 
     pihole = {
       image = "pihole/pihole:latest";
