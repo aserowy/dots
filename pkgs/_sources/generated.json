@@ -41,7 +41,7 @@
     },
     "spicetify-themes": {
         "cargoLocks": null,
-        "date": "2023-11-24",
+        "date": "2023-11-30",
         "extract": null,
         "name": "spicetify-themes",
         "passthru": null,
@@ -53,11 +53,11 @@
             "name": null,
             "owner": "spicetify",
             "repo": "spicetify-themes",
-            "rev": "9ba01f9861d1f52e049ad1ac01883f1609ffd45b",
-            "sha256": "sha256-WrQ5ejqOf73TR6fbuApt6EwKsq7JkX3CDvFdbBT7UWA=",
+            "rev": "8b6a8010359914b3c8fdaf810705c754ce69c2a4",
+            "sha256": "sha256-iMRutzOrZHaKfHOr2qOM/TkTYHysFBlmunVhU65kf2k=",
             "type": "github"
         },
-        "version": "9ba01f9861d1f52e049ad1ac01883f1609ffd45b"
+        "version": "8b6a8010359914b3c8fdaf810705c754ce69c2a4"
     },
     "tmux-continuum": {
         "cargoLocks": null,
@@ -238,12 +238,12 @@
         },
         "pinned": false,
         "src": {
-            "name": "remote-containers-0.325.0.zip",
-            "sha256": "sha256-CR3k4UHCUJahYDCOKhM3VBRqxIZNUeJjOBkRmHrnyDY=",
+            "name": "remote-containers-0.326.0.zip",
+            "sha256": "sha256-wr7zWQCc/4kiDQy+Nn0uAghU0BlGRDwPxWRPTDHScMk=",
             "type": "url",
-            "url": "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.325.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+            "url": "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.326.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
-        "version": "0.325.0"
+        "version": "0.326.0"
     },
     "vscode-extensions-remote-wsl": {
         "cargoLocks": null,
