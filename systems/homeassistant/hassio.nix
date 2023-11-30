@@ -28,7 +28,7 @@
         "--network=ha-network"
       ];
       ports = [
-        "8080:80"
+        "80:80"
       ];
       volumes = [
         "/srv/nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro"
@@ -59,9 +59,6 @@
         "--network=ha-network"
         "--device=/dev/serial/by-id/usb-1a86_USB_Serial-if00-port0:/dev/ttyUSB0"
       ];
-      ports = [
-        "8124:8080"
-      ];
       volumes = [
         "/srv/zigbee2mqtt:/app/data"
         "/run/udev:/run/udev:ro"
@@ -84,13 +81,11 @@
       ];
     };
 
+    # TODO: add subdomain to nginx with port 8086
     influxdb = {
       image = "influxdb:latest";
       extraOptions = [
         "--network=ha-network"
-      ];
-      ports = [
-        "8127:8086"
       ];
       volumes = [
         "/srv/influxdb:/var/lib/influxdb2"
@@ -113,9 +108,6 @@
       volumes = [
         "/srv/grafana:/var/lib/grafana"
       ];
-      ports = [
-        "8126:3000"
-      ];
     };
 
     home-assistant = {
@@ -128,10 +120,6 @@
         "influxdb"
         "mariadb"
         "mosquitto"
-      ];
-      ports = [
-        "80:8123"
-        "8123:8123"
       ];
       volumes = [
         "/srv/home-assistant:/config"
@@ -159,7 +147,6 @@
         "53:53/tcp"
         "53:53/udp"
         "67:67/udp"
-        "8125:80/tcp"
       ];
       volumes = [
         "/srv/pihole/config/:/etc/pihole/"
