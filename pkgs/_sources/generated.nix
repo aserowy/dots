@@ -205,11 +205,11 @@
   };
   vscode-extensions-vscode-neovim = {
     pname = "vscode-extensions-vscode-neovim";
-    version = "1.1.4";
+    version = "1.1.5";
     src = fetchurl {
-      url = "https://asvetliakov.gallery.vsassets.io/_apis/public/gallery/publisher/asvetliakov/extension/vscode-neovim/1.1.4/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "vscode-neovim-1.1.4.zip";
-      sha256 = "sha256-xKmd5Hjak1F3LJSPRyWMZLS0QSrtY5bNg0ZhAEuipEU=";
+      url = "https://asvetliakov.gallery.vsassets.io/_apis/public/gallery/publisher/asvetliakov/extension/vscode-neovim/1.1.5/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "vscode-neovim-1.1.5.zip";
+      sha256 = "sha256-s63aWW/qV8tLDU2mPZOmL68KawBH/eg/0sVezdrSN0c=";
     };
     publisher = "asvetliakov";
     name = "vscode-neovim";
