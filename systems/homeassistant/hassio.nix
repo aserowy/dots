@@ -131,10 +131,6 @@
       image = "pihole/pihole:latest";
       environment = {
         "TZ" = "Europe/Berlin";
-        # Run docker logs pihole | grep random to find your random pass.
-        # WEBPASSWORD: <pw>
-      };
-      environment = {
         "CORS_HOSTS" = "dns.smart.home";
         "DNSMASQ_USER" = "root";
       };
