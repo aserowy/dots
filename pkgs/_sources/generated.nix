@@ -73,11 +73,11 @@
   };
   vscode-extensions-crates = {
     pname = "vscode-extensions-crates";
-    version = "0.6.3";
+    version = "0.6.4";
     src = fetchurl {
-      url = "https://serayuzgur.gallery.vsassets.io/_apis/public/gallery/publisher/serayuzgur/extension/crates/0.6.3/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "crates-0.6.3.zip";
-      sha256 = "sha256-vVTFnWd1JWDPP2hwZ0Sz8fsfgEar9GYf+kH/tPpU1Mo=";
+      url = "https://serayuzgur.gallery.vsassets.io/_apis/public/gallery/publisher/serayuzgur/extension/crates/0.6.4/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "crates-0.6.4.zip";
+      sha256 = "sha256-WwjLcGnsq6NtNe7SezVuTjwEX1qHVHvaBsGtn4yZJLI=";
     };
     publisher = "serayuzgur";
     name = "crates";
@@ -117,11 +117,11 @@
   };
   vscode-extensions-live-share = {
     pname = "vscode-extensions-live-share";
-    version = "1.0.5896";
+    version = "1.0.5897";
     src = fetchurl {
-      url = "https://MS-vsliveshare.gallery.vsassets.io/_apis/public/gallery/publisher/MS-vsliveshare/extension/vsliveshare/1.0.5896/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "vsliveshare-1.0.5896.zip";
-      sha256 = "sha256-b0Sl6AZhYqV4lMfcQFmhSr6THpGgLhiL9JmjCc/BObA=";
+      url = "https://MS-vsliveshare.gallery.vsassets.io/_apis/public/gallery/publisher/MS-vsliveshare/extension/vsliveshare/1.0.5897/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "vsliveshare-1.0.5897.zip";
+      sha256 = "sha256-qYWoQfIkIEe3MXknM0TQx32ah6ylF2dRPtFd9HmAadY=";
     };
     publisher = "MS-vsliveshare";
     name = "vsliveshare";
@@ -139,11 +139,11 @@
   };
   vscode-extensions-remote-containers = {
     pname = "vscode-extensions-remote-containers";
-    version = "0.326.0";
+    version = "0.328.0";
     src = fetchurl {
-      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.326.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "remote-containers-0.326.0.zip";
-      sha256 = "sha256-wr7zWQCc/4kiDQy+Nn0uAghU0BlGRDwPxWRPTDHScMk=";
+      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.328.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "remote-containers-0.328.0.zip";
+      sha256 = "sha256-kA0f5lObxseC6HefuF2vqlPbobwUDjDn6mKmvTc3heA=";
     };
     publisher = "ms-vscode-remote";
     name = "remote-containers";
