@@ -55,6 +55,8 @@
     # (disc-gran and disc-max should be non zero)
     fstrim.enable = true;
 
+    fwupd.enable = true;
+
     gnome.gnome-keyring.enable = true;
 
     modules = {
