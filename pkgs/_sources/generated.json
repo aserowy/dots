@@ -130,12 +130,12 @@
         },
         "pinned": false,
         "src": {
-            "name": "crates-0.6.4.zip",
-            "sha256": "sha256-WwjLcGnsq6NtNe7SezVuTjwEX1qHVHvaBsGtn4yZJLI=",
+            "name": "crates-0.6.5.zip",
+            "sha256": "sha256-HgqM4PKGk3R5MLY4cVjKxv79p5KlOkVDeDbv7/6FmpM=",
             "type": "url",
-            "url": "https://serayuzgur.gallery.vsassets.io/_apis/public/gallery/publisher/serayuzgur/extension/crates/0.6.4/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+            "url": "https://serayuzgur.gallery.vsassets.io/_apis/public/gallery/publisher/serayuzgur/extension/crates/0.6.5/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
-        "version": "0.6.4"
+        "version": "0.6.5"
     },
     "vscode-extensions-errorlens": {
         "cargoLocks": null,

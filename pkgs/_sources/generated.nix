@@ -73,11 +73,11 @@
   };
   vscode-extensions-crates = {
     pname = "vscode-extensions-crates";
-    version = "0.6.4";
+    version = "0.6.5";
     src = fetchurl {
-      url = "https://serayuzgur.gallery.vsassets.io/_apis/public/gallery/publisher/serayuzgur/extension/crates/0.6.4/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "crates-0.6.4.zip";
-      sha256 = "sha256-WwjLcGnsq6NtNe7SezVuTjwEX1qHVHvaBsGtn4yZJLI=";
+      url = "https://serayuzgur.gallery.vsassets.io/_apis/public/gallery/publisher/serayuzgur/extension/crates/0.6.5/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "crates-0.6.5.zip";
+      sha256 = "sha256-HgqM4PKGk3R5MLY4cVjKxv79p5KlOkVDeDbv7/6FmpM=";
     };
     publisher = "serayuzgur";
     name = "crates";
