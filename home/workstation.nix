@@ -16,7 +16,6 @@
     modules = {
       gtk.enable = true;
       hyprland.enable = true;
-      teams.enable = true;
       xdg.enable = true;
     };
 

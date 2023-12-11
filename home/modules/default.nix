@@ -9,7 +9,6 @@
     ./notification
     ./screenshot
     ./sway
-    ./teams
     ./waybar
     ./xdg
   ];
