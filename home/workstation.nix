@@ -21,16 +21,13 @@
     };
 
     packages = with pkgs; [
-      ardour
       discord
-      gparted
       (lutris.override {
         extraPkgs = pkgs: [
           winePackages.staging
           wine64Packages.staging
         ];
       })
-      remmina
       spotify
     ];
   };
