@@ -87,6 +87,9 @@
       extraOptions = [
         "--network=ha-network"
       ];
+      ports = [
+        "8127:8086"
+      ];
       volumes = [
         "/srv/influxdb:/var/lib/influxdb2"
         "/srv/influxdb/config.yml:/etc/influxdb2/config.yml"
