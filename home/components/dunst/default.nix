@@ -86,9 +86,10 @@ in
         file.".config/dunst/dunstrc".text = mkUnless cnfg.hideNotifications ''
           [global]
           frame_color="#00000000"
-          progress_bar="false"
-          transparency=100
           height=1
+          progress_bar="false"
+          timeout=1
+          transparency=100
           width=1
         '' ''
           [global]
