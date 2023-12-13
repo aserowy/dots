@@ -22,6 +22,14 @@ in
       '';
     };
 
+    hideNotifications = mkOption {
+      type = types.bool;
+      default = false;
+      description = ''
+        Hides all notifications.
+      '';
+    };
+
     enableSwayIntegration = mkOption {
       type = types.bool;
       default = true;
@@ -63,6 +71,11 @@ in
       icon_paths = lib.concatMapStringsSep ":" mkPath (lib.cartesianProductOfSets {
         category = categories;
       });
+
+      mkUnless = condition: onTrue: onFalse: mkMerge [
+        (mkIf condition onTrue)
+        (mkIf (!condition) onFalse)
+      ];
     in
     mkIf cnfg.enable {
       home = {
@@ -70,7 +83,14 @@ in
           dunst
         ];
 
-        file.".config/dunst/dunstrc".text = ''
+        file.".config/dunst/dunstrc".text = mkUnless cnfg.hideNotifications ''
+          [global]
+          frame_color="#00000000"
+          progress_bar="false"
+          transparency=100
+          height=1
+          width=1
+        '' ''
           [global]
           alignment="center"
           always_run_script="true"

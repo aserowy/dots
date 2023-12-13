@@ -32,6 +32,7 @@ in {
     mkIf cnfg.enable {
       home = {
         components = {
+          dunst.hideNotifications = true;
           lf.enable = true;
           rofi.enable = true;
 
