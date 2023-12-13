@@ -6,6 +6,7 @@
 
   home = {
     components = {
+      chrome.enable = true;
       docker.enable = true;
       foot.enable = true;
       obsidian.enable = true;
