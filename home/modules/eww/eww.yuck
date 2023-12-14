@@ -1,7 +1,7 @@
 ;; all icons are nf-md-...
 
-(defwindow example
-    :monitor 1
+(defwindow sidebar
+    :monitor 0
     :geometry (geometry
         :y "20"
         :width "425"
@@ -124,7 +124,7 @@
             )
             (label
                 :halign "end"
-                :text {notification['body']['data']}
+                :markup {notification['body']['data']}
             )
         )
     )

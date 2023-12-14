@@ -22,12 +22,15 @@ in
     home = {
       components = {
         # TODO: rework dunst to mako (more active maintainer)
+        # https://github.com/emersion/mako/blob/master/makoctl.1.scd
         dunst = {
           enable = true;
           hideNotifications = true;
         };
       };
 
+      # https://dharmx.is-a.dev/eww-powermenu/#tips
+      # https://elkowar.github.io/eww/widgets.html
       file.".config/eww/eww.css".source = ./eww.css;
       file.".config/eww/eww.yuck".source = ./eww.yuck;
 
