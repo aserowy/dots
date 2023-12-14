@@ -1,9 +1,10 @@
 { config, lib, pkgs, ... }:
 
 with lib;
-let cnfg = config.home.modules.hyprland;
-
-in {
+let
+  cnfg = config.home.modules.hyprland;
+in
+{
   options.home.modules.hyprland = {
     enable = mkEnableOption "hyprland";
 
@@ -32,7 +33,6 @@ in {
     mkIf cnfg.enable {
       home = {
         components = {
-          dunst.hideNotifications = true;
           lf.enable = true;
           rofi.enable = true;
 
@@ -60,6 +60,7 @@ in {
 
         modules = {
           browser.enable = true;
+          eww.enable = true;
           clipboard.enable = true;
           notification.enable = true;
           waybar.enable = true;

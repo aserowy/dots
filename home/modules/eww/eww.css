@@ -1,0 +1,21 @@
+*{
+	all: unset;
+    text-shadow: 2px 2px 2px #000000;
+}
+
+.container {
+	font-family: Inter;
+    font-size: 1rem;
+    padding: 8px;
+    padding-right: 20px;
+    box-shadow: inset -3px 0 #61afef;
+}
+
+.highlight {
+    font-weight: 500;
+}
+
+.nerd-icon {
+    font-family: FiraCode Nerd Font Mono;
+    font-size: 2rem;
+}
