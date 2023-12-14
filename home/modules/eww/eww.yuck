@@ -8,7 +8,7 @@
         :anchor "top right"
     )
     :stacking "bottom"
-    :namespace "example"
+    :namespace "eww sidebar"
     (box
         :orientation "vertical"
         :spacing 68
@@ -73,7 +73,7 @@
 
 (defwidget notifications []
     (box
-        :class "container"
+        :class "${ arraylength(notifications['data'][0]) == 0 ? 'container-disabled' : 'container' }"
         :orientation "vertical"
         :spacing 10
         :space-evenly false

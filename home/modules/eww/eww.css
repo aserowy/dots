@@ -11,6 +11,14 @@
     box-shadow: inset -3px 0 #61afef;
 }
 
+.container-disabled {
+	font-family: Inter;
+    font-size: 1rem;
+    padding: 8px;
+    padding-right: 20px;
+    box-shadow: inset -3px 0 #abb2bf;
+}
+
 .highlight {
     font-weight: 500;
 }
