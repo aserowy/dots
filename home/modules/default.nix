@@ -2,6 +2,7 @@
 {
   imports = [
     ./browser
+    ./eww
     ./clipboard
     ./gtk
     ./hyprland

@@ -76,6 +76,7 @@
     "custom/spotify-metadata": {
         "exec": "~/.config/waybar/spotify/metadata.sh",
         "format": "󰓇",
+        "tooltip": false,
         "interval": "once",
         "return-type": "json",
         "signal": 5
@@ -83,26 +84,21 @@
     "custom/spotify-play-pause": {
         "exec": "~/.config/waybar/spotify/play-pause.sh",
         "format": "{}",
+        "tooltip": false,
         "interval": "once",
         "on-click": "sleep 0.1 && ~/.config/waybar/spotify/controls.sh",
         "return-type": "json",
         "signal": 5
     },
     "custom/spotify-next": {
-        "exec": "~/.config/waybar/spotify/metadata.sh",
         "format": "󰒭",
-        "interval": "once",
+        "tooltip": false,
         "on-click": "sleep 0.1 && ~/.config/waybar/spotify/controls.sh next",
-        "return-type": "json",
-        "signal": 5
     },
     "custom/spotify-prev": {
-        "exec": "~/.config/waybar/spotify/metadata.sh",
         "format": "󰒮",
-        "interval": "once",
+        "tooltip": false,
         "on-click": "sleep 0.1 && ~/.config/waybar/spotify/controls.sh prev",
-        "return-type": "json",
-        "signal": 5
     },
     "hyprland/workspaces": {
         "format": "{icon}",
