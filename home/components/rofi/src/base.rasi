@@ -1,6 +1,6 @@
 configuration {
     drun-display-format: "{icon} {name}";
-    font: "Inter 10";
+    font: "FiraCode Nerd Font Mono 10";
     modi: "window,run,drun";
     show-icons: true;
     icon-theme: "Paper";
@@ -8,10 +8,10 @@ configuration {
 }
 
 * {
-  red: #e06c75;
-  blue: #61afef;
+  red: white;
+  blue: white;
 
-  foreground: #abb2bf;
+  foreground: white;
   active-foreground: @foreground;
   alternate-active-foreground: @foreground;
   selected-active-foreground: @foreground;
@@ -23,10 +23,10 @@ configuration {
   selected-urgent-foreground: @foreground;
 
 
-  background: #23272e;
+  background: transparent;
   active-background: @background;
   alternate-active-background: @background;
-  selected-active-background: #3e4451;
+  selected-active-background: rgba(255, 255, 255, 0.075);
   normal-background: @background;
   alternate-normal-background: @background;
   selected-normal-background: @selected-active-background;
@@ -45,19 +45,23 @@ configuration {
   background-color: @background;
   border: 0;
   border-radius: 6px;
-  width: 675px;
+
+  height: 100%;
+  width: 100%;
+
+  padding: calc(50% - 335px);
+
+  children: [ mainbox ];
 }
 #mainbox {
   border: 0;
-  padding: 10;
 }
 
 #inputbar {
   text-color: @normal-foreground;
   padding: 10px 20px 20px;
   margin: 0px 0px 15px;
-  border: 0px 0px 2px;
-  border-color: @selected-normal-background;
+  border: 0;
 
   children: [ prompt, textbox-prompt-colon, entry, case-indicator ];
 }
