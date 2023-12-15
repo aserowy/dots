@@ -60,6 +60,7 @@ in
 
         modules = {
           browser.enable = true;
+          # FIX: https://github.com/hyprwm/Hyprland/issues/4162
           eww.enable = true;
           clipboard.enable = true;
           notification.enable = true;
