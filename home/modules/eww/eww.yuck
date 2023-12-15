@@ -8,7 +8,7 @@
         :anchor "top right"
     )
     :stacking "bottom"
-    :namespace "eww sidebar"
+    :namespace "eww_sidebar"
     (box
         :orientation "vertical"
         :spacing 68
