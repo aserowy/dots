@@ -1,10 +1,9 @@
 configuration {
     drun-display-format: "{icon} {name}";
-    font: "FiraCode Nerd Font Mono 10";
+    font: "Inter 10";
     modi: "window,run,drun";
     show-icons: true;
-    icon-theme: "Paper";
-    terminal: "wezterm";
+    terminal: "foot";
 }
 
 * {
@@ -43,12 +42,9 @@ configuration {
 }
 
 #window {
-  background-color: rgba(1, 1, 1, 0.35);
   border: 0;
 
-  fullscreen: true;
-
-  padding: calc(50% - 335px);
+  width: 675px;
 
   children: [ mainbox ];
 }

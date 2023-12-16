@@ -12,6 +12,7 @@
         :anchor "top right"
     )
     :stacking "overlay"
+    :focusable true
     :namespace "eww_dashboard"
     (centerbox
         :orientation "horizontal"

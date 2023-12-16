@@ -1,7 +1,7 @@
 @import "base.rasi"
 
 #window {
-  padding: calc(50% - 175px);
+  width: 350px;
 }
 
 #listview {
