@@ -1,0 +1,47 @@
+(deflisten spotify_now_playing_artist
+    'playerctl -p spotify --follow metadata --format {{artist}}'
+)
+(deflisten spotify_now_playing_title
+    'playerctl -p spotify --follow metadata --format {{title}}'
+)
+
+(defwidget spotify []
+    (box
+        :class "container"
+        :orientation "vertical"
+        :space-evenly false
+        (box
+            :halign "start"
+            :orientation "horizontal"
+        )
+        (box
+            :orientation "horizontal"
+            (box
+                :orientation "horizontal"
+                :halign "start"
+                :spacing 10
+                :space-evenly false
+                (label
+                    :class "nerd-icon"
+                    :text "󰓇 "
+                )
+                (label
+                    :halign "end"
+                    :class "highlight"
+                    :text spotify_now_playing_artist
+                )
+                (label
+                    :halign "center"
+                    :angle 15
+                    :wrap true
+                    :text "with"
+                )
+                (label
+                    :halign "start"
+                    :class "highlight"
+                    :text spotify_now_playing_title
+                )
+            )
+        )
+    )
+)

@@ -33,6 +33,7 @@ in
       # https://elkowar.github.io/eww/widgets.html
       file.".config/eww/eww.css".source = ./eww.css;
       file.".config/eww/eww.yuck".source = ./eww.yuck;
+      file.".config/eww/widgets/".source = ./widgets;
 
       packages = with pkgs; [
         eww-wayland

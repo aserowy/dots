@@ -1,6 +1,16 @@
 * {
   all: unset;
+}
+.test {
+  background-color: #ff0000;
+}
+
+.sidebar {
   text-shadow: 2px 2px 2px #000000;
+}
+
+.dashboard {
+  background-color: rgba(1, 1, 1, 0.25);
 }
 
 .container {

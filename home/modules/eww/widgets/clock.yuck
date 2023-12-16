@@ -1,0 +1,21 @@
+(defpoll time
+    :initial '{"hour":"00","min":"00"}'
+    :interval "5s" `date +'{"hour":"%H","min":"%M"}'`
+)
+
+(defwidget clock []
+    (box
+        :spacing 15
+        :space-evenly false
+        (label
+            :class "nerd-icon"
+            :style "font-size: 4rem"
+            :text "󰅐"
+        )
+        (label
+            :class "highlight"
+            :style "font-size: 3rem"
+            :text "${time.hour} ${time.min}"
+        )
+    )
+)
