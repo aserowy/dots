@@ -26,12 +26,13 @@ configuration {
   background: transparent;
   active-background: @background;
   alternate-active-background: @background;
-  selected-active-background: rgba(255, 255, 255, 0.075);
   normal-background: @background;
   alternate-normal-background: @background;
-  selected-normal-background: @selected-active-background;
   urgent-background: @background;
   alternate-urgent-background: @background;
+
+  selected-active-background: rgba(255, 255, 255, 0.075);
+  selected-normal-background: @selected-active-background;
   selected-urgent-background: @selected-active-background;
 
   bordercolor: @blue;
@@ -42,7 +43,7 @@ configuration {
 }
 
 #window {
-  background-color: rgba(1, 1, 1, 0.25);
+  background-color: rgba(1, 1, 1, 0.35);
   border: 0;
 
   fullscreen: true;
