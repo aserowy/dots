@@ -5,7 +5,7 @@
 (include "./widgets/spotify.yuck")
 
 (defwindow dashboard
-    :monitor 1
+    :monitor 0
     :geometry (geometry
         :height "100%"
         :width "100%"
@@ -36,7 +36,7 @@
 )
 
 (defwindow sidebar
-    :monitor 1
+    :monitor 0
     :geometry (geometry
         :y "25px"
         :width "425px"

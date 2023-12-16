@@ -17,6 +17,14 @@ in
       '';
     };
 
+    defaultDashboard = mkOption {
+      type = types.str;
+      default = "eww open dashboard --toggle";
+      description = ''
+        Sets default dashboard in hyprland.
+      '';
+    };
+
     additionalConfig = mkOption {
       type = types.lines;
       default = "";
@@ -46,6 +54,7 @@ in
         file = {
           ".config/hypr/hyprland.conf".source = builtins.toFile "hyprland-config" ''
             # programs
+            $dashboard = ${cnfg.defaultDashboard}
             $terminal = ${cnfg.defaultTerminal}
 
             # additional config
@@ -60,7 +69,6 @@ in
 
         modules = {
           browser.enable = true;
-          # FIX: https://github.com/hyprwm/Hyprland/issues/4162
           eww.enable = true;
           clipboard.enable = true;
           notification.enable = true;
