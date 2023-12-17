@@ -9,18 +9,16 @@ let predefined = [
     [workspace 'rofi -config ~/.config/rofi/list.rasi -modi workspace:~/.config/rofi/focus_by_name.nu -show workspace']
 ]
 
-def main [command_name: string, monitor: string = ''] {
+def main [command_name: string, additional_rofi_flags: string = ""] {
     mut command = ($predefined
         | where name == $command_name
         | first
         | get command)
 
-    if $command != '' {
-        $command = $command + ' -m ' + $monitor
+    if $additional_rofi_flags != "" {
+        $command = $command + " " + $additional_rofi_flags
     }
 
-print $command
-    
-    run-external --redirect-stdout --redirect-stderr 'sh' '-c' $command | ignore
+    (sh -c $command | ignore)
 }
 
