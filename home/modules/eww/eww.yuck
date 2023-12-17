@@ -4,19 +4,36 @@
 (include "./widgets/notifications.yuck")
 (include "./widgets/spotify.yuck")
 
-(defwindow dashboard
-    :monitor 0
+;; FIX: dual monitor windows
+;; https://github.com/elkowar/eww/issues/519
+(defwindow dashboard_monitor_0
     :geometry (geometry
         :height "100%"
         :width "100%"
         :anchor "top right"
     )
+    :monitor 0
     :stacking "overlay"
-    :focusable true
     :namespace "eww_dashboard"
+    (dashboard)
+)
+
+(defwindow dashboard_monitor_1
+    :geometry (geometry
+        :height "100%"
+        :width "100%"
+        :anchor "top right"
+    )
+    :monitor 1
+    :stacking "overlay"
+    :namespace "eww_dashboard"
+    (dashboard)
+)
+
+(defwidget dashboard []
     (centerbox
         :orientation "horizontal"
-            :class "dashboard"
+        :class "dashboard"
         (box
             :orientation "vertical"
             :space-evenly true
@@ -37,14 +54,14 @@
 )
 
 (defwindow sidebar
-    :monitor 0
     :geometry (geometry
         :y "25px"
         :width "425px"
         :anchor "top right"
     )
-    :stacking "bottom"
+    :monitor 0
     :namespace "eww_sidebar"
+    :stacking "bottom"
     (box
         :class "sidebar"
         (sidebar)
