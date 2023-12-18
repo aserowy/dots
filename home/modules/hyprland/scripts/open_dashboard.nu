@@ -10,7 +10,7 @@ def main [launch: string] {
     let dashboard = $"dashboard_monitor_($monitor)"
     (eww open $dashboard)
 
-    (~/.config/rofi/launch.nu $launch "-run-command 'hyprctl dispatch exec {cmd}'")
+    (~/.config/rofi/launch.nu $launch "-run-command \"hyprctl dispatch exec '{cmd}'\"")
 
     (eww close $dashboard)
 }

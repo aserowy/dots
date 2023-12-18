@@ -7,7 +7,7 @@
 }
 
 .dashboard {
-  background-color: rgba(1, 1, 1, 0.25);
+  background-color: rgba(1, 1, 1, 0.35);
 }
 
 .container {
@@ -36,7 +36,6 @@
   font-family: FiraCode Nerd Font Mono;
   font-size: 2rem;
 }
-
 
 .progress_bar scale trough highlight {
 	all: unset;
