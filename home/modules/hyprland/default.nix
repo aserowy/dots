@@ -9,9 +9,7 @@ in
     enable = mkEnableOption "hyprland";
 
     defaultTerminal = mkOption {
-      # TODO: change from Script to package
       type = types.str;
-      default = "wezterm";
       description = ''
         Sets default terminal in hyprland.
       '';
@@ -36,7 +34,6 @@ in
           lf.enable = true;
           rofi.enable = true;
 
-          # wezterm.enable = true;
           foot = {
             enable = true;
             enableAsHyprlandDefaultTerminal = true;

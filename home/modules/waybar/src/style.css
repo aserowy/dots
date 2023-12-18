@@ -46,22 +46,6 @@ window > box {
   color: #e06c75;
 }
 
-#custom-spotify-metadata {
-  font-size: 2.25em;
-  padding: 0;
-  color: #fff;
-}
-#custom-spotify-metadata.playing {
-  color: #61afef;
-}
-#custom-spotify-play-pause,
-#custom-spotify-prev,
-#custom-spotify-next {
-  font-size: 1.125em;
-  color: #fff;
-  padding: 0px;
-}
-
 #workspaces button {
   border-radius: 0;
   /* Use box-shadow instead of border so the text isn't offset */

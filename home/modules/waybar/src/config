@@ -2,13 +2,7 @@
     "position": "left",
     "width": 50,
 
-    "modules-left": [
-        "custom/spotify-monitor",
-        "custom/spotify-metadata",
-        "custom/spotify-prev",
-        "custom/spotify-play-pause",
-        "custom/spotify-next",
-    ],
+    "modules-left": [ ],
     "modules-center": [
         "hyprland/workspaces",
         "sway/workspaces"
@@ -67,38 +61,6 @@
         "exec": "~/.config/waybar/recorder/metadata.sh",
         "on-click": "sleep 0.1 && ~/.config/waybar/recorder/toggle.sh",
         "signal": 8
-    },
-    "custom/spotify-monitor": {
-        "interval": 1,
-        "exec": "pkill -RTMIN+5 waybar",
-        "signal": 4
-    },
-    "custom/spotify-metadata": {
-        "exec": "~/.config/waybar/spotify/metadata.sh",
-        "format": "󰓇",
-        "tooltip": false,
-        "interval": "once",
-        "return-type": "json",
-        "signal": 5
-    },
-    "custom/spotify-play-pause": {
-        "exec": "~/.config/waybar/spotify/play-pause.sh",
-        "format": "{}",
-        "tooltip": false,
-        "interval": "once",
-        "on-click": "sleep 0.1 && ~/.config/waybar/spotify/controls.sh",
-        "return-type": "json",
-        "signal": 5
-    },
-    "custom/spotify-next": {
-        "format": "󰒭",
-        "tooltip": false,
-        "on-click": "sleep 0.1 && ~/.config/waybar/spotify/controls.sh next",
-    },
-    "custom/spotify-prev": {
-        "format": "󰒮",
-        "tooltip": false,
-        "on-click": "sleep 0.1 && ~/.config/waybar/spotify/controls.sh prev",
     },
     "hyprland/workspaces": {
         "format": "{icon}",

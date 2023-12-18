@@ -53,7 +53,7 @@ in
 
     home.modules.hyprland.additionalConfig = mkIf cnfg.enableHyprlandIntegration ''
       # Start waybar as status bar
-      exec-once = waybar
+      exec-once = while true; do waybar; done
     '';
   };
 }
