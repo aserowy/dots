@@ -36,3 +36,18 @@
   font-family: FiraCode Nerd Font Mono;
   font-size: 2rem;
 }
+
+
+.progress_bar scale trough highlight {
+	all: unset;
+	background-color: white;
+	border-radius: 2px;
+}
+
+.progress_bar scale trough {
+	all: unset;
+	background-color: #21252b;
+	border-radius: 2px;
+	min-height: 3px;
+	min-width: 236px;
+}

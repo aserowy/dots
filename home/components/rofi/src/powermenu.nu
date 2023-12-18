@@ -6,9 +6,9 @@ let wm_sway = 'sway'
 
 let commands = [
     [name wm command];
+    ["  suspend" $wm_all 'systemctl suspend']
     ["⏻  shutdown" $wm_all 'systemctl poweroff']
     ["  reboot" $wm_all 'systemctl reboot']
-    ["  suspend" $wm_all 'systemctl suspend']
 ]
 
 def main [command_name: string = ''] {
@@ -26,7 +26,7 @@ def main [command_name: string = ''] {
             | first
             | get command)
         
-        run-external --redirect-stdout --redirect-stderr 'sh' '-c' $command | ignore
+        (sh -c $command | ignore)
     }
 }
 

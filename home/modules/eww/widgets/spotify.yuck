@@ -1,46 +1,49 @@
-(deflisten spotify_now_playing_artist
-    'playerctl -p spotify --follow metadata --format {{artist}}'
+(deflisten status
+    :initial ''
+    `playerctl -p spotify --follow status`
 )
-(deflisten spotify_now_playing_title
-    'playerctl -p spotify --follow metadata --format {{title}}'
+(deflisten song
+    :initial '{"artist": "", "title": "", "length": "1"}'
+    `playerctl -p spotify --follow metadata --format '{"artist": "{{ artist }}", "title": "{{ title }}", "length": "{{ mpris:length }}"}'`
+)
+(deflisten progress
+    :initial '{"current": "0"}'
+    `playerctl -p spotify --follow position --format '{"current": "{{ position }}"}'`
 )
 
 (defwidget spotify []
     (box
-        :class "container"
+        :class "${ status == 'Playing' ? 'container' : 'container-disabled' }"
         :orientation "vertical"
+        :spacing 5
         :space-evenly false
         (box
-            :halign "start"
             :orientation "horizontal"
+            :halign "end"
+            :spacing 10
+            :space-evenly false
+            (label
+                :class "highlight"
+                :limit-width 27
+                :show-truncated true
+                :visible "${status != ''}"
+                :text "${song.artist} - ${song.title}"
+            )
+            (label
+                :class "nerd-icon"
+                :text "󰓇"
+            )
         )
         (box
-            :orientation "horizontal"
-            (box
-                :orientation "horizontal"
-                :halign "start"
-                :spacing 10
-                :space-evenly false
-                (label
-                    :class "nerd-icon"
-                    :text "󰓇 "
-                )
-                (label
-                    :halign "end"
-                    :class "highlight"
-                    :text spotify_now_playing_artist
-                )
-                (label
-                    :halign "center"
-                    :angle 15
-                    :wrap true
-                    :text "with"
-                )
-                (label
-                    :halign "start"
-                    :class "highlight"
-                    :text spotify_now_playing_title
-                )
+            :class "progress_bar"
+            :halign "end"
+            :vexpand "false"
+            :hexpand "false" 
+            :visible "${status != ''}"
+            (scale
+                :min 0
+                :max 100
+                :value "${round(100 * progress.current / song.length, 2)}"
             )
         )
     )
