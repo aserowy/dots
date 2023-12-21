@@ -37,9 +37,6 @@
                 :halign "fill"
                 :width 24
                 :space-evenly false
-                (clipboard)
-                (screenshot)
-                (recorder)
             )
         )
         (workspaces)
@@ -58,10 +55,20 @@
                 :space-evenly false
                 (box
                     :orientation "vertical"
+                    :class "container"
+                    :halign "fill"
+                    :valign "end"
+                    :space-evenly false
+                    (clipboard)
+                    (screenshot)
+                    (recorder)
+                )
+                (box
+                    :orientation "vertical"
+                    :class "container"
                     :space-evenly false
                     :halign "fill"
                     :valign "end"
-                    :style "padding-bottom: 16px"
                     (group_lock)
                     (audio)
                     (network)

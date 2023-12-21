@@ -23,6 +23,10 @@
   padding-bottom: 2em;
 }
 
+.container {
+  padding-bottom: 1.25em;
+}
+
 .workspace {
   border-radius: 0;
   /* Use box-shadow instead of border so the text isn't offset */
