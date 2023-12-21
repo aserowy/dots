@@ -3,7 +3,6 @@
         :onclick "hyprctl dispatch exec 'clipman pick -t rofi'"
         (label
             :class "nerd-icon"
-            :halign "fill"
             :text "󱉫"
         )
     )

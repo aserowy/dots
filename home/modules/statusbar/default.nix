@@ -26,7 +26,11 @@ in
 
       packages = with pkgs; [
         eww-wayland
+        jq
+        pavucontrol
+        slurp
         socat
+        wf-recorder
       ];
     };
 

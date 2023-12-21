@@ -10,7 +10,6 @@
         :onrightclick "hyprctl dispatch exec pavucontrol"
         (label
             :class "nerd-icon"
-            :halign "fill"
             :text "${volume.icon}"
         )
     )

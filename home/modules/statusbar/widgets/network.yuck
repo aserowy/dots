@@ -8,7 +8,6 @@
     (eventbox
         (label
             :class "nerd-icon"
-            :halign "fill"
             :text "${network_status.icon}"
         )
     )

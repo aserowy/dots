@@ -5,6 +5,7 @@
 (include "./widgets/clipboard.yuck")
 (include "./widgets/network.yuck")
 (include "./widgets/screenshot.yuck")
+(include "./widgets/recorder.yuck")
 (include "./widgets/workspaces.yuck")
 
 (defwindow statusbar
@@ -47,6 +48,7 @@
                     :style "padding-bottom: 16px"
                     (clipboard)
                     (screenshot)
+                    (recorder)
                     (audio)
                     (network)
                 )

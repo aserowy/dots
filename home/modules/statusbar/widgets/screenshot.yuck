@@ -5,7 +5,6 @@
         :onrightclick "hyprctl dispatch exec '~/.config/screenshot/screenshot.nu area'"
         (label
             :class "nerd-icon"
-            :halign "fill"
             :text "󰹑"
         )
     )

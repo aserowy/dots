@@ -1,0 +1,15 @@
+(defpoll recording_status
+    :initial '{ "icon": "󰕨", "running": false }'
+    :interval "1s"
+    "./widgets/recording.nu status"
+)
+
+(defwidget recorder []
+    (eventbox
+        :onclick "hyprctl dispatch exec $(realpath ./widgets/recording.nu) toggle"
+        (label
+            :class "nerd-icon"
+            :text "${recording_status.icon}"
+        )
+    )
+)
