@@ -1,0 +1,21 @@
+(defpoll time
+    :initial '{"hour":"00","min":"00"}'
+    :interval "5s" `date +'{"weekday-name":"%A","day":"%d","month":"%m","year":"%Y","hour":"%H","min":"%M"}'`
+)
+
+(defwidget clock []
+    (box
+        :orientation "vertical"
+        :space-evenly false
+        (label
+            :class "highlight"
+            :halign "fill"
+            :text "${time.hour}"
+        )
+        (label
+            :class "highlight"
+            :halign "fill"
+            :text "${time.min}"
+        )
+    )
+)

@@ -1,0 +1,15 @@
+(defpoll network_status
+    :interval "15s"
+    :initial '{ "icon": "󰌸", "connected": true, "online": false }'
+    "./widgets/get_network_status.nu"
+)
+
+(defwidget network []
+    (eventbox
+        (label
+            :class "nerd-icon"
+            :halign "fill"
+            :text "${network_status.icon}"
+        )
+    )
+)

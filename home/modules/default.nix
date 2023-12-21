@@ -2,13 +2,14 @@
 {
   imports = [
     ./browser
-    ./eww
     ./clipboard
     ./gtk
     ./hyprland
     ./neocode
     ./notification
     ./screenshot
+    ./sidebar
+    ./statusbar
     ./sway
     ./waybar
     ./xdg

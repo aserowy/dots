@@ -8,9 +8,9 @@ def main [launch: string] {
 
     let monitor = (hyprctl activeworkspace -j | from json | get monitorID)
     let dashboard = $"dashboard_monitor_($monitor)"
-    (eww open $dashboard)
+    (eww open --config ~/.config/eww/sidebar/ $dashboard)
 
     (~/.config/rofi/launch.nu $launch "-run-command \"hyprctl dispatch exec '{cmd}'\"")
 
-    (eww close $dashboard)
+    (eww close --config ~/.config/eww/sidebar/ $dashboard)
 }

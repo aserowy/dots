@@ -1,0 +1,57 @@
+;; all icons are nf-md-...
+
+(include "./widgets/audio.yuck")
+(include "./widgets/clock.yuck")
+(include "./widgets/clipboard.yuck")
+(include "./widgets/network.yuck")
+(include "./widgets/screenshot.yuck")
+(include "./widgets/workspaces.yuck")
+
+(defwindow statusbar
+    :geometry (geometry
+        :height "100%"
+        :anchor "center left"
+    )
+    :monitor 0
+    :exclusive true
+    :stacking "background"
+    :namespace "eww_statusbar"
+    (statusbar)
+)
+
+(defwidget statusbar []
+    (centerbox
+        :orientation "vertical"
+        (box
+            :class "top"
+        )
+        (workspaces)
+        (box
+            :orientation "horizontal"
+            :valign "end"
+            :space-evenly false
+            (box
+                :width 12
+            )
+            (box
+                :orientation "vertical"
+                :class "bottom"
+                :halign "fill"
+                :width 24
+                :space-evenly false
+                (box
+                    :orientation "vertical"
+                    :space-evenly false
+                    :halign "fill"
+                    :valign "end"
+                    :style "padding-bottom: 16px"
+                    (clipboard)
+                    (screenshot)
+                    (audio)
+                    (network)
+                )
+                (clock)
+            )
+        )
+    )
+)

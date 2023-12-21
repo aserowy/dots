@@ -2,17 +2,17 @@
 
 with lib;
 let
-  cnfg = config.home.modules.eww;
+  cnfg = config.home.modules.sidebar;
 in
 {
-  options.home.modules.eww = {
-    enable = mkEnableOption "eww";
+  options.home.modules.sidebar = {
+    enable = mkEnableOption "sidebar";
 
     enableHyprlandIntegration = mkOption {
       type = types.bool;
       default = true;
       description = ''
-        If enabled, eww gets started while running hyprland.
+        If enabled, sidebar gets started while running hyprland.
       '';
     };
   };
@@ -29,11 +29,9 @@ in
         };
       };
 
-      # https://dharmx.is-a.dev/eww-powermenu/#tips
-      # https://elkowar.github.io/eww/widgets.html
-      file.".config/eww/eww.css".source = ./eww.css;
-      file.".config/eww/eww.yuck".source = ./eww.yuck;
-      file.".config/eww/widgets/".source = ./widgets;
+      file.".config/eww/sidebar/eww.css".source = ./eww.css;
+      file.".config/eww/sidebar/eww.yuck".source = ./eww.yuck;
+      file.".config/eww/sidebar/widgets/".source = ./widgets;
 
       packages = with pkgs; [
         eww-wayland
@@ -41,8 +39,8 @@ in
     };
 
     home.modules.hyprland.additionalConfig = mkIf cnfg.enableHyprlandIntegration ''
-      # Init eww
-      exec-once = eww open sidebar
+      # Init sidebar
+      exec-once = eww open --config ~/.config/eww/sidebar/ sidebar
     '';
   };
 }

@@ -57,10 +57,10 @@ in
 
         modules = {
           browser.enable = true;
-          eww.enable = true;
           clipboard.enable = true;
           notification.enable = true;
-          waybar.enable = true;
+          sidebar.enable = true;
+          statusbar.enable = true;
         };
 
         packages = with pkgs; [

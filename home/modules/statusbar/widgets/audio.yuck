@@ -1,0 +1,17 @@
+(defpoll volume
+    :interval "250ms"
+    :initial '{ "icon": "󰕾", "volume": 1, "muted": false }'
+    "./widgets/get_volume.nu"
+)
+
+(defwidget audio []
+    (eventbox
+        :onclick "hyprctl dispatch exec 'wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle'"
+        :onrightclick "hyprctl dispatch exec pavucontrol"
+        (label
+            :class "nerd-icon"
+            :halign "fill"
+            :text "${volume.icon}"
+        )
+    )
+)

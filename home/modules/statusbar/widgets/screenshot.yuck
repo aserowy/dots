@@ -1,0 +1,12 @@
+(defwidget screenshot []
+    (eventbox
+        :onclick "hyprctl dispatch exec '~/.config/screenshot/screenshot.nu output'"
+        :onmiddleclick "hyprctl dispatch exec '~/.config/screenshot/screenshot.nu window'"
+        :onrightclick "hyprctl dispatch exec '~/.config/screenshot/screenshot.nu area'"
+        (label
+            :class "nerd-icon"
+            :halign "fill"
+            :text "󰹑"
+        )
+    )
+)
