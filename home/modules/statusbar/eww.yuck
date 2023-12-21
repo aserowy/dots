@@ -3,6 +3,7 @@
 (include "./widgets/audio.yuck")
 (include "./widgets/clock.yuck")
 (include "./widgets/clipboard.yuck")
+(include "./widgets/group_lock.yuck")
 (include "./widgets/network.yuck")
 (include "./widgets/screenshot.yuck")
 (include "./widgets/recorder.yuck")
@@ -24,7 +25,22 @@
     (centerbox
         :orientation "vertical"
         (box
-            :class "top"
+            :orientation "horizontal"
+            :valign "start"
+            :space-evenly false
+            (box
+                :width 12
+            )
+            (box
+                :orientation "vertical"
+                :class "top"
+                :halign "fill"
+                :width 24
+                :space-evenly false
+                (clipboard)
+                (screenshot)
+                (recorder)
+            )
         )
         (workspaces)
         (box
@@ -46,9 +62,7 @@
                     :halign "fill"
                     :valign "end"
                     :style "padding-bottom: 16px"
-                    (clipboard)
-                    (screenshot)
-                    (recorder)
+                    (group_lock)
                     (audio)
                     (network)
                 )

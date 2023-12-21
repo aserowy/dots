@@ -1,0 +1,17 @@
+(deflisten group_locked
+    :initial "0"
+    "
+    socat -u UNIX-CONNECT:/tmp/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock - |
+        stdbuf -o0 awk -F '>>' -e '/^lockgroups>>/ {print $2}'
+    "
+)
+
+(defwidget group_lock []
+    (eventbox
+        :onclick "hyprctl dispatch lockgroups toggle"
+        (label
+            :class "nerd-icon"
+            :text "${group_locked == "1" ? "󱘂" : "󱇿"}"
+        )
+    )
+)
