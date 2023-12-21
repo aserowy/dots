@@ -24,6 +24,11 @@ in
       file.".config/eww/statusbar/eww.yuck".source = ./eww.yuck;
       file.".config/eww/statusbar/widgets/".source = ./widgets;
 
+      modules = {
+        clipboard.enable = true;
+        screenshot.enable = true;
+      };
+
       packages = with pkgs; [
         eww-wayland
         jq
