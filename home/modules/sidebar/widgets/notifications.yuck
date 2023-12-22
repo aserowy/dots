@@ -4,8 +4,8 @@
     dunstctl history | jq -r tostring
 
     dbus-monitor \
-        \"path='/org/freedesktop/Notifications',member='NotificationClosed'\" \
-        \"path='/org/freedesktop/Notifications',member='NotificationClearHistory'\" |
+        \"path='/org/freedesktop/Notifications',interface='org.freedesktop.Notifications',member='NotificationClosed'\" \
+        \"path='/org/freedesktop/Notifications',interface='org.dunstproject.cmd0',member='NotificationClearHistory'\" |
         while read -r line; do dunstctl history | jq -r tostring; done
     "
 )

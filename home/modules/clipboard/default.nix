@@ -27,6 +27,8 @@ in
 
   config = {
     home = {
+      file.".config/clipman/open_history.nu".source = ./open_history.nu;
+
       packages = with pkgs; [
         clipman
         wl-clipboard

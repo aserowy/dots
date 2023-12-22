@@ -19,6 +19,8 @@ def main [command_name: string, additional_rofi_flags: string = ""] {
         $command = $command + " " + $additional_rofi_flags
     }
 
+    (dbus-send --type=signal /org/freedesktop/Notifications com.github.ibonn.rofi.open)
     (sh -c $command | ignore)
+    (dbus-send --type=signal /org/freedesktop/Notifications com.github.ibonn.rofi.close)
 }
 

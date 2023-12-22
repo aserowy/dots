@@ -2,7 +2,15 @@
 
 (deflisten toggle_dashboard_with_rofi
     :initial "closed"
-    "./widgets/toggle_dashboard_with_rofi.nu"
+    "
+    dbus-monitor \
+        \"path='/org/freedesktop/Notifications',interface='com.github.ibonn.rofi',member='open'\" \
+        \"path='/org/freedesktop/Notifications',interface='com.github.ibonn.rofi',member='close'\" |
+        stdbuf -o0 awk \
+            -F '; ' \
+            -e '/interface=com.github.ibonn.rofi/ {print $NF}' |
+        while read -r line; do ./widgets/toggle_dashboard_with_rofi.nu $line; done
+    "
 )
 
 (include "./widgets/clock.yuck")
