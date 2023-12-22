@@ -10,9 +10,9 @@ def main [action: string] {
 
 def status [] {
     let is_running = (pgrep wf-recorder | lines | any {true})
-    mut icon = "󰕨"
+    mut icon = "󰕧"
     if $is_running {
-        $icon = "󰕧"
+        $icon = "󰑋"
     }
 
     { "icon": $icon, "running": $is_running } | to json

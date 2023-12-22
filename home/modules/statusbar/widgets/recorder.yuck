@@ -1,5 +1,5 @@
 (defpoll recording_status
-    :initial '{ "icon": "󰕨", "running": false }'
+    :initial '{ "icon": "󰕧", "running": false }'
     :interval "1s"
     "./widgets/recording.nu status"
 )
