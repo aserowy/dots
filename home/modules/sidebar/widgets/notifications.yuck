@@ -1,5 +1,24 @@
-(defpoll notifications :initial '{ "data": [[]] }' :interval '1s' 'dunstctl history')
-(defpoll notifications-paused :initial "false" :interval "1s" "dunstctl is-paused")
+(deflisten notifications
+    :initial '{ "data": [[]] }'
+    "
+    dunstctl history | jq -r tostring
+
+    dbus-monitor \
+        \"path='/org/freedesktop/Notifications',member='NotificationClosed'\" \
+        \"path='/org/freedesktop/Notifications',member='NotificationClearHistory'\" |
+        while read -r line; do dunstctl history | jq -r tostring; done
+    "
+)
+(deflisten notifications-paused
+    :initial 'false'
+    "
+    dunstctl is-paused
+
+    dbus-monitor \"path='/org/freedesktop/Notifications',member='PropertiesChanged'\" |
+        while read -r line; do dunstctl is-paused; done
+    "
+)
+
 
 (defwidget notifications []
     (box

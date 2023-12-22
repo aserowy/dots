@@ -88,7 +88,7 @@ in
           frame_color="#00000000"
           height=1
           progress_bar="false"
-          timeout=1
+          timeout=1ms
           transparency=100
           width=1
         '' ''
