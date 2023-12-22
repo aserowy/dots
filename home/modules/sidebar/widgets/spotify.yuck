@@ -15,22 +15,35 @@
     (box
         :class "${ status == 'Playing' ? 'container' : 'container-disabled' }"
         :orientation "vertical"
+        :halign "end"
         :spacing 5
         :space-evenly false
         (box
             :orientation "horizontal"
-            :halign "end"
-            :spacing 10
+            :spacing 16
             :space-evenly false
-            (label
-                :class "highlight"
-                :limit-width 27
-                :show-truncated true
-                :visible "${status != ''}"
-                :text "${song.artist} - ${song.title}"
+            :halign "end"
+            (box
+                :orientation "vertical"
+                (label
+                    :class "highlight"
+                    :halign "end"
+                    :limit-width 27
+                    :show-truncated true
+                    :visible "${status != '' && song.title != ''}"
+                    :text "${song.title}"
+                )
+                (label
+                    :halign "end"
+                    :limit-width 27
+                    :show-truncated true
+                    :visible "${status != '' && song.artist != ''}"
+                    :text "${song.artist}"
+                )
             )
             (label
                 :class "nerd-icon"
+                :halign "end"
                 :text "󰓇"
             )
         )

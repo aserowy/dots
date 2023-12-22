@@ -1,7 +1,7 @@
 #!/usr/bin/env nu
 
 def main [] {
-    # FIX: replace while with 'wait for process start'
+    # FIX: replace while with 'wait for process start' maybe dbus-send??
     while true {
         if (pgrep rofi | lines | any {true}) {
             # NOTE: currently only implemented for hyprland
