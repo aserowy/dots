@@ -7,7 +7,7 @@
 (defwidget network []
     (eventbox
         (label
-            :class "nerd-icon"
+            :class "nerd-icon ${network_status.online ? '' : 'warning'}"
             :text "${network_status.icon}"
         )
     )

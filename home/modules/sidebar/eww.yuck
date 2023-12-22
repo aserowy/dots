@@ -1,5 +1,10 @@
 ;; all icons are nf-md-...
 
+(deflisten toggle_dashboard_with_rofi
+    :initial "closed"
+    "./widgets/toggle_dashboard_with_rofi.nu"
+)
+
 (include "./widgets/clock.yuck")
 (include "./widgets/notifications.yuck")
 (include "./widgets/spotify.yuck")
@@ -13,7 +18,7 @@
         :anchor "top right"
     )
     :monitor 0
-    :stacking "overlay"
+    :stacking "fg"
     :namespace "eww_dashboard"
     (dashboard)
 )
@@ -25,15 +30,15 @@
         :anchor "top right"
     )
     :monitor 1
-    :stacking "overlay"
+    :stacking "fg"
     :namespace "eww_dashboard"
     (dashboard)
 )
 
 (defwidget dashboard []
     (centerbox
-        :orientation "horizontal"
         :class "dashboard"
+        :orientation "horizontal"
         (box
             :orientation "vertical"
             :space-evenly true
@@ -64,7 +69,12 @@
     :stacking "bottom"
     (box
         :class "sidebar"
+        :orientation "vertical"
         (sidebar)
+        (label
+            :class "invisible"
+            :text "${toggle_dashboard_with_rofi}"
+        )
     )
 )
 

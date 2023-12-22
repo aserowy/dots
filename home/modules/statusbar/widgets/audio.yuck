@@ -9,7 +9,7 @@
         :onclick "hyprctl dispatch exec 'wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle'"
         :onrightclick "hyprctl dispatch exec pavucontrol"
         (label
-            :class "nerd-icon"
+            :class "nerd-icon ${volume.muted ? 'warning' : ''}"
             :text "${volume.icon}"
         )
     )

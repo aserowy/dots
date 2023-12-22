@@ -38,6 +38,14 @@
   color: #61afef;
 }
 
+.active {
+  color: #61afef;
+}
+
+.warning {
+  color: #e06c75;
+}
+
 .invisible {
     opacity: 0;
     font-size: 1px;

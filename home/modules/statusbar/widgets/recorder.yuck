@@ -8,7 +8,7 @@
     (eventbox
         :onclick "hyprctl dispatch exec $(realpath ./widgets/recording.nu) toggle"
         (label
-            :class "nerd-icon"
+            :class "nerd-icon ${recording_status.running ? 'active' : ''}"
             :text "${recording_status.icon}"
         )
     )

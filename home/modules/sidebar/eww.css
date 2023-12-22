@@ -50,3 +50,8 @@
 	min-height: 3px;
 	min-width: 236px;
 }
+
+.invisible {
+    opacity: 0;
+    font-size: 1px;
+}
