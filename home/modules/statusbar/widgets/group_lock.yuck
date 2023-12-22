@@ -10,7 +10,7 @@
     (eventbox
         :onclick "hyprctl dispatch lockgroups toggle"
         (label
-            :class "nerd-icon ${group_locked == '1' ? 'active' : ''}"
+            :class "nerd-icon ${group_locked == '1' ? 'warning' : ''}"
             :text "${group_locked == "1" ? "󱘂" : "󱇿"}"
         )
     )
