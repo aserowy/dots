@@ -2,6 +2,7 @@
 {
   imports = [
     ./alacritty
+    ./direnv
     ./chrome
     ./docker
     ./dunst
@@ -11,11 +12,11 @@
     ./git
     ./gitui
     ./lf
-    ./nushell
     ./obsidian
     ./onedrive
     ./rofi
     ./ssh
+    ./starship
     ./swappy
     ./swaybg
     ./swww

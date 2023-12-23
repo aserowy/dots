@@ -2,37 +2,26 @@
 with lib;
 
 let
-  cnfg = config.home.components.nushell;
+  cnfg = config.home.modules.nushell;
 in
 {
-  options.home.components.nushell.enable = mkEnableOption "nushell";
+  options.home.modules.nushell.enable = mkEnableOption "nushell";
 
   config = mkIf cnfg.enable {
     home = {
+      components = {
+        direnv.enable = true;
+        starship.enable = true;
+      };
+
       packages = with pkgs; [
-        bat
-        bottom
         carapace
-        curl
-        ncurses
-        starship
-        tree
         zoxide
-
-        unixtools.watch
       ];
-
-      file.".config/starship.toml".source = ./starship.toml;
     };
 
     programs = {
-      direnv = {
-        enable = true;
-        enableNushellIntegration = false;
-        nix-direnv = {
-          enable = true;
-        };
-      };
+      direnv.enableNushellIntegration = false;
 
       nushell = {
         enable = true;
