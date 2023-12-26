@@ -10,6 +10,14 @@ let predefined = [
 ]
 
 def main [command_name: string, additional_rofi_flags: string = ""] {
+    if (pgrep rofi | lines | any {true}) {
+        (pkill rofi)
+
+        while (pgrep rofi | lines | any {true}) {
+            sleep 1ms
+        }
+    }
+
     mut command = ($predefined
         | where name == $command_name
         | first
