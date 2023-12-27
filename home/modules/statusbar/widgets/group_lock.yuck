@@ -1,6 +1,8 @@
 (deflisten group_locked
-    :initial "0"
+    :initial "1"
     "
+    hyprctl dispatch lockgroups lock
+
     socat -u UNIX-CONNECT:/tmp/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock - |
         stdbuf -o0 awk -F '>>' -e '/^lockgroups>>/ {print $2}'
     "
