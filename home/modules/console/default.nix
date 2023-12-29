@@ -28,6 +28,7 @@ in
         gh
         curl
         ncurses
+        tailspin
         tree
 
         unixtools.watch
