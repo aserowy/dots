@@ -12,7 +12,8 @@ in
       type = types.bool;
       default = true;
       description = ''
-        If disabled, the build process for treesitter languages will work sequentially.
+        If disabled, the build process for treesitter languages will work
+        sequentially.
       '';
     };
   };
