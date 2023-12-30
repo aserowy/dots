@@ -9,6 +9,7 @@ in
 
   config = mkIf cnfg.enable {
     home = {
+      file.".config/lf/icons".source = ./icons;
       file.".config/lf/lfrc".source = ./lf.config;
 
       packages = with pkgs; [
