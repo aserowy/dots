@@ -39,6 +39,8 @@ in
         ripgrep
         unzip
       ];
+
+      sessionVariables = { EDITOR = "nvim"; };
     };
   };
 }
