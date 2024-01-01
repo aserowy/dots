@@ -35,6 +35,7 @@ in
       packages = with pkgs; [
         gcc
         gnumake
+        lf
         neovim
         ripgrep
         unzip
