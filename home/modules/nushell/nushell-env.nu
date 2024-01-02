@@ -20,9 +20,10 @@ $env.NU_LIB_DIRS = [
     ($nu.default-config-dir | path join 'scripts')
 ]
 
+# FIX: remove replace after https://github.com/rsteube/carapace-bin/pull/2102 gets merged
 mkdir ~/.cache/carapace
 carapace _carapace nushell
-| str replace 'carapace $spans.0 nushell $spans | from json' "# if the current command is an alias, get it's expansion\n  let expanded_alias = (scope aliases | where name == $spans.0 | get -i 0 | get -i expansion)\n\n  # overwrite\n  let spans = (if $expanded_alias != null  {\n    # put the first word of the expanded alias first in the span\n    $spans | skip 1 | prepend ($expanded_alias | split row \" \")\n  } else {\n    $spans\n  })\n\n  carapace $spans.0 nushell $spans\n  | from json\n  | if ($in | default [] | where value =~ '^-.*ERR$' | is-empty) { $in } else { null }"
+| str replace 'carapace $spans.0 nushell $spans | from json' "# if the current command is an alias, get it's expansion\n  let expanded_alias = (scope aliases | where name == $spans.0 | get -i 0 | get -i expansion)\n\n  # overwrite\n  let spans = (if $expanded_alias != null  {\n    # put the first word of the expanded alias first in the span\n    $spans | skip 1 | prepend ($expanded_alias | split row \" \" | take 1)\n  } else {\n    $spans\n  })\n\n  carapace $spans.0 nushell $spans\n  | from json"
 | save --force ~/.cache/carapace/init.nu
 
 mkdir ~/.cache/starship
