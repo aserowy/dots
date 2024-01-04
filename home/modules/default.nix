@@ -5,7 +5,7 @@
     ./clipboard
     ./console
     ./gtk
-    ./hyprland
+    ./hypr
     ./neocode
     ./notification
     ./nushell
