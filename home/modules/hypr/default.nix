@@ -15,6 +15,14 @@ in
       '';
     };
 
+    tuiLaunchCommand = mkOption {
+      type = types.str;
+      description = ''
+        Sets the command to launch tui. It is important to specify the
+        placeholder [PROG] for the command which should get run.
+      '';
+    };
+
     additionalConfig = mkOption {
       type = types.lines;
       default = "";
@@ -27,6 +35,8 @@ in
   config =
     let
       hyprlandConfig = builtins.readFile ./hyprland.conf;
+
+      tuiLaunch = tui: builtins.replaceStrings [ "[PROG]" ] [ tui ] cnfg.tuiLaunchCommand;
     in
     mkIf cnfg.enable {
       home = {
@@ -43,6 +53,7 @@ in
         file = {
           ".config/hypr/hyprland.conf".source = builtins.toFile "hyprland-config" ''
             # programs
+            $explorer = ${tuiLaunch "lf"}
             $terminal = ${cnfg.defaultTerminal}
 
             # additional config

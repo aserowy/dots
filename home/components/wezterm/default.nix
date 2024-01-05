@@ -17,5 +17,8 @@ in
         wezterm
       ];
     };
+
+    # Integration for hyprland.tuiLaunchCommand:
+    # $explorer = wezterm start --class lf -- lf
   };
 }
