@@ -1,5 +1,6 @@
 { pkgs, ... }:
 {
+  # INFO: configuration reachable under http://localhost:631/
   services = {
     printing = {
       enable = true;
