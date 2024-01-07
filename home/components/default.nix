@@ -24,5 +24,6 @@
     ./vscode
     ./vscode-server
     ./wezterm
+    ./yazi
   ];
 }

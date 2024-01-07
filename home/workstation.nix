@@ -12,6 +12,9 @@
       obsidian.enable = true;
       onedrive.enable = true;
       swww.enable = true;
+
+      # NOTE: for testing purposes
+      yazi.enable = true;
     };
 
     modules = {
