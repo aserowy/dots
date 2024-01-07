@@ -5,7 +5,17 @@ let
   cnfg = config.home.components.wezterm;
 in
 {
-  options.home.components.wezterm.enable = mkEnableOption "wezterm";
+  options.home.components.wezterm = {
+    enable = mkEnableOption "wezterm";
+
+    enableAsHyprlandDefaultTerminal = mkOption {
+      type = types.bool;
+      default = false;
+      description = ''
+        If enabled, wezterm gets set as default terminal in Hyprland.
+      '';
+    };
+  };
 
   config = mkIf cnfg.enable {
     home = {
@@ -18,7 +28,9 @@ in
       ];
     };
 
-    # Integration for hyprland.tuiLaunchCommand:
-    # $explorer = wezterm start --class lf -- lf
+    home.modules.hyprland = mkIf cnfg.enableAsHyprlandDefaultTerminal {
+      defaultTerminal = "wezterm";
+      tuiLaunchCommand = "wezterm start --class [PROG] -- [PROG]";
+    };
   };
 }

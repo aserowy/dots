@@ -10,7 +10,7 @@ in
 
     enableAsHyprlandDefaultTerminal = mkOption {
       type = types.bool;
-      default = true;
+      default = false;
       description = ''
         If enabled, foot gets set as default terminal in Hyprland.
       '';
