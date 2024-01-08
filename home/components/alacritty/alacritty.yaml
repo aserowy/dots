@@ -27,11 +27,11 @@ colors:
     background: '#3e4451'
     text: '#abb2bf'
 cursor:
-  style: 
+  style:
     shape: 'Block'
     blinking: off
 font:
   normal:
-    family: 'FiraCode Nerd Font Mono'
+    family: 'UbuntuMono Nerd Font'
     style: Regular
   size: 10
