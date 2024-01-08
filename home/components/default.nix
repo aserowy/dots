@@ -14,6 +14,7 @@
     ./lf
     ./obsidian
     ./onedrive
+    ./rio
     ./rofi
     ./ssh
     ./starship

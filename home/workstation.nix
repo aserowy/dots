@@ -14,7 +14,8 @@
       swww.enable = true;
 
       # NOTE: for testing purposes
-      yazi.enable = true;
+      rio.enable = true; # no line height support
+      yazi.enable = true; # no stdout on file open
     };
 
     modules = {

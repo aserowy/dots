@@ -1,0 +1,12 @@
+editor = 'nvim'
+theme = 'Afterglow'
+
+[fonts]
+family = 'UbuntuMono Nerd Font'
+size = 16
+
+[colors]
+cursor = '#ffffff'
+
+[bindings]
+keys = []
