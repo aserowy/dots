@@ -35,10 +35,12 @@ in
       packages = with pkgs; [
         gcc
         gnumake
-        lf
         neovim
         ripgrep
         unzip
+
+        # lf
+        yazi
       ];
 
       sessionVariables = { EDITOR = "nvim"; };
