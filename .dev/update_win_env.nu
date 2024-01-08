@@ -10,7 +10,13 @@ def main [user: string] {
 
     rm $"($home)/.wezterm.lua"
     cp ~/.config/wezterm/wezterm.lua $"($home)/.wezterm.lua"
+
+    rm $"($home)/.config/starship.toml"
     cp ./home/components/starship/starship.toml $"($home)/.config/"
+
+    rm -rf $"($appdata)/Roaming/alacritty"
+    mkdir $"($appdata)/Roaming/alacritty"
+    cp ./home/components/alacritty/alacritty.toml $"($appdata)/Roaming/alacritty/alacritty.toml"
 
     let nushell_path = $"($appdata)/Roaming/nushell"
     rm -p -r $"($nushell_path)/*"

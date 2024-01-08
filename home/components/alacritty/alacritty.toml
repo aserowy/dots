@@ -1,0 +1,6 @@
+[font]
+size = 10
+
+builtin_box_drawing = true
+
+normal = { family = 'UbuntuMono Nerd Font', style = 'Regular' }
