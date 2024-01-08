@@ -29,5 +29,8 @@ carapace _carapace nushell
 mkdir ~/.cache/starship
 starship init nu | save --force ~/.cache/starship/init.nu
 
+# FIX: remove after zoxide nu fix gets released
 mkdir ~/.cache/zoxide
-zoxide init nushell | save --force ~/.cache/zoxide/init.nu
+zoxide init nushell
+| str replace "def-env" "def --env" --all
+| save --force ~/.cache/zoxide/init.nu
