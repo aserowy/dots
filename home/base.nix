@@ -9,7 +9,7 @@
     stateVersion = "23.11";
 
     components = {
-      wezterm.enable = true;
+      alacritty.enable = true;
     };
 
     modules = {
