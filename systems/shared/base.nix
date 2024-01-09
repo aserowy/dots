@@ -15,10 +15,8 @@
     systemPackages = with pkgs; [
       acpi
       git
-      lf
       mkpasswd
       smartmontools
-      wezterm
     ];
   };
 

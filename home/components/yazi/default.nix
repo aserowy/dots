@@ -8,6 +8,7 @@ in
   options.home.components.yazi.enable = mkEnableOption "yazi";
 
   config = mkIf cnfg.enable {
+    # TODO: add extract command
     home = {
       file = {
         ".config/yazi/yazi.toml" = {
@@ -20,6 +21,17 @@ in
 
       packages = with pkgs; [
         yazi
+
+        # NOTE: optional dependencies
+        ffmpegthumbnailer
+        fd
+        file
+        fzf
+        jq
+        poppler
+        ripgrep
+        unar
+        zoxide
       ];
     };
   };

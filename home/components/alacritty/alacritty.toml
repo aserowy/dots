@@ -1,6 +1,11 @@
-[font]
-size = 10
+import = [
+    "~/.config/alacritty/themes/tokyo-night.toml",
+]
 
-builtin_box_drawing = true
+shell = "nu"
+
+[font]
+size = 12
+offset = { x = 0, y = 2 }
 
 normal = { family = 'UbuntuMono Nerd Font', style = 'Regular' }

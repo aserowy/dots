@@ -20,13 +20,8 @@ in
   config = mkIf cnfg.enable {
     home = {
       file = {
-        ".config/rio/config.toml" = {
-          source = ./config.toml;
-        };
-
-        ".config/rio/themes" = {
-          source = ./themes;
-        };
+        ".config/rio/config.toml".source = ./config.toml;
+        ".config/rio/themes".source = ./themes;
       };
 
       packages = with pkgs; [

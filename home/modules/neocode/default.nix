@@ -38,8 +38,6 @@ in
         neovim
         ripgrep
         unzip
-
-        # lf
         yazi
       ];
 

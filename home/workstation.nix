@@ -6,16 +6,16 @@
 
   home = {
     components = {
+      alacritty.enable = true;
       chrome.enable = true;
       docker.enable = true;
+
+      # NOTE: fallback terminal
       foot.enable = true;
+
       obsidian.enable = true;
       onedrive.enable = true;
       swww.enable = true;
-
-      # NOTE: for testing purposes
-      rio.enable = true; # no line height support
-      yazi.enable = true; # no stdout on file open
     };
 
     modules = {

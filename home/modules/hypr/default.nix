@@ -41,19 +41,21 @@ in
     mkIf cnfg.enable {
       home = {
         components = {
-          lf.enable = true;
-          rofi.enable = true;
-
-          foot = {
+          # foot = {
+          alacritty = {
             enable = true;
             enableAsHyprlandDefaultTerminal = true;
           };
+
+          rofi.enable = true;
+          yazi.enable = true;
         };
 
+        # TODO: enable configuration for tui explorer
         file = {
           ".config/hypr/hyprland.conf".source = builtins.toFile "hyprland-config" ''
             # programs
-            $explorer = ${tuiLaunch "lf"}
+            $explorer = ${tuiLaunch "yazi"}
             $terminal = ${cnfg.defaultTerminal}
 
             # additional config

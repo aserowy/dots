@@ -5,15 +5,33 @@ let
   cnfg = config.home.components.alacritty;
 in
 {
-  options.home.components.alacritty.enable = mkEnableOption "alacritty";
+  options.home.components.alacritty = {
+    enable = mkEnableOption "alacritty";
+
+    enableAsHyprlandDefaultTerminal = mkOption {
+      type = types.bool;
+      default = false;
+      description = ''
+        If enabled, alacritty gets set as default terminal in Hyprland.
+      '';
+    };
+  };
 
   config = mkIf cnfg.enable {
     home = {
-      file.".config/alacritty/alacritty.toml".source = ./alacritty.toml;
+      file = {
+        ".config/alacritty/alacritty.toml".source = ./alacritty.toml;
+        ".config/alacritty/themes".source = ./themes;
+      };
 
       packages = with pkgs; [
         alacritty
       ];
+    };
+
+    home.modules.hyprland = mkIf cnfg.enableAsHyprlandDefaultTerminal {
+      defaultTerminal = "alacritty";
+      tuiLaunchCommand = "alacritty --command [PROG]";
     };
   };
 }
