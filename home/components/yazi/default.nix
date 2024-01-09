@@ -9,9 +9,14 @@ in
 
   config = mkIf cnfg.enable {
     home = {
-      # file.".config/yazi/yazi.lua" = {
-      #   source = ./yazi.lua;
-      # };
+      file = {
+        ".config/yazi/yazi.toml" = {
+          source = ./yazi.toml;
+        };
+        ".config/yazi/theme.toml" = {
+          source = ./theme.toml;
+        };
+      };
 
       packages = with pkgs; [
         yazi
