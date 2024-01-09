@@ -63,13 +63,10 @@ export def create_or_focus_hypr_ws_with [verb: string, name: string] {
         let id = (get_hypr_workspace_id_by_name $workspaces $name)
 
         run-external --redirect-stdout --redirect-stderr 'hyprctl' dispatch $verb $id
-            | ignore 
+            | ignore
 
         run-external --redirect-stdout --redirect-stderr 'hyprctl' dispatch renameworkspace $id $name
-            | ignore 
-
-        # FIX: after https://github.com/Alexays/Waybar/pull/2679 gets merged
-        run-external --redirect-stdout --redirect-stderr 'pkill' '-SIGUSR2' 'waybar'
+            | ignore
     }
 }
 
@@ -96,7 +93,7 @@ def get_hypr_workspace_id_by_name [workspaces: list<any>, name: string] {
         | where id >= $min
         | append {id: 0, name: $name}
         | sort-by name --ignore-case --natural)
-    
+
     mut switch = true;
     for ws in $sorted {
         if $ws.id == 0 {
