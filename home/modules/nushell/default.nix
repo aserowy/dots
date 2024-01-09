@@ -36,6 +36,7 @@ in
 
         shellAliases = {
           cat = "bat";
+          y = "yazi";
 
           gad = "git add";
           gada = "git add --all";
