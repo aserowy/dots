@@ -1,5 +1,6 @@
 import = [
     "~/.config/alacritty/themes/tokyo-night.toml",
+    "~/AppData/Roaming/alacritty/themes/tokyo-night.toml",
 ]
 
 shell = "nu"
