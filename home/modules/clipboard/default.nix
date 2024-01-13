@@ -25,7 +25,7 @@ in
     };
   };
 
-  config = {
+  config = mkIf cnfg.enabled {
     home = {
       file.".config/clipman/open_history.nu".source = ./open_history.nu;
 
