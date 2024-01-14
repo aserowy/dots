@@ -25,6 +25,7 @@ in
       packages = with pkgs; [
         bat
         bottom
+        broot
         gh
         curl
         ncurses
