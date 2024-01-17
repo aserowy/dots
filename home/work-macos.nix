@@ -12,11 +12,13 @@
 
     components = {
       docker.enable = true;
+      wezterm.enable = true;
     };
 
     packages = with pkgs; [
       nerdfonts
       obsidian
+      spotify
     ];
 
     activation.trampolineApps =
