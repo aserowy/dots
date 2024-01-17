@@ -26,8 +26,10 @@ in
         bat
         bottom
         broot
-        gh
         curl
+        gh
+        # TODO: add component for lazygit
+        lazygit
         ncurses
         tailspin
         tree
