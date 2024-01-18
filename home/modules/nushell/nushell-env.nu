@@ -30,4 +30,5 @@ starship init nu | save --force ~/.cache/starship/init.nu
 mkdir ~/.cache/zoxide
 zoxide init nushell
 | str replace "def-env" "def --env" --all
+| str replace "-- $rest" "-- ...$rest" --all
 | save --force ~/.cache/zoxide/init.nu
