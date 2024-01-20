@@ -37,15 +37,15 @@
   };
   tmux-continuum = {
     pname = "tmux-continuum";
-    version = "3e4bc35da41f956c873aea716c97555bf1afce5d";
+    version = "0698e8f4b17d6454c71bf5212895ec055c578da0";
     src = fetchFromGitHub {
       owner = "tmux-plugins";
       repo = "tmux-continuum";
-      rev = "3e4bc35da41f956c873aea716c97555bf1afce5d";
+      rev = "0698e8f4b17d6454c71bf5212895ec055c578da0";
       fetchSubmodules = false;
-      sha256 = "sha256-Z10DPP5svAL6E8ZETcosmj25RkA1DTBhn3AkJ7TDyN8=";
+      sha256 = "sha256-W71QyLwC/MXz3bcLR2aJeWcoXFI/A3itjpcWKAdVFJY=";
     };
-    date = "2022-07-19";
+    date = "2024-01-20";
   };
   tmux-easy-motion = {
     pname = "tmux-easy-motion";
