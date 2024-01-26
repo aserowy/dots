@@ -238,12 +238,12 @@
         },
         "pinned": false,
         "src": {
-            "name": "remote-containers-0.337.0.zip",
-            "sha256": "sha256-VP085X86tK1Os4zyaGUksaY1DtDIsUqcxphfXEcd/48=",
+            "name": "remote-containers-0.338.0.zip",
+            "sha256": "sha256-KRUg0af8gHLMEJ5mqYFVMgGYEzWWYVN8iBXZjqHjQBE=",
             "type": "url",
-            "url": "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.337.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+            "url": "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.338.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
-        "version": "0.337.0"
+        "version": "0.338.0"
     },
     "vscode-extensions-remote-wsl": {
         "cargoLocks": null,
@@ -256,12 +256,12 @@
         },
         "pinned": false,
         "src": {
-            "name": "remote-wsl-0.81.9.zip",
-            "sha256": "sha256-JhIttde2hW5qpnKgIOCXIiJOWsfsvjfNqBKk7Xq1zyk=",
+            "name": "remote-wsl-0.86.0.zip",
+            "sha256": "sha256-pjIaklefBr18XHNZAJmgcW1RroBvcd8aN2YCk7HOwDg=",
             "type": "url",
-            "url": "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-wsl/0.81.9/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+            "url": "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-wsl/0.86.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
-        "version": "0.81.9"
+        "version": "0.86.0"
     },
     "vscode-extensions-todo-tree": {
         "cargoLocks": null,
