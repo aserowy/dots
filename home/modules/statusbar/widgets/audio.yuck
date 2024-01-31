@@ -7,6 +7,7 @@
 (defwidget audio []
     (eventbox
         :onclick "hyprctl dispatch exec 'wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle'"
+        :onmiddleclick  "hyprctl dispatch exec $(realpath ./widgets/set_next_audio_output.nu)"
         :onrightclick "hyprctl dispatch exec pavucontrol"
         (label
             :class "nerd-icon ${volume.muted ? 'warning' : ''}"
