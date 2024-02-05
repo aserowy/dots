@@ -139,11 +139,11 @@
   };
   vscode-extensions-remote-containers = {
     pname = "vscode-extensions-remote-containers";
-    version = "0.339.0";
+    version = "0.341.0";
     src = fetchurl {
-      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.339.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "remote-containers-0.339.0.zip";
-      sha256 = "sha256-H/mjQ4CL8Ylmo5F5rV/3U57yAkc96lxDbAs36kKbkdY=";
+      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.341.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "remote-containers-0.341.0.zip";
+      sha256 = "sha256-Kn/RGsLlzL5o47CJLcKOg6i6EnVVifBgt7cIq6V0HYQ=";
     };
     publisher = "ms-vscode-remote";
     name = "remote-containers";
