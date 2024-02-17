@@ -48,14 +48,13 @@ in
           };
 
           rofi.enable = true;
-          yazi.enable = true;
         };
 
         # TODO: enable configuration for tui explorer
         file = {
           ".config/hypr/hyprland.conf".source = builtins.toFile "hyprland-config" ''
             # programs
-            $explorer = ${tuiLaunch "yazi"}
+            $explorer = ${tuiLaunch "y1337"}
             $terminal = ${cnfg.defaultTerminal}
 
             # additional config

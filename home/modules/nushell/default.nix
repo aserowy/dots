@@ -16,6 +16,7 @@ in
 
       packages = with pkgs; [
         carapace
+        y1337
         zoxide
       ];
     };
@@ -36,7 +37,7 @@ in
 
         shellAliases = {
           cat = "bat";
-          y = "yazi";
+          y = "y1337";
 
           gad = "git add";
           gada = "git add --all";
