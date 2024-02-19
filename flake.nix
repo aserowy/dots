@@ -13,13 +13,13 @@
       url = "github:aserowy/neocode";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    y1337 = {
-      url = "github:aserowy/y1337";
+    yeet = {
+      url = "github:aserowy/yeet";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { fenix, hardware, home, neocode, nixpkgs, y1337, ... }: {
+  outputs = { fenix, hardware, home, neocode, nixpkgs, yeet, ... }: {
     devShells = {
       aarch64-darwin.default = import ./.dev { pkgs = nixpkgs.legacyPackages.aarch64-darwin; };
       x86_64-linux.default = import ./.dev { pkgs = nixpkgs.legacyPackages.x86_64-linux; };
@@ -33,7 +33,7 @@
           {
             nixpkgs.overlays = [
               neocode.overlays.default
-              y1337.overlays.default
+              yeet.overlays.default
               (import ./pkgs)
             ];
           }
@@ -48,7 +48,7 @@
           {
             nixpkgs.overlays = [
               neocode.overlays.default
-              y1337.overlays.default
+              yeet.overlays.default
               (import ./pkgs)
             ];
           }
@@ -63,7 +63,7 @@
           {
             nixpkgs.overlays = [
               neocode.overlays.default
-              y1337.overlays.default
+              yeet.overlays.default
               (import ./pkgs)
             ];
           }
@@ -81,7 +81,7 @@
             nixpkgs.overlays = [
               fenix.overlays.default
               neocode.overlays.default
-              y1337.overlays.default
+              yeet.overlays.default
               (import ./pkgs)
             ];
           }
@@ -113,7 +113,7 @@
             nixpkgs.overlays = [
               fenix.overlays.default
               neocode.overlays.default
-              y1337.overlays.default
+              yeet.overlays.default
               (import ./pkgs)
             ];
           }
@@ -144,7 +144,7 @@
             nixpkgs.overlays = [
               fenix.overlays.default
               neocode.overlays.default
-              y1337.overlays.default
+              yeet.overlays.default
               (import ./pkgs)
             ];
           }

@@ -33,7 +33,7 @@ in
         ncurses
         tailspin
         tree
-        y1337
+        yeet
 
         unixtools.watch
       ];

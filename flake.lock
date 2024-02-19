@@ -6,11 +6,11 @@
         "rust-analyzer-src": "rust-analyzer-src"
       },
       "locked": {
-        "lastModified": 1708237286,
-        "narHash": "sha256-vnELK6BmGDGeoWe/Ybp2LXKEojamaFTu5ZMbwYSkT3w=",
+        "lastModified": 1708323807,
+        "narHash": "sha256-ruXYKlIAuvSIyaV6DsoYFqtcSWIS8x4QbtZ4lZyn5no=",
         "owner": "nix-community",
         "repo": "fenix",
-        "rev": "39318c8f48be57bc2c8fd5325ae1005fffa9f1f2",
+        "rev": "cacd01c5149b8b1f9ec0e667c551f0fbcd6edd0f",
         "type": "github"
       },
       "original": {
@@ -96,11 +96,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1708031129,
-        "narHash": "sha256-EH20hJfNnc1/ODdDVat9B7aKm0B95L3YtkIRwKLvQG8=",
+        "lastModified": 1708294481,
+        "narHash": "sha256-DZtxmeb4OR7iCaKUUuq05ADV2rX8WReZEF7Tq//W0+Y=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "3d6791b3897b526c82920a2ab5f61d71985b3cf8",
+        "rev": "a54e05bc12d88ff2df941d0dc1183cb5235fa438",
         "type": "github"
       },
       "original": {
@@ -205,7 +205,7 @@
         "home": "home",
         "neocode": "neocode",
         "nixpkgs": "nixpkgs_2",
-        "y1337": "y1337"
+        "yeet": "yeet"
       }
     },
     "rust-analyzer-src": {
@@ -229,7 +229,7 @@
       "inputs": {
         "flake-utils": "flake-utils",
         "nixpkgs": [
-          "y1337",
+          "yeet",
           "nixpkgs"
         ]
       },
@@ -262,7 +262,7 @@
         "type": "github"
       }
     },
-    "y1337": {
+    "yeet": {
       "inputs": {
         "flake-parts": "flake-parts_2",
         "nixpkgs": [
@@ -271,16 +271,16 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1708242696,
-        "narHash": "sha256-DUVJWwZx6dxo7TH9lDm5lfD2SN5PYoRhp2A11CCf5JY=",
+        "lastModified": 1708359632,
+        "narHash": "sha256-QCwv+ln9kiBQEwqmacFL6s/TDU5QRsVa5yqOjQfPCeo=",
         "owner": "aserowy",
-        "repo": "y1337",
-        "rev": "56979853cbd58dd81b1ee03a3d5c020ec326395e",
+        "repo": "yeet",
+        "rev": "9643520b6693c24a07ab27ebcd93995f7c6387e8",
         "type": "github"
       },
       "original": {
         "owner": "aserowy",
-        "repo": "y1337",
+        "repo": "yeet",
         "type": "github"
       }
     }

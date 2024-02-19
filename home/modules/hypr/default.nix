@@ -54,7 +54,7 @@ in
         file = {
           ".config/hypr/hyprland.conf".source = builtins.toFile "hyprland-config" ''
             # programs
-            $explorer = ${tuiLaunch "y1337"}
+            $explorer = ${tuiLaunch "yeet"}
             $terminal = ${cnfg.defaultTerminal}
 
             # additional config

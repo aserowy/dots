@@ -38,7 +38,7 @@ in
         neovim
         ripgrep
         unzip
-        y1337
+        yeet
       ];
 
       sessionVariables = { EDITOR = "nvim"; };
