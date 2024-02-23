@@ -9,6 +9,10 @@
   home = {
     homeDirectory = "/home/uitdeveloper";
     username = "uitdeveloper";
+
+    components = {
+      alacritty.enable = true;
+    };
   };
 
   programs = {
