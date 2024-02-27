@@ -14,49 +14,6 @@ local onedark = {
 
 local theme = onedark
 
-wezterm.on("update-right-status", function(window, pane)
-    local date = wezterm.strftime("%Y-%m-%d %H:%M")
-    local hostname = " " .. wezterm.hostname() .. " "
-
-    local cwd = ""
-    if pane:get_current_working_dir() ~= nil then
-        cwd = " " .. pane:get_current_working_dir():sub(8) .. " "
-    end
-
-    local battery = ""
-    for _, b in ipairs(wezterm.battery_info()) do
-        battery = "  " .. string.format("%.0f%%", b.state_of_charge * 100) .. " "
-    end
-
-    window:set_right_status(wezterm.format({
-        { Foreground = { Color = theme.foreground } },
-        { Text = cwd },
-        { Background = { Color = theme.brights[1] } },
-        { Text = battery },
-        { Foreground = { Color = theme.background } },
-        { Background = { Color = theme.brights[6] } },
-        { Text = "  " .. date .. " " },
-        { Foreground = { Color = theme.background } },
-        { Background = { Color = theme.brights[5] } },
-        { Text = hostname },
-    }))
-end)
-
--- function(tab, tabs, panes, config, hover, max_width)
-wezterm.on("format-tab-title", function(tab, _, _, _, _, max_width)
-    local title = tab.tab_title
-    if not title or #title == 0 then
-        title = tab.active_pane.title
-    end
-
-    local name = string.sub(title, 1, max_width)
-    local padding = max_width - #name
-    local pad_left = math.floor(padding / 2)
-    local pad_right = math.ceil(padding / 2)
-
-    return string.rep(" ", pad_left) .. name .. string.rep(" ", pad_right)
-end)
-
 local M = {
     -- domains
     ssh_domains = {
@@ -116,50 +73,9 @@ local M = {
     line_height = 1.1,
     -- key mappings
     disable_default_key_bindings = true,
-    leader = { mods = "CTRL", key = "c" },
     keys = {
-        { mods = "LEADER|CTRL", key = "c", action = wezterm.action.SendKey({ key = "c", mods = "CTRL" }) },
-        { mods = "CTRL|SHIFT",  key = "p", action = wezterm.action.ActivateCommandPalette },
-        { mods = "LEADER|CTRL", key = "f", action = "ShowLauncher" },
-        { mods = "LEADER|CTRL", key = "/", action = wezterm.action({ Search = { CaseSensitiveString = "" } }) },
-        { mods = "LEADER|CTRL", key = "y", action = "ActivateCopyMode" },
-        {
-            mods = "LEADER|CTRL",
-            key = "v",
-            action = wezterm.action({ SplitHorizontal = { domain = "CurrentPaneDomain" } }),
-        },
-        {
-            mods = "LEADER|CTRL",
-            key = "x",
-            action = wezterm.action({ SplitVertical = { domain = "CurrentPaneDomain" } }),
-        },
-        {
-            mods = "LEADER|CTRL",
-            key = "r",
-            action = wezterm.action.PromptInputLine({
-                description = "Enter new name for tab",
-                action = wezterm.action_callback(function(window, _, line)
-                    if line then
-                        window:active_tab():set_title(line)
-                    end
-                end),
-            }),
-        },
-
-        { mods = "CTRL|ALT",    key = "Enter", action = "ToggleFullScreen" },
-        { mods = "CTRL|ALT",    key = "h",     action = wezterm.action.AdjustPaneSize({ "Left", 1 }) },
-        { mods = "CTRL|ALT",    key = "l",     action = wezterm.action.AdjustPaneSize({ "Right", 1 }) },
-        { mods = "CTRL|ALT",    key = "k",     action = wezterm.action.AdjustPaneSize({ "Up", 1 }) },
-        { mods = "CTRL|ALT",    key = "j",     action = wezterm.action.AdjustPaneSize({ "Down", 1 }) },
-        { mods = "CTRL|SHIFT",  key = "c",     action = wezterm.action({ CopyTo = "Clipboard" }) },
-        { mods = "CTRL|SHIFT",  key = "v",     action = wezterm.action({ PasteFrom = "Clipboard" }) },
-        { mods = "LEADER|CTRL", key = "n",     action = wezterm.action({ ActivateTabRelative = 1 }) },
-        { mods = "LEADER|CTRL", key = "p",     action = wezterm.action({ ActivateTabRelative = -1 }) },
-        { mods = "LEADER|CTRL", key = "h",     action = wezterm.action({ ActivatePaneDirection = "Left" }) },
-        { mods = "LEADER|CTRL", key = "l",     action = wezterm.action({ ActivatePaneDirection = "Right" }) },
-        { mods = "LEADER|CTRL", key = "k",     action = wezterm.action({ ActivatePaneDirection = "Up" }) },
-        { mods = "LEADER|CTRL", key = "j",     action = wezterm.action({ ActivatePaneDirection = "Down" }) },
-        { mods = "LEADER|CTRL", key = "z",     action = "TogglePaneZoomState" },
+        { mods = "CTRL|SHIFT", key = "c", action = wezterm.action({ CopyTo = "Clipboard" }) },
+        { mods = "CTRL|SHIFT", key = "v", action = wezterm.action({ PasteFrom = "Clipboard" }) },
     },
     mouse_bindings = {
         {

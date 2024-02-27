@@ -2,7 +2,10 @@
   description = "NixOS configurations";
 
   inputs = {
-    fenix.url = "github:nix-community/fenix";
+    darwin = {
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     hardware.url = "github:NixOS/nixos-hardware/master";
     home = {
       url = "github:nix-community/home-manager";
@@ -19,43 +22,36 @@
     };
   };
 
-  outputs = { fenix, hardware, home, neocode, nixpkgs, yeet, ... }: {
+  outputs = { self, darwin, hardware, home, neocode, nixpkgs, yeet, ... }: {
     devShells = {
       aarch64-darwin.default = import ./.dev { pkgs = nixpkgs.legacyPackages.aarch64-darwin; };
       x86_64-linux.default = import ./.dev { pkgs = nixpkgs.legacyPackages.x86_64-linux; };
     };
 
+    darwinConfigurations."FR6NP4LHY7" = darwin.lib.darwinSystem {
+      modules = [
+        {
+          nixpkgs.overlays = [
+            neocode.overlays.default
+            yeet.overlays.default
+            (import ./pkgs)
+          ];
+        }
+
+        home.darwinModules.home-manager
+        {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            users."alexander.serowy" = import ./home/work-macos.nix;
+          };
+        }
+
+        (import ./systems/fr6np4lhy7 self.rev or self.dirtyRev or null)
+      ];
+    };
+
     homeConfigurations = {
-      "alexander.serowy@CR345Q2G4C" = home.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-
-        modules = [
-          {
-            nixpkgs.overlays = [
-              neocode.overlays.default
-              yeet.overlays.default
-              (import ./pkgs)
-            ];
-          }
-
-          ./home/work-macos.nix
-        ];
-      };
-      "serowy@DESKTOP-UVAKAQL" = home.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-
-        modules = [
-          {
-            nixpkgs.overlays = [
-              neocode.overlays.default
-              yeet.overlays.default
-              (import ./pkgs)
-            ];
-          }
-
-          ./home/work-wsl.nix
-        ];
-      };
       "uitdeveloper@UIN01PC013901" = home.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
 
@@ -79,7 +75,6 @@
         modules = [
           {
             nixpkgs.overlays = [
-              fenix.overlays.default
               neocode.overlays.default
               yeet.overlays.default
               (import ./pkgs)
@@ -111,7 +106,6 @@
         modules = [
           {
             nixpkgs.overlays = [
-              fenix.overlays.default
               neocode.overlays.default
               yeet.overlays.default
               (import ./pkgs)
@@ -142,7 +136,6 @@
         modules = [
           {
             nixpkgs.overlays = [
-              fenix.overlays.default
               neocode.overlays.default
               yeet.overlays.default
               (import ./pkgs)
