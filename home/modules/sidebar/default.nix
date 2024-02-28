@@ -34,7 +34,7 @@ in
       file.".config/eww/sidebar/widgets/".source = ./widgets;
 
       packages = with pkgs; [
-        eww-wayland
+        eww
         playerctl
       ];
     };

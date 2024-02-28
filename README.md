@@ -1,28 +1,5 @@
 # Dotfiles
 
-## tmux
-
-> cheatsheet for tmux <https://gist.github.com/MohamedAlaa/2961058>
-
-The prefix changed to <kbd>ctrl + t</kbd> to overwrite the terminal key inside
-neovim while using tmux.
-
-### bindings
-
-| keys                             | effect                                                  |
-| -------------------------------- | ------------------------------------------------------- |
-| <kbd>ctrl + t</kbd> <kbd>v</kbd> | split window vertically                                 |
-| <kbd>ctrl + t</kbd> <kbd>x</kbd> | split window horizontally                               |
-| <kbd>ctrl + t</kbd> <kbd>w</kbd> | trigger tmux-easy-motion (bd-w)                         |
-| <kbd>ctrl + h</kbd>              | moves to left pane                                      |
-| <kbd>ctrl + j</kbd>              | moves to lower pane                                     |
-| <kbd>ctrl + k</kbd>              | moves to upper pane                                     |
-| <kbd>ctrl + l</kbd>              | moves to right pane                                     |
-| <kbd>alt + h</kbd>               | (not working in vim) in/decrease size by 5 to the left  |
-| <kbd>alt + j</kbd>               | (not working in vim) in/decrease size by 5 down         |
-| <kbd>alt + k</kbd>               | (not working in vim) in/decrease size by 5 up           |
-| <kbd>alt + l</kbd>               | (not working in vim) in/decrease size by 5 to the right |
-
 ## install nixpkgs
 
 ### fonts

@@ -7,10 +7,14 @@ def main [action: string] {
 
         (eww open --config . $dashboard)
     } else {
-        (eww windows -c .)
+        (eww active-windows -c .)
             | lines
-            | where {|it| $it | str contains "*dashboard_monitor_"}
-            | each {|row| $row | str substring 1..}
+            | where {|it| $it | str contains "dashboard_monitor_"}
+            | each {|row|
+                let split_index = ($row | str index-of ':')
+                let target = ($row | str substring 0..$split_index)
+                return $target
+            }
             | each {|row| (eww close --config . $row)}
     }
 }

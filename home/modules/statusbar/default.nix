@@ -30,7 +30,7 @@ in
       };
 
       packages = with pkgs; [
-        eww-wayland
+        eww
         jq
         pavucontrol
         slurp
