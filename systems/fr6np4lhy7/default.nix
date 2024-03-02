@@ -1,6 +1,4 @@
 revision: { ... }: {
-  services.nix-daemon.enable = true;
-
   nix.settings.experimental-features = "nix-command flakes";
 
   system = {
@@ -15,10 +13,31 @@ revision: { ... }: {
     home = "/Users/alexander.serowy";
   };
 
-  programs.zsh.enable = true;
-
   homebrew = {
     enable = true;
     casks = [ "google-chrome" "microsoft-edge" "obsidian" "spotify" "wezterm" ];
+  };
+
+  programs.zsh.enable = true;
+
+  services = {
+    nix-daemon.enable = true;
+
+    yabai = {
+      enable = true;
+    };
+  };
+
+  system.defaults = {
+    dock = {
+      autohide = true;
+      orientation = "left";
+      show-recents = false;
+      showhidden = true;
+      static-only = true;
+      tilesize = 32;
+    };
+
+    SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
   };
 }
