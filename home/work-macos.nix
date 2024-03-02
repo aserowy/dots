@@ -15,12 +15,13 @@
     };
 
     file = {
+      # NOTE: wezterm is installed on system level with brew
       ".config/wezterm/wezterm.lua".source = ./components/wezterm/wezterm.lua;
 
       ".zshrc".source = builtins.toFile "user-zshrc" ''
         export PATH=/run/current-system/sw/bin:/etc/profiles/per-user/alexander.serowy/bin:$PATH
 
-        nu
+        nu; exit
       '';
     };
 
