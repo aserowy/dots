@@ -1,5 +1,5 @@
 {
-  description = "NixOS configurations";
+  description = "nix configurations";
 
   inputs = {
     darwin = {
