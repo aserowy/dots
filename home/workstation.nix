@@ -32,6 +32,7 @@
           wine64Packages.staging
         ];
       })
+      remmina
       spotify
     ];
   };
