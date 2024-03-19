@@ -17,27 +17,12 @@
 (include "./widgets/notifications.yuck")
 (include "./widgets/spotify.yuck")
 
-;; FIX: dual monitor windows
-;; https://github.com/elkowar/eww/issues/519
-(defwindow dashboard_monitor_0
+(defwindow dashboard_monitor
     :geometry (geometry
         :height "100%"
         :width "100%"
         :anchor "top right"
     )
-    :monitor 0
-    :stacking "fg"
-    :namespace "eww_dashboard"
-    (dashboard)
-)
-
-(defwindow dashboard_monitor_1
-    :geometry (geometry
-        :height "100%"
-        :width "100%"
-        :anchor "top right"
-    )
-    :monitor 1
     :stacking "fg"
     :namespace "eww_dashboard"
     (dashboard)
