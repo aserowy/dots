@@ -7,11 +7,6 @@
     ./hardware-configuration.nix
   ];
 
-  # FIX: after https://github.com/NixOS/nixpkgs/issues/263764 resolved
-  nixpkgs.config.permittedInsecurePackages = [
-    "electron-24.8.6"
-  ];
-
   boot = {
     loader = {
       systemd-boot.enable = true;

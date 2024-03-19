@@ -12,7 +12,6 @@
     ./git
     ./gitui
     ./lf
-    ./obsidian
     ./onedrive
     ./rio
     ./rofi

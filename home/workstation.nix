@@ -13,7 +13,6 @@
       # NOTE: fallback terminal
       foot.enable = true;
 
-      obsidian.enable = true;
       onedrive.enable = true;
       swww.enable = true;
     };
@@ -32,6 +31,7 @@
           wine64Packages.staging
         ];
       })
+      obsidian
       remmina
       spotify
     ];
