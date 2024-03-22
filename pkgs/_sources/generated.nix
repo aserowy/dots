@@ -139,22 +139,22 @@
   };
   vscode-extensions-remote-containers = {
     pname = "vscode-extensions-remote-containers";
-    version = "0.350.0";
+    version = "0.352.0";
     src = fetchurl {
-      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.350.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "remote-containers-0.350.0.zip";
-      sha256 = "sha256-6GoDRUK/OkQW215ZQB7UYOTrWDzZq44MYUPqsPYw/iM=";
+      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.352.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "remote-containers-0.352.0.zip";
+      sha256 = "sha256-bLkMJcC4IS9fAIzEKBtjUkqAzKQUGrGpp/LR1Ak81A4=";
     };
     publisher = "ms-vscode-remote";
     name = "remote-containers";
   };
   vscode-extensions-remote-wsl = {
     pname = "vscode-extensions-remote-wsl";
-    version = "0.86.0";
+    version = "0.88.0";
     src = fetchurl {
-      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-wsl/0.86.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "remote-wsl-0.86.0.zip";
-      sha256 = "sha256-pjIaklefBr18XHNZAJmgcW1RroBvcd8aN2YCk7HOwDg=";
+      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-wsl/0.88.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "remote-wsl-0.88.0.zip";
+      sha256 = "sha256-rEEIZMXsA3Hg0VOjFI9tJ9jDSZITs2+ORb7JId/dRSA=";
     };
     publisher = "ms-vscode-remote";
     name = "remote-wsl";
