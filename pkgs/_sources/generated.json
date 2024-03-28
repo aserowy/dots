@@ -33,15 +33,15 @@
             "name": null,
             "owner": "spicetify",
             "repo": "spicetify-cli",
-            "rev": "v2.36.0",
-            "sha256": "sha256-Eth/ihsn/+XVi3YtOdnyzbvMkpR1RBX9Tz7RFQr8MzU=",
+            "rev": "v2.36.1",
+            "sha256": "sha256-VhY1BmloqJDmq4Q1Dp01oVIZEbah7e9872zC082R0l0=",
             "type": "github"
         },
-        "version": "v2.36.0"
+        "version": "v2.36.1"
     },
     "spicetify-themes": {
         "cargoLocks": null,
-        "date": "2024-03-08",
+        "date": "2024-03-28",
         "extract": null,
         "name": "spicetify-themes",
         "passthru": null,
@@ -53,11 +53,11 @@
             "name": null,
             "owner": "spicetify",
             "repo": "spicetify-themes",
-            "rev": "d7e33260b06575a300caaa5ddf7d901381da3b51",
-            "sha256": "sha256-JIbz6+SPgvnM0jsmkE+W+A2hrY0lS1LLq9Yx5GqwiQA=",
+            "rev": "fe3ac5808ad8e505ca166eca18dd0c03db748389",
+            "sha256": "sha256-2uNG6rGdx+m/42rQBF5p9C5ZdzPrtAiaCJ2uqfbP2Lg=",
             "type": "github"
         },
-        "version": "d7e33260b06575a300caaa5ddf7d901381da3b51"
+        "version": "fe3ac5808ad8e505ca166eca18dd0c03db748389"
     },
     "tmux-continuum": {
         "cargoLocks": null,
@@ -346,11 +346,11 @@
         },
         "pinned": false,
         "src": {
-            "name": "vscode-neovim-1.8.0.zip",
-            "sha256": "sha256-HT8u/L9q31AAgKTOyKAJceAaRmuuuHR5BnFNUDRx/jk=",
+            "name": "vscode-neovim-1.8.1.zip",
+            "sha256": "sha256-qHuAIZCH4SyDDn+H4BYLSR6fy7Qwl77mDX7vxYDPH08=",
             "type": "url",
-            "url": "https://asvetliakov.gallery.vsassets.io/_apis/public/gallery/publisher/asvetliakov/extension/vscode-neovim/1.8.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+            "url": "https://asvetliakov.gallery.vsassets.io/_apis/public/gallery/publisher/asvetliakov/extension/vscode-neovim/1.8.1/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
-        "version": "1.8.0"
+        "version": "1.8.1"
     }
 }

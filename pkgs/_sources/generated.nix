@@ -14,26 +14,26 @@
   };
   spicetify-cli = {
     pname = "spicetify-cli";
-    version = "v2.36.0";
+    version = "v2.36.1";
     src = fetchFromGitHub {
       owner = "spicetify";
       repo = "spicetify-cli";
-      rev = "v2.36.0";
+      rev = "v2.36.1";
       fetchSubmodules = false;
-      sha256 = "sha256-Eth/ihsn/+XVi3YtOdnyzbvMkpR1RBX9Tz7RFQr8MzU=";
+      sha256 = "sha256-VhY1BmloqJDmq4Q1Dp01oVIZEbah7e9872zC082R0l0=";
     };
   };
   spicetify-themes = {
     pname = "spicetify-themes";
-    version = "d7e33260b06575a300caaa5ddf7d901381da3b51";
+    version = "fe3ac5808ad8e505ca166eca18dd0c03db748389";
     src = fetchFromGitHub {
       owner = "spicetify";
       repo = "spicetify-themes";
-      rev = "d7e33260b06575a300caaa5ddf7d901381da3b51";
+      rev = "fe3ac5808ad8e505ca166eca18dd0c03db748389";
       fetchSubmodules = false;
-      sha256 = "sha256-JIbz6+SPgvnM0jsmkE+W+A2hrY0lS1LLq9Yx5GqwiQA=";
+      sha256 = "sha256-2uNG6rGdx+m/42rQBF5p9C5ZdzPrtAiaCJ2uqfbP2Lg=";
     };
-    date = "2024-03-08";
+    date = "2024-03-28";
   };
   tmux-continuum = {
     pname = "tmux-continuum";
@@ -205,11 +205,11 @@
   };
   vscode-extensions-vscode-neovim = {
     pname = "vscode-extensions-vscode-neovim";
-    version = "1.8.0";
+    version = "1.8.1";
     src = fetchurl {
-      url = "https://asvetliakov.gallery.vsassets.io/_apis/public/gallery/publisher/asvetliakov/extension/vscode-neovim/1.8.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "vscode-neovim-1.8.0.zip";
-      sha256 = "sha256-HT8u/L9q31AAgKTOyKAJceAaRmuuuHR5BnFNUDRx/jk=";
+      url = "https://asvetliakov.gallery.vsassets.io/_apis/public/gallery/publisher/asvetliakov/extension/vscode-neovim/1.8.1/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "vscode-neovim-1.8.1.zip";
+      sha256 = "sha256-qHuAIZCH4SyDDn+H4BYLSR6fy7Qwl77mDX7vxYDPH08=";
     };
     publisher = "asvetliakov";
     name = "vscode-neovim";
