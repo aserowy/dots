@@ -12,9 +12,7 @@ in
       components = {
         fzf.enable = true;
         git.enable = true;
-        gitui.enable = true;
         ssh.enable = true;
-        yazi.enable = true;
       };
 
       modules = {
@@ -25,15 +23,13 @@ in
       packages = with pkgs; [
         bat
         bottom
-        broot
         curl
-        gh
         # TODO: add component for lazygit
         lazygit
         ncurses
         tailspin
-        tree
         yeet
+        zellij
 
         unixtools.watch
       ];
