@@ -25,9 +25,4 @@ def main [user: string] {
     rm -rfp $"($nvim_path)"
     mkdir $"($nvim_path)"
     sh -c $"cp -rL ~/.config/nvim ($appdata)/Local"
-
-    let yazi_path = $"($appdata)/Roaming/yazi"
-    rm -rfp $"($yazi_path)/config"
-    mkdir $"($yazi_path)/config"
-    sh -c $"cp -rL ~/.config/yazi/* ($yazi_path)/config"
 }
