@@ -25,15 +25,15 @@
   };
   spicetify-themes = {
     pname = "spicetify-themes";
-    version = "fe3ac5808ad8e505ca166eca18dd0c03db748389";
+    version = "4d596125c52b8ffc3fb4a7a243d0c37e9892b150";
     src = fetchFromGitHub {
       owner = "spicetify";
       repo = "spicetify-themes";
-      rev = "fe3ac5808ad8e505ca166eca18dd0c03db748389";
+      rev = "4d596125c52b8ffc3fb4a7a243d0c37e9892b150";
       fetchSubmodules = false;
-      sha256 = "sha256-2uNG6rGdx+m/42rQBF5p9C5ZdzPrtAiaCJ2uqfbP2Lg=";
+      sha256 = "sha256-ziGeoK9TshSk7Md4fCCaUwfrrKBBXWsTiW8ZyOAo2pM=";
     };
-    date = "2024-03-28";
+    date = "2024-04-04";
   };
   tmux-continuum = {
     pname = "tmux-continuum";
@@ -139,11 +139,11 @@
   };
   vscode-extensions-remote-containers = {
     pname = "vscode-extensions-remote-containers";
-    version = "0.353.0";
+    version = "0.355.0";
     src = fetchurl {
-      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.353.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "remote-containers-0.353.0.zip";
-      sha256 = "sha256-ZVTvb/FeEAK6mo2PrwCth9SlkWkGIfwnB7rhwgNGzYk=";
+      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.355.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "remote-containers-0.355.0.zip";
+      sha256 = "sha256-Ju1hLN1hQBbs5TwW/q8loQeUXJ/Kdgwv9FPWvxaRXyg=";
     };
     publisher = "ms-vscode-remote";
     name = "remote-containers";
