@@ -25,5 +25,6 @@
     ./vscode-server
     ./wezterm
     ./yazi
+    ./zellij
   ];
 }

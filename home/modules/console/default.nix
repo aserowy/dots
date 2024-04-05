@@ -13,6 +13,7 @@ in
         fzf.enable = true;
         git.enable = true;
         ssh.enable = true;
+        zellij.enable = true;
       };
 
       modules = {
@@ -29,7 +30,6 @@ in
         ncurses
         tailspin
         yeet
-        zellij
 
         unixtools.watch
       ];
