@@ -35,6 +35,13 @@ in
 
   config = mkIf cnfg.enable {
     home.packages = with pkgs; [
+      # NOTE: fallback if beta is broken
+      (microsoft-edge.override {
+        commandLineArgs = [
+          "--enable-features=UseOzonePlatform,WebRTCPipeWireCapturer"
+          "--ozone-platform-hint=auto"
+        ];
+      })
       (microsoft-edge-beta.override {
         commandLineArgs = [
           "--enable-features=UseOzonePlatform,WebRTCPipeWireCapturer"
