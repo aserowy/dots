@@ -84,11 +84,11 @@
   };
   vscode-extensions-errorlens = {
     pname = "vscode-extensions-errorlens";
-    version = "3.16.0";
+    version = "3.17.0";
     src = fetchurl {
-      url = "https://usernamehw.gallery.vsassets.io/_apis/public/gallery/publisher/usernamehw/extension/errorlens/3.16.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "errorlens-3.16.0.zip";
-      sha256 = "sha256-Y3M/A5rYLkxQPRIZ0BUjhlkvixDae+wIRUsBn4tREFw=";
+      url = "https://usernamehw.gallery.vsassets.io/_apis/public/gallery/publisher/usernamehw/extension/errorlens/3.17.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "errorlens-3.17.0.zip";
+      sha256 = "sha256-E0EAzYukaiu/DKREEP4HQjRXPAqwB4cP2PwM1B3c0ok=";
     };
     publisher = "usernamehw";
     name = "errorlens";
@@ -205,11 +205,11 @@
   };
   vscode-extensions-vscode-neovim = {
     pname = "vscode-extensions-vscode-neovim";
-    version = "1.8.1";
+    version = "1.8.2";
     src = fetchurl {
-      url = "https://asvetliakov.gallery.vsassets.io/_apis/public/gallery/publisher/asvetliakov/extension/vscode-neovim/1.8.1/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "vscode-neovim-1.8.1.zip";
-      sha256 = "sha256-qHuAIZCH4SyDDn+H4BYLSR6fy7Qwl77mDX7vxYDPH08=";
+      url = "https://asvetliakov.gallery.vsassets.io/_apis/public/gallery/publisher/asvetliakov/extension/vscode-neovim/1.8.2/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "vscode-neovim-1.8.2.zip";
+      sha256 = "sha256-4LwuqUGWyDjC0q3/06xR7nfTDxCO8/C8MrfJWa0KslQ=";
     };
     publisher = "asvetliakov";
     name = "vscode-neovim";
