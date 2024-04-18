@@ -15,7 +15,14 @@ revision: { ... }: {
 
   homebrew = {
     enable = true;
-    casks = [ "google-chrome" "microsoft-edge" "obsidian" "spotify" "wezterm" ];
+    casks = [
+      "google-chrome"
+      "drawio"
+      "microsoft-edge"
+      "obsidian"
+      "spotify"
+      "wezterm"
+    ];
   };
 
   programs.zsh.enable = true;
