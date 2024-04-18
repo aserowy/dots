@@ -35,6 +35,7 @@
       obsidian
       remmina
       spotify
+      xboxdrv
     ];
   };
 }
