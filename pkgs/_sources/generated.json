@@ -13,11 +13,11 @@
             "name": null,
             "owner": "GitCredentialManager",
             "repo": "git-credential-manager",
-            "rev": "v2.4.1",
-            "sha256": "sha256-Uf0EXaGM4k9Aanz16B9xA2EcseXTI9lLCws/ZVNb3e8=",
+            "rev": "v2.5.0",
+            "sha256": "sha256-eRSTF9Ldj00cQbUzHzdMihte0+W4nZ9T/qg/L/yes/w=",
             "type": "github"
         },
-        "version": "v2.4.1"
+        "version": "v2.5.0"
     },
     "spicetify-cli": {
         "cargoLocks": null,
@@ -41,7 +41,7 @@
     },
     "spicetify-themes": {
         "cargoLocks": null,
-        "date": "2024-04-04",
+        "date": "2024-04-19",
         "extract": null,
         "name": "spicetify-themes",
         "passthru": null,
@@ -53,11 +53,11 @@
             "name": null,
             "owner": "spicetify",
             "repo": "spicetify-themes",
-            "rev": "4d596125c52b8ffc3fb4a7a243d0c37e9892b150",
-            "sha256": "sha256-ziGeoK9TshSk7Md4fCCaUwfrrKBBXWsTiW8ZyOAo2pM=",
+            "rev": "439051a271192fb685b54fde5588eac7f3515f01",
+            "sha256": "sha256-6ZEy/T2IQfAIzTnRidB/XptPKHdpdm2PJx7cMvLUW+E=",
             "type": "github"
         },
-        "version": "4d596125c52b8ffc3fb4a7a243d0c37e9892b150"
+        "version": "439051a271192fb685b54fde5588eac7f3515f01"
     },
     "tmux-continuum": {
         "cargoLocks": null,
@@ -238,12 +238,12 @@
         },
         "pinned": false,
         "src": {
-            "name": "remote-containers-0.359.0.zip",
-            "sha256": "sha256-vv55JA4IPqlFlYGTpUe3vXXXg9cF7PgNwbJCOu5yEBM=",
+            "name": "remote-containers-0.361.0.zip",
+            "sha256": "sha256-7Mfn9yWBm8AAGQpeQ3HRVaEyfKcBIT2dKkFRDnipMYs=",
             "type": "url",
-            "url": "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.359.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+            "url": "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.361.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
-        "version": "0.359.0"
+        "version": "0.361.0"
     },
     "vscode-extensions-remote-wsl": {
         "cargoLocks": null,
@@ -346,11 +346,11 @@
         },
         "pinned": false,
         "src": {
-            "name": "vscode-neovim-1.8.2.zip",
-            "sha256": "sha256-4LwuqUGWyDjC0q3/06xR7nfTDxCO8/C8MrfJWa0KslQ=",
+            "name": "vscode-neovim-1.8.3.zip",
+            "sha256": "sha256-4uBIayvSSgwfPzmUEfUF9gPSNk0q14hvGfM6P+6CZqo=",
             "type": "url",
-            "url": "https://asvetliakov.gallery.vsassets.io/_apis/public/gallery/publisher/asvetliakov/extension/vscode-neovim/1.8.2/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+            "url": "https://asvetliakov.gallery.vsassets.io/_apis/public/gallery/publisher/asvetliakov/extension/vscode-neovim/1.8.3/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
-        "version": "1.8.2"
+        "version": "1.8.3"
     }
 }
