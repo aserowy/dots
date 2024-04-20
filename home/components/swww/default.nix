@@ -1,8 +1,23 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, ... }:
 with lib;
 
 let
   cnfg = config.home.components.swww;
+
+  # FIX: pin to 0.9.1 till https://github.com/LGFae/swww/issues/275 is fixed
+  system = "x86_64-linux";
+
+  pkgsPinned = import
+    (builtins.fetchGit {
+      # Descriptive name to make the store path easier to identify
+      name = "my-old-revision";
+      url = "https://github.com/NixOS/nixpkgs/";
+      ref = "refs/heads/nixpkgs-unstable";
+      rev = "e89cf1c932006531f454de7d652163a9a5c86668";
+    })
+    {
+      inherit system;
+    };
 in
 {
   options.home.components.swww = {
@@ -29,7 +44,7 @@ in
     home = {
       file.".config/swww/wallpaper.sh".source = ./swww-wallpaper.sh;
 
-      packages = with pkgs; [
+      packages = with pkgsPinned; [
         swww
       ];
     };
