@@ -39,13 +39,13 @@ in
       (microsoft-edge.override {
         commandLineArgs = [
           "--enable-features=UseOzonePlatform,WebRTCPipeWireCapturer"
-          "--ozone-platform-hint=auto"
+          "--ozone-platform=wayland"
         ];
       })
       (microsoft-edge-beta.override {
         commandLineArgs = [
           "--enable-features=UseOzonePlatform,WebRTCPipeWireCapturer"
-          "--ozone-platform-hint=auto"
+          "--ozone-platform=wayland"
         ];
       })
     ];

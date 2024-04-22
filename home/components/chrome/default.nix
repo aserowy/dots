@@ -38,7 +38,7 @@ in
       (google-chrome.override {
         commandLineArgs = [
           "--enable-features=UseOzonePlatform,WebRTCPipeWireCapturer"
-          "--ozone-platform-hint=auto"
+          "--ozone-platform=wayland"
         ];
       })
     ];
