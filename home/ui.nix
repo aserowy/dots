@@ -12,6 +12,7 @@
 
     components = {
       alacritty.enable = true;
+      podman.enable = true;
     };
   };
 

@@ -15,34 +15,34 @@ in
   };
 
   config = mkIf cnfg.enable {
-    file = {
-      ".config/containers/registry.conf".source = builtins.toFile "podman-registry-conf" ''
-        [registries.search]
-        registries = ['docker.io']
-
-        [registries.block]
-        registries = []
-      '';
-
-      ".config/containers/default-policy.json".source = builtins.toFile "podman-default-policy" ''
-        {
-            "default": [
-                {
-                    "type": "insecureAcceptAnything"
-                }
-            ],
-            "transports":
-                {
-                    "docker-daemon":
-                        {
-                            "": [{"type":"insecureAcceptAnything"}]
-                        }
-                }
-        }
-      '';
-    };
-
     home = {
+      file = {
+        ".config/containers/registry.conf".source = builtins.toFile "podman-registry-conf" ''
+          [registries.search]
+          registries = ['docker.io']
+
+          [registries.block]
+          registries = []
+        '';
+
+        ".config/containers/default-policy.json".source = builtins.toFile "podman-default-policy" ''
+          {
+              "default": [
+                  {
+                      "type": "insecureAcceptAnything"
+                  }
+              ],
+              "transports":
+                  {
+                      "docker-daemon":
+                          {
+                              "": [{"type":"insecureAcceptAnything"}]
+                          }
+                  }
+          }
+        '';
+      };
+
       packages = with pkgs; [
         dockerCompat
         podman
