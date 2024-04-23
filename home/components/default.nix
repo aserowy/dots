@@ -13,6 +13,7 @@
     ./gitui
     ./lf
     ./onedrive
+    ./podman
     ./rio
     ./rofi
     ./ssh
