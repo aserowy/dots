@@ -14,26 +14,26 @@
   };
   spicetify-cli = {
     pname = "spicetify-cli";
-    version = "v2.36.6";
+    version = "v2.36.8";
     src = fetchFromGitHub {
       owner = "spicetify";
       repo = "spicetify-cli";
-      rev = "v2.36.6";
+      rev = "v2.36.8";
       fetchSubmodules = false;
-      sha256 = "sha256-cpgghu25NSIHocYPkE6DH+rcVAhgE8q4wc+mazQ6S78=";
+      sha256 = "sha256-gG/go5evS3vgQ4Gce5bBaNL8PJflwSPB+aPBIX5dIlw=";
     };
   };
   spicetify-themes = {
     pname = "spicetify-themes";
-    version = "439051a271192fb685b54fde5588eac7f3515f01";
+    version = "d39d5e519dd15b21c1b82e1f6ec6095f1faca95a";
     src = fetchFromGitHub {
       owner = "spicetify";
       repo = "spicetify-themes";
-      rev = "439051a271192fb685b54fde5588eac7f3515f01";
+      rev = "d39d5e519dd15b21c1b82e1f6ec6095f1faca95a";
       fetchSubmodules = false;
-      sha256 = "sha256-6ZEy/T2IQfAIzTnRidB/XptPKHdpdm2PJx7cMvLUW+E=";
+      sha256 = "sha256-2ayztHXuB9i1FkvYxmwKvgJTzjZmNrvI6WZJCl3GiGQ=";
     };
-    date = "2024-04-19";
+    date = "2024-04-24";
   };
   tmux-continuum = {
     pname = "tmux-continuum";
@@ -150,11 +150,11 @@
   };
   vscode-extensions-remote-wsl = {
     pname = "vscode-extensions-remote-wsl";
-    version = "0.88.0";
+    version = "0.88.2";
     src = fetchurl {
-      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-wsl/0.88.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "remote-wsl-0.88.0.zip";
-      sha256 = "sha256-rEEIZMXsA3Hg0VOjFI9tJ9jDSZITs2+ORb7JId/dRSA=";
+      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-wsl/0.88.2/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "remote-wsl-0.88.2.zip";
+      sha256 = "sha256-fl7fLNd3EHA9eMiPUIL/23SUiA81gveqZLFkqaHTX+Q=";
     };
     publisher = "ms-vscode-remote";
     name = "remote-wsl";
