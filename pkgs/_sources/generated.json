@@ -41,7 +41,7 @@
     },
     "spicetify-themes": {
         "cargoLocks": null,
-        "date": "2024-04-24",
+        "date": "2024-04-25",
         "extract": null,
         "name": "spicetify-themes",
         "passthru": null,
@@ -53,11 +53,11 @@
             "name": null,
             "owner": "spicetify",
             "repo": "spicetify-themes",
-            "rev": "d39d5e519dd15b21c1b82e1f6ec6095f1faca95a",
-            "sha256": "sha256-2ayztHXuB9i1FkvYxmwKvgJTzjZmNrvI6WZJCl3GiGQ=",
+            "rev": "d44dcab858930c2f72d0c38ad1198f7b76e1396e",
+            "sha256": "sha256-g2TEX4egBFzeUzZX7ncpNTNsREYpIk7HJeSAJgOluaw=",
             "type": "github"
         },
-        "version": "d39d5e519dd15b21c1b82e1f6ec6095f1faca95a"
+        "version": "d44dcab858930c2f72d0c38ad1198f7b76e1396e"
     },
     "tmux-continuum": {
         "cargoLocks": null,
@@ -220,12 +220,12 @@
         },
         "pinned": false,
         "src": {
-            "name": "material-theme-3.17.0.zip",
-            "sha256": "sha256-UZK4ZWTnp4G9ue/GfD6kUw+l50C5ms61aZiXqpYjzr8=",
+            "name": "material-theme-3.17.2.zip",
+            "sha256": "sha256-4s3I6FJUqvannOq6osPU79qExQJrgfP51wcr55yJ2Nc=",
             "type": "url",
-            "url": "https://zhuangtongfa.gallery.vsassets.io/_apis/public/gallery/publisher/zhuangtongfa/extension/material-theme/3.17.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+            "url": "https://zhuangtongfa.gallery.vsassets.io/_apis/public/gallery/publisher/zhuangtongfa/extension/material-theme/3.17.2/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
-        "version": "3.17.0"
+        "version": "3.17.2"
     },
     "vscode-extensions-remote-containers": {
         "cargoLocks": null,
