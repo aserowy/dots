@@ -346,11 +346,11 @@
         },
         "pinned": false,
         "src": {
-            "name": "vscode-neovim-1.10.0.zip",
-            "sha256": "sha256-KLx3rVZ8SQ5jTi7fpahxjDIovHqIkKed9jO23jtQBBs=",
+            "name": "vscode-neovim-1.10.1.zip",
+            "sha256": "sha256-M31mAkbHvD/8r4O3T5nJbSxyjPqqjv0aM7bQCejlroQ=",
             "type": "url",
-            "url": "https://asvetliakov.gallery.vsassets.io/_apis/public/gallery/publisher/asvetliakov/extension/vscode-neovim/1.10.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+            "url": "https://asvetliakov.gallery.vsassets.io/_apis/public/gallery/publisher/asvetliakov/extension/vscode-neovim/1.10.1/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
-        "version": "1.10.0"
+        "version": "1.10.1"
     }
 }
