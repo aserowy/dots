@@ -33,11 +33,11 @@
             "name": null,
             "owner": "spicetify",
             "repo": "spicetify-cli",
-            "rev": "v2.36.8",
-            "sha256": "sha256-gG/go5evS3vgQ4Gce5bBaNL8PJflwSPB+aPBIX5dIlw=",
+            "rev": "v2.36.9",
+            "sha256": "sha256-h0DgG311bAxFIJJX2RYcYW6gyufN9lGnewoIT0+eB3M=",
             "type": "github"
         },
-        "version": "v2.36.8"
+        "version": "v2.36.9"
     },
     "spicetify-themes": {
         "cargoLocks": null,
@@ -238,12 +238,12 @@
         },
         "pinned": false,
         "src": {
-            "name": "remote-containers-0.361.0.zip",
-            "sha256": "sha256-7Mfn9yWBm8AAGQpeQ3HRVaEyfKcBIT2dKkFRDnipMYs=",
+            "name": "remote-containers-0.363.0.zip",
+            "sha256": "sha256-oTiLCrj5RYxfqVav4GMYtIohq9y80UGhEMEzTDDfCBA=",
             "type": "url",
-            "url": "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.361.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+            "url": "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.363.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
-        "version": "0.361.0"
+        "version": "0.363.0"
     },
     "vscode-extensions-remote-wsl": {
         "cargoLocks": null,
@@ -346,11 +346,11 @@
         },
         "pinned": false,
         "src": {
-            "name": "vscode-neovim-1.10.1.zip",
-            "sha256": "sha256-M31mAkbHvD/8r4O3T5nJbSxyjPqqjv0aM7bQCejlroQ=",
+            "name": "vscode-neovim-1.11.0.zip",
+            "sha256": "sha256-ZiIspz0BIsV1TdABiPVVSWVS6fSOAuVixMTQ7IJhElo=",
             "type": "url",
-            "url": "https://asvetliakov.gallery.vsassets.io/_apis/public/gallery/publisher/asvetliakov/extension/vscode-neovim/1.10.1/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+            "url": "https://asvetliakov.gallery.vsassets.io/_apis/public/gallery/publisher/asvetliakov/extension/vscode-neovim/1.11.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
-        "version": "1.10.1"
+        "version": "1.11.0"
     }
 }
