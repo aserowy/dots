@@ -239,11 +239,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1714460183,
-        "narHash": "sha256-m1xSj9dR8RfvhCeKRG2mZxnVuUC/+YR0NMvICAi3s9g=",
+        "lastModified": 1714829615,
+        "narHash": "sha256-NLkxg95qHdiRgg/gAgtgkRHsg0xzGcZSdo6TIzM6Rus=",
         "owner": "aserowy",
         "repo": "yeet",
-        "rev": "f76b5eb34b82b7f22d86afafb1b43e4140f594e6",
+        "rev": "fff3f8cae747896b67ed8394f49e086e941d6e1f",
         "type": "github"
       },
       "original": {
