@@ -14,26 +14,26 @@
   };
   spicetify-cli = {
     pname = "spicetify-cli";
-    version = "v2.36.10";
+    version = "v2.36.11";
     src = fetchFromGitHub {
       owner = "spicetify";
       repo = "spicetify-cli";
-      rev = "v2.36.10";
+      rev = "v2.36.11";
       fetchSubmodules = false;
-      sha256 = "sha256-lwbd5sXqzC3H2GwmVqxAdt6Qcic00wh39l5Kp1UIYAs=";
+      sha256 = "sha256-ZqWGKuYDxuKVqz6cNxZ3cTcKTxkxuu42b48hlAialKc=";
     };
   };
   spicetify-themes = {
     pname = "spicetify-themes";
-    version = "e9fd0ac138499470e4996b43430a197756f940fc";
+    version = "18a4673920a8b9d74e4c7dc61b1207f8ecb31e1c";
     src = fetchFromGitHub {
       owner = "spicetify";
       repo = "spicetify-themes";
-      rev = "e9fd0ac138499470e4996b43430a197756f940fc";
+      rev = "18a4673920a8b9d74e4c7dc61b1207f8ecb31e1c";
       fetchSubmodules = false;
-      sha256 = "sha256-3lLEkc2VGjwLpxEoHn3tMP2YogaWXFc6VVKf5nFdGaI=";
+      sha256 = "sha256-9NNre+zmRGEb8V0qKTAnBc6cA3R3QM98GSs2H9L84Rs=";
     };
-    date = "2024-05-07";
+    date = "2024-05-08";
   };
   tmux-continuum = {
     pname = "tmux-continuum";
