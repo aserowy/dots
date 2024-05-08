@@ -5,10 +5,25 @@
       (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "ehci_pci" "ahci" "xhci_pci" "firewire_ohci" "usbhid" "usb_storage" "sd_mod" "sr_mod" ];
-  boot.initrd.kernelModules = [ "amdgpu" "dm-snapshot" "i915" ];
-  boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ ];
+  boot = {
+    # FIX: remove override and use the default kernel > Kernel versions 6.9rc-5+/6.8.9+/6.6.30+ have a DRM bug which results in unplayable crashes
+    # https://gitlab.freedesktop.org/drm/amd/-/issues/3343
+    kernelPackages = pkgs.linuxPackagesFor (pkgs.linux_latest.override {
+      argsOverride = rec {
+        src = pkgs.fetchurl {
+          url = "mirror://kernel/linux/kernel/v6.x/linux-${version}.tar.xz";
+          sha256 = "sha256-HEzcudVg+tH7ldssuK++3JIvnq2Eg3H+QDY7E/n2Mbo=";
+        };
+        version = "6.8.8";
+        modDirVersion = "6.8.8";
+      };
+    });
+
+    initrd.availableKernelModules = [ "ehci_pci" "ahci" "xhci_pci" "firewire_ohci" "usbhid" "usb_storage" "sd_mod" "sr_mod" ];
+    initrd.kernelModules = [ "amdgpu" "dm-snapshot" "i915" ];
+    kernelModules = [ "kvm-intel" ];
+    extraModulePackages = [ ];
+  };
 
   fileSystems."/" =
     {
