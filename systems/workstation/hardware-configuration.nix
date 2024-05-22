@@ -6,18 +6,7 @@
     ];
 
   boot = {
-    # FIX: remove override and use the default kernel > Kernel versions 6.9rc-5+/6.8.9+/6.6.30+ have a DRM bug which results in unplayable crashes
-    # https://gitlab.freedesktop.org/drm/amd/-/issues/3343
-    kernelPackages = pkgs.linuxPackagesFor (pkgs.linux_latest.override {
-      argsOverride = rec {
-        src = pkgs.fetchurl {
-          url = "mirror://kernel/linux/kernel/v6.x/linux-${version}.tar.xz";
-          sha256 = "sha256-KR0aH69Oh7Ow6pcpCA24h6r9H/L6wUMM7Kkh5GvCL64=";
-        };
-        version = "6.8.7";
-        modDirVersion = "6.8.7";
-      };
-    });
+    kernelPackages = pkgs.linuxPackages_latest;
 
     initrd.availableKernelModules = [ "ehci_pci" "ahci" "xhci_pci" "firewire_ohci" "usbhid" "usb_storage" "sd_mod" "sr_mod" ];
     initrd.kernelModules = [ "amdgpu" "dm-snapshot" "i915" ];
