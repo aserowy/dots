@@ -14,7 +14,7 @@ def focus_workspace [name: string] {
     let wm = (get_current_wm)
 
     match $wm {
-        'Hyprland' => { (create_or_focus_hypr_ws_with 'workspace' $name) },
-        'sway' => { run-external --redirect-stdout --redirect-stderr 'swaymsg' workspace $name | ignore }
+        'Hyprland' => { (hyprctl dispatch workspace $'name:($name)' | ignore) },
+        'sway' => { (swaymsg workspace $name | ignore) }
     }
 }

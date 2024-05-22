@@ -14,7 +14,7 @@ def move_to_workspace [name: string] {
     let wm = (get_current_wm)
 
     match $wm {
-        'Hyprland' => { (create_or_focus_hypr_ws_with 'movetoworkspace' $name) },
-        'sway' => { run-external --redirect-stdout --redirect-stderr 'swaymsg' move container to workspace $name | ignore }
+        'Hyprland' => { (hyprctl dispatch movetoworkspace $name | ignore) },
+        'sway' => { (swaymsg move container to workspace $name | ignore) }
     }
 }

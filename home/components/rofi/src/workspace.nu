@@ -5,7 +5,7 @@ export def get_special_workspace_names [] {
 }
 
 export def get_default_workspace_names [] {
-    [dots gaming notes social work]
+    [dots gaming social work]
 }
 
 export def get_current_wm [] {
@@ -48,66 +48,4 @@ export def get_workspace_names_with_defaults [] {
         | sort --ignore-case --natural)
 
     $workspaces
-}
-
-export def create_or_focus_hypr_ws_with [verb: string, name: string] {
-    let wm = (get_current_wm)
-    let workspaces = (get_workspaces $wm)
-    let is_existing = $workspaces
-        | any {|it| $it.name == $name }
-
-    if $is_existing {
-        run-external --redirect-stdout --redirect-stderr 'hyprctl' dispatch $verb $"name:($name)"
-            | ignore
-    } else {
-        let id = (get_hypr_workspace_id_by_name $workspaces $name)
-
-        run-external --redirect-stdout --redirect-stderr 'hyprctl' dispatch $verb $id
-            | ignore
-
-        run-external --redirect-stdout --redirect-stderr 'hyprctl' dispatch renameworkspace $id $name
-            | ignore
-    }
-}
-
-export def rename_hypr_ws [id: int, name: string] {
-    # FIX: rework to move windows with correct layout
-    while true {
-        let window_count = (hyprctl activeworkspace -j | from json).windows
-        if $window_count == 0 {
-            break
-        }
-
-        (create_or_focus_hypr_ws_with 'movetoworkspacesilent' $name)
-    }
-
-    (create_or_focus_hypr_ws_with 'workspace' $name)
-}
-
-def get_hypr_workspace_id_by_name [workspaces: list<any>, name: string] {
-    mut min = 100;
-    mut max = 2147483647;
-
-    let sorted = ($workspaces
-        | select id name
-        | where id >= $min
-        | append {id: 0, name: $name}
-        | sort-by name --ignore-case --natural)
-
-    mut switch = true;
-    for ws in $sorted {
-        if $ws.id == 0 {
-            $switch = false
-        } else if $switch {
-            if $min < $ws.id {
-                $min = $ws.id
-            }
-        } else {
-            if $max > $ws.id {
-                $max = $ws.id
-            }
-        }
-    }
-
-    return (($min + $max) / 2 | into int)
 }

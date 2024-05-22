@@ -14,7 +14,7 @@ let workspace_icons = [
 def main [monitor: number = 0] {
     (hyprctl workspaces -j
         | from json
-        | where id > 0 and monitorID == $monitor
+        | where monitorID == $monitor
         | select id name
         | sort-by name
         | insert icon {|rw| icon $rw.name}

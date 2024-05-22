@@ -6,7 +6,7 @@ def main [workspace_name: string = ''] {
     let wm = (get_current_wm)
 
     if $workspace_name == '' {
-        let workspaces = (get_workspaces $wm 
+        let workspaces = (get_workspaces $wm
             | get name
             | str join " ")
 
@@ -23,7 +23,7 @@ def main [workspace_name: string = ''] {
 
 def rename_workspace [wm: string, id: int, name: string] {
     match $wm {
-        'Hyprland' => { (rename_hypr_ws $id $name) },
-        'sway' => { run-external --redirect-stdout --redirect-stderr 'sawy' rename workspace to $name | ignore }
+        'Hyprland' => { (hyprctl dispatch renameworkspace $id $name | ignore) },
+        'sway' => { (swaymsg rename workspace to $name | ignore) }
     }
 }

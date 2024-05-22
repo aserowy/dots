@@ -20,9 +20,9 @@ def main [direction: string] {
     let workspaces = ($workspaces
         | prepend { name: ($workspaces | last | get name) id: 0 })
 
-    let next = ($workspaces 
+    let next = ($workspaces
         | take until { |workspace| $workspace.id == $active_workspace.id }
         | last)
 
-    run-external --redirect-stderr 'hyprctl' dispatch workspace $"name:($next.name)"
+    (hyprctl dispatch workspace $"name:($next.name)" | ignore)
 }
