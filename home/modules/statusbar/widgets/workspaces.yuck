@@ -3,7 +3,7 @@
     "
     ./widgets/get_workspaces.nu
 
-    socat -u UNIX-CONNECT:/tmp/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock - |
+    socat -u UNIX-CONNECT:/$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock - |
         stdbuf -o0 awk -e '/^(renameworkspace|workspace)>>/' |
         while read -r line; do ./widgets/get_workspaces.nu; done
     "
@@ -11,9 +11,9 @@
 (deflisten current_workspace
     :initial "1"
     "
-    hyprctl monitors -j | jq -r '.[] | select(.focused) | .activeWorkspace.name' 
+    hyprctl monitors -j | jq -r '.[] | select(.focused) | .activeWorkspace.name'
 
-    socat -u UNIX-CONNECT:/tmp/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock - |
+    socat -u UNIX-CONNECT:/$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock - |
         stdbuf -o0 awk \
             -F '>>|,' \
             -e '/^workspace>>/ {print $2}' \
@@ -31,7 +31,7 @@
             :text "${current_workspace}")
         (for workspace in workspaces
             (eventbox
-                :onclick "hyprctl dispatch workspace ${workspace.id}"
+                :onclick "hyprctl dispatch workspace name:${workspace.name}"
                 (box
                     :class "workspace ${workspace.name == current_workspace ? "current" : ""}"
                     (label
