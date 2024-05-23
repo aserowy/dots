@@ -49,3 +49,12 @@ export def get_workspace_names_with_defaults [] {
 
     $workspaces
 }
+
+export def get_workspace_by_name [name: string] {
+    let wm = (get_current_wm)
+    let workspaces = (get_workspaces $wm)
+
+    let ws = ($workspaces | where name == $name)
+
+    $ws
+}

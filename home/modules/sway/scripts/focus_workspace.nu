@@ -2,14 +2,14 @@
 
 def main [direction: string] {
 
-    let output = (swaymsg -t get_outputs 
-        | from json 
+    let output = (swaymsg -t get_outputs
+        | from json
         | where focused == true
         | get name
         | first)
 
-    let workspaces = (swaymsg -t get_workspaces -r 
-        | from json 
+    let workspaces = (swaymsg -t get_workspaces -r
+        | from json
         | where output == $output
         | select name focused
         | if $direction == 'prev' {
@@ -19,9 +19,9 @@ def main [direction: string] {
     let workspaces = ($workspaces
         | prepend { name: ($workspaces | last | get name) focused: false })
 
-    let next = ($workspaces 
+    let next = ($workspaces
         | take until { |workspace| $workspace.focused == true }
         | last)
 
-    run-external --redirect-stderr 'swaymsg' workspace $next.name
+    (swaymsg workspace $next.name)
 }
