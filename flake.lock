@@ -91,11 +91,11 @@
     },
     "hardware": {
       "locked": {
-        "lastModified": 1716715385,
-        "narHash": "sha256-fe6Z33pbfqu4TI5ijmcaNc5vRBs633tyxJ12HTghy3w=",
+        "lastModified": 1716798306,
+        "narHash": "sha256-s8+OhT1WSPMoqbTawT30hj4NVMg+w03/a+2HVqcNhY0=",
         "owner": "NixOS",
         "repo": "nixos-hardware",
-        "rev": "2e7d6c568063c83355fe066b8a8917ee758de1b8",
+        "rev": "9a20e17a73b052d6be912adcee220cb483477094",
         "type": "github"
       },
       "original": {
@@ -271,11 +271,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1716534218,
-        "narHash": "sha256-bKuwQY9E2azmszn+R662MdD800KtgI3Rzsa0wXjfuME=",
+        "lastModified": 1716816106,
+        "narHash": "sha256-mTORGn2Qs5YtJu27ca0AH84+YihbhEFXMcRr+ZhfjlQ=",
         "owner": "aserowy",
         "repo": "yeet",
-        "rev": "4417773b8d2f5ce0d532965592931d647b498211",
+        "rev": "0d9be518a28c5593dbf0971e707c18d567d9ea82",
         "type": "github"
       },
       "original": {
