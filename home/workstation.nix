@@ -26,6 +26,7 @@
     packages = with pkgs; [
       discord
       drawio
+      logseq
       (lutris.override {
         extraPkgs = pkgs: [
           winePackages.staging
