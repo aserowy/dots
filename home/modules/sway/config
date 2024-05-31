@@ -31,9 +31,9 @@ client.urgent           #5c6370 #3e4451 #abb2bf #e06c75 #e06c75
 client.placeholder      #23272e #3e4451 #abb2bf #23272e #23272e
 
 gaps left 0
-gaps top 3
-gaps right 3
-gaps bottom 3
+gaps top 5
+gaps right 5
+gaps bottom 5
 
 gaps inner 10
 

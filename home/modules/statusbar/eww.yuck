@@ -16,7 +16,7 @@
     )
     :monitor 0
     :exclusive true
-    :stacking "background"
+    :stacking "fg"
     :namespace "eww_statusbar"
     (statusbar)
 )

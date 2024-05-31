@@ -47,7 +47,6 @@ in
           };
 
           rofi.enable = true;
-          lf.enable = true;
         };
 
         file = {

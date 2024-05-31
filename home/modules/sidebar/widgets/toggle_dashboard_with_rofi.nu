@@ -24,7 +24,7 @@ def get_current_monitor_id [] {
                     return $it.index
                 }
             }
+            return 0
         }
     }
 }
-
