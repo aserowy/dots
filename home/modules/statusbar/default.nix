@@ -15,6 +15,14 @@ in
         If enabled, statusbar gets started while running hyprland.
       '';
     };
+
+    enableSwayIntegration = mkOption {
+      type = types.bool;
+      default = true;
+      description = ''
+        If enabled, statusbar gets started while running sway.
+      '';
+    };
   };
 
   config = mkIf cnfg.enable {
@@ -42,6 +50,11 @@ in
     home.modules.hyprland.additionalConfig = mkIf cnfg.enableHyprlandIntegration ''
       # Init statusbar
       exec-once = eww open --config ~/.config/eww/statusbar/ statusbar
+    '';
+
+    home.modules.sway.additionalConfig = mkIf cnfg.enableSwayIntegration ''
+      # Init statusbar
+      exec eww open --config ~/.config/eww/statusbar/ statusbar
     '';
   };
 }

@@ -16,11 +16,18 @@ in
       '';
     };
 
-    swaybarCommand = mkOption {
+    defaultTerminal = mkOption {
       type = types.str;
-      default = "";
       description = ''
-        Command that is used to start status bar with swaybar_command.
+        Sets default terminal in hyprland.
+      '';
+    };
+
+    tuiLaunchCommand = mkOption {
+      type = types.str;
+      description = ''
+        Sets the command to launch tui. It is important to specify the
+        placeholder [PROG] for the command which should get run.
       '';
     };
   };
@@ -29,19 +36,26 @@ in
     let
       swayConfig = builtins.readFile ./config;
 
-      swaybarCommand = mkIf cnfg.swaybarCommand != ""
-        "swaybar_command ${cnfg.swaybarCommand}";
+      tuiLaunch = tui: builtins.replaceStrings [ "[PROG]" ] [ tui ] cnfg.tuiLaunchCommand;
     in
     mkIf cnfg.enable {
       home = {
         components = {
+          alacritty = {
+            enable = true;
+            enableAsSwayDefaultTerminal = true;
+          };
+
           rofi.enable = true;
           lf.enable = true;
-          wezterm.enable = true;
         };
 
         file = {
           ".config/sway/config".source = builtins.toFile "sway-config" ''
+            # programs
+            set $terminal = ${cnfg.defaultTerminal}
+            set $explorer = ${tuiLaunch "yeet"}
+
             # additional config
 
             ${cnfg.additionalConfig}
@@ -49,12 +63,6 @@ in
             # sway config
 
             ${swayConfig}
-
-            # bar and systemd_target
-
-            bar {
-                ${swaybarCommand}
-            }
 
             include ~/.config/sway/config.d/*
           '';
@@ -67,7 +75,8 @@ in
           browser.enable = true;
           clipboard.enable = true;
           notification.enable = true;
-          waybar.enable = true;
+          sidebar.enable = true;
+          statusbar.enable = true;
         };
 
         packages = with pkgs; [

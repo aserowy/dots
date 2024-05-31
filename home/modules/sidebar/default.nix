@@ -15,6 +15,14 @@ in
         If enabled, sidebar gets started while running hyprland.
       '';
     };
+
+    enableSwayIntegration = mkOption {
+      type = types.bool;
+      default = true;
+      description = ''
+        If enabled, sidebar gets started while running sway.
+      '';
+    };
   };
 
   config = mkIf cnfg.enable {
@@ -42,6 +50,11 @@ in
     home.modules.hyprland.additionalConfig = mkIf cnfg.enableHyprlandIntegration ''
       # Init sidebar
       exec-once = eww open --config ~/.config/eww/sidebar/ sidebar
+    '';
+
+    home.modules.sway.additionalConfig = mkIf cnfg.enableSwayIntegration ''
+      # Init sidebar
+      exec eww open --config ~/.config/eww/sidebar/ sidebar
     '';
   };
 }

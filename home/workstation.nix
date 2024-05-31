@@ -19,7 +19,7 @@
 
     modules = {
       gtk.enable = true;
-      hyprland.enable = true;
+      sway.enable = true;
       xdg.enable = true;
     };
 

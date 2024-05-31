@@ -47,13 +47,13 @@ in
       ];
     };
 
-    home.modules.sway.swaybarCommand = mkIf cnfg.enableSwayIntegration ''
-      waybar
-    '';
-
     home.modules.hyprland.additionalConfig = mkIf cnfg.enableHyprlandIntegration ''
       # Start waybar as status bar
       exec-once = waybar
+    '';
+
+    home.modules.sway.additionalConfig = mkIf cnfg.enableSwayIntegration ''
+      exec waybar
     '';
   };
 }

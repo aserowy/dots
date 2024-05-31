@@ -1,21 +1,12 @@
 # PROGRAMS
 
 set $browser microsoft-edge-beta
-set $explorer wezterm start --class lf -- lf
-set $menu exec ~/.config/rofi/launch.nu drun 
-set $terminal wezterm
-
-# INPUTS
-
-input "1133:49970:Logitech_Gaming_Mouse_G502" {
-    accel_profile "flat"
-    pointer_accel 0.4
-}
+set $menu exec ~/.config/rofi/launch.nu drun
 
 # OUTPUTS
 
-output DP-1 position 0 0
-output DP-2 transform 270
+output DP-2 position 0 0
+output HDMI-A-1 transform 270
 
 # STARTUP
 
@@ -33,18 +24,18 @@ default_border pixel 1
 default_floating_border pixel 1
 
 # class                 border  backgr. text    indi.   child_border
-client.focused          #61afef #3e4451 #abb2bf #98c379 #61afef
+client.focused          #ffffff #3e4451 #abb2bf #98c379 #ffffff
 client.focused_inactive #5c6370 #3e4451 #abb2bf #5c6370 #5c6370
 client.unfocused        #5c6370 #3e4451 #abb2bf #23272e #23272e
 client.urgent           #5c6370 #3e4451 #abb2bf #e06c75 #e06c75
 client.placeholder      #23272e #3e4451 #abb2bf #23272e #23272e
 
 gaps left 0
-gaps top 5
-gaps right 5
-gaps bottom 5
+gaps top 3
+gaps right 3
+gaps bottom 3
 
-gaps inner 20
+gaps inner 10
 
 # KEYBINDINGS
 
