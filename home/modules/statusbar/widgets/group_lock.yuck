@@ -11,6 +11,7 @@
 (defwidget group_lock []
     (eventbox
         :onclick "hyprctl dispatch lockgroups toggle"
+        :visible { get_env("XDG_CURRENT_DESKTOP") == "Hyprland" }
         (label
             :class "nerd-icon ${group_locked == '1' ? '' : 'active'}"
             :text "${group_locked == "1" ? "󰋩" : "󰚓"}"
