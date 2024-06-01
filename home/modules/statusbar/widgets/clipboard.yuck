@@ -1,6 +1,8 @@
 (defwidget clipboard []
     (eventbox
-        :onclick "hyprctl dispatch exec ~/.config/clipman/open_history.nu"
+        :onclick { get_env("XDG_CURRENT_DESKTOP") == "Hyprland"
+            ? "hyprctl dispatch exec ~/.config/clipman/open_history.nu"
+            : "swaymsg exec ~/.config/clipman/open_history.nu" }
         (label
             :class "nerd-icon"
             :text "󱉫"

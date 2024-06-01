@@ -30,10 +30,22 @@ def toggle [] {
         let date = (date now | format date "%Y-%m-%d_%H:%M:%S")
         let command = $"wf-recorder -g '($area)' -f ~/videos/($date).mp4"
 
-        (hyprctl dispatch exec $command)
+        (dispatch $command)
 
         while (pgrep wf-recorder | lines | is-empty) {
             sleep 1ms
         }
+    }
+}
+
+def get_current_wm [] {
+    $env.XDG_CURRENT_DESKTOP
+}
+
+def dispatch [command: string] {
+    let wm = (get_current_wm)
+    match $wm {
+        'Hyprland' => { (hyprctl dispatch exec $command) },
+        'sway' => { (swaymsg exec $command) }
     }
 }
