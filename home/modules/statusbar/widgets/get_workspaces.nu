@@ -12,10 +12,7 @@ let workspace_icons = [
 ]
 
 def main [monitor: number = 0] {
-    (hyprctl workspaces -j
-        | from json
-        | where monitorID == $monitor
-        | select id name
+    (get_workspaces $monitor
         | sort-by name
         | insert icon {|rw| icon $rw.name}
         | to json -r
@@ -30,4 +27,28 @@ def icon [name: string] {
         | first
 
     return $icon.icon
+}
+
+def get_current_wm [] {
+    $env.XDG_CURRENT_DESKTOP
+}
+
+def get_workspaces [monitor: number] {
+    let wm = (get_current_wm)
+    match $wm {
+        'Hyprland' => (hyprctl workspaces -j
+            | from json
+            | where monitorID == $monitor
+            # FIX: add focused to workspace item hyprctl activeworkspace may be
+            # usefull if focused is not part of respone
+            | select id name
+        ),
+        # TODO: from number to output to filter workspaces if desired
+        # let outputs = (swaymsg -r -t get_outputs | from json)
+        # for $it in $outputs --numbered { ... $it.index == $monitor ...
+        'sway' => (swaymsg -r -t get_workspaces
+            | from json
+            | select id name focused
+        )
+    }
 }

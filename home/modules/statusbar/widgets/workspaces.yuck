@@ -3,21 +3,14 @@
     "
     ./widgets/get_workspaces.nu
 
-    socat -u UNIX-CONNECT:/$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock - |
-        stdbuf -o0 awk -e '/^(renameworkspace|workspace)>>/' |
-        while read -r line; do ./widgets/get_workspaces.nu; done
-    "
-)
-(deflisten current_workspace
-    :initial "1"
-    "
-    hyprctl monitors -j | jq -r '.[] | select(.focused) | .activeWorkspace.name'
-
-    socat -u UNIX-CONNECT:/$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock - |
-        stdbuf -o0 awk \
-            -F '>>|,' \
-            -e '/^workspace>>/ {print $2}' \
-            -e '/^(renameworkspace|focusedmon)>>/ {print $3}'
+    if [ '$XDG_CURRENT_DESKTOP' == 'Hyprland' ]; then
+        socat -u UNIX-CONNECT:/$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock - |
+            stdbuf -o0 awk -e '/^(renameworkspace|workspace|focusedmon)>>/' |
+            while read -r line; do ./widgets/get_workspaces.nu; done
+    else
+        swaymsg -t subscribe '[ \"workspace\" ]' -m |
+            while read -r line; do ./widgets/get_workspaces.nu; done
+    fi
     "
 )
 
@@ -26,14 +19,13 @@
         :orientation "vertical"
         :space-evenly false
         :class "center"
-        (label
-            :class "invisible"
-            :text "${current_workspace}")
         (for workspace in workspaces
             (eventbox
-                :onclick "hyprctl dispatch workspace name:${workspace.name}"
+                :onclick { get_env("XDG_CURRENT_DESKTOP") == "Hyprland"
+                    ? "hyprctl dispatch workspace name:${workspace.name}"
+                    : "swaymsg workspace ${workspace.name}" }
                 (box
-                    :class "workspace ${workspace.name == current_workspace ? "current" : ""}"
+                    :class "workspace ${workspace.focused ? "current" : ""}"
                     (label
                         :halign "end"
                         :text "${workspace.icon}"

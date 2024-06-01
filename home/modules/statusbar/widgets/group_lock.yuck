@@ -1,10 +1,12 @@
 (deflisten group_locked
     :initial "1"
     "
-    hyprctl dispatch lockgroups lock >/dev/null 2>&1
+    if [ '$XDG_CURRENT_DESKTOP' == 'Hyprland' ]; then
+        hyprctl dispatch lockgroups lock >/dev/null 2>&1
 
-    socat -u UNIX-CONNECT:/$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock - |
-        stdbuf -o0 awk -F '>>' -e '/^lockgroups>>/ {print $2}'
+        socat -u UNIX-CONNECT:/$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock - |
+            stdbuf -o0 awk -F '>>' -e '/^lockgroups>>/ {print $2}'
+    fi
     "
 )
 
