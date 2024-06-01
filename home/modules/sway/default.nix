@@ -82,7 +82,10 @@ in
           browser.enable = true;
           clipboard.enable = true;
           notification.enable = true;
-          sidebar.enable = true;
+          sidebar = {
+            enable = true;
+            dashboardBackgroundOpacity = "0.75";
+          };
           statusbar.enable = true;
         };
 

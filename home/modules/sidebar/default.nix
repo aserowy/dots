@@ -23,38 +23,55 @@ in
         If enabled, sidebar gets started while running sway.
       '';
     };
+
+    dashboardBackgroundOpacity = mkOption {
+      type = types.str;
+      default = "0.4";
+      description = ''
+        Sets the opacity of the dashboard background.
+      '';
+    };
   };
 
-  config = mkIf cnfg.enable {
-
-    home = {
-      components = {
-        # TODO: rework dunst to mako (more active maintainer)
-        # https://github.com/emersion/mako/blob/master/makoctl.1.scd
-        dunst = {
-          enable = true;
-          hideNotifications = true;
+  config =
+    let
+      ewwCss = builtins.readFile ./eww.css;
+    in
+    mkIf cnfg.enable {
+      home = {
+        components = {
+          # TODO: rework dunst to mako (more active maintainer)
+          # https://github.com/emersion/mako/blob/master/makoctl.1.scd
+          dunst = {
+            enable = true;
+            hideNotifications = true;
+          };
         };
+
+        file.".config/eww/sidebar/eww.css".source = builtins.toFile "eww-sidebar-css" ''
+          ${ewwCss}
+
+          .dashboard {
+            background-color: rgba(0, 0, 0, ${cnfg.dashboardBackgroundOpacity});
+          }
+        '';
+        file.".config/eww/sidebar/eww.yuck".source = ./eww.yuck;
+        file.".config/eww/sidebar/widgets/".source = ./widgets;
+
+        packages = with pkgs; [
+          eww
+          playerctl
+        ];
       };
 
-      file.".config/eww/sidebar/eww.css".source = ./eww.css;
-      file.".config/eww/sidebar/eww.yuck".source = ./eww.yuck;
-      file.".config/eww/sidebar/widgets/".source = ./widgets;
+      home.modules.hyprland.additionalConfig = mkIf cnfg.enableHyprlandIntegration ''
+        # Init sidebar
+        exec-once = eww open --config ~/.config/eww/sidebar/ sidebar
+      '';
 
-      packages = with pkgs; [
-        eww
-        playerctl
-      ];
+      home.modules.sway.appendedConfig = mkIf cnfg.enableSwayIntegration ''
+        # Init sidebar
+        exec eww open --config ~/.config/eww/sidebar/ sidebar
+      '';
     };
-
-    home.modules.hyprland.additionalConfig = mkIf cnfg.enableHyprlandIntegration ''
-      # Init sidebar
-      exec-once = eww open --config ~/.config/eww/sidebar/ sidebar
-    '';
-
-    home.modules.sway.appendedConfig = mkIf cnfg.enableSwayIntegration ''
-      # Init sidebar
-      exec eww open --config ~/.config/eww/sidebar/ sidebar
-    '';
-  };
 }
