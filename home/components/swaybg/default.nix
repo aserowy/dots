@@ -34,7 +34,7 @@ in
       ];
     };
 
-    home.modules.sway.additionalConfig = mkIf cnfg.enableSwayIntegration ''
+    home.modules.sway.prependedConfig = mkIf cnfg.enableSwayIntegration ''
       exec ~/.config/swaybg/wallpaper.sh
     '';
 

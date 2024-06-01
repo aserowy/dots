@@ -35,7 +35,7 @@ in
       ];
     };
 
-    home.modules.sway.additionalConfig = mkIf cnfg.enableSwayIntegration ''
+    home.modules.sway.prependedConfig = mkIf cnfg.enableSwayIntegration ''
       # Init clipman with wl-clipboard tools
       exec wl-paste -t text --watch clipman store --no-persist
     '';

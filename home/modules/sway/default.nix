@@ -8,11 +8,19 @@ in
   options.home.modules.sway = {
     enable = mkEnableOption "sway";
 
-    additionalConfig = mkOption {
+    prependedConfig = mkOption {
       type = types.lines;
       default = "";
       description = ''
         Extra commands that are prepended to sway config.
+      '';
+    };
+
+    appendedConfig = mkOption {
+      type = types.lines;
+      default = "";
+      description = ''
+        Extra commands that are appended to sway config.
       '';
     };
 
@@ -51,17 +59,17 @@ in
 
         file = {
           ".config/sway/config".source = builtins.toFile "sway-config" ''
+            ${cnfg.prependedConfig}
+
             # programs
-            set $terminal = ${cnfg.defaultTerminal}
-            set $explorer = ${tuiLaunch "yeet"}
-
-            # additional config
-
-            ${cnfg.additionalConfig}
+            set $terminal ${cnfg.defaultTerminal}
+            set $explorer ${tuiLaunch "yeet"}
 
             # sway config
 
             ${swayConfig}
+
+            ${cnfg.appendedConfig}
 
             include ~/.config/sway/config.d/*
           '';

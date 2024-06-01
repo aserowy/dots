@@ -52,7 +52,7 @@ in
       exec-once = eww open --config ~/.config/eww/statusbar/ statusbar
     '';
 
-    home.modules.sway.additionalConfig = mkIf cnfg.enableSwayIntegration ''
+    home.modules.sway.appendedConfig = mkIf cnfg.enableSwayIntegration ''
       # Init statusbar
       exec eww open --config ~/.config/eww/statusbar/ statusbar
     '';

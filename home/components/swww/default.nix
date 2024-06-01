@@ -34,7 +34,7 @@ in
       ];
     };
 
-    home.modules.sway.additionalConfig = mkIf cnfg.enableSwayIntegration ''
+    home.modules.sway.prependedConfig = mkIf cnfg.enableSwayIntegration ''
       # Start swww daemon and cycle through random wallpaper
       exec swww-daemon
       exec bash ~/.config/swww/wallpaper.sh ~/onedrive/Wallpapers/

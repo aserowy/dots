@@ -136,7 +136,7 @@ in
         '';
       };
 
-      home.modules.sway.additionalConfig = mkIf cnfg.enableSwayIntegration ''
+      home.modules.sway.prependedConfig = mkIf cnfg.enableSwayIntegration ''
         # Start dunst daemon to enable notifications
         exec dunst -conf ~/.config/dunst/dunstrc
       '';

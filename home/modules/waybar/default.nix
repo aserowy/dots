@@ -52,7 +52,7 @@ in
       exec-once = waybar
     '';
 
-    home.modules.sway.additionalConfig = mkIf cnfg.enableSwayIntegration ''
+    home.modules.sway.appendedConfig = mkIf cnfg.enableSwayIntegration ''
       exec waybar
     '';
   };

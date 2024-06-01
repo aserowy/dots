@@ -52,7 +52,7 @@ in
       exec-once = eww open --config ~/.config/eww/sidebar/ sidebar
     '';
 
-    home.modules.sway.additionalConfig = mkIf cnfg.enableSwayIntegration ''
+    home.modules.sway.appendedConfig = mkIf cnfg.enableSwayIntegration ''
       # Init sidebar
       exec eww open --config ~/.config/eww/sidebar/ sidebar
     '';
