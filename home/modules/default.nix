@@ -13,7 +13,6 @@
     ./sidebar
     ./statusbar
     ./sway
-    ./waybar
     ./xdg
   ];
 }
