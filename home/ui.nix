@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   nixpkgs.config.allowUnfree = true;
 
@@ -11,10 +11,21 @@
     username = "uitdeveloper";
 
     components = {
-      alacritty.enable = true;
+      foot = {
+        enable = true;
+        setDpiAware = false;
+      };
       podman.enable = true;
     };
+
+    packages = with pkgs; [
+      inter
+      powerline-fonts
+      nerdfonts
+    ];
   };
+
+  fonts.fontconfig.enable = true;
 
   programs = {
     home-manager.enable = true;

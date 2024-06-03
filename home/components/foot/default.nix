@@ -15,6 +15,14 @@ in
         If enabled, foot gets set as default terminal in Hyprland.
       '';
     };
+
+    setDpiAware = mkOption {
+      type = types.bool;
+      default = true;
+      description = ''
+        If enabled, foot will be set to be DPI aware.
+      '';
+    };
   };
 
   config = mkIf cnfg.enable {
@@ -22,7 +30,7 @@ in
       enable = true;
       settings = {
         main = {
-          dpi-aware = "yes";
+          dpi-aware = mkIf cnfg.setDpiAware "yes";
           font = "UbuntuMonoNerdFont:size=10";
           line-height = 12;
           term = "xterm-256color";
