@@ -72,6 +72,9 @@ bindsym $mod+p exec ~/.config/sway/scripts/focus_workspace.nu prev
 bindsym $mod+s scratchpad show
 bindsym $mod+Shift+s move scratchpad
 
+bindsym $mod+greater move workspace to output right
+bindsym $mod+less move workspace to output left
+
 ## Window
 
 mouse_warping none
