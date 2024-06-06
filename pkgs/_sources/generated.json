@@ -238,12 +238,12 @@
         },
         "pinned": false,
         "src": {
-            "name": "remote-containers-0.370.0.zip",
-            "sha256": "sha256-ukOJctz6Ids3dCvEdxVa/XCTJifi1O0inDE2cgi7nTg=",
+            "name": "remote-containers-0.371.0.zip",
+            "sha256": "sha256-RXLgNrMvKSCrCo2CYq9xap6a3LLWkYetObcHY7bvRqw=",
             "type": "url",
-            "url": "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.370.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+            "url": "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.371.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
-        "version": "0.370.0"
+        "version": "0.371.0"
     },
     "vscode-extensions-remote-wsl": {
         "cargoLocks": null,
@@ -346,11 +346,11 @@
         },
         "pinned": false,
         "src": {
-            "name": "vscode-neovim-1.15.1.zip",
-            "sha256": "sha256-XW9IBqMkCHeu4/lMwf2Hhbj0YUXmUhLKrgHXLZOXi/k=",
+            "name": "vscode-neovim-1.15.2.zip",
+            "sha256": "sha256-gurh2DSLH/gM/EZCUACHGlzOf0LPwkc+zYxw7AOcb1E=",
             "type": "url",
-            "url": "https://asvetliakov.gallery.vsassets.io/_apis/public/gallery/publisher/asvetliakov/extension/vscode-neovim/1.15.1/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+            "url": "https://asvetliakov.gallery.vsassets.io/_apis/public/gallery/publisher/asvetliakov/extension/vscode-neovim/1.15.2/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
-        "version": "1.15.1"
+        "version": "1.15.2"
     }
 }
