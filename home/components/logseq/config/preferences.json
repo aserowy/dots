@@ -1,0 +1,22 @@
+{
+  "theme": null,
+  "themes": {
+    "mode": "dark",
+    "light": null,
+    "dark": {
+      "name": "Bonofix Theme",
+      "url": "assets:///home/serowy/.logseq/plugins/logseq-bonofix-theme/custom.css",
+      "description": "A clean theme",
+      "pid": "logseq-bonofix-theme",
+      "group-first": true,
+      "group-desc": "light & dark themes",
+      "mode": "dark",
+      "selected": false
+    }
+  },
+  "externals": [],
+  "pinnedToolbarItems": [
+    "logseq-todo-plugin:logseq-plugin-todo",
+    "logseq-tags:tags-plugin-open"
+  ]
+}
