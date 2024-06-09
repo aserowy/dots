@@ -13,6 +13,7 @@
       # NOTE: fallback terminal
       foot.enable = true;
 
+      logseq.enable = true;
       onedrive.enable = true;
       swww.enable = true;
     };
@@ -26,7 +27,6 @@
     packages = with pkgs; [
       discord
       drawio
-      logseq
       (lutris.override {
         extraPkgs = pkgs: [
           winePackages.staging

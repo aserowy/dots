@@ -12,6 +12,7 @@
     ./git
     ./gitui
     ./lf
+    ./logseq
     ./onedrive
     ./podman
     ./rio
