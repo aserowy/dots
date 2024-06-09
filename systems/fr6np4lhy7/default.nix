@@ -21,6 +21,7 @@ revision: { ... }: {
       "logseq"
       "microsoft-edge"
       "obsidian"
+      "onedrive"
       "spotify"
       "wezterm"
     ];
