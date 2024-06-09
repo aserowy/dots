@@ -18,6 +18,7 @@ revision: { ... }: {
     casks = [
       "google-chrome"
       "drawio"
+      "logseq"
       "microsoft-edge"
       "obsidian"
       "spotify"
