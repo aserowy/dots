@@ -20,10 +20,6 @@ in
 
   config = mkIf cnfg.enable {
     home = {
-      # file.".logseq" = {
-      #   source = ./config;
-      # };
-
       packages = mkIf cnfg.installPackage [
         pkgs.logseq
       ];

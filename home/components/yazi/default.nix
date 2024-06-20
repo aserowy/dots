@@ -8,7 +8,6 @@ in
   options.home.components.yazi.enable = mkEnableOption "yazi";
 
   config = mkIf cnfg.enable {
-    # TODO: add extract command
     home = {
       file = {
         ".config/yazi/yazi.toml" = {
