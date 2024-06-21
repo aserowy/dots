@@ -148,12 +148,12 @@
         },
         "pinned": false,
         "src": {
-            "name": "errorlens-3.18.0.zip",
-            "sha256": "sha256-sRZRBUne9IqDBSe4BXyqBqirIyjeP03B2w9+ptNrJl0=",
+            "name": "errorlens-3.19.0.zip",
+            "sha256": "sha256-duljH6bEZmtOmtLh6axwjOJrx3B6RShShufSW4l/oX0=",
             "type": "url",
-            "url": "https://usernamehw.gallery.vsassets.io/_apis/public/gallery/publisher/usernamehw/extension/errorlens/3.18.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+            "url": "https://usernamehw.gallery.vsassets.io/_apis/public/gallery/publisher/usernamehw/extension/errorlens/3.19.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
-        "version": "3.18.0"
+        "version": "3.19.0"
     },
     "vscode-extensions-even-better-toml": {
         "cargoLocks": null,
