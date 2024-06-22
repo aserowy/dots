@@ -25,15 +25,15 @@
   };
   spicetify-themes = {
     pname = "spicetify-themes";
-    version = "dfdd89ad84d5c68915c65e4a83580047349c49b4";
+    version = "3637dbff71043c9246905bf04b86a9f44d9591e7";
     src = fetchFromGitHub {
       owner = "spicetify";
       repo = "spicetify-themes";
-      rev = "dfdd89ad84d5c68915c65e4a83580047349c49b4";
+      rev = "3637dbff71043c9246905bf04b86a9f44d9591e7";
       fetchSubmodules = false;
-      sha256 = "sha256-8IF2Y7xJtzk92rl4bfjiMXCISzUMaxXxOaMZkLS5mww=";
+      sha256 = "sha256-D0YZyy5MBQAEDVxRVUBcXimC57R2YwwEHwjRoN567fw=";
     };
-    date = "2024-05-17";
+    date = "2024-06-22";
   };
   tmux-continuum = {
     pname = "tmux-continuum";
@@ -84,11 +84,11 @@
   };
   vscode-extensions-errorlens = {
     pname = "vscode-extensions-errorlens";
-    version = "3.19.0";
+    version = "3.20.0";
     src = fetchurl {
-      url = "https://usernamehw.gallery.vsassets.io/_apis/public/gallery/publisher/usernamehw/extension/errorlens/3.19.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "errorlens-3.19.0.zip";
-      sha256 = "sha256-duljH6bEZmtOmtLh6axwjOJrx3B6RShShufSW4l/oX0=";
+      url = "https://usernamehw.gallery.vsassets.io/_apis/public/gallery/publisher/usernamehw/extension/errorlens/3.20.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "errorlens-3.20.0.zip";
+      sha256 = "sha256-0gCT+u6rfkEcWcdzqRdc4EosROllD/Q0TIOQ4k640j0=";
     };
     publisher = "usernamehw";
     name = "errorlens";
