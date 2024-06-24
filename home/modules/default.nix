@@ -8,6 +8,7 @@
     ./hypr
     ./neocode
     ./notification
+    ./niri
     ./nushell
     ./screenshot
     ./sidebar

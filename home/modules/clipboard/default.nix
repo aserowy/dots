@@ -16,6 +16,14 @@ in
       '';
     };
 
+    enableNiriIntegration = mkOption {
+      type = types.bool;
+      default = true;
+      description = ''
+        If enabled, init clipman with wl-clipboard tools in niri.
+      '';
+    };
+
     enableHyprlandIntegration = mkOption {
       type = types.bool;
       default = true;
@@ -38,6 +46,10 @@ in
     home.modules.sway.prependedConfig = mkIf cnfg.enableSwayIntegration ''
       # Init clipman with wl-clipboard tools
       exec wl-paste -t text --watch clipman store --no-persist
+    '';
+
+    home.modules.niri.prependedConfig = mkIf cnfg.enableNiriIntegration ''
+      spawn-at-startup "wl-paste" "-t" "text" "--watch" "clipman" "store" "--no-persist"
     '';
 
     home.modules.hyprland.additionalConfig = mkIf cnfg.enableHyprlandIntegration ''

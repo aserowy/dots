@@ -27,7 +27,7 @@ in
     defaultTerminal = mkOption {
       type = types.str;
       description = ''
-        Sets default terminal in hyprland.
+        Sets default terminal in sway.
       '';
     };
 

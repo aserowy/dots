@@ -16,6 +16,14 @@ in
       '';
     };
 
+    enableNiriIntegration = mkOption {
+      type = types.bool;
+      default = true;
+      description = ''
+        If enabled, statusbar gets started while running niri.
+      '';
+    };
+
     enableSwayIntegration = mkOption {
       type = types.bool;
       default = true;
@@ -50,6 +58,10 @@ in
     home.modules.hyprland.additionalConfig = mkIf cnfg.enableHyprlandIntegration ''
       # Init statusbar
       exec-once = eww open --config ~/.config/eww/statusbar/ statusbar
+    '';
+
+    home.modules.niri.prependedConfig = mkIf cnfg.enableNiriIntegration ''
+      spawn-at-startup "sh" "-c" "eww open --config ~/.config/eww/statusbar/ statusbar"
     '';
 
     home.modules.sway.appendedConfig = mkIf cnfg.enableSwayIntegration ''

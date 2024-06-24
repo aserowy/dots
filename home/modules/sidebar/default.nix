@@ -16,6 +16,14 @@ in
       '';
     };
 
+    enableNiriIntegration = mkOption {
+      type = types.bool;
+      default = true;
+      description = ''
+        If enabled, sidebar gets started while running niri.
+      '';
+    };
+
     enableSwayIntegration = mkOption {
       type = types.bool;
       default = true;
@@ -67,6 +75,10 @@ in
       home.modules.hyprland.additionalConfig = mkIf cnfg.enableHyprlandIntegration ''
         # Init sidebar
         exec-once = eww open --config ~/.config/eww/sidebar/ sidebar
+      '';
+
+      home.modules.niri.prependedConfig = mkIf cnfg.enableNiriIntegration ''
+        spawn-at-startup "sh" "-c" "eww open --config ~/.config/eww/sidebar/ sidebar"
       '';
 
       home.modules.sway.appendedConfig = mkIf cnfg.enableSwayIntegration ''

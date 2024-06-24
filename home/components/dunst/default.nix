@@ -38,6 +38,14 @@ in
       '';
     };
 
+    enableNiriIntegration = mkOption {
+      type = types.bool;
+      default = true;
+      description = ''
+        If enabled, the dunst daemon gets started while running niri.
+      '';
+    };
+
     enableHyprlandIntegration = mkOption {
       type = types.bool;
       default = true;
@@ -139,6 +147,10 @@ in
       home.modules.sway.prependedConfig = mkIf cnfg.enableSwayIntegration ''
         # Start dunst daemon to enable notifications
         exec dunst -conf ~/.config/dunst/dunstrc
+      '';
+
+      home.modules.niri.prependedConfig = mkIf cnfg.enableNiriIntegration ''
+        spawn-at-startup "sh" "-c" "dunst -conf ~/.config/dunst/dunstrc"
       '';
 
       home.modules.hyprland.additionalConfig = mkIf cnfg.enableHyprlandIntegration ''

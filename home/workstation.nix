@@ -20,6 +20,7 @@
 
     modules = {
       gtk.enable = true;
+      niri.enable = true;
       sway.enable = true;
       xdg.enable = true;
     };

@@ -16,6 +16,14 @@ in
       '';
     };
 
+    enableNiriIntegration = mkOption {
+      type = types.bool;
+      default = true;
+      description = ''
+        If enabled, the swww script gets added to niris config.
+      '';
+    };
+
     enableHyprlandIntegration = mkOption {
       type = types.bool;
       default = true;
@@ -38,6 +46,11 @@ in
       # Start swww daemon and cycle through random wallpaper
       exec swww-daemon
       exec bash ~/.config/swww/wallpaper.sh ~/onedrive/Wallpapers/
+    '';
+
+    home.modules.niri.prependedConfig = mkIf cnfg.enableNiriIntegration ''
+      spawn-at-startup "swww-daemon"
+      spawn-at-startup "bash" "-c" "~/.config/swww/wallpaper.sh ~/onedrive/Wallpapers/"
     '';
 
     home.modules.hyprland.additionalConfig = mkIf cnfg.enableHyprlandIntegration ''
