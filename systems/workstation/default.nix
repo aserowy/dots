@@ -67,9 +67,9 @@
       gtk.enable = true;
       tuigreet = {
         enable = true;
-        # command = "niri --session";
+        command = "niri-session";
         # command = "Hyprland";
-        command = "sway";
+        # command = "sway";
       };
       xdg.enable = true;
     };
