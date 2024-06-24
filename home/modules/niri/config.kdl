@@ -5,6 +5,18 @@ hotkey-overlay {
     skip-at-startup
 }
 
+input {
+    keyboard {
+        xkb {
+            layout "us"
+        }
+
+        repeat-delay 600
+        repeat-rate 25
+        track-layout "global"
+    }
+}
+
 output "HDMI-A-1" {
     transform "90"
 }
