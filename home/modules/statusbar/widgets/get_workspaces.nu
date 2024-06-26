@@ -12,7 +12,12 @@ let workspace_icons = [
 ]
 
 def main [monitor: number = 0] {
-    (get_workspaces $monitor
+    let workspaces = get_workspaces $monitor
+    if ($workspaces | is-empty) {
+        return '[]'
+    }
+
+    ($workspaces
         | sort-by name
         | insert icon {|rw| icon $rw.name}
         | to json -r
