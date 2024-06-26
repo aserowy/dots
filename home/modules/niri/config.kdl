@@ -54,8 +54,6 @@ window-rule {
 }
 
 binds {
-    Mod+Shift+Slash { show-hotkey-overlay; }
-
     Mod+B { spawn "microsoft-edge-beta"; }
     Mod+T { spawn "alacritty"; }
     Mod+E { spawn "alacritty" "--command" "yeet"; }
@@ -77,7 +75,7 @@ binds {
 
     Mod+Shift+H { move-column-left; }
     Mod+Shift+J { move-window-down-or-to-workspace-down; }
-    Mod+Shift+K { move-window-down-or-to-workspace-up; }
+    Mod+Shift+K { move-window-up-or-to-workspace-up; }
     Mod+Shift+L { move-column-right; }
 
     Mod+G { focus-column-first; }
