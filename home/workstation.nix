@@ -9,19 +9,18 @@
       alacritty.enable = true;
       chrome.enable = true;
       docker.enable = true;
-
-      # NOTE: fallback terminal
-      foot.enable = true;
-
       logseq.enable = true;
       onedrive.enable = true;
       swww.enable = true;
+
+      # NOTE: fallback terminal
+      foot.enable = true;
     };
 
     modules = {
       gtk.enable = true;
-      # niri.enable = true;
-      sway.enable = true;
+      niri.enable = true;
+      # sway.enable = true;
       xdg.enable = true;
     };
 

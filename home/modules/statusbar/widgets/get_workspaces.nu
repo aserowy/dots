@@ -40,7 +40,7 @@ def get_workspaces [monitor: number] {
             | from json
             | where monitorID == $monitor
             # FIX: add focused to workspace item hyprctl activeworkspace may be
-            # usefull if focused is not part of respone
+            # usefull if focused is not part of response
             | select id name
         ),
         # TODO: from number to output to filter workspaces if desired
@@ -50,5 +50,6 @@ def get_workspaces [monitor: number] {
             | from json
             | select id name focused
         )
+        _ => []
     }
 }

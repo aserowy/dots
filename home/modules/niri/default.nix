@@ -53,10 +53,8 @@ in
         };
 
         packages = with pkgs; [
+          gamescope
           niri
-
-          xorg.xlsclients
-          xwayland
         ];
 
         sessionVariables = {
