@@ -22,6 +22,9 @@ in
     home = {
       packages = mkIf cnfg.installPackage [
         pkgs.logseq
+
+        # FIX: https://github.com/logseq/logseq/issues/10851
+        pkgs.glibc
       ];
     };
   };
