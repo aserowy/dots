@@ -80,8 +80,8 @@ binds {
 
     Mod+G { focus-monitor-left; }
     Mod+Semicolon { focus-monitor-right; }
-    Mod+Shift+G { move-workspace-to-monitor-left; }
-    Mod+Shift+Semicolon { move-workspace-to-monitor-right; }
+    Mod+Shift+G { move-column-to-monitor-left; }
+    Mod+Shift+Semicolon { move-column-to-monitor-right; }
 
     Mod+Z { fullscreen-window; }
 

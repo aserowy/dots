@@ -8,6 +8,14 @@ in
   options.home.components.rofi = {
     enable = mkEnableOption "rofi";
 
+    theme = mkOption {
+      type = types.str;
+      default = "clear-list-two";
+      description = ''
+        The theme to use for rofi.
+      '';
+    };
+
     enableDunstIntegration = mkOption {
       type = types.bool;
       default = true;
@@ -23,7 +31,15 @@ in
         rofi-wayland
       ];
 
-      file.".config/rofi/".source = ./src;
+      file = {
+        ".config/rofi/scripts".source = ./scripts;
+        ".config/rofi/themes".source = ./themes;
+
+        ".config/rofi/config.rasi".source = builtins.toFile "rofi-config" ''
+          @import "themes/${cnfg.theme}.rasi"
+        '';
+      };
+
     };
 
     home.components.dunst.dmenuCommand = mkIf cnfg.enableDunstIntegration

@@ -2,13 +2,14 @@
 
 let predefined = [
     [name command];
-    [drun 'rofi -config ~/.config/rofi/config.rasi -modi drun -show drun']
-    [move 'rofi -config ~/.config/rofi/list.rasi -modi move:~/.config/rofi/move_by_name.nu -show move']
-    [power 'rofi -config ~/.config/rofi/powermenu.rasi -modi power:~/.config/rofi/powermenu.nu -show power']
-    [rename 'rofi -config ~/.config/rofi/list.rasi -modi rename:~/.config/rofi/rename.nu -show rename']
-    [workspace 'rofi -config ~/.config/rofi/list.rasi -modi workspace:~/.config/rofi/focus_by_name.nu -show workspace']
+    [drun 'rofi -modi drun -show drun']
+    [move 'rofi -modi move:~/.config/rofi/move_by_name.nu -show move']
+    [power 'rofi -modi power:~/.config/rofi/powermenu.nu -show power']
+    [rename 'rofi -modi rename:~/.config/rofi/rename.nu -show rename']
+    [workspace 'rofi -modi workspace:~/.config/rofi/focus_by_name.nu -show workspace']
 ]
 
+# TODO: add capability to pass themes to rofi
 def main [command_name: string, additional_rofi_flags: string = ""] {
     if (pgrep rofi | lines | any {true}) {
         (pkill rofi)

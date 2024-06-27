@@ -3,7 +3,7 @@ configuration {
     font: "Inter 10";
     modi: "window,run,drun";
     show-icons: true;
-    terminal: "foot";
+    terminal: "alacritty";
 }
 
 * {
@@ -20,7 +20,6 @@ configuration {
   urgent-foreground: @foreground;
   alternate-urgent-foreground: @foreground;
   selected-urgent-foreground: @foreground;
-
 
   background: transparent;
   active-background: @background;
