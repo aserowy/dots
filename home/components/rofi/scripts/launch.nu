@@ -3,10 +3,10 @@
 let predefined = [
     [name command];
     [drun 'rofi -modi drun -show drun']
-    [move 'rofi -modi move:~/.config/rofi/move_by_name.nu -show move']
-    [power 'rofi -modi power:~/.config/rofi/powermenu.nu -show power']
-    [rename 'rofi -modi rename:~/.config/rofi/rename.nu -show rename']
-    [workspace 'rofi -modi workspace:~/.config/rofi/focus_by_name.nu -show workspace']
+    [move 'rofi -modi move:~/.config/rofi/scripts/move_by_name.nu -show move']
+    [power 'rofi -modi power:~/.config/rofi/scripts/powermenu.nu -show power']
+    [rename 'rofi -modi rename:~/.config/rofi/scripts/rename.nu -show rename']
+    [workspace 'rofi -modi workspace:~/.config/rofi/scripts/focus_by_name.nu -show workspace']
 ]
 
 # TODO: add capability to pass themes to rofi

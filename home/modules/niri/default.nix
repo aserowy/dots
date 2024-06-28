@@ -28,7 +28,10 @@ in
             enable = true;
           };
 
-          rofi.enable = true;
+          rofi = {
+            enable = true;
+            theme = "spotlight-light";
+          };
         };
 
         file = {

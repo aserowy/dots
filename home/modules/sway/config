@@ -1,7 +1,7 @@
 # PROGRAMS
 
 set $browser microsoft-edge-beta
-set $menu exec ~/.config/rofi/launch.nu drun
+set $menu exec ~/.config/rofi/scripts/launch.nu drun
 
 # OUTPUTS
 
@@ -56,15 +56,15 @@ bindsym $mod+t exec $terminal
 
 ## Sway
 
-bindsym $mod+q exec ~/.config/rofi/launch.nu power
+bindsym $mod+q exec ~/.config/rofi/scripts/launch.nu power
 bindsym $mod+Shift+c kill
 bindsym $mod+Shift+r reload
 
 for_window [title="fzf-switcher"] floating enable
 
-bindsym $mod+r exec ~/.config/rofi/launch.nu rename
-bindsym $mod+w exec ~/.config/rofi/launch.nu workspace
-bindsym $mod+Shift+w exec ~/.config/rofi/launch.nu move
+bindsym $mod+r exec ~/.config/rofi/scripts/launch.nu rename
+bindsym $mod+w exec ~/.config/rofi/scripts/launch.nu workspace
+bindsym $mod+Shift+w exec ~/.config/rofi/scripts/launch.nu move
 
 bindsym $mod+n exec ~/.config/sway/scripts/focus_workspace.nu next
 bindsym $mod+p exec ~/.config/sway/scripts/focus_workspace.nu prev

@@ -36,10 +36,9 @@ in
         ".config/rofi/themes".source = ./themes;
 
         ".config/rofi/config.rasi".source = builtins.toFile "rofi-config" ''
-          @import "themes/${cnfg.theme}.rasi"
+          @theme "${cnfg.theme}"
         '';
       };
-
     };
 
     home.components.dunst.dmenuCommand = mkIf cnfg.enableDunstIntegration
