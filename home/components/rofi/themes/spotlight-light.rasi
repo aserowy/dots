@@ -27,7 +27,7 @@ window {
     background-color:   @bg0;
 
     location:       north;
-    y-offset:       calc( 50% - 24px );
+    y-offset:       calc(50% - 202px);
     width:          640;
     border-radius:  8;
 }
