@@ -78,6 +78,9 @@ binds {
     Mod+Shift+K { move-window-up-or-to-workspace-up; }
     Mod+Shift+L { move-column-right; }
 
+    Mod+Shift+U { consume-or-expel-window-left; }
+    Mod+Shift+I { consume-or-expel-window-right; }
+
     Mod+G { focus-monitor-left; }
     Mod+Semicolon { focus-monitor-right; }
     Mod+Shift+G { move-column-to-monitor-left; }
