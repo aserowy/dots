@@ -33,6 +33,7 @@ layout {
         proportion 0.33333
         proportion 0.5
         proportion 0.66667
+        proportion 1.0
     }
 
     default-column-width { proportion 0.5; }
@@ -88,6 +89,7 @@ binds {
 
     Mod+Z { fullscreen-window; }
 
+    Mod+Alt+Semicolon { switch-preset-column-width; }
     Mod+Alt+H { set-column-width "-10%"; }
     Mod+Alt+L { set-column-width "+10%"; }
     Mod+Alt+J { set-window-height "-10%"; }
