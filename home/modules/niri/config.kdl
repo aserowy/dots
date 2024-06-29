@@ -50,6 +50,11 @@ layout {
 }
 
 window-rule {
+    geometry-corner-radius 5
+    clip-to-geometry true
+}
+
+window-rule {
     match app-id=r#"^org\.wezfurlong\.wezterm$"#
     default-column-width {}
 }
