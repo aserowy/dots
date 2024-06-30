@@ -9,14 +9,14 @@
 (include "./widgets/recorder.yuck")
 (include "./widgets/workspaces.yuck")
 
-(defwindow statusbar
+(defwindow statusbar [stacking]
     :geometry (geometry
         :height "100%"
         :anchor "center left"
     )
     :monitor 0
     :exclusive true
-    :stacking "bottom"
+    :stacking { stacking }
     :namespace "eww_statusbar"
     (statusbar)
 )

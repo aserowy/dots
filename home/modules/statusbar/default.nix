@@ -57,16 +57,16 @@ in
 
     home.modules.hyprland.additionalConfig = mkIf cnfg.enableHyprlandIntegration ''
       # Init statusbar
-      exec-once = eww open --config ~/.config/eww/statusbar/ statusbar
+      exec-once = eww open --config ~/.config/eww/statusbar/ statusbar --arg stacking=bottom
     '';
 
     home.modules.niri.prependedConfig = mkIf cnfg.enableNiriIntegration ''
-      spawn-at-startup "sh" "-c" "eww open --config ~/.config/eww/statusbar/ statusbar"
+      spawn-at-startup "sh" "-c" "eww open --config ~/.config/eww/statusbar/ statusbar --arg stacking=overlay"
     '';
 
     home.modules.sway.appendedConfig = mkIf cnfg.enableSwayIntegration ''
       # Init statusbar
-      exec eww open --config ~/.config/eww/statusbar/ statusbar
+      exec eww open --config ~/.config/eww/statusbar/ statusbar --arg stacking=bottom
     '';
   };
 }
