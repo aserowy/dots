@@ -41,7 +41,7 @@
                 (label :text "󱏫")
             )
         )
-        (box 
+        (box
             :orientation "vertical"
             :spacing 22
             :space-evenly false
@@ -50,7 +50,9 @@
                 :orientation "vertical"
                 :space-evenly false
                 :visible {arraylength(notifications['data'][0]) == 0}
-                (label :text "No Notifications.")
+                (label
+                    :text "No Notifications."
+                    :wrap true)
             )
             (for notification in {notifications['data'][0]}
                 (notification-entry :notification notification)
@@ -69,10 +71,12 @@
             (label
                 :class "highlight"
                 :halign "end"
+                :wrap true
                 :text {notification['summary']['data']}
             )
             (label
                 :halign "end"
+                :wrap true
                 :markup {notification['body']['data']}
             )
         )
