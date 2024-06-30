@@ -50,7 +50,7 @@ in
 
     home.modules.niri.prependedConfig = mkIf cnfg.enableNiriIntegration ''
       spawn-at-startup "swww-daemon"
-      spawn-at-startup "bash" "~/.config/swww/wallpaper.sh ~/onedrive/Wallpapers/"
+      spawn-at-startup "bash" "~/.config/swww/wallpaper.sh" "~/onedrive/Wallpapers/"
     '';
 
     home.modules.hyprland.additionalConfig = mkIf cnfg.enableHyprlandIntegration ''
