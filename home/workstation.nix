@@ -20,12 +20,10 @@
     modules = {
       gtk.enable = true;
       niri.enable = true;
-      # sway.enable = true;
       xdg.enable = true;
     };
 
     packages = with pkgs; [
-      discord
       drawio
       (lutris.override {
         extraPkgs = pkgs: [
