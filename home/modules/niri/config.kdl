@@ -99,8 +99,4 @@ binds {
     Mod+Alt+L { set-column-width "+10%"; }
     Mod+Alt+J { set-window-height "-10%"; }
     Mod+Alt+K { set-window-height "+10%"; }
-
-    Print { screenshot; }
-    Ctrl+Print { screenshot-screen; }
-    Alt+Print { screenshot-window; }
 }
