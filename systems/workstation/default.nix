@@ -33,7 +33,7 @@
     config = {
       # FIX: remove this once packages are updated
       permittedInsecurePackages = [
-        "electron-28.3.3"
+        "electron-27.3.11"
       ];
     };
   };
