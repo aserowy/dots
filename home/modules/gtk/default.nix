@@ -9,7 +9,7 @@ in
 
   config = mkIf cnfg.enable {
     home.packages = with pkgs; [
-      gnome.gnome-tweaks
+      gnome-tweaks
     ];
 
     gtk = {

@@ -10,7 +10,7 @@ in
 
     theme = mkOption {
       type = types.str;
-      default = "clear-list-two";
+      default = "dashboard-list-two";
       description = ''
         The theme to use for rofi.
       '';

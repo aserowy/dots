@@ -30,7 +30,7 @@ in
 
           rofi = {
             enable = true;
-            theme = "spotlight-light";
+            theme = "clear";
           };
         };
 
