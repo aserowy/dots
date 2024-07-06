@@ -19,6 +19,9 @@ in
           wine64Packages.staging
         ];
       })
+
+      # NOTE: xbox controller support
+      xboxdrv
     ];
 
     xdg.desktopEntries = {
