@@ -56,7 +56,6 @@ in
         };
 
         packages = with pkgs; [
-          gamescope
           niri
         ];
 

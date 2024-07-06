@@ -4,6 +4,7 @@
     ./browser
     ./clipboard
     ./console
+    ./gaming
     ./gtk
     ./hypr
     ./neocode

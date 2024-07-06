@@ -18,6 +18,7 @@
     };
 
     modules = {
+      gaming.enable = true;
       gtk.enable = true;
       niri.enable = true;
       xdg.enable = true;
@@ -25,12 +26,6 @@
 
     packages = with pkgs; [
       drawio
-      (lutris.override {
-        extraPkgs = pkgs: [
-          winePackages.staging
-          wine64Packages.staging
-        ];
-      })
       obsidian
       remmina
       spotify
