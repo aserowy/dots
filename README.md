@@ -10,32 +10,6 @@ To get usefull icons in shell and nvim, install your favorite nerd font from
 
 Set the installed font as default in your terminal.
 
-### on debian
-
-Install the specified dependencies in your distribution.
-
-```sh
-sudo apt-get update
-sudo apt-get install -y curl openssh-server xz-utils
-```
-
-After these packages are installed run the install script with the following
-command.
-
-> For others to use: fork and change targets in flake.nix (user@system)
-> accordingly.
-
-```sh
-curl -L https://raw.githubusercontent.com/aserowy/dots/main/install.sh | sh
-```
-
-At the end, copy your ssh keys into `~/.ssh` and set the permissions to 600 for
-all keys and pubs.
-
-```sh
-sudo chmod 600 [file]
-```
-
 ### on windows for wsl 2
 
 Fix author and principal in <./assets/wsl\_init.xml> accordingly. Open the Task
@@ -44,6 +18,8 @@ Scheduler and import the updated task definition.
 ## install nixos
 
 ### filesystem
+
+<!-- TODO: use disko -->
 
 ```sh
 export ROOT_DISK=/dev/sda
