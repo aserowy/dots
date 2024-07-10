@@ -3,13 +3,13 @@
 {
   git-credential-manager = {
     pname = "git-credential-manager";
-    version = "v2.5.0";
+    version = "v2.5.1";
     src = fetchFromGitHub {
       owner = "GitCredentialManager";
       repo = "git-credential-manager";
-      rev = "v2.5.0";
+      rev = "v2.5.1";
       fetchSubmodules = false;
-      sha256 = "sha256-eRSTF9Ldj00cQbUzHzdMihte0+W4nZ9T/qg/L/yes/w=";
+      sha256 = "sha256-fD/HToyreYS8PG85CHHLPQOUKV1cDYGukxyVOr+7cKk=";
     };
   };
   spicetify-cli = {
@@ -205,11 +205,11 @@
   };
   vscode-extensions-vscode-neovim = {
     pname = "vscode-extensions-vscode-neovim";
-    version = "1.18.2";
+    version = "1.18.3";
     src = fetchurl {
-      url = "https://asvetliakov.gallery.vsassets.io/_apis/public/gallery/publisher/asvetliakov/extension/vscode-neovim/1.18.2/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "vscode-neovim-1.18.2.zip";
-      sha256 = "sha256-z7NdpZERjaOqPqi+7XTbabYU9/Ei4cZ7DYFCUl3uq2c=";
+      url = "https://asvetliakov.gallery.vsassets.io/_apis/public/gallery/publisher/asvetliakov/extension/vscode-neovim/1.18.3/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "vscode-neovim-1.18.3.zip";
+      sha256 = "sha256-yJUHfaDhWOPDXJPKLwFO39tbgQiCCJ78+ChW6H9K0EQ=";
     };
     publisher = "asvetliakov";
     name = "vscode-neovim";
