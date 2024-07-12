@@ -31,6 +31,10 @@ jobs:
         run: nix flake check -v --show-trace
         timeout-minutes: 90
 
+      - name: build workstation
+        run: nixos-rebuild build --verbose --show-trace --flake .#workstation
+        timeout-minutes: 90
+
       - name: commit and push changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
