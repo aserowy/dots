@@ -32,7 +32,7 @@ jobs:
         timeout-minutes: 90
 
       - name: build workstation
-        run: nixos-rebuild build --verbose --show-trace --flake .#workstation
+        run: nix build -v --show-trace .#nixosConfigurations.workstation.config.system.build.toplevel
         timeout-minutes: 90
 
       - name: commit and push changes
