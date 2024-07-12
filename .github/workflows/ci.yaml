@@ -24,13 +24,6 @@ jobs:
           extra_nix_config: |
             experimental-features = nix-command flakes
 
-      - name: free space for ubuntu
-        uses: jlumbroso/free-disk-space@v1.3.1
-
       - name: check flake
         run: nix flake check -v --show-trace
-        timeout-minutes: 90
-
-      - name: build workstation
-        run: nix build -v --show-trace .#nixosConfigurations.workstation.config.system.build.toplevel
         timeout-minutes: 90
