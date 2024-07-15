@@ -14,13 +14,13 @@
   };
   spicetify-cli = {
     pname = "spicetify-cli";
-    version = "v2.36.14";
+    version = "v2.36.15";
     src = fetchFromGitHub {
       owner = "spicetify";
       repo = "spicetify-cli";
-      rev = "v2.36.14";
+      rev = "v2.36.15";
       fetchSubmodules = false;
-      sha256 = "sha256-F5fXTkUbpVwscM2GwMA/hSpe0ZVQU12Jb8I8dxuRzYc=";
+      sha256 = "sha256-K3lhPeW6L9N9OljNn8e6iQqx4k4HX5A9mX7SUlv2IRw=";
     };
   };
   spicetify-themes = {
