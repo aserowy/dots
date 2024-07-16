@@ -35,7 +35,7 @@ in
     ];
 
     xdg.desktopEntries = {
-      gamescoped.steam = {
+      "gamescoped.steam" = {
         name = "GameScoped Steam";
         genericName = "Steam";
         exec = "${pkgs.gamescope}/bin/gamescope -w 3440 -h 1440 --steam -- steam -pipewire-dmabuf";
