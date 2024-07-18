@@ -3,6 +3,11 @@ with lib;
 
 let
   cnfg = config.home.modules.gaming;
+
+  mkUnless = condition: onTrue: onFalse: mkMerge [
+    (mkIf condition onTrue)
+    (mkIf (!condition) onFalse)
+  ];
 in
 {
   options.home.modules.gaming = {
@@ -56,8 +61,14 @@ in
       spawn-at-startup "xwayland-satellite"
     '';
 
-    home.sessionVariables = mkIf cnfg.enableNiriIntegration {
-      DISPLAY = ":0";
-    };
+    # NOTE: sdl with wayland, x11 and windows is for easy anti cheat support on wine
+    home.sessionVariables = mkUnless cnfg.enableNiriIntegration
+      {
+        DISPLAY = ":0";
+        SDL_VIDEODRIVER = "wayland,x11,windows";
+      }
+      {
+        SDL_VIDEODRIVER = "wayland,x11,windows";
+      };
   };
 }
