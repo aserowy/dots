@@ -13,7 +13,7 @@ in
   options.home.modules.gaming = {
     enable = mkEnableOption "gaming";
 
-    enableNiriIntegration = mkOption {
+    enableXwaylandSatellite = mkOption {
       type = types.bool;
       default = true;
       description = ''
@@ -57,18 +57,19 @@ in
       };
     };
 
-    home.modules.niri.prependedConfig = mkIf cnfg.enableNiriIntegration ''
+    home.modules.niri.prependedConfig = mkIf cnfg.enableXwaylandSatellite ''
       spawn-at-startup "xwayland-satellite"
     '';
 
     # NOTE: sdl with wayland, x11 and windows is for easy anti cheat support on wine
-    home.sessionVariables = mkUnless cnfg.enableNiriIntegration
+    home.sessionVariables = mkUnless cnfg.enableXwaylandSatellite
       {
+        # FIX: envs are not present when using rofi to launch eg steam
         DISPLAY = ":0";
         SDL_VIDEODRIVER = "wayland,x11,windows";
       }
       {
-        SDL_VIDEODRIVER = "wayland,x11,windows";
+        SDL_VIDEODRIVER = "wayland";
       };
   };
 }
