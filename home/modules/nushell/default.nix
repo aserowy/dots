@@ -42,6 +42,7 @@ in
           gad = "git add";
           gada = "git add --all";
           gbr = "git branch";
+          gbrclean = "bash -c \"git fetch --prune && git branch -r | awk '{print $1}' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk '{print $1}' | xargs git branch -D\"";
           gcl = "git clone --recurse-submodules -j8";
           gco = "git checkout";
           gcm = "git commit -s -m";
