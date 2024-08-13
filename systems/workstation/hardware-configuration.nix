@@ -6,8 +6,6 @@
     ];
 
   boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
-
     initrd.availableKernelModules = [ "ehci_pci" "ahci" "xhci_pci" "firewire_ohci" "usbhid" "usb_storage" "sd_mod" "sr_mod" ];
     initrd.kernelModules = [ "amdgpu" "dm-snapshot" "i915" ];
     kernelModules = [ "kvm-intel" ];
