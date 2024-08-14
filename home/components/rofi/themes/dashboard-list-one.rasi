@@ -1,4 +1,4 @@
-@import "clear-base.rasi"
+@import "dashboard-base.rasi"
 
 #window {
   width: 350px;
