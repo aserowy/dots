@@ -8,7 +8,7 @@ fi
 
 export SWWW_TRANSITION='fade'
 
-INTERVAL=300
+INTERVAL=3600
 
 while true; do
 	find "$1" \
