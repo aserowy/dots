@@ -24,38 +24,12 @@ in
 
   config = mkIf cnfg.enable {
     home.packages = with pkgs; [
-      gamescope
       xwayland
       xwayland-satellite
-
-      (lutris.override {
-        extraPkgs = pkgs: [
-          winePackages.staging
-          wine64Packages.staging
-        ];
-      })
 
       # NOTE: xbox controller support
       xboxdrv
     ];
-
-    xdg.desktopEntries = {
-      "gamescoped.steam" = {
-        name = "GameScoped Steam";
-        genericName = "Steam";
-        exec = "${pkgs.gamescope}/bin/gamescope -w 3440 -h 1440 --steam -- steam -pipewire-dmabuf";
-        icon = "steam";
-        categories = [ "Game" ];
-      };
-
-      "gamescoped.lutris" = {
-        name = "GameScoped Lutris";
-        genericName = "Lutris";
-        exec = "${pkgs.gamescope}/bin/gamescope -w 3440 -h 1440 -- lutris";
-        icon = "lutris";
-        categories = [ "Game" ];
-      };
-    };
 
     home.modules.niri.prependedConfig = mkIf cnfg.enableXwaylandSatellite ''
       spawn-at-startup "xwayland-satellite"
