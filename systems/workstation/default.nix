@@ -50,7 +50,7 @@
       daemon = {
         enable = true;
         settings = {
-          ExcludePath = "^/home/serowy/games/";
+          ExcludePath = "^/home/serowy/.local/share/Steam\nExcludePath ^/home/serowy/.steam";
         };
       };
     };
