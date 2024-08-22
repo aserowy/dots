@@ -3,6 +3,17 @@ with lib;
 
 let
   cnfg = config.home.components.rofi;
+
+    # FIX: till https://github.com/davatorium/rofi/discussions/2008 got released
+  rofi = pkgs.rofi-wayland.overrideAttrs (old: {
+    version = "git";
+    src = pkgs.fetchFromGitHub {
+      owner = "lbonn";
+      repo = "rofi";
+      rev = "d88b475bad26a6ba60c85cd7830e441da5774cdb";
+      sha256 = "sha256-0ER7iiTrStuca2cOyddYzwBoVE02Cdnlt2/5gZszSNs=";
+    };
+  });
 in
 {
   options.home.components.rofi = {
@@ -27,8 +38,8 @@ in
 
   config = mkIf cnfg.enable {
     home = {
-      packages = with pkgs; [
-        rofi-wayland
+      packages =  [
+        rofi
       ];
 
       file = {
