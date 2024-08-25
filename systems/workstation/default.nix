@@ -1,4 +1,14 @@
 { pkgs, ... }:
+let
+  # FIX: till https://github.com/NixOS/nixpkgs/issues/334852 got merged
+  clamav = pkgs.clamav.overrideAttrs (old: rec {
+    version = "1.4.0";
+    src = pkgs.fetchurl {
+      url = "https://www.clamav.net/downloads/production/${old.pname}-${version}.tar.gz";
+      hash = "sha256-1nqymeXKBdrT2imaXqc9YCCTcqW+zX8TuaM8KQM4pOY=";
+    };
+  });
+in
 {
   imports = [
     ../shared/base.nix
@@ -45,6 +55,7 @@
 
   services = {
     clamav = {
+      package = clamav;
       updater.enable = true;
 
       daemon = {

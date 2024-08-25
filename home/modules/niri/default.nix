@@ -28,10 +28,10 @@ in
             enable = true;
           };
 
-          rofi = {
-            enable = true;
-            theme = "clear";
-          };
+          # rofi = {
+          #   enable = true;
+          #   theme = "clear";
+          # };
         };
 
         file = {
@@ -59,6 +59,7 @@ in
 
         packages = with pkgs; [
           niri
+          ulauncher
         ];
 
         sessionVariables = {
