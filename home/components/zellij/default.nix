@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 with lib;
 
 let
@@ -8,12 +8,12 @@ in
   options.home.components.zellij.enable = mkEnableOption "zellij";
 
   config = mkIf cnfg.enable {
-    programs.zellij = {
-      enable = true;
-      settings = {
-        simplified_ui = true;
-        pane_frames = false;
-      };
+    home = {
+      file.".config/zellij/config.kdl".source = ./config.kdl;
+
+      packages = with pkgs; [
+        zellij
+      ];
     };
   };
 }

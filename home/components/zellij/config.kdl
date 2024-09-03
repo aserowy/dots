@@ -1,0 +1,30 @@
+default_shell "nu"
+simplified_ui true
+pane_frames false
+
+ui {
+    pane_frames {
+        hide_session_name true
+    }
+}
+
+keybinds clear-defaults=true {
+    normal {
+        bind "Ctrl t" { SwitchToMode "tmux"; }
+    }
+    tmux {
+        bind "Esc" { SwitchToMode "normal"; }
+
+        bind "Ctrl t" { NewTab; SwitchToMode "normal"; }
+        bind "Ctrl n" { GoToNextTab; SwitchToMode "normal"; }
+        bind "Ctrl p" { GoToPreviousTab; SwitchToMode "normal"; }
+
+        bind "Ctrl w" { NewPane "Right"; SwitchToMode "normal"; }
+        bind "Ctrl h" { MoveFocus "Left"; SwitchToMode "normal"; }
+        bind "Ctrl j" { MoveFocus "Down"; SwitchToMode "normal"; }
+        bind "Ctrl k" { MoveFocus "Up"; SwitchToMode "normal"; }
+        bind "Ctrl l" { MoveFocus "Right"; SwitchToMode "normal"; }
+
+        bind "q" { Quit; }
+    }
+}
