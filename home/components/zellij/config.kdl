@@ -25,6 +25,8 @@ keybinds clear-defaults=true {
         bind "Ctrl k" { MoveFocus "Up"; SwitchToMode "normal"; }
         bind "Ctrl l" { MoveFocus "Right"; SwitchToMode "normal"; }
 
+        bind "Ctrl z" { ToggleFocusFullscreen; SwitchToMode "normal"; }
+
         bind "q" { Quit; }
     }
 }
