@@ -11,11 +11,6 @@ def main [user: string] {
     rm $"($home)/.config/starship.toml"
     cp ./home/components/starship/starship.toml $"($home)/.config/"
 
-    let alacritty_path = $"($appdata)/Roaming/alacritty"
-    rm -rfp $"($alacritty_path)"
-    mkdir $"($alacritty_path)"
-    sh -c $"cp -rL ~/.config/alacritty ($appdata)/Roaming"
-
     let nushell_path = $"($appdata)/Roaming/nushell"
     rm -rfp $"($nushell_path)"
     mkdir $"($nushell_path)"
