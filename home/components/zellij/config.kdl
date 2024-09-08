@@ -8,11 +8,31 @@ ui {
     }
 }
 
-keybinds clear-defaults=true {
-    normal {
+keybinds {
+    unbind "q"
+
+    unbind "Ctrl g"
+    unbind "Ctrl h"
+    unbind "Ctrl n"
+    unbind "Ctrl o"
+    unbind "Ctrl p"
+    unbind "Ctrl r"
+    unbind "Ctrl s"
+    unbind "Ctrl t"
+
+    normal clear-defaults=true {
         bind "Ctrl t" { SwitchToMode "tmux"; }
     }
-    tmux {
+    tmux clear-defaults=true {
+        bind "Ctrl o" {
+            LaunchOrFocusPlugin "zellij:session-manager" {
+                floating true
+            };
+            SwitchToMode "normal";
+        }
+        bind "Ctrl r" { SwitchToMode "resize"; }
+        bind "Ctrl s" { SwitchToMode "search"; }
+
         bind "Esc" { SwitchToMode "normal"; }
 
         bind "Ctrl t" { NewTab; SwitchToMode "normal"; }
@@ -20,6 +40,7 @@ keybinds clear-defaults=true {
         bind "Ctrl p" { GoToPreviousTab; SwitchToMode "normal"; }
 
         bind "Ctrl w" { NewPane "Right"; SwitchToMode "normal"; }
+
         bind "Ctrl h" { MoveFocus "Left"; SwitchToMode "normal"; }
         bind "Ctrl j" { MoveFocus "Down"; SwitchToMode "normal"; }
         bind "Ctrl k" { MoveFocus "Up"; SwitchToMode "normal"; }
