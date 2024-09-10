@@ -25,11 +25,12 @@ in
         bat
         bottom
         curl
-        # TODO: add component for lazygit
         lazygit
         ncurses
         tailspin
+
         yeet
+        chafa # enables image previews in yeet
 
         unixtools.watch
       ];

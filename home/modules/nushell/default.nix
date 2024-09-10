@@ -16,7 +16,6 @@ in
 
       packages = with pkgs; [
         carapace
-        yeet
         zoxide
       ];
     };
