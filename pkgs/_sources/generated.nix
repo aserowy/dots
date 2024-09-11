@@ -14,13 +14,13 @@
   };
   spicetify-cli = {
     pname = "spicetify-cli";
-    version = "v2.38.2";
+    version = "v2.38.3";
     src = fetchFromGitHub {
       owner = "spicetify";
       repo = "spicetify-cli";
-      rev = "v2.38.2";
+      rev = "v2.38.3";
       fetchSubmodules = false;
-      sha256 = "sha256-JFDUP03EBHUJ2qtQ4K1tp4+Bprz7y0tGWp+59hTf0tY=";
+      sha256 = "sha256-la0zNYWzsU49Z6OKTefocN3xzoyNceaPAzG+CAFKMPc=";
     };
   };
   spicetify-themes = {
@@ -139,22 +139,22 @@
   };
   vscode-extensions-remote-containers = {
     pname = "vscode-extensions-remote-containers";
-    version = "0.385.0";
+    version = "0.386.0";
     src = fetchurl {
-      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.385.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "remote-containers-0.385.0.zip";
-      sha256 = "sha256-Bt6NDONipcmKjtH45RBy6kRNYFX+6EF0GQds6bmM/lU=";
+      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-containers/0.386.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "remote-containers-0.386.0.zip";
+      sha256 = "sha256-LeugtqZ7MC93kCQim/rwdUzd77US5G/5L6lkWq/ugjw=";
     };
     publisher = "ms-vscode-remote";
     name = "remote-containers";
   };
   vscode-extensions-remote-wsl = {
     pname = "vscode-extensions-remote-wsl";
-    version = "0.88.2";
+    version = "0.88.3";
     src = fetchurl {
-      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-wsl/0.88.2/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
-      name = "remote-wsl-0.88.2.zip";
-      sha256 = "sha256-fl7fLNd3EHA9eMiPUIL/23SUiA81gveqZLFkqaHTX+Q=";
+      url = "https://ms-vscode-remote.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode-remote/extension/remote-wsl/0.88.3/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage";
+      name = "remote-wsl-0.88.3.zip";
+      sha256 = "sha256-LzfKMzn2t/LY5eV/+M5MyMCGwCberlTc+rMIQa7QvVY=";
     };
     publisher = "ms-vscode-remote";
     name = "remote-wsl";
