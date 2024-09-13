@@ -4,28 +4,31 @@ default_shell "nu"
 simplified_ui true
 pane_frames false
 
+pane_viewport_serialization true
+scrollback_lines_to_serialize 0
+
 ui {
     pane_frames {
         hide_session_name true
     }
 }
 
-keybinds {
-    unbind "q"
-
-    unbind "Ctrl g"
-    unbind "Ctrl h"
-    unbind "Ctrl n"
-    unbind "Ctrl o"
-    unbind "Ctrl p"
-    unbind "Ctrl r"
-    unbind "Ctrl s"
-    unbind "Ctrl t"
-
-    normal clear-defaults=true {
+keybinds clear-defaults=true {
+    entersearch {
+        bind "Enter" { SwitchToMode "tmux"; }
+    }
+    normal {
         bind "Ctrl t" { SwitchToMode "tmux"; }
     }
-    tmux clear-defaults=true {
+    resize {
+        bind "Esc" { SwitchToMode "normal"; }
+
+        bind "Ctrl h" { Resize "Left"; }
+        bind "Ctrl j" { Resize "Down"; }
+        bind "Ctrl k" { Resize "Up"; }
+        bind "Ctrl l" { Resize "Right"; }
+    }
+    tmux {
         bind "Ctrl o" {
             LaunchOrFocusPlugin "zellij:session-manager" {
                 floating true
@@ -33,9 +36,15 @@ keybinds {
             SwitchToMode "normal";
         }
         bind "Ctrl r" { SwitchToMode "resize"; }
-        bind "Ctrl s" { SwitchToMode "search"; }
+        bind "Ctrl s" { SwitchToMode "entersearch"; }
 
         bind "Esc" { SwitchToMode "normal"; }
+
+        bind "n" { Search "down"; }
+        bind "N" { Search "up"; }
+
+        bind "Ctrl d" { HalfPageScrollDown; }
+        bind "Ctrl u" { HalfPageScrollUp; }
 
         bind "Ctrl t" { NewTab; SwitchToMode "normal"; }
         bind "Ctrl n" { GoToNextTab; SwitchToMode "normal"; }
