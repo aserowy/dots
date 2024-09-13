@@ -220,12 +220,12 @@
         },
         "pinned": false,
         "src": {
-            "name": "material-theme-3.17.2.zip",
-            "sha256": "sha256-4s3I6FJUqvannOq6osPU79qExQJrgfP51wcr55yJ2Nc=",
+            "name": "material-theme-3.17.3.zip",
+            "sha256": "sha256-9LVttrAIEi4CWhUsunmj2AT5j9I56sduzEbZAnI4xKs=",
             "type": "url",
-            "url": "https://zhuangtongfa.gallery.vsassets.io/_apis/public/gallery/publisher/zhuangtongfa/extension/material-theme/3.17.2/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+            "url": "https://zhuangtongfa.gallery.vsassets.io/_apis/public/gallery/publisher/zhuangtongfa/extension/material-theme/3.17.3/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
-        "version": "3.17.2"
+        "version": "3.17.3"
     },
     "vscode-extensions-remote-containers": {
         "cargoLocks": null,
