@@ -2,12 +2,13 @@
 {
   imports = [
     ./alacritty
-    ./direnv
     ./chrome
+    ./direnv
     ./docker
     ./dunst
     ./edge
     ./foot
+    ./fuzzel
     ./fzf
     ./git
     ./gitui

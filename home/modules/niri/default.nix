@@ -28,10 +28,9 @@ in
             enable = true;
           };
 
-          # rofi = {
-          #   enable = true;
-          #   theme = "clear";
-          # };
+          fuzzel = {
+            enable = true;
+          };
         };
 
         file = {
@@ -59,7 +58,6 @@ in
 
         packages = with pkgs; [
           niri
-          ulauncher
         ];
 
         sessionVariables = {
