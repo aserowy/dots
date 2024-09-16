@@ -202,12 +202,12 @@
         },
         "pinned": false,
         "src": {
-            "name": "vsliveshare-1.0.5936.zip",
-            "sha256": "sha256-7jbKo5i9Pe0FUHyFpiH5qDv5NOtJ+POlyzpg0/9IuVA=",
+            "name": "vsliveshare-1.0.5940.zip",
+            "sha256": "sha256-oX/cpcOoipFkNn+xfTJw4G2UdMkkSCUeVn59a8FsUqw=",
             "type": "url",
-            "url": "https://MS-vsliveshare.gallery.vsassets.io/_apis/public/gallery/publisher/MS-vsliveshare/extension/vsliveshare/1.0.5936/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+            "url": "https://MS-vsliveshare.gallery.vsassets.io/_apis/public/gallery/publisher/MS-vsliveshare/extension/vsliveshare/1.0.5940/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
-        "version": "1.0.5936"
+        "version": "1.0.5940"
     },
     "vscode-extensions-material-theme": {
         "cargoLocks": null,
@@ -310,12 +310,12 @@
         },
         "pinned": false,
         "src": {
-            "name": "vscode-icons-12.8.0.zip",
-            "sha256": "sha256-2+Wf0AL9C5xOQCjA9maMt/W/kviNuiyMfaOFDU82KxM=",
+            "name": "vscode-icons-12.9.0.zip",
+            "sha256": "sha256-ULjZlbGcVbPiokfnx7d4z7cmVVEfy2d+SUch80rZRA4=",
             "type": "url",
-            "url": "https://vscode-icons-team.gallery.vsassets.io/_apis/public/gallery/publisher/vscode-icons-team/extension/vscode-icons/12.8.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+            "url": "https://vscode-icons-team.gallery.vsassets.io/_apis/public/gallery/publisher/vscode-icons-team/extension/vscode-icons/12.9.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
         },
-        "version": "12.8.0"
+        "version": "12.9.0"
     },
     "vscode-extensions-vscode-lldb": {
         "cargoLocks": null,
