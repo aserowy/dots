@@ -115,11 +115,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1726570812,
-        "narHash": "sha256-ePvmFOK3zWJOx5Bt42E0Bpfc+rCr5MF9ktmHix3cIu0=",
+        "lastModified": 1726571806,
+        "narHash": "sha256-4C8ds3lrZvS96VL+mZdEFyrt7eRZ0itWICLch4Dw7FM=",
         "owner": "aserowy",
         "repo": "neocode",
-        "rev": "6cc046990e314bb72b6e45c76156cda4adb39d11",
+        "rev": "75b64f0a0c41792a62317b1de3ce4e0f77ace008",
         "type": "github"
       },
       "original": {
