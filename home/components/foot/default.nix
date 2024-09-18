@@ -31,8 +31,7 @@ in
       settings = {
         main = {
           dpi-aware = mkIf cnfg.setDpiAware "yes";
-          font = "UbuntuMonoNerdFont:size=10";
-          line-height = 12;
+          font = "JetBrainsMonoNerdFont:size=12";
           term = "xterm-256color";
         };
       };

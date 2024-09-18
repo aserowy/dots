@@ -7,9 +7,7 @@ shell = "nu"
 
 [font]
 size = 12
-offset = { x = 0, y = 2 }
-
-normal = { family = 'UbuntuMono Nerd Font', style = 'Regular' }
+normal = { family = 'JetBrainsMono Nerd Font', style = 'Regular' }
 
 [keyboard]
 bindings = [
