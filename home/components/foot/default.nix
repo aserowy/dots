@@ -32,7 +32,6 @@ in
         main = {
           dpi-aware = mkIf cnfg.setDpiAware "yes";
           font = "JetBrainsMonoNerdFont:size=10";
-          term = "xterm-256color";
         };
       };
     };
