@@ -42,8 +42,8 @@ in
           gada = "git add --all";
           gbr = "git branch";
           gbrclean = "bash -c \"git fetch --prune && git branch -r | awk '{print $1}' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk '{print $1}' | xargs git branch -D\"";
+          gbrd = "git branch -D";
           gcl = "git clone --recurse-submodules -j8";
-          gco = "git checkout";
           gcm = "git commit -s -m";
           gcma = "git commit --all -s -m";
           gcmam = "git commit --amend";
@@ -57,6 +57,8 @@ in
           grs = "git reset";
           grsh = "git reset --hard";
           gst = "git status";
+          gsw = "git switch";
+          gswc = "git switch -c";
           gta = "git tag";
           gtam = "git tag -a -m";
 
