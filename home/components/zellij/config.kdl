@@ -22,11 +22,12 @@ keybinds clear-defaults=true {
     }
     resize {
         bind "Esc" { SwitchToMode "normal"; }
+        bind "Ctrl t" { SwitchToMode "tmux"; }
 
-        bind "Ctrl h" { Resize "Left"; }
-        bind "Ctrl j" { Resize "Down"; }
-        bind "Ctrl k" { Resize "Up"; }
-        bind "Ctrl l" { Resize "Right"; }
+        bind "h" { Resize "Left"; }
+        bind "j" { Resize "Down"; }
+        bind "k" { Resize "Up"; }
+        bind "l" { Resize "Right"; }
     }
     tmux {
         bind "Ctrl o" {
@@ -36,15 +37,12 @@ keybinds clear-defaults=true {
             SwitchToMode "normal";
         }
         bind "Ctrl r" { SwitchToMode "resize"; }
-        bind "Ctrl s" { SwitchToMode "entersearch"; }
+        bind "Ctrl s" { SwitchToMode "scroll"; }
 
         bind "Esc" { SwitchToMode "normal"; }
 
         bind "n" { Search "down"; }
         bind "N" { Search "up"; }
-
-        bind "Ctrl d" { HalfPageScrollDown; }
-        bind "Ctrl u" { HalfPageScrollUp; }
 
         bind "Ctrl t" { NewTab; SwitchToMode "normal"; }
         bind "Ctrl n" { GoToNextTab; SwitchToMode "normal"; }
@@ -60,5 +58,24 @@ keybinds clear-defaults=true {
         bind "Ctrl z" { ToggleFocusFullscreen; SwitchToMode "normal"; }
 
         bind "q" { Quit; }
+    }
+    scroll {
+        bind "Esc" { SwitchToMode "Normal"; }
+        bind "Ctrl t" { SwitchToMode "tmux"; }
+
+        bind "e" { EditScrollback; SwitchToMode "Normal"; }
+
+        bind "s" { SwitchToMode "EnterSearch"; SearchInput 0; }
+
+        bind "G" { ScrollToBottom; SwitchToMode "Normal"; }
+
+        bind "j" { ScrollDown; }
+        bind "k" { ScrollUp; }
+
+        bind "l" { PageScrollDown; }
+        bind "h" { PageScrollUp; }
+
+        bind "d" { HalfPageScrollDown; }
+        bind "u" { HalfPageScrollUp; }
     }
 }
