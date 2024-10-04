@@ -14,7 +14,7 @@
       swww.enable = true;
 
       # NOTE: fallback terminal
-      foot.enable = true;
+      kitty.enable = true;
     };
 
     modules = {

@@ -12,6 +12,7 @@
     ./fzf
     ./git
     ./gitui
+    ./kitty
     ./lf
     ./logseq
     ./onedrive
