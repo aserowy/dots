@@ -30,7 +30,7 @@ in
         tailspin
 
         yeet
-        chafa # enables image previews in yeet
+        fd
 
         unixtools.watch
       ];
