@@ -1,6 +1,6 @@
 import = [
-    "~/.config/alacritty/themes/tokyo-night.toml",
-    "~/AppData/Roaming/alacritty/themes/tokyo-night.toml",
+    "~/.config/alacritty/themes/bluloco-dark.toml",
+    "~/AppData/Roaming/alacritty/themes/bluloco-dark.toml",
 ]
 
 shell = "nu"

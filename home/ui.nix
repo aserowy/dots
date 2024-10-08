@@ -15,7 +15,6 @@
         enable = true;
         setDpiAware = false;
       };
-      kitty.enable = true;
       podman.enable = true;
     };
 
