@@ -79,3 +79,19 @@ keybinds clear-defaults=true {
         bind "u" { HalfPageScrollUp; }
     }
 }
+
+themes {
+    default {
+        fg "#b9c0cb"
+        bg "#282c34"
+        black "#282c34"
+        red "#fc2f52"
+        green "#25a45c"
+        yellow "#ffcc00"
+        blue "#3476ff"
+        magenta "#7a82da"
+        cyan "#4483aa"
+        white "#cdd4e0"
+        orange "#ff936a"
+    }
+}
