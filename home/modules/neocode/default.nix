@@ -25,8 +25,8 @@ in
       file.".config/nvim/" = {
         recursive = true;
         source = pkgs.neocode.override {
-          theme = "dracula";
-          style = "classic";
+          theme = "bluloco";
+          style = "dark";
 
           syncBuild = !cnfg.parallelTsBuild;
         };
