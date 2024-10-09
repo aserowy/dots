@@ -80,7 +80,7 @@ local M = {
     },
     -- font
     font = wezterm.font_with_fallback({
-        { family = "FiraCode Nerd Font", weight = "Regular", stretch = "Normal", italic = false },
+        { family = "JetBrainsMono Nerd Font", weight = "Regular", stretch = "Normal" },
     }),
     font_size = 10.0,
     line_height = 1.1,

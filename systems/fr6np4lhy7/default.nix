@@ -1,6 +1,9 @@
 revision: { ... }: {
   nix.settings.experimental-features = "nix-command flakes";
 
+  #  FIX: till update to macos 15
+  ids.uids.nixbld = 300;
+
   system = {
     configurationRevision = revision;
     stateVersion = 4;
