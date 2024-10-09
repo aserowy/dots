@@ -36,9 +36,10 @@ local M = {
         },
     },
     -- theming
-    color_scheme = "OneDark",
+    color_scheme = "BluLoco",
     color_schemes = {
         ["OneDark"] = onedark,
+        ["BluLoco"] = bluloco,
     },
     colors = {
         tab_bar = {
