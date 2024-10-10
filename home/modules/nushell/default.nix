@@ -67,6 +67,12 @@ in
 
           ll = "ls -l";
           lla = "ls -la";
+
+          zls = "zellij ls";
+          zs = "zellij --session";
+          za = "zellij attach";
+          zd = "zellij delete-session";
+          zk = "zellij kill-session";
         };
       };
     };
