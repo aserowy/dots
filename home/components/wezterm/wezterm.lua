@@ -82,7 +82,7 @@ local M = {
     font = wezterm.font_with_fallback({
         { family = "JetBrainsMono Nerd Font", weight = "Regular", stretch = "Normal" },
     }),
-    font_size = 10.0,
+    font_size = 14.0,
     line_height = 1.1,
     -- key mappings
     disable_default_key_bindings = true,
