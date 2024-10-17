@@ -5,7 +5,6 @@
     ./chrome
     ./direnv
     ./docker
-    ./dunst
     ./edge
     ./foot
     ./fuzzel
@@ -18,7 +17,6 @@
     ./onedrive
     ./podman
     ./rio
-    ./rofi
     ./ssh
     ./starship
     ./swappy
@@ -28,7 +26,6 @@
     ./vscode
     ./vscode-server
     ./wezterm
-    ./yazi
     ./zellij
   ];
 }

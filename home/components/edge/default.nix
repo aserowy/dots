@@ -8,14 +8,6 @@ in
   options.home.components.edge = {
     enable = mkEnableOption "edge";
 
-    enableDunstIntegration = mkOption {
-      type = types.bool;
-      default = false;
-      description = ''
-        If enabled, edge gets set as default browser in dunst.
-      '';
-    };
-
     enableXdgAssociations = mkOption {
       type = types.bool;
       default = false;
@@ -49,9 +41,6 @@ in
         ];
       })
     ];
-
-    home.components.dunst.browserPath = mkIf cnfg.enableDunstIntegration
-      "${pkgs.microsoft-edge-beta}/bin/microsoft-edge-beta";
 
     # INFO: set edge as default browser for electron apps
     home.sessionVariables.DEFAULT_BROWSER = mkIf cnfg.setDefaultBrowserSessionVariable

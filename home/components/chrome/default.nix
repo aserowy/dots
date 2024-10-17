@@ -8,14 +8,6 @@ in
   options.home.components.chrome = {
     enable = mkEnableOption "chrome";
 
-    enableDunstIntegration = mkOption {
-      type = types.bool;
-      default = false;
-      description = ''
-        If enabled, chrome gets set as default browser in dunst.
-      '';
-    };
-
     enableXdgAssociations = mkOption {
       type = types.bool;
       default = false;
@@ -42,9 +34,6 @@ in
         ];
       })
     ];
-
-    home.components.dunst.browserPath = mkIf cnfg.enableDunstIntegration
-      "${pkgs.google-chrome}/bin/google-chrome-stable";
 
     # INFO: set chrome as default browser for electron apps
     home.sessionVariables.DEFAULT_BROWSER = mkIf cnfg.setDefaultBrowserSessionVariable

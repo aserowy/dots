@@ -64,10 +64,6 @@ binds {
     Mod+T { spawn "alacritty"; }
     Mod+E { spawn "alacritty" "--command" "yeet"; }
 
-    // Mod+Space { spawn "~/.config/rofi/scripts/launch.nu" "drun"; }
-    // Mod+Q { spawn "~/.config/rofi/scripts/launch.nu" "power"; }
-    // Mod+P { spawn "rofi" "-modi" "actions:~/.config/niri/action_picker.nu" "-show" "actions"; }
-
     Mod+Space { spawn "fuzzel"; }
 
     XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }

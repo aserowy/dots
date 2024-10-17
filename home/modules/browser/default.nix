@@ -9,7 +9,6 @@ in {
   config = mkIf cnfg.enable {
     home.components.edge = {
       enable = true;
-      enableDunstIntegration = true;
       enableXdgAssociations = true;
       setDefaultBrowserSessionVariable = true;
     };

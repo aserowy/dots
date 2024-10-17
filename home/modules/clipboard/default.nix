@@ -37,7 +37,7 @@ in
     home = {
       file.".config/clipman/open_history.nu".source = ./open_history.nu;
 
-      components.rofi.enable = true;
+      components.fuzzel.enable = true;
 
       packages = with pkgs; [
         clipman
