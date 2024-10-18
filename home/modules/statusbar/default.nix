@@ -40,6 +40,8 @@ in
       file.".config/eww/statusbar/eww.yuck".source = ./eww.yuck;
       file.".config/eww/statusbar/widgets/".source = ./widgets;
 
+      components.swaync.enable = true;
+
       modules = {
         clipboard.enable = true;
         screenshot.enable = true;

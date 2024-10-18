@@ -1,0 +1,19 @@
+;; (defpoll notifications_status
+;;     :interval "15s"
+;;     :initial '{ "icon": "󰌸", "connected": true, "online": false }'
+;;     "./widgets/get_network_status.nu"
+;; )
+
+(defwidget notification []
+    (eventbox
+        :onclick { get_env("XDG_CURRENT_DESKTOP") == "Hyprland"
+            ? "hyprctl dispatch exec swaync-client -t -sw"
+            : get_env("XDG_CURRENT_DESKTOP") == "niri"
+            ? "niri msg action spawn -- swaync-client -t -sw"
+            : "swaymsg exec swaync-client -t -sw" }
+        (label
+            :class "nerd-icon"
+            :text "󰍦"
+        )
+    )
+)

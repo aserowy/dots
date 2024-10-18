@@ -1,0 +1,5 @@
+@define-color foreground #1a1a1aff;
+@define-color background #f9f9f9bf;
+
+@import "./controls.css";
+@import "./notifications.css";

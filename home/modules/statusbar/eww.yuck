@@ -5,6 +5,7 @@
 (include "./widgets/clipboard.yuck")
 (include "./widgets/group_lock.yuck")
 (include "./widgets/network.yuck")
+(include "./widgets/notification.yuck")
 (include "./widgets/screenshot.yuck")
 (include "./widgets/recorder.yuck")
 (include "./widgets/workspaces.yuck")
@@ -53,6 +54,14 @@
                 :halign "fill"
                 :width 24
                 :space-evenly false
+                (box
+                    :orientation "vertical"
+                    :class "container"
+                    :halign "fill"
+                    :valign "end"
+                    :space-evenly false
+                    (notification)
+                )
                 (box
                     :orientation "vertical"
                     :class "container"

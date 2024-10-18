@@ -21,6 +21,7 @@
     ./starship
     ./swappy
     ./swaybg
+    ./swaync
     ./swww
     ./tmux
     ./vscode
