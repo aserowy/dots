@@ -22,8 +22,6 @@ in
       file = {
         ".config/swaync/config.json".source = ./config.json;
         ".config/swaync/style.css".source = ./style.css;
-        ".config/swaync/controls.css".source = ./controls.css;
-        ".config/swaync/notifications.css".source = ./notifications.css;
       };
 
       packages = with pkgs; [
