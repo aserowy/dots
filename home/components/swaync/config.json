@@ -37,7 +37,7 @@
   "widgets": ["buttons-grid", "mpris", "title", "notifications"],
   "widget-config": {
     "title": {
-      "text": "",
+      "text": "Notifications",
       "clear-all-button": true,
       "button-text": "󰗨"
     },
@@ -46,7 +46,7 @@
       "text": " "
     },
     "mpris": {
-      "image-size": 96,
+      "image-size": 72,
       "image-radius": 12
     },
     "buttons-grid": {
