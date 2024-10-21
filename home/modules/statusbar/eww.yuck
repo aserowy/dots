@@ -60,14 +60,6 @@
                     :halign "fill"
                     :valign "end"
                     :space-evenly false
-                    (notification)
-                )
-                (box
-                    :orientation "vertical"
-                    :class "container"
-                    :halign "fill"
-                    :valign "end"
-                    :space-evenly false
                     (clipboard)
                     (screenshot)
                     (recorder)
@@ -79,6 +71,7 @@
                     :halign "fill"
                     :valign "end"
                     (group_lock)
+                    (notification)
                     (audio)
                     (network)
                 )

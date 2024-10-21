@@ -11,16 +11,11 @@
             : get_env("XDG_CURRENT_DESKTOP") == "niri"
             ? "niri msg action spawn -- wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
             : "swaymsg exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle" }
-        :onmiddleclick { get_env("XDG_CURRENT_DESKTOP") == "Hyprland"
+        :onrightclick { get_env("XDG_CURRENT_DESKTOP") == "Hyprland"
             ? "hyprctl dispatch exec $(realpath ./widgets/set_next_audio_output.nu)"
             : get_env("XDG_CURRENT_DESKTOP") == "niri"
             ? "niri msg action spawn -- $(realpath ./widgets/set_next_audio_output.nu)"
             : "swaymsg exec $(realpath ./widgets/set_next_audio_output.nu)" }
-        :onrightclick { get_env("XDG_CURRENT_DESKTOP") == "Hyprland"
-            ? "hyprctl dispatch exec pavucontrol"
-            : get_env("XDG_CURRENT_DESKTOP") == "niri"
-            ? "niri msg action spawn -- pavucontrol"
-            : "swaymsg exec pavucontrol" }
         (label
             :class "nerd-icon ${volume.muted ? 'warning' : ''}"
             :text "${volume.icon}"

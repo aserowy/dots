@@ -1,10 +1,8 @@
 {
   "$schema": "/etc/xdg/swaync/configSchema.json",
   "positionX": "left",
-  "positionY": "center",
+  "positionY": "top",
   "cssPriority": "user",
-
-  "fit-to-screen": true,
 
   "control-center-width": 400,
   "control-center-margin-top": 0,
@@ -25,8 +23,9 @@
   "image-visibility": "when-available",
   "transition-time": 200,
   "hide-on-clear": false,
-  "hide-on-action": false,
+  "hide-on-action": true,
   "script-fail-notify": true,
+
   "notification-visibility": {
     "example-name": {
       "state": "muted",
@@ -34,28 +33,25 @@
       "app-name": "Spotify"
     }
   },
+
   "widgets": ["buttons-grid", "mpris", "title", "notifications"],
   "widget-config": {
+    "buttons-grid": {
+      "actions": [
+        {
+          "label": "󰋋",
+          "command": "pavucontrol"
+        }
+      ]
+    },
+    "mpris": {
+      "image-size": 48,
+      "image-radius": 12
+    },
     "title": {
       "text": "Notifications",
       "clear-all-button": true,
       "button-text": "󰗨"
-    },
-    "label": {
-      "max-lines": 1,
-      "text": " "
-    },
-    "mpris": {
-      "image-size": 72,
-      "image-radius": 12
-    },
-    "buttons-grid": {
-      "actions": [
-        {
-          "label": " ",
-          "command": "amixer set Master toggle"
-        }
-      ]
     }
   }
 }
