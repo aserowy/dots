@@ -34,7 +34,6 @@
           nixpkgs.overlays = [
             neocode.overlays.default
             yeet.overlays.default
-            (import ./pkgs)
           ];
         }
 
@@ -60,7 +59,6 @@
             nixpkgs.overlays = [
               neocode.overlays.default
               yeet.overlays.default
-              (import ./pkgs)
             ];
           }
 
@@ -77,7 +75,6 @@
             nixpkgs.overlays = [
               neocode.overlays.default
               yeet.overlays.default
-              (import ./pkgs)
             ];
           }
 
@@ -108,7 +105,6 @@
             nixpkgs.overlays = [
               neocode.overlays.default
               yeet.overlays.default
-              (import ./pkgs)
             ];
           }
 
@@ -138,7 +134,6 @@
             nixpkgs.overlays = [
               neocode.overlays.default
               yeet.overlays.default
-              (import ./pkgs)
             ];
           }
 
