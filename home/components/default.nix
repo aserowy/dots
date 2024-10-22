@@ -24,8 +24,6 @@
     ./swaync
     ./swww
     ./tmux
-    ./vscode
-    ./vscode-server
     ./wezterm
     ./zellij
   ];
