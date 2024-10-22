@@ -1,14 +1,19 @@
 #!/usr/bin/env nu
 
-let wm_all = 'all'
 let wm_hypr = 'Hyprland'
+let wm_niri = 'niri'
 let wm_sway = 'sway'
 
 let predefined = [
     [name wm command];
-    [area $wm_all { || slurp }]
-    [output $wm_all { || slurp -o }]
+    [area $wm_hypr { || slurp }]
+    [output $wm_hypr { || slurp -o }]
     [window $wm_hypr { || (get_hypr_window_areas) | slurp }]
+    [area $wm_niri { || niri msg action screenshot }]
+    [output $wm_niri { || niri msg action screenshot-screen }]
+    [window $wm_niri { || niri msg action screenshot-window }]
+    [area $wm_sway { || slurp }]
+    [output $wm_sway { || slurp -o }]
     [window $wm_sway { || swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp }]
 ]
 
@@ -16,16 +21,19 @@ def main [action: string] {
     let current_wm = (get_current_wm)
 
     let command = ($predefined
-        | where $it.name == $action
-            and ($it.wm == $current_wm or $it.wm == $wm_all)
+        | where $it.name == $action and $it.wm == $current_wm
         | first
         | get command)
 
-    let area = (do $command
-        | str join ""
-        | str trim)
+    if $current_wm == $wm_niri {
+        (do $command)
+    } else {
+        let area = (do $command
+            | str join ""
+            | str trim)
 
-    (grim -g $"\"($area)\"" -) | (swappy -f -)
+        (grim -g $"\"($area)\"" -) | (swappy -f -)
+    }
 }
 
 def get_current_wm [] {

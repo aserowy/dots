@@ -41,6 +41,14 @@
         {
           "label": "󰋋",
           "command": "pavucontrol"
+        },
+        {
+          "label": "󰅍",
+          "command": "nu ~/.config/clipman/open_history.nu"
+        },
+        {
+          "label": "󰹑",
+          "command": "nu ~/.config/screenshot/screenshot.nu area"
         }
       ]
     },

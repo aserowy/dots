@@ -2,11 +2,9 @@
 
 (include "./widgets/audio.yuck")
 (include "./widgets/clock.yuck")
-(include "./widgets/clipboard.yuck")
 (include "./widgets/group_lock.yuck")
 (include "./widgets/network.yuck")
 (include "./widgets/notification.yuck")
-(include "./widgets/screenshot.yuck")
 (include "./widgets/recorder.yuck")
 (include "./widgets/workspaces.yuck")
 
@@ -60,8 +58,6 @@
                     :halign "fill"
                     :valign "end"
                     :space-evenly false
-                    (clipboard)
-                    (screenshot)
                     (recorder)
                 )
                 (box
