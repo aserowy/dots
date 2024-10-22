@@ -23,7 +23,6 @@
     ./swaybg
     ./swaync
     ./swww
-    ./tmux
     ./wezterm
     ./zellij
   ];

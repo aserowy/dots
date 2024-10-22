@@ -7,7 +7,6 @@
   home = {
     components = {
       docker.enable = true;
-      tmux.enable = true;
     };
 
     modules = {
