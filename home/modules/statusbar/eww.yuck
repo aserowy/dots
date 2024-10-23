@@ -55,14 +55,6 @@
                 (box
                     :orientation "vertical"
                     :class "container"
-                    :halign "fill"
-                    :valign "end"
-                    :space-evenly false
-                    (recorder)
-                )
-                (box
-                    :orientation "vertical"
-                    :class "container"
                     :space-evenly false
                     :halign "fill"
                     :valign "end"

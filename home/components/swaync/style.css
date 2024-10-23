@@ -69,47 +69,6 @@
   color: @foreground-disabled;
 }
 
-.widget-title {
-  background: @background;
-  border-radius: 8px;
-  color: @foreground;
-  font-weight: bold;
-  padding: 1rem;
-}
-
-.widget-title > button {
-  font-size: 1.5rem;
-}
-
-.widget-title > button:hover {
-  color: @alert;
-}
-
-.widget-mpris {
-  background: @background;
-  border-radius: 8px;
-  margin-bottom: 1rem;
-}
-
-.widget-mpris > box > button {
-}
-
-.widget-mpris-player {
-  background-color: @background-highlight;
-  border-radius: 8px;
-  padding: 1rem;
-  margin: 0.5rem 1.5rem;
-}
-
-.widget-mpris-title {
-  font-size: 1.25rem;
-  font-weight: bold;
-}
-
-.widget-mpris-subtitle {
-  font-size: 1.1rem;
-}
-
 .widget-buttons-grid {
   background: @background;
   border-radius: 8px;
@@ -128,4 +87,46 @@
 
 .widget-buttons-grid > flowbox > flowboxchild > button:checked {
   background: @background-highlight;
+}
+
+.widget-mpris {
+  background: @background;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.widget-mpris > box > button:hover {
+  background-color: @background-highlight;
+  border-radius: 8px;
+}
+
+.widget-mpris-player {
+  background-color: @background-highlight;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 0.5rem 1.5rem;
+}
+
+.widget-mpris-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.widget-mpris-subtitle {
+  font-size: 1.1rem;
+}
+
+.widget-title {
+  background: @background;
+  border-radius: 8px;
+  font-size: 3.5rem;
+  font-weight: bold;
+  padding: 1rem;
+}
+
+.widget-title > button {
+}
+
+.widget-title > button:hover {
+  color: @alert;
 }
