@@ -32,15 +32,6 @@
   # FIX: remove this once packages are updated:
   # https://github.com/logseq/logseq/issues/10851
   nixpkgs = {
-    overlays = [
-      (
-        final: prev: {
-          logseq = prev.logseq.override {
-            electron = prev.electron_27;
-          };
-        }
-      )
-    ];
     config = {
       permittedInsecurePackages = [
         "electron-27.3.11"
