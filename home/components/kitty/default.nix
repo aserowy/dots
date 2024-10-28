@@ -15,6 +15,9 @@ in
           name = "JetBrainsMonoNerdFont";
           size = 12;
         };
+        settings = {
+          cursor_blink_interval = 0;
+        };
         themeFile = "BlulocoDark";
       };
     };
