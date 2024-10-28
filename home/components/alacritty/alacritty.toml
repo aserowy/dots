@@ -1,8 +1,10 @@
+[general]
 import = [
     "~/.config/alacritty/themes/bluloco-dark.toml",
     "~/AppData/Roaming/alacritty/themes/bluloco-dark.toml",
 ]
 
+[terminal]
 shell = "nu"
 
 [font]
