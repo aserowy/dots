@@ -43,6 +43,13 @@ revision: { ... }: {
       tilesize = 32;
     };
 
+    finder.FXPreferredViewStyle = "clmv";
+
+    NSGlobalDomain = {
+      AppleICUForce24HourTime = true;
+      AppleInterfaceStyle = "Dark";
+    };
+
     SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
   };
 }
