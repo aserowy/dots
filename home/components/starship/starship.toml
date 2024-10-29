@@ -11,19 +11,19 @@ read_only = '󰌾'
 style = 'bold green'
 
 [git_status]
-format = '[$all_status$ahead_behind]($style)'
+format = '[$all_status $ahead_behind]($style) '
 
-ahead = '[󱦲$count](green) '
-behind = '[󱦳$count](red) '
-diverged = '[󱦲$ahead_count](green)[󱦳$behind_count](red) '
+ahead = '[󱦲$count](green)'
+behind = '[󱦳$count](red)'
+diverged = '[󱦲$ahead_count](green)[󱦳$behind_count](red)'
 
-conflicted = '[~$count](red) '
-deleted = '[-$count](yellow) '
-modified = '[!$count](yellow) '
-renamed = '[>$count](yellow) '
-staged = '[+$count](green) '
-stashed = '[*$count](blue) '
-untracked = '[?$count](blue) '
+conflicted = '[~$count](red)'
+deleted = '[-$count](yellow)'
+modified = '[!$count](yellow)'
+renamed = '[>$count](yellow)'
+staged = '[+$count](green)'
+stashed = '[*$count](blue)'
+untracked = '[?$count](blue)'
 
 [time]
 disabled = false
@@ -31,46 +31,17 @@ format = '[$time ]($style)'
 time_format = '%T'
 
 # symbols
-[aws]
-symbol = '󰸏 '
-
-[docker_context]
-symbol = '󰡨 '
-
 [dotnet]
 format = '[$symbol($version )(󰓾 $tfm)]($style)'
-symbol = '󰌛 '
-
-[git_branch]
-symbol = '󰘬 '
-
-[golang]
-symbol = '󰟓 '
 
 [hostname]
-ssh_symbol = ' '
 format = '[$ssh_symbol$hostname]($style) '
-
-[hg_branch]
-symbol = '󰘬 '
-
-[lua]
-symbol = '󰢱 '
 
 [nix_shell]
 disabled = true
 
 [os]
 disabled = true
-
-[package]
-symbol = '󰏗 '
-
-[python]
-symbol = '󰌠 '
-
-[rust]
-symbol = '󱘗 '
 
 [shell]
 disabled = true
