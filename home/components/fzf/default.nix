@@ -11,19 +11,20 @@ in
     programs.fzf = {
       enable = true;
       colors = {
-        "fg" = "-1";
-        "bg" = "-1";
-        "hl" = "#c678dd";
+        "fg" = "#b9c0cb";
         "fg+" = "#ffffff";
-        "bg+" = "#4b5263";
-        "hl+" = "#d858fe";
-        "info" = "#98c379";
-        "prompt" = "#61afef";
-        "pointer" = "#be5046";
-        "marker" = "#e5c07b";
-        "spinner" = "#61afef";
-        "header" = "#61afef";
+        "bg" = "#282c34";
+        "bg+" = "#282c34";
+        "hl" = "#10b1fe";
+        "hl+" = "#10b1fe";
+        "info" = "#25a45c";
+        "prompt" = "#ff936a";
+        "pointer" = "#3476ff";
+        "marker" = "#ff6480";
+        "spinner" = "#3476ff";
+        "header" = "#7a82da";
       };
+      fileWidgetOptions = [ "--preview 'bat {}'" ];
     };
   };
 }
