@@ -10,7 +10,6 @@
     ./fuzzel
     ./fzf
     ./git
-    ./gitui
     ./kitty
     ./lf
     ./logseq
@@ -22,7 +21,6 @@
     ./swaybg
     ./swaync
     ./swww
-    ./wezterm
     ./zellij
   ];
 }
