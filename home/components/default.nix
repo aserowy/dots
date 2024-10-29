@@ -16,7 +16,6 @@
     ./logseq
     ./onedrive
     ./podman
-    ./rio
     ./ssh
     ./starship
     ./swappy
