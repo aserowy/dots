@@ -1,13 +1,24 @@
 # Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
 
+[aws]
+symbol = '󰸏 '
+
+# using indicator of nu for better vi integration
+[character]
+disabled = true
+
 [directory]
 format = '[$path]($style)[$read_only]($read_only_style) '
 read_only = '󰌾'
 style = 'bold green'
 
+[docker_context]
+symbol = '󰡨 '
+
 [dotnet]
 format = '[$symbol($version )(󰓾 $tfm)]($style)'
+symbol = '󰌛 '
 
 [git_status]
 format = '($all_status )($ahead_behind )'
@@ -24,8 +35,33 @@ staged = '[+$count](green)'
 stashed = '[*$count](blue)'
 untracked = '[?$count](blue)'
 
+[golang]
+symbol = '󰟓 '
+
 [hostname]
 format = '[$ssh_symbol$hostname]($style) '
+ssh_symbol = ' '
+
+[lua]
+symbol = '󰢱 '
+
+[nix_shell]
+disabled = true
+
+[os]
+disabled = true
+
+[package]
+symbol = '󰏗 '
+
+[python]
+symbol = '󰌠 '
+
+[rust]
+symbol = '󱘗 '
+
+[shell]
+disabled = true
 
 [time]
 disabled = false
@@ -34,17 +70,3 @@ time_format = '%T'
 
 [username]
 format = '[$user]($style) '
-
-# using indicator of nu for better vi integration
-[character]
-disabled = true
-
-[nix_shell]
-disabled = true
-
-[os]
-disabled = true
-
-[shell]
-disabled = true
-
