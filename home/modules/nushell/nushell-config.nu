@@ -38,6 +38,10 @@ $env.config = {
                     if ($command | is-empty) {
                         return
                     }
+                    let command = $command.0
+                    if $command == 'z' {
+                        return
+                    }
 
                     (zellij action rename-tab $command.0)
                 } catch {
