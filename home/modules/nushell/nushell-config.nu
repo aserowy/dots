@@ -1,31 +1,65 @@
 $env.config = {
     show_banner: false
-
     edit_mode: vi
 
     # hook for direnv
     hooks: {
-        pre_prompt: [{ ||
-            try {
-                let direnv = (direnv export json | from json | default {})
-                if ($direnv | is-empty) {
-                    return
+        pre_prompt: [
+            {||
+                try {
+                    let direnv = (direnv export json | from json | default {})
+                    if ($direnv | is-empty) {
+                        return
+                    }
+                    $direnv
+                        | items {|key, value| {
+                            key: $key
+                            value: (if $key in $env.ENV_CONVERSIONS {
+                                do ($env.ENV_CONVERSIONS | get $key | get from_string) $value
+                            } else {
+                                $value
+                            })
+                        }}
+                        | transpose -ird
+                        | load-env
+                } catch {
+                    'direnv missing'
                 }
-                $direnv
-                    | items {|key, value| {
-                        key: $key
-                        value: (if $key in $env.ENV_CONVERSIONS {
-                            do ($env.ENV_CONVERSIONS | get $key | get from_string) $value
-                        } else {
-                            $value
-                        })
-                    }}
-                    | transpose -ird
-                    | load-env
-            } catch {
-                'direnv missing'
             }
-        }]
+        ]
+        pre_execution: [
+            {||
+                try {
+                    if ($env.ZELLIJ? | is-empty) {
+                        return
+                    }
+
+                    let command = (commandline | split row ' ')
+                    if ($command | is-empty) {
+                        return
+                    }
+
+                    (zellij action rename-tab $command.0)
+                } catch {
+                    (zellij action rename-tab 'unnamed')
+                }
+            }
+        ]
+        env_change: {
+            PWD: [
+                {|_, $after|
+                    try {
+                        if ($env.ZELLIJ? | is-empty) {
+                            return
+                        }
+
+                        (zellij action rename-tab $after)
+                    } catch {
+                        (zellij action rename-tab 'unnamed')
+                    }
+                }
+            ]
+        }
     }
 
     ls: {
