@@ -43,7 +43,7 @@ $env.config = {
                         return
                     }
 
-                    (zellij action rename-tab $command.0)
+                    (zellij action rename-tab $command)
                 } catch {
                     (zellij action rename-tab 'unnamed')
                 }
