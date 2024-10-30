@@ -20,9 +20,12 @@
       url = "github:aserowy/yeet";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    zjstatus = {
+      url = "github:dj95/zjstatus";
+    };
   };
 
-  outputs = { self, darwin, hardware, home, neocode, nixpkgs, yeet, ... }: {
+  outputs = { self, darwin, hardware, home, neocode, nixpkgs, yeet, zjstatus, ... }: {
     devShells = {
       aarch64-darwin.default = import ./.dev { pkgs = nixpkgs.legacyPackages.aarch64-darwin; };
       x86_64-linux.default = import ./.dev { pkgs = nixpkgs.legacyPackages.x86_64-linux; };
@@ -34,6 +37,7 @@
           nixpkgs.overlays = [
             neocode.overlays.default
             yeet.overlays.default
+            (final: prev: { zjstatus = zjstatus.packages.${prev.system}.default; })
           ];
         }
 
@@ -59,6 +63,7 @@
             nixpkgs.overlays = [
               neocode.overlays.default
               yeet.overlays.default
+              (final: prev: { zjstatus = zjstatus.packages.${prev.system}.default; })
             ];
           }
 
@@ -75,6 +80,7 @@
             nixpkgs.overlays = [
               neocode.overlays.default
               yeet.overlays.default
+              (final: prev: { zjstatus = zjstatus.packages.${prev.system}.default; })
             ];
           }
 
@@ -105,6 +111,7 @@
             nixpkgs.overlays = [
               neocode.overlays.default
               yeet.overlays.default
+              (final: prev: { zjstatus = zjstatus.packages.${prev.system}.default; })
             ];
           }
 
@@ -134,6 +141,7 @@
             nixpkgs.overlays = [
               neocode.overlays.default
               yeet.overlays.default
+              (final: prev: { zjstatus = zjstatus.packages.${prev.system}.default; })
             ];
           }
 
