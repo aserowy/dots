@@ -1,3 +1,6 @@
+let tab_names = ['lazydocker' 'lazygit' 'nvim' 'ssh' 'yeet']
+let command_expansion = [[short extended]; ['y' 'yeet']]
+
 $env.config = {
     show_banner: false
     edit_mode: vi
@@ -38,8 +41,18 @@ $env.config = {
                     if ($command | is-empty) {
                         return
                     }
-                    let command = $command.0
-                    if $command == 'z' {
+
+                    let expansion = ($command_expansion
+                        | find --regex $command.0
+                        | get extended)
+
+                    let command = if ($expansion | is-not-empty) {
+                        $expansion.0
+                    } else {
+                        $command.0
+                    }
+
+                    if ($tab_names | all {|it| $it != $command}) {
                         return
                     }
 
