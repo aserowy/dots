@@ -1,4 +1,4 @@
-let tab_names = ['lazydocker' 'lazygit' 'nvim' 'ssh' 'yeet']
+let tab_names = ['btm' 'lazydocker' 'lazygit' 'nvim' 'ssh' 'yeet']
 let command_expansion = [[short extended]; ['y' 'yeet']]
 
 $env.config = {
