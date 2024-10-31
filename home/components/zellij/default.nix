@@ -17,32 +17,24 @@ in
                 children
                 pane size=1 borderless=true {
                     plugin location="file://${pkgs.zjstatus}/bin/zjstatus.wasm" {
-                        format_left   "{mode}#[bg=#282c34] {tabs}"
+                        format_left   "{mode}#[bg=#282c34,fg=#b9c0cb,bold] {session} {tabs}"
                         format_center ""
-                        format_right  "#[bg=#282c34,fg=#10b1fe]█#[bg=#10b1fe,fg=#282c34,bold] #[bg=#41444d,fg=#b9c0cb,bold] {session} #[bg=#41444d,fg=#b9c0cb,bold]"
+                        format_right  ""
                         format_space  ""
                         format_hide_on_overlength "true"
                         format_precedence "crl"
 
                         border_enabled  "false"
-                        border_char     "─"
-                        border_format   "#[fg=#6C7086]{char}"
-                        border_position "top"
 
-                        mode_normal        "#[bg=#3fc56b,fg=#41444d,bold] NORMAL#[bg=#41444d,fg=#3fc56b]█"
-                        mode_locked        "#[bg=#41444d,fg=#41444d,bold] LOCKED#[bg=#41444d,fg=#41444d]█"
-                        mode_resize        "#[bg=#fc2f52,fg=#41444d,bold] RESIZE#[bg=#41444d,fg=#fc2f52]█"
-                        mode_pane          "#[bg=#10b1fe,fg=#41444d,bold]  PANE #[bg=#41444d,fg=#10b1fe]█"
-                        mode_tab           "#[bg=#7a82da,fg=#41444d,bold]  TAB  #[bg=#41444d,fg=#7a82da]█"
-                        mode_scroll        "#[bg=#f9c859,fg=#41444d,bold] SCROLL#[bg=#41444d,fg=#f9c859]█"
-                        mode_enter_search  "#[bg=#10b1fe,fg=#41444d,bold] SEARCH#[bg=#41444d,fg=#10b1fe]█"
-                        mode_search        "#[bg=#10b1fe,fg=#41444d,bold] SEARCH#[bg=#41444d,fg=#10b1fe]█"
-                        mode_rename_tab    "#[bg=#7a82da,fg=#41444d,bold] RENAME#[bg=#41444d,fg=#7a82da]█"
-                        mode_rename_pane   "#[bg=#10b1fe,fg=#41444d,bold] RENAME#[bg=#41444d,fg=#10b1fe]█"
-                        mode_session       "#[bg=#ff78f8,fg=#41444d,bold]  SESS #[bg=#41444d,fg=#ff78f8]█"
-                        mode_move          "#[bg=#ffffff,fg=#41444d,bold]  MOVE #[bg=#41444d,fg=#ffffff]█"
-                        mode_prompt        "#[bg=#10b1fe,fg=#41444d,bold] PROMPT#[bg=#41444d,fg=#10b1fe]█"
-                        mode_tmux          "#[bg=#ff936a,fg=#41444d,bold]  TMUX #[bg=#41444d,fg=#ff936a]█"
+                        mode_normal        "#[bg=#3fc56b,fg=#282c34,bold] #[bg=#282c34,fg=#3fc56b]█"
+                        mode_resize        "#[bg=#4483aa,fg=#282c34,bold] #[bg=#282c34,fg=#4483aa]█"
+                        mode_scroll        "#[bg=#f9c859,fg=#282c34,bold] #[bg=#282c34,fg=#f9c859]█"
+                        mode_rename_tab    "#[bg=#7a82da,fg=#282c34,bold] #[bg=#282c34,fg=#7a82da]█"
+                        mode_rename_pane   "#[bg=#7a82da,fg=#282c34,bold] #[bg=#282c34,fg=#7a82da]█"
+                        mode_enter_search  "#[bg=#ff936a,fg=#282c34,bold] #[bg=#282c34,fg=#ff936a]█"
+                        mode_search        "#[bg=#ff936a,fg=#282c34,bold] #[bg=#282c34,fg=#ff936a]█"
+                        mode_session       "#[bg=#ff78f8,fg=#282c34,bold] #[bg=#282c34,fg=#ff78f8]█"
+                        mode_tmux          "#[bg=#10b1fe,fg=#282c34,bold] #[bg=#282c34,fg=#10b1fe]█"
 
                         // formatting for inactive tabs
                         tab_normal              "#[bg=#41444d,fg=#10b1fe]█#[bg=#10b1fe,fg=#41444d,bold]{index} #[bg=#41444d,fg=#b9c0cb,bold] {name}{floating_indicator}#[bg=#41444d,fg=#41444d,bold]█"
