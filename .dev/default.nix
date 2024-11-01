@@ -1,6 +1,5 @@
 { pkgs, ... }: with pkgs; mkShell {
   buildInputs = [
-    deno
     doas-sudo-shim
     nil
     nixpkgs-fmt
@@ -10,6 +9,6 @@
     nufmt
     stylua
     sumneko-lua-language-server
-        taplo
+    taplo
   ];
 }
