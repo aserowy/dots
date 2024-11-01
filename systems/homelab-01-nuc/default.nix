@@ -14,6 +14,13 @@
     };
   };
 
+  # Fixes for longhorn
+  systemd.tmpfiles.rules = [
+    "L+ /usr/local/bin - - - - /run/current-system/sw/bin/"
+  ];
+  virtualisation.docker.logDriver = "json-file";
+  #
+
   networking = {
     hostName = "homelab01";
 
@@ -29,11 +36,31 @@
   services = {
     # lsblk --discard to ensure ssd supports trim (disc-gran and disc-max should be non zero)
     fstrim.enable = true;
+
+    k3s = {
+      enable = true;
+      role = "server";
+      tokenFile = /var/lib/rancher/k3s/server/token;
+      extraFlags = toString ([
+        "--write-kubeconfig-mode \"0644\""
+        "--cluster-init"
+        "--disable servicelb"
+        "--disable traefik"
+        "--disable local-storage"
+        # ] ++ (if meta.hostname == "homelab-0" then [
+        # ] else [
+        #   "--server https://homelab-01-nuc:6443"
+        # ]));
+      ]);
+      # NOTE: meta comes from https://github.com/dreamsofautonomy/homelab/blob/main/nixos/flake.nix
+      # clusterInit = (meta.hostname == "homelab-0");
+      clusterInit = true;
+    };
   };
 
   system = {
     # Did you read the comment?
-    stateVersion = "21.05";
+    stateVersion = "24.05";
   };
 
   systemd.network = {
