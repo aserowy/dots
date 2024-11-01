@@ -22,11 +22,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1730395835,
-        "narHash": "sha256-ADGhFqM8hCabAEx2PADy+vi+iynO9aq221PxDZwrhww=",
+        "lastModified": 1730448474,
+        "narHash": "sha256-qE/cYKBhzxHMtKtLK3hlSR3uzO1pWPGLrBuQK7r0CHc=",
         "owner": "LnL7",
         "repo": "nix-darwin",
-        "rev": "8dbda1064b0678cf0679e4f4091e91f7497e69a2",
+        "rev": "683d0c4cd1102dcccfa3f835565378c7f3cbe05e",
         "type": "github"
       },
       "original": {
@@ -147,11 +147,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1730016908,
-        "narHash": "sha256-bFCxJco7d8IgmjfNExNz9knP8wvwbXU4s/d53KOK6U0=",
+        "lastModified": 1730450782,
+        "narHash": "sha256-0AfApF8aexgB6o34qqLW2cCX4LaWJajBVdU6ddiWZBM=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "e83414058edd339148dc142a8437edb9450574c8",
+        "rev": "8ca921e5a806b5b6171add542defe7bdac79d189",
         "type": "github"
       },
       "original": {
@@ -168,11 +168,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1730468819,
-        "narHash": "sha256-MZUjTgZjXR2/i+pTnOf3LhxAmQbwYdkS9/KkgjvB+jY=",
+        "lastModified": 1730475043,
+        "narHash": "sha256-2zd5l3rrWL4YWYBOGaZGg2z4dTrsu7IF+b1QYnL63lk=",
         "owner": "aserowy",
         "repo": "neocode",
-        "rev": "ce2c0a027a8f5049f971f45aafe3b28b6aab13b4",
+        "rev": "5dca18bb2cc84d2aff11fc3734ad9fd867c8ad84",
         "type": "github"
       },
       "original": {
