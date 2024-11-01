@@ -21,7 +21,6 @@ format = '[$symbol($version )(󰓾 $tfm)]($style)'
 symbol = '󰌛 '
 
 [git_branch]
-# ignore_branches = ['main' 'master']
 symbol = '󰘬 '
 
 [git_status]

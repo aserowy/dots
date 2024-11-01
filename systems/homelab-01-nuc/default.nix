@@ -56,6 +56,12 @@
       # clusterInit = (meta.hostname == "homelab-0");
       clusterInit = true;
     };
+
+    openiscsi = {
+      enable = true;
+      # name = "iqn.2016-04.com.open-iscsi:${meta.hostname}";
+      name = "iqn.2016-04.com.open-iscsi:homelab-01-nuc";
+    };
   };
 
   system = {
