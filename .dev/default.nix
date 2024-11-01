@@ -10,5 +10,6 @@
     nufmt
     stylua
     sumneko-lua-language-server
+        taplo
   ];
 }
