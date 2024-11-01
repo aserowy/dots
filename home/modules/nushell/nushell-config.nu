@@ -1,5 +1,5 @@
-let tab_names = ['btm' 'lazydocker' 'lazygit' 'nvim' 'ssh' 'yeet']
-let command_expansion = [[short extended]; ['y' 'yeet']]
+let tab_names = ['nvim' 'ssh']
+let command_expansion = [[short extended]; ['e.g. y' 'yeet']]
 
 $env.config = {
     show_banner: false
