@@ -14,6 +14,11 @@
   boot.loader.raspberryPi.firmwareConfig = "dtparam=sd_poll_once=on";
 
   networking = {
+    firewall = {
+      allowedTCPPorts = [ 80 443 2022 ];
+      allowedUDPPorts = [ 53 ];
+    };
+
     hostName = "homeassistant";
 
     # enables wifi with: nmcli device wifi connect <SSID> password <PASS>
@@ -24,6 +29,11 @@
   };
 
   services.resolved.enable = false;
+
+  system = {
+    # Did you read the comment?
+    stateVersion = "21.05";
+  };
 
   systemd.network = {
     enable = true;
@@ -38,5 +48,13 @@
       };
     };
     wait-online.ignoredInterfaces = [ "eth0" ];
+  };
+
+  virtualisation = {
+    docker = {
+      enable = true;
+      autoPrune.enable = true;
+      enableOnBoot = true;
+    };
   };
 }

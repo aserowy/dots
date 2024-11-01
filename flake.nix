@@ -6,6 +6,10 @@
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     hardware.url = "github:NixOS/nixos-hardware/master";
     home = {
       url = "github:nix-community/home-manager";
@@ -25,7 +29,7 @@
     };
   };
 
-  outputs = { self, darwin, hardware, home, neocode, nixpkgs, yeet, zjstatus, ... }: {
+  outputs = { self, darwin, disko, hardware, home, neocode, nixpkgs, yeet, zjstatus, ... }: {
     devShells = {
       aarch64-darwin.default = import ./.dev { pkgs = nixpkgs.legacyPackages.aarch64-darwin; };
       x86_64-linux.default = import ./.dev { pkgs = nixpkgs.legacyPackages.x86_64-linux; };
@@ -67,7 +71,7 @@
             ];
           }
 
-          ./home/ui.nix
+          ./home/work-ui.nix
         ];
       };
     };
@@ -90,7 +94,6 @@
 
             users.serowy = {
               enable = true;
-              dockerGroupMember = true;
             };
           }
           home.nixosModule
@@ -99,36 +102,6 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               users.serowy = import ./home/workstation.nix;
-            };
-          }
-        ];
-      };
-
-      homeassistant-nuc = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          {
-            nixpkgs.overlays = [
-              neocode.overlays.default
-              yeet.overlays.default
-              (final: prev: { zjstatus = zjstatus.packages.${prev.system}.default; })
-            ];
-          }
-
-          ./systems/homeassistant-nuc
-          {
-            imports = [ ./users ];
-
-            users.serowy = {
-              enable = true;
-            };
-          }
-          home.nixosModule
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.serowy = import ./home/homeassistant.nix;
             };
           }
         ];
@@ -161,6 +134,37 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               users.serowy = import ./home/homeassistant.nix;
+            };
+          }
+        ];
+      };
+
+      homelab-01-nuc = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          {
+            nixpkgs.overlays = [
+              neocode.overlays.default
+              yeet.overlays.default
+              (final: prev: { zjstatus = zjstatus.packages.${prev.system}.default; })
+            ];
+          }
+
+          disko.nixosModules.disko
+          ./systems/homelab-01-nuc
+          {
+            imports = [ ./users ];
+
+            users.serowy = {
+              enable = true;
+            };
+          }
+          home.nixosModule
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.serowy = import ./home/homelab.nix;
             };
           }
         ];

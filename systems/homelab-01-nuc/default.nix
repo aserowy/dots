@@ -3,11 +3,8 @@
   imports = [
     ../shared/base.nix
 
+    ./disko.nix
     ./hardware-configuration.nix
-
-    ../homeassistant/borgbackup.nix
-    ../homeassistant/hassio.nix
-    ../homeassistant/telegraf.nix
   ];
 
   boot = {
@@ -18,7 +15,7 @@
   };
 
   networking = {
-    hostName = "homeassistant-nuc";
+    hostName = "homelab01";
 
     # enables wifi with: nmcli device wifi connect <SSID> password <PASS>
     networkmanager = {
@@ -32,6 +29,11 @@
   services = {
     # lsblk --discard to ensure ssd supports trim (disc-gran and disc-max should be non zero)
     fstrim.enable = true;
+  };
+
+  system = {
+    # Did you read the comment?
+    stateVersion = "21.05";
   };
 
   systemd.network = {

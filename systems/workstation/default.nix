@@ -64,13 +64,16 @@
 
     gnome.gnome-keyring.enable = true;
 
+    # don’t shutdown when power button is short-pressed
+    logind.extraConfig = ''
+      HandlePowerKey=suspend
+    '';
+
     modules = {
       gtk.enable = true;
       tuigreet = {
         enable = true;
         command = "niri-session";
-        # command = "Hyprland";
-        # command = "sway";
       };
       xdg.enable = true;
     };
@@ -106,6 +109,11 @@
       ];
       dates = "03:45";
     };
+  };
+
+  system = {
+    # Did you read the comment?
+    stateVersion = "21.05";
   };
 
   systemd = {

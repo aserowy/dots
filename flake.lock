@@ -35,6 +35,26 @@
         "type": "github"
       }
     },
+    "disko": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1730190761,
+        "narHash": "sha256-o5m5WzvY6cGIDupuOvjgNSS8AN6yP2iI9MtUC6q/uos=",
+        "owner": "nix-community",
+        "repo": "disko",
+        "rev": "3979285062d6781525cded0f6c4ff92e71376b55",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "disko",
+        "type": "github"
+      }
+    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": "nixpkgs-lib"
@@ -248,6 +268,7 @@
     "root": {
       "inputs": {
         "darwin": "darwin",
+        "disko": "disko",
         "hardware": "hardware",
         "home": "home",
         "neocode": "neocode",

@@ -5,7 +5,6 @@
   ];
 
   boot = {
-    readOnlyNixStore = false;
     tmp.cleanOnBoot = true;
   };
 
@@ -28,8 +27,6 @@
   networking = {
     firewall = {
       enable = true;
-      allowedTCPPorts = [ 80 443 2022 ];
-      allowedUDPPorts = [ 53 ];
       allowPing = false;
     };
     useDHCP = false;
@@ -80,11 +77,6 @@
       packages = [ pkgs.dconf ];
     };
 
-    # don’t shutdown when power button is short-pressed
-    logind.extraConfig = ''
-      HandlePowerKey=suspend
-    '';
-
     openssh = {
       enable = true;
       settings = {
@@ -95,18 +87,5 @@
     };
   };
 
-  system = {
-    # Did you read the comment?
-    stateVersion = "21.05";
-  };
-
   time.timeZone = "Europe/Berlin";
-
-  virtualisation = {
-    docker = {
-      enable = true;
-      autoPrune.enable = true;
-      enableOnBoot = true;
-    };
-  };
 }
