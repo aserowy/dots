@@ -20,6 +20,9 @@ symbol = '󰡨 '
 format = '[$symbol($version )(󰓾 $tfm)]($style)'
 symbol = '󰌛 '
 
+[git_branch]
+symbol = '󰘬'
+
 [git_status]
 format = '($all_status )($ahead_behind )'
 
@@ -27,13 +30,13 @@ ahead = '[󱦲$count](green)'
 behind = '[󱦳$count](red)'
 diverged = '[󱦲$ahead_count](green)[󱦳$behind_count](red)'
 
-conflicted = '[~$count](red)'
+conflicted = '[~$count](bright-red)'
 deleted = '[-$count](yellow)'
-modified = '[!$count](yellow)'
-renamed = '[>$count](yellow)'
+modified = '[!$count](bright-yellow)'
+renamed = '[>$count](bright-yellow)'
 staged = '[+$count](green)'
-stashed = '[*$count](blue)'
-untracked = '[?$count](blue)'
+stashed = '[*$count](purple)'
+untracked = '[?$count](red)'
 
 [golang]
 symbol = '󰟓 '
