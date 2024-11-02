@@ -15,7 +15,7 @@ in
       };
 
       packages = with pkgs; [
-                broot
+        broot
         carapace
         zoxide
       ];
@@ -42,7 +42,7 @@ in
           gad = "git add";
           gada = "git add --all";
           gbr = "git branch";
-          gbrclean = "bash -c \"git fetch --prune && git branch -r | awk '{print $1}' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk '{print $1}' | xargs git branch -D\"";
+          gbrcl = "bash -c \"git fetch --prune && git branch -r | awk '{print $1}' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk '{print $1}' | xargs git branch -D\"";
           gbrd = "git branch -D";
           gcl = "git clone --recurse-submodules -j8";
           gcm = "git commit -s -m";
@@ -73,7 +73,9 @@ in
           zs = "zellij --session";
           za = "zellij attach";
           zd = "zellij delete-session";
+          zda = "zellij delete-all-sessions";
           zk = "zellij kill-session";
+          zka = "zellij kill-all-sessions";
         };
       };
     };
