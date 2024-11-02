@@ -43,7 +43,7 @@ symbol = '󰟓 '
 
 [hostname]
 format = '[$ssh_symbol$hostname]($style) '
-ssh_symbol = ' '
+ssh_symbol = '󰣩 '
 
 [lua]
 symbol = '󰢱 '
