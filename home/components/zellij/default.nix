@@ -37,9 +37,9 @@ in
                         mode_tmux          "#[bg=#10b1fe,fg=#282c34,bold] #[bg=#282c34,fg=#10b1fe]█"
 
                         // formatting for inactive tabs
-                        tab_normal              "#[bg=#41444d,fg=#10b1fe]█#[bg=#10b1fe,fg=#41444d,bold]{index} #[bg=#41444d,fg=#b9c0cb,bold] {name}{floating_indicator}#[bg=#41444d,fg=#41444d,bold]█"
-                        tab_normal_fullscreen   "#[bg=#41444d,fg=#10b1fe]█#[bg=#10b1fe,fg=#41444d,bold]{index} #[bg=#41444d,fg=#b9c0cb,bold] {name}{fullscreen_indicator}#[bg=#41444d,fg=#41444d,bold]█"
-                        tab_normal_sync         "#[bg=#41444d,fg=#10b1fe]█#[bg=#10b1fe,fg=#41444d,bold]{index} #[bg=#41444d,fg=#b9c0cb,bold] {name}{sync_indicator}#[bg=#41444d,fg=#41444d,bold]█"
+                        tab_normal              "#[bg=#282c34,fg=#10b1fe]█#[bg=#10b1fe,fg=#282c34,bold]{index} #[bg=#282c34,fg=#b9c0cb,bold] {name}{floating_indicator}#[bg=#282c34,fg=#282c34,bold]█"
+                        tab_normal_fullscreen   "#[bg=#282c34,fg=#10b1fe]█#[bg=#10b1fe,fg=#282c34,bold]{index} #[bg=#282c34,fg=#b9c0cb,bold] {name}{fullscreen_indicator}#[bg=#282c34,fg=#282c34,bold]█"
+                        tab_normal_sync         "#[bg=#282c34,fg=#10b1fe]█#[bg=#10b1fe,fg=#282c34,bold]{index} #[bg=#282c34,fg=#b9c0cb,bold] {name}{sync_indicator}#[bg=#282c34,fg=#282c34,bold]█"
 
                         // formatting for the current active tab
                         tab_active              "#[bg=#41444d,fg=#ff936a]█#[bg=#ff936a,fg=#41444d,bold]{index} #[bg=#41444d,fg=#b9c0cb,bold] {name}{floating_indicator}#[bg=#41444d,fg=#41444d,bold]█"
