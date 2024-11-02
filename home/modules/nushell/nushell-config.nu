@@ -113,6 +113,7 @@ try {
     }
 }
 
-source ~/.cache/carapace/init.nu
-source ~/.cache/starship/init.nu
-source ~/.cache/zoxide/init.nu
+source ~/.cache/nushell/broot.nu
+source ~/.cache/nushell/carapace.nu
+source ~/.cache/nushell/starship.nu
+source ~/.cache/nushell/zoxide.nu
