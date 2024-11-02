@@ -22,7 +22,7 @@
   #
 
   networking = {
-    hostName = "homelab01";
+    hostName = "homelab-01-nuc";
 
     # enables wifi with: nmcli device wifi connect <SSID> password <PASS>
     networkmanager = {
@@ -38,7 +38,7 @@
     fstrim.enable = true;
 
     k3s = {
-      enable = true;
+      enable = false;
       role = "server";
       # tokenFile = /var/lib/rancher/k3s/server/token;
       token = "";

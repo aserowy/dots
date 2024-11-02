@@ -33,8 +33,8 @@ in
           identitiesOnly = true;
           identityFile = " ~/.ssh/internal_serowy_ed25519";
         };
-        "homeassistant-nuc" = {
-          hostname = "homeassistant-nuc";
+        "homelab-01-nuc" = {
+          hostname = "homelab-01-nuc";
           user = "serowy";
           identitiesOnly = true;
           identityFile = " ~/.ssh/internal_serowy_ed25519";
