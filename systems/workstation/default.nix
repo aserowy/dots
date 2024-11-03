@@ -80,6 +80,8 @@
 
     onedrive.enable = true;
 
+    openssh.settings.PermitRootLogin = "no";
+
     pipewire = {
       enable = true;
       alsa = {

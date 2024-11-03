@@ -1,4 +1,5 @@
 { ... }:
 {
-  imports = [ ./serowy.nix ];
+  imports = [ ./root.nix
+        ./serowy.nix ];
 }

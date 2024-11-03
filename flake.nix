@@ -92,9 +92,7 @@
           {
             imports = [ ./users ];
 
-            users.serowy = {
-              enable = true;
-            };
+            users.serowy.enable = true;
           }
           home.nixosModule
           {
@@ -124,9 +122,7 @@
           {
             imports = [ ./users ];
 
-            users.serowy = {
-              enable = true;
-            };
+            users.serowy.enable = true;
           }
           home.nixosModule
           {
@@ -142,30 +138,12 @@
       homelab-01-nuc = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          {
-            nixpkgs.overlays = [
-              neocode.overlays.default
-              yeet.overlays.default
-              (final: prev: { zjstatus = zjstatus.packages.${prev.system}.default; })
-            ];
-          }
-
           disko.nixosModules.disko
           ./systems/homelab-01-nuc
           {
             imports = [ ./users ];
 
-            users.serowy = {
-              enable = true;
-            };
-          }
-          home.nixosModule
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.serowy = import ./home/homelab.nix;
-            };
+            users.root.enable = true;
           }
         ];
       };
