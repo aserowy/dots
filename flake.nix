@@ -143,7 +143,10 @@
           {
             imports = [ ./users ];
 
-            users.root.enable = true;
+            users = {
+              deploy.enable = true;
+              root.enable = true;
+            };
           }
         ];
       };
