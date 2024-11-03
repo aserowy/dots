@@ -7,6 +7,7 @@
     nodePackages.prettier
     nodePackages.vscode-json-languageserver
     nufmt
+        sops
     stylua
     sumneko-lua-language-server
     taplo

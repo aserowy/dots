@@ -1,4 +1,4 @@
-{ ... }:
+{ config, ... }:
 {
   imports = [
     ../shared/base.nix
@@ -40,8 +40,7 @@
     k3s = {
       enable = false;
       role = "server";
-      # tokenFile = /var/lib/rancher/k3s/server/token;
-      token = "";
+      tokenFile = config.sops.secrets."k3s/cluster/token".path;
       extraFlags = toString ([
         "--write-kubeconfig-mode \"0644\""
         "--cluster-init"
@@ -63,6 +62,15 @@
       # name = "iqn.2016-04.com.open-iscsi:${meta.hostname}";
       name = "iqn.2016-04.com.open-iscsi:homelab-01-nuc";
     };
+  };
+
+  sops = {
+    defaultSopsFile = ./secrets.yaml;
+    defaultSopsFormat = "yaml";
+
+    age.keyFile = "/root/.config/sops/age/homelab_keys.txt";
+
+    secrets."k3s/cluster/token" = { };
   };
 
   system = {

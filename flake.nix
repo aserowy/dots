@@ -20,6 +20,10 @@
       url = "github:aserowy/neocode";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    sops = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     yeet = {
       url = "github:aserowy/yeet";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -29,7 +33,7 @@
     };
   };
 
-  outputs = { self, darwin, disko, hardware, home, neocode, nixpkgs, yeet, zjstatus, ... }: {
+  outputs = { self, darwin, disko, hardware, home, neocode, nixpkgs, sops, yeet, zjstatus, ... }: {
     devShells = {
       aarch64-darwin.default = import ./.dev { pkgs = nixpkgs.legacyPackages.aarch64-darwin; };
       x86_64-linux.default = import ./.dev { pkgs = nixpkgs.legacyPackages.x86_64-linux; };
@@ -91,7 +95,6 @@
           ./systems/workstation
           {
             imports = [ ./users ];
-
             users.serowy.enable = true;
           }
           home.nixosModule
@@ -121,7 +124,6 @@
           ./systems/homeassistant
           {
             imports = [ ./users ];
-
             users.serowy.enable = true;
           }
           home.nixosModule
@@ -139,10 +141,11 @@
         system = "x86_64-linux";
         modules = [
           disko.nixosModules.disko
+          sops.nixosModules.sops
+
           ./systems/homelab-01-nuc
           {
             imports = [ ./users ];
-
             users.root.enable = true;
           }
         ];
