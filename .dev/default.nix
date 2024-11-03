@@ -1,13 +1,14 @@
 { pkgs, ... }: with pkgs; mkShell {
   buildInputs = [
     doas-sudo-shim
+        kubectl
     nil
     nixpkgs-fmt
     nodejs_20
     nodePackages.prettier
     nodePackages.vscode-json-languageserver
     nufmt
-        sops
+    sops
     stylua
     sumneko-lua-language-server
     taplo

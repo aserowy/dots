@@ -14,12 +14,11 @@
     };
   };
 
-  # Fixes for longhorn
+  # FIX: for longhorn on nixos
   systemd.tmpfiles.rules = [
     "L+ /usr/local/bin - - - - /run/current-system/sw/bin/"
   ];
   virtualisation.docker.logDriver = "json-file";
-  #
 
   networking = {
     hostName = "homelab-01-nuc";
@@ -29,9 +28,17 @@
       enable = true;
       insertNameservers = [ "127.0.0.1" ];
     };
-  };
 
-  services.resolved.enable = false;
+    firewall = {
+      allowedTCPPorts = [
+                80 443
+        6443 # k3s: required so that pods can reach the API server
+      ];
+      allowedUDPPorts = [
+        8472 # k3s, flannel: required if using multi-node for inter-node networking
+      ];
+    };
+  };
 
   services = {
     # lsblk --discard to ensure ssd supports trim (disc-gran and disc-max should be non zero)
@@ -57,11 +64,14 @@
       clusterInit = true;
     };
 
+    # NOTE: is used by longhorn
     openiscsi = {
       enable = true;
       # name = "iqn.2016-04.com.open-iscsi:${meta.hostname}";
       name = "iqn.2016-04.com.open-iscsi:homelab-01-nuc";
     };
+
+    resolved.enable = false;
   };
 
   sops = {
