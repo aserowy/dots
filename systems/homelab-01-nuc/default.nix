@@ -38,7 +38,7 @@
     fstrim.enable = true;
 
     k3s = {
-      enable = false;
+      enable = true;
       role = "server";
       tokenFile = config.sops.secrets."k3s/cluster/token".path;
       extraFlags = toString ([
