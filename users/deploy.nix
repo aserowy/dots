@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 with lib;
 
 let
@@ -12,7 +12,7 @@ in
   config = mkIf cnfg.enable
     {
       users = {
-        users.groups.deploy = { };
+        groups.deploy = { };
 
         users.deploy = {
           isSystemUser = true;
