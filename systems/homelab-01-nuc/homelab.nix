@@ -55,6 +55,11 @@
 
     age.keyFile = "/root/.config/sops/age/homelab_keys.txt";
 
-    secrets."k3s/cluster/token" = { };
+    secrets = {
+      "root/password" = {
+        neededForUsers = true;
+      };
+      "k3s/cluster/token" = { };
+    };
   };
 }
