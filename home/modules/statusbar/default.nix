@@ -53,7 +53,6 @@ in
         pavucontrol
         slurp
         socat
-        wf-recorder
       ];
     };
 

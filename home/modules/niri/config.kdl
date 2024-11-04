@@ -6,7 +6,7 @@ hotkey-overlay {
 }
 
 input {
-    focus-follows-mouse
+    focus-follows-mouse max-scroll-amount="25%"
     warp-mouse-to-focus
 
     keyboard {
@@ -30,10 +30,10 @@ layout {
     center-focused-column "never"
 
     preset-column-widths {
-        proportion 0.33333
-        proportion 0.5
-        proportion 0.66667
-        proportion 1.0
+        proportion 0.32
+        proportion 0.48
+        proportion 0.64
+        proportion 0.96
     }
 
     default-column-width { proportion 0.33333; }
