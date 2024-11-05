@@ -15,6 +15,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixidy = {
+      url = "github:arnarg/nixidy";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     neocode = {
       url = "github:aserowy/neocode";
@@ -33,10 +37,16 @@
     };
   };
 
-  outputs = { self, darwin, disko, hardware, home, neocode, nixpkgs, sops, yeet, zjstatus, ... }: {
+  outputs = { self, darwin, disko, hardware, home, neocode, nixidy, nixpkgs, sops, yeet, zjstatus, ... }: {
     devShells = {
-      aarch64-darwin.default = import ./.dev { pkgs = nixpkgs.legacyPackages.aarch64-darwin; };
-      x86_64-linux.default = import ./.dev { pkgs = nixpkgs.legacyPackages.x86_64-linux; };
+      aarch64-darwin.default = import ./.dev {
+        inherit nixidy;
+        pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+      };
+      x86_64-linux.default = import ./.dev {
+        inherit nixidy;
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+      };
     };
 
     darwinConfigurations."FR6NP4LHY7" = darwin.lib.darwinSystem {
@@ -151,5 +161,17 @@
         ];
       };
     };
+
+    nixidyEnvs.x86_64-linux =
+      let
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+      in
+      nixidy.lib.mkEnvs
+        {
+          inherit pkgs;
+          envs = {
+            homelab.modules = [ ./cluster/homelab/default.nix ];
+          };
+        };
   };
 }

@@ -1,8 +1,9 @@
-{ pkgs, ... }: with pkgs; mkShell {
+{ nixidy, pkgs, ... }: with pkgs; mkShell {
   buildInputs = [
     doas-sudo-shim
-        kubectl
+    kubectl
     nil
+    nixidy.packages.${pkgs.system}.default
     nixpkgs-fmt
     nodejs_20
     nodePackages.prettier
