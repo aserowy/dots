@@ -4,7 +4,7 @@ with lib;
 let
   cnfg = config.home.modules.console;
 
-  system = "x86_64-linux";
+  system = pkgs.system;
   pinned = import
     (builtins.fetchGit {
       name = "tailspin_3_0_1";
