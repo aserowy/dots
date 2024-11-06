@@ -12,4 +12,7 @@ spec:
     path: ./demo
     repoURL: https://github.com/aserowy/dots.git
     targetRevision: homelab
-  syncPolicy: {}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
