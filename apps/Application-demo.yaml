@@ -9,7 +9,7 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: ./manifests/homelab/demo
+    path: ./demo
     repoURL: https://github.com/aserowy/dots.git
     targetRevision: homelab
   syncPolicy: {}
