@@ -5,6 +5,15 @@
       branch = "homelab";
       rootPath = "./";
     };
+    defaults = {
+      syncPolicy = {
+        autoSync = {
+          enabled = true;
+          prune = true;
+          selfHeal = true;
+        };
+      };
+    };
   };
 
   applications.demo = {
