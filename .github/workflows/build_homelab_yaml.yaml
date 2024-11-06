@@ -33,18 +33,20 @@ jobs:
 
       - name: remove files
         run: |
-          touch test-file
-          echo `ls -a`
-          echo `ls -a | grep -v "^.$\|^..$\|^.git$\|^.gitignore$"`
+          pwd
+          touch content-to-enable-rm-on-empty-dir
           rm -r `ls -a | grep -v "^.$\|^..$\|^.git$\|^.gitignore$"`
         working-directory: ./homelab
 
       - name: copy build
         run: |
+          pwd
+          ls -a
           cp -RT result/ homelab/
 
       - name: commit and push changes
         run: |
+          pwd
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add --all
