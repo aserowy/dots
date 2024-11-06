@@ -44,10 +44,10 @@ jobs:
           ls -a
 
       - name: copy build
+        # cp -RT ${{ steps.build.outputs.store_path }}/ homelab/
         run: |
           pwd
-          ls -a
-          cp -RT ${{ steps.build.outputs.store_path }}/ homelab/
+          echo ${{ steps.build.outputs.store_path }}
 
       - name: commit and push changes
         working-directory: ./homelab
