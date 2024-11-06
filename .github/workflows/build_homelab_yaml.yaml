@@ -47,7 +47,7 @@ jobs:
         run: |
           pwd
           echo ${{ steps.build.outputs.out-path }}
-          cp -RT ${{ steps.build.outputs.out-path }}/ homelab/
+          rsync --recursive '${{steps.build.outputs.out-path}}/' homelab/
 
       - name: commit and push changes
         working-directory: ./homelab
