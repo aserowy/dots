@@ -33,6 +33,7 @@ jobs:
 
       - name: remove files
         run: |
+          touch test-file
           echo `ls -a`
           echo `ls -a | grep -v "^.$\|^..$\|^.git$\|^.gitignore$"`
           rm -r `ls -a | grep -v "^.$\|^..$\|^.git$\|^.gitignore$"`
