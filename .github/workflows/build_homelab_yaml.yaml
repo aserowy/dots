@@ -32,11 +32,13 @@ jobs:
           path: ./homelab
 
       - name: remove files
+        working-directory: ./homelab
         run: |
           pwd
           touch content-to-enable-rm-on-empty-dir
+          echo `ls -a | grep -v "^.$\|^..$\|^.git$\|^.gitignore$"`
           rm -r `ls -a | grep -v "^.$\|^..$\|^.git$\|^.gitignore$"`
-        working-directory: ./homelab
+          ls -a
 
       - name: copy build
         run: |
@@ -45,6 +47,7 @@ jobs:
           cp -RT result/ homelab/
 
       - name: commit and push changes
+        working-directory: ./homelab
         run: |
           pwd
           git config --global user.name 'github-actions[bot]'
@@ -52,4 +55,3 @@ jobs:
           git add --all
           git commit -m 'update homelab configuration'
           git push origin homelab
-        working-directory: ./homelab
