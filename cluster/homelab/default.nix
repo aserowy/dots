@@ -3,6 +3,7 @@
     target = {
       repository = "https://github.com/aserowy/dots.git";
       branch = "homelab";
+      rootPath = "./";
     };
   };
 
@@ -10,7 +11,8 @@
     namespace = "demo";
     createNamespace = true;
 
-    resources = let
+    resources =
+      let
         labels = {
           "app.kubernetes.io/name" = "nginx";
         };

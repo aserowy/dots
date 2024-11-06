@@ -37,22 +37,18 @@ jobs:
         run: |
           pwd
           touch content-to-enable-rm-on-empty-dir
-          echo "--- rm query result"
+          echo "remove files:"
           echo `ls -a | grep -v "^.$\|^..$\|^.git$\|^.gitignore$"`
           rm -r `ls -a | grep -v "^.$\|^..$\|^.git$\|^.gitignore$"`
-          echo "--- ls -a after deletion"
-          ls -a
 
       - name: copy build
         run: |
-          pwd
           echo ${{ steps.build.outputs.out-path }}
           rsync --copy-links --copy-dirlinks --recursive '${{steps.build.outputs.out-path}}/' homelab
 
       - name: commit and push changes
         working-directory: ./homelab
         run: |
-          pwd
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add --all
