@@ -33,9 +33,9 @@ jobs:
 
       - name: remove files
         run: |
-          echo `ls -la`
-          echo `ls -la | grep -v ".git\|.gitignore"`
-          rm -r `ls -la | grep -v ".git\|.gitignore"`
+          echo `ls -a`
+          echo `ls -a | grep -v ".git\|.gitignore"`
+          rm -r `ls -a | grep -v "^.$\|^..$\|^.git$\|^.gitignore$"`
         working-directory: ./homelab
 
       - name: copy build
