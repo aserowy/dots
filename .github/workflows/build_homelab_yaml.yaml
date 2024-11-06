@@ -32,11 +32,13 @@ jobs:
           path: ./homelab
 
       - name: remove files
-        run: rm -r `ls | grep -v ".git\|.gitignore"`
+        run: |
+          rm -r `ls | grep -v ".git\|.gitignore"`
         working-directory: ./homelab
 
       - name: copy build
-        run: cp -RT result/ homelab/
+        run: |
+          cp -RT result/ homelab/
 
       - name: commit and push changes
         run: |
