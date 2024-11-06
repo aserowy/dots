@@ -35,7 +35,7 @@
             spec = {
               securityContext.fsGroup = 1000;
               containers.nginx = {
-                image = "nginx:1.25.1";
+                image = "nginx:1.27.2";
                 imagePullPolicy = "IfNotPresent";
                 volumeMounts = {
                   "/etc/nginx".name = "config";
