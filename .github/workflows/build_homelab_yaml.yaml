@@ -19,12 +19,9 @@ jobs:
 
       - name: checkout main
         uses: actions/checkout@v4
-        with:
-          path: ./main
 
       - name: build homelab
         uses: arnarg/nixidy/actions/build@main
-        working-directory: ./main
         with:
           environment: .#homelab
 
@@ -37,6 +34,9 @@ jobs:
       - name: remove files
         run: rm -r `ls | grep -v ".git\|.gitignore"`
         working-directory: ./homelab
+
+      - name: copy build
+        run: cp -RT result/ homelab/
 
       - name: commit and push changes
         run: |
