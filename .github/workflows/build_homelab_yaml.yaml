@@ -37,17 +37,17 @@ jobs:
         run: |
           pwd
           touch content-to-enable-rm-on-empty-dir
-          echo "rm query result"
+          echo "--- rm query result"
           echo `ls -a | grep -v "^.$\|^..$\|^.git$\|^.gitignore$"`
           rm -r `ls -a | grep -v "^.$\|^..$\|^.git$\|^.gitignore$"`
-          echo "ls -a after deletion"
+          echo "--- ls -a after deletion"
           ls -a
 
       - name: copy build
         # cp -RT ${{ steps.build.outputs.store_path }}/ homelab/
         run: |
           pwd
-          echo ${{ steps.build.outputs.store_path }}
+          echo ${{ steps.build.outputs.out-path }}
 
       - name: commit and push changes
         working-directory: ./homelab
