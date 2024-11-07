@@ -19,6 +19,10 @@
       url = "github:arnarg/nixidy";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixhelm = {
+      url = "github:farcaller/nixhelm";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     neocode = {
       url = "github:aserowy/neocode";
@@ -37,7 +41,7 @@
     };
   };
 
-  outputs = { self, darwin, disko, hardware, home, neocode, nixidy, nixpkgs, sops, yeet, zjstatus, ... }: {
+  outputs = { self, darwin, disko, hardware, home, neocode, nixidy, nixhelm, nixpkgs, sops, yeet, zjstatus, ... }: {
     devShells = {
       aarch64-darwin.default = import ./.dev {
         inherit nixidy;
@@ -169,6 +173,8 @@
       nixidy.lib.mkEnvs
         {
           inherit pkgs;
+
+          charts = nixhelm.chartsDerivations.${pkgs.system};
           envs = {
             homelab.modules = [ ./cluster/homelab/default.nix ];
           };
