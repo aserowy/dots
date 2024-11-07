@@ -60,7 +60,7 @@ window-rule {
 }
 
 binds {
-    Mod+B { spawn "microsoft-edge-beta"; }
+    Mod+B { spawn "microsoft-edge"; }
     Mod+T { spawn "alacritty"; }
     Mod+E { spawn "alacritty" "--command" "yeet"; }
 

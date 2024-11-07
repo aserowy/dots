@@ -1,6 +1,6 @@
 # PROGRAMS
 
-set $browser microsoft-edge-beta
+set $browser microsoft-edge
 set $menu exec ~/.config/rofi/scripts/launch.nu drun
 
 # OUTPUTS

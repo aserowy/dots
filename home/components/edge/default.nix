@@ -27,14 +27,7 @@ in
 
   config = mkIf cnfg.enable {
     home.packages = with pkgs; [
-      # NOTE: fallback if beta is broken
       (microsoft-edge.override {
-        commandLineArgs = [
-          "--enable-features=UseOzonePlatform,WebRTCPipeWireCapturer"
-          "--ozone-platform=wayland"
-        ];
-      })
-      (microsoft-edge-beta.override {
         commandLineArgs = [
           "--enable-features=UseOzonePlatform,WebRTCPipeWireCapturer"
           "--ozone-platform=wayland"
@@ -44,14 +37,14 @@ in
 
     # INFO: set edge as default browser for electron apps
     home.sessionVariables.DEFAULT_BROWSER = mkIf cnfg.setDefaultBrowserSessionVariable
-      "${pkgs.microsoft-edge-beta}/bin/microsoft-edge-beta";
+      "${pkgs.microsoft-edge}/bin/microsoft-edge";
 
     xdg.mimeApps.associations.added = mkIf cnfg.enableXdgAssociations {
-      "text/html" = "microsoft-edge-beta.desktop";
-      "x-scheme-handler/http" = "microsoft-edge-beta.desktop";
-      "x-scheme-handler/https" = "microsoft-edge-beta.desktop";
-      "x-scheme-handler/about" = "microsoft-edge-beta.desktop";
-      "x-scheme-handler/unknown" = "microsoft-edge-beta.desktop";
+      "text/html" = "microsoft-edge.desktop";
+      "x-scheme-handler/http" = "microsoft-edge.desktop";
+      "x-scheme-handler/https" = "microsoft-edge.desktop";
+      "x-scheme-handler/about" = "microsoft-edge.desktop";
+      "x-scheme-handler/unknown" = "microsoft-edge.desktop";
     };
   };
 }
