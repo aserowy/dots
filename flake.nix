@@ -87,11 +87,11 @@
     {
       devShells = {
         aarch64-darwin.default = import ./.dev {
-          inherit nixidy;
+          inherit self nixidy;
           pkgs = nixpkgs.legacyPackages.aarch64-darwin;
         };
         x86_64-linux.default = import ./.dev {
-          inherit nixidy;
+          inherit self nixidy;
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
         };
       };
@@ -219,6 +219,28 @@
           charts = nixhelm.chartsDerivations.${pkgs.system};
           envs = {
             homelab.modules = [ ./cluster/homelab/default.nix ];
+          };
+        };
+
+      packages.x86_64-linux =
+        let
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        in
+        {
+          generators = {
+            cilium = nixidy.packages.${pkgs.system}.generators.fromCRD {
+              name = "cilium";
+              src = pkgs.fetchFromGitHub {
+                owner = "cilium";
+                repo = "cilium";
+                rev = "v1.16.0";
+                hash = "sha256-LJrNGHF52hdKCuVwjvGifqsH+8hxkf/A3LZNpCHeR7E=";
+              };
+              crds = [
+                "pkg/k8s/apis/cilium.io/client/crds/v2/ciliumnetworkpolicies.yaml"
+                "pkg/k8s/apis/cilium.io/client/crds/v2/ciliumclusterwidenetworkpolicies.yaml"
+              ];
+            };
           };
         };
     };
