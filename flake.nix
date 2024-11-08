@@ -2,6 +2,16 @@
   description = "nix configurations";
 
   inputs = {
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    flake-utils.url = "github:numtide/flake-utils";
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
+
+
     darwin = {
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -17,16 +27,25 @@
     };
     nixidy = {
       url = "github:arnarg/nixidy";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-utils.follows = "flake-utils";
+      };
     };
     nixhelm = {
       url = "github:farcaller/nixhelm";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-utils.follows = "flake-utils";
+      };
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     neocode = {
       url = "github:aserowy/neocode";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        flake-parts.follows = "flake-parts";
+                nixpkgs.follows = "nixpkgs";
+            };
     };
     sops = {
       url = "github:Mic92/sops-nix";
@@ -34,10 +53,19 @@
     };
     yeet = {
       url = "github:aserowy/yeet";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-parts.follows = "flake-parts";
+        rust-overlay.follows = "rust-overlay";
+      };
     };
     zjstatus = {
       url = "github:dj95/zjstatus";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-utils.follows = "flake-utils";
+        rust-overlay.follows = "rust-overlay";
+      };
     };
   };
 
