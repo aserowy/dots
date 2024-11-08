@@ -11,27 +11,5 @@
         global.networkPolicy.create = true;
       };
     };
-
-    # resources = {
-    #   # allow all argocd pods to access kube-apiserver
-    #   allow-kube-apiserver-egress.spec = {
-    #     endpointSelector.matchLabels."app.kubernetes.io/part-of" = "argocd";
-    #     egress = [
-    #       {
-    #         toEntities = [ "kube-apiserver" ];
-    #         toPorts = [
-    #           {
-    #             ports = [
-    #               {
-    #                 port = "6443";
-    #                 protocol = "TCP";
-    #               }
-    #             ];
-    #           }
-    #         ];
-    #       }
-    #     ];
-    #   };
-    # };
   };
 }

@@ -2,6 +2,7 @@
 {
   imports = [
     ./argocd.nix
+    ./cilium.nix
   ];
 
   nixidy = {
@@ -10,6 +11,7 @@
       branch = "homelab";
       rootPath = "./";
     };
+
     defaults = {
       syncPolicy = {
         autoSync = {
