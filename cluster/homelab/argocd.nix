@@ -1,4 +1,4 @@
-{ charts }:
+{ charts, ... }:
 {
   applications.argocd = {
     namespace = "argocd";
