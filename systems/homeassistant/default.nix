@@ -15,7 +15,11 @@
 
   networking = {
     firewall = {
-      allowedTCPPorts = [ 80 443 2022 ];
+      allowedTCPPorts = [
+        80
+        443
+        2022
+      ];
       allowedUDPPorts = [ 53 ];
     };
 

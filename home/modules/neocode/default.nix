@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 
 let
@@ -41,7 +46,9 @@ in
         yeet
       ];
 
-      sessionVariables = { EDITOR = "nvim"; };
+      sessionVariables = {
+        EDITOR = "nvim";
+      };
     };
   };
 }

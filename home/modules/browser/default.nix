@@ -1,9 +1,11 @@
 { config, lib, ... }:
 
 with lib;
-let cnfg = config.home.modules.browser;
+let
+  cnfg = config.home.modules.browser;
 
-in {
+in
+{
   options.home.modules.browser.enable = mkEnableOption "browser";
 
   config = mkIf cnfg.enable {

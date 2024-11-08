@@ -1,10 +1,12 @@
-{ nixidy, pkgs }: with pkgs; mkShell
-{
+{ nixidy, pkgs }:
+with pkgs;
+mkShell {
   buildInputs = [
     doas-sudo-shim
     kubectl
     nixd
     nixidy.packages.${pkgs.system}.default
+    nixfmt-rfc-style
     nodejs_20
     nodePackages.prettier
     nodePackages.vscode-json-languageserver
@@ -14,8 +16,6 @@
     sumneko-lua-language-server
     taplo
   ];
-
-
 }
 
 # a14y

@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 
 let
@@ -27,30 +32,30 @@ in
         "wheel"
       ];
     in
-    mkIf cnfg.enable
-      {
-        users = {
-          users.serowy = {
-            createHome = true;
-            extraGroups =
-              if cnfg.dockerGroupMember
-              then extraGroups ++ [ "docker" ]
-              else extraGroups;
-            group = "users";
-            home = "/home/serowy";
-            isNormalUser = true;
-            openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAoChM+zDcZalCCTTF4NTeNyBcrbLBs8b0vBTp/EW1nX serowy" ];
-            shell = pkgs.nushell;
-            uid = 1000;
-          };
+    mkIf cnfg.enable {
+      users = {
+        users.serowy = {
+          createHome = true;
+          extraGroups = if cnfg.dockerGroupMember then extraGroups ++ [ "docker" ] else extraGroups;
+          group = "users";
+          home = "/home/serowy";
+          isNormalUser = true;
+          openssh.authorizedKeys.keys = [
+            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAoChM+zDcZalCCTTF4NTeNyBcrbLBs8b0vBTp/EW1nX serowy"
+          ];
+          shell = pkgs.nushell;
+          uid = 1000;
         };
+      };
 
-        security.doas = {
-          extraRules = [{
+      security.doas = {
+        extraRules = [
+          {
             users = [ "serowy" ];
             keepEnv = true;
             persist = true;
-          }];
-        };
+          }
+        ];
       };
+    };
 }

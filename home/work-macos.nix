@@ -25,10 +25,9 @@
       '';
     };
 
-    packages = with pkgs;
-      [
-        nerdfonts
-      ];
+    packages = with pkgs; [
+      nerdfonts
+    ];
   };
 
   fonts.fontconfig.enable = true;

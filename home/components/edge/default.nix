@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 
 let
@@ -36,8 +41,7 @@ in
     ];
 
     # INFO: set edge as default browser for electron apps
-    home.sessionVariables.DEFAULT_BROWSER = mkIf cnfg.setDefaultBrowserSessionVariable
-      "${pkgs.microsoft-edge}/bin/microsoft-edge";
+    home.sessionVariables.DEFAULT_BROWSER = mkIf cnfg.setDefaultBrowserSessionVariable "${pkgs.microsoft-edge}/bin/microsoft-edge";
 
     xdg.mimeApps.associations.added = mkIf cnfg.enableXdgAssociations {
       "text/html" = "microsoft-edge.desktop";

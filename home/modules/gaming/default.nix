@@ -1,13 +1,20 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 
 let
   cnfg = config.home.modules.gaming;
 
-  mkUnless = condition: onTrue: onFalse: mkMerge [
-    (mkIf condition onTrue)
-    (mkIf (!condition) onFalse)
-  ];
+  mkUnless =
+    condition: onTrue: onFalse:
+    mkMerge [
+      (mkIf condition onTrue)
+      (mkIf (!condition) onFalse)
+    ];
 in
 {
   options.home.modules.gaming = {
@@ -36,14 +43,15 @@ in
     '';
 
     # NOTE: sdl with wayland, x11 and windows is for easy anti cheat support on wine
-    home.sessionVariables = mkUnless cnfg.enableXwaylandSatellite
-      {
-        # FIX: envs are not present when using rofi to launch eg steam
-        DISPLAY = ":0";
-        SDL_VIDEODRIVER = "wayland,x11,windows";
-      }
-      {
-        SDL_VIDEODRIVER = "wayland";
-      };
+    home.sessionVariables =
+      mkUnless cnfg.enableXwaylandSatellite
+        {
+          # FIX: envs are not present when using rofi to launch eg steam
+          DISPLAY = ":0";
+          SDL_VIDEODRIVER = "wayland,x11,windows";
+        }
+        {
+          SDL_VIDEODRIVER = "wayland";
+        };
   };
 }

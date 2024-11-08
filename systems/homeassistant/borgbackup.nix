@@ -15,8 +15,9 @@
       passCommand = "cat /root/borgbackup_passphrase";
     };
     environment.BORG_RSH = "ssh -i /root/borgbackup_ssh";
-    exclude = [
-    ];
+    exclude =
+      [
+      ];
     paths = [
       "/srv"
     ];

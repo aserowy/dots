@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 
 let
@@ -36,8 +41,7 @@ in
     ];
 
     # INFO: set chrome as default browser for electron apps
-    home.sessionVariables.DEFAULT_BROWSER = mkIf cnfg.setDefaultBrowserSessionVariable
-      "${pkgs.google-chrome}/bin/google-chrome-stable";
+    home.sessionVariables.DEFAULT_BROWSER = mkIf cnfg.setDefaultBrowserSessionVariable "${pkgs.google-chrome}/bin/google-chrome-stable";
 
     xdg.mimeApps.associations.added = mkIf cnfg.enableXdgAssociations {
       "text/html" = "google-chrome.desktop";

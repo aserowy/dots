@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 
 let
@@ -30,10 +35,9 @@ in
         envFile.source = ./nushell-env.nu;
 
         # FIX: https://github.com/nix-community/home-manager/issues/4313
-        environmentVariables =
-          builtins.mapAttrs
-            (name: value: "${builtins.toString value}")
-            config.home.sessionVariables;
+        environmentVariables = builtins.mapAttrs (
+          name: value: "${builtins.toString value}"
+        ) config.home.sessionVariables;
 
         shellAliases = {
           cat = "bat";
