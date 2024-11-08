@@ -1,15 +1,15 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: demo
+  name: argocd
   namespace: argocd
 spec:
   destination:
-    namespace: demo
+    namespace: argocd
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: ./demo
+    path: ./argocd
     repoURL: https://github.com/aserowy/dots.git
     targetRevision: homelab
   syncPolicy:
