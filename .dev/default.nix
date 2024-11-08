@@ -3,9 +3,8 @@
   buildInputs = [
     doas-sudo-shim
     kubectl
-    nil
+    nixd
     nixidy.packages.${pkgs.system}.default
-    nixpkgs-fmt
     nodejs_20
     nodePackages.prettier
     nodePackages.vscode-json-languageserver
@@ -15,6 +14,8 @@
     sumneko-lua-language-server
     taplo
   ];
+
+
 }
 
 # a14y
