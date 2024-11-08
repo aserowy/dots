@@ -1,7 +1,7 @@
-{ charts, ... }:
+{ ... }:
 {
   imports = [
-    (import ./argocd.nix { inherit charts; })
+    ./argocd.nix
   ];
 
   nixidy = {
