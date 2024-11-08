@@ -70,7 +70,8 @@ $env.config = {
                             return
                         }
 
-                        (zellij action rename-tab $after)
+                        let new_tab_name = ($after | split row "/" | last | default '')
+                        (zellij action rename-tab $"($new_tab_name)/")
                     } catch {
                         (zellij action rename-tab 'unnamed')
                     }
