@@ -1,7 +1,7 @@
 { charts, ... }:
 {
   nixidy.resourceImports = [
-    ../cdr/cilium.nix
+    ../crd/cilium.nix
   ];
 
   applications.cilium = {

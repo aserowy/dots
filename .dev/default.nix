@@ -39,6 +39,6 @@ mkShell {
 
   shellHook = ''
     echo "generate cilium"
-    cat ${generators.cilium} > ./cluster/cdr/cilium.nix
+    cat ${generators.cilium} > ./cluster/crd/cilium.nix
   '';
 }
