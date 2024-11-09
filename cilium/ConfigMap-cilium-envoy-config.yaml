@@ -321,4 +321,4 @@ data:
 kind: ConfigMap
 metadata:
   name: cilium-envoy-config
-  namespace: cilium
+  namespace: kube-system

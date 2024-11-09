@@ -3,6 +3,13 @@ data:
   admin.enabled: "true"
   application.instanceLabelKey: argocd.argoproj.io/instance
   exec.enabled: "false"
+  resource.exclusions: |
+    - apiGroups:
+      - cilium.io
+      kinds:
+        - CiliumIdentity
+      clusters:
+        - "*"
   server.rbac.log.enforce.enable: "false"
   statusbadge.enabled: "false"
   timeout.hard.reconciliation: 0s

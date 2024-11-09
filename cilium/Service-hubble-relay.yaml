@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/part-of: cilium
     k8s-app: hubble-relay
   name: hubble-relay
-  namespace: cilium
+  namespace: kube-system
 spec:
   ports:
     - port: 80

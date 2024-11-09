@@ -4,4 +4,4 @@ data:
 kind: ConfigMap
 metadata:
   name: hubble-ui-nginx
-  namespace: cilium
+  namespace: kube-system

@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/part-of: cilium
     k8s-app: hubble-generate-certs
   name: hubble-generate-certs
-  namespace: cilium
+  namespace: kube-system
 spec:
   template:
     metadata:
@@ -20,7 +20,7 @@ spec:
         - args:
             - --ca-generate
             - --ca-reuse-secret
-            - --ca-secret-namespace=cilium
+            - --ca-secret-namespace=kube-system
             - --ca-secret-name=cilium-ca
             - --ca-common-name=Cilium CA
           command:
@@ -30,7 +30,7 @@ spec:
               value: |
                 certs:
                 - name: hubble-server-certs
-                  namespace: cilium
+                  namespace: kube-system
                   commonName: "*.default.hubble-grpc.cilium.io"
                   hosts:
                   - "*.default.hubble-grpc.cilium.io"
@@ -41,7 +41,7 @@ spec:
                   - client auth
                   validity: 26280h
                 - name: hubble-relay-client-certs
-                  namespace: cilium
+                  namespace: kube-system
                   commonName: "*.hubble-relay.cilium.io"
                   hosts:
                   - "*.hubble-relay.cilium.io"

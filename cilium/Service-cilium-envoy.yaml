@@ -10,7 +10,7 @@ metadata:
     io.cilium/app: proxy
     k8s-app: cilium-envoy
   name: cilium-envoy
-  namespace: cilium
+  namespace: kube-system
 spec:
   clusterIP: None
   ports:

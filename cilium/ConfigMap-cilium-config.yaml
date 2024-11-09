@@ -131,4 +131,4 @@ data:
 kind: ConfigMap
 metadata:
   name: cilium-config
-  namespace: cilium
+  namespace: kube-system

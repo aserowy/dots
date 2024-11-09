@@ -4,7 +4,7 @@ metadata:
   labels:
     app.kubernetes.io/part-of: cilium
   name: cilium-config-agent
-  namespace: cilium
+  namespace: kube-system
 rules:
   - apiGroups:
       - ""

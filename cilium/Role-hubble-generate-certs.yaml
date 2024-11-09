@@ -4,7 +4,7 @@ metadata:
   labels:
     app.kubernetes.io/part-of: cilium
   name: hubble-generate-certs
-  namespace: cilium
+  namespace: kube-system
 rules:
   - apiGroups:
       - ""

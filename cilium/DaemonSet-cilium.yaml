@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/part-of: cilium
     k8s-app: cilium
   name: cilium
-  namespace: cilium
+  namespace: kube-system
 spec:
   selector:
     matchLabels:
