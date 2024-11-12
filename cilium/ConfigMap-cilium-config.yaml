@@ -18,7 +18,7 @@ data:
   cilium-endpoint-gc-interval: 5m0s
   cluster-id: "0"
   cluster-name: default
-  cluster-pool-ipv4-cidr: 10.42.0.0/16
+  cluster-pool-ipv4-cidr: 10.0.0.0/8
   cluster-pool-ipv4-mask-size: "24"
   clustermesh-enable-endpoint-sync: "false"
   clustermesh-enable-mcs-api: "false"
@@ -53,7 +53,7 @@ data:
   enable-masquerade-to-route-source: "false"
   enable-metrics: "true"
   enable-node-selector-labels: "false"
-  enable-policy: always
+  enable-policy: never
   enable-runtime-device-detection: "true"
   enable-sctp: "false"
   enable-svc-source-range-check: "true"
@@ -99,7 +99,6 @@ data:
   nodes-gc-interval: 5m0s
   operator-api-serve-addr: 127.0.0.1:9234
   operator-prometheus-serve-addr: :9963
-  policy-audit-mode: "false"
   policy-cidr-match-mode: ""
   preallocate-bpf-maps: "false"
   procfs: /host/proc

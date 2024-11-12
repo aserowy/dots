@@ -62,9 +62,9 @@ spec:
                   name: cilium-config
                   optional: true
             - name: KUBERNETES_SERVICE_HOST
-              value: localhost
+              value: 192.168.178.53
             - name: KUBERNETES_SERVICE_PORT
-              value: "6444"
+              value: "6443"
           image: quay.io/cilium/operator-generic:v1.16.3@sha256:6e2925ef47a1c76e183c48f95d4ce0d34a1e5e848252f910476c3e11ce1ec94b
           imagePullPolicy: IfNotPresent
           livenessProbe:

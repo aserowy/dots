@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/name: argocd-notifications-controller
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.13.0
-    helm.sh/chart: argo-cd-7.7.0
+    helm.sh/chart: argo-cd-7.7.1
   name: argocd-notifications-controller
   namespace: argocd
 spec:
@@ -29,7 +29,7 @@ spec:
         app.kubernetes.io/name: argocd-notifications-controller
         app.kubernetes.io/part-of: argocd
         app.kubernetes.io/version: v2.13.0
-        helm.sh/chart: argo-cd-7.7.0
+        helm.sh/chart: argo-cd-7.7.1
     spec:
       affinity:
         podAntiAffinity:

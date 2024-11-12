@@ -50,9 +50,9 @@ spec:
                   divisor: "1"
                   resource: limits.memory
             - name: KUBERNETES_SERVICE_HOST
-              value: localhost
+              value: 192.168.178.53
             - name: KUBERNETES_SERVICE_PORT
-              value: "6444"
+              value: "6443"
           image: quay.io/cilium/cilium:v1.16.3@sha256:62d2a09bbef840a46099ac4c69421c90f84f28d018d479749049011329aa7f28
           imagePullPolicy: IfNotPresent
           lifecycle:
@@ -191,9 +191,9 @@ spec:
                   apiVersion: v1
                   fieldPath: metadata.namespace
             - name: KUBERNETES_SERVICE_HOST
-              value: localhost
+              value: 192.168.178.53
             - name: KUBERNETES_SERVICE_PORT
-              value: "6444"
+              value: "6443"
           image: quay.io/cilium/cilium:v1.16.3@sha256:62d2a09bbef840a46099ac4c69421c90f84f28d018d479749049011329aa7f28
           imagePullPolicy: IfNotPresent
           name: config
@@ -301,9 +301,9 @@ spec:
                   name: cilium-config
                   optional: true
             - name: KUBERNETES_SERVICE_HOST
-              value: localhost
+              value: 192.168.178.53
             - name: KUBERNETES_SERVICE_PORT
-              value: "6444"
+              value: "6443"
           image: quay.io/cilium/cilium:v1.16.3@sha256:62d2a09bbef840a46099ac4c69421c90f84f28d018d479749049011329aa7f28
           imagePullPolicy: IfNotPresent
           name: clean-cilium-state
