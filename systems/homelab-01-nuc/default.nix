@@ -18,10 +18,18 @@
   networking = {
     hostName = "homelab-01-nuc";
 
+    interfaces = {
+      eno1.ipv4.addresses = [
+        {
+          address = "192.168.178.53";
+          prefixLength = 24;
+        }
+      ];
+    };
+
     # enables wifi with: nmcli device wifi connect <SSID> password <PASS>
     networkmanager = {
       enable = true;
-      insertNameservers = [ "127.0.0.1" ];
     };
   };
 
