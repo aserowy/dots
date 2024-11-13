@@ -30,10 +30,9 @@ layout {
     center-focused-column "never"
 
     preset-column-widths {
-        proportion 0.32
-        proportion 0.48
-        proportion 0.64
-        proportion 0.96
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66666
     }
 
     default-column-width { proportion 0.33333; }
@@ -46,6 +45,10 @@ layout {
 
     border {
         off
+    }
+
+    struts {
+        right 64
     }
 }
 
