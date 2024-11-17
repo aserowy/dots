@@ -29,6 +29,7 @@
       enable = true;
       allowPing = false;
     };
+    nftables.enable = true;
     useDHCP = false;
   };
 
