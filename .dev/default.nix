@@ -24,6 +24,7 @@ mkShell {
   packages = [
     doas-sudo-shim
     kubectl
+        marksman
     nixd
     nixidy.packages.${pkgs.system}.default
     nixfmt-rfc-style
