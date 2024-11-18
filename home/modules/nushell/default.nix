@@ -76,9 +76,9 @@ in
           zls = "zellij ls";
           zs = "zellij --session";
           za = "zellij attach";
-          zd = "zellij delete-session";
+          zds = "zellij delete-session";
           zda = "zellij delete-all-sessions";
-          zk = "zellij kill-session";
+          zks = "zellij kill-session";
           zka = "zellij kill-all-sessions";
         };
       };
