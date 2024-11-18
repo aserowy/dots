@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/name: argocd-redis
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.13.0
-    helm.sh/chart: argo-cd-7.7.1
+    helm.sh/chart: argo-cd-7.7.3
   name: argocd-redis
   namespace: argocd
 spec:
@@ -26,7 +26,7 @@ spec:
         app.kubernetes.io/name: argocd-redis
         app.kubernetes.io/part-of: argocd
         app.kubernetes.io/version: v2.13.0
-        helm.sh/chart: argo-cd-7.7.1
+        helm.sh/chart: argo-cd-7.7.3
     spec:
       affinity:
         podAntiAffinity:
@@ -51,7 +51,7 @@ spec:
                 secretKeyRef:
                   key: auth
                   name: argocd-redis
-          image: public.ecr.aws/docker/library/redis:7.2.4-alpine
+          image: public.ecr.aws/docker/library/redis:7.4.1-alpine
           imagePullPolicy: IfNotPresent
           name: redis
           ports:

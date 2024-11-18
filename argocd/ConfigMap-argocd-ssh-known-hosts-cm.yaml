@@ -23,6 +23,6 @@ metadata:
     app.kubernetes.io/name: argocd-ssh-known-hosts-cm
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v2.13.0
-    helm.sh/chart: argo-cd-7.7.1
+    helm.sh/chart: argo-cd-7.7.3
   name: argocd-ssh-known-hosts-cm
   namespace: argocd
