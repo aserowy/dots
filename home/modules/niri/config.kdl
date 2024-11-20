@@ -64,7 +64,7 @@ window-rule {
 
 binds {
     Mod+B { spawn "microsoft-edge"; }
-    Mod+T { spawn "alacritty"; }
+    Mod+T { spawn "kitty"; }
     Mod+E { spawn "alacritty" "--command" "yeet"; }
 
     Mod+Space { spawn "fuzzel"; }
