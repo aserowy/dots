@@ -11,8 +11,6 @@
     ./telegraf.nix
   ];
 
-  boot.loader.raspberryPi.firmwareConfig = "dtparam=sd_poll_once=on";
-
   networking = {
     firewall = {
       allowedTCPPorts = [
