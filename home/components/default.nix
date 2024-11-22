@@ -21,6 +21,7 @@
     ./swaybg
     ./swaync
     ./swww
+    ./wpaperd
     ./zellij
   ];
 }

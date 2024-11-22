@@ -11,7 +11,8 @@
       docker.enable = true;
       logseq.enable = true;
       onedrive.enable = true;
-      swww.enable = true;
+      # swww.enable = true;
+      wpaperd.enable = true;
 
       # NOTE: fallback terminal
       kitty.enable = true;
