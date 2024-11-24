@@ -43,8 +43,10 @@ in
       settings = {
         default = {
           duration = "30m";
+          group = 1;
           mode = "center";
           path = "~/onedrive/Wallpapers/";
+          sorting = "random";
 
           transition.doom = {
             bars = 50;
