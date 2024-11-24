@@ -19,9 +19,7 @@
         # dnsProxy.enableTransparentMode = false;
 
         # replicate k3s environment
-        ipam = {
-          operator.clusterPoolIPv4PodCIDRList = [ "10.42.0.0/16" ];
-        };
+        ipam.operator.clusterPoolIPv4PodCIDRList = [ "10.42.0.0/16" ];
 
         # TODO: is host dependent: should come as modul option
         k8sServiceHost = "192.168.178.53";
@@ -41,7 +39,8 @@
 
     resources = {
       ciliumNetworkPolicies = {
-        allow-coredns-apiserver-egress.spec = {
+        # kube dns
+        allow-kubedns-egress-kubeapiserver.spec = {
           endpointSelector.matchLabels.k8s-app = "kube-dns";
           egress = [
             {
@@ -50,11 +49,34 @@
           ];
         };
 
-        allow-hubble-relay-server-egress.spec = {
+        allow-kubedns-egress-world.spec = {
+          endpointSelector.matchLabels.k8s-app = "kube-dns";
+          egress = [
+            {
+              toEntities = [ "world" ];
+              toPorts = [
+                {
+                  ports = [
+                    {
+                      port = "53";
+                      protocol = "UDP";
+                    }
+                  ];
+                }
+              ];
+            }
+          ];
+        };
+
+        # hubble
+        allow-hubblerelay-egress-nodes.spec = {
           endpointSelector.matchLabels."app.kubernetes.io/name" = "hubble-relay";
           egress = [
             {
-              toEntities = [ "remote-node" "host" ];
+              toEntities = [
+                "remote-node"
+                "host"
+              ];
               toPorts = [
                 {
                   ports = [
@@ -69,7 +91,7 @@
           ];
         };
 
-        allow-hubble-ui-relay-ingress.spec = {
+        allow-hubblerelay-ingress-hubbleui.spec = {
           endpointSelector.matchLabels."app.kubernetes.io/name" = "hubble-relay";
           ingress = [
             {
@@ -92,7 +114,7 @@
           ];
         };
 
-        allow-hubble-ui-kube-apiserver-egress.spec = {
+        allow-hubbleui-egress-kubeapiserver.spec = {
           endpointSelector.matchLabels."app.kubernetes.io/name" = "hubble-ui";
           egress = [
             {
@@ -111,26 +133,7 @@
           ];
         };
 
-        allow-kube-dns-upstream-egress.spec = {
-          endpointSelector.matchLabels.k8s-app = "kube-dns";
-          egress = [
-            {
-              toEntities = [ "world" ];
-              toPorts = [
-                {
-                  ports = [
-                    {
-                      port = "53";
-                      protocol = "UDP";
-                    }
-                  ];
-                }
-              ];
-            }
-          ];
-        };
-
-        allow-hubble-generate-certs-apiserver-egress.spec = {
+        allow-hubblegeneratecerts-egress-kubeapiserver.spec = {
           endpointSelector.matchLabels."batch.kubernetes.io/job-name" = "hubble-generate-certs";
           egress = [
             {
@@ -151,7 +154,8 @@
       };
 
       ciliumClusterwideNetworkPolicies = {
-        allow-kube-dns-cluster-ingress.spec = {
+        # kube dns
+        allow-kubedns-ingress-cluster.spec = {
           endpointSelector.matchLabels = {
             "k8s:io.kubernetes.pod.namespace" = "kube-system";
             "k8s-app" = "kube-dns";
@@ -173,7 +177,8 @@
           ];
         };
 
-        cilium-health-checks.spec = {
+        # health checks
+        allow-health-bigress-nodes.spec = {
           endpointSelector.matchLabels."reserved:health" = "";
           ingress = [
             {
@@ -183,6 +188,16 @@
           egress = [
             {
               toEntities = [ "remote-node" ];
+            }
+          ];
+        };
+
+        # inter node
+        allow-cluster-egress-cluster.spec = {
+          endpointSelector = { };
+          egress = [
+            {
+              toEndpoints = [ { } ];
             }
           ];
         };
