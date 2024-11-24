@@ -1,7 +1,7 @@
 apiVersion: cilium.io/v2
 kind: CiliumClusterwideNetworkPolicy
 metadata:
-  name: cilium-health-checks
+  name: allow-health-bigress-nodes
 spec:
   egress:
     - toEntities:

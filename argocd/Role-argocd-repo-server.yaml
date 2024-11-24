@@ -7,7 +7,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-repo-server
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v2.13.0
-    helm.sh/chart: argo-cd-7.7.3
+    app.kubernetes.io/version: v2.13.1
+    helm.sh/chart: argo-cd-7.7.5
   name: argocd-repo-server
   namespace: argocd

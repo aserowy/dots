@@ -1,7 +1,7 @@
 apiVersion: cilium.io/v2
 kind: CiliumClusterwideNetworkPolicy
 metadata:
-  name: allow-kube-dns-cluster-ingress
+  name: allow-kubedns-ingress-cluster
 spec:
   endpointSelector:
     matchLabels:

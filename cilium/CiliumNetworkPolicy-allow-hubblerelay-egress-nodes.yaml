@@ -1,7 +1,7 @@
 apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
-  name: allow-hubble-relay-server-egress
+  name: allow-hubblerelay-egress-nodes
   namespace: kube-system
 spec:
   egress:

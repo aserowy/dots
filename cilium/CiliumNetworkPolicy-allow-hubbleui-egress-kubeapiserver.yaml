@@ -1,7 +1,7 @@
 apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
-  name: allow-hubble-generate-certs-apiserver-egress
+  name: allow-hubbleui-egress-kubeapiserver
   namespace: kube-system
 spec:
   egress:
@@ -13,4 +13,4 @@ spec:
               protocol: TCP
   endpointSelector:
     matchLabels:
-      batch.kubernetes.io/job-name: hubble-generate-certs
+      app.kubernetes.io/name: hubble-ui

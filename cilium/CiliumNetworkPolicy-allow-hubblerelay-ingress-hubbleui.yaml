@@ -1,7 +1,7 @@
 apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
-  name: allow-hubble-ui-relay-ingress
+  name: allow-hubblerelay-ingress-hubbleui
   namespace: kube-system
 spec:
   endpointSelector:

@@ -1,12 +1,16 @@
 apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
-  name: allow-coredns-apiserver-egress
+  name: allow-kubedns-egress-world
   namespace: kube-system
 spec:
   egress:
     - toEntities:
-        - kube-apiserver
+        - world
+      toPorts:
+        - ports:
+            - port: "53"
+              protocol: UDP
   endpointSelector:
     matchLabels:
       k8s-app: kube-dns
