@@ -26,7 +26,6 @@
 
     packages = with pkgs; [
       drawio
-            gephi
       spotify
     ];
   };
