@@ -1,4 +1,5 @@
 {
+  lib,
   nixidy,
   pkgs,
 }:
@@ -19,24 +20,26 @@ let
     };
   };
 in
-with pkgs;
-mkShell {
-  packages = [
-    doas-sudo-shim
-    kubectl
-        marksman
-    nixd
-    nixidy.packages.${pkgs.system}.default
-    nixfmt-rfc-style
-    nodejs_20
-    nodePackages.prettier
-    nodePackages.vscode-json-languageserver
-    nufmt
-    sops
-    stylua
-    sumneko-lua-language-server
-    taplo
-  ];
+pkgs.mkShell {
+  packages =
+    [
+      pkgs.kubectl
+      pkgs.marksman
+      pkgs.nixd
+      nixidy.packages.${pkgs.system}.default
+      pkgs.nixfmt-rfc-style
+      pkgs.nodejs_20
+      pkgs.nodePackages.prettier
+      pkgs.nodePackages.vscode-json-languageserver
+      pkgs.nufmt
+      pkgs.sops
+      pkgs.stylua
+      pkgs.sumneko-lua-language-server
+      pkgs.taplo
+    ]
+    ++ lib.optionals (!pkgs.stdenv.isDarwin) [
+      pkgs.doas-sudo-shim
+    ];
 
   shellHook = ''
     echo "generate cilium"

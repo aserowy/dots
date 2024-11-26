@@ -18,9 +18,9 @@ revision:
   homebrew = {
     enable = true;
     casks = [
-      "google-chrome"
       "drawio"
-      "logseq"
+      "google-chrome"
+      "karbiner-elements"
       "microsoft-edge"
       "obsidian"
       "onedrive"

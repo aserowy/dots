@@ -20,7 +20,6 @@
 
       ".zshrc".source = builtins.toFile "user-zshrc" ''
         export PATH=/run/current-system/sw/bin:/etc/profiles/per-user/alexander.serowy/bin:$PATH
-
         nu; exit
       '';
     };

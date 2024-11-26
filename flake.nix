@@ -88,10 +88,12 @@
       devShells = {
         aarch64-darwin.default = import ./.dev {
           inherit nixidy;
+          lib = nixpkgs.lib;
           pkgs = nixpkgs.legacyPackages.aarch64-darwin;
         };
         x86_64-linux.default = import ./.dev {
           inherit nixidy;
+          lib = nixpkgs.lib;
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
         };
       };
