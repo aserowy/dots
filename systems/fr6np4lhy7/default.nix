@@ -20,7 +20,7 @@ revision:
     casks = [
       "drawio"
       "google-chrome"
-      "karbiner-elements"
+      "karabiner-elements"
       "microsoft-edge"
       "obsidian"
       "onedrive"
