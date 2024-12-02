@@ -25,7 +25,8 @@
     };
 
     packages = with pkgs; [
-      nerdfonts
+      nerd-fonts.fira-code
+      nerd-fonts.jetbrains-mono
     ];
   };
 

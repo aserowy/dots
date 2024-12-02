@@ -21,7 +21,8 @@
     packages = with pkgs; [
       inter
       powerline-fonts
-      nerdfonts
+      nerd-fonts.fira-code
+      nerd-fonts.jetbrains-mono
     ];
   };
 
