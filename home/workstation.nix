@@ -9,7 +9,6 @@
       alacritty.enable = true;
       chrome.enable = true;
       docker.enable = true;
-      logseq.enable = true;
       onedrive.enable = true;
       wpaperd.enable = true;
 

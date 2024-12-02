@@ -30,16 +30,6 @@
 
   networking.hostName = "workstation";
 
-  # FIX: remove this once packages are updated:
-  # https://github.com/logseq/logseq/issues/10851
-  nixpkgs = {
-    config = {
-      permittedInsecurePackages = [
-        "electron-27.3.11"
-      ];
-    };
-  };
-
   programs = {
     seahorse.enable = true;
     steam.enable = true;
