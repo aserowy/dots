@@ -48,9 +48,7 @@ in
           path = "~/onedrive/Wallpapers/";
           sorting = "random";
 
-          transition.doom = {
-            bars = 50;
-          };
+          transition.linear-blur = { intensity = 0.05;};
         };
       };
     };
