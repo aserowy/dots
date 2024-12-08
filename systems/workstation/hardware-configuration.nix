@@ -38,6 +38,13 @@
   fileSystems."/boot" = {
     device = "/dev/disk/by-label/boot";
     fsType = "vfat";
+    # NOTE: prevents: Mount point '/boot' which backs the random seed file is world accessible,
+    # which is a security hole!
+    options = [
+      "fmask=0077"
+      "dmask=0077"
+      "defaults"
+    ];
   };
 
   swapDevices = [
