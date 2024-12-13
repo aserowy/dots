@@ -57,17 +57,12 @@ window-rule {
     clip-to-geometry true
 }
 
-window-rule {
-    match app-id=r#"^org\.wezfurlong\.wezterm$"#
-    default-column-width {}
-}
-
 binds {
     Mod+B { spawn "microsoft-edge"; }
     Mod+T { spawn "kitty"; }
-    Mod+E { spawn "alacritty" "--command" "yeet"; }
+    Mod+E { spawn "kitty" "--command" "yeet"; }
 
-    Mod+Space { spawn "fuzzel"; }
+    Mod+Space { spawn "fuzzel" "--list-executables-in-path"; }
 
     XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }

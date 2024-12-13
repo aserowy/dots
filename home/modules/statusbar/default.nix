@@ -49,14 +49,12 @@ in
 
       modules = {
         clipboard.enable = true;
-        screenshot.enable = true;
       };
 
       packages = with pkgs; [
         eww
         jq
         pavucontrol
-        slurp
         socat
       ];
     };

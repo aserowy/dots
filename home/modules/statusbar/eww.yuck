@@ -5,7 +5,6 @@
 (include "./widgets/group_lock.yuck")
 (include "./widgets/network.yuck")
 (include "./widgets/notification.yuck")
-(include "./widgets/recorder.yuck")
 (include "./widgets/workspaces.yuck")
 
 (defwindow statusbar [stacking]

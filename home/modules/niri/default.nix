@@ -56,6 +56,16 @@ in
 
         packages = with pkgs; [
           niri
+
+          (pkgs.writeShellScriptBin "outputshot" ''
+            niri msg action screenshot-screen
+          '')
+          (pkgs.writeShellScriptBin "screenshot" ''
+            niri msg action screenshot
+          '')
+          (pkgs.writeShellScriptBin "windowshot" ''
+            niri msg action screenshot-window
+          '')
         ];
 
         sessionVariables = {
