@@ -2,6 +2,7 @@
 {
   imports = [
     ./alacritty
+    ./anyrun
     ./chrome
     ./direnv
     ./docker

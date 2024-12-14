@@ -1,0 +1,18 @@
+Config(
+  close_on_click: true,
+  height: Absolute(0),
+  hide_icons: false,
+  hide_plugin_info: true,
+  ignore_exclusive_zones: false,
+  layer: Overlay,
+  max_entries: None,
+  show_results_immediately: false,
+  width: Absolute(640),
+  x: Fraction(0.5),
+  y: Fraction(0.25),
+
+  plugins: [
+    "libapplications.so",
+    "libshell.so",
+  ],
+)

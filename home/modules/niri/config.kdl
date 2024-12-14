@@ -62,7 +62,7 @@ binds {
     Mod+T { spawn "kitty"; }
     Mod+E { spawn "kitty" "--command" "yeet"; }
 
-    Mod+Space { spawn "fuzzel" "--list-executables-in-path"; }
+    Mod+Space { spawn "anyrun"; }
 
     XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
