@@ -27,6 +27,9 @@
       "i915"
     ];
     kernelModules = [ "kvm-intel" ];
+    # NOTE: reduces cracking audio on dac, see
+        # https://discourse.nixos.org/t/setting-up-pipewire-to-get-rid-of-cracks-noises/56358
+    kernelParams = [ "preempt=full" ];
     extraModulePackages = [ ];
   };
 
