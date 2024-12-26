@@ -25,6 +25,7 @@
 
     packages = with pkgs; [
       drawio
+      nautilus
       spotify
     ];
   };
