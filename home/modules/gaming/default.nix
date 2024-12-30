@@ -33,9 +33,6 @@ in
     home.packages = with pkgs; [
       xwayland
       xwayland-satellite
-
-      # NOTE: xbox controller support
-      xboxdrv
     ];
 
     home.modules.niri.prependedConfig = mkIf cnfg.enableXwaylandSatellite ''
