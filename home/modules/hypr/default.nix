@@ -46,7 +46,6 @@ in
     mkIf cnfg.enable {
       home = {
         components = {
-          # foot = {
           alacritty = {
             enable = true;
             enableAsHyprlandDefaultTerminal = true;

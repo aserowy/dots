@@ -59,8 +59,8 @@ window-rule {
 
 binds {
     Mod+B { spawn "microsoft-edge"; }
-    Mod+T { spawn "kitty"; }
-    Mod+E { spawn "kitty" "--command" "yeet"; }
+    Mod+T { spawn "ghostty"; }
+    Mod+E { spawn "ghostty" "-e" "yeet"; }
 
     Mod+Space { spawn "fuzzel" "--list-executables-in-path"; }
 

@@ -11,11 +11,7 @@
     username = "uitdeveloper";
 
     components = {
-      foot = {
-        enable = true;
-        setDpiAware = false;
-      };
-      podman.enable = true;
+      ghostty.enable = true;
     };
 
     packages = with pkgs; [

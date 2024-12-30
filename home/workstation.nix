@@ -6,9 +6,9 @@
 
   home = {
     components = {
-      alacritty.enable = true;
       chrome.enable = true;
       docker.enable = true;
+      ghostty.enable = true;
       onedrive.enable = true;
       wpaperd.enable = true;
 

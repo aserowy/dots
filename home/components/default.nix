@@ -9,12 +9,12 @@
     ./foot
     ./fuzzel
     ./fzf
+    ./ghostty
     ./git
     ./kitty
     ./lf
     ./logseq
     ./onedrive
-    ./podman
     ./ssh
     ./starship
     ./swappy

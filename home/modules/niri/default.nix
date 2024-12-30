@@ -29,13 +29,8 @@ in
     mkIf cnfg.enable {
       home = {
         components = {
-          alacritty = {
-            enable = true;
-          };
-
-          fuzzel = {
-            enable = true;
-          };
+          ghostty.enable = true;
+          fuzzel.enable = true;
         };
 
         file = {
