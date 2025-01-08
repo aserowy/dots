@@ -28,9 +28,11 @@
     ];
     kernelModules = [ "kvm-intel" ];
     # NOTE: reduces cracking audio on dac, see
-        # https://discourse.nixos.org/t/setting-up-pipewire-to-get-rid-of-cracks-noises/56358
+    # https://discourse.nixos.org/t/setting-up-pipewire-to-get-rid-of-cracks-noises/56358
     kernelParams = [ "preempt=full" ];
     extraModulePackages = [ ];
+    # NOTE: allows compiling aarch64-linux with qemu
+    binfmt.emulatedSystems = [ "aarch64-linux" ];
   };
 
   fileSystems."/" = {
