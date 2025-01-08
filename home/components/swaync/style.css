@@ -1,132 +1,175 @@
-@define-color transparent rgba(0, 0, 0, 0);
-@define-color background rgba(249, 249, 249, 0.9);
-@define-color background-highlight rgba(255, 255, 255, 0.9);
-@define-color alert #ff0000;
+@define-color background  rgba(249, 249, 249, 0.9);
 @define-color foreground #1a1a1a;
-@define-color foreground-disabled #5f5f5f;
+
+@define-color item-bg rgba(255, 255, 255, 0.9);
+@define-color item-hover #1a1a1a;
+@define-color slider-empty #1a1a1a;
+@define-color tint #DC8ADD;
 
 * {
-  all: unset;
-  background: @transparent;
-  color: @foreground;
-  font-size: 12px;
-  font-family: Inter;
-  transition: 300ms;
+    color: @foreground;
+    font-size: 12px;
+    font-family: Inter;
+    transition: 200ms;
+}
+
+.blank-window {
+    background: transparent;
 }
 
 .control-center {
-  margin-top: 1rem;
-}
-
-.control-center-list-placeholder {
-  opacity: 0;
-}
-
-.notification-row {
-  background: @background;
-  border-radius: 8px;
-}
-
-.notification-row:focus,
-.notification-row:hover {
-  background: @background-highlight;
-}
-
-.notification-content {
-  padding: 1rem;
-}
-
-.text-box {
-  padding-left: 1rem;
-}
-
-.summary {
-  font-size: 1.1rem;
-  font-weight: bold;
-  margin-bottom: 0.2rem;
-}
-
-.time {
-  font-size: 0.75rem;
-}
-
-.close-button {
-  background: @alert;
-  color: @transparent;
-}
-
-.close-button:hover {
-  background: @alert;
-  transition: all 0.15s ease-in-out;
-}
-
-.inline-reply-entry {
-  background: @background-highlight;
-  caret-color: @foreground;
-}
-
-.inline-reply-button:disabled {
-  color: @foreground-disabled;
-}
-
-.widget-buttons-grid {
-  background: @background;
-  border-radius: 8px;
-  margin-bottom: 1rem;
-}
-
-.widget-buttons-grid > flowbox > flowboxchild > button {
-  border-radius: 8px;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-}
-
-.widget-buttons-grid > flowbox > flowboxchild > button:hover {
-  background: @background-highlight;
-}
-
-.widget-buttons-grid > flowbox > flowboxchild > button:checked {
-  background: @background-highlight;
-}
-
-.widget-mpris {
-  background: @background;
-  border-radius: 8px;
-  margin-bottom: 1rem;
-}
-
-.widget-mpris > box > button:hover {
-  background-color: @background-highlight;
-  border-radius: 8px;
-}
-
-.widget-mpris-player {
-  background-color: @background-highlight;
-  border-radius: 8px;
-  padding: 1rem;
-  margin: 0.5rem 1.5rem;
-}
-
-.widget-mpris-title {
-  font-size: 1.25rem;
-  font-weight: bold;
-}
-
-.widget-mpris-subtitle {
-  font-size: 1.1rem;
+    background: @background;
+    border-radius: 8px;
+    padding: 12px;
 }
 
 .widget-title {
-  background: @background;
-  border-radius: 8px;
-  font-size: 3.5rem;
-  font-weight: bold;
-  padding: 1rem;
+    padding: 10px 10px 0px 10px;
+    font-size: 22px;
+    color: @foreground;
 }
 
 .widget-title > button {
+    font-family: "JetBrains Mono NerdFont", sans-serif;
+    border: 0px;
+    background: transparent;
+    font-size: inherit;
+    padding: 0 35px 0 30px;
 }
 
 .widget-title > button:hover {
-  color: @alert;
+    background: @item-bg;
+}
+
+.widget-title > button:active {
+    background: @background;
+}
+
+.notification-row {
+    margin: 0px;
+    padding: 0px;
+    color: @foreground;
+}
+
+.notification {
+    background-color: @item-bg;
+    color: @foreground;
+    box-shadow: none;
+    border: 0;
+}
+
+.notification-content {
+    padding: 5px;
+}
+
+.notification-group {
+    background-color: transparent;
+}
+
+.notification-group-icon {
+    color: @tint;
+}
+
+.notification-group-collapse-button,
+.notification-group-close-all-button {
+    background-color: @tint;
+    border: 0px;
+}
+
+.notification-group.collapsed:hover .notification {
+    background-color: @background;
+}
+
+.notification-default-action:hover {
+    background-color: @background;
+}
+
+.notification-action:hover {
+    background-color: @item-hover;
+}
+
+.notification-default-action:active,
+.notification-action:active {
+    background-color: @background;
+}
+
+.notification-content .text-box {
+    padding: 0px 5px;
+}
+
+.close-button {
+    background-color: @tint;
+}
+
+.widget-volume {
+    background-color: @item-bg;
+    border-radius: 20px;
+    margin: 0 10px;
+}
+
+trough highlight {
+    background-color: @foreground;
+}
+
+scale trough {
+    background-color: transparent;
+    border: transparent;
+    padding: 0px;
+    min-height: 5px;
+    margin: 0 0 0 10px;
+    font-family: "JetBrains Mono NerdFont", sans-serif;
+}
+
+slider {
+    background-color: @slider-empty;
+    border: 2px solid @foreground;
+}
+
+.widget-volume label {
+    padding: 0 0 0 10px;
+    color: @foreground;
+}
+
+.widget-volume trough highlight {
+    background: @tint;
+    border: unset;
+}
+
+.widget-volume button {
+    background-color: inherit;
+    box-shadow: unset;
+    font-size: 20px;
+    padding: 0 20px 0 0;
+    border-radius: 20px;
+    color: @tint;
+    font-family: "JetBrains Mono NerdFont", sans-serif;
+}
+
+.widget-buttons-grid {
+    background-color: transparent;
+    font-size: x-large;
+    padding: 6px 2px;
+    margin: 6px;
+    border-radius: 12px;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button {
+    background-color: transparent;
+    border-radius: 8px;
+    border: unset;
+    box-shadow: unset;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button:hover {
+    background-color: @item-bg;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button:active {
+    background-color: @background;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button label {
+    color: @foreground;
+    font-family: "JetBrains Mono NerdFont", sans-serif;
+    font-size: 20px;
 }
