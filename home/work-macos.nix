@@ -12,10 +12,12 @@
 
     components = {
       docker.enable = true;
-      ghostty.enable = true;
     };
 
     file = {
+      # NOTE: ghostty is installed on system level with brew
+      ".config/ghostty/config".source = ./components/ghostty/ghostty.config;
+
       ".zshrc".source = builtins.toFile "user-zshrc" ''
         export PATH=/run/current-system/sw/bin:/etc/profiles/per-user/alexander.serowy/bin:$PATH
         nu; exit

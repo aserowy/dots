@@ -19,6 +19,7 @@ revision:
     enable = true;
     casks = [
       "drawio"
+      "ghostty"
       "google-chrome"
       "microsoft-edge"
       "obsidian"
