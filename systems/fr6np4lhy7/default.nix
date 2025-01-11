@@ -24,7 +24,7 @@ revision:
       "obsidian"
       "onedrive"
       "spotify"
-      "wezterm"
+      "steam"
     ];
   };
 
