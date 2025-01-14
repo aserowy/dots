@@ -18,6 +18,7 @@ revision:
   homebrew = {
     enable = true;
     casks = [
+      "discord"
       "drawio"
       # "ghostty"
       "google-chrome"

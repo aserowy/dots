@@ -24,6 +24,7 @@
     };
 
     packages = with pkgs; [
+      discord
       drawio
       nautilus
       spotify

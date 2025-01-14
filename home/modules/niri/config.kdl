@@ -1,6 +1,8 @@
 prefer-no-csd
 screenshot-path "~/pictures/%Y-%m-%d %H-%M-%S.png"
 
+// un/set-workspace-name
+
 hotkey-overlay {
     skip-at-startup
 }
@@ -25,17 +27,16 @@ output "HDMI-A-1" {
 }
 
 layout {
-    gaps 16
-
+    empty-workspace-above-first
     center-focused-column "never"
+    default-column-width { proportion 0.33333; }
+    gaps 16
 
     preset-column-widths {
         proportion 0.33333
         proportion 0.5
         proportion 0.66666
     }
-
-    default-column-width { proportion 0.33333; }
 
     focus-ring {
         width 2
@@ -84,10 +85,10 @@ binds {
     Mod+Shift+U { consume-or-expel-window-left; }
     Mod+Shift+I { consume-or-expel-window-right; }
 
-    Mod+G { focus-monitor-left; }
-    Mod+Semicolon { focus-monitor-right; }
-    Mod+Shift+G { move-column-to-monitor-left; }
-    Mod+Shift+Semicolon { move-column-to-monitor-right; }
+    Mod+N { focus-monitor-next; }
+    Mod+P { focus-monitor-previous; }
+    Mod+Shift+N { move-column-to-monitor-next; }
+    Mod+Shift+P { move-column-to-monitor-previous; }
 
     Mod+Z { fullscreen-window; }
 
