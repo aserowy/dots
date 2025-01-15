@@ -29,7 +29,11 @@
                     ? "hyprctl dispatch workspace name:${workspace.name}"
                     : "swaymsg workspace ${workspace.name}" }
                 (box
-                    :class "workspace ${workspace.focused ? "current" : ""}"
+                    :class "workspace ${workspace.focused
+                        ? "current"
+                        : workspace.on_current_output
+                        ? ""
+                        : "disabled"}"
                     (label
                         :halign "end"
                         :text "${workspace.icon}"

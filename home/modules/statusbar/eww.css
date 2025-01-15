@@ -42,6 +42,10 @@
   color: #61afef;
 }
 
+.disabled {
+  color: rgba(255, 255, 255, 0.5);
+}
+
 .warning {
   color: #e06c75;
 }
