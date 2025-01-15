@@ -18,7 +18,7 @@ def main [monitor: number = 0] {
     }
 
     ($workspaces
-        | sort-by name
+        | sort-by --ignore-case --natural name id
         | insert icon {|rw| icon $rw.name}
         | to json -r
         | print
@@ -54,6 +54,17 @@ def get_workspaces [monitor: number] {
         'sway' => (swaymsg -r -t get_workspaces
             | from json
             | select id name focused
+        )
+        # {"id":5,"idx":3,"name":"dots","output":"DP-2","is_active":true,"is_focused":true,"active_window_id":33},
+        # {"id":6,"idx":4,"name":null,"output":"DP-2","is_active":false,"is_focused":false,"active_window_id":15},
+        # {"id":2,"idx":2,"name":null,"output":"HDMI-A-1","is_active":true,"is_focused":false,"active_window_id":7},
+        'niri' => (niri msg --json workspaces
+            | from json
+            # | where output == $monitor and active_window_id != null
+            | where active_window_id != null
+            | select id idx is_focused
+            | update idx {|row| $row.idx | into string }
+            | rename id name focused
         )
         _ => []
     }

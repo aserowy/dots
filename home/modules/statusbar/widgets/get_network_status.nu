@@ -25,7 +25,7 @@ def get_online_status [] {
 
 def get_online_status_for_url [url: string] {
     try {
-        return (http head --max-time 1 $url | any {true})
+        return (http head --max-time 1sec $url | any {true})
     } catch {
         return false
     }
