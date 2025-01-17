@@ -39,6 +39,8 @@ in
 
             ${niriConfig}
           '';
+
+          ".config/niri/scripts".source = ./scripts;
         };
 
         modules = {
