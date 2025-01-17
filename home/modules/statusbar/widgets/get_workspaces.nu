@@ -18,7 +18,7 @@ def main [monitor: number = 0] {
     }
 
     ($workspaces
-        | sort-by --natural order
+        | sort-by --natural output order
         | insert icon {|rw| icon $rw.name}
         | to json -r
         | print
@@ -61,8 +61,8 @@ def get_workspaces [monitor: number] {
                 | from json
                 | where active_window_id != null
                 | insert on_current_output {|rw| $rw.output == $current_monitor}
-                | select id name idx is_focused on_current_output
-                | rename id name order focused on_current_output
+                | select id name output idx is_focused on_current_output
+                | rename id name output order focused on_current_output
                 | update name {|row| if $row.name == null {""} else {$row.name}}
             )
         }
