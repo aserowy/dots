@@ -5,7 +5,7 @@ let current_names = (niri msg --json workspaces
     | where name != null
     | get name)
 
-let defaults = (["dots", "gaming", "work"]
+let defaults = (["dots", "gaming", "social", "work"]
     | where $it not-in $current_names
     | sort
     | uniq

@@ -11,7 +11,12 @@ let current_names = ($workspaces
     | where name != null
     | get name)
 
-let current_names_string = ($current_names | str join "\n")
+let current_names_string = ($current_names
+    | append ["dots", "gaming", "social", "work"]
+    | uniq
+    | sort
+    | str join "\n")
+
 let selection = ($current_names_string | fuzzel --dmenu)
 
 if $selection in $current_names {
