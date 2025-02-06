@@ -143,6 +143,8 @@
         workstation = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
+            sops.nixosModules.sops
+
             {
               nixpkgs.overlays = [
                 neocode.overlays.default
@@ -170,6 +172,8 @@
         homeassistant = nixpkgs.lib.nixosSystem {
           system = "aarch64-linux";
           modules = [
+            sops.nixosModules.sops
+
             {
               nixpkgs.overlays = [
                 neocode.overlays.default

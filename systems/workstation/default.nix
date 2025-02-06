@@ -3,6 +3,7 @@
   imports = [
     ../shared/base.nix
     ../shared/printing.nix
+    ../shared/sops.nix
 
     ./hardware-configuration.nix
   ];

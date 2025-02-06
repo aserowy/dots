@@ -5,6 +5,10 @@
   ...
 }:
 {
+  imports = [
+    ../shared/sops.nix
+  ];
+
   networking = {
     firewall = {
       checkReversePath = "loose";
@@ -76,20 +80,6 @@
           );
         in
         "--config ${serverConfig}";
-    };
-  };
-
-  sops = {
-    defaultSopsFile = ./secrets.yaml;
-    defaultSopsFormat = "yaml";
-
-    age.keyFile = "/root/.config/sops/age/homelab_keys.txt";
-
-    secrets = {
-      "root/password" = {
-        neededForUsers = true;
-      };
-      "k3s/cluster/token" = { };
     };
   };
 }
