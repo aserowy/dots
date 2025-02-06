@@ -35,27 +35,6 @@
     binfmt.emulatedSystems = [ "aarch64-linux" ];
   };
 
-  fileSystems."/" = {
-    device = "/dev/disk/by-label/root";
-    fsType = "ext4";
-  };
-
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-label/boot";
-    fsType = "vfat";
-    # NOTE: prevents: Mount point '/boot' which backs the random seed file is world accessible,
-    # which is a security hole!
-    options = [
-      "fmask=0077"
-      "dmask=0077"
-      "defaults"
-    ];
-  };
-
-  swapDevices = [
-    { device = "/dev/disk/by-label/swap"; }
-  ];
-
   hardware = {
     cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
