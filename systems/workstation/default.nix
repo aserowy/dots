@@ -5,6 +5,7 @@
     ../shared/printing.nix
     ../shared/sops.nix
 
+    ./disko.nix
     ./hardware-configuration.nix
   ];
 
