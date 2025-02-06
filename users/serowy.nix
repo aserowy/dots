@@ -34,6 +34,8 @@ in
     in
     mkIf cnfg.enable {
       users = {
+        mutableUsers = false;
+
         users.serowy = {
           hashedPasswordFile = config.sops.secrets."serowy/password".path;
           createHome = true;
