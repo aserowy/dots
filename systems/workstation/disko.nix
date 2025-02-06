@@ -44,12 +44,12 @@
                 };
 
                 mountpoint = "/partition-root";
-
-                swap = {
-                  size = "8G";
-                  content.type = "swap";
-                };
               };
+            };
+
+            swap = {
+              size = "8G";
+              content.type = "swap";
             };
           };
         };
