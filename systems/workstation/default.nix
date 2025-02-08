@@ -3,8 +3,8 @@
   imports = [
     ../shared/base.nix
     ../shared/printing.nix
-    ../shared/sops.nix
 
+    ./disko.nix
     ./hardware-configuration.nix
   ];
 
@@ -114,7 +114,7 @@
     network = {
       enable = true;
       networks."10-lan" = {
-        matchConfig.Name = "eno1";
+        matchConfig.Name = "enp130s0";
         networkConfig.DHCP = "ipv4";
       };
     };

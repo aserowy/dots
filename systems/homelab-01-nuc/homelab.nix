@@ -5,10 +5,6 @@
   ...
 }:
 {
-  imports = [
-    ../shared/sops.nix
-  ];
-
   networking = {
     firewall = {
       checkReversePath = "loose";

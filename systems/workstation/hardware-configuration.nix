@@ -12,19 +12,16 @@
 
   boot = {
     initrd.availableKernelModules = [
-      "ehci_pci"
-      "ahci"
       "xhci_pci"
-      "firewire_ohci"
-      "usbhid"
+      "thunderbolt"
+      "ahci"
+      "nvme"
       "usb_storage"
+      "usbhid"
       "sd_mod"
-      "sr_mod"
     ];
     initrd.kernelModules = [
       "amdgpu"
-      "dm-snapshot"
-      "i915"
     ];
     kernelModules = [ "kvm-intel" ];
     # NOTE: reduces cracking audio on dac, see
@@ -34,27 +31,6 @@
     # NOTE: allows compiling aarch64-linux with qemu
     binfmt.emulatedSystems = [ "aarch64-linux" ];
   };
-
-  fileSystems."/" = {
-    device = "/dev/disk/by-label/root";
-    fsType = "ext4";
-  };
-
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-label/boot";
-    fsType = "vfat";
-    # NOTE: prevents: Mount point '/boot' which backs the random seed file is world accessible,
-    # which is a security hole!
-    options = [
-      "fmask=0077"
-      "dmask=0077"
-      "defaults"
-    ];
-  };
-
-  swapDevices = [
-    { device = "/dev/disk/by-label/swap"; }
-  ];
 
   hardware = {
     cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;

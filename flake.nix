@@ -140,10 +140,33 @@
       };
 
       nixosConfigurations = {
-        workstation = nixpkgs.lib.nixosSystem {
+        minimaliso = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
             sops.nixosModules.sops
+            ./sops.nix
+
+            (
+              { pkgs, modulesPath, ... }:
+              {
+                imports = [ (modulesPath + "/installer/cd-dvd/installation-cd-minimal.nix") ];
+                environment.systemPackages = [ pkgs.neovim ];
+                systemd.services.sshd.wantedBy = pkgs.lib.mkForce [ "multi-user.target" ];
+              }
+            )
+            {
+              imports = [ ./users ];
+              users.root.enable = true;
+            }
+          ];
+        };
+
+        workstation = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            disko.nixosModules.disko
+            sops.nixosModules.sops
+            ./sops.nix
 
             {
               nixpkgs.overlays = [
@@ -173,6 +196,7 @@
           system = "aarch64-linux";
           modules = [
             sops.nixosModules.sops
+            ./sops.nix
 
             {
               nixpkgs.overlays = [
@@ -205,6 +229,7 @@
           modules = [
             disko.nixosModules.disko
             sops.nixosModules.sops
+            ./sops.nix
 
             ./systems/homelab-01-nuc
             {
