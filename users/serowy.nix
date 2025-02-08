@@ -37,6 +37,7 @@ in
         mutableUsers = false;
 
         users.serowy = {
+          # hashedPassword = "";
           hashedPasswordFile = config.sops.secrets."serowy/password".path;
           createHome = true;
           extraGroups = if cnfg.dockerGroupMember then extraGroups ++ [ "docker" ] else extraGroups;

@@ -12,19 +12,16 @@
 
   boot = {
     initrd.availableKernelModules = [
-      "ehci_pci"
-      "ahci"
       "xhci_pci"
-      "firewire_ohci"
-      "usbhid"
+      "thunderbolt"
+      "ahci"
+      "nvme"
       "usb_storage"
+      "usbhid"
       "sd_mod"
-      "sr_mod"
     ];
     initrd.kernelModules = [
       "amdgpu"
-      "dm-snapshot"
-      "i915"
     ];
     kernelModules = [ "kvm-intel" ];
     # NOTE: reduces cracking audio on dac, see
