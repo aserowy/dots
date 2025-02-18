@@ -30,11 +30,6 @@ in
         size = 10;
       };
 
-      iconTheme = {
-        name = "Fluent";
-        package = pkgs.fluent-icon-theme;
-      };
-
       theme = {
         name = "Fluent-Dark-compact";
         package = pkgs.fluent-gtk-theme;
