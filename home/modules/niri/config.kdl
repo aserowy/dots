@@ -86,6 +86,7 @@ binds {
     Mod+Shift+I { consume-or-expel-window-right; }
 
     Mod+W { spawn "~/.config/niri/scripts/create_or_focus_workspace.nu"; }
+    Mod+Shift+W { spawn "~/.config/niri/scripts/move_to_workspace.nu"; }
     Mod+R { spawn "~/.config/niri/scripts/rename_workspace.nu"; }
 
     Mod+N { focus-monitor-next; }
