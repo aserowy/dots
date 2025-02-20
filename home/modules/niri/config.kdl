@@ -48,6 +48,16 @@ layout {
         off
     }
 
+    // shadow {
+    //     on
+    //     softness 30
+    //     spread 5
+    //     offset x=0 y=5
+    //     draw-behind-window true
+    //     color "#00000070"
+    //     inactive-color "#00000070"
+    // }
+
     struts {
         right 64
     }
