@@ -1,7 +1,7 @@
 revision:
 { ... }:
 {
-  nix.settings.experimental-features = "nix-command flakes";
+  # FIX: trace: warning: alexander.serowy profile: You have set either `nixpkgs.config` or `nixpkgs.overlays` while using `home-manager.useGlobalPkgs`. This will soon not be possible. Please remove all `nixpkgs` options when using `home-manager.useGlobalPkgs`. nix.settings.experimental-features = "nix-command flakes";
 
   system = {
     configurationRevision = revision;
@@ -31,10 +31,6 @@ revision:
   };
 
   programs.zsh.enable = true;
-
-  services = {
-    nix-daemon.enable = true;
-  };
 
   system.defaults = {
     dock = {
