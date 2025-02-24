@@ -38,7 +38,7 @@ in
   };
 
   config = mkIf cnfg.enable {
-    programs.wpaperd = {
+    services.wpaperd = {
       enable = true;
       settings = {
         default = {
@@ -48,7 +48,9 @@ in
           path = "~/onedrive/Wallpapers/";
           sorting = "random";
 
-          transition.linear-blur = { intensity = 0.05;};
+          transition.linear-blur = {
+            intensity = 0.05;
+          };
         };
       };
     };

@@ -32,7 +32,6 @@ in
         curl
         lazygit
         ncurses
-        tailspin
 
         yeet
         fd

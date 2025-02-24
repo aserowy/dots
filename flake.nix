@@ -181,7 +181,7 @@
               imports = [ ./users ];
               users.serowy.enable = true;
             }
-            home.nixosModule
+            home.nixosModules.home-manager
             {
               home-manager = {
                 useGlobalPkgs = true;
@@ -213,7 +213,7 @@
               imports = [ ./users ];
               users.serowy.enable = true;
             }
-            home.nixosModule
+            home.nixosModules.home-manager
             {
               home-manager = {
                 useGlobalPkgs = true;
