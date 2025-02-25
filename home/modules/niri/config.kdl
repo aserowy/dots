@@ -50,7 +50,7 @@ layout {
 
     shadow {
         on
-        softness 30
+        softness 10
         spread 5
         offset x=0 y=5
         draw-behind-window true
@@ -58,9 +58,31 @@ layout {
         inactive-color "#00000070"
     }
 
+    tab-indicator {
+        gaps-between-tabs 2
+        place-within-column
+    }
+
     struts {
         right 64
     }
+}
+
+layer-rule {
+    match namespace="^launcher$"
+
+    shadow {
+        on
+        softness 10
+        spread 5
+        offset x=0 y=0
+        draw-behind-window true
+        color "#00000070"
+        inactive-color "#00000070"
+    }
+
+    // NOTE: equal value in fuzzel configuration
+    geometry-corner-radius 5
 }
 
 window-rule {
@@ -94,6 +116,7 @@ binds {
 
     Mod+Shift+U { consume-or-expel-window-left; }
     Mod+Shift+I { consume-or-expel-window-right; }
+    Mod+Shift+G { toggle-column-tabbed-display; }
 
     Mod+W { spawn "~/.config/niri/scripts/create_or_focus_workspace.nu"; }
     Mod+Shift+W { spawn "~/.config/niri/scripts/move_to_workspace.nu"; }
