@@ -12,7 +12,8 @@
     loader = {
       systemd-boot = {
         enable = true;
-        configurationLimit = 10;
+        # FIX: remove after new disko configuration got applied
+        configurationLimit = 1;
       };
       efi.canTouchEfiVariables = true;
     };
