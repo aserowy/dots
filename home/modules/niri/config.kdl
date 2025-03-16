@@ -90,6 +90,11 @@ window-rule {
     clip-to-geometry true
 }
 
+window-rule {
+    match app-id=r#"pavucontrol$"#
+    open-floating true
+}
+
 binds {
     Mod+B { spawn "microsoft-edge"; }
     Mod+T { spawn "ghostty"; }
