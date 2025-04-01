@@ -11,6 +11,7 @@
     username = "uitdeveloper";
 
     components = {
+      docker.enable = true;
       ghostty.enable = true;
     };
 
