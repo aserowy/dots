@@ -1,4 +1,4 @@
-@define-color background  rgba(249, 249, 249, 0.9);
+@define-color background  rgba(249, 249, 249, 0.95);
 @define-color foreground #1a1a1a;
 
 @define-color item-bg rgba(255, 255, 255, 0.9);
@@ -25,7 +25,7 @@
 
 .widget-title {
     padding: 10px 10px 0px 10px;
-    font-size: 22px;
+    font-size: 36px;
     color: @foreground;
 }
 
@@ -99,77 +99,4 @@
 
 .close-button {
     background-color: @tint;
-}
-
-.widget-volume {
-    background-color: @item-bg;
-    border-radius: 20px;
-    margin: 0 10px;
-}
-
-trough highlight {
-    background-color: @foreground;
-}
-
-scale trough {
-    background-color: transparent;
-    border: transparent;
-    padding: 0px;
-    min-height: 5px;
-    margin: 0 0 0 10px;
-    font-family: "JetBrains Mono NerdFont", sans-serif;
-}
-
-slider {
-    background-color: @slider-empty;
-    border: 2px solid @foreground;
-}
-
-.widget-volume label {
-    padding: 0 0 0 10px;
-    color: @foreground;
-}
-
-.widget-volume trough highlight {
-    background: @tint;
-    border: unset;
-}
-
-.widget-volume button {
-    background-color: inherit;
-    box-shadow: unset;
-    font-size: 20px;
-    padding: 0 20px 0 0;
-    border-radius: 20px;
-    color: @tint;
-    font-family: "JetBrains Mono NerdFont", sans-serif;
-}
-
-.widget-buttons-grid {
-    background-color: transparent;
-    font-size: x-large;
-    padding: 6px 2px;
-    margin: 6px;
-    border-radius: 12px;
-}
-
-.widget-buttons-grid > flowbox > flowboxchild > button {
-    background-color: transparent;
-    border-radius: 8px;
-    border: unset;
-    box-shadow: unset;
-}
-
-.widget-buttons-grid > flowbox > flowboxchild > button:hover {
-    background-color: @item-bg;
-}
-
-.widget-buttons-grid > flowbox > flowboxchild > button:active {
-    background-color: @background;
-}
-
-.widget-buttons-grid > flowbox > flowboxchild > button label {
-    color: @foreground;
-    font-family: "JetBrains Mono NerdFont", sans-serif;
-    font-size: 20px;
 }
