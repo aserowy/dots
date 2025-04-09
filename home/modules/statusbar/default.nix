@@ -65,7 +65,7 @@ in
     '';
 
     home.modules.niri.prependedConfig = mkIf cnfg.enableNiriIntegration ''
-      spawn-at-startup "sh" "-c" "eww open --config ~/.config/eww/statusbar/ statusbar --arg stacking=bottom"
+      spawn-at-startup "sh" "-c" "eww open --config ~/.config/eww/statusbar/ statusbar --arg stacking=overlay"
     '';
 
     home.modules.sway.appendedConfig = mkIf cnfg.enableSwayIntegration ''
