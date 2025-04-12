@@ -20,6 +20,7 @@ revision:
     casks = [
       "discord"
       "drawio"
+      "epic-games"
       # "ghostty"
       "google-chrome"
       "microsoft-edge"
