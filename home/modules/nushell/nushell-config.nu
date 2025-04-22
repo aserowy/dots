@@ -114,7 +114,7 @@ try {
     }
 }
 
-source ~/.cache/nushell/broot.nu
+# source ~/.cache/nushell/broot.nu
 source ~/.cache/nushell/carapace.nu
 source ~/.cache/nushell/starship.nu
 source ~/.cache/nushell/zoxide.nu
