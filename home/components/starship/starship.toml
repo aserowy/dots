@@ -4,9 +4,9 @@
 [aws]
 symbol = '󰸏 '
 
-# using indicator of nu for better vi integration
+# using indicator of nu for better vi integration but enabling the line break
 [character]
-disabled = true
+format = ':'
 
 [directory]
 format = '[$path]($style)[$read_only]($read_only_style) '
