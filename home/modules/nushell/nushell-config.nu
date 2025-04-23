@@ -1,3 +1,32 @@
+# path conversion for windows environments
+$env.ENV_CONVERSIONS = {
+  "PATH": {
+    from_string: { |s| $s | split row (char esep) | path expand -n }
+    to_string: { |v| $v | path expand -n | str join (char esep) }
+  }
+  "Path": {
+    from_string: { |s| $s | split row (char esep) | path expand -n }
+    to_string: { |v| $v | path expand -n | str join (char esep) }
+  }
+}
+
+# adding nix bin to path for wsl and macos
+if "PATH" in $env {
+    $env.PATH = ($env.PATH | split row (char esep) | prepend $"($env.HOME)/.nix-profile/bin")
+}
+
+# Directories to search for scripts when calling source or use
+$env.NU_LIB_DIRS = [
+    ($nu.default-config-dir | path join 'scripts')
+]
+
+mkdir ~/.cache/nushell
+
+# broot --print-shell-function nushell | save --force ~/.cache/nushell/broot.nu
+carapace _carapace nushell | save --force ~/.cache/nushell/carapace.nu
+starship init nu | save --force ~/.cache/nushell/starship.nu
+zoxide init nushell | save --force ~/.cache/nushell/zoxide.nu
+
 let tab_names = ['nvim' 'ssh']
 let command_expansion = [[short extended]; ['e.g. y' 'yeet']]
 
@@ -5,10 +34,10 @@ $env.config = {
     show_banner: false
     edit_mode: vi
 
-    # hook for direnv
     hooks: {
         pre_prompt: [
             {||
+                # hook for direnv
                 try {
                     let direnv = (direnv export json | from json | default {})
                     if ($direnv | is-empty) {
@@ -118,3 +147,10 @@ try {
 source ~/.cache/nushell/carapace.nu
 source ~/.cache/nushell/starship.nu
 source ~/.cache/nushell/zoxide.nu
+
+$env.PROMPT_INDICATOR = ""
+$env.TRANSIENT_PROMPT_INDICATOR = ""
+$env.PROMPT_INDICATOR_VI_INSERT = ""
+$env.TRANSIENT_PROMPT_INDICATOR_VI_INSERT = ""
+$env.PROMPT_INDICATOR_VI_NORMAL = ""
+$env.TRANSIENT_PROMPT_INDICATOR_VI_NORMAL = ""
