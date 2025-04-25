@@ -98,14 +98,15 @@
   system = {
     autoUpgrade = {
       enable = true;
-      allowReboot = true;
+      allowReboot = false;
       flake = "github:aserowy/dots";
+      # no recreate-lock-file because updates are automated with gh actions
       flags = [
-        "--recreate-lock-file"
-        "--no-write-lock-file"
         "-L"
       ];
-      dates = "03:45";
+      dates = "weekly";
+      randomizedDelaySec = "30min";
+      fixedRandomDelay = true;
     };
   };
 
