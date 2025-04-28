@@ -36,6 +36,7 @@
   networking.hostName = "workstation";
 
   programs = {
+    niri.enable = true;
     seahorse.enable = true;
     steam.enable = true;
   };
@@ -58,8 +59,6 @@
 
     fwupd.enable = true;
 
-    gnome.gnome-keyring.enable = true;
-
     # don’t shutdown when power button is short-pressed
     logind.extraConfig = ''
       HandlePowerKey=suspend
@@ -71,7 +70,6 @@
         enable = true;
         command = "niri-session";
       };
-      xdg.enable = true;
     };
 
     onedrive.enable = true;
