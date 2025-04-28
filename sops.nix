@@ -13,6 +13,9 @@
       "serowy/password" = {
         neededForUsers = true;
       };
+      "sim/password" = {
+        neededForUsers = true;
+      };
       "k3s/cluster/token" = { };
     };
   };
