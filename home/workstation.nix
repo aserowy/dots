@@ -19,7 +19,10 @@
     modules = {
       gaming.enable = true;
       gtk.enable = true;
+
+      # NOTE: Configs are handled in user space
       niri.enable = true;
+
       xdg.enable = true;
     };
 
