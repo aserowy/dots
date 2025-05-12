@@ -16,6 +16,8 @@
     packages = with pkgs; [
       discord
       drawio
+      gimp-with-plugins
+      onlyoffice-desktopeditors
       spotify
     ];
   };

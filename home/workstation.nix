@@ -30,6 +30,7 @@
       discord
       drawio
       nautilus
+      onlyoffice-desktopeditors
       spotify
     ];
   };
