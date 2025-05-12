@@ -36,6 +36,9 @@ in
     ];
 
     home.modules.niri.prependedConfig = mkIf cnfg.enableXwaylandSatellite ''
+      environment {
+        DISPLAY ":0"
+      }
       spawn-at-startup "xwayland-satellite"
     '';
 
