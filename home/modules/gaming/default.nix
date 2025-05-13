@@ -46,7 +46,6 @@ in
     home.sessionVariables =
       mkUnless cnfg.enableXwaylandSatellite
         {
-          # FIX: envs are not present when using rofi to launch eg steam
           DISPLAY = ":0";
           SDL_VIDEODRIVER = "wayland,x11,windows";
         }
