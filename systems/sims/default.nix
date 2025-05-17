@@ -71,8 +71,6 @@
       HandlePowerKey=suspend
     '';
 
-    openssh.settings.PermitRootLogin = "no";
-
     pipewire = {
       enable = true;
       alsa = {
@@ -109,7 +107,7 @@
     network = {
       enable = true;
       networks."10-lan" = {
-        matchConfig.Name = "enp130s0";
+        matchConfig.Name = "enp0s31f6";
         networkConfig.DHCP = "ipv4";
       };
     };

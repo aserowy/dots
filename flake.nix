@@ -176,10 +176,13 @@
               ];
             }
 
-            ./systems/workstation
+            ./systems/sims
             {
               imports = [ ./users ];
-              users.sim.enable = true;
+              users = {
+                root.enable = true;
+                sim.enable = true;
+              };
             }
             home.nixosModules.home-manager
             {
