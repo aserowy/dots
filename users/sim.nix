@@ -37,8 +37,8 @@ in
         mutableUsers = false;
 
         users.sim = {
-          # hashedPassword = "";
-          hashedPasswordFile = config.sops.secrets."sim/password".path;
+          hashedPassword = "";
+          # hashedPasswordFile = config.sops.secrets."sim/password".path;
           createHome = true;
           extraGroups = if cnfg.dockerGroupMember then extraGroups ++ [ "docker" ] else extraGroups;
           group = "users";
