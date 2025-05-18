@@ -19,7 +19,25 @@
   };
 
   # INFO: sets ozone wayland support for all chromium based applications
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  environment = {
+    sessionVariables.NIXOS_OZONE_WL = "1";
+
+    systemPackages = with pkgs; [
+      discord
+      drawio
+      ghostty
+      gimp-with-plugins
+      google-chrome
+      insync
+      kdePackages.plasma-browser-integration
+      onlyoffice-desktopeditors
+      spotify
+
+      git
+      neovim
+      yeet
+    ];
+  };
 
   fonts = {
     fontDir.enable = true;
@@ -32,7 +50,34 @@
     ];
   };
 
-  networking.hostName = "sims";
+  i18n = {
+    defaultLocale = "de_DE.UTF-8";
+    extraLocaleSettings = {
+      LC_ADDRESS = "de_DE.UTF-8";
+      LC_COLLATE = "de_DE.UTF-8";
+      LC_CTYPE = "de_DE.UTF-8";
+      LC_MEASUREMENT = "de_DE.UTF-8";
+      LC_MESSAGES = "de_DE.UTF-8";
+      LC_MONETARY = "de_DE.UTF-8";
+      LC_NAME = "de_DE.UTF-8";
+      LC_NUMERIC = "de_DE.UTF-8";
+      LC_PAPER = "de_DE.UTF-8";
+      LC_TELEPHONE = "de_DE.UTF-8";
+      LC_TIME = "de_DE.UTF-8";
+    };
+  };
+
+  networking = {
+    hostName = "sims";
+    networkmanager = {
+      enable = true;
+      wifi.backend = "iwd";
+    };
+    wireless = {
+      iwd.enable = true;
+      userControlled.enable = true;
+    };
+  };
 
   programs = {
     steam.enable = true;
@@ -62,7 +107,7 @@
 
     # lsblk --discard to ensure ssd supports trim
     # (disc-gran and disc-max should be non zero)
-    # fstrim.enable = true;
+    fstrim.enable = true;
 
     fwupd.enable = true;
 
@@ -96,9 +141,7 @@
       randomizedDelaySec = "30min";
       fixedRandomDelay = true;
     };
-  };
 
-  system = {
     # Did you read the comment?
     stateVersion = "21.05";
   };
@@ -106,9 +149,15 @@
   systemd = {
     network = {
       enable = true;
-      networks."10-lan" = {
-        matchConfig.Name = "enp0s31f6";
-        networkConfig.DHCP = "ipv4";
+      networks = {
+        "10-lan" = {
+          matchConfig.Name = "enp0s31f6";
+          networkConfig.DHCP = "ipv4";
+        };
+        "10-wlan" = {
+          matchConfig.Name = "wlp0s20f0u3";
+          networkConfig.DHCP = "ipv4";
+        };
       };
     };
 

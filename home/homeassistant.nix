@@ -10,6 +10,7 @@
     };
 
     modules = {
+      console.enable = true;
       neocode.parallelTsBuild = false;
     };
   };

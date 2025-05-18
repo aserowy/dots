@@ -15,6 +15,10 @@
       ghostty.enable = true;
     };
 
+    modules = {
+      console.enable = true;
+    };
+
     packages = with pkgs; [
       inter
       powerline-fonts

@@ -170,9 +170,7 @@
 
             {
               nixpkgs.overlays = [
-                neocode.overlays.default
                 yeet.overlays.default
-                (final: prev: { zjstatus = zjstatus.packages.${prev.system}.default; })
               ];
             }
 
@@ -182,14 +180,6 @@
               users = {
                 root.enable = true;
                 sim.enable = true;
-              };
-            }
-            home.nixosModules.home-manager
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                users.sim = import ./home/sims.nix;
               };
             }
           ];

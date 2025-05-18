@@ -14,6 +14,10 @@
       docker.enable = true;
     };
 
+    modules = {
+      console.enable = true;
+    };
+
     file = {
       # NOTE: ghostty is installed on system level with brew
       ".config/ghostty/config".source = ./components/ghostty/ghostty.config;

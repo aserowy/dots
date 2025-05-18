@@ -17,6 +17,7 @@
     };
 
     modules = {
+      console.enable = true;
       gaming.enable = true;
       gtk.enable = true;
 
