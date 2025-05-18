@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   imports = [
     ../shared/base.nix
@@ -69,6 +69,10 @@
 
   networking = {
     hostName = "sims";
+    interfaces = {
+      enp0s31f6.useDHCP = lib.mkDefault true;
+      wlan0.useDHCP = lib.mkDefault true;
+    };
     networkmanager = {
       enable = true;
       wifi.backend = "iwd";
@@ -149,20 +153,6 @@
   };
 
   systemd = {
-    network = {
-      enable = true;
-      networks = {
-        "10-lan" = {
-          matchConfig.Name = "enp0s31f6";
-          networkConfig.DHCP = "ipv4";
-        };
-        "10-wlan" = {
-          matchConfig.Name = "wlp0s20f0u3";
-          networkConfig.DHCP = "ipv4";
-        };
-      };
-    };
-
     # TODO: lutris specific, but unable to set with home manager?
     user.extraConfig = ''
       DefaultLimitNOFILE=1048576
