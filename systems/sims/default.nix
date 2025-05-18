@@ -126,6 +126,8 @@
       pulse.enable = true;
       socketActivation = true;
     };
+
+    xserver.videoDrivers = [ "nvidia" ];
   };
 
   system = {
