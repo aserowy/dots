@@ -87,6 +87,11 @@
     steam.enable = true;
   };
 
+  console = {
+    earlySetup = true;
+    useXkbConfig = true;
+  };
+
   services = {
     clamav = {
       updater.enable = true;
@@ -131,7 +136,10 @@
       socketActivation = true;
     };
 
-    xserver.videoDrivers = [ "nvidia" ];
+    xserver = {
+      videoDrivers = [ "nvidia" ];
+      xkb.layout = "de";
+    };
   };
 
   system = {
