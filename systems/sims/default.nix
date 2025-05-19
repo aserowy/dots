@@ -18,8 +18,8 @@
     };
   };
 
-  # INFO: sets ozone wayland support for all chromium based applications
   environment = {
+    # INFO: sets ozone wayland support for all chromium based applications
     sessionVariables.NIXOS_OZONE_WL = "1";
 
     systemPackages = with pkgs; [
@@ -89,6 +89,7 @@
 
   console = {
     earlySetup = true;
+    # NOTE: ensure the keyboard layout is set correctly on login screen
     useXkbConfig = true;
   };
 

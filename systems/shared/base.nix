@@ -19,11 +19,6 @@
     ];
   };
 
-  i18n.inputMethod = {
-    enable = true;
-    type = "ibus";
-  };
-
   networking = {
     firewall = {
       enable = true;
@@ -63,8 +58,6 @@
     };
   };
 
-  programs.dconf.enable = true;
-
   security = {
     rtkit.enable = true;
 
@@ -73,11 +66,6 @@
   };
 
   services = {
-    dbus = {
-      enable = true;
-      packages = [ pkgs.dconf ];
-    };
-
     openssh = {
       enable = true;
       settings.PasswordAuthentication = false;

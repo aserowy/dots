@@ -33,9 +33,15 @@
     ];
   };
 
+  i18n.inputMethod = {
+    enable = true;
+    type = "ibus";
+  };
+
   networking.hostName = "workstation";
 
   programs = {
+    dconf.enable = true;
     niri.enable = true;
     seahorse.enable = true;
     steam.enable = true;
@@ -53,13 +59,17 @@
       };
     };
 
-    # lsblk --discard to ensure ssd supports trim
+    dbus = {
+      enable = true;
+      packages = [ pkgs.dconf ];
+    };
+
+    # NOTE: lsblk --discard to ensure ssd supports trim
     # (disc-gran and disc-max should be non zero)
     fstrim.enable = true;
 
     fwupd.enable = true;
 
-    # don’t shutdown when power button is short-pressed
     logind.extraConfig = ''
       HandlePowerKey=suspend
     '';
@@ -106,9 +116,7 @@
       randomizedDelaySec = "30min";
       fixedRandomDelay = true;
     };
-  };
 
-  system = {
     # Did you read the comment?
     stateVersion = "21.05";
   };
