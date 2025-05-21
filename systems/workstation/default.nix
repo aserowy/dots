@@ -19,8 +19,10 @@
     };
   };
 
-  # INFO: sets ozone wayland support for all chromium based applications
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  environment.sessionVariables = {
+    # INFO: sets ozone wayland support for all chromium based applications
+    NIXOS_OZONE_WL = "1";
+  };
 
   fonts = {
     fontDir.enable = true;
@@ -42,7 +44,10 @@
 
   programs = {
     dconf.enable = true;
+
+    # NOTE: Configs are handled in user space
     niri.enable = true;
+
     seahorse.enable = true;
     steam.enable = true;
   };
@@ -97,7 +102,7 @@
       socketActivation = true;
     };
 
-    # to enable working with qmk on this pc
+    # NOTE: to enable working with qmk on this pc
     udev.packages = [ pkgs.qmk-udev-rules ];
 
     xserver.videoDrivers = [ "amdgpu" ];
@@ -108,7 +113,7 @@
       enable = true;
       allowReboot = false;
       flake = "github:aserowy/dots";
-      # no recreate-lock-file because updates are automated with gh actions
+      # NOTE: no recreate-lock-file because updates are automated with gh actions
       flags = [
         "-L"
       ];
