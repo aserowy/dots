@@ -1,8 +1,6 @@
 prefer-no-csd
 screenshot-path "~/pictures/%Y-%m-%d %H-%M-%S.png"
 
-// un/set-workspace-name
-
 hotkey-overlay {
     skip-at-startup
 }

@@ -235,7 +235,10 @@
             ./systems/homeassistant
             {
               imports = [ ./users ];
-              users.serowy.enable = true;
+              users = {
+                root.enable = true;
+                serowy.enable = true;
+              };
             }
             home.nixosModules.home-manager
             {

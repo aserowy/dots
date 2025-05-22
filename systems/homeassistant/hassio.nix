@@ -36,6 +36,16 @@
       ];
     };
 
+    broker = {
+      image = "valkey:latest";
+      extraOptions = [
+        "--network=ha-network"
+      ];
+      volumes = [
+        "/srv/valkey/data:/data"
+      ];
+    };
+
     mosquitto = {
       image = "eclipse-mosquitto:latest";
       extraOptions = [
@@ -151,6 +161,45 @@
       volumes = [
         "/srv/pihole/config/:/etc/pihole/"
         "/srv/pihole/dnsmasq.d/:/etc/dnsmasq.d/"
+      ];
+    };
+
+    postgres = {
+      image = "postgres:latest";
+      environment = {
+        "POSTGRES_DB" = "paperless";
+        "POSTGRES_USER" = "paperless";
+        "POSTGRES_PASSWORD" = "/var/lib/postgresql/user_password";
+      };
+      extraOptions = [
+        "--network=ha-network"
+      ];
+      volumes = [
+        "/srv/postgres/data:/var/lib/postgresql/data"
+      ];
+    };
+
+    paperless = {
+      image = "ghcr.io/paperless-ngx/paperless-ngx:latest";
+      environment = {
+        "PAPERLESS_REDIS" = "redis://broker:6379";
+        "PAPERLESS_DBHOST" = "postgres";
+        "PAPERLESS_DBNAME" = "paperless";
+        "PAPERLESS_DBUSER" = "paperless";
+        "PAPERLESS_DBPASS" = "/var/lib/postgresql/user_password";
+      };
+      extraOptions = [
+        "--network=ha-network"
+      ];
+      dependsOn = [
+        "postgres"
+        "broker"
+      ];
+      volumes = [
+        "/srv/paperless/data:/usr/src/paperless/data"
+        "/srv/paperless/media:/usr/src/paperless/media"
+        "/srv/paperless/export:/usr/src/paperless/export"
+        "/srv/paperless/consume:/usr/src/paperless/consume"
       ];
     };
 
