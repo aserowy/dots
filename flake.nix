@@ -222,31 +222,12 @@
             sops.nixosModules.sops
             ./sops.nix
 
-            {
-              nixpkgs.overlays = [
-                neocode.overlays.default
-                yeet.overlays.default
-                (final: prev: { zjstatus = zjstatus.packages.${prev.system}.default; })
-              ];
-            }
-
             hardware.nixosModules.raspberry-pi-4
 
             ./systems/homeassistant
             {
               imports = [ ./users ];
-              users = {
-                root.enable = true;
-                serowy.enable = true;
-              };
-            }
-            home.nixosModules.home-manager
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                users.serowy = import ./home/homeassistant.nix;
-              };
+              users.root.enable = true;
             }
           ];
         };
