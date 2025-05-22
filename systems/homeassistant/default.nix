@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   imports = [
     ../shared/base.nix
@@ -9,6 +9,10 @@
     ./fan-pwm.nix
     ./hassio.nix
     ./telegraf.nix
+  ];
+
+  environment.systemPackages = with pkgs; [
+    neovim
   ];
 
   networking = {
