@@ -37,7 +37,7 @@
     };
 
     broker = {
-      image = "valkey:latest";
+      image = "valkey/valkey:latest";
       extraOptions = [
         "--network=ha-network"
       ];
@@ -187,6 +187,7 @@
         "PAPERLESS_DBNAME" = "paperless";
         "PAPERLESS_DBUSER" = "paperless";
         "PAPERLESS_DBPASS" = "/var/lib/postgresql/user_password";
+        "PAPERLESS_URL" = "http://dms.smart.home";
       };
       extraOptions = [
         "--network=ha-network"
