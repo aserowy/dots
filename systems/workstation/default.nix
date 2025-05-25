@@ -29,9 +29,9 @@
     enableGhostscriptFonts = true;
     packages = with pkgs; [
       inter
-      powerline-fonts
       nerd-fonts.fira-code
       nerd-fonts.jetbrains-mono
+      powerline-fonts
     ];
   };
 
