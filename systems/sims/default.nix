@@ -28,7 +28,7 @@
       ghostty
       gimp-with-plugins
       google-chrome
-      insync
+      onedrivegui
       kdePackages.plasma-browser-integration
       onlyoffice-desktopeditors
       spotify
@@ -125,6 +125,8 @@
     logind.extraConfig = ''
       HandlePowerKey=suspend
     '';
+
+    onedrive.enable = true;
 
     pipewire = {
       enable = true;
