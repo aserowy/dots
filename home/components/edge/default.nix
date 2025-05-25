@@ -12,6 +12,7 @@ let
   system = "x86_64-linux";
 
   # FIX: remove after edge maintainer found
+  # https://github.com/NixOS/nixpkgs/commits/47dec1cd02e559655a90d3d2748aa56e04459a86/pkgs/by-name/mi/microsoft-edge
   pkgs =
     import
       (builtins.fetchGit {
