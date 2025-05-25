@@ -131,6 +131,7 @@ binds {
     Mod+Shift+N { move-column-to-monitor-next; }
     Mod+Shift+P { move-column-to-monitor-previous; }
 
+    Mod+O { toggle-overview; }
     Mod+Z { fullscreen-window; }
 
     Mod+Alt+Semicolon { switch-preset-column-width; }
