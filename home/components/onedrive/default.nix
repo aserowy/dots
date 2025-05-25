@@ -1,4 +1,9 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 
 let
@@ -8,8 +13,12 @@ in
   options.home.components.onedrive.enable = mkEnableOption "onedrive";
 
   config = mkIf cnfg.enable {
-    home.file.".config/onedrive/config" = {
-      source = ./onedrive.config;
+    home = {
+      file.".config/onedrive/config" = {
+        source = ./onedrive.config;
+      };
+
+      packages = [ pkgs.onedrivegui ];
     };
   };
 }
