@@ -10,15 +10,26 @@ let
   cnfg = config.home.components.onedrive;
 in
 {
-  options.home.components.onedrive.enable = mkEnableOption "onedrive";
+  options.home.components.onedrive = {
+    enable = mkEnableOption "onedrive";
+
+    enableNiriIntegration = mkOption {
+      type = types.bool;
+      default = true;
+      description = ''
+        If enabled, init onedrivegui on startup
+      '';
+    };
+  };
 
   config = mkIf cnfg.enable {
-    home = {
-      file.".config/onedrive/config" = {
-        source = ./onedrive.config;
-      };
+    home.packages = [
+      pkgs.onedrive
+      pkgs.onedrivegui
+    ];
 
-      packages = [ pkgs.onedrivegui ];
-    };
+    home.modules.niri.prependedConfig = mkIf cnfg.enableNiriIntegration ''
+      spawn-at-startup "onedrivegui"
+    '';
   };
 }
