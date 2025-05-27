@@ -14,6 +14,11 @@ data:
   controller.repo.server.timeout.seconds: "60"
   controller.self.heal.timeout.seconds: "5"
   controller.status.processors: "20"
+  controller.sync.timeout.seconds: "0"
+  dexserver.log.format: text
+  dexserver.log.level: info
+  notificationscontroller.log.format: text
+  notificationscontroller.log.level: info
   otlp.address: ""
   redis.server: argocd-redis:6379
   repo.server: argocd-repo-server:8081
@@ -41,7 +46,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-cmd-params-cm
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v2.13.1
-    helm.sh/chart: argo-cd-7.7.5
+    app.kubernetes.io/version: v3.0.3
+    helm.sh/chart: argo-cd-8.0.10
   name: argocd-cmd-params-cm
   namespace: argocd

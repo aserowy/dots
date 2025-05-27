@@ -7,8 +7,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-repo-server
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v2.13.1
-    helm.sh/chart: argo-cd-7.7.5
+    app.kubernetes.io/version: v3.0.3
+    helm.sh/chart: argo-cd-8.0.10
   name: argocd-repo-server
   namespace: argocd
 spec:
@@ -21,16 +21,16 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/cm: 52471701f8c1408b1cd83192b0d354f9c08b515b0c720b1f981b31b6d70595a7
-        checksum/cmd-params: 7da95175bab05fbfd2b3e419b908caac21336e59cf73728a2f1ae3e74f352957
+        checksum/cm: 6c692ebc63074f782366ea70496ae1a87ecdf12ff1124dda43993a3554b20fae
+        checksum/cmd-params: 9fa2f733d0041d475f07af592f652ed7cfc0e28ed5c461e67814d3f64a78b43a
       labels:
         app.kubernetes.io/component: repo-server
         app.kubernetes.io/instance: argocd
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: argocd-repo-server
         app.kubernetes.io/part-of: argocd
-        app.kubernetes.io/version: v2.13.1
-        helm.sh/chart: argo-cd-7.7.5
+        app.kubernetes.io/version: v3.0.3
+        helm.sh/chart: argo-cd-8.0.10
     spec:
       affinity:
         podAntiAffinity:
@@ -66,6 +66,12 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: reposerver.log.level
+                  name: argocd-cmd-params-cm
+                  optional: true
+            - name: ARGOCD_LOG_FORMAT_TIMESTAMP
+              valueFrom:
+                configMapKeyRef:
+                  key: log.format.timestamp
                   name: argocd-cmd-params-cm
                   optional: true
             - name: ARGOCD_REPO_SERVER_PARALLELISM_LIMIT
@@ -145,6 +151,7 @@ spec:
                 secretKeyRef:
                   key: auth
                   name: argocd-redis
+                  optional: false
             - name: REDIS_SENTINEL_USERNAME
               valueFrom:
                 secretKeyRef:
@@ -181,6 +188,12 @@ spec:
                   key: otlp.headers
                   name: argocd-cmd-params-cm
                   optional: true
+            - name: ARGOCD_REPO_SERVER_OTLP_ATTRS
+              valueFrom:
+                configMapKeyRef:
+                  key: otlp.attrs
+                  name: argocd-cmd-params-cm
+                  optional: true
             - name: ARGOCD_REPO_SERVER_MAX_COMBINED_DIRECTORY_MANIFESTS_SIZE
               valueFrom:
                 configMapKeyRef:
@@ -191,6 +204,12 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: reposerver.plugin.tar.exclusions
+                  name: argocd-cmd-params-cm
+                  optional: true
+            - name: ARGOCD_REPO_SERVER_PLUGIN_USE_MANIFEST_GENERATE_PATHS
+              valueFrom:
+                configMapKeyRef:
+                  key: reposerver.plugin.use.manifest.generate.paths
                   name: argocd-cmd-params-cm
                   optional: true
             - name: ARGOCD_REPO_SERVER_ALLOW_OUT_OF_BOUNDS_SYMLINKS
@@ -259,7 +278,7 @@ spec:
               value: /helm-working-dir
             - name: HELM_DATA_HOME
               value: /helm-working-dir
-          image: quay.io/argoproj/argocd:v2.13.1
+          image: quay.io/argoproj/argocd:v3.0.3
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
@@ -321,7 +340,7 @@ spec:
             - -n
             - /usr/local/bin/argocd
             - /var/run/argocd/argocd-cmp-server
-          image: quay.io/argoproj/argocd:v2.13.1
+          image: quay.io/argoproj/argocd:v3.0.3
           imagePullPolicy: IfNotPresent
           name: copyutil
           resources: {}
@@ -337,6 +356,8 @@ spec:
           volumeMounts:
             - mountPath: /var/run/argocd
               name: var-files
+      nodeSelector:
+        kubernetes.io/os: linux
       serviceAccountName: argocd-repo-server
       terminationGracePeriodSeconds: 30
       volumes:

@@ -7,8 +7,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-applicationset-controller
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v2.13.1
-    helm.sh/chart: argo-cd-7.7.5
+    app.kubernetes.io/version: v3.0.3
+    helm.sh/chart: argo-cd-8.0.10
   name: argocd-applicationset-controller
   namespace: argocd
 spec:
@@ -21,15 +21,15 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/cmd-params: 7da95175bab05fbfd2b3e419b908caac21336e59cf73728a2f1ae3e74f352957
+        checksum/cmd-params: 9fa2f733d0041d475f07af592f652ed7cfc0e28ed5c461e67814d3f64a78b43a
       labels:
         app.kubernetes.io/component: applicationset-controller
         app.kubernetes.io/instance: argocd
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: argocd-applicationset-controller
         app.kubernetes.io/part-of: argocd
-        app.kubernetes.io/version: v2.13.1
-        helm.sh/chart: argo-cd-7.7.5
+        app.kubernetes.io/version: v3.0.3
+        helm.sh/chart: argo-cd-8.0.10
     spec:
       affinity:
         podAntiAffinity:
@@ -106,6 +106,12 @@ spec:
                   key: applicationsetcontroller.log.level
                   name: argocd-cmd-params-cm
                   optional: true
+            - name: ARGOCD_LOG_FORMAT_TIMESTAMP
+              valueFrom:
+                configMapKeyRef:
+                  key: log.format.timestamp
+                  name: argocd-cmd-params-cm
+                  optional: true
             - name: ARGOCD_APPLICATIONSET_CONTROLLER_DRY_RUN
               valueFrom:
                 configMapKeyRef:
@@ -122,6 +128,12 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: applicationsetcontroller.enable.progressive.syncs
+                  name: argocd-cmd-params-cm
+                  optional: true
+            - name: ARGOCD_APPLICATIONSET_CONTROLLER_TOKENREF_STRICT_MODE
+              valueFrom:
+                configMapKeyRef:
+                  key: applicationsetcontroller.enable.tokenref.strict.mode
                   name: argocd-cmd-params-cm
                   optional: true
             - name: ARGOCD_APPLICATIONSET_CONTROLLER_ENABLE_NEW_GIT_FILE_GLOBBING
@@ -184,7 +196,13 @@ spec:
                   key: applicationsetcontroller.webhook.parallelism.limit
                   name: argocd-cmd-params-cm
                   optional: true
-          image: quay.io/argoproj/argocd:v2.13.1
+            - name: ARGOCD_APPLICATIONSET_CONTROLLER_REQUEUE_AFTER
+              valueFrom:
+                configMapKeyRef:
+                  key: applicationsetcontroller.requeue.after
+                  name: argocd-cmd-params-cm
+                  optional: true
+          image: quay.io/argoproj/argocd:v3.0.3
           imagePullPolicy: IfNotPresent
           name: applicationset-controller
           ports:
@@ -221,6 +239,8 @@ spec:
             - mountPath: /tmp
               name: tmp
       dnsPolicy: ClusterFirst
+      nodeSelector:
+        kubernetes.io/os: linux
       serviceAccountName: argocd-applicationset-controller
       terminationGracePeriodSeconds: 30
       volumes:

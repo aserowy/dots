@@ -7,8 +7,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-notifications-controller
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v2.13.1
-    helm.sh/chart: argo-cd-7.7.5
+    app.kubernetes.io/version: v3.0.3
+    helm.sh/chart: argo-cd-8.0.10
   name: argocd-notifications-controller
   namespace: argocd
 spec:
@@ -28,8 +28,8 @@ spec:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: argocd-notifications-controller
         app.kubernetes.io/part-of: argocd
-        app.kubernetes.io/version: v2.13.1
-        helm.sh/chart: argo-cd-7.7.5
+        app.kubernetes.io/version: v3.0.3
+        helm.sh/chart: argo-cd-8.0.10
     spec:
       affinity:
         podAntiAffinity:
@@ -45,8 +45,6 @@ spec:
         - args:
             - /usr/local/bin/argocd-notifications
             - --metrics-port=9001
-            - --loglevel=info
-            - --logformat=text
             - --namespace=argocd
             - --argocd-repo-server=argocd-repo-server:8081
             - --secret-name=argocd-notifications-secret
@@ -61,6 +59,12 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: notificationscontroller.log.format
+                  name: argocd-cmd-params-cm
+                  optional: true
+            - name: ARGOCD_LOG_FORMAT_TIMESTAMP
+              valueFrom:
+                configMapKeyRef:
+                  key: log.format.timestamp
                   name: argocd-cmd-params-cm
                   optional: true
             - name: ARGOCD_APPLICATION_NAMESPACES
@@ -81,7 +85,7 @@ spec:
                   key: notificationscontroller.repo.server.plaintext
                   name: argocd-cmd-params-cm
                   optional: true
-          image: quay.io/argoproj/argocd:v2.13.1
+          image: quay.io/argoproj/argocd:v3.0.3
           imagePullPolicy: IfNotPresent
           name: notifications-controller
           ports:
@@ -105,6 +109,8 @@ spec:
               name: argocd-repo-server-tls
           workingDir: /app
       dnsPolicy: ClusterFirst
+      nodeSelector:
+        kubernetes.io/os: linux
       serviceAccountName: argocd-notifications-controller
       terminationGracePeriodSeconds: 30
       volumes:

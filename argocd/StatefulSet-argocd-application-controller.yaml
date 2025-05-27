@@ -7,8 +7,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-application-controller
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v2.13.1
-    helm.sh/chart: argo-cd-7.7.5
+    app.kubernetes.io/version: v3.0.3
+    helm.sh/chart: argo-cd-8.0.10
   name: argocd-application-controller
   namespace: argocd
 spec:
@@ -22,16 +22,16 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/cm: 52471701f8c1408b1cd83192b0d354f9c08b515b0c720b1f981b31b6d70595a7
-        checksum/cmd-params: 7da95175bab05fbfd2b3e419b908caac21336e59cf73728a2f1ae3e74f352957
+        checksum/cm: 6c692ebc63074f782366ea70496ae1a87ecdf12ff1124dda43993a3554b20fae
+        checksum/cmd-params: 9fa2f733d0041d475f07af592f652ed7cfc0e28ed5c461e67814d3f64a78b43a
       labels:
         app.kubernetes.io/component: application-controller
         app.kubernetes.io/instance: argocd
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: argocd-application-controller
         app.kubernetes.io/part-of: argocd
-        app.kubernetes.io/version: v2.13.1
-        helm.sh/chart: argo-cd-7.7.5
+        app.kubernetes.io/version: v3.0.3
+        helm.sh/chart: argo-cd-8.0.10
     spec:
       affinity:
         podAntiAffinity:
@@ -112,6 +112,12 @@ spec:
                   key: controller.log.level
                   name: argocd-cmd-params-cm
                   optional: true
+            - name: ARGOCD_LOG_FORMAT_TIMESTAMP
+              valueFrom:
+                configMapKeyRef:
+                  key: log.format.timestamp
+                  name: argocd-cmd-params-cm
+                  optional: true
             - name: ARGOCD_APPLICATION_CONTROLLER_METRICS_CACHE_EXPIRATION
               valueFrom:
                 configMapKeyRef:
@@ -140,6 +146,12 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: controller.self.heal.backoff.cap.seconds
+                  name: argocd-cmd-params-cm
+                  optional: true
+            - name: ARGOCD_APPLICATION_CONTROLLER_SYNC_TIMEOUT
+              valueFrom:
+                configMapKeyRef:
+                  key: controller.sync.timeout.seconds
                   name: argocd-cmd-params-cm
                   optional: true
             - name: ARGOCD_APPLICATION_CONTROLLER_REPO_SERVER_PLAINTEXT
@@ -195,6 +207,7 @@ spec:
                 secretKeyRef:
                   key: auth
                   name: argocd-redis
+                  optional: false
             - name: REDIS_SENTINEL_USERNAME
               valueFrom:
                 secretKeyRef:
@@ -229,6 +242,12 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: otlp.headers
+                  name: argocd-cmd-params-cm
+                  optional: true
+            - name: ARGOCD_APPLICATION_CONTROLLER_OTLP_ATTRS
+              valueFrom:
+                configMapKeyRef:
+                  key: otlp.attrs
                   name: argocd-cmd-params-cm
                   optional: true
             - name: ARGOCD_APPLICATION_NAMESPACES
@@ -273,7 +292,27 @@ spec:
                   key: controller.ignore.normalizer.jq.timeout
                   name: argocd-cmd-params-cm
                   optional: true
-          image: quay.io/argoproj/argocd:v2.13.1
+            - name: ARGOCD_HYDRATOR_ENABLED
+              valueFrom:
+                configMapKeyRef:
+                  key: hydrator.enabled
+                  name: argocd-cmd-params-cm
+                  optional: true
+            - name: ARGOCD_CLUSTER_CACHE_BATCH_EVENTS_PROCESSING
+              valueFrom:
+                configMapKeyRef:
+                  key: controller.cluster.cache.batch.events.processing
+                  name: argocd-cmd-params-cm
+                  optional: true
+            - name: ARGOCD_CLUSTER_CACHE_EVENTS_PROCESSING_INTERVAL
+              valueFrom:
+                configMapKeyRef:
+                  key: controller.cluster.cache.events.processing.interval
+                  name: argocd-cmd-params-cm
+                  optional: true
+            - name: KUBECACHEDIR
+              value: /tmp/kubecache
+          image: quay.io/argoproj/argocd:v3.0.3
           imagePullPolicy: IfNotPresent
           name: application-controller
           ports:
@@ -306,13 +345,19 @@ spec:
               name: argocd-home
             - mountPath: /home/argocd/params
               name: argocd-cmd-params-cm
+            - mountPath: /tmp
+              name: argocd-application-controller-tmp
           workingDir: /home/argocd
       dnsPolicy: ClusterFirst
+      nodeSelector:
+        kubernetes.io/os: linux
       serviceAccountName: argocd-application-controller
       terminationGracePeriodSeconds: 30
       volumes:
         - emptyDir: {}
           name: argocd-home
+        - emptyDir: {}
+          name: argocd-application-controller-tmp
         - name: argocd-repo-server-tls
           secret:
             items:

@@ -48,7 +48,6 @@ spec:
             - -c /var/run/cilium/envoy/bootstrap-config.json
             - --base-id 0
             - --log-level info
-            - --log-format [%Y-%m-%d %T.%e][%t][%l][%n] [%g:%#] %v
           command:
             - /usr/bin/cilium-envoy-starter
           env:
@@ -66,7 +65,7 @@ spec:
               value: 192.168.178.53
             - name: KUBERNETES_SERVICE_PORT
               value: "6443"
-          image: quay.io/cilium/cilium-envoy:v1.30.7-1731393961-97edc2815e2c6a174d3d12e71731d54f5d32ea16@sha256:0287b36f70cfbdf54f894160082f4f94d1ee1fb10389f3a95baa6c8e448586ed
+          image: quay.io/cilium/cilium-envoy:v1.32.6-1746661844-0f602c28cb2aa57b29078195049fb257d5b5246c@sha256:a04218c6879007d60d96339a441c448565b6f86650358652da27582e0efbf182
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 10
