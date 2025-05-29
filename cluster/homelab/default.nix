@@ -3,6 +3,7 @@
   imports = [
     ./argocd.nix
     ./cilium.nix
+    ./traefik.nix
   ];
 
   nixidy = {
