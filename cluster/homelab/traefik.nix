@@ -8,11 +8,9 @@
       chart = charts.traefik.traefik;
 
       values = {
-        providers = {
-          kubernetesIngress = {
-            publishedService.enabled = true;
-          };
-        };
+        additionalArguments = [
+          "--log.level=DEBUG"
+        ];
       };
     };
 
