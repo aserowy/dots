@@ -31,7 +31,7 @@
               services = [
                 {
                   name = "api@internal";
-                  kind = "traefik";
+                  kind = "TraefikService";
                 }
               ];
             }
