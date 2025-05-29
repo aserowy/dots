@@ -21,7 +21,7 @@
     resources = {
       ciliumLoadBalancerIPPools = {
         traefik-loadbalancer-ippool.spec = {
-          blocks = [ { cidr = "192.168.172.53/32"; } ];
+          blocks = [ { cidr = "192.168.178.53/32"; } ];
         };
       };
       ingressRoutes = {
