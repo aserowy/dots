@@ -4,7 +4,7 @@ metadata:
   annotations:
     ingressclass.kubernetes.io/is-default-class: "true"
   labels:
-    app.kubernetes.io/instance: traefik-argocd
+    app.kubernetes.io/instance: traefik-loadbalancer
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
     helm.sh/chart: traefik-35.4.0

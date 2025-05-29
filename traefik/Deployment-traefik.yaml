@@ -2,18 +2,18 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app.kubernetes.io/instance: traefik-argocd
+    app.kubernetes.io/instance: traefik-loadbalancer
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
     helm.sh/chart: traefik-35.4.0
   name: traefik
-  namespace: argocd
+  namespace: loadbalancer
 spec:
   minReadySeconds: 0
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/instance: traefik-argocd
+      app.kubernetes.io/instance: traefik-loadbalancer
       app.kubernetes.io/name: traefik
   strategy:
     rollingUpdate:
@@ -27,7 +27,7 @@ spec:
         prometheus.io/port: "9100"
         prometheus.io/scrape: "true"
       labels:
-        app.kubernetes.io/instance: traefik-argocd
+        app.kubernetes.io/instance: traefik-loadbalancer
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: traefik
         helm.sh/chart: traefik-35.4.0
@@ -49,7 +49,7 @@ spec:
             - --providers.kubernetescrd.allowEmptyServices=true
             - --providers.kubernetesingress
             - --providers.kubernetesingress.allowEmptyServices=true
-            - --providers.kubernetesingress.ingressendpoint.publishedservice=argocd/traefik
+            - --providers.kubernetesingress.ingressendpoint.publishedservice=loadbalancer/traefik
             - --entryPoints.websecure.http.tls=true
             - --log.level=INFO
           env:
