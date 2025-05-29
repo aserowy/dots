@@ -37,7 +37,7 @@
                 {
                   name = "argocd-server";
                   namespace = "argocd";
-                  port = 443;
+                  port = 80;
                 }
               ];
             }

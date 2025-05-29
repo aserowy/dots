@@ -19,16 +19,6 @@
     };
 
     resources = {
-      # ciliumNetworkPolicies = {
-      #   allow-traefik-to-server-egress.spec = {
-      #     endpointSelector.matchLabels."app.kubernetes.io/name" = "traefik";
-      #     egress = [
-      #       {
-      #         toEntities = [ "all" ];
-      #       }
-      #     ];
-      #   };
-      # };
       ingressRoutes = {
         traefik-dashboard-route.spec = {
           entryPoints = [
