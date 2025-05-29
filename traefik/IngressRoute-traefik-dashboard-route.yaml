@@ -10,5 +10,5 @@ spec:
     - kind: Rule
       match: Host(`*`)
       services:
-        - kind: traefik
+        - kind: TraefikService
           name: api@internal
