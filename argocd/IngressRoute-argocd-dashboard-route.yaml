@@ -11,4 +11,5 @@ spec:
       match: PathPrefix(`/argo`)
       services:
         - name: argocd-server
+          namespace: argocd
           port: 443
