@@ -8,7 +8,7 @@ spec:
     - web
   routes:
     - kind: Rule
-      match: ClientIP(`192.168.178.0/24`)
+      match: PathPrefix(`/traefik`)
       services:
         - kind: TraefikService
           name: api@internal
