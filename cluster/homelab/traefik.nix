@@ -1,9 +1,5 @@
 { charts, ... }:
 {
-  nixidy.resourceImports = [
-    ../crd/traefik.nix
-  ];
-
   applications.traefik = {
     namespace = "loadbalancer";
     createNamespace = true;

@@ -1,9 +1,5 @@
 { charts, ... }:
 {
-  nixidy.resourceImports = [
-    ../crd/traefik.nix
-  ];
-
   applications.argocd = {
     namespace = "argocd";
 

@@ -7,6 +7,11 @@
   ];
 
   nixidy = {
+    resourceImports = [
+      ../crd/cilium.nix
+      ../crd/traefik.nix
+    ];
+
     target = {
       repository = "https://github.com/aserowy/dots.git";
       branch = "homelab";

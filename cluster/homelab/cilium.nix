@@ -1,10 +1,5 @@
 { charts, ... }:
 {
-  nixidy.resourceImports = [
-    ../crd/cilium.nix
-    ../crd/traefik.nix
-  ];
-
   applications.cilium = {
     namespace = "kube-system";
 
