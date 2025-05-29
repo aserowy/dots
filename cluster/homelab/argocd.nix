@@ -23,6 +23,26 @@
       };
     };
 
-    resources = { };
+    resources = {
+      ingressRoutes = {
+        argocd-dashboard-route.spec = {
+          entryPoints = [
+            "web"
+          ];
+          routes = [
+            {
+              match = "PathPrefix(`/argo`)";
+              kind = "Rule";
+              services = [
+                {
+                  name = "argocd-server";
+                  port = 443;
+                }
+              ];
+            }
+          ];
+        };
+      };
+    };
   };
 }
