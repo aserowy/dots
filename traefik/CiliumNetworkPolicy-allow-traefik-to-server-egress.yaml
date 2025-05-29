@@ -1,0 +1,12 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: allow-traefik-to-server-egress
+  namespace: loadbalancer
+spec:
+  egress:
+    - toEntities:
+        - all
+  endpointSelector:
+    matchLabels:
+      app.kubernetes.io/name: traefik
