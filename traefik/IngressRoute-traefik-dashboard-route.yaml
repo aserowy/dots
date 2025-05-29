@@ -1,0 +1,14 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: traefik-dashboard-route
+  namespace: loadbalancer
+spec:
+  entryPoints:
+    - web
+  routes:
+    - kind: Rule
+      match: Host(`*`)
+      services:
+        - kind: traefik
+          name: api@internal
