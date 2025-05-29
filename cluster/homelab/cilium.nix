@@ -37,5 +37,25 @@
     };
 
     resources = { };
+    ingressRoutes = {
+      cilium-dashboard-route.spec = {
+        entryPoints = [
+          "web"
+        ];
+        routes = [
+          {
+            match = "Host(`hubble.smart.home`)";
+            kind = "Rule";
+            services = [
+              {
+                name = "hubble-ui";
+                namespace = "kube-system";
+                port = 80;
+              }
+            ];
+          }
+        ];
+      };
+    };
   };
 }
