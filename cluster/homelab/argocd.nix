@@ -36,6 +36,7 @@
               services = [
                 {
                   name = "argocd-server";
+                  namespace = "argocd";
                   port = 443;
                 }
               ];
