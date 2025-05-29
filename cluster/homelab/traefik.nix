@@ -10,9 +10,7 @@
       values = {
         providers = {
           kubernetesIngress = {
-            ingressEndpoint = {
-              publishedService.enabled = true;
-            };
+            publishedService.enabled = true;
           };
         };
       };
