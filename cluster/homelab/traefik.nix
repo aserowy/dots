@@ -19,6 +19,11 @@
     };
 
     resources = {
+      ciliumLoadBalancerIPPools = {
+        traefik-loadbalancer-ippool.spec = {
+          blocks = [ { cidr = "192.168.172.53/32"; } ];
+        };
+      };
       ingressRoutes = {
         traefik-dashboard-route.spec = {
           entryPoints = [
@@ -26,7 +31,7 @@
           ];
           routes = [
             {
-              match = "PathPrefix(`/traefik`)";
+              match = "Host(`traefik.smart.home`)";
               kind = "Rule";
               services = [
                 {

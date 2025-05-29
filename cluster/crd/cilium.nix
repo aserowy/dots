@@ -9564,6 +9564,166 @@ with lib; let
         "reason" = mkOverride 1002 null;
       };
     };
+    "cilium.io.v2alpha1.CiliumLoadBalancerIPPool" = {
+      options = {
+        "apiVersion" = mkOption {
+          description = "APIVersion defines the versioned schema of this representation of an object.\nServers should convert recognized schemas to the latest internal value, and\nmay reject unrecognized values.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources";
+          type = types.nullOr types.str;
+        };
+        "kind" = mkOption {
+          description = "Kind is a string value representing the REST resource this object represents.\nServers may infer this from the endpoint the client submits requests to.\nCannot be updated.\nIn CamelCase.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds";
+          type = types.nullOr types.str;
+        };
+        "metadata" = mkOption {
+          description = "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata";
+          type = globalSubmoduleOf "io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta";
+        };
+        "spec" = mkOption {
+          description = "Spec is a human readable description for a BGP load balancer\nip pool.";
+          type = submoduleOf "cilium.io.v2alpha1.CiliumLoadBalancerIPPoolSpec";
+        };
+        "status" = mkOption {
+          description = "Status is the status of the IP Pool.\n\nIt might be possible for users to define overlapping IP Pools, we can't validate or enforce non-overlapping pools\nduring object creation. The Cilium operator will do this validation and update the status to reflect the ability\nto allocate IPs from this pool.";
+          type = types.nullOr (submoduleOf "cilium.io.v2alpha1.CiliumLoadBalancerIPPoolStatus");
+        };
+      };
+
+      config = {
+        "apiVersion" = mkOverride 1002 null;
+        "kind" = mkOverride 1002 null;
+        "status" = mkOverride 1002 null;
+      };
+    };
+    "cilium.io.v2alpha1.CiliumLoadBalancerIPPoolSpec" = {
+      options = {
+        "allowFirstLastIPs" = mkOption {
+          description = "AllowFirstLastIPs, if set to `Yes` or undefined means that the first and last IPs of each CIDR will be allocatable.\nIf `No`, these IPs will be reserved. This field is ignored for /{31,32} and /{127,128} CIDRs since\nreserving the first and last IPs would make the CIDRs unusable.";
+          type = types.nullOr types.str;
+        };
+        "blocks" = mkOption {
+          description = "Blocks is a list of CIDRs comprising this IP Pool";
+          type = types.nullOr (types.listOf (submoduleOf "cilium.io.v2alpha1.CiliumLoadBalancerIPPoolSpecBlocks"));
+        };
+        "disabled" = mkOption {
+          description = "Disabled, if set to true means that no new IPs will be allocated from this pool.\nExisting allocations will not be removed from services.";
+          type = types.nullOr types.bool;
+        };
+        "serviceSelector" = mkOption {
+          description = "ServiceSelector selects a set of services which are eligible to receive IPs from this";
+          type = types.nullOr (submoduleOf "cilium.io.v2alpha1.CiliumLoadBalancerIPPoolSpecServiceSelector");
+        };
+      };
+
+      config = {
+        "allowFirstLastIPs" = mkOverride 1002 null;
+        "blocks" = mkOverride 1002 null;
+        "disabled" = mkOverride 1002 null;
+        "serviceSelector" = mkOverride 1002 null;
+      };
+    };
+    "cilium.io.v2alpha1.CiliumLoadBalancerIPPoolSpecBlocks" = {
+      options = {
+        "cidr" = mkOption {
+          description = "";
+          type = types.nullOr types.str;
+        };
+        "start" = mkOption {
+          description = "";
+          type = types.nullOr types.str;
+        };
+        "stop" = mkOption {
+          description = "";
+          type = types.nullOr types.str;
+        };
+      };
+
+      config = {
+        "cidr" = mkOverride 1002 null;
+        "start" = mkOverride 1002 null;
+        "stop" = mkOverride 1002 null;
+      };
+    };
+    "cilium.io.v2alpha1.CiliumLoadBalancerIPPoolSpecServiceSelector" = {
+      options = {
+        "matchExpressions" = mkOption {
+          description = "matchExpressions is a list of label selector requirements. The requirements are ANDed.";
+          type = types.nullOr (types.listOf (submoduleOf "cilium.io.v2alpha1.CiliumLoadBalancerIPPoolSpecServiceSelectorMatchExpressions"));
+        };
+        "matchLabels" = mkOption {
+          description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
+          type = types.nullOr (types.attrsOf types.str);
+        };
+      };
+
+      config = {
+        "matchExpressions" = mkOverride 1002 null;
+        "matchLabels" = mkOverride 1002 null;
+      };
+    };
+    "cilium.io.v2alpha1.CiliumLoadBalancerIPPoolSpecServiceSelectorMatchExpressions" = {
+      options = {
+        "key" = mkOption {
+          description = "key is the label key that the selector applies to.";
+          type = types.str;
+        };
+        "operator" = mkOption {
+          description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
+          type = types.str;
+        };
+        "values" = mkOption {
+          description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
+          type = types.nullOr (types.listOf types.str);
+        };
+      };
+
+      config = {
+        "values" = mkOverride 1002 null;
+      };
+    };
+    "cilium.io.v2alpha1.CiliumLoadBalancerIPPoolStatus" = {
+      options = {
+        "conditions" = mkOption {
+          description = "Current service state";
+          type = types.nullOr (types.listOf (submoduleOf "cilium.io.v2alpha1.CiliumLoadBalancerIPPoolStatusConditions"));
+        };
+      };
+
+      config = {
+        "conditions" = mkOverride 1002 null;
+      };
+    };
+    "cilium.io.v2alpha1.CiliumLoadBalancerIPPoolStatusConditions" = {
+      options = {
+        "lastTransitionTime" = mkOption {
+          description = "lastTransitionTime is the last time the condition transitioned from one status to another.\nThis should be when the underlying condition changed.  If that is not known, then using the time when the API field changed is acceptable.";
+          type = types.str;
+        };
+        "message" = mkOption {
+          description = "message is a human readable message indicating details about the transition.\nThis may be an empty string.";
+          type = types.str;
+        };
+        "observedGeneration" = mkOption {
+          description = "observedGeneration represents the .metadata.generation that the condition was set based upon.\nFor instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date\nwith respect to the current state of the instance.";
+          type = types.nullOr types.int;
+        };
+        "reason" = mkOption {
+          description = "reason contains a programmatic identifier indicating the reason for the condition's last transition.\nProducers of specific condition types may define expected values and meanings for this field,\nand whether the values are considered a guaranteed API.\nThe value should be a CamelCase string.\nThis field may not be empty.";
+          type = types.str;
+        };
+        "status" = mkOption {
+          description = "status of the condition, one of True, False, Unknown.";
+          type = types.str;
+        };
+        "type" = mkOption {
+          description = "type of condition in CamelCase or in foo.example.com/CamelCase.";
+          type = types.str;
+        };
+      };
+
+      config = {
+        "observedGeneration" = mkOverride 1002 null;
+      };
+    };
   };
 in {
   # all resource versions
@@ -9580,11 +9740,21 @@ in {
           type = types.attrsOf (submoduleForDefinition "cilium.io.v2.CiliumNetworkPolicy" "ciliumnetworkpolicies" "CiliumNetworkPolicy" "cilium.io" "v2");
           default = {};
         };
+        "cilium.io"."v2alpha1"."CiliumLoadBalancerIPPool" = mkOption {
+          description = "CiliumLoadBalancerIPPool is a Kubernetes third-party resource which\nis used to defined pools of IPs which the operator can use to to allocate\nand advertise IPs for Services of type LoadBalancer.";
+          type = types.attrsOf (submoduleForDefinition "cilium.io.v2alpha1.CiliumLoadBalancerIPPool" "ciliumloadbalancerippools" "CiliumLoadBalancerIPPool" "cilium.io" "v2alpha1");
+          default = {};
+        };
       }
       // {
         "ciliumClusterwideNetworkPolicies" = mkOption {
           description = "CiliumClusterwideNetworkPolicy is a Kubernetes third-party resource with an\nmodified version of CiliumNetworkPolicy which is cluster scoped rather than\nnamespace scoped.";
           type = types.attrsOf (submoduleForDefinition "cilium.io.v2.CiliumClusterwideNetworkPolicy" "ciliumclusterwidenetworkpolicies" "CiliumClusterwideNetworkPolicy" "cilium.io" "v2");
+          default = {};
+        };
+        "ciliumLoadBalancerIPPools" = mkOption {
+          description = "CiliumLoadBalancerIPPool is a Kubernetes third-party resource which\nis used to defined pools of IPs which the operator can use to to allocate\nand advertise IPs for Services of type LoadBalancer.";
+          type = types.attrsOf (submoduleForDefinition "cilium.io.v2alpha1.CiliumLoadBalancerIPPool" "ciliumloadbalancerippools" "CiliumLoadBalancerIPPool" "cilium.io" "v2alpha1");
           default = {};
         };
         "ciliumNetworkPolicies" = mkOption {
@@ -9615,11 +9785,20 @@ in {
         kind = "CiliumNetworkPolicy";
         attrName = "ciliumNetworkPolicies";
       }
+      {
+        name = "ciliumloadbalancerippools";
+        group = "cilium.io";
+        version = "v2alpha1";
+        kind = "CiliumLoadBalancerIPPool";
+        attrName = "ciliumLoadBalancerIPPools";
+      }
     ];
 
     resources = {
       "cilium.io"."v2"."CiliumClusterwideNetworkPolicy" =
         mkAliasDefinitions options.resources."ciliumClusterwideNetworkPolicies";
+      "cilium.io"."v2alpha1"."CiliumLoadBalancerIPPool" =
+        mkAliasDefinitions options.resources."ciliumLoadBalancerIPPools";
       "cilium.io"."v2"."CiliumNetworkPolicy" =
         mkAliasDefinitions options.resources."ciliumNetworkPolicies";
     };

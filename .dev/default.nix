@@ -16,6 +16,7 @@ let
       crds = [
         "pkg/k8s/apis/cilium.io/client/crds/v2/ciliumnetworkpolicies.yaml"
         "pkg/k8s/apis/cilium.io/client/crds/v2/ciliumclusterwidenetworkpolicies.yaml"
+        "pkg/k8s/apis/cilium.io/client/crds/v2alpha1/ciliumloadbalancerippools.yaml"
       ];
     };
     traefik = nixidy.packages.${pkgs.system}.generators.fromCRD {
