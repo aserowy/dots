@@ -1,0 +1,15 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: cilium-dashboard-route
+  namespace: kube-system
+spec:
+  entryPoints:
+    - web
+  routes:
+    - kind: Rule
+      match: Host(`hubble.smart.home`)
+      services:
+        - name: hubble-ui
+          namespace: kube-system
+          port: 80
