@@ -1,12 +1,21 @@
 { charts, ... }:
 {
   applications.traefik = {
-    namespace = "argocd";
+    namespace = "loadbalancer";
+    createNamespace = true;
 
     helm.releases.traefik = {
       chart = charts.traefik.traefik;
 
-      values = { };
+      values = {
+        providers = {
+          kubernetesIngress = {
+            ingressEndpoint = {
+              publishedService.enabled = true;
+            };
+          };
+        };
+      };
     };
 
     resources = { };
