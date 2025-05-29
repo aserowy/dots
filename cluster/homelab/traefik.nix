@@ -14,6 +14,20 @@
       };
     };
 
-    resources = { };
+    resources = {
+      IngressRoute.spec = {
+        entryPoints = "web";
+        routes = {
+          match = "Host(`*`)";
+          kind = "Rule";
+          services = [
+            {
+              name = "api@internal";
+              kind = "traefik";
+            }
+          ];
+        };
+      };
+    };
   };
 }
