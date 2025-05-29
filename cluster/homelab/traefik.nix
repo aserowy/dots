@@ -1,5 +1,9 @@
 { charts, ... }:
 {
+  nixidy.resourceImports = [
+    ../crd/traefik.nix
+  ];
+
   applications.traefik = {
     namespace = "loadbalancer";
     createNamespace = true;
@@ -15,15 +19,21 @@
     };
 
     resources = {
-      IngressRoute.spec = {
-        entryPoints = "web";
-        routes = {
-          match = "Host(`*`)";
-          kind = "Rule";
-          services = [
+      ingressRoutes = {
+        traefik-dashboard-route.spec = {
+          entryPoints = [
+            "web"
+          ];
+          routes = [
             {
-              name = "api@internal";
-              kind = "traefik";
+              match = "Host(`*`)";
+              kind = "Rule";
+              services = [
+                {
+                  name = "api@internal";
+                  kind = "traefik";
+                }
+              ];
             }
           ];
         };
