@@ -26,7 +26,7 @@
           ];
           routes = [
             {
-              match = "Host(`*`)";
+              match = "ClientIP(`192.168.178.0/24`)";
               kind = "Rule";
               services = [
                 {
