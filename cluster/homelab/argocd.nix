@@ -31,7 +31,7 @@
           ];
           routes = [
             {
-              match = "PathPrefix(`/argo`)";
+              match = "Host(`argo.smart.home`)";
               kind = "Rule";
               services = [
                 {
