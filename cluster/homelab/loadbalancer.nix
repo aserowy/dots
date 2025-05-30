@@ -1,16 +1,25 @@
 { charts, ... }:
 {
-  applications.traefik = {
+  applications.loadbalancer = {
     namespace = "loadbalancer";
     createNamespace = true;
 
-    helm.releases.traefik = {
-      chart = charts.traefik.traefik;
+    helm.releases = {
+      traefik = {
+        chart = charts.traefik.traefik;
 
-      values = {
-        additionalArguments = [
-          "--log.level=DEBUG"
-        ];
+        values = {
+          additionalArguments = [
+            "--log.level=DEBUG"
+          ];
+        };
+      };
+
+      certmanager = {
+        chart = charts.jetstack.cert-manager;
+
+        values = {
+        };
       };
     };
 
