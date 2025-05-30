@@ -2,6 +2,7 @@
 {
   imports = [
     ./argocd.nix
+    ./certmanager.nix
     ./cilium.nix
     ./traefik.nix
   ];

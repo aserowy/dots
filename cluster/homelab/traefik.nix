@@ -17,6 +17,7 @@
     resources = {
       ciliumLoadBalancerIPPools = {
         traefik-loadbalancer-ippool.spec = {
+          # TODO: cidr configurable
           blocks = [ { cidr = "192.168.178.53/32"; } ];
         };
       };
