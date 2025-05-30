@@ -8,7 +8,7 @@ spec:
     - web
   routes:
     - kind: Rule
-      match: Host(`hubble.smart.home`)
+      match: Host(`hubble.anderwerse.de`)
       services:
         - name: hubble-ui
           namespace: kube-system
