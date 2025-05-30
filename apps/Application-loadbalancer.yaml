@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: traefik
+  name: loadbalancer
   namespace: argocd
 spec:
   destination:
@@ -9,7 +9,7 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: ./traefik
+    path: ./loadbalancer
     repoURL: https://github.com/aserowy/dots.git
     targetRevision: homelab
   syncPolicy:
