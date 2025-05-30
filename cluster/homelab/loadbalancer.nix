@@ -19,6 +19,7 @@
         chart = charts.jetstack.cert-manager;
 
         values = {
+          installCRDs = true;
         };
       };
     };
