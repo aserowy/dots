@@ -40,7 +40,7 @@
           ];
           routes = [
             {
-              match = "Host(`hubble.smart.home`)";
+              match = "Host(`hubble.anderwerse.de`)";
               kind = "Rule";
               services = [
                 {

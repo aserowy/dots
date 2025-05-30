@@ -38,7 +38,7 @@
           ];
           routes = [
             {
-              match = "Host(`traefik.smart.home`)";
+              match = "Host(`traefik.anderwerse.de`)";
               kind = "Rule";
               services = [
                 {

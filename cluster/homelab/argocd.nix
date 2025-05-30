@@ -31,7 +31,7 @@
           ];
           routes = [
             {
-              match = "Host(`argo.smart.home`)";
+              match = "Host(`argo.anderwerse.de`)";
               kind = "Rule";
               services = [
                 {
