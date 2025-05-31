@@ -5,7 +5,7 @@ metadata:
   namespace: kube-system
 spec:
   entryPoints:
-    - web
+    - websecure
   routes:
     - kind: Rule
       match: Host(`hubble.anderwerse.de`)
@@ -13,3 +13,5 @@ spec:
         - name: hubble-ui
           namespace: kube-system
           port: 80
+  tls:
+    secretName: anderwersede-tls-certificate

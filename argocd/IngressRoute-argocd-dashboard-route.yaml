@@ -5,7 +5,7 @@ metadata:
   namespace: argocd
 spec:
   entryPoints:
-    - web
+    - websecure
   routes:
     - kind: Rule
       match: Host(`argo.anderwerse.de`)
@@ -13,3 +13,5 @@ spec:
         - name: argocd-server
           namespace: argocd
           port: 80
+  tls:
+    secretName: anderwersede-tls-certificate
