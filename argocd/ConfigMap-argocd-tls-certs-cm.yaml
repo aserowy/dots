@@ -7,6 +7,6 @@ metadata:
     app.kubernetes.io/name: argocd-tls-certs-cm
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v3.0.4
-    helm.sh/chart: argo-cd-8.0.11
+    helm.sh/chart: argo-cd-8.0.12
   name: argocd-tls-certs-cm
   namespace: argocd
