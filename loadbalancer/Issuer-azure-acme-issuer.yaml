@@ -12,11 +12,11 @@ spec:
     solvers:
       - dns01:
           azureDNS:
-            clientID: ""
+            clientID: e48f89f8-a7ac-45c6-8d9c-10edbf3365cb
             clientSecretSecretRef:
               key: AZURE_CLIENT_SECRET
               name: azure-acme-environment
-            hostedZoneName: <your-hosted-zone>
-            resourceGroupName: <your-resource-group>
-            subscriptionID: <your-subscription-id>
-            tenantID: <your-tenant-id>
+            hostedZoneName: anderwerse.de
+            resourceGroupName: rg_homelab
+            subscriptionID: b0f74bb3-5530-4ad4-a307-dc6a96b371c0
+            tenantID: fe7eb9da-a96c-4ffd-8fe0-fd1ec4f77439
