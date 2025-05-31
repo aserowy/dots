@@ -5,10 +5,12 @@ metadata:
   namespace: loadbalancer
 spec:
   entryPoints:
-    - web
+    - websecure
   routes:
     - kind: Rule
       match: Host(`traefik.anderwerse.de`)
       services:
         - kind: TraefikService
           name: api@internal
+  tls:
+    secretName: anderwersede-tls-certificate
