@@ -92,7 +92,7 @@
           pkgs = nixpkgs.legacyPackages.aarch64-darwin;
         };
         x86_64-linux.default = import ./.dev {
-          inherit nixidy;
+          inherit nixidy nixhelm;
           lib = nixpkgs.lib;
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
         };

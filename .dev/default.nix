@@ -1,6 +1,7 @@
 {
   lib,
   nixidy,
+  nixhelm,
   pkgs,
 }:
 let
@@ -19,16 +20,16 @@ let
         "pkg/k8s/apis/cilium.io/client/crds/v2alpha1/ciliumloadbalancerippools.yaml"
       ];
     };
+    sops = nixidy.packages.${pkgs.system}.generators.fromCRD {
+      name = "sops";
+      src = nixhelm.chartsDerivations.${pkgs.system}.isindir.sops-secrets-operator;
+      crds = [ "crds/isindir.github.com_sopssecrets.yaml" ];
+    };
     traefik = nixidy.packages.${pkgs.system}.generators.fromCRD {
       name = "traefik";
-      src = pkgs.fetchFromGitHub {
-        owner = "traefik";
-        repo = "traefik-helm-chart";
-        rev = "v35.4.0";
-        hash = "sha256-hvMzHKn0c71IXZPOzBROixaP2A1ROKvUBAzvYBZuU4Y=";
-      };
+      src = nixhelm.chartsDerivations.${pkgs.system}.traefik.traefik;
       crds = [
-        "traefik-crds/crds-files/traefik/traefik.io_ingressroutes.yaml"
+        "crds/traefik.io_ingressroutes.yaml"
       ];
     };
   };
@@ -57,6 +58,8 @@ pkgs.mkShell {
   shellHook = ''
     echo "generate cilium"
     cat ${generators.cilium} > ./cluster/crd/cilium.nix
+    echo "generate sops"
+    cat ${generators.sops} > ./cluster/crd/sops.nix
     echo "generate traefik"
     cat ${generators.traefik} > ./cluster/crd/traefik.nix
   '';
