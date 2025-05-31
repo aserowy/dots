@@ -32,6 +32,29 @@ in
     ];
 
     resources = {
+      issuers = {
+        azureDnsIssuer.spec.acme = {
+          email = "serowy@hotmail.com";
+          server = "https://acme-v02.api.letsencrypt.org/directory";
+          privateKeySecretRef.name = "azure-issuer-account-key";
+          solvers = [
+            {
+              dns01 = {
+                azureDNS = {
+                  clientSecretSecretRef = {
+                    name = "azure-acme-environment";
+                    key = "AZURE_CLIENT_SECRET";
+                  };
+                  subscriptionID = "<your-subscription-id>";
+                  tenantID = "<your-tenant-id>";
+                  resourceGroupName = "<your-resource-group>";
+                  hostedZoneName = "<your-hosted-zone>";
+                };
+              };
+            }
+          ];
+        };
+      };
       ciliumLoadBalancerIPPools = {
         traefik-loadbalancer-ippool.spec = {
           # TODO: cidr configurable
