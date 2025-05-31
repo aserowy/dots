@@ -79,7 +79,7 @@ in
       ingressRoutes = {
         traefik-dashboard-route.spec = {
           entryPoints = [
-            "web"
+            "websecure"
           ];
           routes = [
             {
@@ -93,6 +93,7 @@ in
               ];
             }
           ];
+          tls.secretName = "anderwersede-tls-certificate";
         };
       };
     };
