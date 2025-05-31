@@ -12,6 +12,7 @@ spec:
     solvers:
       - dns01:
           azureDNS:
+            clientID: ""
             clientSecretSecretRef:
               key: AZURE_CLIENT_SECRET
               name: azure-acme-environment
