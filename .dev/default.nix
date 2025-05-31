@@ -47,6 +47,7 @@ in
 pkgs.mkShell {
   packages =
     [
+      pkgs.azure-cli
       pkgs.kubectl
       pkgs.marksman
       pkgs.nixd
