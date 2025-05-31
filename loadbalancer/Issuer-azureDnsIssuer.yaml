@@ -1,0 +1,21 @@
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: azureDnsIssuer
+  namespace: loadbalancer
+spec:
+  acme:
+    email: serowy@hotmail.com
+    privateKeySecretRef:
+      name: azure-issuer-account-key
+    server: https://acme-v02.api.letsencrypt.org/directory
+    solvers:
+      - dns01:
+          azureDNS:
+            clientSecretSecretRef:
+              key: AZURE_CLIENT_SECRET
+              name: azure-acme-environment
+            hostedZoneName: <your-hosted-zone>
+            resourceGroupName: <your-resource-group>
+            subscriptionID: <your-subscription-id>
+            tenantID: <your-tenant-id>
