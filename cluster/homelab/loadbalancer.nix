@@ -56,6 +56,20 @@ in
           ];
         };
       };
+      certificates = {
+        anderwersede-tls-certificate.spec = {
+          secretName = "anderwersede-tls-certificate";
+          issuerRef = {
+            name = "azure-acme-issuer";
+            kind = "Issuer";
+          };
+          duration = "2160h";
+          renewBefore = "720h";
+          dnsNames = [
+            "*.anderwerse.de"
+          ];
+        };
+      };
       ciliumLoadBalancerIPPools = {
         traefik-loadbalancer-ippool.spec = {
           # TODO: cidr configurable

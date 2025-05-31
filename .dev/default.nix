@@ -14,7 +14,10 @@ let
         rev = "v1.17.2";
         hash = "sha256-ysEV9qKJ08ugtg5CmZKR+YkJAec6pzDalFlph9hGqNQ=";
       };
-      crds = [ "deploy/crds/crd-issuers.yaml" ];
+      crds = [
+        "deploy/crds/crd-certificates.yaml"
+        "deploy/crds/crd-issuers.yaml"
+      ];
     };
     cilium = nixidy.packages.${pkgs.system}.generators.fromCRD {
       name = "cilium";

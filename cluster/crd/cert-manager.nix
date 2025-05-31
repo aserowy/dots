@@ -158,6 +158,551 @@ with lib; let
   );
 
   definitions = {
+    "cert-manager.io.v1.Certificate" = {
+      options = {
+        "apiVersion" = mkOption {
+          description = "APIVersion defines the versioned schema of this representation of an object.\nServers should convert recognized schemas to the latest internal value, and\nmay reject unrecognized values.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources";
+          type = types.nullOr types.str;
+        };
+        "kind" = mkOption {
+          description = "Kind is a string value representing the REST resource this object represents.\nServers may infer this from the endpoint the client submits requests to.\nCannot be updated.\nIn CamelCase.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds";
+          type = types.nullOr types.str;
+        };
+        "metadata" = mkOption {
+          description = "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata";
+          type = types.nullOr (globalSubmoduleOf "io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta");
+        };
+        "spec" = mkOption {
+          description = "Specification of the desired state of the Certificate resource.\nhttps://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status";
+          type = types.nullOr (submoduleOf "cert-manager.io.v1.CertificateSpec");
+        };
+        "status" = mkOption {
+          description = "Status of the Certificate.\nThis is set and managed automatically.\nRead-only.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status";
+          type = types.nullOr (submoduleOf "cert-manager.io.v1.CertificateStatus");
+        };
+      };
+
+      config = {
+        "apiVersion" = mkOverride 1002 null;
+        "kind" = mkOverride 1002 null;
+        "metadata" = mkOverride 1002 null;
+        "spec" = mkOverride 1002 null;
+        "status" = mkOverride 1002 null;
+      };
+    };
+    "cert-manager.io.v1.CertificateSpec" = {
+      options = {
+        "additionalOutputFormats" = mkOption {
+          description = "Defines extra output formats of the private key and signed certificate chain\nto be written to this Certificate's target Secret.\n\nThis is a Beta Feature enabled by default. It can be disabled with the\n`--feature-gates=AdditionalCertificateOutputFormats=false` option set on both\nthe controller and webhook components.";
+          type = types.nullOr (types.listOf (submoduleOf "cert-manager.io.v1.CertificateSpecAdditionalOutputFormats"));
+        };
+        "commonName" = mkOption {
+          description = "Requested common name X509 certificate subject attribute.\nMore info: https://datatracker.ietf.org/doc/html/rfc5280#section-4.1.2.6\nNOTE: TLS clients will ignore this value when any subject alternative name is\nset (see https://tools.ietf.org/html/rfc6125#section-6.4.4).\n\nShould have a length of 64 characters or fewer to avoid generating invalid CSRs.\nCannot be set if the `literalSubject` field is set.";
+          type = types.nullOr types.str;
+        };
+        "dnsNames" = mkOption {
+          description = "Requested DNS subject alternative names.";
+          type = types.nullOr (types.listOf types.str);
+        };
+        "duration" = mkOption {
+          description = "Requested 'duration' (i.e. lifetime) of the Certificate. Note that the\nissuer may choose to ignore the requested duration, just like any other\nrequested attribute.\n\nIf unset, this defaults to 90 days.\nMinimum accepted duration is 1 hour.\nValue must be in units accepted by Go time.ParseDuration https://golang.org/pkg/time/#ParseDuration.";
+          type = types.nullOr types.str;
+        };
+        "emailAddresses" = mkOption {
+          description = "Requested email subject alternative names.";
+          type = types.nullOr (types.listOf types.str);
+        };
+        "encodeUsagesInRequest" = mkOption {
+          description = "Whether the KeyUsage and ExtKeyUsage extensions should be set in the encoded CSR.\n\nThis option defaults to true, and should only be disabled if the target\nissuer does not support CSRs with these X509 KeyUsage/ ExtKeyUsage extensions.";
+          type = types.nullOr types.bool;
+        };
+        "ipAddresses" = mkOption {
+          description = "Requested IP address subject alternative names.";
+          type = types.nullOr (types.listOf types.str);
+        };
+        "isCA" = mkOption {
+          description = "Requested basic constraints isCA value.\nThe isCA value is used to set the `isCA` field on the created CertificateRequest\nresources. Note that the issuer may choose to ignore the requested isCA value, just\nlike any other requested attribute.\n\nIf true, this will automatically add the `cert sign` usage to the list\nof requested `usages`.";
+          type = types.nullOr types.bool;
+        };
+        "issuerRef" = mkOption {
+          description = "Reference to the issuer responsible for issuing the certificate.\nIf the issuer is namespace-scoped, it must be in the same namespace\nas the Certificate. If the issuer is cluster-scoped, it can be used\nfrom any namespace.\n\nThe `name` field of the reference must always be specified.";
+          type = submoduleOf "cert-manager.io.v1.CertificateSpecIssuerRef";
+        };
+        "keystores" = mkOption {
+          description = "Additional keystore output formats to be stored in the Certificate's Secret.";
+          type = types.nullOr (submoduleOf "cert-manager.io.v1.CertificateSpecKeystores");
+        };
+        "literalSubject" = mkOption {
+          description = "Requested X.509 certificate subject, represented using the LDAP \"String\nRepresentation of a Distinguished Name\" [1].\nImportant: the LDAP string format also specifies the order of the attributes\nin the subject, this is important when issuing certs for LDAP authentication.\nExample: `CN=foo,DC=corp,DC=example,DC=com`\nMore info [1]: https://datatracker.ietf.org/doc/html/rfc4514\nMore info: https://github.com/cert-manager/cert-manager/issues/3203\nMore info: https://github.com/cert-manager/cert-manager/issues/4424\n\nCannot be set if the `subject` or `commonName` field is set.";
+          type = types.nullOr types.str;
+        };
+        "nameConstraints" = mkOption {
+          description = "x.509 certificate NameConstraint extension which MUST NOT be used in a non-CA certificate.\nMore Info: https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.10\n\nThis is an Alpha Feature and is only enabled with the\n`--feature-gates=NameConstraints=true` option set on both\nthe controller and webhook components.";
+          type = types.nullOr (submoduleOf "cert-manager.io.v1.CertificateSpecNameConstraints");
+        };
+        "otherNames" = mkOption {
+          description = "`otherNames` is an escape hatch for SAN that allows any type. We currently restrict the support to string like otherNames, cf RFC 5280 p 37\nAny UTF8 String valued otherName can be passed with by setting the keys oid: x.x.x.x and UTF8Value: somevalue for `otherName`.\nMost commonly this would be UPN set with oid: 1.3.6.1.4.1.311.20.2.3\nYou should ensure that any OID passed is valid for the UTF8String type as we do not explicitly validate this.";
+          type = types.nullOr (types.listOf (submoduleOf "cert-manager.io.v1.CertificateSpecOtherNames"));
+        };
+        "privateKey" = mkOption {
+          description = "Private key options. These include the key algorithm and size, the used\nencoding and the rotation policy.";
+          type = types.nullOr (submoduleOf "cert-manager.io.v1.CertificateSpecPrivateKey");
+        };
+        "renewBefore" = mkOption {
+          description = "How long before the currently issued certificate's expiry cert-manager should\nrenew the certificate. For example, if a certificate is valid for 60 minutes,\nand `renewBefore=10m`, cert-manager will begin to attempt to renew the certificate\n50 minutes after it was issued (i.e. when there are 10 minutes remaining until\nthe certificate is no longer valid).\n\nNOTE: The actual lifetime of the issued certificate is used to determine the\nrenewal time. If an issuer returns a certificate with a different lifetime than\nthe one requested, cert-manager will use the lifetime of the issued certificate.\n\nIf unset, this defaults to 1/3 of the issued certificate's lifetime.\nMinimum accepted value is 5 minutes.\nValue must be in units accepted by Go time.ParseDuration https://golang.org/pkg/time/#ParseDuration.\nCannot be set if the `renewBeforePercentage` field is set.";
+          type = types.nullOr types.str;
+        };
+        "renewBeforePercentage" = mkOption {
+          description = "`renewBeforePercentage` is like `renewBefore`, except it is a relative percentage\nrather than an absolute duration. For example, if a certificate is valid for 60\nminutes, and  `renewBeforePercentage=25`, cert-manager will begin to attempt to\nrenew the certificate 45 minutes after it was issued (i.e. when there are 15\nminutes (25%) remaining until the certificate is no longer valid).\n\nNOTE: The actual lifetime of the issued certificate is used to determine the\nrenewal time. If an issuer returns a certificate with a different lifetime than\nthe one requested, cert-manager will use the lifetime of the issued certificate.\n\nValue must be an integer in the range (0,100). The minimum effective\n`renewBefore` derived from the `renewBeforePercentage` and `duration` fields is 5\nminutes.\nCannot be set if the `renewBefore` field is set.";
+          type = types.nullOr types.int;
+        };
+        "revisionHistoryLimit" = mkOption {
+          description = "The maximum number of CertificateRequest revisions that are maintained in\nthe Certificate's history. Each revision represents a single `CertificateRequest`\ncreated by this Certificate, either when it was created, renewed, or Spec\nwas changed. Revisions will be removed by oldest first if the number of\nrevisions exceeds this number.\n\nIf set, revisionHistoryLimit must be a value of `1` or greater.\nIf unset (`nil`), revisions will not be garbage collected.\nDefault value is `nil`.";
+          type = types.nullOr types.int;
+        };
+        "secretName" = mkOption {
+          description = "Name of the Secret resource that will be automatically created and\nmanaged by this Certificate resource. It will be populated with a\nprivate key and certificate, signed by the denoted issuer. The Secret\nresource lives in the same namespace as the Certificate resource.";
+          type = types.str;
+        };
+        "secretTemplate" = mkOption {
+          description = "Defines annotations and labels to be copied to the Certificate's Secret.\nLabels and annotations on the Secret will be changed as they appear on the\nSecretTemplate when added or removed. SecretTemplate annotations are added\nin conjunction with, and cannot overwrite, the base set of annotations\ncert-manager sets on the Certificate's Secret.";
+          type = types.nullOr (submoduleOf "cert-manager.io.v1.CertificateSpecSecretTemplate");
+        };
+        "subject" = mkOption {
+          description = "Requested set of X509 certificate subject attributes.\nMore info: https://datatracker.ietf.org/doc/html/rfc5280#section-4.1.2.6\n\nThe common name attribute is specified separately in the `commonName` field.\nCannot be set if the `literalSubject` field is set.";
+          type = types.nullOr (submoduleOf "cert-manager.io.v1.CertificateSpecSubject");
+        };
+        "uris" = mkOption {
+          description = "Requested URI subject alternative names.";
+          type = types.nullOr (types.listOf types.str);
+        };
+        "usages" = mkOption {
+          description = "Requested key usages and extended key usages.\nThese usages are used to set the `usages` field on the created CertificateRequest\nresources. If `encodeUsagesInRequest` is unset or set to `true`, the usages\nwill additionally be encoded in the `request` field which contains the CSR blob.\n\nIf unset, defaults to `digital signature` and `key encipherment`.";
+          type = types.nullOr (types.listOf types.str);
+        };
+      };
+
+      config = {
+        "additionalOutputFormats" = mkOverride 1002 null;
+        "commonName" = mkOverride 1002 null;
+        "dnsNames" = mkOverride 1002 null;
+        "duration" = mkOverride 1002 null;
+        "emailAddresses" = mkOverride 1002 null;
+        "encodeUsagesInRequest" = mkOverride 1002 null;
+        "ipAddresses" = mkOverride 1002 null;
+        "isCA" = mkOverride 1002 null;
+        "keystores" = mkOverride 1002 null;
+        "literalSubject" = mkOverride 1002 null;
+        "nameConstraints" = mkOverride 1002 null;
+        "otherNames" = mkOverride 1002 null;
+        "privateKey" = mkOverride 1002 null;
+        "renewBefore" = mkOverride 1002 null;
+        "renewBeforePercentage" = mkOverride 1002 null;
+        "revisionHistoryLimit" = mkOverride 1002 null;
+        "secretTemplate" = mkOverride 1002 null;
+        "subject" = mkOverride 1002 null;
+        "uris" = mkOverride 1002 null;
+        "usages" = mkOverride 1002 null;
+      };
+    };
+    "cert-manager.io.v1.CertificateSpecAdditionalOutputFormats" = {
+      options = {
+        "type" = mkOption {
+          description = "Type is the name of the format type that should be written to the\nCertificate's target Secret.";
+          type = types.str;
+        };
+      };
+
+      config = {};
+    };
+    "cert-manager.io.v1.CertificateSpecIssuerRef" = {
+      options = {
+        "group" = mkOption {
+          description = "Group of the resource being referred to.";
+          type = types.nullOr types.str;
+        };
+        "kind" = mkOption {
+          description = "Kind of the resource being referred to.";
+          type = types.nullOr types.str;
+        };
+        "name" = mkOption {
+          description = "Name of the resource being referred to.";
+          type = types.str;
+        };
+      };
+
+      config = {
+        "group" = mkOverride 1002 null;
+        "kind" = mkOverride 1002 null;
+      };
+    };
+    "cert-manager.io.v1.CertificateSpecKeystores" = {
+      options = {
+        "jks" = mkOption {
+          description = "JKS configures options for storing a JKS keystore in the\n`spec.secretName` Secret resource.";
+          type = types.nullOr (submoduleOf "cert-manager.io.v1.CertificateSpecKeystoresJks");
+        };
+        "pkcs12" = mkOption {
+          description = "PKCS12 configures options for storing a PKCS12 keystore in the\n`spec.secretName` Secret resource.";
+          type = types.nullOr (submoduleOf "cert-manager.io.v1.CertificateSpecKeystoresPkcs12");
+        };
+      };
+
+      config = {
+        "jks" = mkOverride 1002 null;
+        "pkcs12" = mkOverride 1002 null;
+      };
+    };
+    "cert-manager.io.v1.CertificateSpecKeystoresJks" = {
+      options = {
+        "alias" = mkOption {
+          description = "Alias specifies the alias of the key in the keystore, required by the JKS format.\nIf not provided, the default alias `certificate` will be used.";
+          type = types.nullOr types.str;
+        };
+        "create" = mkOption {
+          description = "Create enables JKS keystore creation for the Certificate.\nIf true, a file named `keystore.jks` will be created in the target\nSecret resource, encrypted using the password stored in\n`passwordSecretRef` or `password`.\nThe keystore file will be updated immediately.\nIf the issuer provided a CA certificate, a file named `truststore.jks`\nwill also be created in the target Secret resource, encrypted using the\npassword stored in `passwordSecretRef`\ncontaining the issuing Certificate Authority";
+          type = types.bool;
+        };
+        "password" = mkOption {
+          description = "Password provides a literal password used to encrypt the JKS keystore.\nMutually exclusive with passwordSecretRef.\nOne of password or passwordSecretRef must provide a password with a non-zero length.";
+          type = types.nullOr types.str;
+        };
+        "passwordSecretRef" = mkOption {
+          description = "PasswordSecretRef is a reference to a non-empty key in a Secret resource\ncontaining the password used to encrypt the JKS keystore.\nMutually exclusive with password.\nOne of password or passwordSecretRef must provide a password with a non-zero length.";
+          type = types.nullOr (submoduleOf "cert-manager.io.v1.CertificateSpecKeystoresJksPasswordSecretRef");
+        };
+      };
+
+      config = {
+        "alias" = mkOverride 1002 null;
+        "password" = mkOverride 1002 null;
+        "passwordSecretRef" = mkOverride 1002 null;
+      };
+    };
+    "cert-manager.io.v1.CertificateSpecKeystoresJksPasswordSecretRef" = {
+      options = {
+        "key" = mkOption {
+          description = "The key of the entry in the Secret resource's `data` field to be used.\nSome instances of this field may be defaulted, in others it may be\nrequired.";
+          type = types.nullOr types.str;
+        };
+        "name" = mkOption {
+          description = "Name of the resource being referred to.\nMore info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names";
+          type = types.str;
+        };
+      };
+
+      config = {
+        "key" = mkOverride 1002 null;
+      };
+    };
+    "cert-manager.io.v1.CertificateSpecKeystoresPkcs12" = {
+      options = {
+        "create" = mkOption {
+          description = "Create enables PKCS12 keystore creation for the Certificate.\nIf true, a file named `keystore.p12` will be created in the target\nSecret resource, encrypted using the password stored in\n`passwordSecretRef` or in `password`.\nThe keystore file will be updated immediately.\nIf the issuer provided a CA certificate, a file named `truststore.p12` will\nalso be created in the target Secret resource, encrypted using the\npassword stored in `passwordSecretRef` containing the issuing Certificate\nAuthority";
+          type = types.bool;
+        };
+        "password" = mkOption {
+          description = "Password provides a literal password used to encrypt the PKCS#12 keystore.\nMutually exclusive with passwordSecretRef.\nOne of password or passwordSecretRef must provide a password with a non-zero length.";
+          type = types.nullOr types.str;
+        };
+        "passwordSecretRef" = mkOption {
+          description = "PasswordSecretRef is a reference to a non-empty key in a Secret resource\ncontaining the password used to encrypt the PKCS#12 keystore.\nMutually exclusive with password.\nOne of password or passwordSecretRef must provide a password with a non-zero length.";
+          type = types.nullOr (submoduleOf "cert-manager.io.v1.CertificateSpecKeystoresPkcs12PasswordSecretRef");
+        };
+        "profile" = mkOption {
+          description = "Profile specifies the key and certificate encryption algorithms and the HMAC algorithm\nused to create the PKCS12 keystore. Default value is `LegacyRC2` for backward compatibility.\n\nIf provided, allowed values are:\n`LegacyRC2`: Deprecated. Not supported by default in OpenSSL 3 or Java 20.\n`LegacyDES`: Less secure algorithm. Use this option for maximal compatibility.\n`Modern2023`: Secure algorithm. Use this option in case you have to always use secure algorithms\n(eg. because of company policy). Please note that the security of the algorithm is not that important\nin reality, because the unencrypted certificate and private key are also stored in the Secret.";
+          type = types.nullOr types.str;
+        };
+      };
+
+      config = {
+        "password" = mkOverride 1002 null;
+        "passwordSecretRef" = mkOverride 1002 null;
+        "profile" = mkOverride 1002 null;
+      };
+    };
+    "cert-manager.io.v1.CertificateSpecKeystoresPkcs12PasswordSecretRef" = {
+      options = {
+        "key" = mkOption {
+          description = "The key of the entry in the Secret resource's `data` field to be used.\nSome instances of this field may be defaulted, in others it may be\nrequired.";
+          type = types.nullOr types.str;
+        };
+        "name" = mkOption {
+          description = "Name of the resource being referred to.\nMore info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names";
+          type = types.str;
+        };
+      };
+
+      config = {
+        "key" = mkOverride 1002 null;
+      };
+    };
+    "cert-manager.io.v1.CertificateSpecNameConstraints" = {
+      options = {
+        "critical" = mkOption {
+          description = "if true then the name constraints are marked critical.";
+          type = types.nullOr types.bool;
+        };
+        "excluded" = mkOption {
+          description = "Excluded contains the constraints which must be disallowed. Any name matching a\nrestriction in the excluded field is invalid regardless\nof information appearing in the permitted";
+          type = types.nullOr (submoduleOf "cert-manager.io.v1.CertificateSpecNameConstraintsExcluded");
+        };
+        "permitted" = mkOption {
+          description = "Permitted contains the constraints in which the names must be located.";
+          type = types.nullOr (submoduleOf "cert-manager.io.v1.CertificateSpecNameConstraintsPermitted");
+        };
+      };
+
+      config = {
+        "critical" = mkOverride 1002 null;
+        "excluded" = mkOverride 1002 null;
+        "permitted" = mkOverride 1002 null;
+      };
+    };
+    "cert-manager.io.v1.CertificateSpecNameConstraintsExcluded" = {
+      options = {
+        "dnsDomains" = mkOption {
+          description = "DNSDomains is a list of DNS domains that are permitted or excluded.";
+          type = types.nullOr (types.listOf types.str);
+        };
+        "emailAddresses" = mkOption {
+          description = "EmailAddresses is a list of Email Addresses that are permitted or excluded.";
+          type = types.nullOr (types.listOf types.str);
+        };
+        "ipRanges" = mkOption {
+          description = "IPRanges is a list of IP Ranges that are permitted or excluded.\nThis should be a valid CIDR notation.";
+          type = types.nullOr (types.listOf types.str);
+        };
+        "uriDomains" = mkOption {
+          description = "URIDomains is a list of URI domains that are permitted or excluded.";
+          type = types.nullOr (types.listOf types.str);
+        };
+      };
+
+      config = {
+        "dnsDomains" = mkOverride 1002 null;
+        "emailAddresses" = mkOverride 1002 null;
+        "ipRanges" = mkOverride 1002 null;
+        "uriDomains" = mkOverride 1002 null;
+      };
+    };
+    "cert-manager.io.v1.CertificateSpecNameConstraintsPermitted" = {
+      options = {
+        "dnsDomains" = mkOption {
+          description = "DNSDomains is a list of DNS domains that are permitted or excluded.";
+          type = types.nullOr (types.listOf types.str);
+        };
+        "emailAddresses" = mkOption {
+          description = "EmailAddresses is a list of Email Addresses that are permitted or excluded.";
+          type = types.nullOr (types.listOf types.str);
+        };
+        "ipRanges" = mkOption {
+          description = "IPRanges is a list of IP Ranges that are permitted or excluded.\nThis should be a valid CIDR notation.";
+          type = types.nullOr (types.listOf types.str);
+        };
+        "uriDomains" = mkOption {
+          description = "URIDomains is a list of URI domains that are permitted or excluded.";
+          type = types.nullOr (types.listOf types.str);
+        };
+      };
+
+      config = {
+        "dnsDomains" = mkOverride 1002 null;
+        "emailAddresses" = mkOverride 1002 null;
+        "ipRanges" = mkOverride 1002 null;
+        "uriDomains" = mkOverride 1002 null;
+      };
+    };
+    "cert-manager.io.v1.CertificateSpecOtherNames" = {
+      options = {
+        "oid" = mkOption {
+          description = "OID is the object identifier for the otherName SAN.\nThe object identifier must be expressed as a dotted string, for\nexample, \"1.2.840.113556.1.4.221\".";
+          type = types.nullOr types.str;
+        };
+        "utf8Value" = mkOption {
+          description = "utf8Value is the string value of the otherName SAN.\nThe utf8Value accepts any valid UTF8 string to set as value for the otherName SAN.";
+          type = types.nullOr types.str;
+        };
+      };
+
+      config = {
+        "oid" = mkOverride 1002 null;
+        "utf8Value" = mkOverride 1002 null;
+      };
+    };
+    "cert-manager.io.v1.CertificateSpecPrivateKey" = {
+      options = {
+        "algorithm" = mkOption {
+          description = "Algorithm is the private key algorithm of the corresponding private key\nfor this certificate.\n\nIf provided, allowed values are either `RSA`, `ECDSA` or `Ed25519`.\nIf `algorithm` is specified and `size` is not provided,\nkey size of 2048 will be used for `RSA` key algorithm and\nkey size of 256 will be used for `ECDSA` key algorithm.\nkey size is ignored when using the `Ed25519` key algorithm.";
+          type = types.nullOr types.str;
+        };
+        "encoding" = mkOption {
+          description = "The private key cryptography standards (PKCS) encoding for this\ncertificate's private key to be encoded in.\n\nIf provided, allowed values are `PKCS1` and `PKCS8` standing for PKCS#1\nand PKCS#8, respectively.\nDefaults to `PKCS1` if not specified.";
+          type = types.nullOr types.str;
+        };
+        "rotationPolicy" = mkOption {
+          description = "RotationPolicy controls how private keys should be regenerated when a\nre-issuance is being processed.\n\nIf set to `Never`, a private key will only be generated if one does not\nalready exist in the target `spec.secretName`. If one does exist but it\ndoes not have the correct algorithm or size, a warning will be raised\nto await user intervention.\nIf set to `Always`, a private key matching the specified requirements\nwill be generated whenever a re-issuance occurs.\nDefault is `Never` for backward compatibility.";
+          type = types.nullOr types.str;
+        };
+        "size" = mkOption {
+          description = "Size is the key bit size of the corresponding private key for this certificate.\n\nIf `algorithm` is set to `RSA`, valid values are `2048`, `4096` or `8192`,\nand will default to `2048` if not specified.\nIf `algorithm` is set to `ECDSA`, valid values are `256`, `384` or `521`,\nand will default to `256` if not specified.\nIf `algorithm` is set to `Ed25519`, Size is ignored.\nNo other values are allowed.";
+          type = types.nullOr types.int;
+        };
+      };
+
+      config = {
+        "algorithm" = mkOverride 1002 null;
+        "encoding" = mkOverride 1002 null;
+        "rotationPolicy" = mkOverride 1002 null;
+        "size" = mkOverride 1002 null;
+      };
+    };
+    "cert-manager.io.v1.CertificateSpecSecretTemplate" = {
+      options = {
+        "annotations" = mkOption {
+          description = "Annotations is a key value map to be copied to the target Kubernetes Secret.";
+          type = types.nullOr (types.attrsOf types.str);
+        };
+        "labels" = mkOption {
+          description = "Labels is a key value map to be copied to the target Kubernetes Secret.";
+          type = types.nullOr (types.attrsOf types.str);
+        };
+      };
+
+      config = {
+        "annotations" = mkOverride 1002 null;
+        "labels" = mkOverride 1002 null;
+      };
+    };
+    "cert-manager.io.v1.CertificateSpecSubject" = {
+      options = {
+        "countries" = mkOption {
+          description = "Countries to be used on the Certificate.";
+          type = types.nullOr (types.listOf types.str);
+        };
+        "localities" = mkOption {
+          description = "Cities to be used on the Certificate.";
+          type = types.nullOr (types.listOf types.str);
+        };
+        "organizationalUnits" = mkOption {
+          description = "Organizational Units to be used on the Certificate.";
+          type = types.nullOr (types.listOf types.str);
+        };
+        "organizations" = mkOption {
+          description = "Organizations to be used on the Certificate.";
+          type = types.nullOr (types.listOf types.str);
+        };
+        "postalCodes" = mkOption {
+          description = "Postal codes to be used on the Certificate.";
+          type = types.nullOr (types.listOf types.str);
+        };
+        "provinces" = mkOption {
+          description = "State/Provinces to be used on the Certificate.";
+          type = types.nullOr (types.listOf types.str);
+        };
+        "serialNumber" = mkOption {
+          description = "Serial number to be used on the Certificate.";
+          type = types.nullOr types.str;
+        };
+        "streetAddresses" = mkOption {
+          description = "Street addresses to be used on the Certificate.";
+          type = types.nullOr (types.listOf types.str);
+        };
+      };
+
+      config = {
+        "countries" = mkOverride 1002 null;
+        "localities" = mkOverride 1002 null;
+        "organizationalUnits" = mkOverride 1002 null;
+        "organizations" = mkOverride 1002 null;
+        "postalCodes" = mkOverride 1002 null;
+        "provinces" = mkOverride 1002 null;
+        "serialNumber" = mkOverride 1002 null;
+        "streetAddresses" = mkOverride 1002 null;
+      };
+    };
+    "cert-manager.io.v1.CertificateStatus" = {
+      options = {
+        "conditions" = mkOption {
+          description = "List of status conditions to indicate the status of certificates.\nKnown condition types are `Ready` and `Issuing`.";
+          type = types.nullOr (types.listOf (submoduleOf "cert-manager.io.v1.CertificateStatusConditions"));
+        };
+        "failedIssuanceAttempts" = mkOption {
+          description = "The number of continuous failed issuance attempts up till now. This\nfield gets removed (if set) on a successful issuance and gets set to\n1 if unset and an issuance has failed. If an issuance has failed, the\ndelay till the next issuance will be calculated using formula\ntime.Hour * 2 ^ (failedIssuanceAttempts - 1).";
+          type = types.nullOr types.int;
+        };
+        "lastFailureTime" = mkOption {
+          description = "LastFailureTime is set only if the latest issuance for this\nCertificate failed and contains the time of the failure. If an\nissuance has failed, the delay till the next issuance will be\ncalculated using formula time.Hour * 2 ^ (failedIssuanceAttempts -\n1). If the latest issuance has succeeded this field will be unset.";
+          type = types.nullOr types.str;
+        };
+        "nextPrivateKeySecretName" = mkOption {
+          description = "The name of the Secret resource containing the private key to be used\nfor the next certificate iteration.\nThe keymanager controller will automatically set this field if the\n`Issuing` condition is set to `True`.\nIt will automatically unset this field when the Issuing condition is\nnot set or False.";
+          type = types.nullOr types.str;
+        };
+        "notAfter" = mkOption {
+          description = "The expiration time of the certificate stored in the secret named\nby this resource in `spec.secretName`.";
+          type = types.nullOr types.str;
+        };
+        "notBefore" = mkOption {
+          description = "The time after which the certificate stored in the secret named\nby this resource in `spec.secretName` is valid.";
+          type = types.nullOr types.str;
+        };
+        "renewalTime" = mkOption {
+          description = "RenewalTime is the time at which the certificate will be next\nrenewed.\nIf not set, no upcoming renewal is scheduled.";
+          type = types.nullOr types.str;
+        };
+        "revision" = mkOption {
+          description = "The current 'revision' of the certificate as issued.\n\nWhen a CertificateRequest resource is created, it will have the\n`cert-manager.io/certificate-revision` set to one greater than the\ncurrent value of this field.\n\nUpon issuance, this field will be set to the value of the annotation\non the CertificateRequest resource used to issue the certificate.\n\nPersisting the value on the CertificateRequest resource allows the\ncertificates controller to know whether a request is part of an old\nissuance or if it is part of the ongoing revision's issuance by\nchecking if the revision value in the annotation is greater than this\nfield.";
+          type = types.nullOr types.int;
+        };
+      };
+
+      config = {
+        "conditions" = mkOverride 1002 null;
+        "failedIssuanceAttempts" = mkOverride 1002 null;
+        "lastFailureTime" = mkOverride 1002 null;
+        "nextPrivateKeySecretName" = mkOverride 1002 null;
+        "notAfter" = mkOverride 1002 null;
+        "notBefore" = mkOverride 1002 null;
+        "renewalTime" = mkOverride 1002 null;
+        "revision" = mkOverride 1002 null;
+      };
+    };
+    "cert-manager.io.v1.CertificateStatusConditions" = {
+      options = {
+        "lastTransitionTime" = mkOption {
+          description = "LastTransitionTime is the timestamp corresponding to the last status\nchange of this condition.";
+          type = types.nullOr types.str;
+        };
+        "message" = mkOption {
+          description = "Message is a human readable description of the details of the last\ntransition, complementing reason.";
+          type = types.nullOr types.str;
+        };
+        "observedGeneration" = mkOption {
+          description = "If set, this represents the .metadata.generation that the condition was\nset based upon.\nFor instance, if .metadata.generation is currently 12, but the\n.status.condition[x].observedGeneration is 9, the condition is out of date\nwith respect to the current state of the Certificate.";
+          type = types.nullOr types.int;
+        };
+        "reason" = mkOption {
+          description = "Reason is a brief machine readable explanation for the condition's last\ntransition.";
+          type = types.nullOr types.str;
+        };
+        "status" = mkOption {
+          description = "Status of the condition, one of (`True`, `False`, `Unknown`).";
+          type = types.str;
+        };
+        "type" = mkOption {
+          description = "Type of the condition, known values are (`Ready`, `Issuing`).";
+          type = types.str;
+        };
+      };
+
+      config = {
+        "lastTransitionTime" = mkOverride 1002 null;
+        "message" = mkOverride 1002 null;
+        "observedGeneration" = mkOverride 1002 null;
+        "reason" = mkOverride 1002 null;
+      };
+    };
     "cert-manager.io.v1.Issuer" = {
       options = {
         "apiVersion" = mkOption {
@@ -3288,6 +3833,11 @@ in {
   options = {
     resources =
       {
+        "cert-manager.io"."v1"."Certificate" = mkOption {
+          description = "A Certificate resource should be created to ensure an up to date and signed\nX.509 certificate is stored in the Kubernetes Secret resource named in `spec.secretName`.\n\nThe stored certificate will be renewed before it expires (as configured by `spec.renewBefore`).";
+          type = types.attrsOf (submoduleForDefinition "cert-manager.io.v1.Certificate" "certificates" "Certificate" "cert-manager.io" "v1");
+          default = {};
+        };
         "cert-manager.io"."v1"."Issuer" = mkOption {
           description = "An Issuer represents a certificate issuing authority which can be\nreferenced as part of `issuerRef` fields.\nIt is scoped to a single namespace and can therefore only be referenced by\nresources within the same namespace.";
           type = types.attrsOf (submoduleForDefinition "cert-manager.io.v1.Issuer" "issuers" "Issuer" "cert-manager.io" "v1");
@@ -3295,6 +3845,11 @@ in {
         };
       }
       // {
+        "certificates" = mkOption {
+          description = "A Certificate resource should be created to ensure an up to date and signed\nX.509 certificate is stored in the Kubernetes Secret resource named in `spec.secretName`.\n\nThe stored certificate will be renewed before it expires (as configured by `spec.renewBefore`).";
+          type = types.attrsOf (submoduleForDefinition "cert-manager.io.v1.Certificate" "certificates" "Certificate" "cert-manager.io" "v1");
+          default = {};
+        };
         "issuers" = mkOption {
           description = "An Issuer represents a certificate issuing authority which can be\nreferenced as part of `issuerRef` fields.\nIt is scoped to a single namespace and can therefore only be referenced by\nresources within the same namespace.";
           type = types.attrsOf (submoduleForDefinition "cert-manager.io.v1.Issuer" "issuers" "Issuer" "cert-manager.io" "v1");
@@ -3310,6 +3865,13 @@ in {
     # register resource types
     types = [
       {
+        name = "certificates";
+        group = "cert-manager.io";
+        version = "v1";
+        kind = "Certificate";
+        attrName = "certificates";
+      }
+      {
         name = "issuers";
         group = "cert-manager.io";
         version = "v1";
@@ -3319,11 +3881,19 @@ in {
     ];
 
     resources = {
+      "cert-manager.io"."v1"."Certificate" =
+        mkAliasDefinitions options.resources."certificates";
       "cert-manager.io"."v1"."Issuer" =
         mkAliasDefinitions options.resources."issuers";
     };
 
     defaults = [
+      {
+        group = "cert-manager.io";
+        version = "v1";
+        kind = "Certificate";
+        default.metadata.namespace = lib.mkDefault config.namespace;
+      }
       {
         group = "cert-manager.io";
         version = "v1";
