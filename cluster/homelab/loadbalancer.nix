@@ -20,9 +20,16 @@
 
         values = {
           installCRDs = true;
+          envFrom = [
+            { secretRef.name = "azure-acme-environment"; }
+          ];
         };
       };
     };
+
+    yamls = [
+      (builtins.readFile ./loadbalancer-secrets.sops.yaml)
+    ];
 
     resources = {
       ciliumLoadBalancerIPPools = {

@@ -1,0 +1,5 @@
+creation_rules:
+# Encrypt all secrets to be used by SOPS operator
+- path_regex: '.*.sops.yaml'
+  encrypted_regex: ^(data|stringData)$
+  age: age14u8amhy8uks7vakhw3s6hpc3cvjxnnvqv636430whuncqqg46cjq5ry7pg
