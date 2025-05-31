@@ -36,7 +36,7 @@
       ingressRoutes = {
         cilium-dashboard-route.spec = {
           entryPoints = [
-            "web"
+            "websecure"
           ];
           routes = [
             {
@@ -51,6 +51,7 @@
               ];
             }
           ];
+          tls.secretName = "anderwersede-tls-certificate";
         };
       };
     };

@@ -27,7 +27,7 @@
       ingressRoutes = {
         argocd-dashboard-route.spec = {
           entryPoints = [
-            "web"
+            "websecure"
           ];
           routes = [
             {
@@ -42,6 +42,7 @@
               ];
             }
           ];
+          tls.secretName = "anderwersede-tls-certificate";
         };
       };
     };
