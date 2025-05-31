@@ -41,6 +41,7 @@ in
             {
               dns01 = {
                 azureDNS = {
+                  clientID = "";
                   clientSecretSecretRef = {
                     name = "azure-acme-environment";
                     key = "AZURE_CLIENT_SECRET";
