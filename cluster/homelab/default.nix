@@ -4,11 +4,13 @@
     ./argocd.nix
     ./cilium.nix
     ./loadbalancer.nix
+    ./secrets.nix
   ];
 
   nixidy = {
     resourceImports = [
       ../crd/cilium.nix
+      ../crd/sops.nix
       ../crd/traefik.nix
     ];
 
