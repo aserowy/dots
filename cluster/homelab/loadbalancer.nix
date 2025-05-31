@@ -1,4 +1,7 @@
 { charts, ... }:
+let
+
+in
 {
   applications.loadbalancer = {
     namespace = "loadbalancer";
@@ -19,10 +22,7 @@
         chart = charts.jetstack.cert-manager;
 
         values = {
-          installCRDs = true;
-          envFrom = [
-            { secretRef.name = "azure-acme-environment"; }
-          ];
+          crds.enabled = true;
         };
       };
     };

@@ -9,6 +9,7 @@
 
   nixidy = {
     resourceImports = [
+      ../crd/cert-manager.nix
       ../crd/cilium.nix
       ../crd/sops.nix
       ../crd/traefik.nix

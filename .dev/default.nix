@@ -6,6 +6,16 @@
 }:
 let
   generators = {
+    cert-manager = nixidy.packages.${pkgs.system}.generators.fromCRD {
+      name = "cert-manager";
+      src = pkgs.fetchFromGitHub {
+        owner = "cert-manager";
+        repo = "cert-manager";
+        rev = "v1.17.2";
+        hash = "sha256-ysEV9qKJ08ugtg5CmZKR+YkJAec6pzDalFlph9hGqNQ=";
+      };
+      crds = [ "deploy/crds/crd-issuers.yaml" ];
+    };
     cilium = nixidy.packages.${pkgs.system}.generators.fromCRD {
       name = "cilium";
       src = pkgs.fetchFromGitHub {
@@ -56,6 +66,8 @@ pkgs.mkShell {
     ];
 
   shellHook = ''
+    echo "generate cert-manager"
+    cat ${generators.cert-manager} > ./cluster/crd/cert-manager.nix
     echo "generate cilium"
     cat ${generators.cilium} > ./cluster/crd/cilium.nix
     echo "generate sops"
