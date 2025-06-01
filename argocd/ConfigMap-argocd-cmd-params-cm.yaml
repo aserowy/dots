@@ -17,6 +17,7 @@ data:
   controller.sync.timeout.seconds: "0"
   dexserver.log.format: text
   dexserver.log.level: info
+  hydrator.enabled: "false"
   notificationscontroller.log.format: text
   notificationscontroller.log.level: info
   otlp.address: ""
@@ -46,7 +47,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-cmd-params-cm
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.0.4
-    helm.sh/chart: argo-cd-8.0.12
+    app.kubernetes.io/version: v3.0.5
+    helm.sh/chart: argo-cd-8.0.14
   name: argocd-cmd-params-cm
   namespace: argocd

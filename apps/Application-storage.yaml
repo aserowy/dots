@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: storage
+  namespace: argocd
+spec:
+  destination:
+    namespace: longhorn-system
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: ./storage
+    repoURL: https://github.com/aserowy/dots.git
+    targetRevision: homelab
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
