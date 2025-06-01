@@ -5,12 +5,14 @@
     ./cilium.nix
     ./loadbalancer.nix
     ./secrets.nix
+    ./storage.nix
   ];
 
   nixidy = {
     resourceImports = [
       ../crd/cert-manager.nix
       ../crd/cilium.nix
+      ../crd/longhorn.nix
       ../crd/sops.nix
       ../crd/traefik.nix
     ];

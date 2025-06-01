@@ -5,6 +5,35 @@
   pkgs,
 }:
 let
+  longhorn-crds = pkgs.stdenv.mkDerivation {
+    name = "longhorn-crds";
+    src = nixhelm.chartsDerivations.${pkgs.system}.longhorn.longhorn;
+    installPhase = ''
+      awk '
+        BEGIN{f="split_crd_0.yaml"}
+        /\-\-\-/{f="split_crd_"NR".yaml"}
+        !/\-\-\-/{
+          print > f
+        }
+      ' $src/templates/crds.yaml
+
+      for yaml in split_crd_*; do
+        sed -i 's/{{-.*}}//g' $yaml
+        name=$(awk '
+          in_metadata=="" && /^metadata:/ {in_metadata="inside"}
+          in_metadata=="inside" && /name:/{
+            print $NF
+            in_metadata="outside"
+          }
+        ' $yaml)
+        mv $yaml $name.yaml
+      done
+
+      mkdir -p $out/
+      cp *.yaml $out/
+    '';
+  };
+
   generators = {
     cert-manager = nixidy.packages.${pkgs.system}.generators.fromCRD {
       name = "cert-manager";
@@ -31,6 +60,13 @@ let
         "pkg/k8s/apis/cilium.io/client/crds/v2/ciliumnetworkpolicies.yaml"
         "pkg/k8s/apis/cilium.io/client/crds/v2/ciliumclusterwidenetworkpolicies.yaml"
         "pkg/k8s/apis/cilium.io/client/crds/v2alpha1/ciliumloadbalancerippools.yaml"
+      ];
+    };
+    longhorn = nixidy.packages.${pkgs.system}.generators.fromCRD {
+      name = "longhorn";
+      src = longhorn-crds;
+      crds = [
+        "recurringjobs.longhorn.io.yaml"
       ];
     };
     sops = nixidy.packages.${pkgs.system}.generators.fromCRD {
@@ -74,6 +110,8 @@ pkgs.mkShell {
     cat ${generators.cert-manager} > ./cluster/crd/cert-manager.nix
     echo "generate cilium"
     cat ${generators.cilium} > ./cluster/crd/cilium.nix
+    echo "generate longhorn"
+    cat ${generators.longhorn} > ./cluster/crd/longhorn.nix
     echo "generate sops"
     cat ${generators.sops} > ./cluster/crd/sops.nix
     echo "generate traefik"

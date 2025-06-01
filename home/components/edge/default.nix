@@ -13,6 +13,7 @@ let
 
   # FIX: remove after edge maintainer found
   # https://github.com/NixOS/nixpkgs/commits/47dec1cd02e559655a90d3d2748aa56e04459a86/pkgs/by-name/mi/microsoft-edge
+  # https://nixpkgs-tracker.ocfox.me/?pr=411663
   pkgs =
     import
       (builtins.fetchGit {
