@@ -8,6 +8,7 @@
       chart = charts.longhorn.longhorn;
 
       values = {
+        preUpgradeChecker.jobEnabled = false;
       };
     };
   };
