@@ -16,7 +16,7 @@
 
     resources = {
       ingressRoutes = {
-        cilium-dashboard-route.spec = {
+        pihole-dashboard-route.spec = {
           entryPoints = [
             "websecure"
           ];
