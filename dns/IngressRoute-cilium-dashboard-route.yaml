@@ -1,0 +1,17 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: cilium-dashboard-route
+  namespace: dns
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`dns.anderwerse.de`)
+      services:
+        - name: pihole-web
+          namespace: dns
+          port: 80
+  tls:
+    secretName: anderwersede-tls-certificate
