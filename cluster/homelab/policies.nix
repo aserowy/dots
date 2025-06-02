@@ -5,8 +5,8 @@
     createNamespace = true;
 
     annotations = {
-      serverSideDiff = true;
-      includeMutationWebhook = true;
+      serverSideDiff = "true";
+      includeMutationWebhook = "true";
     };
 
     syncPolicy.syncOptions.serverSideApply = true;
