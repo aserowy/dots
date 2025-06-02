@@ -13,6 +13,31 @@
       };
     };
 
+    resources = {
+      ingressRoutes = {
+        longhorn-dashboard-route.spec = {
+          entryPoints = [
+            "websecure"
+          ];
+          routes = [
+            {
+              match = "Host(`longhorn.anderwerse.de`)";
+              kind = "Rule";
+              services = [
+                {
+                  name = "longhorn-frontend";
+                  namespace = "longhorn-system";
+                  port = 80;
+                }
+              ];
+            }
+          ];
+          tls.secretName = "anderwersede-tls-certificate";
+        };
+      };
+    };
+
+    # NOTE: patching path to enable longhorn on nixos
     yamls = [
       ''
         apiVersion: v1
