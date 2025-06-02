@@ -4,6 +4,7 @@
     ./argocd.nix
     ./cilium.nix
     ./loadbalancer.nix
+    ./policies.nix
     ./secrets.nix
     ./storage.nix
   ];
@@ -12,7 +13,6 @@
     resourceImports = [
       ../crd/cert-manager.nix
       ../crd/cilium.nix
-      ../crd/longhorn.nix
       ../crd/sops.nix
       ../crd/traefik.nix
     ];

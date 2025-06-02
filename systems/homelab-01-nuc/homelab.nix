@@ -25,34 +25,31 @@
     };
   };
 
+  # NOTE: longhorn requirement
+  boot.supportedFilesystems = [ "nfs" ];
+
+  # NOTE: longhorn requirement
+  environment.systemPackages = with pkgs; [
+    cryptsetup
+    nfs-utils
+  ];
+
   services = {
+    # NOTE: longhorn requirement
+    nfs.server.enable = true;
+    rpcbind.enable = true;
+
+    openiscsi = {
+      enable = true;
+      name = "iqn.2025-03.com.open-iscsi:${config.networking.hostName}";
+    };
+
     k3s = {
       enable = true;
       clusterInit = true;
       tokenFile = config.sops.secrets."k3s/cluster/token".path;
       extraFlags =
         let
-          admissionControlConfig = pkgs.writeText "k3s-admission-control-config.yaml" ''
-            apiVersion: apiserver.config.k8s.io/v1
-            kind: AdmissionConfiguration
-            plugins:
-            - name: PodSecurity
-              configuration:
-                apiVersion: pod-security.admission.config.k8s.io/v1beta1
-                kind: PodSecurityConfiguration
-                defaults:
-                  enforce: "baseline"
-                  enforce-version: "latest"
-                  audit: "restricted"
-                  audit-version: "latest"
-                  warn: "restricted"
-                  warn-version: "latest"
-                exemptions:
-                  usernames: []
-                  runtimeClasses: []
-                  namespaces: [kube-system]
-          '';
-
           serverConfig = pkgs.writeText "k3s-config.yaml" (
             lib.generators.toYAML { } {
               # instead cilium will be deployed
@@ -71,7 +68,6 @@
               egress-selector-mode = "cluster";
 
               kube-apiserver-arg = [
-                "admission-control-config-file=${admissionControlConfig}"
                 "anonymous-auth=true"
               ];
             }

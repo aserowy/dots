@@ -8,6 +8,7 @@
       chart = charts.longhorn.longhorn;
 
       values = {
+        # NOTE: must be disabled for helm deployments inside argo cd
         preUpgradeChecker.jobEnabled = false;
       };
     };
