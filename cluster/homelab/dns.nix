@@ -8,11 +8,18 @@
       chart = charts.mojo2600.pihole;
 
       values = {
+        admin = {
+          existingSecret = "pihole-dashboard";
+        };
         persistentVolumeClaim = {
           enabled = true;
         };
       };
     };
+
+    yamls = [
+      (builtins.readFile ./pihole-secrets.sops.yaml)
+    ];
 
     resources = {
       ingressRoutes = {
