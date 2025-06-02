@@ -4,7 +4,14 @@
     namespace = "policies";
     createNamespace = true;
 
-    helm.releases.sops-policies-operator = {
+    annotations = {
+      serverSideDiff = true;
+      includeMutationWebhook = true;
+    };
+
+    syncPolicy.syncOptions.serverSideApply = true;
+
+    helm.releases.kyverno = {
       chart = charts.kyverno.kyverno;
 
       values = {
