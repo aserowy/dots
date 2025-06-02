@@ -1,7 +1,4 @@
 { charts, ... }:
-let
-
-in
 {
   applications.loadbalancer = {
     namespace = "loadbalancer";
