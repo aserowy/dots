@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: pihole
+    app.kubernetes.io/name: pihole
+    chart: pihole-2.31.0
+    heritage: Helm
+    release: pihole
+  name: pihole-web
+  namespace: dns
+spec:
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: http
+    - name: https
+      port: 443
+      protocol: TCP
+      targetPort: https
+  selector:
+    app: pihole
+    release: pihole
+  type: ClusterIP
