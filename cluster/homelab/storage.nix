@@ -37,8 +37,38 @@
       };
     };
 
-    # NOTE: patching path to enable longhorn on nixos
     yamls = [
+      # NOTE: cleaning resources
+      ''
+        apiVersion: longhorn.io/v1beta2
+        kind: RecurringJob
+        metadata:
+          name: filesystem-trim
+          namespace: longhorn-system
+        spec:
+          concurrency: 1
+          cron: 0 0 * * *
+          name: filesystem-trim
+          task: filesystem-trim
+          groups:
+            - default
+      ''
+      ''
+        apiVersion: longhorn.io/v1beta2
+        kind: RecurringJob
+        metadata:
+          name: snapshot-cleanup
+          namespace: longhorn-system
+        spec:
+          concurrency: 1
+          cron: 12 0 * * *
+          groups:
+            - default
+          name: snapshot-cleanup
+          task: snapshot-cleanup
+      ''
+
+      # NOTE: patching path to enable longhorn on nixos
       ''
         apiVersion: v1
         kind: ConfigMap
