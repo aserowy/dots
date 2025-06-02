@@ -13,9 +13,6 @@
 
     helm.releases.kyverno = {
       chart = charts.kyverno.kyverno;
-
-      values = {
-      };
     };
   };
 }
