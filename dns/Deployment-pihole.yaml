@@ -103,8 +103,9 @@ spec:
       dnsPolicy: None
       hostNetwork: false
       volumes:
-        - emptyDir: {}
-          name: config
+        - name: config
+          persistentVolumeClaim:
+            claimName: pihole
         - configMap:
             defaultMode: 420
             name: pihole-custom-dnsmasq
