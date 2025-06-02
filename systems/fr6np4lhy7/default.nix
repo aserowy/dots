@@ -33,23 +33,27 @@ revision:
 
   programs.zsh.enable = true;
 
-  system.defaults = {
-    dock = {
-      autohide = true;
-      orientation = "left";
-      show-recents = false;
-      showhidden = true;
-      static-only = true;
-      tilesize = 32;
+  system = {
+    primaryUser = "alexander.serowy";
+
+    defaults = {
+      dock = {
+        autohide = true;
+        orientation = "left";
+        show-recents = false;
+        showhidden = true;
+        static-only = true;
+        tilesize = 32;
+      };
+
+      finder.FXPreferredViewStyle = "clmv";
+
+      NSGlobalDomain = {
+        AppleICUForce24HourTime = true;
+        AppleInterfaceStyle = "Dark";
+      };
+
+      SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
     };
-
-    finder.FXPreferredViewStyle = "clmv";
-
-    NSGlobalDomain = {
-      AppleICUForce24HourTime = true;
-      AppleInterfaceStyle = "Dark";
-    };
-
-    SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
   };
 }
