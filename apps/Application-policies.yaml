@@ -1,6 +1,9 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
+  annotations:
+    includeMutationWebhook: "true"
+    serverSideDiff: "true"
   name: policies
   namespace: argocd
 spec:
@@ -16,3 +19,5 @@ spec:
     automated:
       prune: true
       selfHeal: true
+    syncOptions:
+      - ServerSideApply=true

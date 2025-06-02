@@ -3,9 +3,9 @@ kind: Deployment
 metadata:
   labels:
     app.kubernetes.io/component: admission-controller
-    app.kubernetes.io/instance: sops-policies-operator
+    app.kubernetes.io/instance: kyverno
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/part-of: sops-policies-operator-kyverno
+    app.kubernetes.io/part-of: kyverno
     app.kubernetes.io/version: 3.4.1
     helm.sh/chart: kyverno-3.4.1
   name: kyverno-admission-controller
@@ -15,8 +15,8 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/component: admission-controller
-      app.kubernetes.io/instance: sops-policies-operator
-      app.kubernetes.io/part-of: sops-policies-operator-kyverno
+      app.kubernetes.io/instance: kyverno
+      app.kubernetes.io/part-of: kyverno
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -26,9 +26,9 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/component: admission-controller
-        app.kubernetes.io/instance: sops-policies-operator
+        app.kubernetes.io/instance: kyverno
         app.kubernetes.io/managed-by: Helm
-        app.kubernetes.io/part-of: sops-policies-operator-kyverno
+        app.kubernetes.io/part-of: kyverno
         app.kubernetes.io/version: 3.4.1
         helm.sh/chart: kyverno-3.4.1
     spec:
@@ -46,8 +46,8 @@ spec:
               weight: 1
       containers:
         - args:
-            - --caSecretName=sops-policies-operator-kyverno-svc.policies.svc.kyverno-tls-ca
-            - --tlsSecretName=sops-policies-operator-kyverno-svc.policies.svc.kyverno-tls-pair
+            - --caSecretName=kyverno-svc.policies.svc.kyverno-tls-ca
+            - --tlsSecretName=kyverno-svc.policies.svc.kyverno-tls-pair
             - --backgroundServiceAccountName=system:serviceaccount:policies:kyverno-background-controller
             - --reportsServiceAccountName=system:serviceaccount:policies:kyverno-reports-controller
             - --servicePort=443
@@ -76,9 +76,9 @@ spec:
             - --enableReporting=validate,mutate,mutateExisting,imageVerify,generate
           env:
             - name: INIT_CONFIG
-              value: sops-policies-operator-kyverno
+              value: kyverno
             - name: METRICS_CONFIG
-              value: sops-policies-operator-kyverno-metrics
+              value: kyverno-metrics
             - name: KYVERNO_NAMESPACE
               valueFrom:
                 fieldRef:
@@ -90,9 +90,9 @@ spec:
             - name: KYVERNO_SERVICEACCOUNT_NAME
               value: kyverno-admission-controller
             - name: KYVERNO_ROLE_NAME
-              value: sops-policies-operator-kyverno:admission-controller
+              value: kyverno:admission-controller
             - name: KYVERNO_SVC
-              value: sops-policies-operator-kyverno-svc
+              value: kyverno-svc
             - name: TUF_ROOT
               value: /.sigstore
             - name: KYVERNO_DEPLOYMENT
@@ -163,11 +163,11 @@ spec:
             - name: KYVERNO_SERVICEACCOUNT_NAME
               value: kyverno-admission-controller
             - name: KYVERNO_ROLE_NAME
-              value: sops-policies-operator-kyverno:admission-controller
+              value: kyverno:admission-controller
             - name: INIT_CONFIG
-              value: sops-policies-operator-kyverno
+              value: kyverno
             - name: METRICS_CONFIG
-              value: sops-policies-operator-kyverno-metrics
+              value: kyverno-metrics
             - name: KYVERNO_NAMESPACE
               valueFrom:
                 fieldRef:
@@ -179,7 +179,7 @@ spec:
             - name: KYVERNO_DEPLOYMENT
               value: kyverno-admission-controller
             - name: KYVERNO_SVC
-              value: sops-policies-operator-kyverno-svc
+              value: kyverno-svc
           image: reg.kyverno.io/kyverno/kyvernopre:v1.14.1
           imagePullPolicy: IfNotPresent
           name: kyverno-pre
