@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/component: admission-controller
+    app.kubernetes.io/instance: sops-policies-operator
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: sops-policies-operator-kyverno
+    app.kubernetes.io/version: 3.4.1
+    helm.sh/chart: kyverno-3.4.1
+  name: sops-policies-operator-kyverno-svc
+  namespace: policies
+spec:
+  ports:
+    - appProtocol: https
+      name: https
+      port: 443
+      protocol: TCP
+      targetPort: https
+  selector:
+    app.kubernetes.io/component: admission-controller
+    app.kubernetes.io/instance: sops-policies-operator
+    app.kubernetes.io/part-of: sops-policies-operator-kyverno
+  type: ClusterIP

@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: policies
+  namespace: argocd
+spec:
+  destination:
+    namespace: policies
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: ./policies
+    repoURL: https://github.com/aserowy/dots.git
+    targetRevision: homelab
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

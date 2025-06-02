@@ -1,0 +1,19 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  labels:
+    app.kubernetes.io/component: reports-controller
+    app.kubernetes.io/instance: sops-policies-operator
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: sops-policies-operator-kyverno
+    app.kubernetes.io/version: 3.4.1
+    helm.sh/chart: kyverno-3.4.1
+  name: sops-policies-operator-kyverno:reports-controller
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: sops-policies-operator-kyverno:reports-controller
+subjects:
+  - kind: ServiceAccount
+    name: kyverno-reports-controller
+    namespace: policies

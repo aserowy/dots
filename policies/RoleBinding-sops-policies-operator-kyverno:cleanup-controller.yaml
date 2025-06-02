@@ -1,0 +1,20 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  labels:
+    app.kubernetes.io/component: cleanup-controller
+    app.kubernetes.io/instance: sops-policies-operator
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: sops-policies-operator-kyverno
+    app.kubernetes.io/version: 3.4.1
+    helm.sh/chart: kyverno-3.4.1
+  name: sops-policies-operator-kyverno:cleanup-controller
+  namespace: policies
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: sops-policies-operator-kyverno:cleanup-controller
+subjects:
+  - kind: ServiceAccount
+    name: kyverno-cleanup-controller
+    namespace: policies
