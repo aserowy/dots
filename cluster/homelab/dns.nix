@@ -13,21 +13,5 @@
         };
       };
     };
-
-    yamls = [
-      ''
-        apiVersion: v1
-        kind: PersistentVolumeClaim
-        metadata:
-          name: pihole-pvc
-        spec:
-          storageClassName: longhorn
-          accessModes:
-            - ReadWriteMany
-          resources:
-            requests:
-              storage: 1Gi
-      ''
-    ];
   };
 }
