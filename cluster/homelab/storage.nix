@@ -9,7 +9,7 @@
 
       values = {
         defaultBackupStore = {
-          backupTarget = "azblob://sahomelab71283.blob.core.windows.net/";
+          backupTarget = "azblob://backup@core.windows.net/";
           backupTargetCredentialSecret = "longhorn-azblob-secret";
         };
 
