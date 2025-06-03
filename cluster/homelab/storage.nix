@@ -74,7 +74,7 @@
           cron: 0 3 * * 3,5
           retain: 8
           parameters:
-            full-backup-interval: 4
+            full-backup-interval: "4"
           groups:
             - default
       ''
