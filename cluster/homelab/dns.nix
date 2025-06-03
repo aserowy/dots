@@ -18,7 +18,7 @@
     };
 
     yamls = [
-      (builtins.readFile ./pihole-secrets.sops.yaml)
+      (builtins.readFile ./dns-secrets.sops.yaml)
     ];
 
     resources = {
