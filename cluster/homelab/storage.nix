@@ -8,6 +8,11 @@
       chart = charts.longhorn.longhorn;
 
       values = {
+        defaultBackupStore = {
+          backupTarget = "AZURE";
+          backupTargetCredentialSecret = "longhorn-azblob-secret";
+        };
+
         # NOTE: must be disabled for helm deployments inside argo cd
         preUpgradeChecker.jobEnabled = false;
       };
@@ -38,18 +43,54 @@
     };
 
     yamls = [
+      (builtins.readFile ./storage-secrets.sops.yaml)
+
+      # NOTE: backup
+      ''
+        apiVersion: longhorn.io/v1beta2
+        kind: RecurringJob
+        metadata:
+          name: default-snapshot-daily
+          namespace: longhorn-system
+        spec:
+          name: default-snapshot-daily
+          task: snapshot
+          concurrency: 1
+          cron: 0 0 * * *
+          retain: 7
+          groups:
+          - default
+      ''
+      ''
+        apiVersion: longhorn.io/v1beta2
+        kind: RecurringJob
+        metadata:
+          name: default-backup
+          namespace: longhorn-system
+        spec:
+          name: default-backup
+          task: backup
+          concurrency: 1
+          cron: 0 3 * * 3,5
+          retain: 8
+          parameters:
+            full-backup-interval: 4
+          groups:
+            - default
+      ''
+
       # NOTE: cleaning resources
       ''
         apiVersion: longhorn.io/v1beta2
         kind: RecurringJob
         metadata:
-          name: filesystem-trim
+          name: default-filesystem-trim
           namespace: longhorn-system
         spec:
+          name: default-filesystem-trim
+          task: filesystem-trim
           concurrency: 1
           cron: 0 0 * * *
-          name: filesystem-trim
-          task: filesystem-trim
           groups:
             - default
       ''
@@ -57,15 +98,15 @@
         apiVersion: longhorn.io/v1beta2
         kind: RecurringJob
         metadata:
-          name: snapshot-cleanup
+          name: default-snapshot-cleanup
           namespace: longhorn-system
         spec:
+          name: default-snapshot-cleanup
+          task: snapshot-cleanup
           concurrency: 1
-          cron: 12 0 * * *
+          cron: 0 0 * * *
           groups:
             - default
-          name: snapshot-cleanup
-          task: snapshot-cleanup
       ''
 
       # NOTE: patching path to enable longhorn on nixos
