@@ -1,6 +1,8 @@
 apiVersion: v1
 data:
-  default-resource.yaml: ""
+  default-resource.yaml: |-
+    backup-target: AZURE
+    backup-target-credential-secret: longhorn-azblob-secret
 kind: ConfigMap
 metadata:
   labels:
