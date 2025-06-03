@@ -9,8 +9,15 @@
 
       values = {
         defaultBackupStore = {
-          backupTarget = "AZURE";
+          backupTarget = "azblob://sahomelab71283.blob.core.windows.net/homelab-backup/";
           backupTargetCredentialSecret = "longhorn-azblob-secret";
+        };
+
+        persistence = {
+          reclaimPolicy = "Retain";
+
+          # NOTE: default is 3, but running it on single node currently
+          defaultClassReplicaCount = 1;
         };
 
         # NOTE: must be disabled for helm deployments inside argo cd
