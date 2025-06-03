@@ -1,7 +1,7 @@
 apiVersion: v1
 data:
   default-resource.yaml: |-
-    backup-target: AZURE
+    backup-target: azblob://sahomelab71283.blob.core.windows.net/homelab-backup/
     backup-target-credential-secret: longhorn-azblob-secret
 kind: ConfigMap
 metadata:
