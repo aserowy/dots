@@ -10,6 +10,6 @@ spec:
     - default
   name: default-backup
   parameters:
-    full-backup-interval: 4
+    full-backup-interval: "4"
   retain: 8
   task: backup
