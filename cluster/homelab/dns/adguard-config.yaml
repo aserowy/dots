@@ -1,0 +1,64 @@
+auth_attempts: 5
+block_auth_min: 15
+theme: auto
+dns:
+  bind_hosts:
+    - 0.0.0.0
+  port: 53
+  anonymize_client_ip: false
+  ratelimit: 500
+  refuse_any: true
+  upstream_dns:
+    - 1.1.1.1
+    - 9.9.9.9
+  upstream_mode: parallel
+  cache_size: 4194304
+  cache_ttl_min: 0
+  cache_ttl_max: 0
+  cache_optimistic: false
+  max_goroutines: 300
+tls:
+  enabled: false
+querylog:
+  enabled: true
+  interval: 2160h
+  size_memory: 1000
+  file_enabled: true
+statistics:
+  enabled: true
+  interval: 24h
+filters:
+  - enabled: true
+    url: https://adguardteam.github.io/HostlistsRegistry/assets/filter_1.txt
+    name: AdGuard DNS filter
+    id: 1
+  - enabled: false
+    url: https://adguardteam.github.io/HostlistsRegistry/assets/filter_2.txt
+    name: AdAway Default Blocklist
+    id: 2
+dhcp:
+  enabled: false
+filtering:
+  protection_enabled: true
+  filtering_enabled: true
+  parental_enabled: false
+  parental_block_host: family-block.dns.adguard.com
+  safebrowsing_enabled: false
+  safebrowsing_block_host: standard-block.dns.adguard.com
+clients:
+  runtime_sources:
+    whois: true
+    arp: true
+    rdns: true
+    dhcp: true
+    hosts: true
+log:
+  file: ""
+  max_backups: 0
+  max_size: 100
+  max_age: 3
+os:
+  group: ""
+  user: ""
+  rlimit_nofile: 0
+schema_version: 28

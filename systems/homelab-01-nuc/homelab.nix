@@ -11,9 +11,6 @@
       interfaces.eno1 = {
         allowedTCPPorts = [
           22
-          80
-          8080
-          8081
         ];
       };
       trustedInterfaces = [

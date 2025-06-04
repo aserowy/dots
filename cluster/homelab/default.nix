@@ -3,7 +3,7 @@
   imports = [
     ./argocd.nix
     ./cilium.nix
-    ./dns.nix
+    ./dns
     ./loadbalancer.nix
     ./policies.nix
     ./secrets.nix
