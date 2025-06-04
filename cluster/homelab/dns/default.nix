@@ -26,7 +26,41 @@ in
           };
         };
       };
-
+      services = {
+        adguard-service = {
+          metadata = {
+            inherit namespace;
+            name = "adguard-service";
+          };
+          spec = {
+            selector = {
+              app = "adguard";
+            };
+            ports = [
+              {
+                name = "http";
+                protocol = "TCP";
+                port = 3000;
+              }
+              {
+                name = "dns-tcp";
+                protocol = "TCP";
+                port = 53;
+              }
+              {
+                name = "dns-udp";
+                protocol = "UDP";
+                port = 53;
+              }
+              {
+                name = "dhcp";
+                protocol = "UDP";
+                port = 67;
+              }
+            ];
+          };
+        };
+      };
       ingressRoutes = {
         adguard-dashboard-route.spec = {
           entryPoints = [
@@ -38,8 +72,8 @@ in
               kind = "Rule";
               services = [
                 {
-                  name = "pihole-web";
-                  namespace = "dns";
+                  inherit namespace;
+                  name = "adguard-service";
                   port = 80;
                 }
               ];
