@@ -94,7 +94,7 @@ in
               services = [
                 {
                   inherit namespace;
-                  name = "adguard-service";
+                  name = "adguard-dashboard";
                   port = 3000;
                 }
               ];
