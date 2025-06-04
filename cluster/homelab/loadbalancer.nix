@@ -9,6 +9,12 @@
         chart = charts.traefik.traefik;
 
         values = {
+          annotations = {
+            "lbipam.cilium.io/sharing-key" = "default-ippool";
+          };
+          labels = {
+            "homelab/loadbalancer" = "entrypoint";
+          };
           additionalArguments = [
             "--log.level=DEBUG"
           ];
@@ -65,12 +71,6 @@
           dnsNames = [
             "*.anderwerse.de"
           ];
-        };
-      };
-      ciliumLoadBalancerIPPools = {
-        traefik-loadbalancer-ippool.spec = {
-          # TODO: cidr configurable
-          blocks = [ { cidr = "192.168.178.53/32"; } ];
         };
       };
       ingressRoutes = {

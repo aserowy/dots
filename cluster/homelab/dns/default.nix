@@ -27,10 +27,10 @@ in
         };
       };
       services = {
-        adguard-service = {
+        adguard-dashboard = {
           metadata = {
             inherit namespace;
-            name = "adguard-service";
+            name = "adguard-dashboard";
           };
           spec = {
             selector = {
@@ -42,6 +42,25 @@ in
                 protocol = "TCP";
                 port = 3000;
               }
+            ];
+          };
+        };
+        adguard-dns = {
+          metadata = {
+            inherit namespace;
+            name = "adguard-dns";
+            annotations = {
+              "lbipam.cilium.io/sharing-key" = "default-ippool";
+            };
+            labels = {
+              "homelab/loadbalancer" = "entrypoint";
+            };
+          };
+          spec = {
+            selector = {
+              app = "adguard";
+            };
+            ports = [
               {
                 name = "dns-tcp";
                 protocol = "TCP";

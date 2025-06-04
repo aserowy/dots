@@ -33,6 +33,15 @@
     };
 
     resources = {
+      ciliumLoadBalancerIPPools = {
+        default-loadbalancer-ippool.spec = {
+          # TODO: cidr configurable
+          blocks = [ { cidr = "192.168.178.53/32"; } ];
+          serviceSelector.matchLabels = {
+            "homelab/loadbalancer" = "entrypoint";
+          };
+        };
+      };
       ingressRoutes = {
         cilium-dashboard-route.spec = {
           entryPoints = [
