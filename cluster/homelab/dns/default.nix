@@ -50,6 +50,7 @@ in
             inherit namespace;
             name = "adguard-dns";
             annotations = {
+              "lbipam.cilium.io/sharing-cross-namespace" = "*";
               "lbipam.cilium.io/sharing-key" = "default-ippool";
             };
             labels = {
