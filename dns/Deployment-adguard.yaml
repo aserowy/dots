@@ -1,0 +1,87 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: adguard
+  namespace: dns
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: adguard
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: adguard
+    spec:
+      containers:
+        - image: docker.io/adguard/adguardhome:v0.107.60
+          name: adguard
+          ports:
+            - containerPort: 53
+              name: dns-tcp
+              protocol: TCP
+            - containerPort: 53
+              name: dns-udp
+              protocol: UDP
+            - containerPort: 67
+              name: dchp
+              protocol: UDP
+            - containerPort: 3000
+              name: http
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 500m
+              memory: 256Mi
+            requests:
+              cpu: 50m
+              memory: 128Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+          volumeMounts:
+            - mountPath: /opt/adguardhome/conf
+              name: config-folder
+            - mountPath: /opt/adguardhome/work
+              name: work-folder
+      initContainers:
+        - command:
+            - /bin/sh
+            - -c
+            - |
+              cp -v /tmp/adguardhome.yaml /opt/adguardhome/conf/AdGuardHome.yaml
+              cat /tmp/users.yaml >> /opt/adguardhome/conf/AdGuardHome.yaml
+          image: busybox
+          name: copy-base-config
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+          volumeMounts:
+            - mountPath: /tmp/adguardhome.yaml
+              name: config
+              subPath: adguardhome.yaml
+            - mountPath: /tmp/users.yaml
+              name: users
+              subPath: users.yaml
+            - mountPath: /opt/adguardhome/conf
+              name: config-folder
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+      volumes:
+        - configMap:
+            name: adguard-cm
+          name: config
+        - name: users
+          secret:
+            secretName: adguard-users
+        - emptyDir: {}
+          name: config-folder
+        - name: work-folder
+          persistentVolumeClaim:
+            claimName: adguard-work-pvc

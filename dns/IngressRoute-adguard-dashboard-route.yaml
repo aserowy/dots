@@ -1,7 +1,7 @@
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
-  name: pihole-dashboard-route
+  name: adguard-dashboard-route
   namespace: dns
 spec:
   entryPoints:
