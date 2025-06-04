@@ -57,6 +57,7 @@ in
             };
           };
           spec = {
+            type = "LoadBalancer";
             selector = {
               app = "adguard";
             };
