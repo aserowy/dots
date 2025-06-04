@@ -10,7 +10,7 @@ spec:
     - kind: Rule
       match: Host(`dns.anderwerse.de`)
       services:
-        - name: adguard-service
+        - name: adguard-dashboard
           namespace: dns
           port: 3000
   tls:
