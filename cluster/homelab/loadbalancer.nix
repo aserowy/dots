@@ -9,15 +9,17 @@
         chart = charts.traefik.traefik;
 
         values = {
-          annotations = {
-            "lbipam.cilium.io/sharing-key" = "default-ippool";
-          };
-          labels = {
-            "homelab/loadbalancer" = "entrypoint";
-          };
           additionalArguments = [
             "--log.level=DEBUG"
           ];
+          service = {
+            annotations = {
+              "lbipam.cilium.io/sharing-key" = "default-ippool";
+            };
+            labels = {
+              "homelab/loadbalancer" = "entrypoint";
+            };
+          };
         };
       };
 
