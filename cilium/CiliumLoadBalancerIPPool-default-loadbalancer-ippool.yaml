@@ -1,7 +1,10 @@
 apiVersion: cilium.io/v2alpha1
 kind: CiliumLoadBalancerIPPool
 metadata:
-  name: traefik-loadbalancer-ippool
+  name: default-loadbalancer-ippool
 spec:
   blocks:
     - cidr: 192.168.178.53/32
+  serviceSelector:
+    matchLabels:
+      homelab/loadbalancer: entrypoint
