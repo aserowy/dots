@@ -20,3 +20,4 @@ spec:
       protocol: UDP
   selector:
     app: adguard
+  type: LoadBalancer
