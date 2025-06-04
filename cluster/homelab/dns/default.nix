@@ -74,7 +74,7 @@ in
                 {
                   inherit namespace;
                   name = "adguard-service";
-                  port = 80;
+                  port = 3000;
                 }
               ];
             }
