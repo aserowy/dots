@@ -10,8 +10,8 @@ spec:
     - kind: Rule
       match: Host(`dns.anderwerse.de`)
       services:
-        - name: pihole-web
+        - name: adguard-service
           namespace: dns
-          port: 80
+          port: 3000
   tls:
     secretName: anderwersede-tls-certificate
