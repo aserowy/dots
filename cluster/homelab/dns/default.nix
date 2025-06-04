@@ -1,7 +1,10 @@
 { ... }:
+let
+  namespace = "dns";
+in
 {
   applications.dns = {
-    namespace = "dns";
+    inherit namespace;
     createNamespace = true;
 
     yamls = [
@@ -12,6 +15,18 @@
     ];
 
     resources = {
+      configMaps = {
+        adguard-cm = {
+          metadata = {
+            inherit namespace;
+            name = "adguard-cm";
+          };
+          data = {
+            "adguardhome.yaml" = (builtins.readFile ./adguard-config.yaml);
+          };
+        };
+      };
+
       ingressRoutes = {
         adguard-dashboard-route.spec = {
           entryPoints = [
