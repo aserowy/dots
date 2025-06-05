@@ -1,4 +1,4 @@
-{ charts, lib, ... }:
+{ charts, ... }:
 let
   namespace = "dms";
   paperless-media-pvc = "paperless-media-pvc";
@@ -23,13 +23,7 @@ in
       };
 
       valkey = {
-        # TODO: renovate update template for this and remove nix helm?
-        chart = lib.helm.downloadHelmChart {
-          repo = "https://charts.bitnami.com/bitnami/";
-          chart = "valkey";
-          version = "3.0.9";
-          chartHash = "sha256-zSLEopYHW05p7OxZlcusR9SQcmtGnKji6CcQPl9s0xA=";
-        };
+        chart = charts.bitnami.valkey;
 
         values = {
           auth = {
