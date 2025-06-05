@@ -111,7 +111,7 @@ in
                     env = [
                       {
                         name = "PAPERLESS_DBHOST";
-                        value = "postgres";
+                        value = "postgres.dms.svc.cluster.local";
                       }
                       {
                         name = "PAPERLESS_URL";
