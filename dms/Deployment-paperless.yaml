@@ -22,7 +22,7 @@ spec:
             - name: PAPERLESS_URL
               value: http://dms.anderwerse.de
             - name: PAPERLESS_OCR_LANGUAGE
-              value: de
+              value: deu
             - name: PAPERLESS_ADMIN_USER
               valueFrom:
                 secretKeyRef:
