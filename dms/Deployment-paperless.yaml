@@ -1,0 +1,86 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: paperless
+  namespace: dms
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: paperless
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: paperless
+    spec:
+      containers:
+        - env:
+            - name: PAPERLESS_REDIS
+              value: redis://valkey-primary:6379
+            - name: PAPERLESS_DBHOST
+              value: postgres
+            - name: PAPERLESS_URL
+              value: http://dms.anderwerse.de
+            - name: PAPERLESS_OCR_LANGUAGE
+              value: de
+            - name: PAPERLESS_ADMIN_USER
+              valueFrom:
+                secretKeyRef:
+                  key: admin
+                  name: paperless
+            - name: PAPERLESS_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: paperless
+            - name: PAPERLESS_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: secretkey
+                  name: paperless
+            - name: PAPERLESS_DBPASS
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: postgresql
+          image: docker.io/paperlessngx/paperless-ngx:2.16
+          name: paperless
+          ports:
+            - containerPort: 8000
+              name: http
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 1Gi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+          volumeMounts:
+            - mountPath: /usr/src/paperless/data
+              name: data
+            - mountPath: /usr/src/paperless/media
+              name: media
+            - mountPath: /usr/src/paperless/export
+              name: export
+            - mountPath: /usr/src/paperless/consume
+              name: consume
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+      volumes:
+        - emptyDir: {}
+          name: export
+        - emptyDir: {}
+          name: consume
+        - name: data
+          persistentVolumeClaim:
+            claimName: paperless-media-pvc
+        - name: media
+          persistentVolumeClaim:
+            claimName: paperless-data-pvc
