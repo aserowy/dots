@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: monitoring
+  namespace: argocd
+spec:
+  destination:
+    namespace: monitoring
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: ./monitoring
+    repoURL: https://github.com/aserowy/dots.git
+    targetRevision: homelab
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
