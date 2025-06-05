@@ -4,7 +4,7 @@
     namespace = "monitoring";
     createNamespace = true;
 
-    helm.releases.kube-prometheus = {
+    helm.releases.kube-prom = {
       chart = charts.prometheus-community.kube-prometheus-stack;
     };
   };
