@@ -8,8 +8,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: kube-prometheus-stack-prometheus-operator
     app.kubernetes.io/part-of: kube-prometheus-stack
-    app.kubernetes.io/version: 73.0.0
-    chart: kube-prometheus-stack-73.0.0
+    app.kubernetes.io/version: 73.1.0
+    chart: kube-prometheus-stack-73.1.0
     heritage: Helm
     release: kube-prometheus
   name: kube-prometheus-kube-prome-operator
@@ -30,8 +30,8 @@ spec:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kube-prometheus-stack-prometheus-operator
         app.kubernetes.io/part-of: kube-prometheus-stack
-        app.kubernetes.io/version: 73.0.0
-        chart: kube-prometheus-stack-73.0.0
+        app.kubernetes.io/version: 73.1.0
+        chart: kube-prometheus-stack-73.1.0
         heritage: Helm
         release: kube-prometheus
     spec:
