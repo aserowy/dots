@@ -1,0 +1,17 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: paperless-route
+  namespace: dms
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`dms.anderwerse.de`)
+      services:
+        - name: paperless
+          namespace: dms
+          port: 8000
+  tls:
+    secretName: anderwersede-tls-certificate

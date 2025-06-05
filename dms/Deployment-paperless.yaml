@@ -62,6 +62,8 @@ spec:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
           volumeMounts:
+            - mountPath: /run
+              name: run
             - mountPath: /usr/src/paperless/data
               name: data
             - mountPath: /usr/src/paperless/media
@@ -74,6 +76,9 @@ spec:
         seccompProfile:
           type: RuntimeDefault
       volumes:
+        - emptyDir:
+            sizeLimit: 500Mi
+          name: run
         - emptyDir: {}
           name: export
         - emptyDir: {}
