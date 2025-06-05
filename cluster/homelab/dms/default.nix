@@ -119,7 +119,7 @@ in
                       }
                       {
                         name = "PAPERLESS_OCR_LANGUAGE";
-                        value = "de";
+                        value = "deu";
                       }
                       {
                         name = "PAPERLESS_ADMIN_USER";
