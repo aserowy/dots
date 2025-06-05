@@ -1,0 +1,35 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    app: kube-prometheus-stack-operator
+    app.kubernetes.io/component: prometheus-operator
+    app.kubernetes.io/instance: kube-prome
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: kube-prometheus-stack-prometheus-operator
+    app.kubernetes.io/part-of: kube-prometheus-stack
+    app.kubernetes.io/version: 73.1.0
+    chart: kube-prometheus-stack-73.1.0
+    heritage: Helm
+    release: kube-prome
+  name: kube-prome-kube-prometheus-operator
+  namespace: monitoring
+spec:
+  endpoints:
+    - honorLabels: true
+      port: https
+      scheme: https
+      tlsConfig:
+        ca:
+          secret:
+            key: ca
+            name: kube-prome-kube-prometheus-admission
+            optional: false
+        serverName: kube-prome-kube-prometheus-operator
+  namespaceSelector:
+    matchNames:
+      - monitoring
+  selector:
+    matchLabels:
+      app: kube-prometheus-stack-operator
+      release: kube-prome
