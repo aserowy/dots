@@ -6,8 +6,8 @@ metadata:
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: 3.4.1
-    helm.sh/chart: kyverno-3.4.1
+    app.kubernetes.io/version: 3.4.2
+    helm.sh/chart: kyverno-3.4.2
   name: kyverno-admission-controller
   namespace: policies
 spec:
@@ -29,8 +29,8 @@ spec:
         app.kubernetes.io/instance: kyverno
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/part-of: kyverno
-        app.kubernetes.io/version: 3.4.1
-        helm.sh/chart: kyverno-3.4.1
+        app.kubernetes.io/version: 3.4.2
+        helm.sh/chart: kyverno-3.4.2
     spec:
       affinity:
         podAntiAffinity:
@@ -53,6 +53,7 @@ spec:
             - --servicePort=443
             - --webhookServerPort=9443
             - --resyncPeriod=15m
+            - --crdWatcher=false
             - --disableMetrics=false
             - --otelConfig=prometheus
             - --metricsPort=8000
@@ -97,7 +98,7 @@ spec:
               value: /.sigstore
             - name: KYVERNO_DEPLOYMENT
               value: kyverno-admission-controller
-          image: reg.kyverno.io/kyverno/kyverno:v1.14.1
+          image: reg.kyverno.io/kyverno/kyverno:v1.14.2
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 2
@@ -180,7 +181,7 @@ spec:
               value: kyverno-admission-controller
             - name: KYVERNO_SVC
               value: kyverno-svc
-          image: reg.kyverno.io/kyverno/kyvernopre:v1.14.1
+          image: reg.kyverno.io/kyverno/kyvernopre:v1.14.2
           imagePullPolicy: IfNotPresent
           name: kyverno-pre
           resources:

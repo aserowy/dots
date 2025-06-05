@@ -6,8 +6,8 @@ metadata:
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: 3.4.1
-    helm.sh/chart: kyverno-3.4.1
+    app.kubernetes.io/version: 3.4.2
+    helm.sh/chart: kyverno-3.4.2
   name: kyverno-cleanup-controller
   namespace: policies
 spec:
@@ -29,8 +29,8 @@ spec:
         app.kubernetes.io/instance: kyverno
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/part-of: kyverno
-        app.kubernetes.io/version: 3.4.1
-        helm.sh/chart: kyverno-3.4.1
+        app.kubernetes.io/version: 3.4.2
+        helm.sh/chart: kyverno-3.4.2
     spec:
       affinity:
         podAntiAffinity:
@@ -83,7 +83,7 @@ spec:
                   fieldPath: metadata.namespace
             - name: KYVERNO_SVC
               value: kyverno-cleanup-controller
-          image: reg.kyverno.io/kyverno/cleanup-controller:v1.14.1
+          image: reg.kyverno.io/kyverno/cleanup-controller:v1.14.2
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 2

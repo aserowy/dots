@@ -6,8 +6,8 @@ metadata:
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: 3.4.1
-    helm.sh/chart: kyverno-3.4.1
+    app.kubernetes.io/version: 3.4.2
+    helm.sh/chart: kyverno-3.4.2
   name: kyverno:admission-controller:core
 rules:
   - apiGroups:
@@ -52,7 +52,33 @@ rules:
       - updaterequests/status
       - globalcontextentries
       - globalcontextentries/status
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+      - deletecollection
+  - apiGroups:
+      - kyverno.io
+    resources:
       - policyexceptions
+    verbs:
+      - create
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - policies.kyverno.io
+    resources:
+      - validatingpolicies
+      - validatingpolicies/status
+      - imagevalidatingpolicies
+      - imagevalidatingpolicies/status
     verbs:
       - create
       - delete
@@ -65,20 +91,14 @@ rules:
   - apiGroups:
       - policies.kyverno.io
     resources:
-      - validatingpolicies
-      - validatingpolicies/status
       - policyexceptions
-      - imagevalidatingpolicies
-      - imagevalidatingpolicies/status
     verbs:
       - create
-      - delete
       - get
       - list
       - patch
       - update
       - watch
-      - deletecollection
   - apiGroups:
       - reports.kyverno.io
     resources:
