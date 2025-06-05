@@ -10,11 +10,169 @@ in
     yamls = [
       (builtins.readFile ./dns-secrets.sops.yaml)
 
-      (builtins.readFile ./adguard-deployment.yaml)
-      (builtins.readFile ./adguard-work-pvc.yaml)
+      ''
+        apiVersion: v1
+        kind: PersistentVolumeClaim
+        metadata:
+          name: adguard-work-pvc
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 5Gi
+      ''
     ];
 
     resources = {
+      deployments = {
+        adguard = {
+          apiVersion = "apps/v1";
+          kind = "Deployment";
+          metadata = {
+            name = "adguard";
+            namespace = "dns";
+          };
+          spec = {
+            replicas = 1;
+            selector = {
+              matchLabels = {
+                app = "adguard";
+              };
+            };
+            strategy = {
+              type = "RollingUpdate";
+            };
+            template = {
+              metadata = {
+                labels = {
+                  app = "adguard";
+                };
+              };
+              spec = {
+                securityContext = {
+                  seccompProfile = {
+                    type = "RuntimeDefault";
+                  };
+                };
+                initContainers = [
+                  {
+                    name = "copy-base-config";
+                    image = "busybox";
+                    command = [
+                      "/bin/sh"
+                      "-c"
+                      ''
+                        cp -v /tmp/adguardhome.yaml /opt/adguardhome/conf/AdGuardHome.yaml
+                        cat /tmp/users.yaml >> /opt/adguardhome/conf/AdGuardHome.yaml
+                      ''
+                    ];
+                    securityContext = {
+                      allowPrivilegeEscalation = false;
+                      readOnlyRootFilesystem = true;
+                      capabilities = {
+                        drop = [ "ALL" ];
+                      };
+                    };
+                    volumeMounts = [
+                      {
+                        name = "config";
+                        mountPath = "/tmp/adguardhome.yaml";
+                        subPath = "adguardhome.yaml";
+                      }
+                      {
+                        name = "users";
+                        mountPath = "/tmp/users.yaml";
+                        subPath = "users.yaml";
+                      }
+                      {
+                        name = "config-folder";
+                        mountPath = "/opt/adguardhome/conf";
+                      }
+                    ];
+                  }
+                ];
+                containers = [
+                  {
+                    name = "adguard";
+                    image = "docker.io/adguard/adguardhome:v0.107.60"; # renovate: docker=docker.io/adguard/adguardhome
+                    securityContext = {
+                      allowPrivilegeEscalation = false;
+                      readOnlyRootFilesystem = true;
+                    };
+                    ports = [
+                      {
+                        name = "dns-tcp";
+                        containerPort = 53;
+                        protocol = "TCP";
+                      }
+                      {
+                        name = "dns-udp";
+                        containerPort = 53;
+                        protocol = "UDP";
+                      }
+                      {
+                        name = "dhcp";
+                        containerPort = 67;
+                        protocol = "UDP";
+                      }
+                      {
+                        name = "http";
+                        containerPort = 3000;
+                        protocol = "TCP";
+                      }
+                    ];
+                    resources = {
+                      requests = {
+                        cpu = "50m";
+                        memory = "128Mi";
+                      };
+                      limits = {
+                        cpu = "500m";
+                        memory = "256Mi";
+                      };
+                    };
+                    volumeMounts = [
+                      {
+                        name = "config-folder";
+                        mountPath = "/opt/adguardhome/conf";
+                      }
+                      {
+                        name = "work-folder";
+                        mountPath = "/opt/adguardhome/work";
+                      }
+                    ];
+                  }
+                ];
+                volumes = [
+                  {
+                    name = "config";
+                    configMap = {
+                      name = "adguard-cm";
+                    };
+                  }
+                  {
+                    name = "users";
+                    secret = {
+                      secretName = "adguard-users";
+                    };
+                  }
+                  {
+                    name = "config-folder";
+                    emptyDir = { };
+                  }
+                  {
+                    name = "work-folder";
+                    persistentVolumeClaim = {
+                      claimName = "adguard-work-pvc";
+                    };
+                  }
+                ];
+              };
+            };
+          };
+        };
+      };
       configMaps = {
         adguard-cm = {
           metadata = {
