@@ -17,8 +17,6 @@ spec:
     spec:
       containers:
         - env:
-            - name: PAPERLESS_REDIS
-              value: redis://valkey-primary:6379
             - name: PAPERLESS_DBHOST
               value: postgres
             - name: PAPERLESS_URL
@@ -39,6 +37,11 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: secretkey
+                  name: paperless
+            - name: PAPERLESS_REDIS
+              valueFrom:
+                secretKeyRef:
+                  key: redis
                   name: paperless
             - name: PAPERLESS_DBPASS
               valueFrom:
@@ -64,6 +67,8 @@ spec:
           volumeMounts:
             - mountPath: /run
               name: run
+            - mountPath: /tmp
+              name: tmp
             - mountPath: /usr/src/paperless/data
               name: data
             - mountPath: /usr/src/paperless/media
@@ -79,6 +84,9 @@ spec:
         - emptyDir:
             sizeLimit: 500Mi
           name: run
+        - emptyDir:
+            sizeLimit: 500Mi
+          name: tmp
         - emptyDir: {}
           name: export
         - emptyDir: {}

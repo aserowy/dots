@@ -25,7 +25,7 @@ spec:
         checksum/configmap: c8cdc0c4c772ac3192446a08bf401c29f1e39f33614657d36e4bb1692e34b39f
         checksum/health: e3a0f06458110f02986bb8df4391c43567355d3582dd02f25447184391196fbc
         checksum/scripts: d87b005ab93cb3225e1477ef0d54753d36d6eab097730e743b79274ce622ec62
-        checksum/secret: 6876fb00ee607be7af1953987759fe2b4693075b6596b642c8b910b3500cc7e4
+        checksum/secret: 44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a
       labels:
         app.kubernetes.io/component: primary
         app.kubernetes.io/instance: valkey
@@ -151,7 +151,7 @@ spec:
         - name: valkey-password
           secret:
             items:
-              - key: valkey-password
+              - key: password
                 path: valkey-password
             secretName: valkey
         - configMap:
