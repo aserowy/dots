@@ -18,7 +18,7 @@ spec:
       containers:
         - env:
             - name: PAPERLESS_DBHOST
-              value: postgres
+              value: postgres.dms.svc.cluster.local
             - name: PAPERLESS_URL
               value: http://dms.anderwerse.de
             - name: PAPERLESS_OCR_LANGUAGE
