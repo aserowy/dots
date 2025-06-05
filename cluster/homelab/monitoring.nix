@@ -9,7 +9,7 @@
       serverSideApply = true;
     };
 
-    helm.releases.kube-prometheus = {
+    helm.releases.kube-prome = {
       chart = charts.prometheus-community.kube-prometheus-stack;
     };
   };
