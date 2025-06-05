@@ -4,6 +4,7 @@
     ./argocd.nix
     ./cilium.nix
     ./dns
+    ./dms
     ./loadbalancer.nix
     ./policies.nix
     ./secrets.nix

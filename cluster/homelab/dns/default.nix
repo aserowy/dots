@@ -30,8 +30,8 @@ in
           apiVersion = "apps/v1";
           kind = "Deployment";
           metadata = {
+            inherit namespace;
             name = "adguard";
-            namespace = "dns";
           };
           spec = {
             replicas = 1;

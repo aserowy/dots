@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, ... }:
 let
   namespace = "dms";
 in
@@ -7,66 +7,24 @@ in
     inherit namespace;
     createNamespace = true;
 
+    helm.releases.valkey = {
+      # TODO: renovate update template for this and remove nix helm?
+      chart = lib.helm.downloadHelmChart {
+        repo = "https://charts.bitnami.com/bitnami/";
+        chart = "valkey";
+        version = "3.0.9";
+        chartHash = "sha256-zSLEopYHW05p7OxZlcusR9SQcmtGnKji6CcQPl9s0xA=";
+      };
+
+      values = {
+      };
+    };
+
     yamls = [
       (builtins.readFile ./dms-secrets.sops.yaml)
-
-      (builtins.readFile ./paperless-deployment.yaml)
-      (builtins.readFile ./paperless-pvc.yaml)
     ];
 
     resources = {
-      configMaps = {
-        paperless-cm = {
-          metadata = {
-            inherit namespace;
-            name = "paperless-cm";
-          };
-          data = {
-            "paperlesshome.yaml" = (builtins.readFile ./paperless-config.yaml);
-          };
-        };
-      };
-      services = {
-        paperless-dashboard = {
-          metadata = {
-            inherit namespace;
-            name = "paperless-dashboard";
-          };
-          spec = {
-            selector = {
-              app = "paperless";
-            };
-            ports = [
-              {
-                name = "http";
-                protocol = "TCP";
-                port = 3000;
-              }
-            ];
-          };
-        };
-      };
-      ingressRoutes = {
-        paperless-dashboard-route.spec = {
-          entryPoints = [
-            "websecure"
-          ];
-          routes = [
-            {
-              match = "Host(`dms.anderwerse.de`)";
-              kind = "Rule";
-              services = [
-                {
-                  inherit namespace;
-                  name = "paperless-dashboard";
-                  port = 3000;
-                }
-              ];
-            }
-          ];
-          tls.secretName = "anderwersede-tls-certificate";
-        };
-      };
     };
   };
 }
