@@ -169,6 +169,10 @@ in
                     };
                     volumeMounts = [
                       {
+                        name = "run";
+                        mountPath = "/run";
+                      }
+                      {
                         name = "data";
                         mountPath = "/usr/src/paperless/data";
                       }
@@ -188,6 +192,10 @@ in
                   }
                 ];
                 volumes = [
+                  {
+                    name = "run";
+                    emptyDir.sizeLimit = "500Mi";
+                  }
                   {
                     name = "export";
                     emptyDir = { };
@@ -212,6 +220,47 @@ in
               };
             };
           };
+        };
+      };
+      services = {
+        paperless = {
+          metadata = {
+            inherit namespace;
+            name = "paperless";
+          };
+          spec = {
+            selector = {
+              app = "paperless";
+            };
+            ports = [
+              {
+                name = "http";
+                protocol = "TCP";
+                port = 8000;
+              }
+            ];
+          };
+        };
+      };
+      ingressRoutes = {
+        paperless-route.spec = {
+          entryPoints = [
+            "websecure"
+          ];
+          routes = [
+            {
+              match = "Host(`dms.anderwerse.de`)";
+              kind = "Rule";
+              services = [
+                {
+                  inherit namespace;
+                  name = "paperless";
+                  port = 8000;
+                }
+              ];
+            }
+          ];
+          tls.secretName = "anderwersede-tls-certificate";
         };
       };
     };
