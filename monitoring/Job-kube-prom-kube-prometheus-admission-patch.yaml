@@ -1,0 +1,61 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  annotations:
+    helm.sh/hook: post-install,post-upgrade
+    helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
+  labels:
+    app: kube-prometheus-stack-admission-patch
+    app.kubernetes.io/component: prometheus-operator-webhook
+    app.kubernetes.io/instance: kube-prom
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: kube-prometheus-stack-prometheus-operator
+    app.kubernetes.io/part-of: kube-prometheus-stack
+    app.kubernetes.io/version: 73.1.0
+    chart: kube-prometheus-stack-73.1.0
+    heritage: Helm
+    release: kube-prom
+  name: kube-prom-kube-prometheus-admission-patch
+  namespace: monitoring
+spec:
+  template:
+    metadata:
+      labels:
+        app: kube-prometheus-stack-admission-patch
+        app.kubernetes.io/component: prometheus-operator-webhook
+        app.kubernetes.io/instance: kube-prom
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: kube-prometheus-stack-prometheus-operator
+        app.kubernetes.io/part-of: kube-prometheus-stack
+        app.kubernetes.io/version: 73.1.0
+        chart: kube-prometheus-stack-73.1.0
+        heritage: Helm
+        release: kube-prom
+      name: kube-prom-kube-prometheus-admission-patch
+    spec:
+      containers:
+        - args:
+            - patch
+            - --webhook-name=kube-prom-kube-prometheus-admission
+            - --namespace=monitoring
+            - --secret-name=kube-prom-kube-prometheus-admission
+            - --patch-failure-policy=
+          image: registry.k8s.io/ingress-nginx/kube-webhook-certgen:v1.5.3
+          imagePullPolicy: IfNotPresent
+          name: patch
+          resources: {}
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+      restartPolicy: OnFailure
+      securityContext:
+        runAsGroup: 2000
+        runAsNonRoot: true
+        runAsUser: 2000
+        seccompProfile:
+          type: RuntimeDefault
+      serviceAccountName: kube-prom-kube-prometheus-admission
+  ttlSecondsAfterFinished: 60
