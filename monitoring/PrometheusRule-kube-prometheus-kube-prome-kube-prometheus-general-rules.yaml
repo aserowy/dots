@@ -1,0 +1,22 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+    app: kube-prometheus-stack
+    app.kubernetes.io/instance: kube-prometheus
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: kube-prometheus-stack
+    app.kubernetes.io/version: 73.1.0
+    chart: kube-prometheus-stack-73.1.0
+    heritage: Helm
+    release: kube-prometheus
+  name: kube-prometheus-kube-prome-kube-prometheus-general.rules
+  namespace: monitoring
+spec:
+  groups:
+    - name: kube-prometheus-general.rules
+      rules:
+        - expr: count without(instance, pod, node) (up == 1)
+          record: count:up1
+        - expr: count without(instance, pod, node) (up == 0)
+          record: count:up0
