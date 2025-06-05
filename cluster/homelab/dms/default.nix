@@ -32,6 +32,10 @@ in
         };
 
         values = {
+          auth = {
+            existingSecret = "valkey";
+            existingSecretPasswordKey = "password";
+          };
         };
       };
     };
@@ -106,10 +110,6 @@ in
                     };
                     env = [
                       {
-                        name = "PAPERLESS_REDIS";
-                        value = "redis://valkey-primary:6379";
-                      }
-                      {
                         name = "PAPERLESS_DBHOST";
                         value = "postgres";
                       }
@@ -143,6 +143,13 @@ in
                         };
                       }
                       {
+                        name = "PAPERLESS_REDIS";
+                        valueFrom.secretKeyRef = {
+                          name = "paperless";
+                          key = "redis";
+                        };
+                      }
+                      {
                         name = "PAPERLESS_DBPASS";
                         valueFrom.secretKeyRef = {
                           name = "postgresql";
@@ -173,6 +180,10 @@ in
                         mountPath = "/run";
                       }
                       {
+                        name = "tmp";
+                        mountPath = "/tmp";
+                      }
+                      {
                         name = "data";
                         mountPath = "/usr/src/paperless/data";
                       }
@@ -194,6 +205,10 @@ in
                 volumes = [
                   {
                     name = "run";
+                    emptyDir.sizeLimit = "500Mi";
+                  }
+                  {
+                    name = "tmp";
                     emptyDir.sizeLimit = "500Mi";
                   }
                   {
