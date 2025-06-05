@@ -1,0 +1,32 @@
+apiVersion: v1
+data:
+  primary.conf: |-
+    dir /data
+    # User-supplied primary configuration:
+    rename-command FLUSHDB ""
+    rename-command FLUSHALL ""
+    # End of primary configuration
+  replica.conf: |-
+    dir /data
+    # User-supplied replica configuration:
+    rename-command FLUSHDB ""
+    rename-command FLUSHALL ""
+    # End of replica configuration
+  valkey.conf: |-
+    # User-supplied common configuration:
+    # Enable AOF https://valkey.io/docs/topics/persistence.html
+    appendonly yes
+    # Disable RDB persistence, AOF persistence already enabled.
+    save ""
+    # End of common configuration
+kind: ConfigMap
+metadata:
+  labels:
+    app.kubernetes.io/instance: valkey
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: valkey
+    app.kubernetes.io/part-of: valkey
+    app.kubernetes.io/version: 8.1.1
+    helm.sh/chart: valkey-3.0.9
+  name: valkey-configuration
+  namespace: dms
