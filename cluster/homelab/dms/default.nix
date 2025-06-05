@@ -110,6 +110,12 @@ in
                     };
                     env = [
                       {
+                        # NOTE: see `granian fails to start with "is not a valid port number"`
+                        # in https://docs.paperless-ngx.com/troubleshooting/
+                        name = "PAPERLESS_PORT";
+                        value = "8000";
+                      }
+                      {
                         name = "PAPERLESS_DBHOST";
                         value = "postgresql.dms.svc.cluster.local";
                       }
