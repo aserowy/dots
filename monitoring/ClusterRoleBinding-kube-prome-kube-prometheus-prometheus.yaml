@@ -1,0 +1,21 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  labels:
+    app: kube-prometheus-stack-prometheus
+    app.kubernetes.io/instance: kube-prome
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: kube-prometheus-stack
+    app.kubernetes.io/version: 73.1.0
+    chart: kube-prometheus-stack-73.1.0
+    heritage: Helm
+    release: kube-prome
+  name: kube-prome-kube-prometheus-prometheus
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: kube-prome-kube-prometheus-prometheus
+subjects:
+  - kind: ServiceAccount
+    name: kube-prome-kube-prometheus-prometheus
+    namespace: monitoring
