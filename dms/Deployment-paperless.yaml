@@ -17,6 +17,8 @@ spec:
     spec:
       containers:
         - env:
+            - name: PAPERLESS_PORT
+              value: "8000"
             - name: PAPERLESS_DBHOST
               value: postgresql.dms.svc.cluster.local
             - name: PAPERLESS_URL
