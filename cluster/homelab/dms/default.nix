@@ -121,7 +121,7 @@ in
                       }
                       {
                         name = "PAPERLESS_URL";
-                        value = "http://dms.anderwerse.de";
+                        value = "https://dms.anderwerse.de";
                       }
                       {
                         name = "PAPERLESS_OCR_LANGUAGE";
