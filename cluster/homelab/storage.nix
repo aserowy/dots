@@ -78,7 +78,7 @@
           name: default-backup
           task: backup
           concurrency: 1
-          cron: 0 3 * * 3,5
+          cron: 0 3 * * 2,5
           retain: 8
           parameters:
             full-backup-interval: "4"
