@@ -15,28 +15,11 @@
     };
   };
 
-  networking = {
-    hostName = "homelab-01-nuc";
-
-    interfaces = {
-      eno1.ipv4.addresses = [
-        {
-          address = "192.168.178.53";
-          prefixLength = 24;
-        }
-      ];
-    };
-
-    # enables wifi with: nmcli device wifi connect <SSID> password <PASS>
-    networkmanager = {
-      enable = true;
-    };
-  };
+  networking.hostName = "homelab-01-nuc";
 
   services = {
     # lsblk --discard to ensure ssd supports trim (disc-gran and disc-max should be non zero)
     fstrim.enable = true;
-    resolved.enable = false;
   };
 
   system = {
@@ -46,13 +29,16 @@
 
   systemd.network = {
     enable = true;
-    networks."10-lan" = {
-      matchConfig.Name = "eno1";
-      networkConfig.DHCP = "ipv4";
-      dns = [
-        "8.8.8.8"
-        "1.1.1.1"
-      ];
+    networks = {
+      "10-lan" = {
+        matchConfig.Name = "eno1";
+        networkConfig.DHCP = "ipv4";
+        dns = [
+          "1.1.1.1"
+          "8.8.4.4"
+          "8.8.8.8"
+        ];
+      };
     };
   };
 }
