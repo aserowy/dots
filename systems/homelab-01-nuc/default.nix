@@ -49,6 +49,10 @@
     networks."10-lan" = {
       matchConfig.Name = "eno1";
       networkConfig.DHCP = "ipv4";
+      dns = [
+        "8.8.8.8"
+        "1.1.1.1"
+      ];
     };
   };
 }
