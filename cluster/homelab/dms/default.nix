@@ -166,8 +166,8 @@ in
                       {
                         name = "PAPERLESS_OUTLOOK_OAUTH_CLIENT_SECRET";
                         valueFrom.secretKeyRef = {
-                          name = "outlook-client-secret";
-                          key = "admin";
+                          name = "paperless";
+                          key = "outlook-client-secret";
                         };
                       }
                     ];
