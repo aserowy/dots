@@ -156,6 +156,20 @@ in
                           key = "password";
                         };
                       }
+                      {
+                        name = "PAPERLESS_OUTLOOK_OAUTH_CLIENT_ID";
+                        valueFrom.secretKeyRef = {
+                          name = "paperless";
+                          key = "outlook-client-id";
+                        };
+                      }
+                      {
+                        name = "PAPERLESS_OUTLOOK_OAUTH_CLIENT_SECRET";
+                        valueFrom.secretKeyRef = {
+                          name = "outlook-client-secret";
+                          key = "admin";
+                        };
+                      }
                     ];
                     ports = [
                       {
