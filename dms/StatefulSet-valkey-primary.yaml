@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/name: valkey
     app.kubernetes.io/part-of: valkey
     app.kubernetes.io/version: 8.1.1
-    helm.sh/chart: valkey-3.0.9
+    helm.sh/chart: valkey-3.0.10
   name: valkey-primary
   namespace: dms
 spec:
@@ -32,7 +32,7 @@ spec:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: valkey
         app.kubernetes.io/version: 8.1.1
-        helm.sh/chart: valkey-3.0.9
+        helm.sh/chart: valkey-3.0.10
     spec:
       affinity:
         podAntiAffinity:
@@ -65,7 +65,7 @@ spec:
               value: "no"
             - name: VALKEY_PORT
               value: "6379"
-          image: docker.io/bitnami/valkey:8.1.1-debian-12-r1
+          image: docker.io/bitnami/valkey:8.1.1-debian-12-r2
           imagePullPolicy: IfNotPresent
           livenessProbe:
             exec:

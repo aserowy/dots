@@ -50,6 +50,16 @@ spec:
                 secretKeyRef:
                   key: password
                   name: postgresql
+            - name: PAPERLESS_OUTLOOK_OAUTH_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  key: outlook-client-id
+                  name: paperless
+            - name: PAPERLESS_OUTLOOK_OAUTH_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  key: admin
+                  name: outlook-client-secret
           image: docker.io/paperlessngx/paperless-ngx:2.16
           name: paperless
           ports:
