@@ -60,6 +60,12 @@ spec:
                 secretKeyRef:
                   key: outlook-client-secret
                   name: paperless
+            - name: PAPERLESS_TIKA_ENABLED
+              value: "1"
+            - name: PAPERLESS_TIKA_GOTENBERG_ENDPOINT
+              value: http://gotenberg.dms.svc.cluster.local:3000
+            - name: PAPERLESS_TIKA_ENDPOINT
+              value: http://tika.dms.svc.cluster.local:9998
           image: docker.io/paperlessngx/paperless-ngx:2.16
           name: paperless
           ports:
