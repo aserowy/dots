@@ -38,7 +38,7 @@ spec:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
           volumeMounts:
-            - mountPath: /home
+            - mountPath: /home/gotenberg
               name: home
             - mountPath: /tmp
               name: tmp
