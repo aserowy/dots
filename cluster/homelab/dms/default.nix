@@ -209,6 +209,18 @@ in
                         memory = "1Gi";
                       };
                     };
+                    volumeMounts = [
+                      {
+                        name = "tmp";
+                        mountPath = "/tmp";
+                      }
+                    ];
+                  }
+                ];
+                volumes = [
+                  {
+                    name = "tmp";
+                    emptyDir.sizeLimit = "1Gi";
                   }
                 ];
               };
@@ -245,76 +257,6 @@ in
                   };
                 };
                 containers = [
-                  {
-                    name = "gotenberg";
-                    image = "docker.io/gotenberg/gotenberg:8.21";
-                    securityContext = {
-                      allowPrivilegeEscalation = false;
-                      readOnlyRootFilesystem = true;
-                    };
-                    env = [
-                      {
-                        name = "CHROMIUM_DISABLE_JAVASCRIPT";
-                        value = "true";
-                      }
-                      {
-                        name = "CHROMIUM_ALLOW_LIST";
-                        value = "file:///tmp/.*";
-                      }
-                    ];
-                    ports = [
-                      {
-                        name = "http";
-                        containerPort = 3000;
-                        protocol = "TCP";
-                      }
-                    ];
-                    resources = {
-                      requests = {
-                        cpu = "200m";
-                        memory = "512Mi";
-                      };
-                      limits = {
-                        cpu = "1000m";
-                        memory = "512Mi";
-                      };
-                    };
-                    volumeMounts = [
-                      {
-                        name = "gotenberg-home";
-                        mountPath = "/home";
-                      }
-                      {
-                        name = "gotenberg-tmp";
-                        mountPath = "/tmp";
-                      }
-                    ];
-                  }
-                  {
-                    name = "tika";
-                    image = "docker.io/apache/tika:3.2.0.0";
-                    securityContext = {
-                      allowPrivilegeEscalation = false;
-                      readOnlyRootFilesystem = true;
-                    };
-                    ports = [
-                      {
-                        name = "http";
-                        containerPort = 9998;
-                        protocol = "TCP";
-                      }
-                    ];
-                    resources = {
-                      requests = {
-                        cpu = "100m";
-                        memory = "128Mi";
-                      };
-                      limits = {
-                        cpu = "1000m";
-                        memory = "1Gi";
-                      };
-                    };
-                  }
                   {
                     name = "paperless";
                     image = "docker.io/paperlessngx/paperless-ngx:2.16";
