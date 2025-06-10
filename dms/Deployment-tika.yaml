@@ -32,6 +32,13 @@ spec:
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
+          volumeMounts:
+            - mountPath: /tmp
+              name: tmp
       securityContext:
         seccompProfile:
           type: RuntimeDefault
+      volumes:
+        - emptyDir:
+            sizeLimit: 1Gi
+          name: tmp
