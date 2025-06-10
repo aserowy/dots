@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gotenberg
+  namespace: dms
+spec:
+  ports:
+    - name: http
+      port: 3000
+      protocol: TCP
+  selector:
+    app: gotenberg

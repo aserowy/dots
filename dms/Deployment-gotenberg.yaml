@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gotenberg
+  namespace: dms
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gotenberg
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: gotenberg
+    spec:
+      containers:
+        - env:
+            - name: CHROMIUM_DISABLE_JAVASCRIPT
+              value: "true"
+            - name: CHROMIUM_ALLOW_LIST
+              value: file:///tmp/.*
+          image: docker.io/gotenberg/gotenberg:8.21
+          name: gotenberg
+          ports:
+            - containerPort: 3000
+              name: http
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 512Mi
+            requests:
+              cpu: 200m
+              memory: 512Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+          volumeMounts:
+            - mountPath: /home
+              name: home
+            - mountPath: /tmp
+              name: tmp
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+      volumes:
+        - emptyDir:
+            sizeLimit: 500Mi
+          name: home
+        - emptyDir:
+            sizeLimit: 500Mi
+          name: tmp

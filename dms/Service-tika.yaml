@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: tika
+  namespace: dms
+spec:
+  ports:
+    - name: http
+      port: 9998
+      protocol: TCP
+  selector:
+    app: tika
