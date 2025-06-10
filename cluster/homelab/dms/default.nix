@@ -332,6 +332,18 @@ in
                           key = "outlook-client-secret";
                         };
                       }
+                      {
+                        name = "PAPERLESS_TIKA_ENABLED";
+                        value = "1";
+                      }
+                      {
+                        name = "PAPERLESS_TIKA_GOTENBERG_ENDPOINT";
+                        value = "http://gotenberg.dms.svc.cluster.local:3000";
+                      }
+                      {
+                        name = "PAPERLESS_TIKA_ENDPOINT";
+                        value = "http://tika.dms.svc.cluster.local:9998";
+                      }
                     ];
                     ports = [
                       {
