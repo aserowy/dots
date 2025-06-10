@@ -132,7 +132,7 @@ in
                     volumeMounts = [
                       {
                         name = "home";
-                        mountPath = "/home";
+                        mountPath = "/home/gotenberg";
                       }
                       {
                         name = "tmp";
