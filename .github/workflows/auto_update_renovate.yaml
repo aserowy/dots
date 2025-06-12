@@ -6,7 +6,7 @@ on:
     - cron: "0 20 * * *"
 
 jobs:
-  update_flake:
+  update_renovate:
     runs-on: ubuntu-latest
     steps:
       - name: retrieve app token
@@ -22,5 +22,5 @@ jobs:
       - name: renovate
         uses: renovatebot/github-action@v42.0.4
         with:
-          # configurationFile: example/renovate-config.js
+          configurationFile: .github/renovate-config.js
           token: '${{ steps.app-token.outputs.token }}'

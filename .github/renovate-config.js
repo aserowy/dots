@@ -1,0 +1,4 @@
+{
+  "autodiscover": true,
+  "autodiscoverFilter": ["aserowy/*"]
+}
