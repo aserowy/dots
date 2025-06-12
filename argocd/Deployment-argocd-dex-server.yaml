@@ -7,8 +7,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-dex-server
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.0.5
-    helm.sh/chart: argo-cd-8.0.16
+    app.kubernetes.io/version: v3.0.6
+    helm.sh/chart: argo-cd-8.0.17
   name: argocd-dex-server
   namespace: argocd
 spec:
@@ -21,15 +21,15 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/cmd-params: 47a00906f2e30be049cf038e018b3129e9997e2da03f2b4504ef201cdad73960
+        checksum/cmd-params: b005622ea89a809138c23277d00cb87e3b2fca8f4b6ca9da3e5514b659a62694
       labels:
         app.kubernetes.io/component: dex-server
         app.kubernetes.io/instance: argocd
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: argocd-dex-server
         app.kubernetes.io/part-of: argocd
-        app.kubernetes.io/version: v3.0.5
-        helm.sh/chart: argo-cd-8.0.16
+        app.kubernetes.io/version: v3.0.6
+        helm.sh/chart: argo-cd-8.0.17
     spec:
       affinity:
         podAntiAffinity:
@@ -108,7 +108,7 @@ spec:
             - -n
             - /usr/local/bin/argocd
             - /shared/argocd-dex
-          image: quay.io/argoproj/argocd:v3.0.5
+          image: quay.io/argoproj/argocd:v3.0.6
           imagePullPolicy: IfNotPresent
           name: copyutil
           resources: {}

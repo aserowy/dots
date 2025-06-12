@@ -9,25 +9,20 @@ metadata:
     app.kubernetes.io/name: cert-manager
     app.kubernetes.io/version: v1.18.0
     helm.sh/chart: cert-manager-v1.18.0
-  name: cert-manager-controller-certificates
+  name: cert-manager-http01-controller-challenges
 rules:
   - apiGroups:
-      - cert-manager.io
+      - acme.cert-manager.io
     resources:
-      - certificates
-      - certificates/status
-      - certificaterequests
-      - certificaterequests/status
+      - challenges
+      - challenges/status
     verbs:
       - update
       - patch
   - apiGroups:
-      - cert-manager.io
+      - acme.cert-manager.io
     resources:
-      - certificates
-      - certificaterequests
-      - clusterissuers
-      - issuers
+      - challenges
     verbs:
       - get
       - list
@@ -35,17 +30,9 @@ rules:
   - apiGroups:
       - cert-manager.io
     resources:
-      - certificates/finalizers
-      - certificaterequests/finalizers
+      - issuers
+      - clusterissuers
     verbs:
-      - update
-  - apiGroups:
-      - acme.cert-manager.io
-    resources:
-      - orders
-    verbs:
-      - create
-      - delete
       - get
       - list
       - watch
@@ -57,10 +44,6 @@ rules:
       - get
       - list
       - watch
-      - create
-      - update
-      - delete
-      - patch
   - apiGroups:
       - ""
     resources:
@@ -68,3 +51,48 @@ rules:
     verbs:
       - create
       - patch
+  - apiGroups:
+      - acme.cert-manager.io
+    resources:
+      - challenges/finalizers
+    verbs:
+      - update
+  - apiGroups:
+      - ""
+    resources:
+      - pods
+      - services
+    verbs:
+      - get
+      - list
+      - watch
+      - create
+      - delete
+  - apiGroups:
+      - networking.k8s.io
+    resources:
+      - ingresses
+    verbs:
+      - get
+      - list
+      - watch
+      - create
+      - delete
+      - update
+  - apiGroups:
+      - gateway.networking.k8s.io
+    resources:
+      - httproutes
+    verbs:
+      - get
+      - list
+      - watch
+      - create
+      - delete
+      - update
+  - apiGroups:
+      - route.openshift.io
+    resources:
+      - routes/custom-host
+    verbs:
+      - create

@@ -10,7 +10,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-notifications-controller
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.0.5
-    helm.sh/chart: argo-cd-8.0.16
+    app.kubernetes.io/version: v3.0.6
+    helm.sh/chart: argo-cd-8.0.17
   name: argocd-notifications-cm
   namespace: argocd
