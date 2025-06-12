@@ -6,7 +6,7 @@
   "customManagers": [
     {
       "customType": "regex",
-      "fileFormat": "nix",
+      "managerFilePatterns": ["/.*\.nix$/"],
       "matchStrings": [
         "^\\s*image\\s*=\\s*\".*:(?<current>.+?)\";\\s+# (?<datasource>.+?)\\/(?<depName>.+?)(\\@(?<versioning>.+?))?$"
       ]
