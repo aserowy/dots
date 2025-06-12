@@ -3,7 +3,7 @@ name: "auto_update_renovate"
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 20 * * *"
+    - cron: "*/15 * * * *"
 
 jobs:
   update_renovate:
