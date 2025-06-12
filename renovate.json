@@ -8,7 +8,7 @@
       "customType": "regex",
       "managerFilePatterns": ["/.*\.nix$/"],
       "matchStrings": [
-        "^\\s*image\\s*=\\s*\".*:(?<current>.+?)\";\\s+# (?<datasource>.+?)\\/(?<depName>.+?)(\\@(?<versioning>.+?))?$"
+        "^\\s*image\\s*=\\s*\".*:(?<currentValue>.+?)\";\\s+# (?<datasource>.+?)\\/(?<depName>.+?)(\\@(?<versioning>.+?))?$"
       ]
     }
   ]
