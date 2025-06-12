@@ -1,3 +1,15 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json"
+  "extends": [
+    "config:recommended",
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileFormat": "nix",
+      "matchStrings": [
+        "^\\s*image\\s*=\\s*\".*:(?<current>.+?)\";\\s+# (?<datasource>.+?)\\/(?<depName>.+?)(\\@(?<versioning>.+?))?$"
+      ],
+    }
+  ]
 }

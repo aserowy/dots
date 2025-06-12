@@ -95,7 +95,7 @@ in
                 containers = [
                   {
                     name = "adguard";
-                    image = "docker.io/adguard/adguardhome:v0.107.60";
+                    image = "docker.io/adguard/adguardhome:v0.107.60"; # github-tags/AdguardTeam/AdGuardHome@semver
                     securityContext = {
                       allowPrivilegeEscalation = false;
                       readOnlyRootFilesystem = true;
