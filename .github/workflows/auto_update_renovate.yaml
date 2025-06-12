@@ -1,0 +1,26 @@
+name: "auto_update_renovate"
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 20 * * *"
+
+jobs:
+  update_flake:
+    runs-on: ubuntu-latest
+    steps:
+      - name: retrieve app token
+        uses: actions/create-github-app-token@v2
+        id: app-token
+        with:
+          app-id: ${{ vars.APP_ID }}
+          private-key: ${{ secrets.PRIVATE_KEY }}
+
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: renovate
+        uses: renovatebot/github-action@v42.0.4
+        with:
+          # configurationFile: example/renovate-config.js
+          token: '${{ steps.get_token.outputs.token }}'
