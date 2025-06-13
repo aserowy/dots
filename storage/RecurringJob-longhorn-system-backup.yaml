@@ -1,0 +1,13 @@
+apiVersion: longhorn.io/v1beta2
+kind: RecurringJob
+metadata:
+  name: longhorn-system-backup
+  namespace: longhorn-system
+spec:
+  concurrency: 1
+  cron: 0 3 * * 5
+  name: longhorn-system-backup
+  parameters:
+    volume-backup-policy: disabled
+  retain: 1
+  task: system-backup
