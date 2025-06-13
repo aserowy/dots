@@ -15,6 +15,20 @@
       values = {
         nameOverride = "kube-prometheus";
         fullnameOverride = "kube-prometheus";
+        prometheus = {
+          prometheusSpec = {
+            resources = {
+              requests = {
+                cpu = "250m";
+                memory = "1Gi";
+              };
+              limits = {
+                cpu = "1000m";
+                memory = "2Gi";
+              };
+            };
+          };
+        };
       };
     };
   };
