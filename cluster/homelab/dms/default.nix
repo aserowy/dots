@@ -97,7 +97,7 @@ in
                 containers = [
                   {
                     name = "gotenberg";
-                    image = "docker.io/gotenberg/gotenberg:8.21";
+                    image = "docker.io/gotenberg/gotenberg:8.21"; # docker/gotenberg/gotenberg@semver-coerced
                     securityContext = {
                       allowPrivilegeEscalation = false;
                       readOnlyRootFilesystem = true;
@@ -187,7 +187,7 @@ in
                 containers = [
                   {
                     name = "tika";
-                    image = "docker.io/apache/tika:3.2.0.0";
+                    image = "docker.io/apache/tika:3.2.0.0"; # docker/apache/tika@semver-coerced
                     securityContext = {
                       allowPrivilegeEscalation = false;
                       readOnlyRootFilesystem = true;
@@ -259,7 +259,7 @@ in
                 containers = [
                   {
                     name = "paperless";
-                    image = "docker.io/paperlessngx/paperless-ngx:2.16";
+                    image = "docker.io/paperlessngx/paperless-ngx:2.16"; # docker/paperlessngx/paperless-ngx@semver-coerced
                     securityContext = {
                       allowPrivilegeEscalation = false;
                       readOnlyRootFilesystem = true;

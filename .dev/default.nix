@@ -60,6 +60,7 @@ pkgs.mkShell {
       pkgs.nodePackages.prettier
       pkgs.nodePackages.vscode-json-languageserver
       pkgs.nufmt
+      pkgs.renovate
       pkgs.sops
       pkgs.stylua
       pkgs.sumneko-lua-language-server
