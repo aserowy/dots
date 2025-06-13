@@ -85,6 +85,21 @@
           groups:
             - default
       ''
+      ''
+        apiVersion: longhorn.io/v1beta2
+        kind: RecurringJob
+        metadata:
+          name: default-backup
+          namespace: longhorn-system
+        spec:
+          name: default-backup
+          task: system-backup
+          concurrency: 1
+          cron: 0 3 * * 5
+          retain: 1
+          parameters:
+            volume-backup-policy: disabled
+      ''
 
       # NOTE: cleaning resources
       ''
