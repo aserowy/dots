@@ -16,7 +16,7 @@ spec:
         app: adguard
     spec:
       containers:
-        - image: docker.io/adguard/adguardhome:v0.107.60
+        - image: docker.io/adguard/adguardhome:v0.107.62
           name: adguard
           ports:
             - containerPort: 53
