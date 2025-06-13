@@ -57,10 +57,10 @@
         apiVersion: longhorn.io/v1beta2
         kind: RecurringJob
         metadata:
-          name: default-snapshot-daily
+          name: longhorn-volume-snapshot
           namespace: longhorn-system
         spec:
-          name: default-snapshot-daily
+          name: longhorn-volume-snapshot
           task: snapshot
           concurrency: 1
           cron: 0 0 * * *
@@ -72,10 +72,10 @@
         apiVersion: longhorn.io/v1beta2
         kind: RecurringJob
         metadata:
-          name: default-backup
+          name: longhorn-volume-backup
           namespace: longhorn-system
         spec:
-          name: default-backup
+          name: longhorn-volume-backup
           task: backup
           concurrency: 1
           cron: 0 3 * * 2,5
@@ -89,10 +89,10 @@
         apiVersion: longhorn.io/v1beta2
         kind: RecurringJob
         metadata:
-          name: default-backup
+          name: longhorn-system-backup
           namespace: longhorn-system
         spec:
-          name: default-backup
+          name: longhorn-system-backup
           task: system-backup
           concurrency: 1
           cron: 0 3 * * 5
