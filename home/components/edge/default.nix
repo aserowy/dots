@@ -1,32 +1,13 @@
 {
   config,
   lib,
-  # pkgs,
+  pkgs,
   ...
 }:
 with lib;
 
 let
   cnfg = config.home.components.edge;
-
-  system = "x86_64-linux";
-
-  # FIX: remove after edge maintainer found
-  # https://github.com/NixOS/nixpkgs/commits/47dec1cd02e559655a90d3d2748aa56e04459a86/pkgs/by-name/mi/microsoft-edge
-  # https://nixpkgs-tracker.ocfox.me/?pr=411663
-  pkgs =
-    import
-      (builtins.fetchGit {
-        name = "microsoft-edge-revision";
-        url = "https://github.com/NixOS/nixpkgs/";
-        ref = "refs/heads/nixos-unstable";
-        rev = "75500d4f1a1e62df4939f1702aea338109711377";
-      })
-      {
-        inherit system;
-        config.allowUnfree = true;
-      };
-
 in
 {
   options.home.components.edge = {

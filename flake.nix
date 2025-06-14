@@ -246,6 +246,21 @@
             }
           ];
         };
+
+        homelab-02-l430 = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            disko.nixosModules.disko
+            sops.nixosModules.sops
+            ./sops.nix
+
+            ./systems/homelab-02-l430
+            {
+              imports = [ ./users ];
+              users.root.enable = true;
+            }
+          ];
+        };
       };
 
       nixidyEnvs.x86_64-linux =
