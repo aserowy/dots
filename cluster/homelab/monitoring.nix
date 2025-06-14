@@ -4,9 +4,12 @@
     namespace = "monitoring";
     createNamespace = true;
 
-    syncPolicy.syncOptions = {
-      replace = true;
-      serverSideApply = true;
+    syncPolicy = {
+      autoSync = {
+        prune = false;
+        selfHeal = false;
+      };
+      syncOptions.serverSideApply = true;
     };
 
     helm.releases.kube-prometheus-stack = {
@@ -16,15 +19,29 @@
         nameOverride = "kube-prometheus";
         fullnameOverride = "kube-prometheus";
         prometheus = {
+          prometheusOperator = {
+            livenessProbe = {
+              initialDelaySeconds = 30;
+              timeoutSeconds = 10;
+              periodSeconds = 20;
+            };
+            readinessProbe = {
+              initialDelaySeconds = 30;
+              timeoutSeconds = 10;
+              periodSeconds = 20;
+            };
+          };
           prometheusSpec = {
+            scrapeTimeout = "30s";
+            scrapeInterval = "60s";
             resources = {
               requests = {
-                cpu = "250m";
+                cpu = "0.25";
                 memory = "1Gi";
               };
               limits = {
-                cpu = "1000m";
-                memory = "2Gi";
+                cpu = "1";
+                memory = "3Gi";
               };
             };
           };

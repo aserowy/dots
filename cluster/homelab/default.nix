@@ -6,7 +6,7 @@
     ./dns
     ./dms
     ./loadbalancer.nix
-    # ./monitoring.nix
+    ./monitoring.nix
     ./policies.nix
     ./secrets.nix
     ./storage.nix
