@@ -2,10 +2,10 @@
 {
   imports = [
     ../shared/base.nix
+    ../shared/homelab.nix
 
     ./disko.nix
     ./hardware-configuration.nix
-    ./homelab.nix
   ];
 
   boot = {
