@@ -17,7 +17,7 @@
         ipam.operator.clusterPoolIPv4PodCIDRList = [ "10.42.0.0/16" ];
 
         # TODO: is host dependent: should come as modul option
-        k8sServiceHost = "192.168.178.53";
+        k8sServiceHost = "192.168.178.201";
         k8sServicePort = 6443;
 
         kubeProxyReplacement = true;
@@ -36,7 +36,7 @@
       ciliumLoadBalancerIPPools = {
         default-loadbalancer-ippool.spec = {
           # TODO: cidr configurable
-          blocks = [ { cidr = "192.168.178.53/32"; } ];
+          blocks = [ { cidr = "192.168.178.201/32"; } ];
           serviceSelector.matchLabels = {
             "homelab/loadbalancer" = "entrypoint";
           };
