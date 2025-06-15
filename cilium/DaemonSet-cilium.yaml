@@ -50,7 +50,7 @@ spec:
                   divisor: "1"
                   resource: limits.memory
             - name: KUBERNETES_SERVICE_HOST
-              value: 192.168.178.53
+              value: 192.168.178.201
             - name: KUBERNETES_SERVICE_PORT
               value: "6443"
           image: quay.io/cilium/cilium:v1.17.4@sha256:24a73fe795351cf3279ac8e84918633000b52a9654ff73a6b0d7223bcff4a67a
@@ -196,7 +196,7 @@ spec:
                   apiVersion: v1
                   fieldPath: metadata.namespace
             - name: KUBERNETES_SERVICE_HOST
-              value: 192.168.178.53
+              value: 192.168.178.201
             - name: KUBERNETES_SERVICE_PORT
               value: "6443"
           image: quay.io/cilium/cilium:v1.17.4@sha256:24a73fe795351cf3279ac8e84918633000b52a9654ff73a6b0d7223bcff4a67a
@@ -306,7 +306,7 @@ spec:
                   name: cilium-config
                   optional: true
             - name: KUBERNETES_SERVICE_HOST
-              value: 192.168.178.53
+              value: 192.168.178.201
             - name: KUBERNETES_SERVICE_PORT
               value: "6443"
           image: quay.io/cilium/cilium:v1.17.4@sha256:24a73fe795351cf3279ac8e84918633000b52a9654ff73a6b0d7223bcff4a67a
