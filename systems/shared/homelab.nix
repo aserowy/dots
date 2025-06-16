@@ -34,6 +34,13 @@ in
           Specify the host address for the homelab. E.g. "192.168.0.100/32". This is required to ensure proper networking.
         '';
       };
+
+      gateway = mkOption {
+        type = types.str;
+        description = ''
+          Specify the default gateway for the homelab network. This is required for proper routing.
+        '';
+      };
     };
 
     cluster.masterAddress = mkOption {
@@ -135,7 +142,7 @@ in
         "10-lan" = {
           matchConfig.Name = cnfg.network.adapter;
           address = [ cnfg.network.address ];
-          networkConfig.DHCP = "ipv4";
+          gateway = [ cnfg.network.gateway ];
           dns = [
             "1.1.1.1"
             "8.8.4.4"

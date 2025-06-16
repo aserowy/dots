@@ -12,8 +12,9 @@
     enable = true;
     hostName = "homelab-02-l430";
     network = {
-      adapter = "eno1";
-      address = "192.168.178.202/32";
+      adapter = "enp12s0";
+      address = "192.168.178.202/24";
+      gateway = "192.168.178.1";
     };
     cluster.masterAddress = "https://192.168.178.201:6443";
   };

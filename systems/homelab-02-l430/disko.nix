@@ -48,7 +48,7 @@
                   "/swap" = {
                     mountpoint = "/.swapvol";
                     swap = {
-                      swapfile.size = "8Gi";
+                      swapfile.size = "8G";
                     };
                   };
                 };
@@ -56,7 +56,7 @@
                 mountpoint = "/partition-root";
                 swap = {
                   swapfile = {
-                    size = "8Gi";
+                    size = "8G";
                   };
                 };
               };

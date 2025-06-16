@@ -13,7 +13,8 @@
     hostName = "homelab-01-nuc";
     network = {
       adapter = "eno1";
-      address = "192.168.178.201/32";
+      address = "192.168.178.201/24";
+      gateway = "192.168.178.1";
     };
   };
 
