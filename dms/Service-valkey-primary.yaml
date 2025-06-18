@@ -7,8 +7,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: valkey
     app.kubernetes.io/part-of: valkey
-    app.kubernetes.io/version: 8.1.1
-    helm.sh/chart: valkey-3.0.12
+    app.kubernetes.io/version: 8.1.2
+    helm.sh/chart: valkey-3.0.14
   name: valkey-primary
   namespace: dms
 spec:
