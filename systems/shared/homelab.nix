@@ -118,6 +118,9 @@ in
                 disable-kube-proxy = true;
                 disable-network-policy = true;
 
+                cluster-cidr = "10.42.0.0/16";
+                service-cidr = "10.43.0.0/16";
+
                 disable = [
                   "local-storage"
                   "metrics-server"

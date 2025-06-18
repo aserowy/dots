@@ -13,7 +13,7 @@
 
         dnsProxy.enableTransparentMode = false;
 
-        # replicate k3s environment
+        # NOTE: replicate k3s environment
         ipam.operator.clusterPoolIPv4PodCIDRList = [ "10.42.0.0/16" ];
 
         # TODO: is host dependent: should come as modul option
@@ -26,6 +26,8 @@
 
         routingMode = "native";
         autoDirectNodeRoutes = true;
+        ipv4NativeRoutingCIDR = "10.42.0.0/16";
+        enableIPv4Masquerade = false;
 
         hubble = {
           relay.enabled = true;
