@@ -8,6 +8,7 @@ with lib;
 
 let
   cnfg = config.homelab;
+  isMasterNode = cnfg.cluster.masterAddress == "";
 in
 {
   options.homelab = {
@@ -62,7 +63,6 @@ in
             22
             6443
             6444
-            9000
           ];
         };
         trustedInterfaces = [
@@ -103,11 +103,12 @@ in
       k3s = {
         enable = true;
 
-        clusterInit = cnfg.cluster.masterAddress == "";
+        clusterInit = isMasterNode;
+        role = mkIf (!isMasterNode) "agent";
         serverAddr = cnfg.cluster.masterAddress;
 
         tokenFile = config.sops.secrets."k3s/cluster/token".path;
-        extraFlags =
+        extraFlags = mkIf isMasterNode (
           let
             serverConfig = pkgs.writeText "k3s-config.yaml" (
               lib.generators.toYAML { } {
@@ -132,7 +133,8 @@ in
               }
             );
           in
-          "--config ${serverConfig}";
+          "--config ${serverConfig}"
+        );
       };
     };
 
@@ -145,8 +147,7 @@ in
           gateway = [ cnfg.network.gateway ];
           dns = [
             "1.1.1.1"
-            "8.8.4.4"
-            "8.8.8.8"
+            "9.9.9.9"
           ];
         };
       };

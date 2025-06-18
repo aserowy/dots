@@ -24,6 +24,9 @@
 
         policyEnforcementMode = "default";
 
+        routingMode = "native";
+        autoDirectNodeRoutes = true;
+
         hubble = {
           relay.enabled = true;
           ui.enabled = true;
