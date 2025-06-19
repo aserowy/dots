@@ -56,6 +56,7 @@ in
   config = mkIf cnfg.enable {
     networking = {
       hostName = cnfg.hostName;
+
       firewall = {
         checkReversePath = "loose";
         interfaces."${cnfg.network.adapter}" = {
@@ -72,6 +73,8 @@ in
           "lxc*"
         ];
       };
+
+      useNetworkd = true;
     };
 
     boot = {
@@ -89,6 +92,11 @@ in
       cryptsetup
       nfs-utils
     ];
+
+    security = {
+      auditd.enable = true;
+      audit.enable = true;
+    };
 
     services = {
       # NOTE: longhorn requirement
