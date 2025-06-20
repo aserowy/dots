@@ -62,8 +62,13 @@ in
         interfaces."${cnfg.network.adapter}" = {
           allowedTCPPorts = [
             22
-            6443
-            6444
+            2379 # etcd client
+            2380 # etcd peer
+            6443 # kube api server
+            10250 # kubelet
+          ];
+          allowedUDPPorts = [
+            8472 # vxlan
           ];
         };
         trustedInterfaces = [
@@ -135,8 +140,6 @@ in
                   "servicelb"
                   "traefik"
                 ];
-
-                egress-selector-mode = "cluster";
 
                 kube-apiserver-arg = [
                   "anonymous-auth=true"

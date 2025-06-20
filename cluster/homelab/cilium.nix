@@ -11,8 +11,6 @@
       values = {
         operator.replicas = 1;
 
-        dnsProxy.enableTransparentMode = false;
-
         # NOTE: replicate k3s environment
         ipam.operator.clusterPoolIPv4PodCIDRList = [ "10.42.0.0/16" ];
 
@@ -23,11 +21,6 @@
         kubeProxyReplacement = true;
 
         policyEnforcementMode = "default";
-
-        routingMode = "native";
-        autoDirectNodeRoutes = true;
-        ipv4NativeRoutingCIDR = "10.42.0.0/16";
-        enableIPv4Masquerade = false;
 
         hubble = {
           relay.enabled = true;

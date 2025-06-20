@@ -17,6 +17,7 @@
 
   networking = {
     firewall = {
+      allowPing = false;
       allowedTCPPorts = [
         80
         443
