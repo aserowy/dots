@@ -101,6 +101,6 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: valkey
     app.kubernetes.io/version: 8.1.2
-    helm.sh/chart: valkey-3.0.14
+    helm.sh/chart: valkey-3.0.15
   name: valkey-health
   namespace: dms
