@@ -332,11 +332,11 @@
         "poetry2nix": "poetry2nix"
       },
       "locked": {
-        "lastModified": 1750383223,
-        "narHash": "sha256-wYLsO1nBF822LM/bLiXW0wVFBliLFCSajeE6JRPeUfo=",
+        "lastModified": 1750469544,
+        "narHash": "sha256-/83EWUy/xQxVn/eJ3xfnelv/TFemWuVAzTJ+m/FmztA=",
         "owner": "farcaller",
         "repo": "nixhelm",
-        "rev": "11e0095df79aaa4e70b24206ef5bb7b2d7372802",
+        "rev": "82d35f8a1d819db804b142357d50b3a886fd5163",
         "type": "github"
       },
       "original": {
@@ -451,11 +451,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1750387093,
-        "narHash": "sha256-MgL1+yNVcSD6OlzSmKt5GS4RmAQnNCjckjgPC1hmMPg=",
+        "lastModified": 1750473400,
+        "narHash": "sha256-wiW2j63MyGQyyijRF25hf7Ab7vx4G8pCiGjUe3OGV4c=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "517e9871d182346b53bb7f23fed00810c14db396",
+        "rev": "3d7d4c4e284f26d6dc4840491c66884912be0062",
         "type": "github"
       },
       "original": {
