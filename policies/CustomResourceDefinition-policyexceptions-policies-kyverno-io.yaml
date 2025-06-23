@@ -8,8 +8,8 @@ metadata:
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kyverno-crds
-    app.kubernetes.io/version: 3.4.2
-    helm.sh/chart: crds-3.4.2
+    app.kubernetes.io/version: 3.4.3
+    helm.sh/chart: crds-3.4.3
   name: policyexceptions.policies.kyverno.io
 spec:
   group: policies.kyverno.io
