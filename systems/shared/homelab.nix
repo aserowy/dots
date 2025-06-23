@@ -60,6 +60,7 @@ in
       firewall = {
         checkReversePath = "loose";
         interfaces."${cnfg.network.adapter}" = {
+          # TODO: remove ports used by trusted interfaces
           allowedTCPPorts = [
             22
             2379 # etcd client
