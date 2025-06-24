@@ -9,7 +9,7 @@
       chart = charts.cilium.cilium;
 
       values = {
-        operator.replicas = 1;
+        operator.replicas = 2;
 
         # NOTE: replicate k3s environment
         ipam.operator.clusterPoolIPv4PodCIDRList = [ "10.42.0.0/16" ];

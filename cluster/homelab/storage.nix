@@ -16,8 +16,8 @@
         persistence = {
           reclaimPolicy = "Retain";
 
-          # NOTE: default is 3, but running it on single node currently
-          defaultClassReplicaCount = 1;
+          # NOTE: default is 3, but running it on two node cluster
+          defaultClassReplicaCount = 2;
         };
 
         # NOTE: must be disabled for helm deployments inside argo cd
