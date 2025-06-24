@@ -48,5 +48,29 @@
         };
       };
     };
+
+    resources = {
+      ingressRoutes = {
+        grafana-route.spec = {
+          entryPoints = [
+            "websecure"
+          ];
+          routes = [
+            {
+              match = "Host(`grafana.anderwerse.de`)";
+              kind = "Rule";
+              services = [
+                {
+                  name = "grafana";
+                  namespace = "monitoring";
+                  port = 8080;
+                }
+              ];
+            }
+          ];
+          tls.secretName = "anderwersede-tls-certificate";
+        };
+      };
+    };
   };
 }
