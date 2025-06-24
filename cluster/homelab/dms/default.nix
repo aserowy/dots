@@ -417,6 +417,8 @@ in
                     name = "consume";
                     emptyDir = { };
                   }
+                  # FIX: claim identifier are wrongly referenced, mounting and exchange data accordingly
+                  # https://github.com/longhorn/longhorn/discussions/4178
                   {
                     name = "data";
                     persistentVolumeClaim = {
