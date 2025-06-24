@@ -70,25 +70,6 @@
           ];
           tls.secretName = "anderwersede-tls-certificate";
         };
-        prometheus-route.spec = {
-          entryPoints = [
-            "websecure"
-          ];
-          routes = [
-            {
-              match = "Host(`prometheus.anderwerse.de`)";
-              kind = "Rule";
-              services = [
-                {
-                  name = "kube-prometheus-prometheus";
-                  namespace = "monitoring";
-                  port = 8080;
-                }
-              ];
-            }
-          ];
-          tls.secretName = "anderwersede-tls-certificate";
-        };
       };
     };
   };
