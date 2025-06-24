@@ -30,6 +30,16 @@ in
             existingSecret = "valkey";
             existingSecretPasswordKey = "password";
           };
+          primary = {
+            persistence = {
+              size = "4Gi";
+            };
+          };
+          replica = {
+            persistence = {
+              size = "4Gi";
+            };
+          };
         };
       };
     };
@@ -59,7 +69,7 @@ in
             - ReadWriteOnce
           resources:
             requests:
-              storage: 10Gi
+              storage: 5Gi
       ''
     ];
 
