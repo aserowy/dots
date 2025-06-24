@@ -1,17 +1,17 @@
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
-  name: grafana-route
+  name: prometheus-route
   namespace: monitoring
 spec:
   entryPoints:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`grafana.anderwerse.de`)
+      match: Host(`prometheus.anderwerse.de`)
       services:
-        - name: kube-prometheus-stack-grafana
+        - name: kube-prometheus-prometheus
           namespace: monitoring
-          port: 80
+          port: 8080
   tls:
     secretName: anderwersede-tls-certificate
