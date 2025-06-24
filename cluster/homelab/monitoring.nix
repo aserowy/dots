@@ -61,7 +61,26 @@
               kind = "Rule";
               services = [
                 {
-                  name = "grafana";
+                  name = "kube-prometheus-stack-grafana";
+                  namespace = "monitoring";
+                  port = 80;
+                }
+              ];
+            }
+          ];
+          tls.secretName = "anderwersede-tls-certificate";
+        };
+        prometheus-route.spec = {
+          entryPoints = [
+            "websecure"
+          ];
+          routes = [
+            {
+              match = "Host(`prometheus.anderwerse.de`)";
+              kind = "Rule";
+              services = [
+                {
+                  name = "kube-prometheus-prometheus";
                   namespace = "monitoring";
                   port = 8080;
                 }
