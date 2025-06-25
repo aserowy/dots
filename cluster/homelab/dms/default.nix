@@ -57,7 +57,7 @@ in
             - ReadWriteOnce
           resources:
             requests:
-              storage: 10Gi
+              storage: 5Gi
       ''
       ''
         apiVersion: v1
@@ -69,7 +69,7 @@ in
             - ReadWriteOnce
           resources:
             requests:
-              storage: 5Gi
+              storage: 8Gi
       ''
     ];
 
@@ -417,18 +417,16 @@ in
                     name = "consume";
                     emptyDir = { };
                   }
-                  # FIX: claim identifier are wrongly referenced, mounting and exchange data accordingly
-                  # https://github.com/longhorn/longhorn/discussions/4178
                   {
                     name = "data";
                     persistentVolumeClaim = {
-                      claimName = paperless-media-pvc;
+                      claimName = paperless-data-pvc;
                     };
                   }
                   {
                     name = "media";
                     persistentVolumeClaim = {
-                      claimName = paperless-data-pvc;
+                      claimName = paperless-media-pvc;
                     };
                   }
                 ];
