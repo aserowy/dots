@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/name: kube-state-metrics
     app.kubernetes.io/part-of: kube-state-metrics
     app.kubernetes.io/version: 2.15.0
-    helm.sh/chart: kube-state-metrics-5.37.0
+    helm.sh/chart: kube-state-metrics-6.0.0
     release: kube-prometheus-stack
   name: kube-prometheus-stack-kube-state-metrics
 rules:
