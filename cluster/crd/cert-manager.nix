@@ -3887,6 +3887,8 @@ in {
         mkAliasDefinitions options.resources."issuers";
     };
 
+    # make all namespaced resources default to the
+    # application's namespace
     defaults = [
       {
         group = "cert-manager.io";

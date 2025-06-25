@@ -611,6 +611,8 @@ in {
         mkAliasDefinitions options.resources."ingressRoutes";
     };
 
+    # make all namespaced resources default to the
+    # application's namespace
     defaults = [
       {
         group = "traefik.io";

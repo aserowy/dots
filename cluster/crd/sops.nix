@@ -521,6 +521,8 @@ in {
         mkAliasDefinitions options.resources."sopsSecrets";
     };
 
+    # make all namespaced resources default to the
+    # application's namespace
     defaults = [
       {
         group = "isindir.github.com";

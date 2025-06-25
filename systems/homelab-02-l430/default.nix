@@ -20,7 +20,20 @@
   };
 
   # lsblk --discard to ensure ssd supports trim (disc-gran and disc-max should be non zero)
-  services.fstrim.enable = true;
+  services = {
+    fstrim.enable = true;
+
+    logind = {
+      lidSwitch = "ignore";
+      lidSwitchDocked = "ignore";
+      lidSwitchExternalPower = "ignore";
+      extraConfig = ''
+        IdleAction=ignore
+        HandlePowerKey=ignore
+        HandleSuspendKey=ignore
+      '';
+    };
+  };
 
   system = {
     # Did you read the comment?

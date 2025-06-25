@@ -9803,6 +9803,8 @@ in {
         mkAliasDefinitions options.resources."ciliumNetworkPolicies";
     };
 
+    # make all namespaced resources default to the
+    # application's namespace
     defaults = [
       {
         group = "cilium.io";
