@@ -95,7 +95,7 @@ in
                 containers = [
                   {
                     name = "adguard";
-                    image = "docker.io/adguard/adguardhome:v0.107.62"; # docker/adguard/adguardhome@semver
+                    image = "docker.io/adguard/adguardhome:v0.107.63"; # docker/adguard/adguardhome@semver
                     securityContext = {
                       allowPrivilegeEscalation = false;
                       readOnlyRootFilesystem = true;
