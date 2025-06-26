@@ -11,8 +11,8 @@
         defaultBackupStore = {
           backupTarget = "azblob://backup@core.windows.net/";
           backupTargetCredentialSecret = "longhorn-azblob-secret";
-          # NOTE: disable backup polling
-          pollInterval = "0";
+          # NOTE: set intervall to two days: 60*60*24*2
+          pollInterval = "172800";
         };
 
         persistence = {
