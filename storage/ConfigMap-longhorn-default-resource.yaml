@@ -3,6 +3,7 @@ data:
   default-resource.yaml: |-
     backup-target: azblob://backup@core.windows.net/
     backup-target-credential-secret: longhorn-azblob-secret
+    backupstore-poll-interval: 0
 kind: ConfigMap
 metadata:
   labels:
