@@ -7,6 +7,35 @@ spec:
   destination:
     namespace: longhorn-system
     server: https://kubernetes.default.svc
+  ignoreDifferences:
+    - group: apiextensions.k8s.io
+      jsonPointers:
+        - /spec/preserveUnknownFields
+      kind: CustomResourceDefinition
+    - group: apiextensions.k8s.io
+      jsonPointers:
+        - /spec/preserveUnknownFields
+      kind: CustomResourceDefinition
+    - group: apiextensions.k8s.io
+      jsonPointers:
+        - /spec/preserveUnknownFields
+      kind: CustomResourceDefinition
+    - group: apiextensions.k8s.io
+      jsonPointers:
+        - /spec/preserveUnknownFields
+      kind: CustomResourceDefinition
+    - group: apiextensions.k8s.io
+      jsonPointers:
+        - /spec/preserveUnknownFields
+      kind: CustomResourceDefinition
+    - group: apiextensions.k8s.io
+      jsonPointers:
+        - /spec/preserveUnknownFields
+      kind: CustomResourceDefinition
+    - group: apiextensions.k8s.io
+      jsonPointers:
+        - /spec/preserveUnknownFields
+      kind: CustomResourceDefinition
   project: default
   source:
     path: ./storage
