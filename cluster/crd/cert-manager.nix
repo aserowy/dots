@@ -193,7 +193,7 @@ with lib; let
     "cert-manager.io.v1.CertificateSpec" = {
       options = {
         "additionalOutputFormats" = mkOption {
-          description = "Defines extra output formats of the private key and signed certificate chain\nto be written to this Certificate's target Secret.\n\nThis is a Beta Feature enabled by default. It can be disabled with the\n`--feature-gates=AdditionalCertificateOutputFormats=false` option set on both\nthe controller and webhook components.";
+          description = "Defines extra output formats of the private key and signed certificate chain\nto be written to this Certificate's target Secret.";
           type = types.nullOr (types.listOf (submoduleOf "cert-manager.io.v1.CertificateSpecAdditionalOutputFormats"));
         };
         "commonName" = mkOption {
@@ -257,7 +257,7 @@ with lib; let
           type = types.nullOr types.int;
         };
         "revisionHistoryLimit" = mkOption {
-          description = "The maximum number of CertificateRequest revisions that are maintained in\nthe Certificate's history. Each revision represents a single `CertificateRequest`\ncreated by this Certificate, either when it was created, renewed, or Spec\nwas changed. Revisions will be removed by oldest first if the number of\nrevisions exceeds this number.\n\nIf set, revisionHistoryLimit must be a value of `1` or greater.\nIf unset (`nil`), revisions will not be garbage collected.\nDefault value is `nil`.";
+          description = "The maximum number of CertificateRequest revisions that are maintained in\nthe Certificate's history. Each revision represents a single `CertificateRequest`\ncreated by this Certificate, either when it was created, renewed, or Spec\nwas changed. Revisions will be removed by oldest first if the number of\nrevisions exceeds this number.\n\nIf set, revisionHistoryLimit must be a value of `1` or greater.\nDefault value is `1`.";
           type = types.nullOr types.int;
         };
         "secretName" = mkOption {
@@ -267,6 +267,10 @@ with lib; let
         "secretTemplate" = mkOption {
           description = "Defines annotations and labels to be copied to the Certificate's Secret.\nLabels and annotations on the Secret will be changed as they appear on the\nSecretTemplate when added or removed. SecretTemplate annotations are added\nin conjunction with, and cannot overwrite, the base set of annotations\ncert-manager sets on the Certificate's Secret.";
           type = types.nullOr (submoduleOf "cert-manager.io.v1.CertificateSpecSecretTemplate");
+        };
+        "signatureAlgorithm" = mkOption {
+          description = "Signature algorithm to use.\nAllowed values for RSA keys: SHA256WithRSA, SHA384WithRSA, SHA512WithRSA.\nAllowed values for ECDSA keys: ECDSAWithSHA256, ECDSAWithSHA384, ECDSAWithSHA512.\nAllowed values for Ed25519 keys: PureEd25519.";
+          type = types.nullOr types.str;
         };
         "subject" = mkOption {
           description = "Requested set of X509 certificate subject attributes.\nMore info: https://datatracker.ietf.org/doc/html/rfc5280#section-4.1.2.6\n\nThe common name attribute is specified separately in the `commonName` field.\nCannot be set if the `literalSubject` field is set.";
@@ -300,6 +304,7 @@ with lib; let
         "renewBeforePercentage" = mkOverride 1002 null;
         "revisionHistoryLimit" = mkOverride 1002 null;
         "secretTemplate" = mkOverride 1002 null;
+        "signatureAlgorithm" = mkOverride 1002 null;
         "subject" = mkOverride 1002 null;
         "uris" = mkOverride 1002 null;
         "usages" = mkOverride 1002 null;
@@ -410,7 +415,7 @@ with lib; let
           type = types.nullOr (submoduleOf "cert-manager.io.v1.CertificateSpecKeystoresPkcs12PasswordSecretRef");
         };
         "profile" = mkOption {
-          description = "Profile specifies the key and certificate encryption algorithms and the HMAC algorithm\nused to create the PKCS12 keystore. Default value is `LegacyRC2` for backward compatibility.\n\nIf provided, allowed values are:\n`LegacyRC2`: Deprecated. Not supported by default in OpenSSL 3 or Java 20.\n`LegacyDES`: Less secure algorithm. Use this option for maximal compatibility.\n`Modern2023`: Secure algorithm. Use this option in case you have to always use secure algorithms\n(eg. because of company policy). Please note that the security of the algorithm is not that important\nin reality, because the unencrypted certificate and private key are also stored in the Secret.";
+          description = "Profile specifies the key and certificate encryption algorithms and the HMAC algorithm\nused to create the PKCS12 keystore. Default value is `LegacyRC2` for backward compatibility.\n\nIf provided, allowed values are:\n`LegacyRC2`: Deprecated. Not supported by default in OpenSSL 3 or Java 20.\n`LegacyDES`: Less secure algorithm. Use this option for maximal compatibility.\n`Modern2023`: Secure algorithm. Use this option in case you have to always use secure algorithms\n(e.g., because of company policy). Please note that the security of the algorithm is not that important\nin reality, because the unencrypted certificate and private key are also stored in the Secret.";
           type = types.nullOr types.str;
         };
       };
@@ -541,7 +546,7 @@ with lib; let
           type = types.nullOr types.str;
         };
         "rotationPolicy" = mkOption {
-          description = "RotationPolicy controls how private keys should be regenerated when a\nre-issuance is being processed.\n\nIf set to `Never`, a private key will only be generated if one does not\nalready exist in the target `spec.secretName`. If one does exist but it\ndoes not have the correct algorithm or size, a warning will be raised\nto await user intervention.\nIf set to `Always`, a private key matching the specified requirements\nwill be generated whenever a re-issuance occurs.\nDefault is `Never` for backward compatibility.";
+          description = "RotationPolicy controls how private keys should be regenerated when a\nre-issuance is being processed.\n\nIf set to `Never`, a private key will only be generated if one does not\nalready exist in the target `spec.secretName`. If one does exist but it\ndoes not have the correct algorithm or size, a warning will be raised\nto await user intervention.\nIf set to `Always`, a private key matching the specified requirements\nwill be generated whenever a re-issuance occurs.\nDefault is `Always`.\nThe default was changed from `Never` to `Always` in cert-manager >=v1.18.0.\nThe new default can be disabled by setting the\n`--feature-gates=DefaultPrivateKeyRotationPolicyAlways=false` option on\nthe controller component.";
           type = types.nullOr types.str;
         };
         "size" = mkOption {
@@ -789,12 +794,16 @@ with lib; let
           type = types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecAcmeExternalAccountBinding");
         };
         "preferredChain" = mkOption {
-          description = "PreferredChain is the chain to use if the ACME server outputs multiple.\nPreferredChain is no guarantee that this one gets delivered by the ACME\nendpoint.\nFor example, for Let's Encrypt's DST crosssign you would use:\n\"DST Root CA X3\" or \"ISRG Root X1\" for the newer Let's Encrypt root CA.\nThis value picks the first certificate bundle in the combined set of\nACME default and alternative chains that has a root-most certificate with\nthis value as its issuer's commonname.";
+          description = "PreferredChain is the chain to use if the ACME server outputs multiple.\nPreferredChain is no guarantee that this one gets delivered by the ACME\nendpoint.\nFor example, for Let's Encrypt's DST cross-sign you would use:\n\"DST Root CA X3\" or \"ISRG Root X1\" for the newer Let's Encrypt root CA.\nThis value picks the first certificate bundle in the combined set of\nACME default and alternative chains that has a root-most certificate with\nthis value as its issuer's commonname.";
           type = types.nullOr types.str;
         };
         "privateKeySecretRef" = mkOption {
           description = "PrivateKey is the name of a Kubernetes Secret resource that will be used to\nstore the automatically generated ACME account private key.\nOptionally, a `key` may be specified to select a specific entry within\nthe named Secret resource.\nIf `key` is not specified, a default of `tls.key` will be used.";
           type = submoduleOf "cert-manager.io.v1.IssuerSpecAcmePrivateKeySecretRef";
+        };
+        "profile" = mkOption {
+          description = "Profile allows requesting a certificate profile from the ACME server.\nSupported profiles are listed by the server's ACME directory URL.";
+          type = types.nullOr types.str;
         };
         "server" = mkOption {
           description = "Server is the URL used to access the ACME server's 'directory' endpoint.\nFor example, for Let's Encrypt's staging endpoint, you would use:\n\"https://acme-staging-v02.api.letsencrypt.org/directory\".\nOnly ACME v2 endpoints (i.e. RFC 8555) are supported.";
@@ -817,6 +826,7 @@ with lib; let
         "enableDurationFeature" = mkOverride 1002 null;
         "externalAccountBinding" = mkOverride 1002 null;
         "preferredChain" = mkOverride 1002 null;
+        "profile" = mkOverride 1002 null;
         "skipTLSVerify" = mkOverride 1002 null;
         "solvers" = mkOverride 1002 null;
       };
@@ -880,7 +890,7 @@ with lib; let
           type = types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversDns01");
         };
         "http01" = mkOption {
-          description = "Configures cert-manager to attempt to complete authorizations by\nperforming the HTTP01 challenge flow.\nIt is not possible to obtain certificates for wildcard domain names\n(e.g. `*.example.com`) using the HTTP01 challenge mechanism.";
+          description = "Configures cert-manager to attempt to complete authorizations by\nperforming the HTTP01 challenge flow.\nIt is not possible to obtain certificates for wildcard domain names\n(e.g., `*.example.com`) using the HTTP01 challenge mechanism.";
           type = types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01");
         };
         "selector" = mkOption {
@@ -1116,15 +1126,15 @@ with lib; let
     "cert-manager.io.v1.IssuerSpecAcmeSolversDns01AzureDNSManagedIdentity" = {
       options = {
         "clientID" = mkOption {
-          description = "client ID of the managed identity, can not be used at the same time as resourceID";
+          description = "client ID of the managed identity, cannot be used at the same time as resourceID";
           type = types.nullOr types.str;
         };
         "resourceID" = mkOption {
-          description = "resource ID of the managed identity, can not be used at the same time as clientID\nCannot be used for Azure Managed Service Identity";
+          description = "resource ID of the managed identity, cannot be used at the same time as clientID\nCannot be used for Azure Managed Service Identity";
           type = types.nullOr types.str;
         };
         "tenantID" = mkOption {
-          description = "tenant ID of the managed identity, can not be used at the same time as resourceID";
+          description = "tenant ID of the managed identity, cannot be used at the same time as resourceID";
           type = types.nullOr types.str;
         };
       };
@@ -1407,7 +1417,7 @@ with lib; let
     "cert-manager.io.v1.IssuerSpecAcmeSolversDns01Webhook" = {
       options = {
         "config" = mkOption {
-          description = "Additional configuration that should be passed to the webhook apiserver\nwhen challenges are processed.\nThis can contain arbitrary JSON data.\nSecret values should not be specified in this stanza.\nIf secret values are needed (e.g. credentials for a DNS service), you\nshould use a SecretKeySelector to reference a Secret resource.\nFor details on the schema of this field, consult the webhook provider\nimplementation's documentation.";
+          description = "Additional configuration that should be passed to the webhook apiserver\nwhen challenges are processed.\nThis can contain arbitrary JSON data.\nSecret values should not be specified in this stanza.\nIf secret values are needed (e.g., credentials for a DNS service), you\nshould use a SecretKeySelector to reference a Secret resource.\nFor details on the schema of this field, consult the webhook provider\nimplementation's documentation.";
           type = types.nullOr types.attrs;
         };
         "groupName" = mkOption {
@@ -1415,7 +1425,7 @@ with lib; let
           type = types.str;
         };
         "solverName" = mkOption {
-          description = "The name of the solver to use, as defined in the webhook provider\nimplementation.\nThis will typically be the name of the provider, e.g. 'cloudflare'.";
+          description = "The name of the solver to use, as defined in the webhook provider\nimplementation.\nThis will typically be the name of the provider, e.g., 'cloudflare'.";
           type = types.str;
         };
       };
@@ -3434,6 +3444,10 @@ with lib; let
           description = "Server is the connection address for the Vault server, e.g: \"https://vault.example.com:8200\".";
           type = types.str;
         };
+        "serverName" = mkOption {
+          description = "ServerName is used to verify the hostname on the returned certificates\nby the Vault server.";
+          type = types.nullOr types.str;
+        };
       };
 
       config = {
@@ -3442,6 +3456,7 @@ with lib; let
         "clientCertSecretRef" = mkOverride 1002 null;
         "clientKeySecretRef" = mkOverride 1002 null;
         "namespace" = mkOverride 1002 null;
+        "serverName" = mkOverride 1002 null;
       };
     };
     "cert-manager.io.v1.IssuerSpecVaultAuth" = {
@@ -3677,7 +3692,7 @@ with lib; let
           type = submoduleOf "cert-manager.io.v1.IssuerSpecVenafiCloudApiTokenSecretRef";
         };
         "url" = mkOption {
-          description = "URL is the base URL for Venafi Cloud.\nDefaults to \"https://api.venafi.cloud/v1\".";
+          description = "URL is the base URL for Venafi Cloud.\nDefaults to \"https://api.venafi.cloud/\".";
           type = types.nullOr types.str;
         };
       };

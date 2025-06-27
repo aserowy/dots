@@ -11,8 +11,8 @@ let
       src = pkgs.fetchFromGitHub {
         owner = "cert-manager";
         repo = "cert-manager";
-        rev = "v1.17.2";
-        hash = "sha256-ysEV9qKJ08ugtg5CmZKR+YkJAec6pzDalFlph9hGqNQ=";
+        rev = "v1.18.1";
+        hash = "sha256-X2FWGW3085KKzXOce8j46xiPBjfH+K4clqrpQFpfWPA=";
       };
       crds = [
         "deploy/crds/crd-certificates.yaml"
@@ -24,8 +24,8 @@ let
       src = pkgs.fetchFromGitHub {
         owner = "cilium";
         repo = "cilium";
-        rev = "v1.17.4";
-        hash = "sha256-v6tNi85OxWFDWJTpWGxi+ywOHxu3g8VLaxdAdb1c/ho=";
+        rev = "v1.17.5";
+        hash = "sha256-frpu1kJICbZFwmH/KQ2pZHcS2M+XvLvxZpzVxok2eM8=";
       };
       crds = [
         "pkg/k8s/apis/cilium.io/client/crds/v2/ciliumnetworkpolicies.yaml"
