@@ -35,9 +35,9 @@ data:
         url: https://adguardteam.github.io/HostlistsRegistry/assets/filter_1.txt
         name: AdGuard DNS filter
         id: 1
-      - enabled: false
-        url: https://adguardteam.github.io/HostlistsRegistry/assets/filter_2.txt
-        name: AdAway Default Blocklist
+      - enabled: true
+        url: https://adguardteam.github.io/HostlistsRegistry/assets/filter_48.txt
+        name: HaGeZi's Pro Blocklist
         id: 2
     dhcp:
       enabled: false
