@@ -66,7 +66,7 @@
           task: snapshot
           concurrency: 1
           cron: 0 0 * * *
-          retain: 7
+          retain: 4
           groups:
           - default
       ''
@@ -108,10 +108,10 @@
         apiVersion: longhorn.io/v1beta2
         kind: RecurringJob
         metadata:
-          name: default-filesystem-trim
+          name: longhorn-filesystem-trim
           namespace: longhorn-system
         spec:
-          name: default-filesystem-trim
+          name: longhorn-filesystem-trim
           task: filesystem-trim
           concurrency: 1
           cron: 0 0 * * *
@@ -122,10 +122,10 @@
         apiVersion: longhorn.io/v1beta2
         kind: RecurringJob
         metadata:
-          name: default-snapshot-cleanup
+          name: longhorn-snapshot-cleanup
           namespace: longhorn-system
         spec:
-          name: default-snapshot-cleanup
+          name: longhorn-snapshot-cleanup
           task: snapshot-cleanup
           concurrency: 1
           cron: 0 0 * * *
@@ -181,6 +181,8 @@
                               name: longhorn-nixos-path
       ''
     ];
+
+    # NOTE: https://github.com/longhorn/longhorn/discussions/10786
     ignoreDifferences = {
       "engineimages.longhorn.io" = {
         group = "apiextensions.k8s.io";
