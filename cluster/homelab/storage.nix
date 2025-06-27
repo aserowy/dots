@@ -181,5 +181,42 @@
                               name: longhorn-nixos-path
       ''
     ];
+    ignoreDifferences = {
+      "engineimages.longhorn.io" = {
+        group = "apiextensions.k8s.io";
+        kind = "CustomResourceDefinition";
+        jsonPointers = [ "/spec/preserveUnknownFields" ];
+      };
+      "engines.longhorn.io" = {
+        group = "apiextensions.k8s.io";
+        kind = "CustomResourceDefinition";
+        jsonPointers = [ "/spec/preserveUnknownFields" ];
+      };
+      "instancemanagers.longhorn.io" = {
+        group = "apiextensions.k8s.io";
+        kind = "CustomResourceDefinition";
+        jsonPointers = [ "/spec/preserveUnknownFields" ];
+      };
+      "nodes.longhorn.io" = {
+        group = "apiextensions.k8s.io";
+        kind = "CustomResourceDefinition";
+        jsonPointers = [ "/spec/preserveUnknownFields" ];
+      };
+      "replicas.longhorn.io" = {
+        group = "apiextensions.k8s.io";
+        kind = "CustomResourceDefinition";
+        jsonPointers = [ "/spec/preserveUnknownFields" ];
+      };
+      "settings.longhorn.io" = {
+        group = "apiextensions.k8s.io";
+        kind = "CustomResourceDefinition";
+        jsonPointers = [ "/spec/preserveUnknownFields" ];
+      };
+      "volumes.longhorn.io" = {
+        group = "apiextensions.k8s.io";
+        kind = "CustomResourceDefinition";
+        jsonPointers = [ "/spec/preserveUnknownFields" ];
+      };
+    };
   };
 }
