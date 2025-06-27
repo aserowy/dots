@@ -9,5 +9,5 @@ spec:
   groups:
     - default
   name: longhorn-volume-snapshot
-  retain: 7
+  retain: 4
   task: snapshot
