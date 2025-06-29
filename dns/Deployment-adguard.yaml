@@ -9,7 +9,7 @@ spec:
     matchLabels:
       app: adguard
   strategy:
-    type: RollingUpdate
+    type: Recreate
   template:
     metadata:
       labels:
