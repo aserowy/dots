@@ -2,6 +2,7 @@
 {
   imports = [
     ./argocd.nix
+    ./caching.nix
     ./cilium.nix
     ./devices.nix
     ./dns

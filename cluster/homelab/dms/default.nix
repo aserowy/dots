@@ -21,27 +21,6 @@ in
           };
         };
       };
-
-      valkey = {
-        chart = charts.bitnami.valkey;
-
-        values = {
-          auth = {
-            existingSecret = "valkey";
-            existingSecretPasswordKey = "password";
-          };
-          primary = {
-            persistence = {
-              size = "4Gi";
-            };
-          };
-          replica = {
-            persistence = {
-              size = "4Gi";
-            };
-          };
-        };
-      };
     };
 
     yamls = [
