@@ -6,6 +6,14 @@
 }:
 let
   generators = {
+    akri = nixidy.packages.${pkgs.system}.generators.fromCRD {
+      name = "akri";
+      src = nixhelm.chartsDerivations.${pkgs.system}.project-akri.akri;
+      crds = [
+        "crds/akri-configuration-crd.yaml"
+        "crds/akri-instance-crd.yaml"
+      ];
+    };
     cert-manager = nixidy.packages.${pkgs.system}.generators.fromCRD {
       name = "cert-manager";
       src = pkgs.fetchFromGitHub {
@@ -71,6 +79,8 @@ pkgs.mkShell {
     ];
 
   shellHook = ''
+    echo "generate akri crds"
+    cat ${generators.akri} > ./cluster/crd/akri.nix
     echo "generate cert-manager"
     cat ${generators.cert-manager} > ./cluster/crd/cert-manager.nix
     echo "generate cilium"
