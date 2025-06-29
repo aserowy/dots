@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    app.kubernetes.io/component: agent
+    app.kubernetes.io/instance: akri
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: akri-agent
+    app.kubernetes.io/part-of: akri
+    app.kubernetes.io/version: 0.13.8
+    helm.sh/chart: akri-0.13.8
+  name: akri-agent-daemonset
+  namespace: devices
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: akri
+      app.kubernetes.io/name: akri-agent
+      app.kubernetes.io/part-of: akri
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: agent
+        app.kubernetes.io/instance: akri
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: akri-agent
+        app.kubernetes.io/part-of: akri
+        app.kubernetes.io/version: 0.13.8
+        helm.sh/chart: akri-0.13.8
+    spec:
+      containers:
+        - env:
+            - name: AGENT_NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: DISCOVERY_HANDLERS_DIRECTORY
+              value: /var/lib/akri
+          image: ghcr.io/project-akri/akri/agent:v0.13.8
+          name: akri-agent
+          resources:
+            limits:
+              cpu: 26m
+              memory: 79Mi
+            requests:
+              cpu: 10m
+              memory: 11Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+          volumeMounts:
+            - mountPath: /var/lib/akri
+              name: discovery-handlers
+            - mountPath: /var/lib/kubelet/device-plugins
+              name: device-plugin
+            - mountPath: /var/lib/kubelet/pod-resources
+              name: pod-resources
+      nodeSelector:
+        kubernetes.io/os: linux
+      serviceAccountName: akri-agent-sa
+      volumes:
+        - hostPath:
+            path: /var/lib/akri
+          name: discovery-handlers
+        - hostPath:
+            path: /var/lib/kubelet/device-plugins
+          name: device-plugin
+        - hostPath:
+            path: /var/lib/kubelet/pod-resources
+          name: pod-resources

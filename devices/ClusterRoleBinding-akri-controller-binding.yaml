@@ -1,0 +1,21 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  labels:
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: akri
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: akri-controller
+    app.kubernetes.io/part-of: akri
+    app.kubernetes.io/version: 0.13.8
+    helm.sh/chart: akri-0.13.8
+  name: akri-controller-binding
+  namespace: devices
+roleRef:
+  apiGroup: ""
+  kind: ClusterRole
+  name: akri-controller-role
+subjects:
+  - kind: ServiceAccount
+    name: akri-controller-sa
+    namespace: devices

@@ -7,6 +7,6 @@ metadata:
     app.kubernetes.io/name: argocd-gpg-keys-cm
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v3.0.6
-    helm.sh/chart: argo-cd-8.1.1
+    helm.sh/chart: argo-cd-8.1.2
   name: argocd-gpg-keys-cm
   namespace: argocd

@@ -1,0 +1,42 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/component: agent
+    app.kubernetes.io/instance: akri
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: akri-agent
+    app.kubernetes.io/part-of: akri
+    app.kubernetes.io/version: 0.13.8
+    helm.sh/chart: akri-0.13.8
+  name: akri-agent-role
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - pods
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - akri.sh
+    resources:
+      - instances
+    verbs:
+      - get
+      - list
+      - watch
+      - create
+      - update
+      - patch
+      - delete
+  - apiGroups:
+      - akri.sh
+    resources:
+      - configurations
+    verbs:
+      - get
+      - list
+      - watch
+      - patch

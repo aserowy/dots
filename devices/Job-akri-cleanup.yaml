@@ -1,0 +1,34 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  annotations:
+    helm.sh/hook: pre-delete
+    helm.sh/hook-delete-policy: hook-succeeded
+    helm.sh/hook-weight: "-5"
+  labels:
+    app.kubernetes.io/instance: akri
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/version: 0.13.8
+    helm.sh/chart: akri-0.13.8
+  name: akri-cleanup
+  namespace: devices
+spec:
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: helm-hook
+        app.kubernetes.io/instance: akri
+        app.kubernetes.io/managed-by: Helm
+        helm.sh/chart: akri-0.13.8
+      name: akri
+    spec:
+      containers:
+        - args:
+            - kubectl delete configurations.akri.sh --all --all-namespaces --wait
+          command:
+            - /bin/sh
+            - -c
+          image: bitnami/kubectl:latest
+          name: delete-configurations
+      restartPolicy: Never
+      serviceAccountName: akri-helm-cleanup-hook-sa

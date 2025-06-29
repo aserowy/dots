@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: homeassistant
+  namespace: argocd
+spec:
+  destination:
+    namespace: homeassistant
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: ./homeassistant
+    repoURL: https://github.com/aserowy/dots.git
+    targetRevision: homelab
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

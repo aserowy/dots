@@ -1,0 +1,46 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  annotations:
+    helm.sh/hook: pre-install,pre-upgrade
+    helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
+  labels:
+    app.kubernetes.io/component: admission-webhook
+    app.kubernetes.io/instance: akri
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: akri
+    app.kubernetes.io/version: 0.13.8
+    helm.sh/chart: akri-0.13.8
+  name: akri-webhook-configuration-create
+  namespace: devices
+spec:
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: admission-webhook
+        app.kubernetes.io/instance: akri
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/part-of: akri
+        app.kubernetes.io/version: 0.13.8
+        helm.sh/chart: akri-0.13.8
+      name: akri-webhook-configuration-create
+    spec:
+      containers:
+        - args:
+            - create
+            - --host=akri-webhook-configuration,akri-webhook-configuration.devices.svc
+            - --namespace=devices
+            - --secret-name=akri-webhook-configuration
+            - --cert-name=tls.crt
+            - --key-name=tls.key
+          env:
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+          image: registry.k8s.io/ingress-nginx/kube-webhook-certgen:v1.1.1
+          imagePullPolicy: IfNotPresent
+          name: create
+      restartPolicy: OnFailure
+      serviceAccountName: akri-webhook-configuration-patch
+  ttlSecondsAfterFinished: 0

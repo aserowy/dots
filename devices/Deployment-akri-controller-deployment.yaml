@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: akri
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: akri-controller
+    app.kubernetes.io/part-of: akri
+    app.kubernetes.io/version: 0.13.8
+    helm.sh/chart: akri-0.13.8
+  name: akri-controller-deployment
+  namespace: devices
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: akri
+      app.kubernetes.io/name: akri-controller
+      app.kubernetes.io/part-of: akri
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: controller
+        app.kubernetes.io/instance: akri
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: akri-controller
+        app.kubernetes.io/part-of: akri
+        app.kubernetes.io/version: 0.13.8
+        helm.sh/chart: akri-0.13.8
+    spec:
+      containers:
+        - image: ghcr.io/project-akri/akri/controller:v0.13.8
+          imagePullPolicy: Always
+          name: akri-controller
+          resources:
+            limits:
+              cpu: 26m
+              memory: 100Mi
+            requests:
+              cpu: 10m
+              memory: 11Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 1000
+      nodeSelector:
+        kubernetes.io/os: linux
+      serviceAccountName: akri-controller-sa
+      tolerations:
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/master

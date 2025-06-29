@@ -1,0 +1,14 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  labels:
+    app.kubernetes.io/component: helm-hook
+  name: akri-helm-cleanup-hook-binding
+roleRef:
+  apiGroup: ""
+  kind: ClusterRole
+  name: akri-helm-cleanup-hook-role
+subjects:
+  - kind: ServiceAccount
+    name: akri-helm-cleanup-hook-sa
+    namespace: devices
