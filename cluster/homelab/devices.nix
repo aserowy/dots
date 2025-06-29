@@ -10,6 +10,9 @@ in
     helm.releases = {
       akri = {
         chart = charts.project-akri.akri;
+        values = {
+          udev.discovery.enabled = true;
+        };
       };
     };
 
