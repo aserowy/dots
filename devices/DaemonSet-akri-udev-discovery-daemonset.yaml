@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    app.kubernetes.io/component: discovery-handler
+    app.kubernetes.io/instance: akri
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: akri-udev-discovery
+    app.kubernetes.io/part-of: akri
+    app.kubernetes.io/version: 0.13.8
+    helm.sh/chart: akri-0.13.8
+  name: akri-udev-discovery-daemonset
+  namespace: devices
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: akri
+      app.kubernetes.io/name: akri-udev-discovery
+      app.kubernetes.io/part-of: akri
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: discovery-handler
+        app.kubernetes.io/instance: akri
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: akri-udev-discovery
+        app.kubernetes.io/part-of: akri
+        app.kubernetes.io/version: 0.13.8
+        helm.sh/chart: akri-0.13.8
+    spec:
+      containers:
+        - env:
+            - name: DISCOVERY_HANDLERS_DIRECTORY
+              value: /var/lib/akri
+          image: ghcr.io/project-akri/akri/udev-discovery:v0.13.8
+          name: akri-udev-discovery
+          resources:
+            limits:
+              cpu: 24m
+              memory: 24Mi
+            requests:
+              cpu: 10m
+              memory: 11Mi
+          volumeMounts:
+            - mountPath: /var/lib/akri
+              name: discovery-handlers
+            - mountPath: /run/udev
+              name: devices
+      nodeSelector:
+        kubernetes.io/os: linux
+      volumes:
+        - hostPath:
+            path: /var/lib/akri
+          name: discovery-handlers
+        - hostPath:
+            path: /run/udev
+          name: devices
