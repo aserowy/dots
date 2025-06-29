@@ -3,8 +3,10 @@
   imports = [
     ./argocd.nix
     ./cilium.nix
+    ./devices.nix
     ./dns
     ./dms
+    ./homeassistant
     ./loadbalancer.nix
     ./monitoring.nix
     ./policies.nix
