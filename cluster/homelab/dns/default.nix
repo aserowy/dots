@@ -41,7 +41,7 @@ in
               };
             };
             strategy = {
-              type = "RollingUpdate";
+              type = "Recreate";
             };
             template = {
               metadata = {
