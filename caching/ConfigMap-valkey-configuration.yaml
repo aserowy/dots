@@ -29,4 +29,4 @@ metadata:
     app.kubernetes.io/version: 8.1.2
     helm.sh/chart: valkey-3.0.16
   name: valkey-configuration
-  namespace: dms
+  namespace: caching
