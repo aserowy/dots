@@ -18,6 +18,12 @@
       values = {
         nameOverride = "kube-prometheus";
         fullnameOverride = "kube-prometheus";
+
+        alertmanager.alertmanagerSpec.storage.volumeClaimTemplate.spec = {
+          storageClassName = "longhorn";
+          resources.requests.storage = "2Gi";
+        };
+
         prometheus = {
           prometheusOperator = {
             livenessProbe = {
@@ -34,6 +40,10 @@
           prometheusSpec = {
             scrapeTimeout = "30s";
             scrapeInterval = "60s";
+            storageSpec.volumeClaimTemplate.spec = {
+              storageClassName = "longhorn";
+              resources.requests.storage = "5Gi";
+            };
             resources = {
               requests = {
                 cpu = "0.25";
@@ -45,10 +55,6 @@
               };
             };
           };
-        };
-        storage.volumeClaimTemplate.spec = {
-          storageClassName = "longhorn";
-          resources.requests.storage = "5Gi";
         };
       };
     };
