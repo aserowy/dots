@@ -22,7 +22,6 @@ spec:
       annotations:
         checksum/config: 0e9cbd0ea8e24e32f7dfca5bab17a2ba05652642f0a09a4882833ae88e4cc4a3
         checksum/sc-dashboard-provider-config: e70bf6a851099d385178a76de9757bb0bef8299da6d8443602590e44f05fdf24
-        checksum/secret: 032056e9c62bbe9d1daa41ee49cd3d9524c076f51ca4c65adadf4ef08ef28712
         kubectl.kubernetes.io/default-container: grafana
       labels:
         app.kubernetes.io/instance: kube-prometheus-stack
@@ -49,12 +48,12 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: admin-user
-                  name: kube-prometheus-stack-grafana
+                  name: grafana
             - name: REQ_PASSWORD
               valueFrom:
                 secretKeyRef:
                   key: admin-password
-                  name: kube-prometheus-stack-grafana
+                  name: grafana
             - name: REQ_URL
               value: http://localhost:3000/api/admin/provisioning/dashboards/reload
             - name: REQ_METHOD
@@ -87,12 +86,12 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: admin-user
-                  name: kube-prometheus-stack-grafana
+                  name: grafana
             - name: REQ_PASSWORD
               valueFrom:
                 secretKeyRef:
                   key: admin-password
-                  name: kube-prometheus-stack-grafana
+                  name: grafana
             - name: REQ_URL
               value: http://localhost:3000/api/admin/provisioning/datasources/reload
             - name: REQ_METHOD
@@ -119,12 +118,12 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: admin-user
-                  name: kube-prometheus-stack-grafana
+                  name: grafana
             - name: GF_SECURITY_ADMIN_PASSWORD
               valueFrom:
                 secretKeyRef:
                   key: admin-password
-                  name: kube-prometheus-stack-grafana
+                  name: grafana
             - name: GF_PATHS_DATA
               value: /var/lib/grafana/
             - name: GF_PATHS_LOGS
