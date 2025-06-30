@@ -89,6 +89,13 @@ spec:
     matchLabels:
       release: kube-prometheus-stack
   shards: 1
+  storage:
+    volumeClaimTemplate:
+      spec:
+        resources:
+          requests:
+            storage: 5Gi
+        storageClassName: longhorn
   tsdb:
     outOfOrderTimeWindow: 0s
   version: v3.4.2
