@@ -141,69 +141,6 @@
       ];
     };
 
-    pihole = {
-      image = "pihole/pihole:latest";
-      environment = {
-        "TZ" = "Europe/Berlin";
-        "CORS_HOSTS" = "dns.smart.home";
-        "DNSMASQ_USER" = "root";
-      };
-      extraOptions = [
-        "--cap-add=NET_ADMIN"
-        "--dns=127.0.0.1"
-        "--network=ha-network"
-      ];
-      ports = [
-        "53:53/tcp"
-        "53:53/udp"
-        "67:67/udp"
-      ];
-      volumes = [
-        "/srv/pihole/config/:/etc/pihole/"
-        "/srv/pihole/dnsmasq.d/:/etc/dnsmasq.d/"
-      ];
-    };
-
-    postgres = {
-      image = "postgres:latest";
-      environment = {
-        "POSTGRES_DB" = "paperless";
-        "POSTGRES_USER" = "paperless";
-        "POSTGRES_PASSWORD" = "/var/lib/postgresql/user_password";
-      };
-      extraOptions = [
-        "--network=ha-network"
-      ];
-      volumes = [
-        "/srv/postgres/data:/var/lib/postgresql/data"
-      ];
-    };
-
-    paperless = {
-      image = "ghcr.io/paperless-ngx/paperless-ngx:latest";
-      environment = {
-        "PAPERLESS_REDIS" = "redis://broker:6379";
-        "PAPERLESS_DBHOST" = "postgres";
-        "PAPERLESS_DBNAME" = "paperless";
-        "PAPERLESS_DBUSER" = "paperless";
-        "PAPERLESS_DBPASS" = "/var/lib/postgresql/user_password";
-        "PAPERLESS_URL" = "http://dms.smart.home";
-      };
-      extraOptions = [
-        "--network=ha-network"
-      ];
-      dependsOn = [
-        "postgres"
-        "broker"
-      ];
-      volumes = [
-        "/srv/paperless/data:/usr/src/paperless/data"
-        "/srv/paperless/media:/usr/src/paperless/media"
-        "/srv/paperless/export:/usr/src/paperless/export"
-        "/srv/paperless/consume:/usr/src/paperless/consume"
-      ];
-    };
-
     watchtower = {
       image = "containrrr/watchtower:latest";
       environment = {
