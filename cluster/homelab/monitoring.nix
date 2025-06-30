@@ -24,6 +24,12 @@
           resources.requests.storage = "2Gi";
         };
 
+        grafana.admin = {
+          existingSecret = "grafana";
+          userKey = "admin-user";
+          passwordKey = "admin-password";
+        };
+
         prometheus = {
           prometheusOperator = {
             livenessProbe = {
@@ -78,5 +84,9 @@
       ];
       tls.secretName = "anderwersede-tls-certificate";
     };
+
+    yamls = [
+      (builtins.readFile ./monitoring-secrets.sops.yaml)
+    ];
   };
 }
