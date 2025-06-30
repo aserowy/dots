@@ -46,31 +46,31 @@
             };
           };
         };
+        storage.volumeClaimTemplate.spec = {
+          storageClassName = "longhorn";
+          resources.requests.storage = "5Gi";
+        };
       };
     };
 
-    resources = {
-      ingressRoutes = {
-        grafana-route.spec = {
-          entryPoints = [
-            "websecure"
-          ];
-          routes = [
+    resources.ingressRoutes.grafana-route.spec = {
+      entryPoints = [
+        "websecure"
+      ];
+      routes = [
+        {
+          match = "Host(`grafana.anderwerse.de`)";
+          kind = "Rule";
+          services = [
             {
-              match = "Host(`grafana.anderwerse.de`)";
-              kind = "Rule";
-              services = [
-                {
-                  name = "kube-prometheus-stack-grafana";
-                  namespace = "monitoring";
-                  port = 80;
-                }
-              ];
+              name = "kube-prometheus-stack-grafana";
+              namespace = "monitoring";
+              port = 80;
             }
           ];
-          tls.secretName = "anderwersede-tls-certificate";
-        };
-      };
+        }
+      ];
+      tls.secretName = "anderwersede-tls-certificate";
     };
   };
 }
