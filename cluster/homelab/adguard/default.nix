@@ -1,14 +1,15 @@
 { ... }:
 let
-  namespace = "dns";
+  application = "adguard";
+  namespace = application;
 in
 {
-  applications.dns = {
+  applications."${application}" = {
     inherit namespace;
     createNamespace = true;
 
     yamls = [
-      (builtins.readFile ./dns-secrets.sops.yaml)
+      (builtins.readFile ./adguard-secrets.sops.yaml)
 
       ''
         apiVersion: v1
