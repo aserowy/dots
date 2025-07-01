@@ -20,7 +20,7 @@ spec:
             - name: PAPERLESS_PORT
               value: "8000"
             - name: PAPERLESS_DBHOST
-              value: postgresql.dms.svc.cluster.local
+              value: postgresql.paperless.svc.cluster.local
             - name: PAPERLESS_URL
               value: https://dms.anderwerse.de
             - name: PAPERLESS_OCR_LANGUAGE
@@ -63,9 +63,9 @@ spec:
             - name: PAPERLESS_TIKA_ENABLED
               value: "1"
             - name: PAPERLESS_TIKA_GOTENBERG_ENDPOINT
-              value: http://gotenberg.dms.svc.cluster.local:3000
+              value: http://gotenberg.paperless.svc.cluster.local:3000
             - name: PAPERLESS_TIKA_ENDPOINT
-              value: http://tika.dms.svc.cluster.local:9998
+              value: http://tika.paperless.svc.cluster.local:9998
           image: docker.io/paperlessngx/paperless-ngx:2.17.1
           name: paperless
           ports:
