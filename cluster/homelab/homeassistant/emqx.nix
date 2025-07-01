@@ -6,7 +6,7 @@
         chart = charts.jetstack.cert-manager;
 
         values = {
-          crds.enabled = true;
+          crds.enabled = false;
         };
       };
     };
