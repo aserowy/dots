@@ -1,10 +1,29 @@
-{ application, namespace, ... }:
+{
+  application,
+  namespace,
+  charts,
+  ...
+}:
 let
   paperless-media-pvc = "paperless-media-pvc";
   paperless-data-pvc = "paperless-data-pvc";
 in
 {
   applications."${application}" = {
+    helm.releases = {
+      postgresql = {
+        chart = charts.bitnami.postgresql;
+
+        values = {
+          auth = {
+            database = "paperless";
+            username = "paperless";
+            existingSecret = "postgresql";
+          };
+        };
+      };
+    };
+
     yamls = [
       ''
         apiVersion: v1
