@@ -1,20 +1,19 @@
-{ ... }:
+{ charts, ... }:
 let
-  namespace = "homeassistant";
+  application = "homeassistant";
+  namespace = application;
 in
 {
-  applications.homeassistant = {
+  imports = [
+    (import ./emqx.nix { inherit application charts; })
+  ];
+
+  applications."${application}" = {
     inherit namespace;
     createNamespace = true;
-
-    helm.releases = {
-    };
 
     yamls = [
       (builtins.readFile ./homeassistant-secrets.sops.yaml)
     ];
-
-    resources = {
-    };
   };
 }
