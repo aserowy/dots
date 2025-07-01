@@ -99,7 +99,7 @@ in
                       }
                       {
                         name = "PAPERLESS_DBHOST";
-                        value = "postgresql.dms.svc.cluster.local";
+                        value = "postgresql.paperless.svc.cluster.local";
                       }
                       {
                         name = "PAPERLESS_URL";
@@ -164,11 +164,11 @@ in
                       }
                       {
                         name = "PAPERLESS_TIKA_GOTENBERG_ENDPOINT";
-                        value = "http://gotenberg.dms.svc.cluster.local:3000";
+                        value = "http://gotenberg.paperless.svc.cluster.local:3000";
                       }
                       {
                         name = "PAPERLESS_TIKA_ENDPOINT";
-                        value = "http://tika.dms.svc.cluster.local:9998";
+                        value = "http://tika.paperless.svc.cluster.local:9998";
                       }
                     ];
                     ports = [
