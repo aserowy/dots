@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: gotenberg
-  namespace: dms
+  name: paperless
+  namespace: paperless
 spec:
   ports:
     - name: http
-      port: 3000
+      port: 8000
       protocol: TCP
   selector:
-    app: gotenberg
+    app: paperless

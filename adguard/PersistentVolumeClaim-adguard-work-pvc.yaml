@@ -1,8 +1,8 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: paperless-media-pvc
-  namespace: dms
+  name: adguard-work-pvc
+  namespace: adguard
 spec:
   accessModes:
     - ReadWriteOnce

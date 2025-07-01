@@ -68,4 +68,4 @@ data:
 kind: ConfigMap
 metadata:
   name: adguard-cm
-  namespace: dns
+  namespace: adguard

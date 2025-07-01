@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: paperless-data-pvc
-  namespace: dms
+  name: paperless-media-pvc
+  namespace: paperless
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 8Gi
+      storage: 5Gi

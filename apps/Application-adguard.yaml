@@ -1,15 +1,15 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: dns
+  name: adguard
   namespace: argocd
 spec:
   destination:
-    namespace: dns
+    namespace: adguard
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: ./dns
+    path: ./adguard
     repoURL: https://github.com/aserowy/dots.git
     targetRevision: homelab
   syncPolicy:

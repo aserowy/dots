@@ -8,16 +8,17 @@ metadata:
     app.kubernetes.io/name: postgresql
     app.kubernetes.io/version: 17.5.0
     helm.sh/chart: postgresql-16.7.14
-  name: postgresql
-  namespace: dms
+  name: postgresql-hl
+  namespace: paperless
 spec:
+  clusterIP: None
   ports:
     - name: tcp-postgresql
       port: 5432
       targetPort: tcp-postgresql
+  publishNotReadyAddresses: true
   selector:
     app.kubernetes.io/component: primary
     app.kubernetes.io/instance: postgresql
     app.kubernetes.io/name: postgresql
-  sessionAffinity: None
   type: ClusterIP

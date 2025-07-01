@@ -9,7 +9,7 @@ metadata:
     app.kubernetes.io/version: 17.5.0
     helm.sh/chart: postgresql-16.7.14
   name: postgresql
-  namespace: dms
+  namespace: paperless
 spec:
   egress:
     - {}
