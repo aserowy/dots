@@ -1,6 +1,6 @@
 { charts, ... }:
 let
-  application = "dms";
+  application = "paperless";
   namespace = application;
 in
 {
@@ -15,7 +15,7 @@ in
     createNamespace = true;
 
     yamls = [
-      (builtins.readFile ./dms-secrets.sops.yaml)
+      (builtins.readFile ./paperless-secrets.sops.yaml)
     ];
   };
 }
