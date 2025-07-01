@@ -23,14 +23,6 @@
           };
         };
       };
-
-      cert-manager = {
-        chart = charts.jetstack.cert-manager;
-
-        values = {
-          crds.enabled = true;
-        };
-      };
     };
 
     yamls = [
@@ -62,6 +54,7 @@
           ];
         };
       };
+
       certificates = {
         anderwersede-tls-certificate.spec = {
           secretName = "anderwersede-tls-certificate";

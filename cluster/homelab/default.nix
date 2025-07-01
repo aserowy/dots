@@ -2,17 +2,20 @@
 {
   imports = [
     ./argocd.nix
+
     ./caching.nix
+    ./certificates.nix
     ./cilium.nix
     ./devices.nix
-    ./dns
-    ./dms
-    ./homeassistant
     ./loadbalancer.nix
     ./monitoring.nix
     ./policies.nix
     ./secrets.nix
     ./storage.nix
+
+    ./adguard
+    ./homeassistant
+    ./paperless
   ];
 
   nixidy = {
