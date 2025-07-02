@@ -29,7 +29,7 @@ in
         "disk"
         "networkmanager"
         "video"
-        "wheel"
+        # "wheel"
       ];
     in
     mkIf cnfg.enable {
@@ -52,14 +52,14 @@ in
         };
       };
 
-      security.doas = {
-        extraRules = [
-          {
-            users = [ "sim" ];
-            keepEnv = true;
-            persist = true;
-          }
-        ];
-      };
+      # security.doas = {
+      #   extraRules = [
+      #     {
+      #       users = [ "sim" ];
+      #       keepEnv = true;
+      #       persist = true;
+      #     }
+      #   ];
+      # };
     };
 }
