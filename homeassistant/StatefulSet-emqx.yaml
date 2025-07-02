@@ -82,8 +82,19 @@ spec:
         supplementalGroups:
           - 1000
       serviceAccountName: emqx
-      volumes:
-        - emptyDir: {}
-          name: emqx-data
   updateStrategy:
     type: RollingUpdate
+  volumeClaimTemplates:
+    - metadata:
+        labels:
+          app.kubernetes.io/instance: emqx
+          app.kubernetes.io/managed-by: Helm
+          app.kubernetes.io/name: emqx
+        name: emqx-data
+        namespace: homeassistant
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi

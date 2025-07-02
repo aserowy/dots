@@ -1,0 +1,17 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: emqx-dashboard-route
+  namespace: homeassistant
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`mqtt.anderwerse.de`)
+      services:
+        - name: emqx
+          namespace: homeassistant
+          port: 18083
+  tls:
+    secretName: anderwersede-tls-certificate
