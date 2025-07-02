@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/instance: emqx
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: emqx
+    helm.sh/chart: emqx-5.8.6
+  name: emqx
+  namespace: homeassistant
+spec:
+  ports:
+    - name: mqtt
+      port: 1883
+      protocol: TCP
+      targetPort: mqtt
+    - name: mqttssl
+      port: 8883
+      protocol: TCP
+      targetPort: mqttssl
+    - name: ws
+      port: 8083
+      protocol: TCP
+      targetPort: ws
+    - name: wss
+      port: 8084
+      protocol: TCP
+      targetPort: wss
+    - name: dashboard
+      port: 18083
+      protocol: TCP
+      targetPort: dashboard
+  selector:
+    app.kubernetes.io/instance: emqx
+    app.kubernetes.io/name: emqx
+  type: ClusterIP

@@ -5,7 +5,7 @@ metadata:
     app.kubernetes.io/instance: traefik-loadbalancer
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-36.2.0
+    helm.sh/chart: traefik-36.3.0
   name: traefik
   namespace: loadbalancer
 spec:
@@ -30,7 +30,7 @@ spec:
         app.kubernetes.io/instance: traefik-loadbalancer
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: traefik
-        helm.sh/chart: traefik-36.2.0
+        helm.sh/chart: traefik-36.3.0
     spec:
       automountServiceAccountToken: true
       containers:
@@ -61,7 +61,7 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
-          image: docker.io/traefik:v3.4.1
+          image: docker.io/traefik:v3.4.3
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
