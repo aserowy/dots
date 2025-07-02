@@ -8,7 +8,7 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`hubble.anderwerse.de`)
+      match: Host(`cni.anderwerse.de`)
       services:
         - name: hubble-ui
           namespace: kube-system

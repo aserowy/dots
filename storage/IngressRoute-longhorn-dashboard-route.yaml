@@ -8,7 +8,7 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`longhorn.anderwerse.de`)
+      match: Host(`csi.anderwerse.de`)
       services:
         - name: longhorn-frontend
           namespace: longhorn-system

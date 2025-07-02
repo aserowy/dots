@@ -8,7 +8,7 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`grafana.anderwerse.de`)
+      match: Host(`cluster.anderwerse.de`)
       services:
         - name: kube-prometheus-stack-grafana
           namespace: monitoring
