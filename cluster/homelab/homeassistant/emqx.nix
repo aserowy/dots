@@ -14,10 +14,6 @@
           storageClass = "longhorn";
           size = "1Gi";
         };
-        ingress = {
-          dashboard.enabled = true;
-          mqtt.enabled = true;
-        };
       };
     };
   };
