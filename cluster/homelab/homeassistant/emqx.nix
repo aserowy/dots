@@ -8,10 +8,17 @@
     helm.releases.emqx = {
       chart = charts.emqx.emqx;
 
-      values = { };
-    };
-
-    resources = {
+      values = {
+        persistence = {
+          enable = true;
+          storageClass = "longhorn";
+          size = "1Gi";
+        };
+        ingress = {
+          dashboard.enabled = true;
+          mqtt.enabled = true;
+        };
+      };
     };
   };
 }
