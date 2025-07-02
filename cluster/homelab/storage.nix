@@ -35,7 +35,7 @@
           ];
           routes = [
             {
-              match = "Host(`longhorn.anderwerse.de`)";
+              match = "Host(`csi.anderwerse.de`)";
               kind = "Rule";
               services = [
                 {

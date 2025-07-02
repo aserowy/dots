@@ -71,7 +71,7 @@
       ];
       routes = [
         {
-          match = "Host(`grafana.anderwerse.de`)";
+          match = "Host(`cluster.anderwerse.de`)";
           kind = "Rule";
           services = [
             {

@@ -47,7 +47,7 @@
           ];
           routes = [
             {
-              match = "Host(`hubble.anderwerse.de`)";
+              match = "Host(`cni.anderwerse.de`)";
               kind = "Rule";
               services = [
                 {
