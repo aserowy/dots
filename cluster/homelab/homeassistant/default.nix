@@ -5,7 +5,7 @@ let
 in
 {
   imports = [
-    (import ./emqx.nix { inherit application charts; })
+    (import ./emqx.nix { inherit application namespace charts; })
   ];
 
   applications."${application}" = {
