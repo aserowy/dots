@@ -7,9 +7,9 @@ metadata:
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: cert-manager
-    app.kubernetes.io/version: v1.18.1
-    helm.sh/chart: cert-manager-v1.18.1
-  name: cert-manager-dns01-controller-challenges
+    app.kubernetes.io/version: v1.18.2
+    helm.sh/chart: cert-manager-v1.18.2
+  name: cert-manager-controller-challenges
 rules:
   - apiGroups:
       - acme.cert-manager.io
@@ -51,6 +51,45 @@ rules:
     verbs:
       - create
       - patch
+  - apiGroups:
+      - ""
+    resources:
+      - pods
+      - services
+    verbs:
+      - get
+      - list
+      - watch
+      - create
+      - delete
+  - apiGroups:
+      - networking.k8s.io
+    resources:
+      - ingresses
+    verbs:
+      - get
+      - list
+      - watch
+      - create
+      - delete
+      - update
+  - apiGroups:
+      - gateway.networking.k8s.io
+    resources:
+      - httproutes
+    verbs:
+      - get
+      - list
+      - watch
+      - create
+      - delete
+      - update
+  - apiGroups:
+      - route.openshift.io
+    resources:
+      - routes/custom-host
+    verbs:
+      - create
   - apiGroups:
       - acme.cert-manager.io
     resources:
