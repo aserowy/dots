@@ -14,6 +14,21 @@ in
 
     yamls = [
       (builtins.readFile ./homeassistant-secrets.sops.yaml)
+
+      ''
+        apiVersion: akri.sh/v0
+        kind: Configuration
+        metadata:
+          name: akri-zigbee-stick
+        spec:
+          capacity: 1
+          discoveryHandler:
+            discoveryDetails: |
+              groupRecursive: true
+              udevRules:
+              - ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", ATTRS{bcdDevice}=="0264"
+            name: udev
+      ''
     ];
   };
 }

@@ -20,7 +20,7 @@
 
   nixidy = {
     resourceImports = [
-      ../crd/akri.nix
+      # ../crd/akri.nix
       ../crd/cert-manager.nix
       ../crd/cilium.nix
       ../crd/sops.nix
