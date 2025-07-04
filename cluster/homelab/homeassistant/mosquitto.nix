@@ -65,6 +65,9 @@ in
               };
               spec = {
                 securityContext = {
+                  fsGroup = "1099";
+                  runAsGroup = "1099";
+                  runAsUser = "1099";
                   seccompProfile = {
                     type = "RuntimeDefault";
                   };
