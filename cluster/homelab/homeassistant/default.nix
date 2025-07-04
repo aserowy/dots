@@ -5,7 +5,7 @@ let
 in
 {
   imports = [
-    (import ./emqx-operator.nix { inherit application namespace charts; })
+    (import ./mosquitto.nix { inherit application namespace; })
     (import ./zigbee2mqtt.nix { inherit application namespace charts; })
   ];
 
