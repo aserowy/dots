@@ -49,28 +49,16 @@ in
           };
           spec = {
             replicas = 1;
-            selector = {
-              matchLabels = {
-                app = "mosquitto";
-              };
-            };
-            strategy = {
-              type = "Recreate";
-            };
+            selector.matchLabels.app = "mosquitto";
+            strategy.type = "Recreate";
             template = {
-              metadata = {
-                labels = {
-                  app = "mosquitto";
-                };
-              };
+              metadata.labels.app = "mosquitto";
               spec = {
                 securityContext = {
                   fsGroup = 1099;
                   runAsGroup = 1099;
                   runAsUser = 1099;
-                  seccompProfile = {
-                    type = "RuntimeDefault";
-                  };
+                  seccompProfile.type = "RuntimeDefault";
                 };
                 containers = [
                   {
@@ -81,11 +69,6 @@ in
                       readOnlyRootFilesystem = true;
                     };
                     ports = [ { containerPort = 1883; } ];
-                    lifecycle.postStart.exec.command = [
-                      "/bin/sh"
-                      "-c"
-                      "chmod 0700 /mosquitto/config/password.txt"
-                    ];
                     resources = {
                       requests = {
                         cpu = "100m";
@@ -141,9 +124,7 @@ in
             name = "mosquitto";
           };
           spec = {
-            selector = {
-              app = "mosquitto";
-            };
+            selector.app = "mosquitto";
             ports = [
               {
                 name = "http";
