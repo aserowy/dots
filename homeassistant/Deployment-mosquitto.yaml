@@ -17,6 +17,13 @@ spec:
     spec:
       containers:
         - image: docker.io/eclipse-mosquitto:2.0.21
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - /bin/sh
+                  - -c
+                  - chmod 0700 /mosquitto/config/password.txt
           name: mosquitto
           ports:
             - containerPort: 1883
