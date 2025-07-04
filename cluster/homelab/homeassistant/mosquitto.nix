@@ -80,10 +80,11 @@ in
                       allowPrivilegeEscalation = false;
                       readOnlyRootFilesystem = true;
                     };
-                    ports = [
-                      {
-                        containerPort = 1883;
-                      }
+                    ports = [ { containerPort = 1883; } ];
+                    lifecycle.postStart.exec.command = [
+                      "/bin/sh"
+                      "-c"
+                      "chmod 0700 /mosquitto/config/password.txt"
                     ];
                     resources = {
                       requests = {
