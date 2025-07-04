@@ -6,37 +6,49 @@
 }:
 {
   applications."${application}" = {
-    helm.releases = {
-      # emqx-operator = {
-      #   chart = charts.emqx.emqx-operator;
-      #
-      #   values = {
-      #     singleNamespace = true;
-      #   };
-      # };
+    helm.releases.zigbee2mqtt = {
+      chart = charts.koenkk.zigbee2mqtt;
+
+      values = {
+        statefulset = {
+          resources = {
+            limits = {
+              cpu = "200m";
+              memory = "600Mi";
+              "akri.sh/akri-zigbee-stick" = "1";
+            };
+            requests = {
+              cpu = "200m";
+              memory = "600Mi";
+              "akri.sh/akri-zigbee-stick" = "1";
+            };
+          };
+          storage.storageClassName = "longhorn";
+        };
+      };
     };
 
     resources = {
       ingressRoutes = {
-        # emqx-dashboard-route.spec = {
-        #   entryPoints = [
-        #     "websecure"
-        #   ];
-        #   routes = [
-        #     {
-        #       match = "Host(`mqtt.anderwerse.de`)";
-        #       kind = "Rule";
-        #       services = [
-        #         {
-        #           inherit namespace;
-        #           name = "emqx";
-        #           port = 18083;
-        #         }
-        #       ];
-        #     }
-        #   ];
-        #   tls.secretName = "anderwersede-tls-certificate";
-        # };
+        zigbee2mqtt-dashboard-route.spec = {
+          entryPoints = [
+            "websecure"
+          ];
+          routes = [
+            {
+              match = "Host(`mqtt.test.anderwerse.de`)";
+              kind = "Rule";
+              services = [
+                {
+                  inherit namespace;
+                  name = "zigbee2mqtt";
+                  port = 8080;
+                }
+              ];
+            }
+          ];
+          tls.secretName = "anderwersede-tls-certificate";
+        };
       };
     };
   };
