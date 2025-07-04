@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mosquitto
+  namespace: homeassistant
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mosquitto
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mosquitto
+    spec:
+      containers:
+        - image: docker.io/eclipse-mosquitto:2.0.21
+          name: mosquitto
+          ports:
+            - containerPort: 1883
+          resources:
+            limits:
+              cpu: 500m
+              memory: 1Gi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+          volumeMounts:
+            - mountPath: /mosquitto/data
+              name: data
+            - mountPath: /mosquitto/config/mosquitto.conf
+              name: config
+              subPath: mosquitto.conf
+            - mountPath: /mosquitto/config/password.txt
+              name: password
+              subPath: password.txt
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: mosquitto-pvc
+        - configMap:
+            name: mosquitto-config
+          name: config
+        - name: password
+          secret:
+            secretName: mosquitto
