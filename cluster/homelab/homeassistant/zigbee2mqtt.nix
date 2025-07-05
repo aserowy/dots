@@ -63,7 +63,7 @@ in
                 initContainers = [
                   {
                     name = "copy-base-config";
-                    image = "mikefarah/yq:4.45.1"; # docker/mikefarah/yq@semver-coerced
+                    image = "mikefarah/yq:4.45.4"; # docker/mikefarah/yq@semver-coerced
                     workingDir = "/app/data";
                     command = [
                       "/bin/sh"
