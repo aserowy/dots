@@ -1,0 +1,94 @@
+apiVersion: v1
+data:
+  zigbee2mqtt.conf: |
+    homeassistant:
+      enabled: true
+    frontend:
+      enabled: true
+      port: 8080
+    mqtt:
+      base_topic: zigbee2mqtt
+      server: mqtt://mosquitto:1883
+      user: '!secret user'
+      password: '!secret password'
+    serial:
+      adapter: zstack
+      port: /dev/ttyUSB0
+    advanced:
+      channel: 11
+      network_key:
+        - 214
+        - 172
+        - 231
+        - 206
+        - 62
+        - 190
+        - 240
+        - 174
+        - 166
+        - 54
+        - 35
+        - 33
+        - 165
+        - 248
+        - 2
+        - 40
+      pan_id: 4919
+      ext_pan_id:
+        - 19
+        - 221
+        - 55
+        - 221
+        - 19
+        - 221
+        - 55
+        - 221
+    device_options: {}
+    devices:
+      '0x00158d0006b89def':
+        friendly_name: simsroom_thp_sensor
+      '0x0017880108f84895':
+        friendly_name: hue_dimmer_switch_01
+      '0x0017880104c4ed98':
+        friendly_name: corridor_pictures_light
+      '0x0017880108b832b9':
+        friendly_name: livingroom_dinnertable_light
+      '0x001788010826273a':
+        friendly_name: livingroom_couch_light
+      '0x00178801093bb8a3':
+        friendly_name: corridor_cabinet_light
+      '0x00178801082626bf':
+        friendly_name: homeoffice_main_light
+      '0x842e14fffe1e20d5':
+        friendly_name: bedroom_bed_left_strip
+      '0x842e14fffe15fbe6':
+        friendly_name: bedroom_bed_right_strip
+      '0x00158d0006beaea7':
+        friendly_name: childrenroom_thp_sensor
+      '0x00158d0006bfa0b9':
+        friendly_name: boilerroom_thp_sensor
+      '0x00158d0006b89dab':
+        friendly_name: bedroom_thp_sensor
+      '0xf0d1b800001cd2ae':
+        friendly_name: smart_plug_01
+      '0xf0d1b800001cccae':
+        friendly_name: smart_plug_02
+      '0xf0d1b800001ccea7':
+        friendly_name: smart_plug_03
+      '0xf0d1b800001cc2f8':
+        friendly_name: smart_plug_04
+      '0x001788010e1c6acd':
+        friendly_name: bedroom_bed_left_hue
+      '0x001788010e1c7916':
+        friendly_name: bedroom_bed_right_hue
+      '0x00158d0006bee32a':
+        friendly_name: livingroom_thp_sensor
+      '0xa4c138c4c4f71043':
+        friendly_name: smart_plug_homlab_servers
+      '0xa4c1386cce3b457e':
+        friendly_name: smart_plug_livingroom_media
+    version: 4
+kind: ConfigMap
+metadata:
+  name: zigbee2mqtt-cm
+  namespace: homeassistant
