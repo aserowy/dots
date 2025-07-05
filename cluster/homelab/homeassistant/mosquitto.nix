@@ -27,16 +27,12 @@ in
     ];
 
     resources = {
-      configMaps = {
-        adguard-cm = {
-          metadata = {
-            inherit namespace;
-            name = mosquitto-cm;
-          };
-          data = {
-            "mosquitto.conf" = (builtins.readFile ./mosquitto.conf);
-          };
+      configMaps.mosquitto-cm = {
+        metadata = {
+          inherit namespace;
+          name = mosquitto-cm;
         };
+        data."mosquitto.conf" = (builtins.readFile ./mosquitto.conf);
       };
 
       deployments = {

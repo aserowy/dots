@@ -59,6 +59,7 @@ in
                 initContainers = [
                   {
                     name = "copy-base-config";
+                    # TODO: add version tag
                     image = "busybox";
                     command = [
                       "/bin/sh"
@@ -174,6 +175,7 @@ in
           };
         };
       };
+
       configMaps = {
         adguard-cm = {
           metadata = {
@@ -185,6 +187,7 @@ in
           };
         };
       };
+
       services = {
         adguard-dashboard = {
           metadata = {
@@ -241,6 +244,7 @@ in
           };
         };
       };
+
       ingressRoutes = {
         adguard-dashboard-route.spec = {
           entryPoints = [

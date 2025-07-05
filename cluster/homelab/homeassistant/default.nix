@@ -6,7 +6,7 @@ in
 {
   imports = [
     (import ./mosquitto.nix { inherit application namespace; })
-    (import ./zigbee2mqtt.nix { inherit application namespace charts; })
+    (import ./zigbee2mqtt.nix { inherit application namespace; })
   ];
 
   applications."${application}" = {

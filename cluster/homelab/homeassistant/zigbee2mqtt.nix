@@ -1,34 +1,180 @@
 {
   application,
   namespace,
-  charts,
   ...
 }:
+let
+  zigbee2mqtt-cm = "zigbee2mqtt-cm";
+  zigbee2mqtt-pvc = "zigbee2mqtt-pvc";
+in
 {
   applications."${application}" = {
-    helm.releases.zigbee2mqtt = {
-      chart = charts.koenkk.zigbee2mqtt;
+    yamls = [
+      (builtins.readFile ./homeassistant-secrets.sops.yaml)
 
-      values = {
-        statefulset = {
-          resources = {
-            limits = {
-              cpu = "200m";
-              memory = "600Mi";
-              "akri.sh/akri-zigbee-stick" = "1";
-            };
-            requests = {
-              cpu = "200m";
-              memory = "600Mi";
-              "akri.sh/akri-zigbee-stick" = "1";
-            };
-          };
-          storage.storageClassName = "longhorn";
-        };
-      };
-    };
+      ''
+        apiVersion: v1
+        kind: PersistentVolumeClaim
+        metadata:
+          name: ${zigbee2mqtt-pvc}
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 1Gi
+      ''
+    ];
 
     resources = {
+      configMaps = {
+        adguard-cm = {
+          metadata = {
+            inherit namespace;
+            name = zigbee2mqtt-cm;
+          };
+          data = {
+            "zigbee2mqtt.conf" = (builtins.readFile ./zigbee2mqtt.conf);
+          };
+        };
+      };
+
+      deployments = {
+        zigbee2mqtt = {
+          apiVersion = "apps/v1";
+          kind = "Deployment";
+          metadata = {
+            inherit namespace;
+            name = "zigbee2mqtt";
+          };
+          spec = {
+            replicas = 1;
+            selector.matchLabels.app = "zigbee2mqtt";
+            strategy.type = "Recreate";
+            template = {
+              metadata.labels.app = "zigbee2mqtt";
+              spec = {
+                securityContext = {
+                  fsGroup = 1099;
+                  runAsGroup = 1099;
+                  runAsUser = 1099;
+                  seccompProfile.type = "RuntimeDefault";
+                };
+                initContainers = [
+                  {
+                    name = "copy-base-config";
+                    image = "mikefarah/yq:4.45.1"; # docker/mikefarah/yq@semver-coerced
+                    workingDir = "/app/data";
+                    command = [
+                      "/bin/sh"
+                      "-c"
+                      ''
+                        if [ -f configuration.yaml ]
+                        then
+                          echo "Backing up existing configuration file to /app/data/configuration-helm-backup.yaml"
+                          cp --force configuration.yaml configuration-helm-backup.yaml
+                        else
+                          echo "configuration.yaml does not exists, creating one from config map /app/data/configmap-configuration.yaml"
+                          cp configmap-configuration.yaml configuration.yaml
+                        fi
+
+                        yq --inplace '. *= load("configmap-configuration.yaml") | del(.version) ' configuration.yaml
+                        yq eval-all  '. as $item ireduce ({}; . * $item )' configmap-configuration.yaml configuration.yaml > configuration.yaml
+                      ''
+                    ];
+                    securityContext = {
+                      allowPrivilegeEscalation = false;
+                      readOnlyRootFilesystem = true;
+                      capabilities = {
+                        drop = [ "ALL" ];
+                      };
+                    };
+                    volumeMounts = [
+                      {
+                        name = "data";
+                        mountPath = "/app/data";
+                      }
+                      {
+                        name = "config";
+                        subPath = "zigbee2mqtt.yaml";
+                        mountPath = "/app/data/configmap-configuration.yaml";
+                      }
+                    ];
+                  }
+                ];
+                containers = [
+                  {
+                    name = "zigbee2mqtt";
+                    image = "docker.io/koenkk/zigbee2mqtt:2.5.1"; # docker/koenkk/zigbee2mqtt@semver-coerced
+                    securityContext = {
+                      allowPrivilegeEscalation = false;
+                      readOnlyRootFilesystem = true;
+                    };
+                    ports = [ { containerPort = 8080; } ];
+                    resources = {
+                      requests = {
+                        "akri.sh/akri-zigbee-stick" = "1";
+                        cpu = "200m";
+                        memory = "600Mi";
+                      };
+                      limits = {
+                        "akri.sh/akri-zigbee-stick" = "1";
+                        cpu = "200m";
+                        memory = "600Mi";
+                      };
+                    };
+                    volumeMounts = [
+                      {
+                        name = "data";
+                        mountPath = "/app/data";
+                      }
+                      {
+                        name = "secrets";
+                        subPath = "secrets.yaml";
+                        mountPath = "/app/data/secret.yaml";
+                      }
+                    ];
+                  }
+                ];
+                volumes = [
+                  {
+                    name = "data";
+                    persistentVolumeClaim.claimName = zigbee2mqtt-pvc;
+                  }
+                  {
+                    name = "config";
+                    configMap.name = zigbee2mqtt-cm;
+                  }
+                  {
+                    name = "secrets";
+                    secret.secretName = "zigbee2mqtt";
+                  }
+                ];
+              };
+            };
+          };
+        };
+      };
+
+      services = {
+        zigbee2mqtt = {
+          metadata = {
+            inherit namespace;
+            name = "zigbee2mqtt";
+          };
+          spec = {
+            selector.app = "zigbee2mqtt";
+            ports = [
+              {
+                name = "http";
+                protocol = "TCP";
+                port = 1883;
+              }
+            ];
+          };
+        };
+      };
+
       ingressRoutes = {
         zigbee2mqtt-dashboard-route.spec = {
           entryPoints = [

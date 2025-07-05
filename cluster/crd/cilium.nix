@@ -400,7 +400,7 @@ with lib; let
         };
         "type" = mkOption {
           description = "Type is a ICMP-type.\nIt should be an 8bit code (0-255), or it's CamelCase name (for example, \"EchoReply\").\nAllowed ICMP types are:\n    Ipv4: EchoReply | DestinationUnreachable | Redirect | Echo | EchoRequest |\n\t\t     RouterAdvertisement | RouterSelection | TimeExceeded | ParameterProblem |\n\t\t\t Timestamp | TimestampReply | Photuris | ExtendedEcho Request | ExtendedEcho Reply\n    Ipv6: DestinationUnreachable | PacketTooBig | TimeExceeded | ParameterProblem |\n\t\t\t EchoRequest | EchoReply | MulticastListenerQuery| MulticastListenerReport |\n\t\t\t MulticastListenerDone | RouterSolicitation | RouterAdvertisement | NeighborSolicitation |\n\t\t\t NeighborAdvertisement | RedirectMessage | RouterRenumbering | ICMPNodeInformationQuery |\n\t\t\t ICMPNodeInformationResponse | InverseNeighborDiscoverySolicitation | InverseNeighborDiscoveryAdvertisement |\n\t\t\t HomeAgentAddressDiscoveryRequest | HomeAgentAddressDiscoveryReply | MobilePrefixSolicitation |\n\t\t\t MobilePrefixAdvertisement | DuplicateAddressRequestCodeSuffix | DuplicateAddressConfirmationCodeSuffix |\n\t\t\t ExtendedEchoRequest | ExtendedEchoReply";
-          type = types.int;
+          type = types.either types.int types.str;
         };
       };
 
@@ -762,7 +762,7 @@ with lib; let
         };
         "type" = mkOption {
           description = "Type is a ICMP-type.\nIt should be an 8bit code (0-255), or it's CamelCase name (for example, \"EchoReply\").\nAllowed ICMP types are:\n    Ipv4: EchoReply | DestinationUnreachable | Redirect | Echo | EchoRequest |\n\t\t     RouterAdvertisement | RouterSelection | TimeExceeded | ParameterProblem |\n\t\t\t Timestamp | TimestampReply | Photuris | ExtendedEcho Request | ExtendedEcho Reply\n    Ipv6: DestinationUnreachable | PacketTooBig | TimeExceeded | ParameterProblem |\n\t\t\t EchoRequest | EchoReply | MulticastListenerQuery| MulticastListenerReport |\n\t\t\t MulticastListenerDone | RouterSolicitation | RouterAdvertisement | NeighborSolicitation |\n\t\t\t NeighborAdvertisement | RedirectMessage | RouterRenumbering | ICMPNodeInformationQuery |\n\t\t\t ICMPNodeInformationResponse | InverseNeighborDiscoverySolicitation | InverseNeighborDiscoveryAdvertisement |\n\t\t\t HomeAgentAddressDiscoveryRequest | HomeAgentAddressDiscoveryReply | MobilePrefixSolicitation |\n\t\t\t MobilePrefixAdvertisement | DuplicateAddressRequestCodeSuffix | DuplicateAddressConfirmationCodeSuffix |\n\t\t\t ExtendedEchoRequest | ExtendedEchoReply";
-          type = types.int;
+          type = types.either types.int types.str;
         };
       };
 
@@ -1829,7 +1829,7 @@ with lib; let
         };
         "type" = mkOption {
           description = "Type is a ICMP-type.\nIt should be an 8bit code (0-255), or it's CamelCase name (for example, \"EchoReply\").\nAllowed ICMP types are:\n    Ipv4: EchoReply | DestinationUnreachable | Redirect | Echo | EchoRequest |\n\t\t     RouterAdvertisement | RouterSelection | TimeExceeded | ParameterProblem |\n\t\t\t Timestamp | TimestampReply | Photuris | ExtendedEcho Request | ExtendedEcho Reply\n    Ipv6: DestinationUnreachable | PacketTooBig | TimeExceeded | ParameterProblem |\n\t\t\t EchoRequest | EchoReply | MulticastListenerQuery| MulticastListenerReport |\n\t\t\t MulticastListenerDone | RouterSolicitation | RouterAdvertisement | NeighborSolicitation |\n\t\t\t NeighborAdvertisement | RedirectMessage | RouterRenumbering | ICMPNodeInformationQuery |\n\t\t\t ICMPNodeInformationResponse | InverseNeighborDiscoverySolicitation | InverseNeighborDiscoveryAdvertisement |\n\t\t\t HomeAgentAddressDiscoveryRequest | HomeAgentAddressDiscoveryReply | MobilePrefixSolicitation |\n\t\t\t MobilePrefixAdvertisement | DuplicateAddressRequestCodeSuffix | DuplicateAddressConfirmationCodeSuffix |\n\t\t\t ExtendedEchoRequest | ExtendedEchoReply";
-          type = types.int;
+          type = types.either types.int types.str;
         };
       };
 
@@ -2104,7 +2104,7 @@ with lib; let
         };
         "type" = mkOption {
           description = "Type is a ICMP-type.\nIt should be an 8bit code (0-255), or it's CamelCase name (for example, \"EchoReply\").\nAllowed ICMP types are:\n    Ipv4: EchoReply | DestinationUnreachable | Redirect | Echo | EchoRequest |\n\t\t     RouterAdvertisement | RouterSelection | TimeExceeded | ParameterProblem |\n\t\t\t Timestamp | TimestampReply | Photuris | ExtendedEcho Request | ExtendedEcho Reply\n    Ipv6: DestinationUnreachable | PacketTooBig | TimeExceeded | ParameterProblem |\n\t\t\t EchoRequest | EchoReply | MulticastListenerQuery| MulticastListenerReport |\n\t\t\t MulticastListenerDone | RouterSolicitation | RouterAdvertisement | NeighborSolicitation |\n\t\t\t NeighborAdvertisement | RedirectMessage | RouterRenumbering | ICMPNodeInformationQuery |\n\t\t\t ICMPNodeInformationResponse | InverseNeighborDiscoverySolicitation | InverseNeighborDiscoveryAdvertisement |\n\t\t\t HomeAgentAddressDiscoveryRequest | HomeAgentAddressDiscoveryReply | MobilePrefixSolicitation |\n\t\t\t MobilePrefixAdvertisement | DuplicateAddressRequestCodeSuffix | DuplicateAddressConfirmationCodeSuffix |\n\t\t\t ExtendedEchoRequest | ExtendedEchoReply";
-          type = types.int;
+          type = types.either types.int types.str;
         };
       };
 
@@ -2710,7 +2710,7 @@ with lib; let
         };
         "type" = mkOption {
           description = "Type is a ICMP-type.\nIt should be an 8bit code (0-255), or it's CamelCase name (for example, \"EchoReply\").\nAllowed ICMP types are:\n    Ipv4: EchoReply | DestinationUnreachable | Redirect | Echo | EchoRequest |\n\t\t     RouterAdvertisement | RouterSelection | TimeExceeded | ParameterProblem |\n\t\t\t Timestamp | TimestampReply | Photuris | ExtendedEcho Request | ExtendedEcho Reply\n    Ipv6: DestinationUnreachable | PacketTooBig | TimeExceeded | ParameterProblem |\n\t\t\t EchoRequest | EchoReply | MulticastListenerQuery| MulticastListenerReport |\n\t\t\t MulticastListenerDone | RouterSolicitation | RouterAdvertisement | NeighborSolicitation |\n\t\t\t NeighborAdvertisement | RedirectMessage | RouterRenumbering | ICMPNodeInformationQuery |\n\t\t\t ICMPNodeInformationResponse | InverseNeighborDiscoverySolicitation | InverseNeighborDiscoveryAdvertisement |\n\t\t\t HomeAgentAddressDiscoveryRequest | HomeAgentAddressDiscoveryReply | MobilePrefixSolicitation |\n\t\t\t MobilePrefixAdvertisement | DuplicateAddressRequestCodeSuffix | DuplicateAddressConfirmationCodeSuffix |\n\t\t\t ExtendedEchoRequest | ExtendedEchoReply";
-          type = types.int;
+          type = types.either types.int types.str;
         };
       };
 
@@ -3072,7 +3072,7 @@ with lib; let
         };
         "type" = mkOption {
           description = "Type is a ICMP-type.\nIt should be an 8bit code (0-255), or it's CamelCase name (for example, \"EchoReply\").\nAllowed ICMP types are:\n    Ipv4: EchoReply | DestinationUnreachable | Redirect | Echo | EchoRequest |\n\t\t     RouterAdvertisement | RouterSelection | TimeExceeded | ParameterProblem |\n\t\t\t Timestamp | TimestampReply | Photuris | ExtendedEcho Request | ExtendedEcho Reply\n    Ipv6: DestinationUnreachable | PacketTooBig | TimeExceeded | ParameterProblem |\n\t\t\t EchoRequest | EchoReply | MulticastListenerQuery| MulticastListenerReport |\n\t\t\t MulticastListenerDone | RouterSolicitation | RouterAdvertisement | NeighborSolicitation |\n\t\t\t NeighborAdvertisement | RedirectMessage | RouterRenumbering | ICMPNodeInformationQuery |\n\t\t\t ICMPNodeInformationResponse | InverseNeighborDiscoverySolicitation | InverseNeighborDiscoveryAdvertisement |\n\t\t\t HomeAgentAddressDiscoveryRequest | HomeAgentAddressDiscoveryReply | MobilePrefixSolicitation |\n\t\t\t MobilePrefixAdvertisement | DuplicateAddressRequestCodeSuffix | DuplicateAddressConfirmationCodeSuffix |\n\t\t\t ExtendedEchoRequest | ExtendedEchoReply";
-          type = types.int;
+          type = types.either types.int types.str;
         };
       };
 
@@ -4139,7 +4139,7 @@ with lib; let
         };
         "type" = mkOption {
           description = "Type is a ICMP-type.\nIt should be an 8bit code (0-255), or it's CamelCase name (for example, \"EchoReply\").\nAllowed ICMP types are:\n    Ipv4: EchoReply | DestinationUnreachable | Redirect | Echo | EchoRequest |\n\t\t     RouterAdvertisement | RouterSelection | TimeExceeded | ParameterProblem |\n\t\t\t Timestamp | TimestampReply | Photuris | ExtendedEcho Request | ExtendedEcho Reply\n    Ipv6: DestinationUnreachable | PacketTooBig | TimeExceeded | ParameterProblem |\n\t\t\t EchoRequest | EchoReply | MulticastListenerQuery| MulticastListenerReport |\n\t\t\t MulticastListenerDone | RouterSolicitation | RouterAdvertisement | NeighborSolicitation |\n\t\t\t NeighborAdvertisement | RedirectMessage | RouterRenumbering | ICMPNodeInformationQuery |\n\t\t\t ICMPNodeInformationResponse | InverseNeighborDiscoverySolicitation | InverseNeighborDiscoveryAdvertisement |\n\t\t\t HomeAgentAddressDiscoveryRequest | HomeAgentAddressDiscoveryReply | MobilePrefixSolicitation |\n\t\t\t MobilePrefixAdvertisement | DuplicateAddressRequestCodeSuffix | DuplicateAddressConfirmationCodeSuffix |\n\t\t\t ExtendedEchoRequest | ExtendedEchoReply";
-          type = types.int;
+          type = types.either types.int types.str;
         };
       };
 
@@ -4414,7 +4414,7 @@ with lib; let
         };
         "type" = mkOption {
           description = "Type is a ICMP-type.\nIt should be an 8bit code (0-255), or it's CamelCase name (for example, \"EchoReply\").\nAllowed ICMP types are:\n    Ipv4: EchoReply | DestinationUnreachable | Redirect | Echo | EchoRequest |\n\t\t     RouterAdvertisement | RouterSelection | TimeExceeded | ParameterProblem |\n\t\t\t Timestamp | TimestampReply | Photuris | ExtendedEcho Request | ExtendedEcho Reply\n    Ipv6: DestinationUnreachable | PacketTooBig | TimeExceeded | ParameterProblem |\n\t\t\t EchoRequest | EchoReply | MulticastListenerQuery| MulticastListenerReport |\n\t\t\t MulticastListenerDone | RouterSolicitation | RouterAdvertisement | NeighborSolicitation |\n\t\t\t NeighborAdvertisement | RedirectMessage | RouterRenumbering | ICMPNodeInformationQuery |\n\t\t\t ICMPNodeInformationResponse | InverseNeighborDiscoverySolicitation | InverseNeighborDiscoveryAdvertisement |\n\t\t\t HomeAgentAddressDiscoveryRequest | HomeAgentAddressDiscoveryReply | MobilePrefixSolicitation |\n\t\t\t MobilePrefixAdvertisement | DuplicateAddressRequestCodeSuffix | DuplicateAddressConfirmationCodeSuffix |\n\t\t\t ExtendedEchoRequest | ExtendedEchoReply";
-          type = types.int;
+          type = types.either types.int types.str;
         };
       };
 
@@ -5103,7 +5103,7 @@ with lib; let
         };
         "type" = mkOption {
           description = "Type is a ICMP-type.\nIt should be an 8bit code (0-255), or it's CamelCase name (for example, \"EchoReply\").\nAllowed ICMP types are:\n    Ipv4: EchoReply | DestinationUnreachable | Redirect | Echo | EchoRequest |\n\t\t     RouterAdvertisement | RouterSelection | TimeExceeded | ParameterProblem |\n\t\t\t Timestamp | TimestampReply | Photuris | ExtendedEcho Request | ExtendedEcho Reply\n    Ipv6: DestinationUnreachable | PacketTooBig | TimeExceeded | ParameterProblem |\n\t\t\t EchoRequest | EchoReply | MulticastListenerQuery| MulticastListenerReport |\n\t\t\t MulticastListenerDone | RouterSolicitation | RouterAdvertisement | NeighborSolicitation |\n\t\t\t NeighborAdvertisement | RedirectMessage | RouterRenumbering | ICMPNodeInformationQuery |\n\t\t\t ICMPNodeInformationResponse | InverseNeighborDiscoverySolicitation | InverseNeighborDiscoveryAdvertisement |\n\t\t\t HomeAgentAddressDiscoveryRequest | HomeAgentAddressDiscoveryReply | MobilePrefixSolicitation |\n\t\t\t MobilePrefixAdvertisement | DuplicateAddressRequestCodeSuffix | DuplicateAddressConfirmationCodeSuffix |\n\t\t\t ExtendedEchoRequest | ExtendedEchoReply";
-          type = types.int;
+          type = types.either types.int types.str;
         };
       };
 
@@ -5465,7 +5465,7 @@ with lib; let
         };
         "type" = mkOption {
           description = "Type is a ICMP-type.\nIt should be an 8bit code (0-255), or it's CamelCase name (for example, \"EchoReply\").\nAllowed ICMP types are:\n    Ipv4: EchoReply | DestinationUnreachable | Redirect | Echo | EchoRequest |\n\t\t     RouterAdvertisement | RouterSelection | TimeExceeded | ParameterProblem |\n\t\t\t Timestamp | TimestampReply | Photuris | ExtendedEcho Request | ExtendedEcho Reply\n    Ipv6: DestinationUnreachable | PacketTooBig | TimeExceeded | ParameterProblem |\n\t\t\t EchoRequest | EchoReply | MulticastListenerQuery| MulticastListenerReport |\n\t\t\t MulticastListenerDone | RouterSolicitation | RouterAdvertisement | NeighborSolicitation |\n\t\t\t NeighborAdvertisement | RedirectMessage | RouterRenumbering | ICMPNodeInformationQuery |\n\t\t\t ICMPNodeInformationResponse | InverseNeighborDiscoverySolicitation | InverseNeighborDiscoveryAdvertisement |\n\t\t\t HomeAgentAddressDiscoveryRequest | HomeAgentAddressDiscoveryReply | MobilePrefixSolicitation |\n\t\t\t MobilePrefixAdvertisement | DuplicateAddressRequestCodeSuffix | DuplicateAddressConfirmationCodeSuffix |\n\t\t\t ExtendedEchoRequest | ExtendedEchoReply";
-          type = types.int;
+          type = types.either types.int types.str;
         };
       };
 
@@ -6532,7 +6532,7 @@ with lib; let
         };
         "type" = mkOption {
           description = "Type is a ICMP-type.\nIt should be an 8bit code (0-255), or it's CamelCase name (for example, \"EchoReply\").\nAllowed ICMP types are:\n    Ipv4: EchoReply | DestinationUnreachable | Redirect | Echo | EchoRequest |\n\t\t     RouterAdvertisement | RouterSelection | TimeExceeded | ParameterProblem |\n\t\t\t Timestamp | TimestampReply | Photuris | ExtendedEcho Request | ExtendedEcho Reply\n    Ipv6: DestinationUnreachable | PacketTooBig | TimeExceeded | ParameterProblem |\n\t\t\t EchoRequest | EchoReply | MulticastListenerQuery| MulticastListenerReport |\n\t\t\t MulticastListenerDone | RouterSolicitation | RouterAdvertisement | NeighborSolicitation |\n\t\t\t NeighborAdvertisement | RedirectMessage | RouterRenumbering | ICMPNodeInformationQuery |\n\t\t\t ICMPNodeInformationResponse | InverseNeighborDiscoverySolicitation | InverseNeighborDiscoveryAdvertisement |\n\t\t\t HomeAgentAddressDiscoveryRequest | HomeAgentAddressDiscoveryReply | MobilePrefixSolicitation |\n\t\t\t MobilePrefixAdvertisement | DuplicateAddressRequestCodeSuffix | DuplicateAddressConfirmationCodeSuffix |\n\t\t\t ExtendedEchoRequest | ExtendedEchoReply";
-          type = types.int;
+          type = types.either types.int types.str;
         };
       };
 
@@ -6807,7 +6807,7 @@ with lib; let
         };
         "type" = mkOption {
           description = "Type is a ICMP-type.\nIt should be an 8bit code (0-255), or it's CamelCase name (for example, \"EchoReply\").\nAllowed ICMP types are:\n    Ipv4: EchoReply | DestinationUnreachable | Redirect | Echo | EchoRequest |\n\t\t     RouterAdvertisement | RouterSelection | TimeExceeded | ParameterProblem |\n\t\t\t Timestamp | TimestampReply | Photuris | ExtendedEcho Request | ExtendedEcho Reply\n    Ipv6: DestinationUnreachable | PacketTooBig | TimeExceeded | ParameterProblem |\n\t\t\t EchoRequest | EchoReply | MulticastListenerQuery| MulticastListenerReport |\n\t\t\t MulticastListenerDone | RouterSolicitation | RouterAdvertisement | NeighborSolicitation |\n\t\t\t NeighborAdvertisement | RedirectMessage | RouterRenumbering | ICMPNodeInformationQuery |\n\t\t\t ICMPNodeInformationResponse | InverseNeighborDiscoverySolicitation | InverseNeighborDiscoveryAdvertisement |\n\t\t\t HomeAgentAddressDiscoveryRequest | HomeAgentAddressDiscoveryReply | MobilePrefixSolicitation |\n\t\t\t MobilePrefixAdvertisement | DuplicateAddressRequestCodeSuffix | DuplicateAddressConfirmationCodeSuffix |\n\t\t\t ExtendedEchoRequest | ExtendedEchoReply";
-          type = types.int;
+          type = types.either types.int types.str;
         };
       };
 
@@ -7413,7 +7413,7 @@ with lib; let
         };
         "type" = mkOption {
           description = "Type is a ICMP-type.\nIt should be an 8bit code (0-255), or it's CamelCase name (for example, \"EchoReply\").\nAllowed ICMP types are:\n    Ipv4: EchoReply | DestinationUnreachable | Redirect | Echo | EchoRequest |\n\t\t     RouterAdvertisement | RouterSelection | TimeExceeded | ParameterProblem |\n\t\t\t Timestamp | TimestampReply | Photuris | ExtendedEcho Request | ExtendedEcho Reply\n    Ipv6: DestinationUnreachable | PacketTooBig | TimeExceeded | ParameterProblem |\n\t\t\t EchoRequest | EchoReply | MulticastListenerQuery| MulticastListenerReport |\n\t\t\t MulticastListenerDone | RouterSolicitation | RouterAdvertisement | NeighborSolicitation |\n\t\t\t NeighborAdvertisement | RedirectMessage | RouterRenumbering | ICMPNodeInformationQuery |\n\t\t\t ICMPNodeInformationResponse | InverseNeighborDiscoverySolicitation | InverseNeighborDiscoveryAdvertisement |\n\t\t\t HomeAgentAddressDiscoveryRequest | HomeAgentAddressDiscoveryReply | MobilePrefixSolicitation |\n\t\t\t MobilePrefixAdvertisement | DuplicateAddressRequestCodeSuffix | DuplicateAddressConfirmationCodeSuffix |\n\t\t\t ExtendedEchoRequest | ExtendedEchoReply";
-          type = types.int;
+          type = types.either types.int types.str;
         };
       };
 
@@ -7775,7 +7775,7 @@ with lib; let
         };
         "type" = mkOption {
           description = "Type is a ICMP-type.\nIt should be an 8bit code (0-255), or it's CamelCase name (for example, \"EchoReply\").\nAllowed ICMP types are:\n    Ipv4: EchoReply | DestinationUnreachable | Redirect | Echo | EchoRequest |\n\t\t     RouterAdvertisement | RouterSelection | TimeExceeded | ParameterProblem |\n\t\t\t Timestamp | TimestampReply | Photuris | ExtendedEcho Request | ExtendedEcho Reply\n    Ipv6: DestinationUnreachable | PacketTooBig | TimeExceeded | ParameterProblem |\n\t\t\t EchoRequest | EchoReply | MulticastListenerQuery| MulticastListenerReport |\n\t\t\t MulticastListenerDone | RouterSolicitation | RouterAdvertisement | NeighborSolicitation |\n\t\t\t NeighborAdvertisement | RedirectMessage | RouterRenumbering | ICMPNodeInformationQuery |\n\t\t\t ICMPNodeInformationResponse | InverseNeighborDiscoverySolicitation | InverseNeighborDiscoveryAdvertisement |\n\t\t\t HomeAgentAddressDiscoveryRequest | HomeAgentAddressDiscoveryReply | MobilePrefixSolicitation |\n\t\t\t MobilePrefixAdvertisement | DuplicateAddressRequestCodeSuffix | DuplicateAddressConfirmationCodeSuffix |\n\t\t\t ExtendedEchoRequest | ExtendedEchoReply";
-          type = types.int;
+          type = types.either types.int types.str;
         };
       };
 
@@ -8842,7 +8842,7 @@ with lib; let
         };
         "type" = mkOption {
           description = "Type is a ICMP-type.\nIt should be an 8bit code (0-255), or it's CamelCase name (for example, \"EchoReply\").\nAllowed ICMP types are:\n    Ipv4: EchoReply | DestinationUnreachable | Redirect | Echo | EchoRequest |\n\t\t     RouterAdvertisement | RouterSelection | TimeExceeded | ParameterProblem |\n\t\t\t Timestamp | TimestampReply | Photuris | ExtendedEcho Request | ExtendedEcho Reply\n    Ipv6: DestinationUnreachable | PacketTooBig | TimeExceeded | ParameterProblem |\n\t\t\t EchoRequest | EchoReply | MulticastListenerQuery| MulticastListenerReport |\n\t\t\t MulticastListenerDone | RouterSolicitation | RouterAdvertisement | NeighborSolicitation |\n\t\t\t NeighborAdvertisement | RedirectMessage | RouterRenumbering | ICMPNodeInformationQuery |\n\t\t\t ICMPNodeInformationResponse | InverseNeighborDiscoverySolicitation | InverseNeighborDiscoveryAdvertisement |\n\t\t\t HomeAgentAddressDiscoveryRequest | HomeAgentAddressDiscoveryReply | MobilePrefixSolicitation |\n\t\t\t MobilePrefixAdvertisement | DuplicateAddressRequestCodeSuffix | DuplicateAddressConfirmationCodeSuffix |\n\t\t\t ExtendedEchoRequest | ExtendedEchoReply";
-          type = types.int;
+          type = types.either types.int types.str;
         };
       };
 
@@ -9117,7 +9117,7 @@ with lib; let
         };
         "type" = mkOption {
           description = "Type is a ICMP-type.\nIt should be an 8bit code (0-255), or it's CamelCase name (for example, \"EchoReply\").\nAllowed ICMP types are:\n    Ipv4: EchoReply | DestinationUnreachable | Redirect | Echo | EchoRequest |\n\t\t     RouterAdvertisement | RouterSelection | TimeExceeded | ParameterProblem |\n\t\t\t Timestamp | TimestampReply | Photuris | ExtendedEcho Request | ExtendedEcho Reply\n    Ipv6: DestinationUnreachable | PacketTooBig | TimeExceeded | ParameterProblem |\n\t\t\t EchoRequest | EchoReply | MulticastListenerQuery| MulticastListenerReport |\n\t\t\t MulticastListenerDone | RouterSolicitation | RouterAdvertisement | NeighborSolicitation |\n\t\t\t NeighborAdvertisement | RedirectMessage | RouterRenumbering | ICMPNodeInformationQuery |\n\t\t\t ICMPNodeInformationResponse | InverseNeighborDiscoverySolicitation | InverseNeighborDiscoveryAdvertisement |\n\t\t\t HomeAgentAddressDiscoveryRequest | HomeAgentAddressDiscoveryReply | MobilePrefixSolicitation |\n\t\t\t MobilePrefixAdvertisement | DuplicateAddressRequestCodeSuffix | DuplicateAddressConfirmationCodeSuffix |\n\t\t\t ExtendedEchoRequest | ExtendedEchoReply";
-          type = types.int;
+          type = types.either types.int types.str;
         };
       };
 
