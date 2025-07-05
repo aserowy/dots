@@ -6,7 +6,7 @@ metadata:
 spec:
   ports:
     - name: http
-      port: 1883
+      port: 8080
       protocol: TCP
   selector:
     app: zigbee2mqtt

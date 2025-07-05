@@ -37,7 +37,7 @@ spec:
               name: data
             - mountPath: /app/data/secret.yaml
               name: secrets
-              subPath: secrets.yaml
+              subPath: secret.yaml
       initContainers:
         - command:
             - /bin/sh
@@ -67,7 +67,7 @@ spec:
               name: data
             - mountPath: /app/data/configmap-configuration.yaml
               name: config
-              subPath: zigbee2mqtt.yaml
+              subPath: configuration.yaml
           workingDir: /app/data
       securityContext:
         fsGroup: 1099
