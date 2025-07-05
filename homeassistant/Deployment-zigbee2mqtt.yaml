@@ -8,8 +8,6 @@ spec:
   selector:
     matchLabels:
       app: zigbee2mqtt
-  strategy:
-    type: Recreate
   template:
     metadata:
       labels:
@@ -31,6 +29,9 @@ spec:
               memory: 600Mi
           securityContext:
             allowPrivilegeEscalation: false
+            capabilities:
+              add:
+                - SYS_ADMIN
             readOnlyRootFilesystem: true
           volumeMounts:
             - mountPath: /app/data
