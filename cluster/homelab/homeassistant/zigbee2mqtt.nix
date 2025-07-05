@@ -39,7 +39,7 @@ in
         };
       };
 
-      deployments = {
+      statefulSets = {
         zigbee2mqtt = {
           apiVersion = "apps/v1";
           kind = "Deployment";
@@ -50,7 +50,6 @@ in
           spec = {
             replicas = 1;
             selector.matchLabels.app = "zigbee2mqtt";
-            strategy.type = "Recreate";
             template = {
               metadata.labels.app = "zigbee2mqtt";
               spec = {
@@ -116,6 +115,9 @@ in
                     securityContext = {
                       allowPrivilegeEscalation = false;
                       readOnlyRootFilesystem = true;
+                      capabilities = {
+                        add = [ "SYS_ADMIN" ];
+                      };
                     };
                     ports = [ { containerPort = 8080; } ];
                     resources = {
