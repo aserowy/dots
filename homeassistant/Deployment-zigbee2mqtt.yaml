@@ -35,25 +35,24 @@ spec:
           volumeMounts:
             - mountPath: /app/data
               name: data
-            - mountPath: /app/data/secret.yaml
-              name: secrets
-              subPath: secret.yaml
       initContainers:
         - command:
             - /bin/sh
             - -c
             - |
+              cp --force /tmp/secret.yaml secret.yaml
+
               if [ -f configuration.yaml ]
               then
                 echo "Backing up existing configuration file to /app/data/configuration-helm-backup.yaml"
                 cp --force configuration.yaml configuration-helm-backup.yaml
               else
                 echo "configuration.yaml does not exists, creating one from config map /app/data/configmap-configuration.yaml"
-                cp configmap-configuration.yaml configuration.yaml
+                cp /tmp/configmap-configuration.yaml configuration.yaml
               fi
 
-              yq --inplace '. *= load("configmap-configuration.yaml") | del(.version) ' configuration.yaml
-              yq eval-all  '. as $item ireduce ({}; . * $item )' configmap-configuration.yaml configuration.yaml > configuration.yaml
+              yq --inplace '. *= load("/tmp/configmap-configuration.yaml") | del(.version) ' configuration.yaml
+              yq eval-all  '. as $item ireduce ({}; . * $item )' /tmp/configmap-configuration.yaml configuration.yaml > configuration.yaml
           image: mikefarah/yq:4.45.1
           name: copy-base-config
           securityContext:
@@ -65,9 +64,12 @@ spec:
           volumeMounts:
             - mountPath: /app/data
               name: data
-            - mountPath: /app/data/configmap-configuration.yaml
+            - mountPath: /tmp/configmap-configuration.yaml
               name: config
               subPath: configuration.yaml
+            - mountPath: /tmp/secret.yaml
+              name: secrets
+              subPath: secret.yaml
           workingDir: /app/data
       securityContext:
         fsGroup: 1099
