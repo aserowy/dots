@@ -69,17 +69,19 @@ in
                       "/bin/sh"
                       "-c"
                       ''
+                        cp --force /tmp/secret.yaml secret.yaml
+
                         if [ -f configuration.yaml ]
                         then
                           echo "Backing up existing configuration file to /app/data/configuration-helm-backup.yaml"
                           cp --force configuration.yaml configuration-helm-backup.yaml
                         else
                           echo "configuration.yaml does not exists, creating one from config map /app/data/configmap-configuration.yaml"
-                          cp configmap-configuration.yaml configuration.yaml
+                          cp /tmp/configmap-configuration.yaml configuration.yaml
                         fi
 
-                        yq --inplace '. *= load("configmap-configuration.yaml") | del(.version) ' configuration.yaml
-                        yq eval-all  '. as $item ireduce ({}; . * $item )' configmap-configuration.yaml configuration.yaml > configuration.yaml
+                        yq --inplace '. *= load("/tmp/configmap-configuration.yaml") | del(.version) ' configuration.yaml
+                        yq eval-all  '. as $item ireduce ({}; . * $item )' /tmp/configmap-configuration.yaml configuration.yaml > configuration.yaml
                       ''
                     ];
                     securityContext = {
@@ -97,7 +99,12 @@ in
                       {
                         name = "config";
                         subPath = "configuration.yaml";
-                        mountPath = "/app/data/configmap-configuration.yaml";
+                        mountPath = "/tmp/configmap-configuration.yaml";
+                      }
+                      {
+                        name = "secrets";
+                        subPath = "secret.yaml";
+                        mountPath = "/tmp/secret.yaml";
                       }
                     ];
                   }
@@ -127,11 +134,6 @@ in
                       {
                         name = "data";
                         mountPath = "/app/data";
-                      }
-                      {
-                        name = "secrets";
-                        subPath = "secret.yaml";
-                        mountPath = "/app/data/secret.yaml";
                       }
                     ];
                   }

@@ -13,23 +13,7 @@ serial:
   port: /dev/ttyUSB0
 advanced:
   channel: 11
-  network_key:
-    - 214
-    - 172
-    - 231
-    - 206
-    - 62
-    - 190
-    - 240
-    - 174
-    - 166
-    - 54
-    - 35
-    - 33
-    - 165
-    - 248
-    - 2
-    - 40
+  network_key: '!secret.yaml network_key'
   pan_id: 4919
   ext_pan_id:
     - 19
