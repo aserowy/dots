@@ -5,7 +5,6 @@
       deployments = {
         gotenberg = {
           apiVersion = "apps/v1";
-          kind = "Deployment";
           metadata = {
             inherit namespace;
             name = "gotenberg";

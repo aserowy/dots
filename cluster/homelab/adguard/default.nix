@@ -26,10 +26,9 @@ in
     ];
 
     resources = {
-      deployments = {
+      statefulSets = {
         adguard = {
           apiVersion = "apps/v1";
-          kind = "Deployment";
           metadata = {
             inherit namespace;
             name = "adguard";

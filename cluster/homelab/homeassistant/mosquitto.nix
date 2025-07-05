@@ -35,10 +35,9 @@ in
         data."mosquitto.conf" = (builtins.readFile ./mosquitto.conf);
       };
 
-      deployments = {
+      statefulSets = {
         mosquitto = {
           apiVersion = "apps/v1";
-          kind = "Deployment";
           metadata = {
             inherit namespace;
             name = "mosquitto";
