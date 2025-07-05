@@ -34,7 +34,7 @@ in
             name = zigbee2mqtt-cm;
           };
           data = {
-            "zigbee2mqtt.conf" = (builtins.readFile ./zigbee2mqtt.conf);
+            "configuration.yaml" = (builtins.readFile ./zigbee2mqtt.yaml);
           };
         };
       };
@@ -96,7 +96,7 @@ in
                       }
                       {
                         name = "config";
-                        subPath = "zigbee2mqtt.yaml";
+                        subPath = "configuration.yaml";
                         mountPath = "/app/data/configmap-configuration.yaml";
                       }
                     ];
@@ -130,7 +130,7 @@ in
                       }
                       {
                         name = "secrets";
-                        subPath = "secrets.yaml";
+                        subPath = "secret.yaml";
                         mountPath = "/app/data/secret.yaml";
                       }
                     ];
@@ -168,7 +168,7 @@ in
               {
                 name = "http";
                 protocol = "TCP";
-                port = 1883;
+                port = 8080;
               }
             ];
           };
