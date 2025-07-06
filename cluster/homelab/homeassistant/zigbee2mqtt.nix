@@ -133,15 +133,14 @@ in
                         path = "/";
                         port = 8080;
                       };
-                      periodSeconds = 10;
+                      initialDelaySeconds = 30;
+                      failureThreshold = 15;
                     };
                     livenessProbe = {
                       httpGet = {
                         path = "/";
                         port = 8080;
                       };
-                      periodSeconds = 5;
-                      failureThreshold = 3;
                     };
                     ports = [ { containerPort = 8080; } ];
                     resources = {
