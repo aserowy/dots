@@ -28,7 +28,7 @@ in
 
     resources = {
       configMaps = {
-        adguard-cm = {
+        zigbee2mqtt-cm = {
           metadata = {
             inherit namespace;
             name = zigbee2mqtt-cm;

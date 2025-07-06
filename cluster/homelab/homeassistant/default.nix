@@ -5,6 +5,7 @@ let
 in
 {
   imports = [
+    (import ./homeassistant.nix { inherit application namespace charts; })
     (import ./mosquitto.nix { inherit application namespace; })
     (import ./zigbee2mqtt.nix { inherit application namespace; })
   ];
