@@ -14,14 +14,14 @@ serial:
 advanced:
   channel: 11
   network_key: '!secret.yaml network_key'
-  pan_id: 4919
-  ext_pan_id:
-    - 19
-    - 221
-    - 55
-    - 221
-    - 19
-    - 221
-    - 55
-    - 221
+  # pan_id: 4919
+  # ext_pan_id:
+  #   - 19
+  #   - 221
+  #   - 55
+  #   - 221
+  #   - 19
+  #   - 221
+  #   - 55
+  #   - 221
 version: 4
