@@ -16,11 +16,9 @@ spec:
       containers:
         - image: docker.io/koenkk/zigbee2mqtt:2.5.1
           livenessProbe:
-            failureThreshold: 3
             httpGet:
               path: /
               port: 8080
-            periodSeconds: 5
           name: zigbee2mqtt
           ports:
             - containerPort: 8080
@@ -42,10 +40,11 @@ spec:
                 - ALL
             readOnlyRootFilesystem: true
           startupProbe:
+            failureThreshold: 15
             httpGet:
               path: /
               port: 8080
-            periodSeconds: 10
+            initialDelaySeconds: 30
           volumeMounts:
             - mountPath: /app/data
               name: data
