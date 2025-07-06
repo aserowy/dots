@@ -15,6 +15,13 @@ spec:
     spec:
       containers:
         - image: docker.io/koenkk/zigbee2mqtt:2.5.1
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 5
           name: zigbee2mqtt
           ports:
             - containerPort: 8080
