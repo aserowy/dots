@@ -31,7 +31,6 @@ spec:
             allowPrivilegeEscalation: false
             capabilities:
               add:
-                - DAC_OVERRIDE
                 - SYS_RAWIO
               drop:
                 - ALL
@@ -80,8 +79,8 @@ spec:
         runAsGroup: 1000
         runAsNonRoot: true
         runAsUser: 1000
-        seccompProfile:
-          type: RuntimeDefault
+        supplementalGroups:
+          - 27
       volumes:
         - name: data
           persistentVolumeClaim:
