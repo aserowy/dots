@@ -31,11 +31,11 @@ spec:
             allowPrivilegeEscalation: false
             capabilities:
               add:
+                - DAC_OVERRIDE
                 - SYS_RAWIO
               drop:
                 - ALL
             readOnlyRootFilesystem: true
-            runAsNonRoot: true
           volumeMounts:
             - mountPath: /app/data
               name: data
@@ -65,7 +65,6 @@ spec:
               drop:
                 - ALL
             readOnlyRootFilesystem: true
-            runAsNonRoot: true
           volumeMounts:
             - mountPath: /app/data
               name: data
@@ -79,6 +78,7 @@ spec:
       securityContext:
         fsGroup: 1000
         runAsGroup: 1000
+        runAsNonRoot: true
         runAsUser: 1000
         seccompProfile:
           type: RuntimeDefault
