@@ -45,7 +45,6 @@ in
           spec = {
             replicas = 1;
             selector.matchLabels.app = "mosquitto";
-            strategy.type = "Recreate";
             template = {
               metadata.labels.app = "mosquitto";
               spec = {

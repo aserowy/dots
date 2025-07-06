@@ -66,9 +66,6 @@ in
                 app = "paperless";
               };
             };
-            strategy = {
-              type = "Recreate";
-            };
             template = {
               metadata = {
                 labels = {

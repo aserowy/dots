@@ -40,9 +40,6 @@ in
                 app = "adguard";
               };
             };
-            strategy = {
-              type = "Recreate";
-            };
             template = {
               metadata = {
                 labels = {
