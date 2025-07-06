@@ -8,7 +8,7 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`mqtt.test.anderwerse.de`)
+      match: Host(`zigbeetest.anderwerse.de`)
       services:
         - name: zigbee2mqtt
           namespace: homeassistant
