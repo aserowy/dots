@@ -56,6 +56,7 @@ in
                   fsGroup = 1000;
                   runAsGroup = 1000;
                   runAsUser = 1000;
+                  runAsNonRoot = true;
                   seccompProfile.type = "RuntimeDefault";
                 };
                 initContainers = [
@@ -65,7 +66,6 @@ in
                     securityContext = {
                       allowPrivilegeEscalation = false;
                       readOnlyRootFilesystem = true;
-                      runAsNonRoot = true;
                       capabilities = {
                         drop = [ "ALL" ];
                       };
@@ -115,10 +115,12 @@ in
                     securityContext = {
                       allowPrivilegeEscalation = false;
                       readOnlyRootFilesystem = true;
-                      runAsNonRoot = true;
                       capabilities = {
-                        add = [ "SYS_RAWIO" ];
                         drop = [ "ALL" ];
+                        add = [
+                          "DAC_OVERRIDE"
+                          "SYS_RAWIO"
+                        ];
                       };
                     };
                     ports = [ { containerPort = 8080; } ];
