@@ -195,7 +195,7 @@ in
           ];
           routes = [
             {
-              match = "Host(`mqtt.test.anderwerse.de`)";
+              match = "Host(`zigbeetest.anderwerse.de`)";
               kind = "Rule";
               services = [
                 {
