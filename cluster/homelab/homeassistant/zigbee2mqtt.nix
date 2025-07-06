@@ -39,7 +39,7 @@ in
         };
       };
 
-      statefulSets = {
+      deployments = {
         zigbee2mqtt = {
           apiVersion = "apps/v1";
           metadata = {
@@ -48,6 +48,7 @@ in
           };
           spec = {
             replicas = 1;
+            strategy.type = "Recreate";
             selector.matchLabels.app = "zigbee2mqtt";
             template = {
               metadata.labels.app = "zigbee2mqtt";
@@ -128,12 +129,18 @@ in
                         ];
                       };
                     };
+                    startupProbe = {
+                      httpGet = {
+                        path = "/";
+                        port = 8080;
+                      };
+                      periodSeconds = 10;
+                    };
                     livenessProbe = {
                       httpGet = {
                         path = "/";
                         port = 8080;
                       };
-                      initialDelaySeconds = 10;
                       periodSeconds = 5;
                       failureThreshold = 3;
                     };
