@@ -30,9 +30,11 @@ spec:
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
-              add:
-                - SYS_ADMIN
+              drop:
+                - ALL
             readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 1000
           volumeMounts:
             - mountPath: /app/data
               name: data

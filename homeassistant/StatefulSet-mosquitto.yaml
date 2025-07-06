@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: mosquitto
   namespace: homeassistant
@@ -8,8 +8,6 @@ spec:
   selector:
     matchLabels:
       app: mosquitto
-  strategy:
-    type: Recreate
   template:
     metadata:
       labels:
