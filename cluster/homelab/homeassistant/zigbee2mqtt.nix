@@ -57,7 +57,13 @@ in
                   runAsGroup = 1000;
                   runAsUser = 1000;
                   runAsNonRoot = true;
-                  seccompProfile.type = "RuntimeDefault";
+
+                  # NOTE: user group 27 will grant access to the given device
+                  # $ ls -la /dev/ttyUSB0
+                  # crw-rw---- 1 root dialout 188, 0 Jul  3 08:21 /dev/ttyUSB0
+                  # $ getent group dialout
+                  # dialout:x:27:
+                  supplementalGroups = [ 27 ];
                 };
                 initContainers = [
                   {
@@ -118,7 +124,6 @@ in
                       capabilities = {
                         drop = [ "ALL" ];
                         add = [
-                          "DAC_OVERRIDE"
                           "SYS_RAWIO"
                         ];
                       };
