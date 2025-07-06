@@ -128,6 +128,15 @@ in
                         ];
                       };
                     };
+                    livenessProbe = {
+                      httpGet = {
+                        path = "/";
+                        port = 8080;
+                      };
+                      initialDelaySeconds = 10;
+                      periodSeconds = 5;
+                      failureThreshold = 3;
+                    };
                     ports = [ { containerPort = 8080; } ];
                     resources = {
                       requests = {
