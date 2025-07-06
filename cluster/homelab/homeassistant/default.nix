@@ -25,7 +25,6 @@ in
           capacity: 1
           discoveryHandler:
             discoveryDetails: |
-              groupRecursive: true
               udevRules:
               - ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", ATTRS{bcdDevice}=="0264"
             name: udev

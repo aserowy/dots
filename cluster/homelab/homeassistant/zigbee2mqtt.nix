@@ -62,6 +62,13 @@ in
                   {
                     name = "copy-base-config";
                     image = "mikefarah/yq:4.45.4"; # docker/mikefarah/yq@semver-coerced
+                    securityContext = {
+                      allowPrivilegeEscalation = false;
+                      readOnlyRootFilesystem = true;
+                      capabilities = {
+                        drop = [ "ALL" ];
+                      };
+                    };
                     workingDir = "/app/data";
                     command = [
                       "/bin/sh"
@@ -82,13 +89,6 @@ in
                         yq eval-all  '. as $item ireduce ({}; . * $item )' /tmp/configmap-configuration.yaml configuration.yaml > configuration.yaml
                       ''
                     ];
-                    securityContext = {
-                      allowPrivilegeEscalation = false;
-                      readOnlyRootFilesystem = true;
-                      capabilities = {
-                        drop = [ "ALL" ];
-                      };
-                    };
                     volumeMounts = [
                       {
                         name = "data";
@@ -112,10 +112,12 @@ in
                     name = "zigbee2mqtt";
                     image = "docker.io/koenkk/zigbee2mqtt:2.5.1"; # docker/koenkk/zigbee2mqtt@semver-coerced
                     securityContext = {
+                      runAsUser = 1000;
                       allowPrivilegeEscalation = false;
+                      runAsNonRoot = true;
                       readOnlyRootFilesystem = true;
                       capabilities = {
-                        add = [ "SYS_ADMIN" ];
+                        drop = [ "ALL" ];
                       };
                     };
                     ports = [ { containerPort = 8080; } ];
