@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: zigbee2mqtt
   namespace: homeassistant
@@ -8,6 +8,8 @@ spec:
   selector:
     matchLabels:
       app: zigbee2mqtt
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
@@ -20,7 +22,6 @@ spec:
             httpGet:
               path: /
               port: 8080
-            initialDelaySeconds: 10
             periodSeconds: 5
           name: zigbee2mqtt
           ports:
@@ -42,6 +43,11 @@ spec:
               drop:
                 - ALL
             readOnlyRootFilesystem: true
+          startupProbe:
+            httpGet:
+              path: /
+              port: 8080
+            periodSeconds: 10
           volumeMounts:
             - mountPath: /app/data
               name: data
