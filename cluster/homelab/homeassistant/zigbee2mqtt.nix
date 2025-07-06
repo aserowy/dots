@@ -39,7 +39,7 @@ in
         };
       };
 
-      deployments = {
+      statefulSets = {
         zigbee2mqtt = {
           apiVersion = "apps/v1";
           metadata = {
@@ -48,7 +48,6 @@ in
           };
           spec = {
             replicas = 1;
-            strategy.type = "Recreate";
             selector.matchLabels.app = "zigbee2mqtt";
             template = {
               metadata.labels.app = "zigbee2mqtt";
