@@ -53,9 +53,9 @@ in
               metadata.labels.app = "zigbee2mqtt";
               spec = {
                 securityContext = {
-                  fsGroup = 1099;
-                  runAsGroup = 1099;
-                  runAsUser = 1099;
+                  fsGroup = 1000;
+                  runAsGroup = 1000;
+                  runAsUser = 1000;
                   seccompProfile.type = "RuntimeDefault";
                 };
                 initContainers = [
@@ -65,6 +65,7 @@ in
                     securityContext = {
                       allowPrivilegeEscalation = false;
                       readOnlyRootFilesystem = true;
+                      runAsNonRoot = true;
                       capabilities = {
                         drop = [ "ALL" ];
                       };
@@ -112,11 +113,11 @@ in
                     name = "zigbee2mqtt";
                     image = "docker.io/koenkk/zigbee2mqtt:2.5.1"; # docker/koenkk/zigbee2mqtt@semver-coerced
                     securityContext = {
-                      runAsUser = 1000;
                       allowPrivilegeEscalation = false;
-                      runAsNonRoot = true;
                       readOnlyRootFilesystem = true;
+                      runAsNonRoot = true;
                       capabilities = {
+                        add = [ "SYS_RAWIO" ];
                         drop = [ "ALL" ];
                       };
                     };
