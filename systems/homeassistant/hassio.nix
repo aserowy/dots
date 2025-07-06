@@ -92,38 +92,6 @@
       ];
     };
 
-    # TODO: add subdomain to nginx with port 8086
-    influxdb = {
-      image = "influxdb:latest";
-      extraOptions = [
-        "--network=ha-network"
-      ];
-      ports = [
-        "8127:8086"
-      ];
-      volumes = [
-        "/srv/influxdb:/var/lib/influxdb2"
-        "/srv/influxdb/config.yml:/etc/influxdb2/config.yml"
-      ];
-    };
-
-    grafana = {
-      image = "grafana/grafana-oss:latest";
-      user = "root";
-      environment = {
-        "GF_PATHS_CONFIG" = "/var/lib/grafana/grafana.ini";
-      };
-      extraOptions = [
-        "--network=ha-network"
-      ];
-      dependsOn = [
-        "influxdb"
-      ];
-      volumes = [
-        "/srv/grafana:/var/lib/grafana"
-      ];
-    };
-
     home-assistant = {
       image = "homeassistant/home-assistant:stable";
       extraOptions = [
@@ -131,7 +99,6 @@
         "--device=/dev/serial/by-id/usb-EnOcean_GmbH_EnOcean_USB_300_DC_FT50B8B0-if00-port0:/dev/serial/by-id/usb-EnOcean_GmbH_EnOcean_USB_300_DC_FT50B8B0-if00-port0"
       ];
       dependsOn = [
-        "influxdb"
         "mariadb"
         "mosquitto"
       ];
