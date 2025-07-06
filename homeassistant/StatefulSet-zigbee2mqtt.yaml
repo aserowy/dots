@@ -30,11 +30,12 @@ spec:
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
+              add:
+                - SYS_RAWIO
               drop:
                 - ALL
             readOnlyRootFilesystem: true
             runAsNonRoot: true
-            runAsUser: 1000
           volumeMounts:
             - mountPath: /app/data
               name: data
@@ -64,6 +65,7 @@ spec:
               drop:
                 - ALL
             readOnlyRootFilesystem: true
+            runAsNonRoot: true
           volumeMounts:
             - mountPath: /app/data
               name: data
@@ -75,9 +77,9 @@ spec:
               subPath: secret.yaml
           workingDir: /app/data
       securityContext:
-        fsGroup: 1099
-        runAsGroup: 1099
-        runAsUser: 1099
+        fsGroup: 1000
+        runAsGroup: 1000
+        runAsUser: 1000
         seccompProfile:
           type: RuntimeDefault
       volumes:
