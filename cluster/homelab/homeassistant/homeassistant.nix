@@ -99,7 +99,7 @@ in
                           cp /tmp/configmap-configuration.yaml configuration.yaml
                         fi
 
-                        yq --inplace '. *= load("/tmp/configmap-configuration.yaml") | del(.version) ' configuration.yaml
+                        yq --inplace '. *= load("/tmp/configmap-configuration.yaml") ' configuration.yaml
                         yq eval-all  '. as $item ireduce ({}; . * $item )' /tmp/configmap-configuration.yaml configuration.yaml > configuration.yaml
                       ''
                     ];
@@ -124,7 +124,7 @@ in
                 containers = [
                   {
                     name = "homeassistant";
-                    image = "docker.io/home-assistant/home-assistant:2025.7"; # docker/home-assistant/home-assistant@semver-coerced
+                    image = "ghcr.io/home-assistant/home-assistant:2025.7"; # github-release/home-assistant/core@semver-coerced
                     securityContext = {
                       allowPrivilegeEscalation = false;
                       readOnlyRootFilesystem = true;
