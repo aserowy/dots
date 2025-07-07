@@ -127,7 +127,7 @@ in
                   }
                   {
                     name = "setup-hacs";
-                    image = "busybox:1.37.0"; # docker/busybox@semver-coerced
+                    image = "bash:5.2.37"; # docker/bash@semver-coerced
                     securityContext = {
                       allowPrivilegeEscalation = false;
                       readOnlyRootFilesystem = true;
@@ -137,7 +137,7 @@ in
                     };
                     workingDir = "/config";
                     command = [
-                      "/bin/sh"
+                      "/bin/bash"
                       "-c"
                       ''
                         if [ ! -d "/config/custom_components/hacs" ]; then
