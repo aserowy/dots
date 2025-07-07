@@ -125,6 +125,33 @@ in
                       }
                     ];
                   }
+                  {
+                    name = "setup-hacs";
+                    image = "busybox:1.37.0"; # docker/busybox@semver-coerced
+                    securityContext = {
+                      allowPrivilegeEscalation = false;
+                      readOnlyRootFilesystem = true;
+                      capabilities = {
+                        drop = [ "ALL" ];
+                      };
+                    };
+                    workingDir = "/config";
+                    command = [
+                      "/bin/sh"
+                      "-c"
+                      ''
+                        if [ ! -d "/config/custom_components/hacs" ]; then
+                          wget -O - https://get.hacs.xyz | bash -
+                        fi
+                      ''
+                    ];
+                    volumeMounts = [
+                      {
+                        name = "data";
+                        mountPath = "/config";
+                      }
+                    ];
+                  }
                 ];
                 containers = [
                   {

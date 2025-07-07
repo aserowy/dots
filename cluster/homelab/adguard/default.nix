@@ -55,8 +55,7 @@ in
                 initContainers = [
                   {
                     name = "copy-base-config";
-                    # TODO: add version tag
-                    image = "busybox";
+                    image = "busybox:1.37.0"; # docker/busybox@semver-coerced
                     command = [
                       "/bin/sh"
                       "-c"
