@@ -14,7 +14,7 @@ spec:
         app: homeassistant
     spec:
       containers:
-        - image: docker.io/home-assistant/home-assistant:2025.7
+        - image: ghcr.io/home-assistant/home-assistant:2025.7
           livenessProbe:
             httpGet:
               path: /
@@ -60,7 +60,7 @@ spec:
                 cp /tmp/configmap-configuration.yaml configuration.yaml
               fi
 
-              yq --inplace '. *= load("/tmp/configmap-configuration.yaml") | del(.version) ' configuration.yaml
+              yq --inplace '. *= load("/tmp/configmap-configuration.yaml") ' configuration.yaml
               yq eval-all  '. as $item ireduce ({}; . * $item )' /tmp/configmap-configuration.yaml configuration.yaml > configuration.yaml
           image: mikefarah/yq:4.45.4
           name: copy-base-config
