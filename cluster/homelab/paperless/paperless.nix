@@ -13,7 +13,6 @@ in
     helm.releases = {
       postgresql = {
         chart = charts.bitnami.postgresql;
-
         values = {
           auth = {
             database = "paperless";
