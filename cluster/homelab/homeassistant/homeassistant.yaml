@@ -20,8 +20,6 @@ recorder:
 tts:
   - platform: google_translate
 
-wake_on_lan:
-
 automation: !include automations.yaml
 scene: !include scenes.yaml
 script: !include scripts.yaml
