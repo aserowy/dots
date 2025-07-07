@@ -132,6 +132,12 @@ in
                         drop = [ "ALL" ];
                       };
                     };
+                    env = [
+                      {
+                        name = "TZ";
+                        value = "Europe/Berlin";
+                      }
+                    ];
                     startupProbe = {
                       httpGet = {
                         path = "/";
