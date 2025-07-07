@@ -14,7 +14,10 @@ spec:
         app: homeassistant
     spec:
       containers:
-        - image: ghcr.io/home-assistant/home-assistant:2025.7
+        - env:
+            - name: TZ
+              value: Europe/Berlin
+          image: ghcr.io/home-assistant/home-assistant:2025.7
           livenessProbe:
             httpGet:
               path: /
