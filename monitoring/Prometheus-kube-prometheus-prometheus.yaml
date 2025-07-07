@@ -94,7 +94,7 @@ spec:
       spec:
         resources:
           requests:
-            storage: 5Gi
+            storage: 16Gi
         storageClassName: longhorn
   tsdb:
     outOfOrderTimeWindow: 0s
