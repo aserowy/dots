@@ -137,7 +137,7 @@ in
                     };
                     workingDir = "/config";
                     command = [
-                      "/bin/bash"
+                      "bash"
                       "-c"
                       ''
                         if [ ! -d "/config/custom_components/hacs" ]; then
