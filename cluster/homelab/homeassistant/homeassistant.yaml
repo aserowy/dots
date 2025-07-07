@@ -9,7 +9,7 @@ http:
   cors_allowed_origins: "https://homeassistanttest.anderwerse.de"
   use_x_forwarded_for: true
   trusted_proxies:
-    - 127.0.0.1
+    - 10.42.0.0/16
 
 recorder:
   db_url: !secret recorder_db_url
