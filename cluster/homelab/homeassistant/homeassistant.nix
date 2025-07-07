@@ -88,6 +88,17 @@ in
                       "/bin/sh"
                       "-c"
                       ''
+                        echo "create statics if not exist: automations.yaml, scenes.yaml, and scripts.yaml"
+                        if [ ! -f automations.yaml ]; then
+                            touch automations.yaml
+                        fi
+                        if [ ! -f scenes.yaml ]; then
+                            touch scenes.yaml
+                        fi
+                        if [ ! -f scripts.yaml ]; then
+                            touch scripts.yaml
+                        fi
+
                         cp --force /tmp/secrets.yaml secrets.yaml
 
                         if [ -f configuration.yaml ]
