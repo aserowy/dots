@@ -51,7 +51,7 @@ spec:
             - |
               cp -v /tmp/adguardhome.yaml /opt/adguardhome/conf/AdGuardHome.yaml
               cat /tmp/users.yaml >> /opt/adguardhome/conf/AdGuardHome.yaml
-          image: busybox
+          image: busybox:1.37.0
           name: copy-base-config
           securityContext:
             allowPrivilegeEscalation: false

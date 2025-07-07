@@ -93,6 +93,25 @@ spec:
               name: secrets
               subPath: secrets.yaml
           workingDir: /config
+        - command:
+            - /bin/sh
+            - -c
+            - |
+              if [ ! -d "/config/custom_components/hacs" ]; then
+                wget -O - https://get.hacs.xyz | bash -
+              fi
+          image: busybox:1.37.0
+          name: setup-hacs
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+          volumeMounts:
+            - mountPath: /config
+              name: data
+          workingDir: /config
       volumes:
         - name: data
           persistentVolumeClaim:
