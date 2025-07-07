@@ -1,0 +1,17 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: homeassistant-dashboard-route
+  namespace: homeassistant
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`homeassistanttest.anderwerse.de`)
+      services:
+        - name: homeassistant
+          namespace: homeassistant
+          port: 8123
+  tls:
+    secretName: anderwersede-tls-certificate

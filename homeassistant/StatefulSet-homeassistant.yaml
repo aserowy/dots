@@ -1,0 +1,97 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: homeassistant
+  namespace: homeassistant
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: homeassistant
+  template:
+    metadata:
+      labels:
+        app: homeassistant
+    spec:
+      containers:
+        - image: docker.io/home-assistant/home-assistant:2025.7
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8123
+          name: homeassistant
+          ports:
+            - containerPort: 8123
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 1000Mi
+            requests:
+              cpu: 200m
+              memory: 500Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+          startupProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /
+              port: 8123
+            initialDelaySeconds: 30
+          volumeMounts:
+            - mountPath: /config
+              name: data
+      initContainers:
+        - command:
+            - /bin/sh
+            - -c
+            - |
+              cp --force /tmp/secret.yaml secret.yaml
+
+              if [ -f configuration.yaml ]
+              then
+                echo "Backing up existing configuration file to /app/data/configuration-helm-backup.yaml"
+                cp --force configuration.yaml configuration-helm-backup.yaml
+              else
+                echo "configuration.yaml does not exists, creating one from config map /app/data/configmap-configuration.yaml"
+                cp /tmp/configmap-configuration.yaml configuration.yaml
+              fi
+
+              yq --inplace '. *= load("/tmp/configmap-configuration.yaml") | del(.version) ' configuration.yaml
+              yq eval-all  '. as $item ireduce ({}; . * $item )' /tmp/configmap-configuration.yaml configuration.yaml > configuration.yaml
+          image: mikefarah/yq:4.45.4
+          name: copy-base-config
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+          volumeMounts:
+            - mountPath: /app/data
+              name: data
+            - mountPath: /tmp/configmap-configuration.yaml
+              name: config
+              subPath: configuration.yaml
+            - mountPath: /tmp/secrets.yaml
+              name: secrets
+              subPath: secrets.yaml
+          workingDir: /config
+      securityContext:
+        fsGroup: 1000
+        runAsGroup: 1000
+        runAsNonRoot: true
+        runAsUser: 1000
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: homeassistant-pvc
+        - configMap:
+            name: homeassistant-cm
+          name: config
+        - name: secrets
+          secret:
+            secretName: homeassistant

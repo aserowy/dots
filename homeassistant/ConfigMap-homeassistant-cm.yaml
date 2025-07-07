@@ -1,0 +1,33 @@
+apiVersion: v1
+data:
+  configuration.yaml: |+
+    default_config:
+
+    # device_tracker:
+    #   - platform: google_maps
+    #     username: an.der.werse.4@gmail.com
+    #     max_gps_accuracy: 500
+
+    http:
+      cors_allowed_origins: "https://homeassistanttest.anderwerse.de"
+      use_x_forwarded_for: true
+
+    recorder:
+      db_url: !secret recorder_db_url
+      auto_purge: true
+      auto_repack: true
+      purge_keep_days: 14
+
+    tts:
+      - platform: google_translate
+
+    wake_on_lan:
+
+    automation: !include automations.yaml
+    scene: !include scenes.yaml
+    script: !include scripts.yaml
+
+kind: ConfigMap
+metadata:
+  name: homeassistant-cm
+  namespace: homeassistant
