@@ -71,7 +71,7 @@ spec:
                 - ALL
             readOnlyRootFilesystem: true
           volumeMounts:
-            - mountPath: /app/data
+            - mountPath: /config
               name: data
             - mountPath: /tmp/configmap-configuration.yaml
               name: config
