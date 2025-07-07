@@ -66,12 +66,6 @@ in
             template = {
               metadata.labels.app = "homeassistant";
               spec = {
-                securityContext = {
-                  fsGroup = 1000;
-                  runAsGroup = 1000;
-                  runAsUser = 1000;
-                  runAsNonRoot = true;
-                };
                 initContainers = [
                   {
                     name = "copy-base-config";
@@ -138,7 +132,6 @@ in
                     image = "ghcr.io/home-assistant/home-assistant:2025.7"; # github-release/home-assistant/core@semver-coerced
                     securityContext = {
                       allowPrivilegeEscalation = false;
-                      readOnlyRootFilesystem = true;
                       capabilities = {
                         drop = [ "ALL" ];
                       };
