@@ -106,7 +106,7 @@ in
                     volumeMounts = [
                       {
                         name = "data";
-                        mountPath = "/app/data";
+                        mountPath = "/config";
                       }
                       {
                         name = "config";
