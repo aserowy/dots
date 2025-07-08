@@ -1,9 +1,9 @@
 default_config:
 
-# device_tracker:
-#   - platform: google_maps
-#     username: an.der.werse.4@gmail.com
-#     max_gps_accuracy: 500
+device_tracker:
+  - platform: google_maps
+    username: an.der.werse.4@gmail.com
+    max_gps_accuracy: 500
 
 http:
   cors_allowed_origins: "https://homeassistanttest.anderwerse.de"

@@ -94,6 +94,7 @@ in
                         fi
 
                         cp --force /tmp/secrets.yaml secrets.yaml
+                        cp --force /tmp/google_maps_location_sharing_cookies .google_maps_location_sharing.cookies.an_der_werse_4_gmail_com
 
                         if [ -f configuration.yaml ]
                         then
@@ -117,6 +118,11 @@ in
                         name = "config";
                         subPath = "configuration.yaml";
                         mountPath = "/tmp/configmap-configuration.yaml";
+                      }
+                      {
+                        name = "secrets";
+                        subPath = "google_maps_location_sharing_cookies";
+                        mountPath = "/tmp/google_maps_location_sharing_cookies";
                       }
                       {
                         name = "secrets";
