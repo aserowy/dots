@@ -15,18 +15,18 @@ data:
       adapter: zstack
       port: /dev/ttyUSB0
     advanced:
-      channel: 11
+      channel: 25
       network_key: '!secret.yaml network_key'
-      # pan_id: 4919
-      # ext_pan_id:
-      #   - 19
-      #   - 221
-      #   - 55
-      #   - 221
-      #   - 19
-      #   - 221
-      #   - 55
-      #   - 221
+      pan_id: 6754
+      ext_pan_id:
+        - 80
+        - 190
+        - 55
+        - 221
+        - 119
+        - 216
+        - 55
+        - 222
     version: 4
 kind: ConfigMap
 metadata:
