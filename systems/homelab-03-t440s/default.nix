@@ -10,16 +10,13 @@
 
   homelab = {
     enable = true;
-    hostName = "homelab-02-l430";
+    hostName = "homelab-03-t440s";
     network = {
-      adapter = "enp12s0";
-      address = "192.168.178.202/24";
+      adapter = "enp0s25";
+      address = "192.168.178.203/24";
       gateway = "192.168.178.1";
     };
-    cluster = {
-      isAgentNode = true;
-      masterAddress = "https://192.168.178.201:6443";
-    };
+    cluster.masterAddress = "https://192.168.178.201:6443";
   };
 
   # lsblk --discard to ensure ssd supports trim (disc-gran and disc-max should be non zero)

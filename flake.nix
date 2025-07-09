@@ -261,6 +261,21 @@
             }
           ];
         };
+
+        homelab-03-t440s = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            disko.nixosModules.disko
+            sops.nixosModules.sops
+            ./sops.nix
+
+            ./systems/homelab-03-t440s
+            {
+              imports = [ ./users ];
+              users.root.enable = true;
+            }
+          ];
+        };
       };
 
       nixidyEnvs.x86_64-linux =

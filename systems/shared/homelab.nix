@@ -44,12 +44,22 @@ in
       };
     };
 
-    cluster.masterAddress = mkOption {
-      type = types.str;
-      default = "";
-      description = ''
-        Specify the master node address for the cluster and configure the node as agent.
-      '';
+    cluster = {
+      isAgentNode = mkOption {
+        type = types.bool;
+        default = false;
+        description = ''
+          Determines if this node is an agent or controle plane.
+        '';
+      };
+
+      masterAddress = mkOption {
+        type = types.str;
+        default = "";
+        description = ''
+          Specify the master node address for the cluster and configure the node as agent.
+        '';
+      };
     };
   };
 
@@ -118,11 +128,11 @@ in
         enable = true;
 
         clusterInit = isMasterNode;
-        role = mkIf (!isMasterNode) "agent";
+        role = mkIf cnfg.cluster.isAgentNode "agent";
         serverAddr = cnfg.cluster.masterAddress;
 
         tokenFile = config.sops.secrets."k3s/cluster/token".path;
-        extraFlags = mkIf isMasterNode (
+        extraFlags = mkIf (!cnfg.cluster.isAgentNode) (
           let
             serverConfig = pkgs.writeText "k3s-config.yaml" (
               lib.generators.toYAML { } {
