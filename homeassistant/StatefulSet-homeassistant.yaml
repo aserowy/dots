@@ -104,7 +104,7 @@ spec:
               if [ ! -d "/config/custom_components/hacs" ]; then
                 wget -O - https://get.hacs.xyz | bash -
               fi
-          image: bash:5.2.37
+          image: bash:5.3.0
           name: setup-hacs
           securityContext:
             allowPrivilegeEscalation: false
