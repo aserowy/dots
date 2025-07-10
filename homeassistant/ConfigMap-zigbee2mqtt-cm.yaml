@@ -27,7 +27,7 @@ data:
         - 216
         - 55
         - 222
-    version: 4
+    # version: 4
 kind: ConfigMap
 metadata:
   name: zigbee2mqtt-cm
