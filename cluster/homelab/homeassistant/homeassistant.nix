@@ -105,8 +105,8 @@ in
                           cp /tmp/configmap-configuration.yaml configuration.yaml
                         fi
 
-                        yq --inplace '. *= load("/tmp/configmap-configuration.yaml") ' configuration.yaml
-                        yq eval-all  '. as $item ireduce ({}; . * $item )' /tmp/configmap-configuration.yaml configuration.yaml > configuration.yaml
+                        echo "Replace existing values with config-map entries"
+                        yq eval-all  '. as $item ireduce ({}; . * $item )' configuration.yaml /tmp/configmap-configuration.yaml > configuration.yaml
                       ''
                     ];
                     volumeMounts = [
@@ -146,7 +146,9 @@ in
                       "bash"
                       "-c"
                       ''
+                        echo "Check if HACS is already installed"
                         if [ ! -d "/config/custom_components/hacs" ]; then
+                          echo "Installing HACS"
                           wget -O - https://get.hacs.xyz | bash -
                         fi
                       ''
