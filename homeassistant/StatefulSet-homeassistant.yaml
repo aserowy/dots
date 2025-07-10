@@ -76,7 +76,7 @@ spec:
 
               yq --inplace '. *= load("/tmp/configmap-configuration.yaml") ' configuration.yaml
               yq eval-all  '. as $item ireduce ({}; . * $item )' /tmp/configmap-configuration.yaml configuration.yaml > configuration.yaml
-          image: mikefarah/yq:4.45.4
+          image: mikefarah/yq:4.46.1
           name: copy-base-config
           securityContext:
             allowPrivilegeEscalation: false
