@@ -74,8 +74,8 @@ spec:
                 cp /tmp/configmap-configuration.yaml configuration.yaml
               fi
 
-              yq --inplace '. *= load("/tmp/configmap-configuration.yaml") ' configuration.yaml
-              yq eval-all  '. as $item ireduce ({}; . * $item )' /tmp/configmap-configuration.yaml configuration.yaml > configuration.yaml
+              echo "Replace existing values with config-map entries"
+              yq eval-all  '. as $item ireduce ({}; . * $item )' configuration.yaml /tmp/configmap-configuration.yaml > configuration.yaml
           image: mikefarah/yq:4.46.1
           name: copy-base-config
           securityContext:
@@ -101,7 +101,9 @@ spec:
             - bash
             - -c
             - |
+              echo "Check if HACS is already installed"
               if [ ! -d "/config/custom_components/hacs" ]; then
+                echo "Installing HACS"
                 wget -O - https://get.hacs.xyz | bash -
               fi
           image: bash:5.3.0
