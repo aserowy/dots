@@ -83,6 +83,10 @@ in
                       "-c"
                       ''
                         echo "create statics if not exist: automations.yaml, scenes.yaml, and scripts.yaml"
+                        if [ ! -d "/config/themes" ]; then
+                            mkdir ./themes
+                        fi
+
                         if [ ! -f automations.yaml ]; then
                             touch automations.yaml
                         fi

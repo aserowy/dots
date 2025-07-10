@@ -1,5 +1,8 @@
 default_config:
 
+frontend:
+  themes: !include_dir_merge_named themes
+
 device_tracker:
   - platform: google_maps
     username: an.der.werse.4@gmail.com
