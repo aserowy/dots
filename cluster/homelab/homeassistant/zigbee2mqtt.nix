@@ -94,7 +94,7 @@ in
                         fi
 
                         echo "Replace existing values with config-map entries"
-                        yq eval-all  '. as $item ireduce ({}; . * $item )' /tmp/configmap-configuration.yaml configuration.yaml > configuration.yaml
+                        yq eval-all  '. as $item ireduce ({}; . * $item )' configuration.yaml /tmp/configmap-configuration.yaml > configuration.yaml
                       ''
                     ];
                     volumeMounts = [
