@@ -83,6 +83,10 @@ in
                       "-c"
                       ''
                         echo "create statics if not exist: automations.yaml, scenes.yaml, and scripts.yaml"
+                        if [ ! -d "/config/themes" ]; then
+                            mkdir ./themes
+                        fi
+
                         if [ ! -f automations.yaml ]; then
                             touch automations.yaml
                         fi
@@ -135,7 +139,7 @@ in
                     ];
                   }
                   {
-                    name = "setup-themes-and-hacs";
+                    name = "setup-hacs";
                     image = "bash:5.3.0"; # docker/bash@semver-coerced
                     securityContext = {
                       allowPrivilegeEscalation = false;
@@ -149,14 +153,6 @@ in
                       "bash"
                       "-c"
                       ''
-                        echo "Installing default theme"
-                        if [ ! -d "/config/themes" ]; then
-                            mkdir ./themes
-                        fi
-                        if [ ! -f /config/themes/bubble.yaml ]; then
-                             wget https://raw.githubusercontent.com/Clooos/Bubble/main/themes/bubble.yaml -O /config/themes/bubble.yaml
-                        fi
-
                         echo "Check if HACS is already installed"
                         if [ ! -d "/config/custom_components/hacs" ]; then
                           echo "Installing HACS"
