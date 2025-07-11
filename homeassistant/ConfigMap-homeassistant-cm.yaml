@@ -1,15 +1,15 @@
 apiVersion: v1
 data:
-  configuration.yaml: |+
+  configuration.yaml: |
     default_config:
-
-    frontend:
-      themes: !include_dir_merge_named themes
 
     device_tracker:
       - platform: google_maps
         username: an.der.werse.4@gmail.com
         max_gps_accuracy: 500
+
+    frontend:
+      themes: !include_dir_merge_named themes
 
     http:
       cors_allowed_origins: "https://homeassistanttest.anderwerse.de"
@@ -23,13 +23,25 @@ data:
       auto_repack: true
       purge_keep_days: 14
 
+    # Storage for Bubble Card Modules
+    template:
+      - trigger:
+          - trigger: event
+            event_type: bubble_card_update_modules
+        sensor:
+          - name: "Bubble Card Modules"
+            state: "saved"
+            icon: "mdi:puzzle"
+            attributes:
+              modules: "{{ trigger.event.data.modules }}"
+              last_updated: "{{ trigger.event.data.last_updated }}"
+
     tts:
       - platform: google_translate
 
     automation: !include automations.yaml
     scene: !include scenes.yaml
     script: !include scripts.yaml
-
 kind: ConfigMap
 metadata:
   name: homeassistant-cm
