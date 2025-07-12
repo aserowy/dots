@@ -57,7 +57,7 @@ in
                 containers = [
                   {
                     name = "mosquitto";
-                    image = "docker.io/eclipse-mosquitto:2.0.21"; # docker/eclipse-mosquitto@semver-coerced
+                    image = "docker.io/eclipse-mosquitto:2.0.22"; # docker/eclipse-mosquitto@semver-coerced
                     securityContext = {
                       allowPrivilegeEscalation = false;
                       readOnlyRootFilesystem = true;
