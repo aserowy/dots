@@ -21,6 +21,21 @@ in
         apiVersion: akri.sh/v0
         kind: Configuration
         metadata:
+          name: akri-enocean-stick
+        spec:
+          capacity: 1
+          discoveryHandler:
+            discoveryDetails: |
+              groupRecursive: true
+              udevRules:
+              - ATTRS{idVendor}=="0403", ATTRS{product}=="EnOcean USB 300 DC"
+            name: udev
+      ''
+
+      ''
+        apiVersion: akri.sh/v0
+        kind: Configuration
+        metadata:
           name: akri-zigbee-stick
         spec:
           capacity: 1
