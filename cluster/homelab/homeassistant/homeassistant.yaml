@@ -20,6 +20,21 @@ recorder:
   auto_repack: true
   purge_keep_days: 14
 
+# Enocean switches
+binary_sensor:
+  - platform: enocean
+    id: [0xFE, 0xEC, 0xBC, 0xD7]
+    name: taster_buero
+  - platform: enocean
+    id: [0xFE,0xEC,0xBD,0x34]
+    name: taster_flur
+  - platform: enocean
+    id: [0xFE,0xEE,0xB4,0xE8]
+    name: taster_schlafzimmer
+  - platform: enocean
+    id: [0xFE,0xEA,0xAD,0xB1]
+    name: taster_wohnzimmer
+
 # Storage for Bubble Card Modules
 template:
   - trigger:
