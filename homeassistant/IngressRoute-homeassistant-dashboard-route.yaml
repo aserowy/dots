@@ -8,7 +8,7 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`homeassistanttest.anderwerse.de`)
+      match: Host(`homeassistant.anderwerse.de`)
       services:
         - name: homeassistant
           namespace: homeassistant
