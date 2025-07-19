@@ -265,7 +265,7 @@ in
           ];
           routes = [
             {
-              match = "Host(`homeassistanttest.anderwerse.de`)";
+              match = "Host(`homeassistant.anderwerse.de`)";
               kind = "Rule";
               services = [
                 {

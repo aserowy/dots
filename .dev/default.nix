@@ -58,8 +58,10 @@ in
 pkgs.mkShell {
   packages =
     [
-      pkgs.azure-cli
-      pkgs.kubectl
+      # pkgs.azure-cli
+      # pkgs.kubectl
+      # pkgs.renovate
+
       pkgs.marksman
       pkgs.nixd
       nixidy.packages.${pkgs.system}.default
@@ -68,7 +70,6 @@ pkgs.mkShell {
       pkgs.nodePackages.prettier
       pkgs.nodePackages.vscode-json-languageserver
       pkgs.nufmt
-      pkgs.renovate
       pkgs.sops
       pkgs.stylua
       pkgs.sumneko-lua-language-server

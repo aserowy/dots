@@ -213,7 +213,7 @@ in
           ];
           routes = [
             {
-              match = "Host(`zigbeetest.anderwerse.de`)";
+              match = "Host(`zigbee.anderwerse.de`)";
               kind = "Rule";
               services = [
                 {
