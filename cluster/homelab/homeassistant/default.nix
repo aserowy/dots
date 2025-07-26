@@ -14,6 +14,9 @@ in
     inherit namespace;
     createNamespace = true;
 
+    # NOTE: Important on updates to handle usb ressources
+    syncPolicy.syncOptions.replace = true;
+
     yamls = [
       (builtins.readFile ./homeassistant-secrets.sops.yaml)
 
