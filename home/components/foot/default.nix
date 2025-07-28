@@ -8,14 +8,6 @@ in
   options.home.components.foot = {
     enable = mkEnableOption "foot";
 
-    enableAsHyprlandDefaultTerminal = mkOption {
-      type = types.bool;
-      default = false;
-      description = ''
-        If enabled, foot gets set as default terminal in Hyprland.
-      '';
-    };
-
     setDpiAware = mkOption {
       type = types.bool;
       default = true;
@@ -56,11 +48,6 @@ in
           bright7 = "ffffff   # bright white";
         };
       };
-    };
-
-    home.modules.hyprland = mkIf cnfg.enableAsHyprlandDefaultTerminal {
-      defaultTerminal = "foot";
-      tuiLaunchCommand = "foot [PROG]";
     };
   };
 }

@@ -2,7 +2,6 @@
 
 (include "./widgets/audio.yuck")
 (include "./widgets/clock.yuck")
-(include "./widgets/group_lock.yuck")
 (include "./widgets/network.yuck")
 (include "./widgets/notification.yuck")
 (include "./widgets/workspaces.yuck")
@@ -57,7 +56,6 @@
                     :space-evenly false
                     :halign "fill"
                     :valign "end"
-                    (group_lock)
                     (notification)
                     (audio)
                     (network)

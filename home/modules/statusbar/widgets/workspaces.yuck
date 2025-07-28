@@ -3,18 +3,9 @@
     "
     ./widgets/get_workspaces.nu
 
-    if [ $XDG_CURRENT_DESKTOP == 'Hyprland' ]; then
-        socat -u UNIX-CONNECT:/$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock - |
-            stdbuf -o0 awk -e '/^(renameworkspace|workspace|focusedmon)>>/' |
-            while read -r line; do ./widgets/get_workspaces.nu; done
-    elif [ $XDG_CURRENT_DESKTOP == 'sway' ]; then
-        swaymsg -t subscribe '[ \"workspace\" ]' -m |
-            while read -r line; do ./widgets/get_workspaces.nu; done
-    elif [ $XDG_CURRENT_DESKTOP == 'niri' ]; then
-        niri msg --json event-stream |
-            stdbuf -o0 awk -e '/^.*(Window|Workspace)/' |
-            while read -r line; do ./widgets/get_workspaces.nu; done
-    fi
+    niri msg --json event-stream |
+        stdbuf -o0 awk -e '/^.*(Window|Workspace)/' |
+        while read -r line; do ./widgets/get_workspaces.nu; done
     "
 )
 
@@ -25,9 +16,6 @@
         :class "center"
         (for workspace in workspaces
             (eventbox
-                :onclick { get_env("XDG_CURRENT_DESKTOP") == "Hyprland"
-                    ? "hyprctl dispatch workspace name:${workspace.name}"
-                    : "swaymsg workspace ${workspace.name}" }
                 (box
                     :class "workspace ${workspace.focused
                         ? "current"

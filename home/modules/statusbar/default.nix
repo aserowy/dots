@@ -13,27 +13,11 @@ in
   options.home.modules.statusbar = {
     enable = mkEnableOption "statusbar";
 
-    enableHyprlandIntegration = mkOption {
-      type = types.bool;
-      default = true;
-      description = ''
-        If enabled, statusbar gets started while running hyprland.
-      '';
-    };
-
     enableNiriIntegration = mkOption {
       type = types.bool;
       default = true;
       description = ''
         If enabled, statusbar gets started while running niri.
-      '';
-    };
-
-    enableSwayIntegration = mkOption {
-      type = types.bool;
-      default = true;
-      description = ''
-        If enabled, statusbar gets started while running sway.
       '';
     };
   };
@@ -59,18 +43,8 @@ in
       ];
     };
 
-    home.modules.hyprland.additionalConfig = mkIf cnfg.enableHyprlandIntegration ''
-      # Init statusbar
-      exec-once = eww open --config ~/.config/eww/statusbar/ statusbar --arg stacking=bottom
-    '';
-
     home.modules.niri.prependedConfig = mkIf cnfg.enableNiriIntegration ''
-      spawn-at-startup "sh" "-c" "eww open --config ~/.config/eww/statusbar/ statusbar --arg stacking=overlay"
-    '';
-
-    home.modules.sway.appendedConfig = mkIf cnfg.enableSwayIntegration ''
-      # Init statusbar
-      exec eww open --config ~/.config/eww/statusbar/ statusbar --arg stacking=bottom
+      spawn-at-startup "sh" "-c" "eww open --config ~/.config/eww/statusbar/ statusbar --arg stacking=foreground"
     '';
   };
 }

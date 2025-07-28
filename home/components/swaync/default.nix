@@ -34,18 +34,8 @@ in
       ];
     };
 
-    home.modules.sway.prependedConfig = mkIf cnfg.autostart ''
-      # Start swaync daemon
-      exec swaync
-    '';
-
     home.modules.niri.prependedConfig = mkIf cnfg.autostart ''
       spawn-at-startup "swaync"
-    '';
-
-    home.modules.hyprland.additionalConfig = mkIf cnfg.autostart ''
-      # Start swaync daemon
-      exec-once = swaync
     '';
   };
 }

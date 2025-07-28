@@ -17,8 +17,6 @@
     ./onedrive
     ./ssh
     ./starship
-    ./swappy
-    ./swaybg
     ./swaync
     ./swww
     ./wpaperd
