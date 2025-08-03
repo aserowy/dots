@@ -7,6 +7,8 @@ data:
   applicationsetcontroller.log.level: info
   applicationsetcontroller.namespaces: ""
   applicationsetcontroller.policy: sync
+  commitserver.log.format: text
+  commitserver.log.level: info
   controller.ignore.normalizer.jq.timeout: 1s
   controller.log.format: text
   controller.log.level: info
@@ -48,6 +50,6 @@ metadata:
     app.kubernetes.io/name: argocd-cmd-params-cm
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v3.0.12
-    helm.sh/chart: argo-cd-8.2.2
+    helm.sh/chart: argo-cd-8.2.4
   name: argocd-cmd-params-cm
   namespace: argocd
