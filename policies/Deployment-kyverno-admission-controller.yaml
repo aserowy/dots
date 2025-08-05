@@ -6,8 +6,8 @@ metadata:
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: 3.4.4
-    helm.sh/chart: kyverno-3.4.4
+    app.kubernetes.io/version: 3.5.0
+    helm.sh/chart: kyverno-3.5.0
   name: kyverno-admission-controller
   namespace: policies
 spec:
@@ -29,8 +29,8 @@ spec:
         app.kubernetes.io/instance: kyverno
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/part-of: kyverno
-        app.kubernetes.io/version: 3.4.4
-        helm.sh/chart: kyverno-3.4.4
+        app.kubernetes.io/version: 3.5.0
+        helm.sh/chart: kyverno-3.5.0
     spec:
       affinity:
         podAntiAffinity:
@@ -44,6 +44,7 @@ spec:
                         - admission-controller
                 topologyKey: kubernetes.io/hostname
               weight: 1
+      automountServiceAccountToken: true
       containers:
         - args:
             - --caSecretName=kyverno-svc.policies.svc.kyverno-tls-ca
@@ -65,7 +66,8 @@ spec:
             - --enableDeferredLoading=true
             - --dumpPayload=false
             - --forceFailurePolicyIgnore=false
-            - --generateValidatingAdmissionPolicy=false
+            - --generateValidatingAdmissionPolicy=true
+            - --generateMutatingAdmissionPolicy=false
             - --dumpPatches=false
             - --maxAPICallResponseLength=2000000
             - --loggingFormat=text
@@ -99,7 +101,7 @@ spec:
               value: /.sigstore
             - name: KYVERNO_DEPLOYMENT
               value: kyverno-admission-controller
-          image: reg.kyverno.io/kyverno/kyverno:v1.14.4
+          image: reg.kyverno.io/kyverno/kyverno:v1.15.0
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 2
@@ -161,6 +163,7 @@ spec:
         - args:
             - --loggingFormat=text
             - --v=2
+            - --openreportsEnabled=false
           env:
             - name: KYVERNO_SERVICEACCOUNT_NAME
               value: kyverno-admission-controller
@@ -182,7 +185,7 @@ spec:
               value: kyverno-admission-controller
             - name: KYVERNO_SVC
               value: kyverno-svc
-          image: reg.kyverno.io/kyverno/kyvernopre:v1.14.4
+          image: reg.kyverno.io/kyverno/kyvernopre:v1.15.0
           imagePullPolicy: IfNotPresent
           name: kyverno-pre
           resources:

@@ -6,8 +6,8 @@ metadata:
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: 3.4.4
-    helm.sh/chart: kyverno-3.4.4
+    app.kubernetes.io/version: 3.5.0
+    helm.sh/chart: kyverno-3.5.0
   name: kyverno:admission-controller:core
 rules:
   - apiGroups:
@@ -21,6 +21,8 @@ rules:
     resources:
       - mutatingwebhookconfigurations
       - validatingwebhookconfigurations
+      - validatingadmissionpolicies
+      - validatingadmissionpolicybindings
     verbs:
       - create
       - delete
@@ -79,6 +81,10 @@ rules:
       - validatingpolicies/status
       - imagevalidatingpolicies
       - imagevalidatingpolicies/status
+      - generatingpolicies
+      - generatingpolicies/status
+      - mutatingpolicies
+      - mutatingpolicies/status
     verbs:
       - create
       - delete

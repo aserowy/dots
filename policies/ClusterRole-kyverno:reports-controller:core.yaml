@@ -6,8 +6,8 @@ metadata:
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: 3.4.4
-    helm.sh/chart: kyverno-3.4.4
+    app.kubernetes.io/version: 3.5.0
+    helm.sh/chart: kyverno-3.5.0
   name: kyverno:reports-controller:core
 rules:
   - apiGroups:
@@ -49,6 +49,8 @@ rules:
       - validatingpolicies/status
       - imagevalidatingpolicies
       - imagevalidatingpolicies/status
+      - generatingpolicies
+      - mutatingpolicies
     verbs:
       - create
       - delete
@@ -63,6 +65,15 @@ rules:
     resources:
       - policyexceptions
       - policyexceptions/status
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - admissionregistration.k8s.io
+    resources:
+      - validatingadmissionpolicies
+      - validatingadmissionpolicybindings
     verbs:
       - get
       - list
@@ -88,6 +99,22 @@ rules:
       - policyreports/status
       - clusterpolicyreports
       - clusterpolicyreports/status
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+      - deletecollection
+  - apiGroups:
+      - openreports.io
+    resources:
+      - reports
+      - reports/status
+      - clusterreports
+      - clusterreports/status
     verbs:
       - create
       - delete

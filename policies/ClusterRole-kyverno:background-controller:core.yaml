@@ -6,8 +6,8 @@ metadata:
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: 3.4.4
-    helm.sh/chart: kyverno-3.4.4
+    app.kubernetes.io/version: 3.5.0
+    helm.sh/chart: kyverno-3.5.0
   name: kyverno:background-controller:core
 rules:
   - apiGroups:
@@ -37,6 +37,32 @@ rules:
       - update
       - watch
       - deletecollection
+  - apiGroups:
+      - policies.kyverno.io
+    resources:
+      - generatingpolicies
+      - mutatingpolicies
+      - policyexceptions
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+      - deletecollection
+  - apiGroups:
+      - policies.kyverno.io
+    resources:
+      - policyexceptions
+    verbs:
+      - create
+      - get
+      - list
+      - patch
+      - update
+      - watch
   - apiGroups:
       - ""
     resources:

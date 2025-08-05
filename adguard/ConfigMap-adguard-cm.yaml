@@ -13,7 +13,6 @@ data:
       refuse_any: true
       upstream_dns:
         - 1.1.1.1
-        - 9.9.9.9
       upstream_mode: parallel
       cache_size: 4194304
       cache_ttl_min: 0

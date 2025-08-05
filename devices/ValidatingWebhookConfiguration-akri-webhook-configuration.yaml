@@ -1,0 +1,35 @@
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  labels:
+    app.kubernetes.io/component: admission-webhook
+    app.kubernetes.io/instance: akri
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: akri-webhook-configuration
+    app.kubernetes.io/part-of: akri
+    app.kubernetes.io/version: 0.13.8
+    helm.sh/chart: akri-0.13.8
+  name: akri-webhook-configuration
+webhooks:
+  - admissionReviewVersions:
+      - v1
+      - v1beta1
+    clientConfig:
+      service:
+        name: akri-webhook-configuration
+        namespace: devices
+        path: /validate
+        port: 443
+    name: akri-webhook-configuration.devices.svc
+    rules:
+      - apiGroups:
+          - akri.sh
+        apiVersions:
+          - v0
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - configurations
+        scope: '*'
+    sideEffects: None

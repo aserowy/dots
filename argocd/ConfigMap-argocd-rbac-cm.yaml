@@ -13,6 +13,6 @@ metadata:
     app.kubernetes.io/name: argocd-rbac-cm
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v3.0.12
-    helm.sh/chart: argo-cd-8.2.4
+    helm.sh/chart: argo-cd-8.2.5
   name: argocd-rbac-cm
   namespace: argocd
