@@ -33,7 +33,6 @@ in
       enable = true;
       settings = {
         default_session = {
-          # command = "${lib.makeBinPath [ pkgs.greetd.tuigreet ]}/tuigreet --cmd ${cnfg.command}";
           command = "${
             lib.makeBinPath [ pkgs.greetd.tuigreet ]
           }/tuigreet --theme border=magenta;text=cyan;prompt=green;time=red;action=blue;button=yellow;container=black;input=red --cmd ${cnfg.command}";
