@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: renovate
-        uses: renovatebot/github-action@v43.0.5
+        uses: renovatebot/github-action@v43.0.6
         with:
           configurationFile: .github/renovate-config.js
           token: '${{ steps.app-token.outputs.token }}'
