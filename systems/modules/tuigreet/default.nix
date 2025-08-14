@@ -26,7 +26,7 @@ in
     boot.kernelParams = [ "console=tty1" ];
 
     environment.systemPackages = with pkgs; [
-      greetd.tuigreet
+      tuigreet
     ];
 
     services.greetd = {
