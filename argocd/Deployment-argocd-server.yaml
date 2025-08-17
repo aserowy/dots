@@ -7,8 +7,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-server
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.0.12
-    helm.sh/chart: argo-cd-8.2.5
+    app.kubernetes.io/version: v3.1.0
+    helm.sh/chart: argo-cd-8.3.0
   name: argocd-server
   namespace: argocd
 spec:
@@ -21,16 +21,16 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/cm: 6dd29d3a48ee835643a7dd936233eb2d2fbd80aad587a5a1de4c799cae1f9005
-        checksum/cmd-params: 72160a733cc6c676ab56cec9e1ad6e8e814e2a4b876d735ceaf25ed9cdb428ac
+        checksum/cm: 728bbce10022d7311c77e7b0522d5f6fec473dacf0117673bf55b51f70b6f57a
+        checksum/cmd-params: d14dbcaf39b66b2f30780317869af7c5b6d8a987a7d5ce0e6cd94f9e525a3831
       labels:
         app.kubernetes.io/component: server
         app.kubernetes.io/instance: argocd
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: argocd-server
         app.kubernetes.io/part-of: argocd
-        app.kubernetes.io/version: v3.0.12
-        helm.sh/chart: argo-cd-8.2.5
+        app.kubernetes.io/version: v3.1.0
+        helm.sh/chart: argo-cd-8.3.0
     spec:
       affinity:
         podAntiAffinity:
@@ -174,12 +174,6 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: server.oidc.cache.expiration
-                  name: argocd-cmd-params-cm
-                  optional: true
-            - name: ARGOCD_SERVER_LOGIN_ATTEMPTS_EXPIRATION
-              valueFrom:
-                configMapKeyRef:
-                  key: server.login.attempts.expiration
                   name: argocd-cmd-params-cm
                   optional: true
             - name: ARGOCD_SERVER_STATIC_ASSETS
@@ -344,6 +338,12 @@ spec:
                   key: applicationsetcontroller.enable.scm.providers
                   name: argocd-cmd-params-cm
                   optional: true
+            - name: ARGOCD_APPLICATIONSET_CONTROLLER_ENABLE_GITHUB_API_METRICS
+              valueFrom:
+                configMapKeyRef:
+                  key: applicationsetcontroller.enable.github.api.metrics
+                  name: argocd-cmd-params-cm
+                  optional: true
             - name: ARGOCD_HYDRATOR_ENABLED
               valueFrom:
                 configMapKeyRef:
@@ -356,7 +356,7 @@ spec:
                   key: server.sync.replace.allowed
                   name: argocd-cmd-params-cm
                   optional: true
-          image: quay.io/argoproj/argocd:v3.0.12
+          image: quay.io/argoproj/argocd:v3.1.0
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3

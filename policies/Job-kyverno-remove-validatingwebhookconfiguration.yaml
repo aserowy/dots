@@ -4,7 +4,7 @@ metadata:
   annotations:
     helm.sh/hook: pre-delete
     helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded,hook-failed
-    helm.sh/hook-weight: "90"
+    helm.sh/hook-weight: "100"
   labels:
     app.kubernetes.io/component: hooks
     app.kubernetes.io/instance: kyverno
@@ -12,7 +12,7 @@ metadata:
     app.kubernetes.io/part-of: kyverno
     app.kubernetes.io/version: 3.5.1
     helm.sh/chart: kyverno-3.5.1
-  name: kyverno-scale-to-zero
+  name: kyverno-remove-validatingwebhookconfiguration
   namespace: policies
 spec:
   backoffLimit: 2
@@ -22,13 +22,10 @@ spec:
       containers:
         - command:
             - kubectl
-            - scale
-            - -n
-            - policies
-            - deployment
+            - delete
+            - validatingwebhookconfiguration
             - -l
-            - app.kubernetes.io/part-of=kyverno
-            - --replicas=0
+            - webhook.kyverno.io/managed-by=kyverno
           image: registry.k8s.io/kubectl:v1.32.7
           name: kubectl
           resources:

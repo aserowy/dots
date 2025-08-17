@@ -6,8 +6,8 @@ metadata:
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: 3.5.0
-    helm.sh/chart: kyverno-3.5.0
+    app.kubernetes.io/version: 3.5.1
+    helm.sh/chart: kyverno-3.5.1
   name: kyverno-reports-controller
   namespace: policies
 spec:
@@ -29,8 +29,8 @@ spec:
         app.kubernetes.io/instance: kyverno
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/part-of: kyverno
-        app.kubernetes.io/version: 3.5.0
-        helm.sh/chart: kyverno-3.5.0
+        app.kubernetes.io/version: 3.5.1
+        helm.sh/chart: kyverno-3.5.1
     spec:
       affinity:
         podAntiAffinity:
@@ -90,7 +90,7 @@ spec:
                   fieldPath: metadata.namespace
             - name: TUF_ROOT
               value: /.sigstore
-          image: reg.kyverno.io/kyverno/reports-controller:v1.15.0
+          image: reg.kyverno.io/kyverno/reports-controller:v1.15.1
           imagePullPolicy: IfNotPresent
           name: controller
           ports:

@@ -2,17 +2,17 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   annotations:
-    helm.sh/hook: post-delete
+    helm.sh/hook: pre-delete
     helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded,hook-failed
-    helm.sh/hook-weight: "10"
+    helm.sh/hook-weight: "100"
   labels:
     app.kubernetes.io/component: hooks
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: 3.5.0
-    helm.sh/chart: kyverno-3.5.0
-  name: kyverno-remove-configmap
+    app.kubernetes.io/version: 3.5.1
+    helm.sh/chart: kyverno-3.5.1
+  name: kyverno-remove-mutatingwebhookconfiguration
   namespace: policies
 spec:
   backoffLimit: 2
@@ -21,12 +21,12 @@ spec:
       automountServiceAccountToken: true
       containers:
         - command:
-            - /bin/bash
-            - -c
-            - |-
-              set -euo pipefail
-              kubectl delete cm --ignore-not-found -n policies kyverno
-          image: bitnami/kubectl:1.32.3
+            - kubectl
+            - delete
+            - mutatingwebhookconfiguration
+            - -l
+            - webhook.kyverno.io/managed-by=kyverno
+          image: registry.k8s.io/kubectl:v1.32.7
           name: kubectl
           resources:
             limits:
@@ -48,4 +48,4 @@ spec:
             seccompProfile:
               type: RuntimeDefault
       restartPolicy: Never
-      serviceAccountName: kyverno-remove-configmap
+      serviceAccountName: kyverno-admission-controller

@@ -6,8 +6,8 @@ metadata:
     app.kubernetes.io/instance: kube-prometheus-stack
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kube-prometheus
-    app.kubernetes.io/version: 75.15.1
-    chart: kube-prometheus-stack-75.15.1
+    app.kubernetes.io/version: 76.4.0
+    chart: kube-prometheus-stack-76.4.0
     heritage: Helm
     release: kube-prometheus-stack
   name: kube-prometheus-alertmanager
