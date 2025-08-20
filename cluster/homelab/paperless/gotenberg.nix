@@ -34,7 +34,7 @@
                 containers = [
                   {
                     name = "gotenberg";
-                    image = "docker.io/gotenberg/gotenberg:8.21.1"; # docker/gotenberg/gotenberg@semver-coerced
+                    image = "docker.io/gotenberg/gotenberg:8.22.0"; # docker/gotenberg/gotenberg@semver-coerced
                     securityContext = {
                       allowPrivilegeEscalation = false;
                       readOnlyRootFilesystem = true;
