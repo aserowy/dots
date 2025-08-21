@@ -160,6 +160,18 @@ with lib; let
   definitions = {
     "akri.sh.v0.Configuration" = {
       options = {
+        "apiVersion" = mkOption {
+          description = "\nAPIVersion defines the versioned schema of this representation of an object.\nServers should convert recognized schemas to the latest internal value, and\nmay reject unrecognized values.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources\n";
+          type = types.nullOr types.str;
+        };
+        "kind" = mkOption {
+          description = "\nKind is a string value representing the REST resource this object represents.\nServers may infer this from the endpoint the client submits requests to.\nCannot be updated.\nIn CamelCase.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds\n";
+          type = types.nullOr types.str;
+        };
+        "metadata" = mkOption {
+          description = "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata";
+          type = types.nullOr (globalSubmoduleOf "io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta");
+        };
         "spec" = mkOption {
           description = "";
           type = types.nullOr (submoduleOf "akri.sh.v0.ConfigurationSpec");
@@ -167,6 +179,9 @@ with lib; let
       };
 
       config = {
+        "apiVersion" = mkOverride 1002 null;
+        "kind" = mkOverride 1002 null;
+        "metadata" = mkOverride 1002 null;
         "spec" = mkOverride 1002 null;
       };
     };
@@ -339,13 +354,29 @@ with lib; let
     };
     "akri.sh.v0.Instance" = {
       options = {
+        "apiVersion" = mkOption {
+          description = "\nAPIVersion defines the versioned schema of this representation of an object.\nServers should convert recognized schemas to the latest internal value, and\nmay reject unrecognized values.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources\n";
+          type = types.nullOr types.str;
+        };
+        "kind" = mkOption {
+          description = "\nKind is a string value representing the REST resource this object represents.\nServers may infer this from the endpoint the client submits requests to.\nCannot be updated.\nIn CamelCase.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds\n";
+          type = types.nullOr types.str;
+        };
+        "metadata" = mkOption {
+          description = "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata";
+          type = types.nullOr (globalSubmoduleOf "io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta");
+        };
         "spec" = mkOption {
           description = "Defines the information in the Instance CRD\n\nAn Instance is a specific instance described by a Configuration.  For example, a Configuration may describe many cameras, each camera will be represented by a Instance.";
           type = submoduleOf "akri.sh.v0.InstanceSpec";
         };
       };
 
-      config = {};
+      config = {
+        "apiVersion" = mkOverride 1002 null;
+        "kind" = mkOverride 1002 null;
+        "metadata" = mkOverride 1002 null;
+      };
     };
     "akri.sh.v0.InstanceSpec" = {
       options = {

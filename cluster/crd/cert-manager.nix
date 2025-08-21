@@ -1518,8 +1518,8 @@ with lib; let
     "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplate" = {
       options = {
         "metadata" = mkOption {
-          description = "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata";
-          type = types.nullOr (globalSubmoduleOf "io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta");
+          description = "ObjectMeta overrides for the pod used to solve HTTP01 challenges.\nOnly the 'labels' and 'annotations' fields may be set.\nIf labels or annotations overlap with in-built values, the values here\nwill override the in-built values.";
+          type = types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateMetadata");
         };
         "spec" = mkOption {
           description = "PodSpec defines overrides for the HTTP01 challenge solver pod.\nCheck ACMEChallengeSolverHTTP01IngressPodSpec to find out currently supported fields.\nAll other fields will be ignored.";
@@ -1530,6 +1530,23 @@ with lib; let
       config = {
         "metadata" = mkOverride 1002 null;
         "spec" = mkOverride 1002 null;
+      };
+    };
+    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateMetadata" = {
+      options = {
+        "annotations" = mkOption {
+          description = "Annotations that should be added to the created ACME HTTP01 solver pods.";
+          type = types.nullOr (types.attrsOf types.str);
+        };
+        "labels" = mkOption {
+          description = "Labels that should be added to the created ACME HTTP01 solver pods.";
+          type = types.nullOr (types.attrsOf types.str);
+        };
+      };
+
+      config = {
+        "annotations" = mkOverride 1002 null;
+        "labels" = mkOverride 1002 null;
       };
     };
     "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpec" = {
@@ -2448,8 +2465,8 @@ with lib; let
     "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressIngressTemplate" = {
       options = {
         "metadata" = mkOption {
-          description = "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata";
-          type = types.nullOr (globalSubmoduleOf "io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta");
+          description = "ObjectMeta overrides for the ingress used to solve HTTP01 challenges.\nOnly the 'labels' and 'annotations' fields may be set.\nIf labels or annotations overlap with in-built values, the values here\nwill override the in-built values.";
+          type = types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressIngressTemplateMetadata");
         };
       };
 
@@ -2457,11 +2474,28 @@ with lib; let
         "metadata" = mkOverride 1002 null;
       };
     };
+    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressIngressTemplateMetadata" = {
+      options = {
+        "annotations" = mkOption {
+          description = "Annotations that should be added to the created ACME HTTP01 solver ingress.";
+          type = types.nullOr (types.attrsOf types.str);
+        };
+        "labels" = mkOption {
+          description = "Labels that should be added to the created ACME HTTP01 solver ingress.";
+          type = types.nullOr (types.attrsOf types.str);
+        };
+      };
+
+      config = {
+        "annotations" = mkOverride 1002 null;
+        "labels" = mkOverride 1002 null;
+      };
+    };
     "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplate" = {
       options = {
         "metadata" = mkOption {
-          description = "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata";
-          type = types.nullOr (globalSubmoduleOf "io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta");
+          description = "ObjectMeta overrides for the pod used to solve HTTP01 challenges.\nOnly the 'labels' and 'annotations' fields may be set.\nIf labels or annotations overlap with in-built values, the values here\nwill override the in-built values.";
+          type = types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateMetadata");
         };
         "spec" = mkOption {
           description = "PodSpec defines overrides for the HTTP01 challenge solver pod.\nCheck ACMEChallengeSolverHTTP01IngressPodSpec to find out currently supported fields.\nAll other fields will be ignored.";
@@ -2472,6 +2506,23 @@ with lib; let
       config = {
         "metadata" = mkOverride 1002 null;
         "spec" = mkOverride 1002 null;
+      };
+    };
+    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateMetadata" = {
+      options = {
+        "annotations" = mkOption {
+          description = "Annotations that should be added to the created ACME HTTP01 solver pods.";
+          type = types.nullOr (types.attrsOf types.str);
+        };
+        "labels" = mkOption {
+          description = "Labels that should be added to the created ACME HTTP01 solver pods.";
+          type = types.nullOr (types.attrsOf types.str);
+        };
+      };
+
+      config = {
+        "annotations" = mkOverride 1002 null;
+        "labels" = mkOverride 1002 null;
       };
     };
     "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpec" = {
