@@ -1,6 +1,8 @@
 apiVersion: v1
 data:
   default-setting.yaml: |-
+    replica-auto-balance: best-effort
+    storage-over-provisioning-percentage: 75
     priority-class: longhorn-critical
     disable-revision-counter: true
 kind: ConfigMap
