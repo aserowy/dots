@@ -276,6 +276,21 @@
             }
           ];
         };
+
+        homelab-04-t450 = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            disko.nixosModules.disko
+            sops.nixosModules.sops
+            ./sops.nix
+
+            ./systems/homelab-04-t450
+            {
+              imports = [ ./users ];
+              users.root.enable = true;
+            }
+          ];
+        };
       };
 
       nixidyEnvs.x86_64-linux =
