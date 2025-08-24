@@ -12,7 +12,7 @@ data:
     reclaimPolicy: "Retain"
     volumeBindingMode: Immediate
     parameters:
-      numberOfReplicas: "2"
+      numberOfReplicas: "3"
       staleReplicaTimeout: "30"
       fromBackup: ""
       fsType: "ext4"
