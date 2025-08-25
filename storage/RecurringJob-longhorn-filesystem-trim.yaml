@@ -8,5 +8,6 @@ spec:
   cron: 0 0 * * *
   groups:
     - default
+    - backup
   name: longhorn-filesystem-trim
   task: filesystem-trim

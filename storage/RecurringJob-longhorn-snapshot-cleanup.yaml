@@ -7,6 +7,6 @@ spec:
   concurrency: 1
   cron: 0 0 * * *
   groups:
-    - default
+    - backup
   name: longhorn-snapshot-cleanup
   task: snapshot-cleanup

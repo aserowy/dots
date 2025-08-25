@@ -7,7 +7,7 @@ spec:
   concurrency: 1
   cron: 0 0 * * *
   groups:
-    - default
+    - backup
   name: longhorn-volume-snapshot
   retain: 4
   task: snapshot

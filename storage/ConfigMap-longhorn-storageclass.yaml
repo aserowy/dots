@@ -16,6 +16,7 @@ data:
       staleReplicaTimeout: "30"
       fromBackup: ""
       fsType: "ext4"
+      recurringJobSelector: '[map[isGroup:true name:backup]]'
       dataLocality: "disabled"
       unmapMarkSnapChainRemoved: "ignored"
       disableRevisionCounter: "true"
