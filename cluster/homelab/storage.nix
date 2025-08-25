@@ -21,7 +21,11 @@
           storageOverProvisioningPercentage = 75;
         };
 
-        persistence.reclaimPolicy = "Retain";
+        persistence = {
+          # NOTE: better performance and less strain on network
+          defaultClassReplicaCount = 2;
+          reclaimPolicy = "Retain";
+        };
 
         # NOTE: must be disabled for helm deployments inside argo cd
         preUpgradeChecker.jobEnabled = false;
