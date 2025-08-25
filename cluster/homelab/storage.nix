@@ -58,6 +58,7 @@
         longhorn-nobackup = {
           metadata.name = "longhorn-nobackup";
           provisioner = "driver.longhorn.io";
+          allowVolumeExpansion = true;
           parameters = {
             numberOfReplicas = "2";
             staleReplicaTimeout = "30";
