@@ -25,6 +25,15 @@
           # NOTE: better performance and less strain on network
           defaultClassReplicaCount = 2;
           reclaimPolicy = "Retain";
+          recurringJobSelector = {
+            enable = true;
+            jobList = [
+              {
+                name = "backup";
+                isGroup = true;
+              }
+            ];
+          };
         };
 
         # NOTE: must be disabled for helm deployments inside argo cd
@@ -90,7 +99,7 @@
           cron: 0 0 * * *
           retain: 4
           groups:
-          - default
+          - backup
       ''
       ''
         apiVersion: longhorn.io/v1beta2
@@ -107,7 +116,7 @@
           parameters:
             full-backup-interval: "4"
           groups:
-            - default
+            - backup
       ''
       ''
         apiVersion: longhorn.io/v1beta2
@@ -139,6 +148,7 @@
           cron: 0 0 * * *
           groups:
             - default
+            - backup
       ''
       ''
         apiVersion: longhorn.io/v1beta2
@@ -152,7 +162,7 @@
           concurrency: 1
           cron: 0 0 * * *
           groups:
-            - default
+            - backup
       ''
 
       # NOTE: patching path to enable longhorn on nixos
