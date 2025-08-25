@@ -5,6 +5,7 @@ data:
     storage-over-provisioning-percentage: 75
     priority-class: longhorn-critical
     disable-revision-counter: true
+    concurrent-automatic-engine-upgrade-per-node-limit: 1
 kind: ConfigMap
 metadata:
   labels:
