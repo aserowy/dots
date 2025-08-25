@@ -27,7 +27,7 @@
           reclaimPolicy = "Retain";
           recurringJobSelector = {
             enable = true;
-            jobList = "[{'name': 'backup', 'isGroup': true}]";
+            jobList = "[{\"name\":\"backup\",\"isGroup\":true}]";
           };
         };
 
