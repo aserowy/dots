@@ -54,6 +54,22 @@
           tls.secretName = "anderwersede-tls-certificate";
         };
       };
+      storageClasses = {
+        longhorn-nobackup = {
+          metadata.name = "longhorn-nobackup";
+          provisioner = "driver.longhorn.io";
+          parameters = {
+            numberOfReplicas = "2";
+            staleReplicaTimeout = "30";
+            fromBackup = "";
+            fsType = "ext4";
+            dataLocality = "disabled";
+            unmapMarkSnapChainRemoved = "ignored";
+            disableRevisionCounter = "true";
+            dataEngine = "v1";
+          };
+        };
+      };
     };
 
     yamls = [
