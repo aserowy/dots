@@ -34,7 +34,7 @@ in
       settings = {
         default_session = {
           command = "${
-            lib.makeBinPath [ pkgs.greetd.tuigreet ]
+            lib.makeBinPath [ pkgs.tuigreet ]
           }/tuigreet --theme border=magenta;text=cyan;prompt=green;time=red;action=blue;button=yellow;container=black;input=red --cmd ${cnfg.command}";
           user = "greeter";
         };
