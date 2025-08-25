@@ -172,7 +172,6 @@ in
           gateway = [ cnfg.network.gateway ];
           dns = [
             "1.1.1.1"
-            "9.9.9.9"
           ];
         };
       };
