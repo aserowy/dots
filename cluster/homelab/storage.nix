@@ -15,10 +15,11 @@
           pollInterval = "172800";
         };
 
-	defaultSettings = {
-	  replicaAutoBalance = "best-effort";
-	  storageOverProvisioningPercentage = 75;
-	};
+        defaultSettings = {
+          concurrentAutomaticEngineUpgradePerNodeLimit = 1;
+          replicaAutoBalance = "best-effort";
+          storageOverProvisioningPercentage = 75;
+        };
 
         persistence.reclaimPolicy = "Retain";
 
