@@ -94,8 +94,8 @@ spec:
       spec:
         resources:
           requests:
-            storage: 16Gi
-        storageClassName: longhorn
+            storage: 8Gi
+        storageClassName: longhorn-nobackup
   tsdb:
     outOfOrderTimeWindow: 0s
   version: v3.5.0
