@@ -123,10 +123,9 @@
 
     fwupd.enable = true;
 
-    # don’t shutdown when power button is short-pressed
-    logind.extraConfig = ''
-      HandlePowerKey=suspend
-    '';
+    logind.settings.Login = {
+      HandlePowerKey = "suspend";
+    };
 
     onedrive.enable = true;
 

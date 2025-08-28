@@ -77,9 +77,9 @@
 
     fwupd.enable = true;
 
-    logind.extraConfig = ''
-      HandlePowerKey=suspend
-    '';
+    logind.settings.Login = {
+      HandlePowerKey = "suspend";
+    };
 
     modules = {
       gtk.enable = true;

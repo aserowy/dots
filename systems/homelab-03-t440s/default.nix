@@ -23,15 +23,13 @@
   services = {
     fstrim.enable = true;
 
-    logind = {
-      lidSwitch = "ignore";
-      lidSwitchDocked = "ignore";
-      lidSwitchExternalPower = "ignore";
-      extraConfig = ''
-        IdleAction=ignore
-        HandlePowerKey=ignore
-        HandleSuspendKey=ignore
-      '';
+    logind.settings.Login = {
+      HandleLidSwitch = "ignore";
+      HandleLidSwitchExternalPower = "ignore";
+      HandleLidSwitchDocked = "ignore";
+      HandlePowerKey = "ignore";
+      HandleSuspendKey = "ignore";
+      IdleAction = "ignore";
     };
   };
 

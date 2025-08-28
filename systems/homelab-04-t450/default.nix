@@ -23,17 +23,13 @@
   };
 
   # lsblk --discard to ensure ssd supports trim (disc-gran and disc-max should be non zero)
-  services = {
-    logind = {
-      lidSwitch = "ignore";
-      lidSwitchDocked = "ignore";
-      lidSwitchExternalPower = "ignore";
-      extraConfig = ''
-        IdleAction=ignore
-        HandlePowerKey=ignore
-        HandleSuspendKey=ignore
-      '';
-    };
+  services.logind.settings.Login = {
+    HandleLidSwitch = "ignore";
+    HandleLidSwitchExternalPower = "ignore";
+    HandleLidSwitchDocked = "ignore";
+    HandlePowerKey = "ignore";
+    HandleSuspendKey = "ignore";
+    IdleAction = "ignore";
   };
 
   system = {
