@@ -176,3 +176,4 @@ spec:
         resources:
           requests:
             storage: 4Gi
+        storageClassName: longhorn-nobackup
