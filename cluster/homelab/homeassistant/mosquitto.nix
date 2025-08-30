@@ -18,6 +18,7 @@ in
         metadata:
           name: ${mosquitto-pvc}
         spec:
+          storageClassName: "longhorn-nobackup"
           accessModes:
             - ReadWriteOnce
           resources:

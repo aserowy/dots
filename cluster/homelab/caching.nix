@@ -12,6 +12,7 @@ in
         chart = charts.bitnami.valkey;
 
         values = {
+          global.defaultStorageClass = "longhorn-nobackup";
           auth = {
             existingSecret = "valkey";
             existingSecretPasswordKey = "password";
