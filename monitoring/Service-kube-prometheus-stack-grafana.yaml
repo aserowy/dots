@@ -5,7 +5,7 @@ metadata:
     app.kubernetes.io/instance: kube-prometheus-stack
     app.kubernetes.io/name: grafana
     app.kubernetes.io/version: 12.1.0
-    helm.sh/chart: grafana-9.3.6
+    helm.sh/chart: grafana-9.4.0
   name: kube-prometheus-stack-grafana
   namespace: monitoring
 spec:
