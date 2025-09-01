@@ -9,17 +9,7 @@ let
   cnfg = config.home.components.wpaperd;
 in
 {
-  options.home.components.wpaperd = {
-    enable = mkEnableOption "wpaperd";
-
-    enableNiriIntegration = mkOption {
-      type = types.bool;
-      default = true;
-      description = ''
-        If enabled, the wpaperd script gets added to niris config.
-      '';
-    };
-  };
+  options.home.components.wpaperd.enable = mkEnableOption "wpaperd";
 
   config = mkIf cnfg.enable {
     services.wpaperd = {
@@ -38,9 +28,5 @@ in
         };
       };
     };
-
-    home.modules.niri.prependedConfig = mkIf cnfg.enableNiriIntegration ''
-      spawn-at-startup "wpaperd"
-    '';
   };
 }
