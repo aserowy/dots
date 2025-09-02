@@ -27,6 +27,7 @@ in
       extraGroups = [
         "audio"
         "disk"
+        "lpadmin"
         "networkmanager"
         "video"
         # "wheel"
