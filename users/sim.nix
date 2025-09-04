@@ -12,14 +12,6 @@ in
 {
   options.users.sim = {
     enable = mkEnableOption "sim user";
-
-    dockerGroupMember = mkOption {
-      type = types.bool;
-      default = false;
-      description = ''
-        If enabled, the user gets added to the docker group.
-      '';
-    };
   };
 
   config =
@@ -30,7 +22,6 @@ in
         "lpadmin"
         "networkmanager"
         "video"
-        # "wheel"
       ];
     in
     mkIf cnfg.enable {
@@ -38,10 +29,11 @@ in
         mutableUsers = false;
 
         users.sim = {
+          inherit extraGroups;
+
           # hashedPassword = "";
           hashedPasswordFile = config.sops.secrets."sim/password".path;
           createHome = true;
-          extraGroups = if cnfg.dockerGroupMember then extraGroups ++ [ "docker" ] else extraGroups;
           group = "users";
           home = "/home/sim";
           isNormalUser = true;
@@ -52,15 +44,5 @@ in
           uid = 1000;
         };
       };
-
-      # security.doas = {
-      #   extraRules = [
-      #     {
-      #       users = [ "sim" ];
-      #       keepEnv = true;
-      #       persist = true;
-      #     }
-      #   ];
-      # };
     };
 }
