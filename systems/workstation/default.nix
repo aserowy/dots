@@ -51,7 +51,10 @@
     niri.enable = true;
 
     seahorse.enable = true;
-    steam.enable = true;
+    steam = {
+      enable = true;
+      protontricks.enable = true;
+    };
   };
 
   services = {

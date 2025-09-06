@@ -30,7 +30,6 @@
       nautilus
       onlyoffice-desktopeditors
       spotify
-      steamtinkerlaunch
     ];
   };
 }
