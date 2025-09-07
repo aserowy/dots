@@ -19,8 +19,6 @@
     };
   };
 
-  networking.firewall.allowPing = false;
-
   environment.sessionVariables = {
     # INFO: sets ozone wayland support for all chromium based applications
     NIXOS_OZONE_WL = "1";
@@ -42,7 +40,10 @@
     type = "ibus";
   };
 
-  networking.hostName = "workstation";
+  networking = {
+    hostName = "workstation";
+    firewall.allowPing = false;
+  };
 
   programs = {
     dconf.enable = true;

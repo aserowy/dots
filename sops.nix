@@ -10,6 +10,10 @@
       "root/password" = {
         neededForUsers = true;
       };
+
+      "music/password" = {
+        neededForUsers = true;
+      };
       "serowy/password" = {
         neededForUsers = true;
       };

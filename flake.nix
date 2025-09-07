@@ -161,6 +161,28 @@
           ];
         };
 
+        musicstation = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            disko.nixosModules.disko
+
+            {
+              nixpkgs.overlays = [
+                yeet.overlays.default
+              ];
+            }
+
+            ./systems/musicstation
+            {
+              imports = [ ./users ];
+              users = {
+                root.enable = true;
+                music.enable = true;
+              };
+            }
+          ];
+        };
+
         sims = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
@@ -212,22 +234,6 @@
                 useUserPackages = true;
                 users.serowy = import ./home/workstation.nix;
               };
-            }
-          ];
-        };
-
-        homeassistant = nixpkgs.lib.nixosSystem {
-          system = "aarch64-linux";
-          modules = [
-            sops.nixosModules.sops
-            ./sops.nix
-
-            hardware.nixosModules.raspberry-pi-4
-
-            ./systems/homeassistant
-            {
-              imports = [ ./users ];
-              users.root.enable = true;
             }
           ];
         };

@@ -2,20 +2,24 @@
 {
   imports = [
     ../shared/base.nix
-    ../shared/printing.nix
 
     ./disko.nix
     ./hardware-configuration.nix
   ];
 
-  boot = {
-    loader = {
-      systemd-boot = {
-        enable = true;
-        configurationLimit = 5;
-      };
-      efi.canTouchEfiVariables = true;
+  boot.loader = {
+    grub = {
+      enable = true;
+      version = 2;
+      device = "nodev";
+      enableCryptodisk = true;
     };
+  };
+
+  console = {
+    earlySetup = true;
+    # NOTE: ensure the keyboard layout is set correctly on login screen
+    useXkbConfig = true;
   };
 
   environment = {
@@ -23,16 +27,7 @@
     sessionVariables.NIXOS_OZONE_WL = "1";
 
     systemPackages = with pkgs; [
-      discord
-      drawio
       ghostty
-      gimp-with-plugins
-      google-chrome
-      onedrivegui
-      kdePackages.plasma-browser-integration
-      onlyoffice-desktopeditors
-      spotify
-
       git
       neovim
       yeet
@@ -68,31 +63,20 @@
   };
 
   networking = {
-    hostName = "sims";
+    hostName = "musicstation";
+
     firewall.allowPing = false;
 
     interfaces = {
-      enp0s31f6.useDHCP = lib.mkDefault true;
+      enp5s2.useDHCP = lib.mkDefault true;
       wlan0.useDHCP = lib.mkDefault true;
     };
-    networkmanager = {
-      enable = true;
-      wifi.backend = "iwd";
-    };
-    wireless = {
-      iwd.enable = true;
-      userControlled.enable = true;
-    };
   };
+
+  nixpkgs.config.nvidia.acceptLicense = true;
 
   programs = {
     steam.enable = true;
-  };
-
-  console = {
-    earlySetup = true;
-    # NOTE: ensure the keyboard layout is set correctly on login screen
-    useXkbConfig = true;
   };
 
   services = {
@@ -101,16 +85,13 @@
 
       daemon = {
         enable = true;
-        settings = {
-          ExcludePath = "^/home/sims/.local/share/Steam\nExcludePath ^/home/sims/.steam";
-        };
       };
     };
 
-    desktopManager.plasma6.enable = true;
+    desktopManager.gnome.enable = true;
 
     displayManager = {
-      defaultSession = "plasma";
+      defaultSession = "gnome";
       sddm = {
         enable = true;
         wayland.enable = true;
@@ -126,8 +107,6 @@
     logind.settings.Login = {
       HandlePowerKey = "suspend";
     };
-
-    onedrive.enable = true;
 
     pipewire = {
       enable = true;
