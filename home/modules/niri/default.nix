@@ -44,8 +44,6 @@ in
         };
 
         modules = {
-          gaming.enableXwaylandSatellite = true;
-
           browser.enable = true;
           clipboard.enable = true;
           statusbar.enable = true;
