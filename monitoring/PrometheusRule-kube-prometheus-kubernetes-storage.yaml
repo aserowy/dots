@@ -6,8 +6,8 @@ metadata:
     app.kubernetes.io/instance: kube-prometheus-stack
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kube-prometheus
-    app.kubernetes.io/version: 77.1.1
-    chart: kube-prometheus-stack-77.1.1
+    app.kubernetes.io/version: 77.5.0
+    chart: kube-prometheus-stack-77.5.0
     heritage: Helm
     release: kube-prometheus-stack
   name: kube-prometheus-kubernetes-storage
