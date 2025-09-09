@@ -39,7 +39,7 @@ layout {
     focus-ring {
         width 2
         active-color "#FFFFFF"
-        inactive-color "#505050"
+        inactive-color "#5F5F5F"
     }
 
     border {
@@ -52,8 +52,8 @@ layout {
         spread 5
         offset x=0 y=5
         draw-behind-window true
-        color "#00000070"
-        inactive-color "#00000070"
+        color "#1A1A1A75"
+        inactive-color "#1A1A1A75"
     }
 
     tab-indicator {
@@ -76,8 +76,8 @@ layer-rule {
         spread 5
         offset x=0 y=0
         draw-behind-window true
-        color "#00000070"
-        inactive-color "#00000070"
+        color "#1A1A1A75"
+        inactive-color "#1A1A1A75"
     }
 
     // NOTE: equal value in fuzzel configuration
@@ -92,6 +92,26 @@ window-rule {
 window-rule {
     match app-id=r#"pavucontrol$"#
     open-floating true
+}
+
+window-rule {
+    match is-window-cast-target=true
+
+    focus-ring {
+        off
+    }
+
+    border {
+        on
+        active-color "#FB8F23"
+        inactive-color "#F44A4A"
+        width 2
+    }
+
+    tab-indicator {
+        active-color "#FB8F23"
+        inactive-color "#F44A4A"
+    }
 }
 
 binds {

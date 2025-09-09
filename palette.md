@@ -1,0 +1,14 @@
+# used colors for niri (not shell)
+
+#FFFFFF
+#F9F9F9
+#F44A4A
+#FB8F23
+#FEE440
+#7AFF60
+#00F5D4
+#00BBF9
+#9B5DE5
+#F15BB5
+#5F5F5F
+#1A1A1A
