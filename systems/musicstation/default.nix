@@ -91,10 +91,10 @@
     desktopManager.gnome.enable = true;
 
     displayManager = {
-      defaultSession = "gnome";
-      sddm = {
+      gdm = {
         enable = true;
-        wayland.enable = true;
+        autoSuspend = false;
+        wayland = true;
       };
     };
 

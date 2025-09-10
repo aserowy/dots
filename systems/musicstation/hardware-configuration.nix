@@ -19,8 +19,9 @@
 
   # NOTE: We need to add "cryptd" as one of our kernel modules, or else the system won't be booted expecting an encrypted partition, which is where our root, swap, (and home) logical volumes resides in.
   boot.initrd.kernelModules = [
-    "dm-snapshot"
     "cryptd"
+    "dm-snapshot"
+    "nvidia"
   ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
