@@ -8,12 +8,8 @@
   ];
 
   boot.loader = {
-    grub = {
-      enable = true;
-      version = 2;
-      device = "nodev";
-      enableCryptodisk = true;
-    };
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
   };
 
   console = {
@@ -68,8 +64,8 @@
     firewall.allowPing = false;
 
     interfaces = {
-      enp5s2.useDHCP = lib.mkDefault true;
-      wlan0.useDHCP = lib.mkDefault true;
+      eno1.useDHCP = lib.mkDefault true;
+      # wlan0.useDHCP = lib.mkDefault true;
     };
   };
 

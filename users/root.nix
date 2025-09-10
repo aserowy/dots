@@ -11,6 +11,8 @@ in
 
   config = mkIf cnfg.enable {
     users = {
+      mutableUsers = false;
+
       users.root = {
         hashedPassword = null;
         openssh.authorizedKeys.keys = [

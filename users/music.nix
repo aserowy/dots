@@ -25,12 +25,13 @@ in
     in
     mkIf cnfg.enable {
       users = {
-        mutableUsers = true;
+        mutableUsers = false;
 
         users.music = {
           inherit extraGroups;
 
-          hashedPassword = "";
+          # hashedPassword = "";
+          hashedPasswordFile = config.sops.secrets."music/password".path;
           createHome = true;
           group = "users";
           home = "/home/music";

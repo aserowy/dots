@@ -9,13 +9,11 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
   boot.initrd.availableKernelModules = [
-    "uhci_hcd"
     "ehci_pci"
-    "ata_piix"
-    "pata_marvell"
+    "ahci"
+    "xhci_pci"
     "firewire_ohci"
     "usb_storage"
-    "floppy"
     "sd_mod"
   ];
 
@@ -24,7 +22,7 @@
     "dm-snapshot"
     "cryptd"
   ];
-  boot.kernelModules = [ ];
+  boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";

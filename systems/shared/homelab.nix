@@ -64,8 +64,6 @@ in
   };
 
   config = mkIf cnfg.enable {
-    users.mutableUsers = false;
-
     networking = {
       hostName = cnfg.hostName;
 

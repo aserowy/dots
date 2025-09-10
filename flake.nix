@@ -73,7 +73,6 @@
       self,
       darwin,
       disko,
-      hardware,
       home,
       neocode,
       nixidy,
@@ -165,6 +164,8 @@
           system = "x86_64-linux";
           modules = [
             disko.nixosModules.disko
+            sops.nixosModules.sops
+            ./sops.nix
 
             {
               nixpkgs.overlays = [
