@@ -88,13 +88,13 @@
       };
     };
 
-    desktopManager.gnome.enable = true;
+    desktopManager.plasma6.enable = true;
 
     displayManager = {
-      gdm = {
+      defaultSession = "plasma";
+      sddm = {
         enable = true;
-        autoSuspend = false;
-        wayland = true;
+        wayland.enable = true;
       };
     };
 
@@ -105,10 +105,6 @@
     fstrim.enable = true;
 
     fwupd.enable = true;
-
-    logind.settings.Login = {
-      HandlePowerKey = "suspend";
-    };
 
     pipewire = {
       enable = true;
