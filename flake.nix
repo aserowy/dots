@@ -177,7 +177,10 @@
             {
               imports = [ ./users ];
               users = {
-                root.enable = true;
+                root = {
+                  enable = true;
+                  sopsPasswordFilePath = "music/root_password";
+                };
                 music.enable = true;
               };
             }

@@ -23,6 +23,10 @@
     sessionVariables.NIXOS_OZONE_WL = "1";
 
     systemPackages = with pkgs; [
+      google-chrome
+      reaper
+      spotify
+
       ghostty
       git
       neovim
@@ -93,6 +97,8 @@
         wayland.enable = true;
       };
     };
+
+    flatpak.enable = true;
 
     # lsblk --discard to ensure ssd supports trim
     # (disc-gran and disc-max should be non zero)

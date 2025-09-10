@@ -7,11 +7,10 @@
     age.keyFile = "/root/.config/sops/age/keys.txt";
 
     secrets = {
-      "root/password" = {
+      "music/password" = {
         neededForUsers = true;
       };
-
-      "music/password" = {
+      "music/root_password" = {
         neededForUsers = true;
       };
       "serowy/password" = {
