@@ -171,7 +171,7 @@ in
                 containers = [
                   {
                     name = "homeassistant";
-                    image = "ghcr.io/home-assistant/home-assistant:2025.9.0"; # github-release/home-assistant/core@semver-coerced
+                    image = "homeassistant/home-assistant:2025.9.0"; # docker/homeassistant/home-assistant@semver-coerced
                     securityContext = {
                       allowPrivilegeEscalation = false;
                       capabilities = {
