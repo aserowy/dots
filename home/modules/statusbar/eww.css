@@ -7,7 +7,7 @@
   font-family: FiraCode Nerd Font Mono;
   font-size: 1em;
   font-weight: 500;
-  text-shadow: 2px 2px 3px #1A1A1A;
+  text-shadow: 2px 2px 3px #000000;
 }
 
 .top {
@@ -34,20 +34,20 @@
 }
 
 .current {
-  box-shadow: inset 3px 0 #00BBF9;
-  color: #00BBF9;
+  box-shadow: inset 3px 0 #10B1FE;
+  color: #10B1FE;
 }
 
 .active {
-  color: #00BBF9;
+  color: #10B1FE;
 }
 
 .disabled {
-  color: #5F5F5F;
+  color: #CDD4E0;
 }
 
 .warning {
-  color: #F44A4A;
+  color: #FC2F52;
 }
 
 .invisible {

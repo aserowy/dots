@@ -39,7 +39,7 @@ layout {
     focus-ring {
         width 2
         active-color "#FFFFFF"
-        inactive-color "#5F5F5F"
+        inactive-color "#B9C0CA"
     }
 
     border {
@@ -52,8 +52,8 @@ layout {
         spread 5
         offset x=0 y=5
         draw-behind-window true
-        color "#1A1A1A75"
-        inactive-color "#1A1A1A75"
+        color "#272B3375"
+        inactive-color "#272B3375"
     }
 
     tab-indicator {
@@ -76,8 +76,8 @@ layer-rule {
         spread 5
         offset x=0 y=0
         draw-behind-window true
-        color "#1A1A1A75"
-        inactive-color "#1A1A1A75"
+        color "#272B3375"
+        inactive-color "#272B3375"
     }
 
     // NOTE: equal value in fuzzel configuration
@@ -103,14 +103,14 @@ window-rule {
 
     border {
         on
-        active-color "#FB8F23"
-        inactive-color "#F44A4A"
+        active-color "#FF936A"
+        inactive-color "#FC2F52"
         width 2
     }
 
     tab-indicator {
-        active-color "#FB8F23"
-        inactive-color "#F44A4A"
+        active-color "#FF936A"
+        inactive-color "#FC2F52"
     }
 }
 
