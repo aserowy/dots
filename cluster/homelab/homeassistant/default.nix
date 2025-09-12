@@ -24,6 +24,21 @@ in
         apiVersion: akri.sh/v0
         kind: Configuration
         metadata:
+          name: akri-bluetooth-stick
+        spec:
+          capacity: 1
+          discoveryHandler:
+            discoveryDetails: |
+              groupRecursive: true
+              udevRules:
+              - ATTRS{idVendor}=="10d7", ATTRS{idProduct}=="b012"
+            name: udev
+      ''
+
+      ''
+        apiVersion: akri.sh/v0
+        kind: Configuration
+        metadata:
           name: akri-enocean-stick
         spec:
           capacity: 1
