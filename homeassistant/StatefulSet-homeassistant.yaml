@@ -27,10 +27,12 @@ spec:
             - containerPort: 8123
           resources:
             limits:
+              akri.sh/akri-bluetooth-stick: "1"
               akri.sh/akri-enocean-stick: "1"
               cpu: 1000m
               memory: 1000Mi
             requests:
+              akri.sh/akri-bluetooth-stick: "1"
               akri.sh/akri-enocean-stick: "1"
               cpu: 200m
               memory: 500Mi
