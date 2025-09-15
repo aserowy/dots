@@ -18,6 +18,7 @@ in
         metadata:
           name: ${zigbee2mqtt-pvc}
         spec:
+          storageClassName: "longhorn"
           accessModes:
             - ReadWriteOnce
           resources:

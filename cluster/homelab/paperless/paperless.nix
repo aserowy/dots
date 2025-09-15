@@ -30,6 +30,7 @@ in
         metadata:
           name: ${paperless-media-pvc}
         spec:
+          storageClassName: "longhorn"
           accessModes:
             - ReadWriteOnce
           resources:
@@ -42,6 +43,7 @@ in
         metadata:
           name: ${paperless-data-pvc}
         spec:
+          storageClassName: "longhorn"
           accessModes:
             - ReadWriteOnce
           resources:

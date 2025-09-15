@@ -32,6 +32,7 @@ in
         metadata:
           name: ${homeassistant-pvc}
         spec:
+          storageClassName: "longhorn"
           accessModes:
             - ReadWriteOnce
           resources:
