@@ -201,11 +201,13 @@ in
                     ports = [ { containerPort = 8123; } ];
                     resources = {
                       requests = {
+                        "akri.sh/akri-bluetooth-stick" = "1";
                         "akri.sh/akri-enocean-stick" = "1";
                         cpu = "200m";
                         memory = "500Mi";
                       };
                       limits = {
+                        "akri.sh/akri-bluetooth-stick" = "1";
                         "akri.sh/akri-enocean-stick" = "1";
                         cpu = "1000m";
                         memory = "1000Mi";
