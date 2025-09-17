@@ -21,7 +21,7 @@ spec:
               value: "true"
             - name: CHROMIUM_ALLOW_LIST
               value: file:///tmp/.*
-          image: docker.io/gotenberg/gotenberg:8.23
+          image: docker.io/gotenberg/gotenberg:8.23.1
           name: gotenberg
           ports:
             - containerPort: 3000
