@@ -34,7 +34,6 @@ spec:
               akri.sh/akri-bluetooth-stick: "1"
             requests:
               akri.sh/akri-bluetooth-stick: "1"
-          restartPolicy: Always
           securityContext:
             allowPrivilegeEscalation: true
             capabilities:
