@@ -27,12 +27,10 @@ spec:
             - containerPort: 8123
           resources:
             limits:
-              akri.sh/akri-bluetooth-stick: "1"
               akri.sh/akri-enocean-stick: "1"
               cpu: 1000m
               memory: 1000Mi
             requests:
-              akri.sh/akri-bluetooth-stick: "1"
               akri.sh/akri-enocean-stick: "1"
               cpu: 200m
               memory: 500Mi
@@ -129,6 +127,31 @@ spec:
             - mountPath: /config
               name: data
           workingDir: /config
+        - command:
+            - bash
+            - -c
+            - |
+              apt-get update
+              apt-get install -y bluetooth bluetoothd bluez bluez-tools dbus
+
+              dbus-daemon --system --fork
+              bluetoothd -n
+          image: debian:13.1
+          name: bluetooth-sidecar
+          resources:
+            limits:
+              akri.sh/akri-bluetooth-stick: "1"
+            requests:
+              akri.sh/akri-bluetooth-stick: "1"
+          restartPolicy: Always
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+          volumeMounts:
+            - mountPath: /var/run/dbus
+              name: dbus-socket
       volumes:
         - name: data
           persistentVolumeClaim:
@@ -136,6 +159,8 @@ spec:
         - configMap:
             name: homeassistant-cm
           name: config
+        - emptyDir: {}
+          name: dbus-socket
         - name: secrets
           secret:
             secretName: homeassistant
