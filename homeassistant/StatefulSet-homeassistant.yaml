@@ -145,10 +145,12 @@ spec:
               akri.sh/akri-bluetooth-stick: "1"
           restartPolicy: Always
           securityContext:
-            allowPrivilegeEscalation: false
+            allowPrivilegeEscalation: true
             capabilities:
               drop:
                 - ALL
+            runAsGroup: 1000
+            runAsUser: 1000
           volumeMounts:
             - mountPath: /var/run/dbus
               name: dbus-socket
