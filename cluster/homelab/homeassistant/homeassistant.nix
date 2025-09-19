@@ -187,8 +187,8 @@ in
                         apt-get update
                         apt-get install -y bluetooth bluez bluez-tools dbus
 
-                        dbus-daemon --system --fork
-                        bluetoothd -n
+                        # dbus-daemon --system --fork
+                        # bluetoothd -n
                       ''
                     ];
                     resources = {
