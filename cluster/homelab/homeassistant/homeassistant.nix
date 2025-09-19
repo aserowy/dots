@@ -179,15 +179,13 @@ in
                         drop = [ "ALL" ];
                       };
                       privileged = true;
-                      runAsGroup = 0;
-                      runAsUser = 0;
                     };
                     command = [
                       "bash"
                       "-c"
                       ''
                         apt-get update
-                        apt-get install -y bluetooth bluetoothd bluez bluez-tools dbus
+                        apt-get install -y bluetooth bluez bluez-tools dbus
 
                         dbus-daemon --system --fork
                         bluetoothd -n
