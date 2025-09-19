@@ -168,6 +168,44 @@ in
                       }
                     ];
                   }
+                  # SIDECAR
+                  {
+                    name = "bluetooth-sidecar";
+                    image = "debian:13.1"; # docker/debian@semver-coerced
+                    restartPolicy = "Always";
+                    securityContext = {
+                      allowPrivilegeEscalation = false;
+                      capabilities = {
+                        drop = [ "ALL" ];
+                      };
+                    };
+                    command = [
+                      "bash"
+                      "-c"
+                      ''
+                        apt-get update
+                        apt-get install -y bluetooth bluetoothd bluez bluez-tools dbus
+
+                        dbus-daemon --system --fork
+                        bluetoothd -n
+                      ''
+                    ];
+                    resources = {
+                      requests = {
+                        "akri.sh/akri-bluetooth-stick" = "1";
+                      };
+                      limits = {
+                        "akri.sh/akri-bluetooth-stick" = "1";
+                      };
+                    };
+                    volumeMounts = [
+                      {
+                        name = "dbus-socket";
+                        mountPath = "/var/run/dbus";
+                      }
+                    ];
+                  }
+
                 ];
                 containers = [
                   {
@@ -202,13 +240,11 @@ in
                     ports = [ { containerPort = 8123; } ];
                     resources = {
                       requests = {
-                        "akri.sh/akri-bluetooth-stick" = "1";
                         "akri.sh/akri-enocean-stick" = "1";
                         cpu = "200m";
                         memory = "500Mi";
                       };
                       limits = {
-                        "akri.sh/akri-bluetooth-stick" = "1";
                         "akri.sh/akri-enocean-stick" = "1";
                         cpu = "1000m";
                         memory = "1000Mi";
@@ -230,6 +266,10 @@ in
                   {
                     name = "config";
                     configMap.name = homeassistant-cm;
+                  }
+                  {
+                    name = "dbus-socket";
+                    emptyDir = { };
                   }
                   {
                     name = "secrets";
