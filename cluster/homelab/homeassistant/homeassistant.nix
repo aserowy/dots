@@ -189,6 +189,8 @@ in
 
                         # dbus-daemon --system --fork
                         # bluetoothd -n
+
+                        bash
                       ''
                     ];
                     resources = {
