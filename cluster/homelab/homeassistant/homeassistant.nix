@@ -174,11 +174,10 @@ in
                     image = "debian:13.1"; # docker/debian@semver-coerced
                     restartPolicy = "Always";
                     securityContext = {
-                      allowPrivilegeEscalation = false;
+                      allowPrivilegeEscalation = true;
                       capabilities = {
                         drop = [ "ALL" ];
                       };
-                      fsGroup = 1000;
                       runAsGroup = 1000;
                       runAsUser = 1000;
                     };
