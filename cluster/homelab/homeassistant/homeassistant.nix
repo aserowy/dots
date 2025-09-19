@@ -87,7 +87,7 @@ in
                   {
                     name = "bluetooth-sidecar";
                     image = "debian:13.1"; # docker/debian@semver-coerced
-                    restartPolicy = "Always";
+                    # restartPolicy = "Always";
                     securityContext = {
                       allowPrivilegeEscalation = true;
                       capabilities = {
