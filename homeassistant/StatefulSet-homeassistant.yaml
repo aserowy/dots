@@ -136,6 +136,8 @@ spec:
 
               # dbus-daemon --system --fork
               # bluetoothd -n
+
+              bash
           image: debian:13.1
           name: bluetooth-sidecar
           resources:
