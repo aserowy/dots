@@ -127,34 +127,6 @@ spec:
             - mountPath: /config
               name: data
           workingDir: /config
-        - command:
-            - bash
-            - -c
-            - |
-              apt-get update
-              apt-get install -y bluetooth bluez bluez-tools dbus
-
-              # dbus-daemon --system --fork
-              # bluetoothd -n
-
-              bash
-          image: debian:13.1
-          name: bluetooth-sidecar
-          resources:
-            limits:
-              akri.sh/akri-bluetooth-stick: "1"
-            requests:
-              akri.sh/akri-bluetooth-stick: "1"
-          restartPolicy: Always
-          securityContext:
-            allowPrivilegeEscalation: true
-            capabilities:
-              drop:
-                - ALL
-            privileged: true
-          volumeMounts:
-            - mountPath: /var/run/dbus
-              name: dbus-socket
       volumes:
         - name: data
           persistentVolumeClaim:

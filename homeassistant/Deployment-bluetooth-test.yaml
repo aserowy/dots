@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bluetooth-test
+  namespace: homeassistant
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bluetooth-test
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: bluetooth-test
+    spec:
+      containers:
+        - command:
+            - bash
+            - -c
+            - |
+              apt-get update
+              apt-get install -y bluetooth bluez bluez-tools dbus
+
+              # dbus-daemon --system --fork
+              # bluetoothd -n
+
+              sleep infinity
+          image: debian:13.1
+          name: bluetooth-sidecar
+          resources:
+            limits:
+              akri.sh/akri-bluetooth-stick: "1"
+            requests:
+              akri.sh/akri-bluetooth-stick: "1"
+          restartPolicy: Always
+          securityContext:
+            allowPrivilegeEscalation: true
+            capabilities:
+              drop:
+                - ALL
+            privileged: true
+          volumeMounts:
+            - mountPath: /var/run/dbus
+              name: dbus-socket
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+      volumes:
+        - emptyDir: {}
+          name: dbus-socket
