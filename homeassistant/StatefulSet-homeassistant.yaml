@@ -134,8 +134,8 @@ spec:
               apt-get update
               apt-get install -y bluetooth bluez bluez-tools dbus
 
-              dbus-daemon --system --fork
-              bluetoothd -n
+              # dbus-daemon --system --fork
+              # bluetoothd -n
           image: debian:13.1
           name: bluetooth-sidecar
           resources:
