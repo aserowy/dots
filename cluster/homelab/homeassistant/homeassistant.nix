@@ -178,6 +178,9 @@ in
                       capabilities = {
                         drop = [ "ALL" ];
                       };
+                      fsGroup = 1000;
+                      runAsGroup = 1000;
+                      runAsUser = 1000;
                     };
                     command = [
                       "bash"
