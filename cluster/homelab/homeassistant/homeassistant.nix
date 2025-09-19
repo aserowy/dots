@@ -178,6 +178,7 @@ in
                       capabilities = {
                         drop = [ "ALL" ];
                       };
+                      privileged = true;
                       runAsGroup = 0;
                       runAsUser = 0;
                     };
