@@ -132,7 +132,7 @@ spec:
             - -c
             - |
               apt-get update
-              apt-get install -y bluetooth bluetoothd bluez bluez-tools dbus
+              apt-get install -y bluetooth bluez bluez-tools dbus
 
               dbus-daemon --system --fork
               bluetoothd -n
@@ -150,8 +150,6 @@ spec:
               drop:
                 - ALL
             privileged: true
-            runAsGroup: 0
-            runAsUser: 0
           volumeMounts:
             - mountPath: /var/run/dbus
               name: dbus-socket
