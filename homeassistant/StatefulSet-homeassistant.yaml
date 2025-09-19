@@ -149,8 +149,8 @@ spec:
             capabilities:
               drop:
                 - ALL
-            runAsGroup: 1000
-            runAsUser: 1000
+            runAsGroup: 0
+            runAsUser: 0
           volumeMounts:
             - mountPath: /var/run/dbus
               name: dbus-socket
