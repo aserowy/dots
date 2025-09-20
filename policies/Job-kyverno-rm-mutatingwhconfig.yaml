@@ -10,9 +10,9 @@ metadata:
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: 3.5.1
-    helm.sh/chart: kyverno-3.5.1
-  name: kyverno-remove-validatingwebhookconfiguration
+    app.kubernetes.io/version: 3.5.2
+    helm.sh/chart: kyverno-3.5.2
+  name: kyverno-rm-mutatingwhconfig
   namespace: policies
 spec:
   backoffLimit: 2
@@ -23,7 +23,7 @@ spec:
         - command:
             - kubectl
             - delete
-            - validatingwebhookconfiguration
+            - mutatingwebhookconfiguration
             - -l
             - webhook.kyverno.io/managed-by=kyverno
           image: registry.k8s.io/kubectl:v1.32.7
