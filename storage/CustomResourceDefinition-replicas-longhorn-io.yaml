@@ -7,8 +7,8 @@ metadata:
     app.kubernetes.io/instance: longhorn
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: longhorn
-    app.kubernetes.io/version: v1.9.1
-    helm.sh/chart: longhorn-1.9.1
+    app.kubernetes.io/version: v1.9.2
+    helm.sh/chart: longhorn-1.9.2
     longhorn-manager: ""
   name: replicas.longhorn.io
 spec:
@@ -269,6 +269,8 @@ spec:
                 salvageExecuted:
                   type: boolean
                 started:
+                  type: boolean
+                starting:
                   type: boolean
                 storageIP:
                   type: string

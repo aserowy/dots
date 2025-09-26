@@ -6,8 +6,8 @@ metadata:
     app.kubernetes.io/instance: longhorn
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: longhorn
-    app.kubernetes.io/version: v1.9.1
-    helm.sh/chart: longhorn-1.9.1
+    app.kubernetes.io/version: v1.9.2
+    helm.sh/chart: longhorn-1.9.2
   name: longhorn-manager
   namespace: longhorn-system
 spec:
@@ -21,8 +21,8 @@ spec:
         app.kubernetes.io/instance: longhorn
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: longhorn
-        app.kubernetes.io/version: v1.9.1
-        helm.sh/chart: longhorn-1.9.1
+        app.kubernetes.io/version: v1.9.2
+        helm.sh/chart: longhorn-1.9.2
     spec:
       containers:
         - command:
@@ -30,17 +30,17 @@ spec:
             - -d
             - daemon
             - --engine-image
-            - longhornio/longhorn-engine:v1.9.1
+            - longhornio/longhorn-engine:v1.9.2
             - --instance-manager-image
-            - longhornio/longhorn-instance-manager:v1.9.1
+            - longhornio/longhorn-instance-manager:v1.9.2
             - --share-manager-image
-            - longhornio/longhorn-share-manager:v1.9.1
+            - longhornio/longhorn-share-manager:v1.9.2
             - --backing-image-manager-image
-            - longhornio/backing-image-manager:v1.9.1
+            - longhornio/backing-image-manager:v1.9.2
             - --support-bundle-manager-image
-            - longhornio/support-bundle-kit:v0.0.61
+            - longhornio/support-bundle-kit:v0.0.69
             - --manager-image
-            - longhornio/longhorn-manager:v1.9.1
+            - longhornio/longhorn-manager:v1.9.2
             - --service-account
             - longhorn-service-account
             - --upgrade-version-check
@@ -61,7 +61,7 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: spec.nodeName
-          image: longhornio/longhorn-manager:v1.9.1
+          image: longhornio/longhorn-manager:v1.9.2
           imagePullPolicy: IfNotPresent
           name: longhorn-manager
           ports:
@@ -101,7 +101,7 @@ spec:
             - sh
             - -c
             - echo share-manager image pulled && sleep infinity
-          image: longhornio/longhorn-share-manager:v1.9.1
+          image: longhornio/longhorn-share-manager:v1.9.2
           imagePullPolicy: IfNotPresent
           name: pre-pull-share-manager-image
       priorityClassName: longhorn-critical

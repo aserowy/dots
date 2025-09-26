@@ -5,8 +5,8 @@ metadata:
     app.kubernetes.io/instance: longhorn
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: longhorn
-    app.kubernetes.io/version: v1.9.1
-    helm.sh/chart: longhorn-1.9.1
+    app.kubernetes.io/version: v1.9.2
+    helm.sh/chart: longhorn-1.9.2
   name: longhorn-driver-deployer
   namespace: longhorn-system
 spec:
@@ -21,8 +21,8 @@ spec:
         app.kubernetes.io/instance: longhorn
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: longhorn
-        app.kubernetes.io/version: v1.9.1
-        helm.sh/chart: longhorn-1.9.1
+        app.kubernetes.io/version: v1.9.2
+        helm.sh/chart: longhorn-1.9.2
     spec:
       containers:
         - command:
@@ -30,7 +30,7 @@ spec:
             - -d
             - deploy-driver
             - --manager-image
-            - longhornio/longhorn-manager:v1.9.1
+            - longhornio/longhorn-manager:v1.9.2
             - --manager-url
             - http://longhorn-backend:9500/v1
           env:
@@ -58,7 +58,7 @@ spec:
               value: longhornio/csi-snapshotter:v8.3.0-20250709
             - name: CSI_LIVENESS_PROBE_IMAGE
               value: longhornio/livenessprobe:v2.16.0-20250709
-          image: longhornio/longhorn-manager:v1.9.1
+          image: longhornio/longhorn-manager:v1.9.2
           imagePullPolicy: IfNotPresent
           name: longhorn-driver-deployer
       initContainers:
@@ -66,7 +66,7 @@ spec:
             - sh
             - -c
             - while [ $(curl -m 1 -s -o /dev/null -w "%{http_code}" http://longhorn-backend:9500/v1) != "200" ]; do echo waiting; sleep 2; done
-          image: longhornio/longhorn-manager:v1.9.1
+          image: longhornio/longhorn-manager:v1.9.2
           name: wait-longhorn-manager
       priorityClassName: longhorn-critical
       securityContext:
