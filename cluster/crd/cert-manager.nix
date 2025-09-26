@@ -1,4 +1,4 @@
-# This file was generated with nixidy CRD generator, do not edit.
+# This file was generated with nixidy resource generator, do not edit.
 {
   lib,
   options,
@@ -1395,7 +1395,7 @@ let
 
       options = {
         "nameserver" = mkOption {
-          description = "The IP address or hostname of an authoritative DNS server supporting\nRFC2136 in the form host:port. If the host is an IPv6 address it must be\nenclosed in square brackets (e.g [2001:db8::1])u00a0; port is optional.\nThis field is required.";
+          description = "The IP address or hostname of an authoritative DNS server supporting\nRFC2136 in the form host:port. If the host is an IPv6 address it must be\nenclosed in square brackets (e.g [2001:db8::1]) ; port is optional.\nThis field is required.";
           type = types.str;
         };
         "tsigAlgorithm" = mkOption {
