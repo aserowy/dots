@@ -6,8 +6,8 @@ metadata:
     app.kubernetes.io/instance: longhorn
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: longhorn
-    app.kubernetes.io/version: v1.9.2
-    helm.sh/chart: longhorn-1.9.2
+    app.kubernetes.io/version: v1.10.0
+    helm.sh/chart: longhorn-1.10.0
   name: longhorn-manager
   namespace: longhorn-system
 spec:
@@ -21,8 +21,8 @@ spec:
         app.kubernetes.io/instance: longhorn
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: longhorn
-        app.kubernetes.io/version: v1.9.2
-        helm.sh/chart: longhorn-1.9.2
+        app.kubernetes.io/version: v1.10.0
+        helm.sh/chart: longhorn-1.10.0
     spec:
       containers:
         - command:
@@ -30,17 +30,17 @@ spec:
             - -d
             - daemon
             - --engine-image
-            - longhornio/longhorn-engine:v1.9.2
+            - longhornio/longhorn-engine:v1.10.0
             - --instance-manager-image
-            - longhornio/longhorn-instance-manager:v1.9.2
+            - longhornio/longhorn-instance-manager:v1.10.0
             - --share-manager-image
-            - longhornio/longhorn-share-manager:v1.9.2
+            - longhornio/longhorn-share-manager:v1.10.0
             - --backing-image-manager-image
-            - longhornio/backing-image-manager:v1.9.2
+            - longhornio/backing-image-manager:v1.10.0
             - --support-bundle-manager-image
             - longhornio/support-bundle-kit:v0.0.69
             - --manager-image
-            - longhornio/longhorn-manager:v1.9.2
+            - longhornio/longhorn-manager:v1.10.0
             - --service-account
             - longhorn-service-account
             - --upgrade-version-check
@@ -61,14 +61,12 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: spec.nodeName
-          image: longhornio/longhorn-manager:v1.9.2
+          image: longhornio/longhorn-manager:v1.10.0
           imagePullPolicy: IfNotPresent
           name: longhorn-manager
           ports:
             - containerPort: 9500
               name: manager
-            - containerPort: 9501
-              name: conversion-wh
             - containerPort: 9502
               name: admission-wh
             - containerPort: 9503
@@ -76,7 +74,7 @@ spec:
           readinessProbe:
             httpGet:
               path: /v1/healthz
-              port: 9501
+              port: 9502
               scheme: HTTPS
           securityContext:
             privileged: true
@@ -101,7 +99,7 @@ spec:
             - sh
             - -c
             - echo share-manager image pulled && sleep infinity
-          image: longhornio/longhorn-share-manager:v1.9.2
+          image: longhornio/longhorn-share-manager:v1.10.0
           imagePullPolicy: IfNotPresent
           name: pre-pull-share-manager-image
       priorityClassName: longhorn-critical

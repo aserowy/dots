@@ -1,18 +1,18 @@
 apiVersion: v1
 data:
   default-setting.yaml: |-
-    replica-auto-balance: best-effort
-    storage-over-provisioning-percentage: 75
-    priority-class: longhorn-critical
-    disable-revision-counter: true
-    concurrent-automatic-engine-upgrade-per-node-limit: 1
+    replica-auto-balance: "best-effort"
+    storage-over-provisioning-percentage: "75"
+    priority-class: "longhorn-critical"
+    disable-revision-counter: "{\"v1\":\"true\"}"
+    concurrent-automatic-engine-upgrade-per-node-limit: "1"
 kind: ConfigMap
 metadata:
   labels:
     app.kubernetes.io/instance: longhorn
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: longhorn
-    app.kubernetes.io/version: v1.9.2
-    helm.sh/chart: longhorn-1.9.2
+    app.kubernetes.io/version: v1.10.0
+    helm.sh/chart: longhorn-1.10.0
   name: longhorn-default-setting
   namespace: longhorn-system
