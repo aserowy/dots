@@ -11,6 +11,8 @@ dns:
   upstream_dns:
     - 1.1.1.1
   upstream_mode: parallel
+  local_ptr_upstreams:
+    - 192.168.178.1
   cache_size: 4194304
   cache_ttl_min: 0
   cache_ttl_max: 0
