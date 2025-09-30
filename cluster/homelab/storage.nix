@@ -16,9 +16,9 @@
         };
 
         defaultSettings = {
-          concurrentAutomaticEngineUpgradePerNodeLimit = 1;
+          concurrentAutomaticEngineUpgradePerNodeLimit = "1";
           replicaAutoBalance = "best-effort";
-          storageOverProvisioningPercentage = 75;
+          storageOverProvisioningPercentage = "75";
         };
 
         persistence = {
