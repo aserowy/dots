@@ -36,7 +36,6 @@
 
     amdgpu = {
       initrd.enable = true;
-      amdvlk.enable = true;
     };
   };
 }
