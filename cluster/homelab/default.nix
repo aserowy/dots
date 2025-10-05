@@ -6,6 +6,7 @@
     ./caching.nix
     ./certificates.nix
     ./cilium.nix
+    # ./container-registry.nix
     ./devices.nix
     ./loadbalancer.nix
     ./monitoring.nix
