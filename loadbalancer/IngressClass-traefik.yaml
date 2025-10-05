@@ -7,7 +7,7 @@ metadata:
     app.kubernetes.io/instance: traefik-loadbalancer
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-37.1.1
+    helm.sh/chart: traefik-37.1.2
   name: traefik
 spec:
   controller: traefik.io/ingress-controller
