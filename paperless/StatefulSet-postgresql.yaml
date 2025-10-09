@@ -6,8 +6,8 @@ metadata:
     app.kubernetes.io/instance: postgresql
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: postgresql
-    app.kubernetes.io/version: 17.6.0
-    helm.sh/chart: postgresql-16.7.27
+    app.kubernetes.io/version: 18.0.0
+    helm.sh/chart: postgresql-18.0.8
   name: postgresql
   namespace: paperless
 spec:
@@ -25,8 +25,8 @@ spec:
         app.kubernetes.io/instance: postgresql
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: postgresql
-        app.kubernetes.io/version: 17.6.0
-        helm.sh/chart: postgresql-16.7.27
+        app.kubernetes.io/version: 18.0.0
+        helm.sh/chart: postgresql-18.0.8
       name: postgresql
     spec:
       affinity:
@@ -75,7 +75,7 @@ spec:
               value: error
             - name: POSTGRESQL_SHARED_PRELOAD_LIBRARIES
               value: pgaudit
-          image: docker.io/bitnami/postgresql:17.6.0-debian-12-r4
+          image: registry-1.docker.io/bitnami/postgresql:latest
           imagePullPolicy: IfNotPresent
           livenessProbe:
             exec:
