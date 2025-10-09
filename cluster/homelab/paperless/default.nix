@@ -1,4 +1,4 @@
-{ charts, lib, ... }:
+{ charts, ... }:
 let
   application = "paperless";
   namespace = application;
@@ -6,14 +6,7 @@ in
 {
   imports = [
     (import ./gotenberg.nix { inherit application namespace; })
-    (import ./paperless.nix {
-      inherit
-        application
-        namespace
-        charts
-        lib
-        ;
-    })
+    (import ./paperless.nix { inherit application namespace charts; })
     (import ./tika.nix { inherit application namespace; })
   ];
 
