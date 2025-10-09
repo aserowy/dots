@@ -56,28 +56,27 @@ let
   };
 in
 pkgs.mkShell {
-  packages =
-    [
-      # pkgs.azure-cli
-      # pkgs.kubectl
-      # pkgs.renovate
+  packages = [
+    # pkgs.azure-cli
+    # pkgs.kubectl
+    # pkgs.renovate
 
-      pkgs.marksman
-      pkgs.nixd
-      nixidy.packages.${pkgs.system}.default
-      pkgs.nixfmt-rfc-style
-      pkgs.nodejs_20
-      pkgs.nodePackages.prettier
-      pkgs.nodePackages.vscode-json-languageserver
-      pkgs.nufmt
-      pkgs.sops
-      pkgs.stylua
-      pkgs.sumneko-lua-language-server
-      pkgs.taplo
-    ]
-    ++ lib.optionals (!pkgs.stdenv.isDarwin) [
-      pkgs.doas-sudo-shim
-    ];
+    pkgs.marksman
+    pkgs.nixd
+    nixidy.packages.${pkgs.system}.default
+    pkgs.nixfmt-rfc-style
+    pkgs.nodejs_24
+    pkgs.nodePackages.prettier
+    pkgs.nodePackages.vscode-json-languageserver
+    pkgs.nufmt
+    pkgs.sops
+    pkgs.stylua
+    pkgs.sumneko-lua-language-server
+    pkgs.taplo
+  ]
+  ++ lib.optionals (!pkgs.stdenv.isDarwin) [
+    pkgs.doas-sudo-shim
+  ];
 
   shellHook = ''
     echo "generate akri crds"
