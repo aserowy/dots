@@ -1,11 +1,18 @@
-{ charts, ... }:
+{ charts, lib, ... }:
 let
   application = "homeassistant";
   namespace = application;
 in
 {
   imports = [
-    (import ./homeassistant.nix { inherit application namespace charts; })
+    (import ./homeassistant.nix {
+      inherit
+        application
+        namespace
+        charts
+        lib
+        ;
+    })
     (import ./mosquitto.nix { inherit application namespace; })
     (import ./zigbee2mqtt.nix { inherit application namespace; })
   ];
