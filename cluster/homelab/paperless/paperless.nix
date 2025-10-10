@@ -21,6 +21,7 @@ in
         chartHash = "sha256-Sl3CjRqPSVl5j8BYNvahUiAZqCUIAK3Xsv/bMFdQ3t8=";
       };
       values = {
+        repository = "bitnamilegacy/postgresql";
         auth = {
           database = "paperless";
           username = "paperless";
