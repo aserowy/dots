@@ -5,7 +5,7 @@ metadata:
   namespace: rustdesk
 spec:
   entryPoints:
-    - websecure
+    - udp-port-21116
   routes:
     - services:
         - name: rustdesk-udp

@@ -36,7 +36,11 @@ spec:
       containers:
         - args:
             - --entryPoints.metrics.address=:9100/tcp
+            - --entryPoints.tcp-port-21115.address=:21115/tcp
+            - --entryPoints.tcp-port-21116.address=:21116/tcp
+            - --entryPoints.tcp-port-21117.address=:21117/tcp
             - --entryPoints.traefik.address=:8080/tcp
+            - --entryPoints.udp-port-21116.address=:21116/udp
             - --entryPoints.web.address=:8000/tcp
             - --entryPoints.websecure.address=:8443/tcp
             - --api.dashboard=true
@@ -79,9 +83,21 @@ spec:
             - containerPort: 9100
               name: metrics
               protocol: TCP
+            - containerPort: 21115
+              name: tcp-port-21115
+              protocol: TCP
+            - containerPort: 21116
+              name: tcp-port-21116
+              protocol: TCP
+            - containerPort: 21117
+              name: tcp-port-21117
+              protocol: TCP
             - containerPort: 8080
               name: traefik
               protocol: TCP
+            - containerPort: 21116
+              name: udp-port-21116
+              protocol: UDP
             - containerPort: 8000
               name: web
               protocol: TCP

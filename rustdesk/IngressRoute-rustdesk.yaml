@@ -5,7 +5,9 @@ metadata:
   namespace: rustdesk
 spec:
   entryPoints:
-    - websecure
+    - tcp-port-21115
+    - tcp-port-21116
+    - tcp-port-21117
   routes:
     - kind: Rule
       match: Host(`rustdesk.anderwerse.de`)
