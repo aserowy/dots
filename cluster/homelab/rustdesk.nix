@@ -8,6 +8,9 @@ let
 in
 {
   applications."${application}" = {
+    inherit namespace;
+    createNamespace = true;
+
     yamls = [
       ''
         apiVersion: v1
