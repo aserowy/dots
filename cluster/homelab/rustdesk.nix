@@ -236,7 +236,6 @@ in
             ];
           }
         ];
-        tls.secretName = "anderwersede-tls-certificate";
       };
 
       ingressRouteUDPs.rustdesk.spec = {
