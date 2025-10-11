@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: rustdesk
+  namespace: rustdesk
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rustdesk
+  template:
+    metadata:
+      labels:
+        app: rustdesk
+    spec:
+      containers:
+        - args:
+            - hbbs
+            - -r
+            - localhost:21117
+          image: docker.io/rustdesk/rustdesk-server:1.1.14
+          name: rustdesk-server
+          ports:
+            - containerPort: 21115
+            - containerPort: 21116
+            - containerPort: 21118
+          resources:
+            limits:
+              cpu: 200m
+              memory: 250Mi
+            requests:
+              cpu: 200m
+              memory: 250Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+          volumeMounts:
+            - mountPath: /root
+              name: server-data
+        - args:
+            - hbbr
+          image: docker.io/rustdesk/rustdesk-server:1.1.14
+          name: rustdesk-relay
+          ports:
+            - containerPort: 2117
+            - containerPort: 2119
+          resources:
+            limits:
+              cpu: 200m
+              memory: 250Mi
+            requests:
+              cpu: 200m
+              memory: 250Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+          volumeMounts:
+            - mountPath: /root
+              name: relay-data
+      securityContext:
+        fsGroup: 1000
+        runAsGroup: 1000
+        runAsNonRoot: true
+        runAsUser: 1000
+      volumes:
+        - name: server-data
+          persistentVolumeClaim:
+            claimName: rustdesk-server-pvc
+        - name: relay-data
+          persistentVolumeClaim:
+            claimName: rustdesk-relay-pvc
