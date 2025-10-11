@@ -115,8 +115,8 @@ in
                     };
                   };
                   ports = [
-                    { containerPort = 2117; }
-                    { containerPort = 2119; }
+                    { containerPort = 21117; }
+                    { containerPort = 21119; }
                   ];
                   resources = {
                     requests = {
