@@ -209,7 +209,9 @@ in
 
       ingressRoutes.rustdesk.spec = {
         entryPoints = [
-          "websecure"
+          "tcp-port-21115"
+          "tcp-port-21116"
+          "tcp-port-21117"
         ];
         routes = [
           {
@@ -239,7 +241,7 @@ in
 
       ingressRouteUDPs.rustdesk.spec = {
         entryPoints = [
-          "websecure"
+          "udp-port-21116"
         ];
         routes = [
           {

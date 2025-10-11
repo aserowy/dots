@@ -9,6 +9,38 @@
         chart = charts.traefik.traefik;
 
         values = {
+          ports = {
+            web = {
+              exposedPort = 80;
+              port = 8000;
+              http.redirections.entrypoint = {
+                to = "websecure";
+                scheme = "https";
+                permanent = true;
+              };
+            };
+            websecure = {
+              exposedPort = 443;
+              port = 8443;
+            };
+            tcp-port-21115 = {
+              exposedPort = 21115;
+              port = 21115;
+            };
+            udp-port-21116 = {
+              exposedPort = 21116;
+              port = 21116;
+              protocol = "UDP";
+            };
+            tcp-port-21116 = {
+              exposedPort = 21116;
+              port = 21116;
+            };
+            tcp-port-21117 = {
+              exposedPort = 21117;
+              port = 21117;
+            };
+          };
           additionalArguments = [
             "--log.level=DEBUG"
           ];
