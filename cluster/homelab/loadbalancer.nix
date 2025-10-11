@@ -69,6 +69,7 @@
           ];
         };
       };
+
       ingressRoutes = {
         traefik-dashboard-route.spec = {
           entryPoints = [

@@ -156,16 +156,8 @@ in
           metadata = {
             inherit namespace;
             name = "rustdesk-udp";
-            annotations = {
-              "lbipam.cilium.io/sharing-cross-namespace" = "*";
-              "lbipam.cilium.io/sharing-key" = "default-ippool";
-            };
-            labels = {
-              "homelab/loadbalancer" = "entrypoint";
-            };
           };
           spec = {
-            type = "LoadBalancer";
             selector.app = "rustdesk";
             ports = [
               {
@@ -180,16 +172,8 @@ in
           metadata = {
             inherit namespace;
             name = "rustdesk-tcp";
-            annotations = {
-              "lbipam.cilium.io/sharing-cross-namespace" = "*";
-              "lbipam.cilium.io/sharing-key" = "default-ippool";
-            };
-            labels = {
-              "homelab/loadbalancer" = "entrypoint";
-            };
           };
           spec = {
-            type = "LoadBalancer";
             selector.app = "rustdesk";
             ports = [
               {
@@ -221,6 +205,53 @@ in
             ];
           };
         };
+      };
+
+      ingressRoutes.rustdesk.spec = {
+        entryPoints = [
+          "websecure"
+        ];
+        routes = [
+          {
+            match = "Host(`rustdesk.anderwerse.de`)";
+            kind = "Rule";
+            services = [
+              {
+                inherit namespace;
+                name = "rustdesk-tcp";
+                port = 21115;
+              }
+              {
+                inherit namespace;
+                name = "rustdesk-tcp";
+                port = 21116;
+              }
+              {
+                inherit namespace;
+                name = "rustdesk-tcp";
+                port = 21117;
+              }
+            ];
+          }
+        ];
+        tls.secretName = "anderwersede-tls-certificate";
+      };
+
+      ingressRouteUDPs.rustdesk.spec = {
+        entryPoints = [
+          "websecure"
+        ];
+        routes = [
+          {
+            services = [
+              {
+                inherit namespace;
+                name = "rustdesk-udp";
+                port = 21116;
+              }
+            ];
+          }
+        ];
       };
     };
   };

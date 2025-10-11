@@ -51,6 +51,7 @@ let
       src = nixhelm.chartsDerivations.${pkgs.system}.traefik.traefik;
       crds = [
         "crds/traefik.io_ingressroutes.yaml"
+        "crds/traefik.io_ingressrouteudps.yaml"
       ];
     };
   };

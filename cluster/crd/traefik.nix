@@ -642,6 +642,108 @@ let
       };
 
     };
+    "traefik.io.v1alpha1.IngressRouteUDP" = {
+
+      options = {
+        "apiVersion" = mkOption {
+          description = "APIVersion defines the versioned schema of this representation of an object.\nServers should convert recognized schemas to the latest internal value, and\nmay reject unrecognized values.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources";
+          type = (types.nullOr types.str);
+        };
+        "kind" = mkOption {
+          description = "Kind is a string value representing the REST resource this object represents.\nServers may infer this from the endpoint the client submits requests to.\nCannot be updated.\nIn CamelCase.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds";
+          type = (types.nullOr types.str);
+        };
+        "metadata" = mkOption {
+          description = "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata";
+          type = (globalSubmoduleOf "io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta");
+        };
+        "spec" = mkOption {
+          description = "IngressRouteUDPSpec defines the desired state of a IngressRouteUDP.";
+          type = (submoduleOf "traefik.io.v1alpha1.IngressRouteUDPSpec");
+        };
+      };
+
+      config = {
+        "apiVersion" = mkOverride 1002 null;
+        "kind" = mkOverride 1002 null;
+      };
+
+    };
+    "traefik.io.v1alpha1.IngressRouteUDPSpec" = {
+
+      options = {
+        "entryPoints" = mkOption {
+          description = "EntryPoints defines the list of entry point names to bind to.\nEntry points have to be configured in the static configuration.\nMore info: https://doc.traefik.io/traefik/v3.5/routing/entrypoints/\nDefault: all.";
+          type = (types.nullOr (types.listOf types.str));
+        };
+        "routes" = mkOption {
+          description = "Routes defines the list of routes.";
+          type = (types.listOf (submoduleOf "traefik.io.v1alpha1.IngressRouteUDPSpecRoutes"));
+        };
+      };
+
+      config = {
+        "entryPoints" = mkOverride 1002 null;
+      };
+
+    };
+    "traefik.io.v1alpha1.IngressRouteUDPSpecRoutes" = {
+
+      options = {
+        "services" = mkOption {
+          description = "Services defines the list of UDP services.";
+          type = (
+            types.nullOr (
+              coerceAttrsOfSubmodulesToListByKey "traefik.io.v1alpha1.IngressRouteUDPSpecRoutesServices" "name"
+                [ ]
+            )
+          );
+          apply = attrsToList;
+        };
+      };
+
+      config = {
+        "services" = mkOverride 1002 null;
+      };
+
+    };
+    "traefik.io.v1alpha1.IngressRouteUDPSpecRoutesServices" = {
+
+      options = {
+        "name" = mkOption {
+          description = "Name defines the name of the referenced Kubernetes Service.";
+          type = types.str;
+        };
+        "namespace" = mkOption {
+          description = "Namespace defines the namespace of the referenced Kubernetes Service.";
+          type = (types.nullOr types.str);
+        };
+        "nativeLB" = mkOption {
+          description = "NativeLB controls, when creating the load-balancer,\nwhether the LB's children are directly the pods IPs or if the only child is the Kubernetes Service clusterIP.\nThe Kubernetes Service itself does load-balance to the pods.\nBy default, NativeLB is false.";
+          type = (types.nullOr types.bool);
+        };
+        "nodePortLB" = mkOption {
+          description = "NodePortLB controls, when creating the load-balancer,\nwhether the LB's children are directly the nodes internal IPs using the nodePort when the service type is NodePort.\nIt allows services to be reachable when Traefik runs externally from the Kubernetes cluster but within the same network of the nodes.\nBy default, NodePortLB is false.";
+          type = (types.nullOr types.bool);
+        };
+        "port" = mkOption {
+          description = "Port defines the port of a Kubernetes Service.\nThis can be a reference to a named port.";
+          type = (types.either types.int types.str);
+        };
+        "weight" = mkOption {
+          description = "Weight defines the weight used when balancing requests between multiple Kubernetes Service.";
+          type = (types.nullOr types.int);
+        };
+      };
+
+      config = {
+        "namespace" = mkOverride 1002 null;
+        "nativeLB" = mkOverride 1002 null;
+        "nodePortLB" = mkOverride 1002 null;
+        "weight" = mkOverride 1002 null;
+      };
+
+    };
 
   };
 in
@@ -660,6 +762,17 @@ in
         );
         default = { };
       };
+      "traefik.io"."v1alpha1"."IngressRouteUDP" = mkOption {
+        description = "IngressRouteUDP is a CRD implementation of a Traefik UDP Router.";
+        type = (
+          types.attrsOf (
+            submoduleForDefinition "traefik.io.v1alpha1.IngressRouteUDP" "ingressrouteudps" "IngressRouteUDP"
+              "traefik.io"
+              "v1alpha1"
+          )
+        );
+        default = { };
+      };
 
     }
     // {
@@ -668,6 +781,17 @@ in
         type = (
           types.attrsOf (
             submoduleForDefinition "traefik.io.v1alpha1.IngressRoute" "ingressroutes" "IngressRoute"
+              "traefik.io"
+              "v1alpha1"
+          )
+        );
+        default = { };
+      };
+      "ingressRouteUDPs" = mkOption {
+        description = "IngressRouteUDP is a CRD implementation of a Traefik UDP Router.";
+        type = (
+          types.attrsOf (
+            submoduleForDefinition "traefik.io.v1alpha1.IngressRouteUDP" "ingressrouteudps" "IngressRouteUDP"
               "traefik.io"
               "v1alpha1"
           )
@@ -691,10 +815,18 @@ in
         kind = "IngressRoute";
         attrName = "ingressRoutes";
       }
+      {
+        name = "ingressrouteudps";
+        group = "traefik.io";
+        version = "v1alpha1";
+        kind = "IngressRouteUDP";
+        attrName = "ingressRouteUDPs";
+      }
     ];
 
     resources = {
       "traefik.io"."v1alpha1"."IngressRoute" = mkAliasDefinitions options.resources."ingressRoutes";
+      "traefik.io"."v1alpha1"."IngressRouteUDP" = mkAliasDefinitions options.resources."ingressRouteUDPs";
 
     };
 
@@ -705,6 +837,12 @@ in
         group = "traefik.io";
         version = "v1alpha1";
         kind = "IngressRoute";
+        default.metadata.namespace = lib.mkDefault config.namespace;
+      }
+      {
+        group = "traefik.io";
+        version = "v1alpha1";
+        kind = "IngressRouteUDP";
         default.metadata.namespace = lib.mkDefault config.namespace;
       }
     ];
