@@ -15,3 +15,4 @@ spec:
       protocol: UDP
   selector:
     app: rustdesk
+  type: LoadBalancer
