@@ -165,6 +165,7 @@ in
             };
           };
           spec = {
+            type = "LoadBalancer";
             selector.app = "rustdesk";
             ports = [
               {
@@ -188,6 +189,7 @@ in
             };
           };
           spec = {
+            type = "LoadBalancer";
             selector.app = "rustdesk";
             ports = [
               {
