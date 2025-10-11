@@ -24,19 +24,23 @@
               port = 8443;
             };
             tcp-port-21115 = {
+              expose.default = true;
               exposedPort = 21115;
               port = 21115;
             };
             udp-port-21116 = {
+              expose.default = true;
               exposedPort = 21116;
               port = 21116;
               protocol = "UDP";
             };
             tcp-port-21116 = {
+              expose.default = true;
               exposedPort = 21116;
               port = 21116;
             };
             tcp-port-21117 = {
+              expose.default = true;
               exposedPort = 21117;
               port = 21117;
             };
