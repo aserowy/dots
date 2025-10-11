@@ -17,6 +17,7 @@
     ./adguard
     ./homeassistant
     ./paperless
+    ./rustdesk.nix
   ];
 
   nixidy = {
