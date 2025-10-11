@@ -15,5 +15,3 @@ spec:
         - name: rustdesk-tcp
           namespace: rustdesk
           port: 21115
-  tls:
-    secretName: anderwersede-tls-certificate
