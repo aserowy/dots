@@ -45,8 +45,8 @@ spec:
           image: docker.io/rustdesk/rustdesk-server:1.1.14
           name: rustdesk-relay
           ports:
-            - containerPort: 2117
-            - containerPort: 2119
+            - containerPort: 21117
+            - containerPort: 21119
           resources:
             limits:
               cpu: 200m
