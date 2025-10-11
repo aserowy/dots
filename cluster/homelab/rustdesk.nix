@@ -207,35 +207,61 @@ in
         };
       };
 
-      ingressRoutes.rustdesk.spec = {
-        entryPoints = [
-          "tcp-port-21115"
-          "tcp-port-21116"
-          "tcp-port-21117"
-        ];
-        routes = [
-          {
-            match = "Host(`rustdesk.anderwerse.de`)";
-            kind = "Rule";
-            services = [
-              {
-                inherit namespace;
-                name = "rustdesk-tcp";
-                port = 21115;
-              }
-              {
-                inherit namespace;
-                name = "rustdesk-tcp";
-                port = 21116;
-              }
-              {
-                inherit namespace;
-                name = "rustdesk-tcp";
-                port = 21117;
-              }
-            ];
-          }
-        ];
+      ingressRoutes = {
+        rustdesk-tcp-21115.spec = {
+          entryPoints = [
+            "tcp-port-21115"
+          ];
+          routes = [
+            {
+              match = "Host(`rustdesk.anderwerse.de`)";
+              kind = "Rule";
+              services = [
+                {
+                  inherit namespace;
+                  name = "rustdesk-tcp";
+                  port = 21115;
+                }
+              ];
+            }
+          ];
+        };
+        rustdesk-tcp-21116.spec = {
+          entryPoints = [
+            "tcp-port-21116"
+          ];
+          routes = [
+            {
+              match = "Host(`rustdesk.anderwerse.de`)";
+              kind = "Rule";
+              services = [
+                {
+                  inherit namespace;
+                  name = "rustdesk-tcp";
+                  port = 21116;
+                }
+              ];
+            }
+          ];
+        };
+        rustdesk-tcp-21117.spec = {
+          entryPoints = [
+            "tcp-port-21117"
+          ];
+          routes = [
+            {
+              match = "Host(`rustdesk.anderwerse.de`)";
+              kind = "Rule";
+              services = [
+                {
+                  inherit namespace;
+                  name = "rustdesk-tcp";
+                  port = 21117;
+                }
+              ];
+            }
+          ];
+        };
       };
 
       ingressRouteUDPs.rustdesk.spec = {
