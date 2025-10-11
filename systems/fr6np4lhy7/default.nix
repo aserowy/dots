@@ -17,6 +17,11 @@ revision:
 
   homebrew = {
     enable = true;
+    onActivation = {
+      autoUpdate = true;
+      cleanup = "zap";
+      upgrade = true;
+    };
     casks = [
       "discord"
       "drawio"
@@ -28,6 +33,7 @@ revision:
       "onedrive"
       "spotify"
       "steam"
+      "windows-app"
     ];
   };
 
