@@ -1,0 +1,15 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: rustdesk-tcp-21116
+  namespace: rustdesk
+spec:
+  entryPoints:
+    - tcp-port-21116
+  routes:
+    - kind: Rule
+      match: Host(`rustdesk.anderwerse.de`)
+      services:
+        - name: rustdesk-tcp
+          namespace: rustdesk
+          port: 21116

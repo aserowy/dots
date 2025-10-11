@@ -1,12 +1,10 @@
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
-  name: rustdesk
+  name: rustdesk-tcp-21117
   namespace: rustdesk
 spec:
   entryPoints:
-    - tcp-port-21115
-    - tcp-port-21116
     - tcp-port-21117
   routes:
     - kind: Rule
@@ -14,4 +12,4 @@ spec:
       services:
         - name: rustdesk-tcp
           namespace: rustdesk
-          port: 21115
+          port: 21117
