@@ -7,8 +7,10 @@ spec:
   entryPoints:
     - tcp-port-21117
   routes:
-    - match: Host(`rustdesk.anderwerse.de`)
+    - match: HostSNI(`rustdesk.anderwerse.de`)
       services:
         - name: rustdesk-tcp
           namespace: rustdesk
           port: 21117
+  tls:
+    secretName: anderwersede-tls-certificate
