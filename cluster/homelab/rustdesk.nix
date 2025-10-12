@@ -214,7 +214,7 @@ in
           ];
           routes = [
             {
-              match = "Host(`rustdesk.anderwerse.de`)";
+              match = "HostSNI(`rustdesk.anderwerse.de`)";
               services = [
                 {
                   inherit namespace;
@@ -224,6 +224,7 @@ in
               ];
             }
           ];
+          tls.secretName = "anderwersede-tls-certificate";
         };
         rustdesk-tcp-21116.spec = {
           entryPoints = [
@@ -231,7 +232,7 @@ in
           ];
           routes = [
             {
-              match = "Host(`rustdesk.anderwerse.de`)";
+              match = "HostSNI(`rustdesk.anderwerse.de`)";
               services = [
                 {
                   inherit namespace;
@@ -241,6 +242,7 @@ in
               ];
             }
           ];
+          tls.secretName = "anderwersede-tls-certificate";
         };
         rustdesk-tcp-21117.spec = {
           entryPoints = [
@@ -248,7 +250,7 @@ in
           ];
           routes = [
             {
-              match = "Host(`rustdesk.anderwerse.de`)";
+              match = "HostSNI(`rustdesk.anderwerse.de`)";
               services = [
                 {
                   inherit namespace;
@@ -258,10 +260,11 @@ in
               ];
             }
           ];
+          tls.secretName = "anderwersede-tls-certificate";
         };
       };
 
-      ingressRouteUDPs.rustdesk.spec = {
+      ingressRouteUDPs.rustdesk-udp-21116.spec = {
         entryPoints = [
           "udp-port-21116"
         ];
