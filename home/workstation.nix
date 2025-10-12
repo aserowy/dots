@@ -33,4 +33,14 @@
       spotify
     ];
   };
+
+  xdg.desktopEntries = {
+    "RustDesk (patched)" = {
+      name = "RustDesk (patched)";
+      icon = "rustdesk";
+      genericName = "Remote Desktop";
+      exec = "env GDK_BACKEND=x11 ${pkgs.rustdesk}/bin/rustdesk";
+      terminal = false;
+    };
+  };
 }
