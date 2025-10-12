@@ -207,7 +207,7 @@ in
         };
       };
 
-      ingressRoutes = {
+      ingressRouteTCPs = {
         rustdesk-tcp-21115.spec = {
           entryPoints = [
             "tcp-port-21115"
@@ -215,7 +215,6 @@ in
           routes = [
             {
               match = "Host(`rustdesk.anderwerse.de`)";
-              kind = "Rule";
               services = [
                 {
                   inherit namespace;
@@ -233,7 +232,6 @@ in
           routes = [
             {
               match = "Host(`rustdesk.anderwerse.de`)";
-              kind = "Rule";
               services = [
                 {
                   inherit namespace;
@@ -251,7 +249,6 @@ in
           routes = [
             {
               match = "Host(`rustdesk.anderwerse.de`)";
-              kind = "Rule";
               services = [
                 {
                   inherit namespace;

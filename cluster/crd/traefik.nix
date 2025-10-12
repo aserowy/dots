@@ -642,6 +642,288 @@ let
       };
 
     };
+    "traefik.io.v1alpha1.IngressRouteTCP" = {
+
+      options = {
+        "apiVersion" = mkOption {
+          description = "APIVersion defines the versioned schema of this representation of an object.\nServers should convert recognized schemas to the latest internal value, and\nmay reject unrecognized values.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources";
+          type = (types.nullOr types.str);
+        };
+        "kind" = mkOption {
+          description = "Kind is a string value representing the REST resource this object represents.\nServers may infer this from the endpoint the client submits requests to.\nCannot be updated.\nIn CamelCase.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds";
+          type = (types.nullOr types.str);
+        };
+        "metadata" = mkOption {
+          description = "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata";
+          type = (globalSubmoduleOf "io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta");
+        };
+        "spec" = mkOption {
+          description = "IngressRouteTCPSpec defines the desired state of IngressRouteTCP.";
+          type = (submoduleOf "traefik.io.v1alpha1.IngressRouteTCPSpec");
+        };
+      };
+
+      config = {
+        "apiVersion" = mkOverride 1002 null;
+        "kind" = mkOverride 1002 null;
+      };
+
+    };
+    "traefik.io.v1alpha1.IngressRouteTCPSpec" = {
+
+      options = {
+        "entryPoints" = mkOption {
+          description = "EntryPoints defines the list of entry point names to bind to.\nEntry points have to be configured in the static configuration.\nMore info: https://doc.traefik.io/traefik/v3.5/routing/entrypoints/\nDefault: all.";
+          type = (types.nullOr (types.listOf types.str));
+        };
+        "routes" = mkOption {
+          description = "Routes defines the list of routes.";
+          type = (types.listOf (submoduleOf "traefik.io.v1alpha1.IngressRouteTCPSpecRoutes"));
+        };
+        "tls" = mkOption {
+          description = "TLS defines the TLS configuration on a layer 4 / TCP Route.\nMore info: https://doc.traefik.io/traefik/v3.5/routing/routers/#tls_1";
+          type = (types.nullOr (submoduleOf "traefik.io.v1alpha1.IngressRouteTCPSpecTls"));
+        };
+      };
+
+      config = {
+        "entryPoints" = mkOverride 1002 null;
+        "tls" = mkOverride 1002 null;
+      };
+
+    };
+    "traefik.io.v1alpha1.IngressRouteTCPSpecRoutes" = {
+
+      options = {
+        "match" = mkOption {
+          description = "Match defines the router's rule.\nMore info: https://doc.traefik.io/traefik/v3.5/routing/routers/#rule_1";
+          type = types.str;
+        };
+        "middlewares" = mkOption {
+          description = "Middlewares defines the list of references to MiddlewareTCP resources.";
+          type = (
+            types.nullOr (
+              coerceAttrsOfSubmodulesToListByKey "traefik.io.v1alpha1.IngressRouteTCPSpecRoutesMiddlewares" "name"
+                [ ]
+            )
+          );
+          apply = attrsToList;
+        };
+        "priority" = mkOption {
+          description = "Priority defines the router's priority.\nMore info: https://doc.traefik.io/traefik/v3.5/routing/routers/#priority_1";
+          type = (types.nullOr types.int);
+        };
+        "services" = mkOption {
+          description = "Services defines the list of TCP services.";
+          type = (
+            types.nullOr (
+              coerceAttrsOfSubmodulesToListByKey "traefik.io.v1alpha1.IngressRouteTCPSpecRoutesServices" "name"
+                [ ]
+            )
+          );
+          apply = attrsToList;
+        };
+        "syntax" = mkOption {
+          description = "Syntax defines the router's rule syntax.\nMore info: https://doc.traefik.io/traefik/v3.5/routing/routers/#rulesyntax_1\nDeprecated: Please do not use this field and rewrite the router rules to use the v3 syntax.";
+          type = (types.nullOr types.str);
+        };
+      };
+
+      config = {
+        "middlewares" = mkOverride 1002 null;
+        "priority" = mkOverride 1002 null;
+        "services" = mkOverride 1002 null;
+        "syntax" = mkOverride 1002 null;
+      };
+
+    };
+    "traefik.io.v1alpha1.IngressRouteTCPSpecRoutesMiddlewares" = {
+
+      options = {
+        "name" = mkOption {
+          description = "Name defines the name of the referenced Traefik resource.";
+          type = types.str;
+        };
+        "namespace" = mkOption {
+          description = "Namespace defines the namespace of the referenced Traefik resource.";
+          type = (types.nullOr types.str);
+        };
+      };
+
+      config = {
+        "namespace" = mkOverride 1002 null;
+      };
+
+    };
+    "traefik.io.v1alpha1.IngressRouteTCPSpecRoutesServices" = {
+
+      options = {
+        "name" = mkOption {
+          description = "Name defines the name of the referenced Kubernetes Service.";
+          type = types.str;
+        };
+        "namespace" = mkOption {
+          description = "Namespace defines the namespace of the referenced Kubernetes Service.";
+          type = (types.nullOr types.str);
+        };
+        "nativeLB" = mkOption {
+          description = "NativeLB controls, when creating the load-balancer,\nwhether the LB's children are directly the pods IPs or if the only child is the Kubernetes Service clusterIP.\nThe Kubernetes Service itself does load-balance to the pods.\nBy default, NativeLB is false.";
+          type = (types.nullOr types.bool);
+        };
+        "nodePortLB" = mkOption {
+          description = "NodePortLB controls, when creating the load-balancer,\nwhether the LB's children are directly the nodes internal IPs using the nodePort when the service type is NodePort.\nIt allows services to be reachable when Traefik runs externally from the Kubernetes cluster but within the same network of the nodes.\nBy default, NodePortLB is false.";
+          type = (types.nullOr types.bool);
+        };
+        "port" = mkOption {
+          description = "Port defines the port of a Kubernetes Service.\nThis can be a reference to a named port.";
+          type = (types.either types.int types.str);
+        };
+        "proxyProtocol" = mkOption {
+          description = "ProxyProtocol defines the PROXY protocol configuration.\nMore info: https://doc.traefik.io/traefik/v3.5/routing/services/#proxy-protocol\nDeprecated: ProxyProtocol will not be supported in future APIVersions, please use ServersTransport to configure ProxyProtocol instead.";
+          type = (
+            types.nullOr (submoduleOf "traefik.io.v1alpha1.IngressRouteTCPSpecRoutesServicesProxyProtocol")
+          );
+        };
+        "serversTransport" = mkOption {
+          description = "ServersTransport defines the name of ServersTransportTCP resource to use.\nIt allows to configure the transport between Traefik and your servers.\nCan only be used on a Kubernetes Service.";
+          type = (types.nullOr types.str);
+        };
+        "terminationDelay" = mkOption {
+          description = "TerminationDelay defines the deadline that the proxy sets, after one of its connected peers indicates\nit has closed the writing capability of its connection, to close the reading capability as well,\nhence fully terminating the connection.\nIt is a duration in milliseconds, defaulting to 100.\nA negative value means an infinite deadline (i.e. the reading capability is never closed).\nDeprecated: TerminationDelay will not be supported in future APIVersions, please use ServersTransport to configure the TerminationDelay instead.";
+          type = (types.nullOr types.int);
+        };
+        "tls" = mkOption {
+          description = "TLS determines whether to use TLS when dialing with the backend.";
+          type = (types.nullOr types.bool);
+        };
+        "weight" = mkOption {
+          description = "Weight defines the weight used when balancing requests between multiple Kubernetes Service.";
+          type = (types.nullOr types.int);
+        };
+      };
+
+      config = {
+        "namespace" = mkOverride 1002 null;
+        "nativeLB" = mkOverride 1002 null;
+        "nodePortLB" = mkOverride 1002 null;
+        "proxyProtocol" = mkOverride 1002 null;
+        "serversTransport" = mkOverride 1002 null;
+        "terminationDelay" = mkOverride 1002 null;
+        "tls" = mkOverride 1002 null;
+        "weight" = mkOverride 1002 null;
+      };
+
+    };
+    "traefik.io.v1alpha1.IngressRouteTCPSpecRoutesServicesProxyProtocol" = {
+
+      options = {
+        "version" = mkOption {
+          description = "Version defines the PROXY Protocol version to use.";
+          type = (types.nullOr types.int);
+        };
+      };
+
+      config = {
+        "version" = mkOverride 1002 null;
+      };
+
+    };
+    "traefik.io.v1alpha1.IngressRouteTCPSpecTls" = {
+
+      options = {
+        "certResolver" = mkOption {
+          description = "CertResolver defines the name of the certificate resolver to use.\nCert resolvers have to be configured in the static configuration.\nMore info: https://doc.traefik.io/traefik/v3.5/https/acme/#certificate-resolvers";
+          type = (types.nullOr types.str);
+        };
+        "domains" = mkOption {
+          description = "Domains defines the list of domains that will be used to issue certificates.\nMore info: https://doc.traefik.io/traefik/v3.5/routing/routers/#domains";
+          type = (
+            types.nullOr (types.listOf (submoduleOf "traefik.io.v1alpha1.IngressRouteTCPSpecTlsDomains"))
+          );
+        };
+        "options" = mkOption {
+          description = "Options defines the reference to a TLSOption, that specifies the parameters of the TLS connection.\nIf not defined, the `default` TLSOption is used.\nMore info: https://doc.traefik.io/traefik/v3.5/https/tls/#tls-options";
+          type = (types.nullOr (submoduleOf "traefik.io.v1alpha1.IngressRouteTCPSpecTlsOptions"));
+        };
+        "passthrough" = mkOption {
+          description = "Passthrough defines whether a TLS router will terminate the TLS connection.";
+          type = (types.nullOr types.bool);
+        };
+        "secretName" = mkOption {
+          description = "SecretName is the name of the referenced Kubernetes Secret to specify the certificate details.";
+          type = (types.nullOr types.str);
+        };
+        "store" = mkOption {
+          description = "Store defines the reference to the TLSStore, that will be used to store certificates.\nPlease note that only `default` TLSStore can be used.";
+          type = (types.nullOr (submoduleOf "traefik.io.v1alpha1.IngressRouteTCPSpecTlsStore"));
+        };
+      };
+
+      config = {
+        "certResolver" = mkOverride 1002 null;
+        "domains" = mkOverride 1002 null;
+        "options" = mkOverride 1002 null;
+        "passthrough" = mkOverride 1002 null;
+        "secretName" = mkOverride 1002 null;
+        "store" = mkOverride 1002 null;
+      };
+
+    };
+    "traefik.io.v1alpha1.IngressRouteTCPSpecTlsDomains" = {
+
+      options = {
+        "main" = mkOption {
+          description = "Main defines the main domain name.";
+          type = (types.nullOr types.str);
+        };
+        "sans" = mkOption {
+          description = "SANs defines the subject alternative domain names.";
+          type = (types.nullOr (types.listOf types.str));
+        };
+      };
+
+      config = {
+        "main" = mkOverride 1002 null;
+        "sans" = mkOverride 1002 null;
+      };
+
+    };
+    "traefik.io.v1alpha1.IngressRouteTCPSpecTlsOptions" = {
+
+      options = {
+        "name" = mkOption {
+          description = "Name defines the name of the referenced Traefik resource.";
+          type = types.str;
+        };
+        "namespace" = mkOption {
+          description = "Namespace defines the namespace of the referenced Traefik resource.";
+          type = (types.nullOr types.str);
+        };
+      };
+
+      config = {
+        "namespace" = mkOverride 1002 null;
+      };
+
+    };
+    "traefik.io.v1alpha1.IngressRouteTCPSpecTlsStore" = {
+
+      options = {
+        "name" = mkOption {
+          description = "Name defines the name of the referenced Traefik resource.";
+          type = types.str;
+        };
+        "namespace" = mkOption {
+          description = "Namespace defines the namespace of the referenced Traefik resource.";
+          type = (types.nullOr types.str);
+        };
+      };
+
+      config = {
+        "namespace" = mkOverride 1002 null;
+      };
+
+    };
     "traefik.io.v1alpha1.IngressRouteUDP" = {
 
       options = {
@@ -762,6 +1044,17 @@ in
         );
         default = { };
       };
+      "traefik.io"."v1alpha1"."IngressRouteTCP" = mkOption {
+        description = "IngressRouteTCP is the CRD implementation of a Traefik TCP Router.";
+        type = (
+          types.attrsOf (
+            submoduleForDefinition "traefik.io.v1alpha1.IngressRouteTCP" "ingressroutetcps" "IngressRouteTCP"
+              "traefik.io"
+              "v1alpha1"
+          )
+        );
+        default = { };
+      };
       "traefik.io"."v1alpha1"."IngressRouteUDP" = mkOption {
         description = "IngressRouteUDP is a CRD implementation of a Traefik UDP Router.";
         type = (
@@ -781,6 +1074,17 @@ in
         type = (
           types.attrsOf (
             submoduleForDefinition "traefik.io.v1alpha1.IngressRoute" "ingressroutes" "IngressRoute"
+              "traefik.io"
+              "v1alpha1"
+          )
+        );
+        default = { };
+      };
+      "ingressRouteTCPs" = mkOption {
+        description = "IngressRouteTCP is the CRD implementation of a Traefik TCP Router.";
+        type = (
+          types.attrsOf (
+            submoduleForDefinition "traefik.io.v1alpha1.IngressRouteTCP" "ingressroutetcps" "IngressRouteTCP"
               "traefik.io"
               "v1alpha1"
           )
@@ -816,6 +1120,13 @@ in
         attrName = "ingressRoutes";
       }
       {
+        name = "ingressroutetcps";
+        group = "traefik.io";
+        version = "v1alpha1";
+        kind = "IngressRouteTCP";
+        attrName = "ingressRouteTCPs";
+      }
+      {
         name = "ingressrouteudps";
         group = "traefik.io";
         version = "v1alpha1";
@@ -826,6 +1137,7 @@ in
 
     resources = {
       "traefik.io"."v1alpha1"."IngressRoute" = mkAliasDefinitions options.resources."ingressRoutes";
+      "traefik.io"."v1alpha1"."IngressRouteTCP" = mkAliasDefinitions options.resources."ingressRouteTCPs";
       "traefik.io"."v1alpha1"."IngressRouteUDP" = mkAliasDefinitions options.resources."ingressRouteUDPs";
 
     };
@@ -837,6 +1149,12 @@ in
         group = "traefik.io";
         version = "v1alpha1";
         kind = "IngressRoute";
+        default.metadata.namespace = lib.mkDefault config.namespace;
+      }
+      {
+        group = "traefik.io";
+        version = "v1alpha1";
+        kind = "IngressRouteTCP";
         default.metadata.namespace = lib.mkDefault config.namespace;
       }
       {
