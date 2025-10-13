@@ -20,13 +20,6 @@ $env.NU_LIB_DIRS = [
     ($nu.default-config-dir | path join 'scripts')
 ]
 
-mkdir ~/.cache/nushell
-
-# broot --print-shell-function nushell | save --force ~/.cache/nushell/broot.nu
-carapace _carapace nushell | save --force ~/.cache/nushell/carapace.nu
-starship init nu | save --force ~/.cache/nushell/starship.nu
-zoxide init nushell | save --force ~/.cache/nushell/zoxide.nu
-
 let tab_names = ['nvim' 'ssh']
 let command_expansion = [[short extended]; ['e.g. y' 'yeet']]
 
