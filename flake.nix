@@ -121,7 +121,7 @@
       };
 
       homeConfigurations = {
-        "uitdeveloper@UIN01PC013901" = home.lib.homeManagerConfiguration {
+        "uitdeveloper" = home.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
 
           modules = [
