@@ -172,11 +172,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1760312644,
-        "narHash": "sha256-U9SkK45314urw9P7MmjhEgiQwwD/BTj+T3HTuz1JU1Q=",
+        "lastModified": 1760462439,
+        "narHash": "sha256-bks3rTsKGlqehk4l7rViIg2lBnUsY6we22O+ecRZB/c=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "e121f3773fa596ecaba5b22e518936a632d72a90",
+        "rev": "990e5ce6791ff1f497a61280a82eb66e3789e0e9",
         "type": "github"
       },
       "original": {
@@ -295,11 +295,11 @@
         "poetry2nix": "poetry2nix"
       },
       "locked": {
-        "lastModified": 1760327356,
-        "narHash": "sha256-qlU1T6XuNzLID3L21GlpE1fqe/Se1eWLgOOrrh8D5/k=",
+        "lastModified": 1760405227,
+        "narHash": "sha256-+ogcl2q332gPDPp/7LDQy8nWcghvUCR4yMfYbJomhoo=",
         "owner": "farcaller",
         "repo": "nixhelm",
-        "rev": "897b481b4fde289fea98fd9b4882a6459c4754e7",
+        "rev": "745385ccd1352520e0828c893b071c7669e1ff59",
         "type": "github"
       },
       "original": {
@@ -413,11 +413,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1760323082,
-        "narHash": "sha256-SKhC9tyt+gVgQHnZGMVPSdptlDYNqApT56JF5t8RwBY=",
+        "lastModified": 1760409263,
+        "narHash": "sha256-GvcdHmY3nZnU6GnUkEG1a7pDZPgFcuN+zGv3OgvfPH0=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "c73e6874fe8dce0bab82c0387b510875f1eff9f8",
+        "rev": "5694018463c2134e2369996b38deed41b1b9afc1",
         "type": "github"
       },
       "original": {
@@ -433,11 +433,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1760240450,
-        "narHash": "sha256-sa9bS9jSyc4vH0jSWrUsPGdqtMvDwmkLg971ntWOo2U=",
+        "lastModified": 1760393368,
+        "narHash": "sha256-8mN3kqyqa2PKY0wwZ2UmMEYMcxvNTwLaOrrDsw6Qi4E=",
         "owner": "Mic92",
         "repo": "sops-nix",
-        "rev": "41fd1f7570c89f645ee0ada0be4e2d3c4b169549",
+        "rev": "ab8d56e85b8be14cff9d93735951e30c3e86a437",
         "type": "github"
       },
       "original": {
@@ -542,11 +542,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1760019061,
-        "narHash": "sha256-Py/OCwMX94VJAvjlYui2fet1H89aBx+5XrZ1lmBQc2k=",
+        "lastModified": 1760460424,
+        "narHash": "sha256-JAKmfoWvC6uo1XUs9dRP7KdGnhvoTQgTIjx448wfE7o=",
         "owner": "aserowy",
         "repo": "yeet",
-        "rev": "f529078cb2d22ef0ed1b0953c1e29aea1f1966f2",
+        "rev": "a15e8bf2ebc133facefc6dab4ccfdf1a72bfb4b8",
         "type": "github"
       },
       "original": {
