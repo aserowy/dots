@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/name: valkey
     app.kubernetes.io/part-of: valkey
     app.kubernetes.io/version: 8.1.4
-    helm.sh/chart: valkey-4.0.10
+    helm.sh/chart: valkey-4.1.1
   name: valkey-replicas
   namespace: caching
 spec:
@@ -32,7 +32,7 @@ spec:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: valkey
         app.kubernetes.io/version: 8.1.4
-        helm.sh/chart: valkey-4.0.10
+        helm.sh/chart: valkey-4.1.1
     spec:
       affinity:
         podAntiAffinity:
@@ -61,6 +61,8 @@ spec:
               value: valkey-primary-0.valkey-headless.caching.svc.cluster.local
             - name: VALKEY_PRIMARY_PORT_NUMBER
               value: "6379"
+            - name: OPENSSL_FIPS
+              value: "yes"
             - name: ALLOW_EMPTY_PASSWORD
               value: "no"
             - name: VALKEY_PASSWORD_FILE

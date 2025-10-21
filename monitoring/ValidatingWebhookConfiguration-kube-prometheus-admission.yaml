@@ -8,8 +8,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: kube-prometheus-prometheus-operator
     app.kubernetes.io/part-of: kube-prometheus
-    app.kubernetes.io/version: 78.2.1
-    chart: kube-prometheus-stack-78.2.1
+    app.kubernetes.io/version: 78.3.2
+    chart: kube-prometheus-stack-78.3.2
     heritage: Helm
     release: kube-prometheus-stack
   name: kube-prometheus-admission
@@ -23,7 +23,7 @@ webhooks:
         namespace: monitoring
         path: /admission-prometheusrules/validate
     failurePolicy: Ignore
-    name: prometheusrulemutate.monitoring.coreos.com
+    name: prometheusrulevalidate.monitoring.coreos.com
     rules:
       - apiGroups:
           - monitoring.coreos.com
@@ -34,5 +34,27 @@ webhooks:
           - UPDATE
         resources:
           - prometheusrules
+    sideEffects: None
+    timeoutSeconds: 10
+  - admissionReviewVersions:
+      - v1
+      - v1beta1
+    clientConfig:
+      service:
+        name: kube-prometheus-operator
+        namespace: monitoring
+        path: /admission-alertmanagerconfigs/validate
+    failurePolicy: Ignore
+    name: alertmanagerconfigsvalidate.monitoring.coreos.com
+    rules:
+      - apiGroups:
+          - monitoring.coreos.com
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - alertmanagerconfigs
     sideEffects: None
     timeoutSeconds: 10

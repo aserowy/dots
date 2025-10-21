@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/name: valkey
     app.kubernetes.io/part-of: valkey
     app.kubernetes.io/version: 8.1.4
-    helm.sh/chart: valkey-4.0.10
+    helm.sh/chart: valkey-4.1.1
   name: valkey-primary
   namespace: caching
 spec:
@@ -32,7 +32,7 @@ spec:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: valkey
         app.kubernetes.io/version: 8.1.4
-        helm.sh/chart: valkey-4.0.10
+        helm.sh/chart: valkey-4.1.1
     spec:
       affinity:
         podAntiAffinity:
@@ -61,6 +61,8 @@ spec:
               value: "no"
             - name: VALKEY_PASSWORD_FILE
               value: /opt/bitnami/valkey/secrets/valkey-password
+            - name: OPENSSL_FIPS
+              value: "yes"
             - name: VALKEY_TLS_ENABLED
               value: "no"
             - name: VALKEY_PORT

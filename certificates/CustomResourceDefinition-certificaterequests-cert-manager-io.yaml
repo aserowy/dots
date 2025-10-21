@@ -9,8 +9,8 @@ metadata:
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: cert-manager
-    app.kubernetes.io/version: v1.19.0
-    helm.sh/chart: cert-manager-v1.19.0
+    app.kubernetes.io/version: v1.19.1
+    helm.sh/chart: cert-manager-v1.19.1
   name: certificaterequests.cert-manager.io
 spec:
   group: cert-manager.io
@@ -130,12 +130,14 @@ spec:
                     The `name` field of the reference must always be specified.
                   properties:
                     group:
-                      default: cert-manager.io
-                      description: Group of the issuer being referred to.
+                      description: |-
+                        Group of the issuer being referred to.
+                        Defaults to 'cert-manager.io'.
                       type: string
                     kind:
-                      default: Issuer
-                      description: Kind of the issuer being referred to.
+                      description: |-
+                        Kind of the issuer being referred to.
+                        Defaults to 'Issuer'.
                       type: string
                     name:
                       description: Name of the issuer being referred to.
