@@ -89,7 +89,7 @@ in
                 containers = [
                   {
                     name = "paperless";
-                    image = "docker.io/paperlessngx/paperless-ngx:2.18.4"; # docker/paperlessngx/paperless-ngx@semver-coerced
+                    image = "docker.io/paperlessngx/paperless-ngx:2.19"; # docker/paperlessngx/paperless-ngx@semver-coerced
                     securityContext = {
                       allowPrivilegeEscalation = false;
                       readOnlyRootFilesystem = true;
