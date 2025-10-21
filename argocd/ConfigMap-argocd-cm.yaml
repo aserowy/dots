@@ -63,6 +63,6 @@ metadata:
     app.kubernetes.io/name: argocd-cm
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v3.1.9
-    helm.sh/chart: argo-cd-9.0.1
+    helm.sh/chart: argo-cd-9.0.3
   name: argocd-cm
   namespace: argocd

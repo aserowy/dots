@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/name: argocd-dex-server
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v3.1.9
-    helm.sh/chart: argo-cd-9.0.1
+    helm.sh/chart: argo-cd-9.0.3
   name: argocd-dex-server
   namespace: argocd
 spec:
@@ -21,7 +21,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/cmd-params: f8c4ed6688893f59910076863bacc51ec94fbef427493d7f310ea315ef76cecd
+        checksum/cmd-params: 294e9d650e9baa854fcf44ea6ac74f73170918baf65a3c40cb99713e55f661d2
       labels:
         app.kubernetes.io/component: dex-server
         app.kubernetes.io/instance: argocd
@@ -29,7 +29,7 @@ spec:
         app.kubernetes.io/name: argocd-dex-server
         app.kubernetes.io/part-of: argocd
         app.kubernetes.io/version: v3.1.9
-        helm.sh/chart: argo-cd-9.0.1
+        helm.sh/chart: argo-cd-9.0.3
     spec:
       affinity:
         podAntiAffinity:
