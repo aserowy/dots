@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/instance: traefik-loadbalancer
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-37.1.2
+    helm.sh/chart: traefik-37.2.0
     homelab/loadbalancer: entrypoint
   name: traefik
   namespace: loadbalancer
