@@ -19,11 +19,5 @@ in
       gsettings-desktop-schemas
       lxappearance
     ];
-
-    qt = {
-      enable = true;
-      platformTheme = "gtk2";
-      style = "gtk2";
-    };
   };
 }

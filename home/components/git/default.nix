@@ -21,13 +21,15 @@ in
     programs = {
       git = {
         enable = true;
-        userName = "aserowy";
-        userEmail = "serowy@hotmail.com";
-        extraConfig = {
+        settings = {
           core.editor = cnfg.editor;
           credential.useHttpPath = "true";
           init.defaultBranch = "main";
           push.autoSetupRemote = "true";
+          user = {
+            name = "aserowy";
+            email = "serowy@hotmail.com";
+          };
         };
         lfs = {
           enable = true;
