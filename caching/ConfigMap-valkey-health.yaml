@@ -101,6 +101,6 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: valkey
     app.kubernetes.io/version: 8.1.4
-    helm.sh/chart: valkey-4.1.1
+    helm.sh/chart: valkey-4.1.3
   name: valkey-health
   namespace: caching
