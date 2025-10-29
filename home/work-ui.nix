@@ -20,6 +20,7 @@
     };
 
     packages = with pkgs; [
+      firefox
       inter
       powerline-fonts
       nerd-fonts.fira-code
