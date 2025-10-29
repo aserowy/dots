@@ -32,11 +32,7 @@
   programs = {
     home-manager.enable = true;
 
-    git = {
-      extraConfig = {
-        credential.helper = "/mnt/c/Users/ee03927_admin/scoop/shims/git-credential-manager.exe";
-      };
-    };
+    git.settings.credential.helper = "/mnt/c/Program\\ Files/Git/mingw64/bin/git-credential-manager.exe";
 
     ssh.matchBlocks = { };
   };
