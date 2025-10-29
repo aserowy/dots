@@ -6,8 +6,8 @@ metadata:
     app.kubernetes.io/instance: kube-prometheus-stack
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kube-prometheus
-    app.kubernetes.io/version: 78.5.0
-    chart: kube-prometheus-stack-78.5.0
+    app.kubernetes.io/version: 79.0.0
+    chart: kube-prometheus-stack-79.0.0
     heritage: Helm
     jobLabel: kube-proxy
     release: kube-prometheus-stack
