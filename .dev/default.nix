@@ -6,15 +6,15 @@
 }:
 let
   generators = {
-    akri = nixidy.packages.${pkgs.system}.generators.fromCRD {
+    akri = nixidy.packages.${pkgs.stdenv.hostPlatform.system}.generators.fromCRD {
       name = "akri";
-      src = nixhelm.chartsDerivations.${pkgs.system}.project-akri.akri;
+      src = nixhelm.chartsDerivations.${pkgs.stdenv.hostPlatform.system}.project-akri.akri;
       crds = [
         "crds/akri-configuration-crd.yaml"
         "crds/akri-instance-crd.yaml"
       ];
     };
-    cert-manager = nixidy.packages.${pkgs.system}.generators.fromCRD {
+    cert-manager = nixidy.packages.${pkgs.stdenv.hostPlatform.system}.generators.fromCRD {
       name = "cert-manager";
       src = pkgs.fetchFromGitHub {
         owner = "cert-manager";
@@ -27,7 +27,7 @@ let
         "deploy/crds/crd-issuers.yaml"
       ];
     };
-    cilium = nixidy.packages.${pkgs.system}.generators.fromCRD {
+    cilium = nixidy.packages.${pkgs.stdenv.hostPlatform.system}.generators.fromCRD {
       name = "cilium";
       src = pkgs.fetchFromGitHub {
         owner = "cilium";
@@ -41,14 +41,14 @@ let
         "pkg/k8s/apis/cilium.io/client/crds/v2alpha1/ciliumloadbalancerippools.yaml"
       ];
     };
-    sops = nixidy.packages.${pkgs.system}.generators.fromCRD {
+    sops = nixidy.packages.${pkgs.stdenv.hostPlatform.system}.generators.fromCRD {
       name = "sops";
-      src = nixhelm.chartsDerivations.${pkgs.system}.isindir.sops-secrets-operator;
+      src = nixhelm.chartsDerivations.${pkgs.stdenv.hostPlatform.system}.isindir.sops-secrets-operator;
       crds = [ "crds/isindir.github.com_sopssecrets.yaml" ];
     };
-    traefik = nixidy.packages.${pkgs.system}.generators.fromCRD {
+    traefik = nixidy.packages.${pkgs.stdenv.hostPlatform.system}.generators.fromCRD {
       name = "traefik";
-      src = nixhelm.chartsDerivations.${pkgs.system}.traefik.traefik;
+      src = nixhelm.chartsDerivations.${pkgs.stdenv.hostPlatform.system}.traefik.traefik;
       crds = [
         "crds/traefik.io_ingressroutes.yaml"
         "crds/traefik.io_ingressroutetcps.yaml"
@@ -65,7 +65,7 @@ pkgs.mkShell {
 
     pkgs.marksman
     pkgs.nixd
-    nixidy.packages.${pkgs.system}.default
+    nixidy.packages.${pkgs.stdenv.hostPlatform.system}.default
     pkgs.nixfmt-rfc-style
     pkgs.nodejs_24
     pkgs.nodePackages.prettier
@@ -73,10 +73,10 @@ pkgs.mkShell {
     pkgs.nufmt
     pkgs.sops
     pkgs.stylua
-    pkgs.sumneko-lua-language-server
+    pkgs.lua-language-server
     pkgs.taplo
   ]
-  ++ lib.optionals (!pkgs.stdenv.isDarwin) [
+  ++ lib.optionals (!pkgs.pkgs.stdenv.isDarwin) [
     pkgs.doas-sudo-shim
   ];
 

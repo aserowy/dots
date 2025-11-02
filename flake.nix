@@ -103,7 +103,7 @@
             nixpkgs.overlays = [
               neocode.overlays.default
               yeet.overlays.default
-              (final: prev: { zjstatus = zjstatus.packages.${prev.system}.default; })
+              (final: prev: { zjstatus = zjstatus.packages.${prev.stdenv.hostPlatform.system}.default; })
             ];
           }
 
@@ -129,7 +129,7 @@
               nixpkgs.overlays = [
                 neocode.overlays.default
                 yeet.overlays.default
-                (final: prev: { zjstatus = zjstatus.packages.${prev.system}.default; })
+                (final: prev: { zjstatus = zjstatus.packages.${prev.stdenv.hostPlatform.system}.default; })
               ];
             }
 
@@ -222,7 +222,7 @@
               nixpkgs.overlays = [
                 neocode.overlays.default
                 yeet.overlays.default
-                (final: prev: { zjstatus = zjstatus.packages.${prev.system}.default; })
+                (final: prev: { zjstatus = zjstatus.packages.${prev.stdenv.hostPlatform.system}.default; })
               ];
             }
 
@@ -310,7 +310,7 @@
         nixidy.lib.mkEnvs {
           inherit pkgs;
 
-          charts = nixhelm.chartsDerivations.${pkgs.system};
+          charts = nixhelm.chartsDerivations.${pkgs.stdenv.hostPlatform.system};
           envs = {
             homelab.modules = [ ./cluster/homelab/default.nix ];
           };
