@@ -29,6 +29,7 @@
       drawio
       nautilus
       onlyoffice-desktopeditors
+      reaper
       rustdesk
       spotify
     ];
