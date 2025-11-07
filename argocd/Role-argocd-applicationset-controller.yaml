@@ -7,8 +7,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-applicationset-controller
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.1.9
-    helm.sh/chart: argo-cd-9.0.5
+    app.kubernetes.io/version: v3.2.0
+    helm.sh/chart: argo-cd-9.1.0
   name: argocd-applicationset-controller
   namespace: argocd
 rules:
@@ -87,9 +87,13 @@ rules:
       - leases
     verbs:
       - create
-      - delete
+  - apiGroups:
+      - coordination.k8s.io
+    resourceNames:
+      - 58ac56fa.applicationsets.argoproj.io
+    resources:
+      - leases
+    verbs:
       - get
-      - list
-      - patch
       - update
-      - watch
+      - create

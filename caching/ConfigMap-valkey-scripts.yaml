@@ -76,6 +76,6 @@ metadata:
     app.kubernetes.io/name: valkey
     app.kubernetes.io/part-of: valkey
     app.kubernetes.io/version: 9.0.0
-    helm.sh/chart: valkey-5.0.1
+    helm.sh/chart: valkey-5.0.5
   name: valkey-scripts
   namespace: caching
