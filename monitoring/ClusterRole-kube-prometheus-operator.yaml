@@ -8,8 +8,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: kube-prometheus-prometheus-operator
     app.kubernetes.io/part-of: kube-prometheus
-    app.kubernetes.io/version: 79.1.1
-    chart: kube-prometheus-stack-79.1.1
+    app.kubernetes.io/version: 79.4.0
+    chart: kube-prometheus-stack-79.4.0
     heritage: Helm
     release: kube-prometheus-stack
   name: kube-prometheus-operator
@@ -89,6 +89,7 @@ rules:
       - watch
   - apiGroups:
       - ""
+      - events.k8s.io
     resources:
       - events
     verbs:
@@ -108,3 +109,14 @@ rules:
       - storageclasses
     verbs:
       - get
+  - apiGroups:
+      - discovery.k8s.io
+    resources:
+      - endpointslices
+    verbs:
+      - get
+      - create
+      - list
+      - watch
+      - update
+      - delete
