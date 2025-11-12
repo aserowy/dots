@@ -2,6 +2,7 @@
 {
   imports = [
     ./alacritty
+    ./brave
     ./chrome
     ./direnv
     ./docker

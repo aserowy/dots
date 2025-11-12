@@ -11,6 +11,10 @@
     username = "uitdeveloper";
 
     components = {
+      brave = {
+        enable = true;
+        setDefaultBrowserSessionVariable = true;
+      };
       docker.enable = true;
       ghostty.enable = true;
     };
