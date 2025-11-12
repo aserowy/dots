@@ -6,8 +6,8 @@ metadata:
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: 3.5.2
-    helm.sh/chart: kyverno-3.5.2
+    app.kubernetes.io/version: 3.6.0
+    helm.sh/chart: kyverno-3.6.0
   name: kyverno:cleanup-controller:core
 rules:
   - apiGroups:
@@ -47,6 +47,7 @@ rules:
       - policies.kyverno.io
     resources:
       - deletingpolicies
+      - namespaceddeletingpolicies
     verbs:
       - get
       - list
@@ -55,6 +56,7 @@ rules:
       - policies.kyverno.io
     resources:
       - deletingpolicies/status
+      - namespaceddeletingpolicies/status
     verbs:
       - update
   - apiGroups:

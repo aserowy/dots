@@ -8,8 +8,8 @@ metadata:
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: 3.5.2
-    helm.sh/chart: kyverno-3.5.2
+    app.kubernetes.io/version: 3.6.0
+    helm.sh/chart: kyverno-3.6.0
   name: kyverno-admission-controller-metrics
   namespace: policies
 spec:
@@ -19,7 +19,7 @@ spec:
         - /bin/sh
         - -c
         - sleep 20 ; wget -O- -S --no-check-certificate http://kyverno-svc-metrics.policies:8000/metrics
-      image: busybox:1.35
+      image: curlimages/curl:8.10.1
       imagePullPolicy: IfNotPresent
       name: test
       resources:
