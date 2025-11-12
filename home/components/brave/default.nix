@@ -38,6 +38,11 @@ in
         "--enable-features=UseOzonePlatform"
         "--ozone-platform=wayland"
       ];
+      # NOTE: currently not working
+      # extensions = [
+      #   "nngceckbapebfimnlniiiahkandclblb" # Bitwarden Passwortmanager
+      #   "eimadpbcbfnmbkopoojfekhnkhdbieeh" # Dark Reader
+      # ];
     };
 
     # INFO: set brave as default browser for electron apps
