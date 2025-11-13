@@ -6,9 +6,9 @@
 
   home = {
     components = {
-      brave.enable = true;
       chrome.enable = true;
       docker.enable = true;
+      edge.enable = true;
       ghostty.enable = true;
       onedrive.enable = true;
       wpaperd.enable = true;

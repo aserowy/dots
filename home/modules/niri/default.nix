@@ -29,8 +29,14 @@ in
     mkIf cnfg.enable {
       home = {
         components = {
-          ghostty.enable = true;
+          brave = {
+            enable = true;
+            enableXdgAssociations = true;
+            setDefaultBrowserSessionVariable = true;
+          };
+
           fuzzel.enable = true;
+          ghostty.enable = true;
         };
 
         file = {
@@ -44,7 +50,6 @@ in
         };
 
         modules = {
-          browser.enable = true;
           clipboard.enable = true;
           statusbar.enable = true;
         };

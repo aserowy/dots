@@ -116,7 +116,7 @@ window-rule {
 }
 
 binds {
-    Mod+B { spawn "microsoft-edge"; }
+    Mod+B { spawn "brave"; }
     Mod+T { spawn "ghostty"; }
     Mod+E { spawn "ghostty" "-e" "yeet"; }
 

@@ -1,7 +1,6 @@
 { ... }:
 {
   imports = [
-    ./browser
     ./clipboard
     ./console
     ./gaming
