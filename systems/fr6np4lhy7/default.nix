@@ -21,16 +21,16 @@ revision:
       upgrade = true;
     };
     casks = [
+      "brave-browser"
       "discord"
       "drawio"
       "epic-games"
       # "ghostty"
-      "google-chrome"
-      "microsoft-edge"
       "obsidian"
       "onedrive"
       "spotify"
       "steam"
+      "rustdesk"
       "windows-app"
     ];
   };
