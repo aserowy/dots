@@ -6,8 +6,8 @@ metadata:
     app.kubernetes.io/instance: kube-prometheus-stack
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kube-prometheus
-    app.kubernetes.io/version: 79.4.1
-    chart: kube-prometheus-stack-79.4.1
+    app.kubernetes.io/version: 79.5.0
+    chart: kube-prometheus-stack-79.5.0
     heritage: Helm
     release: kube-prometheus-stack
   name: kube-prometheus-kubernetes-apps
@@ -33,7 +33,7 @@ spec:
           expr: |-
             sum by (namespace, pod, cluster) (
               max by (namespace, pod, cluster) (
-                kube_pod_status_phase{job="kube-state-metrics", namespace=~".*", phase=~"Pending|Unknown|Failed"}
+                kube_pod_status_phase{job="kube-state-metrics", namespace=~".*", phase=~"Pending|Unknown"}
               ) * on (namespace, pod, cluster) group_left(owner_kind) topk by (namespace, pod, cluster) (
                 1, max by (namespace, pod, owner_kind, cluster) (kube_pod_owner{owner_kind!="Job"})
               )
