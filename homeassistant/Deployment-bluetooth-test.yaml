@@ -27,7 +27,7 @@ spec:
               # bluetoothd -n
 
               sleep infinity
-          image: debian:13.1
+          image: debian:13.2
           name: bluetooth-sidecar
           resources:
             limits:
