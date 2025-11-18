@@ -93,7 +93,7 @@ in
                 containers = [
                   {
                     name = "bluetooth-sidecar";
-                    image = "debian:13.1"; # docker/debian@semver-coerced
+                    image = "debian:13.2"; # docker/debian@semver-coerced
                     # restartPolicy = "Always";
                     securityContext = {
                       allowPrivilegeEscalation = true;
@@ -260,7 +260,7 @@ in
                   # SIDECAR
                   # {
                   #   name = "bluetooth-sidecar";
-                  #   image = "debian:13.1"; # docker/debian@semver-coerced
+                  #   image = "debian:13.2"; # docker/debian@semver-coerced
                   #   restartPolicy = "Always";
                   #   securityContext = {
                   #     allowPrivilegeEscalation = true;
