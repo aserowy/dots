@@ -26,6 +26,7 @@
     };
 
     packages = with pkgs; [
+      bitwarden-desktop
       discord
       drawio
       nautilus
