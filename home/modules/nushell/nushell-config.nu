@@ -117,29 +117,12 @@ $env.config = {
     }
 }
 
-# loading ssh-agent into env
-try {
-    let sshAgentFilePath = $"/tmp/ssh-agent-($env.USER).nuon"
-
-    if ($sshAgentFilePath | path exists) and ($"/proc/((open $sshAgentFilePath).SSH_AGENT_PID)" | path exists) {
-        load-env (open $sshAgentFilePath)
-    } else {
-        ^ssh-agent -c
-            | lines
-            | first 2
-            | parse "setenv {name} {value};"
-            | transpose -r
-            | into record
-            | save --force $sshAgentFilePath
-
-        load-env (open $sshAgentFilePath)
-    }
-}
-
 # source ~/.cache/nushell/broot.nu
 source ~/.cache/nushell/carapace.nu
 source ~/.cache/nushell/starship.nu
 source ~/.cache/nushell/zoxide.nu
+
+$env.SSH_AUTH_SOCK = ($nu.home-path | path join ".bitwarden-ssh-agent.sock")
 
 $env.PROMPT_INDICATOR = ""
 $env.TRANSIENT_PROMPT_INDICATOR = ""

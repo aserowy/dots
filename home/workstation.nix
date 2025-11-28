@@ -26,7 +26,9 @@
     };
 
     packages = with pkgs; [
+      # NOTE: enable ssh agent under settings
       bitwarden-desktop
+
       discord
       drawio
       nautilus

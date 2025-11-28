@@ -16,7 +16,6 @@
     ./lf
     ./logseq
     ./onedrive
-    ./ssh
     ./starship
     ./swaync
     ./swww

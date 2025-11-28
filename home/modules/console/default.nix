@@ -17,7 +17,6 @@ in
       components = {
         fzf.enable = true;
         git.enable = true;
-        ssh.enable = true;
         zellij.enable = true;
       };
 
