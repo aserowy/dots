@@ -11,7 +11,7 @@ input {
 
     keyboard {
         xkb {
-            layout "us"
+            layout "us,de"
         }
 
         repeat-delay 600

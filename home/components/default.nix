@@ -2,6 +2,7 @@
 {
   imports = [
     ./alacritty
+    ./bitwarden
     ./brave
     ./chrome
     ./direnv
