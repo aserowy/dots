@@ -2,6 +2,7 @@
 
 (include "./widgets/audio.yuck")
 (include "./widgets/clock.yuck")
+(include "./widgets/keyboard.yuck")
 (include "./widgets/network.yuck")
 (include "./widgets/notification.yuck")
 (include "./widgets/workspaces.yuck")
@@ -56,6 +57,10 @@
                     :space-evenly false
                     :halign "fill"
                     :valign "end"
+                    (keyboard)
+                    (box
+                        :height 5
+                    )
                     (notification)
                     (audio)
                     (network)

@@ -1,9 +1,3 @@
-;; (defpoll notifications_status
-;;     :interval "15s"
-;;     :initial '{ "icon": "󰌸", "connected": true, "online": false }'
-;;     "./widgets/get_network_status.nu"
-;; )
-
 (defwidget notification []
     (eventbox
         :onclick {  "niri msg action spawn -- swaync-client -t -sw" }

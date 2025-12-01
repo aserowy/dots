@@ -1,0 +1,18 @@
+(deflisten layout
+    :initial "0"
+    "
+    niri msg --json event-stream |
+        stdbuf -o0 awk -e '/^.*(KeyboardLayoutSwitched)/' |
+        while IFS= read -r line; do echo $line | jq -r '.KeyboardLayoutSwitched.idx'; done
+    "
+)
+
+(defwidget keyboard []
+    (eventbox
+        :onclick { "niri msg action switch-layout next" }
+        (label
+            :class "nerd-icon keyboard-layout"
+            :text "${layout == 1 ? 'DE' : 'US'}"
+        )
+    )
+)
