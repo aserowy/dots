@@ -6,6 +6,7 @@
 
   home = {
     components = {
+      bitwarden.enable = true;
       chrome.enable = true;
       docker.enable = true;
       edge.enable = true;
@@ -26,9 +27,6 @@
     };
 
     packages = with pkgs; [
-      # NOTE: enable ssh agent under settings
-      bitwarden-desktop
-
       discord
       drawio
       nautilus

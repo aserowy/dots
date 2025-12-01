@@ -10,7 +10,7 @@ let
   cnfg = config.home.components.bitwarden;
 
   configure = pkgs.writeText "configure-bitwarden.nu" "
-
+    # touch /home/serowy/testtouch
   ";
 in
 {
@@ -21,10 +21,10 @@ in
       packages = with pkgs; [
         bitwarden-desktop
       ];
-    };
 
-    # activation = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    #   run ${pkgs.nushell}/bin/nu ${configure}
-    # '';
+      activation.bitwarden = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+        run ${pkgs.nushell}/bin/nu ${configure}
+      '';
+    };
   };
 }
