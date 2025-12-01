@@ -59,7 +59,7 @@
                     :valign "end"
                     (keyboard)
                     (box
-                        :height 5
+                        :height 6
                     )
                     (notification)
                     (audio)
