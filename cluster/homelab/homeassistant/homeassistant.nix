@@ -1,7 +1,6 @@
 {
   application,
   namespace,
-  charts,
   lib,
   ...
 }:
@@ -257,46 +256,6 @@ in
                       }
                     ];
                   }
-                  # SIDECAR
-                  # {
-                  #   name = "bluetooth-sidecar";
-                  #   image = "debian:13.2"; # docker/debian@semver-coerced
-                  #   restartPolicy = "Always";
-                  #   securityContext = {
-                  #     allowPrivilegeEscalation = true;
-                  #     capabilities = {
-                  #       drop = [ "ALL" ];
-                  #     };
-                  #     privileged = true;
-                  #   };
-                  #   command = [
-                  #     "bash"
-                  #     "-c"
-                  #     ''
-                  #       apt-get update
-                  #       apt-get install -y bluetooth bluez bluez-tools dbus
-                  #
-                  #       # dbus-daemon --system --fork
-                  #       # bluetoothd -n
-                  #
-                  #       bash
-                  #     ''
-                  #   ];
-                  #   resources = {
-                  #     requests = {
-                  #       "akri.sh/akri-bluetooth-stick" = "1";
-                  #     };
-                  #     limits = {
-                  #       "akri.sh/akri-bluetooth-stick" = "1";
-                  #     };
-                  #   };
-                  #   volumeMounts = [
-                  #     {
-                  #       name = "dbus-socket";
-                  #       mountPath = "/var/run/dbus";
-                  #     }
-                  #   ];
-                  # }
                 ];
                 containers = [
                   {
@@ -411,6 +370,38 @@ in
             }
           ];
           tls.secretName = "anderwersede-tls-certificate";
+        };
+      };
+
+      ciliumNetworkPolicies = {
+        postgresqlPolicy = {
+          apiVersion = "cilium.io/v2";
+          kind = "CiliumNetworkPolicy";
+          metadata = {
+            inherit namespace;
+          };
+          spec = {
+            endpointSelector = {
+              matchLabels = {
+                "app.kubernetes.io/name" = "postgresql";
+              };
+            };
+            ingress = [
+              {
+                fromEndpoints = [
+                  {
+                    matchLabels = {
+                      app = "homeassistant_failing";
+                    };
+                  }
+                ];
+                toPorts = [
+                  { ports = [ { port = "5432"; } ]; }
+                ];
+              }
+            ];
+            egress = [ { } ];
+          };
         };
       };
     };
