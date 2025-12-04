@@ -374,7 +374,7 @@ in
       };
 
       ciliumNetworkPolicies = {
-        postgresqlPolicy = {
+        postgresql = {
           apiVersion = "cilium.io/v2";
           kind = "CiliumNetworkPolicy";
           metadata = {
