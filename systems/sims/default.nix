@@ -118,6 +118,8 @@
       };
     };
 
+    flatpak.enable = true;
+
     # lsblk --discard to ensure ssd supports trim
     # (disc-gran and disc-max should be non zero)
     fstrim.enable = true;
@@ -170,5 +172,14 @@
     user.extraConfig = ''
       DefaultLimitNOFILE=1048576
     '';
+
+    # NOTE: adds flathub as flatpak repo for all users
+    services.flatpak-repo = {
+      wantedBy = [ "multi-user.target" ];
+      path = [ pkgs.flatpak ];
+      script = ''
+        flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+      '';
+    };
   };
 }
