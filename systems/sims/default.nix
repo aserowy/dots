@@ -29,6 +29,7 @@
       gimp-with-plugins
       google-chrome
       onedrivegui
+      kdePackages.dragon
       kdePackages.plasma-browser-integration
       onlyoffice-desktopeditors
       spotify
