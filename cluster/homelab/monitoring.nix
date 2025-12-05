@@ -48,7 +48,7 @@
             scrapeInterval = "60s";
             storageSpec.volumeClaimTemplate.spec = {
               storageClassName = "longhorn-nobackup";
-              resources.requests.storage = "8Gi";
+              resources.requests.storage = "12Gi";
             };
             resources = {
               requests = {
