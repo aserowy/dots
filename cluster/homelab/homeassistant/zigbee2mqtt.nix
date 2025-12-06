@@ -228,6 +228,65 @@ in
           tls.secretName = "anderwersede-tls-certificate";
         };
       };
+
+      ciliumNetworkPolicies = {
+        zigbee2mqtt = {
+          apiVersion = "cilium.io/v2";
+          kind = "CiliumNetworkPolicy";
+          metadata = {
+            inherit namespace;
+          };
+          spec = {
+            endpointSelector = {
+              matchLabels = {
+                app = "zigbee2mqtt";
+              };
+            };
+            ingress = [
+              {
+                fromEndpoints = [
+                  {
+                    matchLabels = {
+                      "homelab/loadbalancer" = "entrypoint";
+                    };
+                  }
+                ];
+                toPorts = [
+                  {
+                    ports = [
+                      {
+                        port = "8080";
+                        protocol = "TCP";
+                      }
+                    ];
+                  }
+                ];
+              }
+            ];
+            egress = [
+              {
+                toEndpoints = [
+                  {
+                    matchLabels = {
+                      app = "mosquitto";
+                    };
+                  }
+                ];
+                toPorts = [
+                  {
+                    ports = [
+                      {
+                        port = "1883";
+                        protocol = "TCP";
+                      }
+                    ];
+                  }
+                ];
+              }
+            ];
+          };
+        };
+      };
     };
   };
 }

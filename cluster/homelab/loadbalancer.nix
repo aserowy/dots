@@ -48,13 +48,13 @@
           additionalArguments = [
             "--log.level=DEBUG"
           ];
+          commonLabels = {
+            "homelab/loadbalancer" = "entrypoint";
+          };
           service = {
             annotations = {
               "lbipam.cilium.io/sharing-cross-namespace" = "*";
               "lbipam.cilium.io/sharing-key" = "default-ippool";
-            };
-            labels = {
-              "homelab/loadbalancer" = "entrypoint";
             };
           };
         };

@@ -372,38 +372,6 @@ in
           tls.secretName = "anderwersede-tls-certificate";
         };
       };
-
-      ciliumNetworkPolicies = {
-        postgresql = {
-          apiVersion = "cilium.io/v2";
-          kind = "CiliumNetworkPolicy";
-          metadata = {
-            inherit namespace;
-          };
-          spec = {
-            endpointSelector = {
-              matchLabels = {
-                "app.kubernetes.io/name" = "postgresql";
-              };
-            };
-            ingress = [
-              {
-                fromEndpoints = [
-                  {
-                    matchLabels = {
-                      app = "homeassistant_failing";
-                    };
-                  }
-                ];
-                toPorts = [
-                  { ports = [ { port = "5432"; } ]; }
-                ];
-              }
-            ];
-            egress = [ { } ];
-          };
-        };
-      };
     };
   };
 }
