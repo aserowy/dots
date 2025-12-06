@@ -244,13 +244,13 @@ in
             };
             ingress = [
               {
-                fromEndpoints = [
-                  {
-                    matchLabels = {
-                      "homelab/loadbalancer" = "entrypoint";
-                    };
-                  }
-                ];
+                # fromEndpoints = [
+                #   {
+                #     matchLabels = {
+                #       "homelab/loadbalancer" = "entrypoint";
+                #     };
+                #   }
+                # ];
                 toPorts = [
                   {
                     ports = [
