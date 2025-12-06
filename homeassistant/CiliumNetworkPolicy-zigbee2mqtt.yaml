@@ -1,0 +1,25 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: zigbee2mqtt
+  namespace: homeassistant
+spec:
+  egress:
+    - toEndpoints:
+        - matchLabels:
+            app: mosquitto
+      toPorts:
+        - ports:
+            - port: "1883"
+              protocol: TCP
+  endpointSelector:
+    matchLabels:
+      app: zigbee2mqtt
+  ingress:
+    - fromEndpoints:
+        - matchLabels:
+            homelab/loadbalancer: entrypoint
+      toPorts:
+        - ports:
+            - port: "8080"
+              protocol: TCP
