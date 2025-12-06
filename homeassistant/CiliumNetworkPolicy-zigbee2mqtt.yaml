@@ -16,10 +16,7 @@ spec:
     matchLabels:
       app: zigbee2mqtt
   ingress:
-    - fromEndpoints:
-        - matchLabels:
-            homelab/loadbalancer: entrypoint
-      toPorts:
+    - toPorts:
         - ports:
             - port: "8080"
               protocol: TCP
