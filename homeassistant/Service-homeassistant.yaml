@@ -9,4 +9,4 @@ spec:
       port: 8123
       protocol: TCP
   selector:
-    app: homeassistant
+    app.kubernetes.io/name: homeassistant

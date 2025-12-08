@@ -7,11 +7,12 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: homeassistant
+      app.kubernetes.io/name: homeassistant
   template:
     metadata:
       labels:
-        app: homeassistant
+        app.kubernetes.io/component: frontend
+        app.kubernetes.io/name: homeassistant
     spec:
       containers:
         - env:
