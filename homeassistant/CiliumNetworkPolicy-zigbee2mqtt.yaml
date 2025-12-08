@@ -7,8 +7,8 @@ spec:
   egress:
     - toEndpoints:
         - matchLabels:
-            k8s:io.kubernetes.pod.namespace: kube-system
-            k8s:k8s-app: kube-dns
+            io.kubernetes.pod.namespace: kube-system
+            k8s-app: kube-dns
       toPorts:
         - ports:
             - port: "53"
@@ -24,7 +24,11 @@ spec:
     matchLabels:
       app: zigbee2mqtt
   ingress:
-    - toPorts:
+    - fromEndpoints:
+        - matchLabels:
+            app.kubernetes.io/component: entrypoint
+            io.kubernetes.pod.namespace: kube-system
+      toPorts:
         - ports:
             - port: "8080"
               protocol: TCP
