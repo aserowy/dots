@@ -49,7 +49,7 @@
             "--log.level=DEBUG"
           ];
           commonLabels = {
-            "homelab/loadbalancer" = "entrypoint";
+            "app.kubernetes.io/component" = "entrypoint";
           };
           service = {
             annotations = {

@@ -244,13 +244,14 @@ in
             };
             ingress = [
               {
-                # fromEndpoints = [
-                #   {
-                #     matchLabels = {
-                #       "homelab/loadbalancer" = "entrypoint";
-                #     };
-                #   }
-                # ];
+                fromEndpoints = [
+                  {
+                    matchLabels = {
+                      "io.kubernetes.pod.namespace" = "kube-system";
+                      "app.kubernetes.io/component" = "entrypoint";
+                    };
+                  }
+                ];
                 toPorts = [
                   {
                     ports = [
@@ -268,8 +269,8 @@ in
                 toEndpoints = [
                   {
                     matchLabels = {
-                      "k8s:io.kubernetes.pod.namespace" = "kube-system";
-                      "k8s:k8s-app" = "kube-dns";
+                      "io.kubernetes.pod.namespace" = "kube-system";
+                      "k8s-app" = "kube-dns";
                     };
                   }
                 ];
