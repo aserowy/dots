@@ -130,6 +130,45 @@ in
           };
         };
       };
+
+      ciliumNetworkPolicies = {
+        mosquitto = {
+          apiVersion = "cilium.io/v2";
+          kind = "CiliumNetworkPolicy";
+          metadata = {
+            inherit namespace;
+          };
+          spec = {
+            endpointSelector = {
+              matchLabels = {
+                app = "mosquitto";
+              };
+            };
+            ingress = [
+              {
+                fromEndpoints = [
+                  {
+                    matchLabels = {
+                      app = "zigbee2mqtt";
+                    };
+                  }
+                ];
+                toPorts = [
+                  {
+                    ports = [
+                      {
+                        port = "1883";
+                        protocol = "TCP";
+                      }
+                    ];
+                  }
+                ];
+              }
+            ];
+            egress = [ { } ];
+          };
+        };
+      };
     };
   };
 }
