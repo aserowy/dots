@@ -151,9 +151,12 @@ in
           };
           spec = {
             replicas = 1;
-            selector.matchLabels.app = "homeassistant";
+            selector.matchLabels."app.kubernetes.io/name" = "homeassistant";
             template = {
-              metadata.labels.app = "homeassistant";
+              metadata.labels = {
+                "app.kubernetes.io/name" = "homeassistant";
+                "app.kubernetes.io/component" = "frontend";
+              };
               spec = {
                 initContainers = [
                   {
@@ -339,7 +342,7 @@ in
             name = "homeassistant";
           };
           spec = {
-            selector.app = "homeassistant";
+            selector."app.kubernetes.io/name" = "homeassistant";
             ports = [
               {
                 name = "http";
