@@ -247,7 +247,7 @@ in
                 fromEndpoints = [
                   {
                     matchLabels = {
-                      "io.kubernetes.pod.namespace" = "kube-system";
+                      "io.kubernetes.pod.namespace" = "loadbalancer";
                       "app.kubernetes.io/component" = "entrypoint";
                     };
                   }
