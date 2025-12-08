@@ -7,11 +7,12 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: zigbee2mqtt
+      app.kubernetes.io/name: zigbee2mqtt
   template:
     metadata:
       labels:
-        app: zigbee2mqtt
+        app.kubernetes.io/component: frontend
+        app.kubernetes.io/name: zigbee2mqtt
     spec:
       containers:
         - image: docker.io/koenkk/zigbee2mqtt:2.7.1

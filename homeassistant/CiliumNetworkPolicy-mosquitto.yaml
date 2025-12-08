@@ -8,18 +8,18 @@ spec:
     - {}
   endpointSelector:
     matchLabels:
-      app: mosquitto
+      app.kubernetes.io/name: mosquitto
   ingress:
     - fromEndpoints:
         - matchLabels:
-            app: homeassistant
+            app.kubernetes.io/name: homeassistant
       toPorts:
         - ports:
             - port: "1883"
               protocol: TCP
     - fromEndpoints:
         - matchLabels:
-            app: zigbee2mqtt
+            app.kubernetes.io/name: zigbee2mqtt
       toPorts:
         - ports:
             - port: "1883"

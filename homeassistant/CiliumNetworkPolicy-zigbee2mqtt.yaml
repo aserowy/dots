@@ -15,14 +15,14 @@ spec:
               protocol: UDP
     - toEndpoints:
         - matchLabels:
-            app: mosquitto
+            app.kubernetes.io/name: mosquitto
       toPorts:
         - ports:
             - port: "1883"
               protocol: TCP
   endpointSelector:
     matchLabels:
-      app: zigbee2mqtt
+      app.kubernetes.io/name: zigbee2mqtt
   ingress:
     - fromEndpoints:
         - matchLabels:

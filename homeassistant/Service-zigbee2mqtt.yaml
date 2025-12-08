@@ -9,4 +9,4 @@ spec:
       port: 8080
       protocol: TCP
   selector:
-    app: zigbee2mqtt
+    app.kubernetes.io/name: zigbee2mqtt

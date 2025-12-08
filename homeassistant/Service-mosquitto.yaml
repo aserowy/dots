@@ -9,4 +9,4 @@ spec:
       port: 1883
       protocol: TCP
   selector:
-    app: mosquitto
+    app.kubernetes.io/name: mosquitto
