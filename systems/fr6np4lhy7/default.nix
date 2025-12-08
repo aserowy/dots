@@ -21,6 +21,7 @@ revision:
       upgrade = true;
     };
     casks = [
+      "bitwarden"
       "brave-browser"
       "discord"
       "drawio"
