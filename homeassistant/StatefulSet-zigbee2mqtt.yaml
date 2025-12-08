@@ -14,7 +14,7 @@ spec:
         app: zigbee2mqtt
     spec:
       containers:
-        - image: docker.io/koenkk/zigbee2mqtt:2.7
+        - image: docker.io/koenkk/zigbee2mqtt:2.7.1
           livenessProbe:
             httpGet:
               path: /
