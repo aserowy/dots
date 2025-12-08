@@ -27,7 +27,7 @@ spec:
     - fromEndpoints:
         - matchLabels:
             app.kubernetes.io/component: entrypoint
-            io.kubernetes.pod.namespace: kube-system
+            io.kubernetes.pod.namespace: loadbalancer
       toPorts:
         - ports:
             - port: "8080"
