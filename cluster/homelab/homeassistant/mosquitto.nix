@@ -45,9 +45,9 @@ in
           };
           spec = {
             replicas = 1;
-            selector.matchLabels.app = "mosquitto";
+            selector.matchLabels."app.kubernetes.io/name" = "mosquitto";
             template = {
-              metadata.labels.app = "mosquitto";
+              metadata.labels."app.kubernetes.io/name" = "mosquitto";
               spec = {
                 securityContext = {
                   fsGroup = 1099;
@@ -119,7 +119,7 @@ in
             name = "mosquitto";
           };
           spec = {
-            selector.app = "mosquitto";
+            selector."app.kubernetes.io/name" = "mosquitto";
             ports = [
               {
                 name = "http";
@@ -141,7 +141,7 @@ in
           spec = {
             endpointSelector = {
               matchLabels = {
-                app = "mosquitto";
+                "app.kubernetes.io/name" = "mosquitto";
               };
             };
             ingress = [
@@ -149,7 +149,7 @@ in
                 fromEndpoints = [
                   {
                     matchLabels = {
-                      app = "homeassistant";
+                      "app.kubernetes.io/name" = "homeassistant";
                     };
                   }
                 ];
@@ -168,7 +168,7 @@ in
                 fromEndpoints = [
                   {
                     matchLabels = {
-                      app = "zigbee2mqtt";
+                      "app.kubernetes.io/name" = "zigbee2mqtt";
                     };
                   }
                 ];

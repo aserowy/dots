@@ -49,9 +49,12 @@ in
           };
           spec = {
             replicas = 1;
-            selector.matchLabels.app = "zigbee2mqtt";
+            selector.matchLabels."app.kubernetes.io/name" = "zigbee2mqtt";
             template = {
-              metadata.labels.app = "zigbee2mqtt";
+              metadata.labels = {
+                "app.kubernetes.io/name" = "zigbee2mqtt";
+                "app.kubernetes.io/component" = "frontend";
+              };
               spec = {
                 securityContext = {
                   fsGroup = 1000;
@@ -195,7 +198,7 @@ in
             name = "zigbee2mqtt";
           };
           spec = {
-            selector.app = "zigbee2mqtt";
+            selector."app.kubernetes.io/name" = "zigbee2mqtt";
             ports = [
               {
                 name = "http";
@@ -239,7 +242,7 @@ in
           spec = {
             endpointSelector = {
               matchLabels = {
-                app = "zigbee2mqtt";
+                "app.kubernetes.io/name" = "zigbee2mqtt";
               };
             };
             ingress = [
@@ -289,7 +292,7 @@ in
                 toEndpoints = [
                   {
                     matchLabels = {
-                      app = "mosquitto";
+                      "app.kubernetes.io/name" = "mosquitto";
                     };
                   }
                 ];
