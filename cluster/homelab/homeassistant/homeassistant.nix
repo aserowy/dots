@@ -61,85 +61,85 @@ in
       };
 
       deployments = {
-        bluetooth-test = {
-          apiVersion = "apps/v1";
-          metadata = {
-            inherit namespace;
-            name = "bluetooth-test";
-          };
-          spec = {
-            replicas = 1;
-            selector = {
-              matchLabels = {
-                app = "bluetooth-test";
-              };
-            };
-            strategy = {
-              type = "RollingUpdate";
-            };
-            template = {
-              metadata = {
-                labels = {
-                  app = "bluetooth-test";
-                };
-              };
-              spec = {
-                securityContext = {
-                  seccompProfile = {
-                    type = "RuntimeDefault";
-                  };
-                };
-                containers = [
-                  {
-                    name = "bluetooth-sidecar";
-                    image = "debian:13.2"; # docker/debian@semver-coerced
-                    # restartPolicy = "Always";
-                    securityContext = {
-                      allowPrivilegeEscalation = true;
-                      capabilities = {
-                        drop = [ "ALL" ];
-                      };
-                      privileged = true;
-                    };
-                    command = [
-                      "bash"
-                      "-c"
-                      ''
-                        apt-get update
-                        apt-get install -y bluetooth bluez bluez-tools dbus
-
-                        # dbus-daemon --system --fork
-                        # bluetoothd -n
-
-                        sleep infinity
-                      ''
-                    ];
-                    resources = {
-                      requests = {
-                        "akri.sh/akri-bluetooth-stick" = "1";
-                      };
-                      limits = {
-                        "akri.sh/akri-bluetooth-stick" = "1";
-                      };
-                    };
-                    volumeMounts = [
-                      {
-                        name = "dbus-socket";
-                        mountPath = "/var/run/dbus";
-                      }
-                    ];
-                  }
-                ];
-                volumes = [
-                  {
-                    name = "dbus-socket";
-                    emptyDir = { };
-                  }
-                ];
-              };
-            };
-          };
-        };
+        # bluetooth-test = {
+        #   apiVersion = "apps/v1";
+        #   metadata = {
+        #     inherit namespace;
+        #     name = "bluetooth-test";
+        #   };
+        #   spec = {
+        #     replicas = 1;
+        #     selector = {
+        #       matchLabels = {
+        #         app = "bluetooth-test";
+        #       };
+        #     };
+        #     strategy = {
+        #       type = "RollingUpdate";
+        #     };
+        #     template = {
+        #       metadata = {
+        #         labels = {
+        #           app = "bluetooth-test";
+        #         };
+        #       };
+        #       spec = {
+        #         securityContext = {
+        #           seccompProfile = {
+        #             type = "RuntimeDefault";
+        #           };
+        #         };
+        #         containers = [
+        #           {
+        #             name = "bluetooth-sidecar";
+        #             image = "debian:13.2"; # docker/debian@semver-coerced
+        #             # restartPolicy = "Always";
+        #             securityContext = {
+        #               allowPrivilegeEscalation = true;
+        #               capabilities = {
+        #                 drop = [ "ALL" ];
+        #               };
+        #               privileged = true;
+        #             };
+        #             command = [
+        #               "bash"
+        #               "-c"
+        #               ''
+        #                 apt-get update
+        #                 apt-get install -y bluetooth bluez bluez-tools dbus
+        #
+        #                 # dbus-daemon --system --fork
+        #                 # bluetoothd -n
+        #
+        #                 sleep infinity
+        #               ''
+        #             ];
+        #             resources = {
+        #               requests = {
+        #                 "akri.sh/akri-bluetooth-stick" = "1";
+        #               };
+        #               limits = {
+        #                 "akri.sh/akri-bluetooth-stick" = "1";
+        #               };
+        #             };
+        #             volumeMounts = [
+        #               {
+        #                 name = "dbus-socket";
+        #                 mountPath = "/var/run/dbus";
+        #               }
+        #             ];
+        #           }
+        #         ];
+        #         volumes = [
+        #           {
+        #             name = "dbus-socket";
+        #             emptyDir = { };
+        #           }
+        #         ];
+        #       };
+        #     };
+        #   };
+        # };
       };
 
       statefulSets = {
