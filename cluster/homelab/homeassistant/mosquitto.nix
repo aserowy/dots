@@ -163,7 +163,8 @@ in
                     ];
                   }
                 ];
-              }{
+              }
+              {
                 fromEndpoints = [
                   {
                     matchLabels = {

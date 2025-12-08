@@ -268,6 +268,26 @@ in
                 toEndpoints = [
                   {
                     matchLabels = {
+                      "k8s:io.kubernetes.pod.namespace" = "kube-system";
+                      "k8s:k8s-app" = "kube-dns";
+                    };
+                  }
+                ];
+                toPorts = [
+                  {
+                    ports = [
+                      {
+                        port = "53";
+                        protocol = "UDP";
+                      }
+                    ];
+                  }
+                ];
+              }
+              {
+                toEndpoints = [
+                  {
+                    matchLabels = {
                       app = "mosquitto";
                     };
                   }
