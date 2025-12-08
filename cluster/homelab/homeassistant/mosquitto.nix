@@ -149,6 +149,24 @@ in
                 fromEndpoints = [
                   {
                     matchLabels = {
+                      app = "homeassistant";
+                    };
+                  }
+                ];
+                toPorts = [
+                  {
+                    ports = [
+                      {
+                        port = "1883";
+                        protocol = "TCP";
+                      }
+                    ];
+                  }
+                ];
+              }{
+                fromEndpoints = [
+                  {
+                    matchLabels = {
                       app = "zigbee2mqtt";
                     };
                   }
