@@ -1,0 +1,20 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: rustdesk
+  namespace: rustdesk
+spec:
+  egress:
+    - {}
+  endpointSelector:
+    matchLabels:
+      app.kubernetes.io/name: rustdesk
+  ingress:
+    - fromEndpoints:
+        - matchLabels:
+            app.kubernetes.io/component: entrypoint
+            io.kubernetes.pod.namespace: loadbalancer
+      toPorts:
+        - ports:
+            - port: "21116"
+              protocol: UDP
