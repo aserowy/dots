@@ -303,25 +303,13 @@ in
                   {
                     ports = [
                       {
+                        port = "21115";
+                        protocol = "TCP";
+                      }
+                      {
                         port = "21116";
                         protocol = "UDP";
                       }
-                    ];
-                  }
-                ];
-              }
-              {
-                fromEndpoints = [
-                  {
-                    matchLabels = {
-                      "io.kubernetes.pod.namespace" = "loadbalancer";
-                      "app.kubernetes.io/component" = "entrypoint";
-                    };
-                  }
-                ];
-                toPorts = [
-                  {
-                    ports = [
                       {
                         port = "21116";
                         protocol = "TCP";
@@ -331,8 +319,7 @@ in
                 ];
               }
             ];
-            egress = [{}
-            ];
+            egress = [ { } ];
           };
         };
       };
