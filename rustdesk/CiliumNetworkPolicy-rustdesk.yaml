@@ -5,7 +5,14 @@ metadata:
   namespace: rustdesk
 spec:
   egress:
-    - {}
+    - toEndpoints:
+        - matchLabels:
+            app.kubernetes.io/component: entrypoint
+            io.kubernetes.pod.namespace: loadbalancer
+      toPorts:
+        - ports:
+            - port: "21116"
+              protocol: UDP
   endpointSelector:
     matchLabels:
       app.kubernetes.io/name: rustdesk
