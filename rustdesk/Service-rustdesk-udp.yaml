@@ -9,4 +9,4 @@ spec:
       port: 21116
       protocol: UDP
   selector:
-    app: rustdesk
+    app.kubernetes.io/name: rustdesk

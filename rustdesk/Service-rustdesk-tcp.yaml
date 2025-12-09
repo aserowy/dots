@@ -15,4 +15,4 @@ spec:
       port: 21117
       protocol: TCP
   selector:
-    app: rustdesk
+    app.kubernetes.io/name: rustdesk
