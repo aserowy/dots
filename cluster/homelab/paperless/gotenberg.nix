@@ -11,20 +11,10 @@
           };
           spec = {
             replicas = 3;
-            selector = {
-              matchLabels = {
-                app = "gotenberg";
-              };
-            };
-            strategy = {
-              type = "RollingUpdate";
-            };
+            selector.matchLabels."app.kubernetes.io/name" = "gotenberg";
+            strategy.type = "RollingUpdate";
             template = {
-              metadata = {
-                labels = {
-                  app = "gotenberg";
-                };
-              };
+              metadata.labels."app.kubernetes.io/name" = "gotenberg";
               spec = {
                 securityContext = {
                   seccompProfile = {
@@ -101,9 +91,7 @@
             name = "gotenberg";
           };
           spec = {
-            selector = {
-              app = "gotenberg";
-            };
+            selector."app.kubernetes.io/name" = "gotenberg";
             ports = [
               {
                 name = "http";

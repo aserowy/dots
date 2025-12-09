@@ -69,16 +69,11 @@ in
           };
           spec = {
             replicas = 1;
-            selector = {
-              matchLabels = {
-                app = "paperless";
-              };
-            };
+            selector.matchLabels."app.kubernetes.io/name" = "paperless";
             template = {
-              metadata = {
-                labels = {
-                  app = "paperless";
-                };
+              metadata.labels = {
+                "app.kubernetes.io/name" = "paperless";
+                "app.kubernetes.io/component" = "frontend";
               };
               spec = {
                 securityContext = {
@@ -263,9 +258,7 @@ in
             name = "paperless";
           };
           spec = {
-            selector = {
-              app = "paperless";
-            };
+            selector."app.kubernetes.io/name" = "paperless";
             ports = [
               {
                 name = "http";

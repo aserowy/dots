@@ -11,20 +11,10 @@
           };
           spec = {
             replicas = 3;
-            selector = {
-              matchLabels = {
-                app = "tika";
-              };
-            };
-            strategy = {
-              type = "RollingUpdate";
-            };
+            selector.matchLabels."app.kubernetes.io/name" = "tika";
+            strategy.type = "RollingUpdate";
             template = {
-              metadata = {
-                labels = {
-                  app = "tika";
-                };
-              };
+              metadata.labels."app.kubernetes.io/name" = "tika";
               spec = {
                 securityContext = {
                   seccompProfile = {
@@ -83,9 +73,7 @@
             name = "tika";
           };
           spec = {
-            selector = {
-              app = "tika";
-            };
+            selector."app.kubernetes.io/name" = "tika";
             ports = [
               {
                 name = "http";
