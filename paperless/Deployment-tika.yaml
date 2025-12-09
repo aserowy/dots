@@ -7,13 +7,13 @@ spec:
   replicas: 3
   selector:
     matchLabels:
-      app: tika
+      app.kubernetes.io/name: tika
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        app: tika
+        app.kubernetes.io/name: tika
     spec:
       containers:
         - image: docker.io/apache/tika:3.2.0.0

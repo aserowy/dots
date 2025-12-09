@@ -7,13 +7,13 @@ spec:
   replicas: 3
   selector:
     matchLabels:
-      app: gotenberg
+      app.kubernetes.io/name: gotenberg
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        app: gotenberg
+        app.kubernetes.io/name: gotenberg
     spec:
       containers:
         - env:

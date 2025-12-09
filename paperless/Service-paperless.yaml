@@ -9,4 +9,4 @@ spec:
       port: 8000
       protocol: TCP
   selector:
-    app: paperless
+    app.kubernetes.io/name: paperless

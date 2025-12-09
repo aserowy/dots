@@ -9,4 +9,4 @@ spec:
       port: 9998
       protocol: TCP
   selector:
-    app: tika
+    app.kubernetes.io/name: tika

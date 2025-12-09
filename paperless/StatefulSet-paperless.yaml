@@ -7,11 +7,12 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: paperless
+      app.kubernetes.io/name: paperless
   template:
     metadata:
       labels:
-        app: paperless
+        app.kubernetes.io/component: frontend
+        app.kubernetes.io/name: paperless
     spec:
       containers:
         - env:
