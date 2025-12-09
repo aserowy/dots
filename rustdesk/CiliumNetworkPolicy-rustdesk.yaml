@@ -16,13 +16,9 @@ spec:
             io.kubernetes.pod.namespace: loadbalancer
       toPorts:
         - ports:
+            - port: "21115"
+              protocol: TCP
             - port: "21116"
               protocol: UDP
-    - fromEndpoints:
-        - matchLabels:
-            app.kubernetes.io/component: entrypoint
-            io.kubernetes.pod.namespace: loadbalancer
-      toPorts:
-        - ports:
             - port: "21116"
               protocol: TCP
