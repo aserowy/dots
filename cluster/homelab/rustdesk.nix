@@ -49,9 +49,9 @@ in
         };
         spec = {
           replicas = 1;
-          selector.matchLabels.app = "rustdesk";
+          selector.matchLabels."app.kubernetes.io/name" = "rustdesk";
           template = {
-            metadata.labels.app = "rustdesk";
+            metadata.labels."app.kubernetes.io/name" = "rustdesk";
             spec = {
               securityContext = {
                 fsGroup = 1000;
@@ -276,6 +276,44 @@ in
             ];
           }
         ];
+      };
+
+      ciliumNetworkPolicies = {
+        rustdesk = {
+          apiVersion = "cilium.io/v2";
+          kind = "CiliumNetworkPolicy";
+          metadata = {
+            inherit namespace;
+          };
+          spec = {
+            endpointSelector.matchLabels = {
+              "app.kubernetes.io/name" = "rustdesk";
+            };
+            ingress = [
+              {
+                fromEndpoints = [
+                  {
+                    matchLabels = {
+                      "io.kubernetes.pod.namespace" = "loadbalancer";
+                      "app.kubernetes.io/component" = "entrypoint";
+                    };
+                  }
+                ];
+                toPorts = [
+                  {
+                    ports = [
+                      {
+                        port = "21116";
+                        protocol = "UDP";
+                      }
+                    ];
+                  }
+                ];
+              }
+            ];
+            egress = [ { } ];
+          };
+        };
       };
     };
   };
