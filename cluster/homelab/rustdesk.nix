@@ -310,10 +310,8 @@ in
                   }
                 ];
               }
-            ];
-            egress = [
               {
-                toEndpoints = [
+                fromEndpoints = [
                   {
                     matchLabels = {
                       "io.kubernetes.pod.namespace" = "loadbalancer";
@@ -326,12 +324,14 @@ in
                     ports = [
                       {
                         port = "21116";
-                        protocol = "UDP";
+                        protocol = "TCP";
                       }
                     ];
                   }
                 ];
               }
+            ];
+            egress = [{}
             ];
           };
         };
