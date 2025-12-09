@@ -84,6 +84,43 @@
           };
         };
       };
+
+      ciliumNetworkPolicies = {
+        tika = {
+          apiVersion = "cilium.io/v2";
+          kind = "CiliumNetworkPolicy";
+          metadata = {
+            inherit namespace;
+          };
+          spec = {
+            endpointSelector.matchLabels = {
+              "app.kubernetes.io/name" = "tika";
+            };
+            ingress = [
+              {
+                fromEndpoints = [
+                  {
+                    matchLabels = {
+                      "app.kubernetes.io/name" = "paperless";
+                    };
+                  }
+                ];
+                toPorts = [
+                  {
+                    ports = [
+                      {
+                        port = "9998";
+                        protocol = "TCP";
+                      }
+                    ];
+                  }
+                ];
+              }
+            ];
+            egress = [ { } ];
+          };
+        };
+      };
     };
   };
 }
