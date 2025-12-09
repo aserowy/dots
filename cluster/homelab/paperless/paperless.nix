@@ -411,7 +411,7 @@ in
                   {
                     ports = [
                       {
-                        port = "3000";
+                        port = "9998";
                         protocol = "TCP";
                       }
                     ];
