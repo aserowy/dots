@@ -158,7 +158,7 @@ in
             name = "rustdesk-udp";
           };
           spec = {
-            selector.app = "rustdesk";
+            selector."app.kubernetes.io/name" = "rustdesk";
             ports = [
               {
                 name = "udp-port-21116";
@@ -174,7 +174,7 @@ in
             name = "rustdesk-tcp";
           };
           spec = {
-            selector.app = "rustdesk";
+            selector."app.kubernetes.io/name" = "rustdesk";
             ports = [
               {
                 name = "tcp-port-21115";
