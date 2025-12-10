@@ -53,7 +53,7 @@ in
             template = {
               metadata.labels = {
                 "app.kubernetes.io/name" = "zigbee2mqtt";
-                "app.kubernetes.io/component" = "frontend";
+                "app.kubernetes.io/type" = "frontend";
               };
               spec = {
                 securityContext = {

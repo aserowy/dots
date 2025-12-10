@@ -73,7 +73,7 @@ in
             template = {
               metadata.labels = {
                 "app.kubernetes.io/name" = "homeassistant";
-                "app.kubernetes.io/component" = "frontend";
+                "app.kubernetes.io/type" = "frontend";
               };
               spec = {
                 initContainers = [

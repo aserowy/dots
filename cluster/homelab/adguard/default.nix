@@ -39,7 +39,8 @@ in
             template = {
               metadata.labels = {
                 "app.kubernetes.io/name" = "adguard";
-                "app.kubernetes.io/component" = "frontend";
+                "app.kubernetes.io/component" = "entrypoint";
+                "app.kubernetes.io/type" = "frontend";
               };
               spec = {
                 securityContext = {
