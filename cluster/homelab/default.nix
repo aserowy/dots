@@ -3,7 +3,6 @@
   imports = [
     ./argocd.nix
 
-    ./caching.nix
     ./certificates.nix
     ./cilium.nix
     # ./container-registry.nix
