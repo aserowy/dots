@@ -1,19 +1,25 @@
-apiVersion: policy/v1
-kind: PodDisruptionBudget
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
 metadata:
   labels:
-    app.kubernetes.io/component: primary
     app.kubernetes.io/instance: valkey
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: valkey
+    app.kubernetes.io/part-of: valkey
     app.kubernetes.io/version: 9.0.0
     helm.sh/chart: valkey-5.0.10
-  name: valkey-primary
-  namespace: caching
+  name: valkey
+  namespace: paperless
 spec:
-  maxUnavailable: 1
-  selector:
+  egress:
+    - {}
+  ingress:
+    - ports:
+        - port: 6379
+  podSelector:
     matchLabels:
-      app.kubernetes.io/component: primary
       app.kubernetes.io/instance: valkey
       app.kubernetes.io/name: valkey
+  policyTypes:
+    - Ingress
+    - Egress

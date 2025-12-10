@@ -47,7 +47,7 @@ data:
     }
 
     VALKEYPORT=$(get_port "$HOSTNAME" "VALKEY")
-    HEADLESS_SERVICE="valkey-headless.caching.svc.cluster.local"
+    HEADLESS_SERVICE="valkey-headless.paperless.svc.cluster.local"
 
     [[ -f $VALKEY_PASSWORD_FILE ]] && export VALKEY_PASSWORD="$(< "${VALKEY_PASSWORD_FILE}")"
     [[ -f $VALKEY_PRIMARY_PASSWORD_FILE ]] && export VALKEY_PRIMARY_PASSWORD="$(< "${VALKEY_PRIMARY_PASSWORD_FILE}")"
@@ -78,4 +78,4 @@ metadata:
     app.kubernetes.io/version: 9.0.0
     helm.sh/chart: valkey-5.0.10
   name: valkey-scripts
-  namespace: caching
+  namespace: paperless

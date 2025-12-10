@@ -9,7 +9,7 @@ metadata:
     app.kubernetes.io/version: 9.0.0
     helm.sh/chart: valkey-5.0.10
   name: valkey-replicas
-  namespace: caching
+  namespace: paperless
 spec:
   maxUnavailable: 1
   selector:

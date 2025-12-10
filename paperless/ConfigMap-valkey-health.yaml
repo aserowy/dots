@@ -103,4 +103,4 @@ metadata:
     app.kubernetes.io/version: 9.0.0
     helm.sh/chart: valkey-5.0.10
   name: valkey-health
-  namespace: caching
+  namespace: paperless

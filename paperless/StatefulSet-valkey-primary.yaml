@@ -2,20 +2,20 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   labels:
-    app.kubernetes.io/component: replica
+    app.kubernetes.io/component: primary
     app.kubernetes.io/instance: valkey
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: valkey
     app.kubernetes.io/part-of: valkey
     app.kubernetes.io/version: 9.0.0
     helm.sh/chart: valkey-5.0.10
-  name: valkey-replicas
-  namespace: caching
+  name: valkey-primary
+  namespace: paperless
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/component: replica
+      app.kubernetes.io/component: primary
       app.kubernetes.io/instance: valkey
       app.kubernetes.io/name: valkey
   serviceName: valkey-headless
@@ -24,10 +24,10 @@ spec:
       annotations:
         checksum/configmap: c8cdc0c4c772ac3192446a08bf401c29f1e39f33614657d36e4bb1692e34b39f
         checksum/health: e3a0f06458110f02986bb8df4391c43567355d3582dd02f25447184391196fbc
-        checksum/scripts: 7c6f20e38b0c8339ff1289c764bf073e3ee5a8e2cac503d296c7b177b24dd511
+        checksum/scripts: 4738d9e91df827df945286095aa627b7d2b76478ef7eef41f4279dfd644077ee
         checksum/secret: 44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a
       labels:
-        app.kubernetes.io/component: replica
+        app.kubernetes.io/component: primary
         app.kubernetes.io/instance: valkey
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: valkey
@@ -40,7 +40,7 @@ spec:
             - podAffinityTerm:
                 labelSelector:
                   matchLabels:
-                    app.kubernetes.io/component: replica
+                    app.kubernetes.io/component: primary
                     app.kubernetes.io/instance: valkey
                     app.kubernetes.io/name: valkey
                 topologyKey: kubernetes.io/hostname
@@ -49,26 +49,20 @@ spec:
       containers:
         - args:
             - -c
-            - /opt/bitnami/scripts/start-scripts/start-replica.sh
+            - /opt/bitnami/scripts/start-scripts/start-primary.sh
           command:
             - /bin/bash
           env:
             - name: BITNAMI_DEBUG
               value: "false"
             - name: VALKEY_REPLICATION_MODE
-              value: replica
-            - name: VALKEY_PRIMARY_HOST
-              value: valkey-primary-0.valkey-headless.caching.svc.cluster.local
-            - name: VALKEY_PRIMARY_PORT_NUMBER
-              value: "6379"
-            - name: OPENSSL_FIPS
-              value: "yes"
+              value: primary
             - name: ALLOW_EMPTY_PASSWORD
               value: "no"
             - name: VALKEY_PASSWORD_FILE
               value: /opt/bitnami/valkey/secrets/valkey-password
-            - name: VALKEY_PRIMARY_PASSWORD_FILE
-              value: /opt/bitnami/valkey/secrets/valkey-password
+            - name: OPENSSL_FIPS
+              value: "yes"
             - name: VALKEY_TLS_ENABLED
               value: "no"
             - name: VALKEY_PORT
@@ -80,7 +74,7 @@ spec:
               command:
                 - sh
                 - -c
-                - /health/ping_liveness_local_and_primary.sh 5
+                - /health/ping_liveness_local.sh 5
             failureThreshold: 5
             initialDelaySeconds: 20
             periodSeconds: 5
@@ -95,7 +89,7 @@ spec:
               command:
                 - sh
                 - -c
-                - /health/ping_readiness_local_and_primary.sh 1
+                - /health/ping_readiness_local.sh 1
             failureThreshold: 5
             initialDelaySeconds: 20
             periodSeconds: 5
@@ -122,14 +116,6 @@ spec:
             seLinuxOptions: {}
             seccompProfile:
               type: RuntimeDefault
-          startupProbe:
-            failureThreshold: 22
-            initialDelaySeconds: 10
-            periodSeconds: 10
-            successThreshold: 1
-            tcpSocket:
-              port: redis
-            timeoutSeconds: 5
           volumeMounts:
             - mountPath: /opt/bitnami/scripts/start-scripts
               name: start-scripts
@@ -141,7 +127,7 @@ spec:
               name: valkey-data
             - mountPath: /opt/bitnami/valkey/mounted-etc
               name: config
-            - mountPath: /opt/bitnami/valkey/etc
+            - mountPath: /opt/bitnami/valkey/etc/
               name: empty-dir
               subPath: app-conf-dir
             - mountPath: /tmp
@@ -153,7 +139,7 @@ spec:
         fsGroupChangePolicy: Always
         supplementalGroups: []
         sysctls: []
-      serviceAccountName: valkey-replica
+      serviceAccountName: valkey-primary
       terminationGracePeriodSeconds: 30
       volumes:
         - configMap:
@@ -182,7 +168,7 @@ spec:
       kind: PersistentVolumeClaim
       metadata:
         labels:
-          app.kubernetes.io/component: replica
+          app.kubernetes.io/component: primary
           app.kubernetes.io/instance: valkey
           app.kubernetes.io/name: valkey
         name: valkey-data

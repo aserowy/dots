@@ -43,7 +43,6 @@ spec:
     - toEndpoints:
         - matchLabels:
             app.kubernetes.io/name: valkey
-            io.kubernetes.pod.namespace: caching
       toPorts:
         - ports:
             - port: "6379"
