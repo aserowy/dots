@@ -35,7 +35,7 @@ spec:
   ingress:
     - fromEndpoints:
         - matchLabels:
-            app.kubernetes.io/component: entrypoint
+            app.kubernetes.io/role: entrypoint
             io.kubernetes.pod.namespace: loadbalancer
       toPorts:
         - ports:

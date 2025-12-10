@@ -2,10 +2,10 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app.kubernetes.io/component: entrypoint
     app.kubernetes.io/instance: traefik-loadbalancer
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
+    app.kubernetes.io/role: entrypoint
     helm.sh/chart: traefik-37.4.0
   name: traefik
   namespace: loadbalancer
@@ -28,10 +28,10 @@ spec:
         prometheus.io/port: "9100"
         prometheus.io/scrape: "true"
       labels:
-        app.kubernetes.io/component: entrypoint
         app.kubernetes.io/instance: traefik-loadbalancer
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: traefik
+        app.kubernetes.io/role: entrypoint
         helm.sh/chart: traefik-37.4.0
     spec:
       automountServiceAccountToken: true

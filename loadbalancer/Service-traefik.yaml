@@ -5,10 +5,10 @@ metadata:
     lbipam.cilium.io/sharing-cross-namespace: '*'
     lbipam.cilium.io/sharing-key: default-ippool
   labels:
-    app.kubernetes.io/component: entrypoint
     app.kubernetes.io/instance: traefik-loadbalancer
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
+    app.kubernetes.io/role: entrypoint
     helm.sh/chart: traefik-37.4.0
   name: traefik
   namespace: loadbalancer
