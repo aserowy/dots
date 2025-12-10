@@ -312,8 +312,12 @@ in
                 toEntities = [ "world" ];
                 toPorts = [
                   {
-                    port = "53";
-                    protocol = "UDP";
+                    ports = [
+                      {
+                        port = "53";
+                        protocol = "UDP";
+                      }
+                    ];
                   }
                 ];
               }
