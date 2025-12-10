@@ -35,16 +35,11 @@ in
           };
           spec = {
             replicas = 1;
-            selector = {
-              matchLabels = {
-                app = "adguard";
-              };
-            };
+            selector.matchLabels."app.kubernetes.io/name" = "adguard";
             template = {
-              metadata = {
-                labels = {
-                  app = "adguard";
-                };
+              metadata.labels = {
+                "app.kubernetes.io/name" = "adguard";
+                "app.kubernetes.io/component" = "frontend";
               };
               spec = {
                 securityContext = {
@@ -190,9 +185,7 @@ in
             name = "adguard-dashboard";
           };
           spec = {
-            selector = {
-              app = "adguard";
-            };
+            selector."app.kubernetes.io/name" = "adguard";
             ports = [
               {
                 name = "http";
@@ -202,6 +195,7 @@ in
             ];
           };
         };
+
         adguard-dns = {
           metadata = {
             inherit namespace;
@@ -210,15 +204,10 @@ in
               "lbipam.cilium.io/sharing-cross-namespace" = "*";
               "lbipam.cilium.io/sharing-key" = "default-ippool";
             };
-            labels = {
-              "homelab/loadbalancer" = "entrypoint";
-            };
           };
           spec = {
             type = "LoadBalancer";
-            selector = {
-              app = "adguard";
-            };
+            selector."app.kubernetes.io/name" = "adguard";
             ports = [
               {
                 name = "dns-tcp";
@@ -259,6 +248,77 @@ in
             }
           ];
           tls.secretName = "anderwersede-tls-certificate";
+        };
+      };
+
+      ciliumNetworkPolicies = {
+        adguard = {
+          apiVersion = "cilium.io/v2";
+          kind = "CiliumNetworkPolicy";
+          metadata = {
+            inherit namespace;
+          };
+          spec = {
+            endpointSelector = {
+              matchLabels = {
+                "app.kubernetes.io/name" = "adguard";
+              };
+            };
+            ingress = [
+              {
+                fromEndpoints = [
+                  {
+                    matchLabels = {
+                      "io.kubernetes.pod.namespace" = "loadbalancer";
+                      "app.kubernetes.io/component" = "entrypoint";
+                    };
+                  }
+                ];
+                toPorts = [
+                  {
+                    ports = [
+                      {
+                        port = "3000";
+                        protocol = "TCP";
+                      }
+                    ];
+                  }
+                ];
+              }
+              {
+                fromEntities = [ "world" ];
+                toPorts = [
+                  {
+                    ports = [
+                      {
+                        port = "53";
+                        protocol = "TCP";
+                      }
+                      {
+                        port = "53";
+                        protocol = "UDP";
+                      }
+                      {
+                        port = "67";
+                        protocol = "UDP";
+                      }
+                    ];
+                  }
+                ];
+              }
+            ];
+            egress = [
+              {
+                toEntities = [ "world" ];
+                toPorts = [
+                  {
+                    port = "53";
+                    protocol = "UDP";
+                  }
+                ];
+              }
+            ];
+          };
         };
       };
     };
