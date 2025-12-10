@@ -7,11 +7,12 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: adguard
+      app.kubernetes.io/name: adguard
   template:
     metadata:
       labels:
-        app: adguard
+        app.kubernetes.io/component: frontend
+        app.kubernetes.io/name: adguard
     spec:
       containers:
         - image: docker.io/adguard/adguardhome:v0.107.71

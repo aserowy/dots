@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/name: valkey
     app.kubernetes.io/part-of: valkey
     app.kubernetes.io/version: 9.0.0
-    helm.sh/chart: valkey-5.0.8
+    helm.sh/chart: valkey-5.0.10
   name: valkey-primary
   namespace: caching
 spec:
@@ -32,7 +32,7 @@ spec:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: valkey
         app.kubernetes.io/version: 9.0.0
-        helm.sh/chart: valkey-5.0.8
+        helm.sh/chart: valkey-5.0.10
     spec:
       affinity:
         podAntiAffinity:
