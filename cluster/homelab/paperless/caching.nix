@@ -1,9 +1,6 @@
-{ charts, ... }:
-let
-  namespace = "caching";
-in
+{ application, namespace, charts, ... }:
 {
-  applications.caching = {
+  applications."${application}" = {
     inherit namespace;
     createNamespace = true;
 
@@ -30,9 +27,5 @@ in
         };
       };
     };
-
-    yamls = [
-      (builtins.readFile ./caching-secrets.sops.yaml)
-    ];
   };
 }

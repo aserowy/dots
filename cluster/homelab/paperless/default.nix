@@ -15,6 +15,13 @@ in
         ;
     })
     (import ./tika.nix { inherit application namespace; })
+    (import ./valkey.nix {
+      inherit
+        application
+        namespace
+        charts
+        ;
+    })
   ];
 
   applications."${application}" = {
