@@ -295,7 +295,7 @@ in
                   {
                     matchLabels = {
                       "io.kubernetes.pod.namespace" = "loadbalancer";
-                      "app.kubernetes.io/component" = "entrypoint";
+                      "app.kubernetes.io/role" = "entrypoint";
                     };
                   }
                 ];

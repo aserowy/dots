@@ -49,7 +49,7 @@
             "--log.level=DEBUG"
           ];
           commonLabels = {
-            "app.kubernetes.io/component" = "entrypoint";
+            "app.kubernetes.io/role" = "entrypoint";
           };
           service = {
             annotations = {

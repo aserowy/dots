@@ -39,8 +39,8 @@ in
             template = {
               metadata.labels = {
                 "app.kubernetes.io/name" = "adguard";
-                "app.kubernetes.io/component" = "entrypoint";
-                "app.kubernetes.io/type" = "frontend";
+                "app.kubernetes.io/component" = "frontend";
+                "app.kubernetes.io/role" = "entrypoint";
               };
               spec = {
                 securityContext = {
@@ -271,7 +271,7 @@ in
                   {
                     matchLabels = {
                       "io.kubernetes.pod.namespace" = "loadbalancer";
-                      "app.kubernetes.io/component" = "entrypoint";
+                      "app.kubernetes.io/role" = "entrypoint";
                     };
                   }
                 ];
