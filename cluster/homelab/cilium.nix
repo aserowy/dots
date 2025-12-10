@@ -22,8 +22,8 @@
 
         policyEnforcementMode = "default";
 
-        # NOTE: mtls with spriffe/spire
-        authentication.mutual.enabled = "true";
+        # NOTE: mtls with spiffe
+        authentication.mutual.spire.enabled = "true";
 
         hubble = {
           relay.enabled = true;
