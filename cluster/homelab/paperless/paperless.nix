@@ -422,7 +422,6 @@ in
                 toEndpoints = [
                   {
                     matchLabels = {
-                      "io.kubernetes.pod.namespace" = "caching";
                       "app.kubernetes.io/name" = "valkey";
                     };
                   }
