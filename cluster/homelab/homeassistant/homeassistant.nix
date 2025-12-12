@@ -150,7 +150,7 @@ in
                   }
                   {
                     name = "setup-hacs";
-                    image = "bash:5.3.8"; # docker/bash@semver-coerced
+                    image = "bash:5.3.9"; # docker/bash@semver-coerced
                     securityContext = {
                       allowPrivilegeEscalation = false;
                       readOnlyRootFilesystem = true;
