@@ -1,102 +1,61 @@
-@define-color background  rgba(249, 249, 249, 0.95);
-@define-color foreground #1a1a1a;
+:root {
+  --border-radius: 8px;
+  --cc-bg: transparent;
 
-@define-color item-bg rgba(255, 255, 255, 0.9);
-@define-color item-hover #1a1a1a;
-@define-color slider-empty #1a1a1a;
-@define-color tint #DC8ADD;
+  --widget-background: rgba(46, 46, 46, 0.7);
+  --noti-bg-alpha: 0.6;
 
-* {
-    color: @foreground;
-    font-size: 12px;
-    font-family: Inter;
-    transition: 200ms;
-}
-
-.blank-window {
-    background: transparent;
+  --padding: 12;
 }
 
 .control-center {
-    background: @background;
-    border-radius: 8px;
-    padding: 12px;
+  border-radius: 0;
 }
 
-.widget-title {
-    padding: 10px 10px 0px 10px;
-    font-size: 36px;
-    color: @foreground;
-}
-
-.widget-title > button {
-    font-family: "JetBrains Mono NerdFont", sans-serif;
-    border: 0px;
-    background: transparent;
-    font-size: inherit;
-    padding: 0 35px 0 30px;
-}
-
-.widget-title > button:hover {
-    background: @item-bg;
-}
-
-.widget-title > button:active {
-    background: @background;
-}
-
-.notification-row {
-    margin: 0px;
-    padding: 0px;
-    color: @foreground;
-}
-
-.notification {
-    background-color: @item-bg;
-    color: @foreground;
-    box-shadow: none;
-    border: 0;
-}
-
-.notification-content {
-    padding: 5px;
+.control-center-list-placeholder {
+  padding: calc(var(--passing) * 2);
 }
 
 .notification-group {
-    background-color: transparent;
+  border-radius: var(--border-radius);
+  padding: 8px;
 }
 
-.notification-group-icon {
-    color: @tint;
+.widgets > .widget,
+.widget-mpris > carouselindicatordots,
+.widget-mpris > box > button {
+  background: var(--widget-background);
+  border-radius: var(--border-radius);
+  padding: var(--padding);
+  border: var(--border);
 }
 
-.notification-group-collapse-button,
-.notification-group-close-all-button {
-    background-color: @tint;
-    border: 0px;
+.widget.widget-mpris {
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+  border: none;
 }
 
-.notification-group.collapsed:hover .notification {
-    background-color: @background;
+.widget.widget-mpris > carouselindicatordots {
+  --dots-padding: 4px;
+  padding: var(--dots-padding);
+  padding-left: var(--dots-padding);
+  padding-right: calc(6px + var(--dots-padding));
+  margin: 0;
+  margin-top: var(--padding);
 }
 
-.notification-default-action:hover {
-    background-color: @background;
+.widget-mpris > box > button:hover {
+  background: rgba(46, 46, 46, 1);
 }
 
-.notification-action:hover {
-    background-color: @item-hover;
+.widget-mpris-player {
+  box-shadow: none;
+  border: var(--border);
+  margin: 0 var(--padding);
 }
 
-.notification-default-action:active,
-.notification-action:active {
-    background-color: @background;
-}
-
-.notification-content .text-box {
-    padding: 0px 5px;
-}
-
-.close-button {
-    background-color: @tint;
+.widget-mpris-player:only-child {
+  margin: 0;
 }

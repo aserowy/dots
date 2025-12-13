@@ -30,6 +30,7 @@ in
       };
 
       packages = with pkgs; [
+        gnome.gvfs
         swaynotificationcenter
       ];
     };
