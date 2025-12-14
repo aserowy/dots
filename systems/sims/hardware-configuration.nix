@@ -15,7 +15,7 @@
     "nvme"
     "usbhid"
   ];
-  boot.initrd.kernelModules = [ ];
+  boot.initrd.kernelModules = [ "nvidia" ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
@@ -30,7 +30,7 @@
       modesetting.enable = true;
       nvidiaSettings = true;
       open = false;
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
+      package = config.boot.kernelPackages.nvidiaPackages.legacy_535;
       powerManagement.enable = false;
       powerManagement.finegrained = false;
     };
