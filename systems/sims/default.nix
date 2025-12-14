@@ -29,14 +29,26 @@
       gimp-with-plugins
       google-chrome
       onedrivegui
-      kdePackages.dragon
-      kdePackages.plasma-browser-integration
       onlyoffice-desktopeditors
       spotify
 
       git
       neovim
       yeet
+
+      kdePackages.discover
+      kdePackages.dragon
+      kdePackages.isoimagewriter
+      kdePackages.kcalc
+      kdePackages.kcharselect
+      kdePackages.kclock
+      kdePackages.kcolorchooser
+      kdePackages.kolourpaint
+      kdePackages.ksystemlog
+      kdePackages.partitionmanager
+      kdePackages.plasma-browser-integration
+      kdePackages.sddm-kcm
+      kdiff3
     ];
   };
 
@@ -149,23 +161,7 @@
     };
   };
 
-  system = {
-    autoUpgrade = {
-      enable = true;
-      allowReboot = false;
-      flake = "github:aserowy/dots";
-      # no recreate-lock-file because updates are automated with gh actions
-      flags = [
-        "-L"
-      ];
-      dates = "weekly";
-      randomizedDelaySec = "30min";
-      fixedRandomDelay = true;
-    };
-
-    # Did you read the comment?
-    stateVersion = "21.05";
-  };
+  system.stateVersion = "21.05";
 
   systemd = {
     # TODO: lutris specific, but unable to set with home manager?
