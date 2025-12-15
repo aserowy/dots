@@ -37,6 +37,14 @@
     };
 
     resources = {
+      # NOTE: maybe fix for cilium/cilium#40533
+      statfulSets.spire-server.spec.template = {
+        spec.containers.cilium-init.securityContext = {
+          runAsUser = "1000";
+          runAsGroup = "1000";
+        };
+      };
+
       ciliumLoadBalancerIPPools = {
         default-loadbalancer-ippool.spec = {
           # TODO: cidr configurable
@@ -46,6 +54,7 @@
           };
         };
       };
+
       ingressRoutes = {
         cilium-dashboard-route.spec = {
           entryPoints = [
