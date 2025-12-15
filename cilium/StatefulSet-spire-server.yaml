@@ -101,9 +101,6 @@ spec:
             - mountPath: /run/spire/config
               name: spire-config
               readOnly: true
-            - mountPath: /run/spire/data
-              name: spire-data
-              readOnly: false
             - mountPath: /tmp/spire-server/private
               name: spire-server-socket
               readOnly: false
@@ -118,13 +115,3 @@ spec:
             path: /var/run/spire-server/sockets
             type: DirectoryOrCreate
           name: spire-server-socket
-  volumeClaimTemplates:
-    - metadata:
-        name: spire-data
-      spec:
-        accessModes:
-          - ReadWriteOnce
-        resources:
-          requests:
-            storage: 1Gi
-        storageClassName: longhorn-nobackup
