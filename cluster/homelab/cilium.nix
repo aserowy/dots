@@ -38,10 +38,10 @@
 
     resources = {
       # NOTE: maybe fix for cilium/cilium#40533
-      statfulSets.spire-server.spec.template = {
+      statefulSets.spire-server.spec.template = {
         spec.containers.cilium-init.securityContext = {
-          runAsUser = "1000";
-          runAsGroup = "1000";
+          runAsUser = 1000;
+          runAsGroup = 1000;
         };
       };
 
