@@ -102,9 +102,6 @@ spec:
             - mountPath: /tmp/cilium/config-map
               name: cilium-config-path
               readOnly: true
-            - mountPath: /run/spire/sockets/agent
-              name: spire-agent-socket
-              readOnly: true
       hostNetwork: true
       nodeSelector:
         kubernetes.io/os: linux
@@ -129,7 +126,3 @@ spec:
         - configMap:
             name: cilium-config
           name: cilium-config-path
-        - hostPath:
-            path: /run/spire/sockets/agent
-            type: DirectoryOrCreate
-          name: spire-agent-socket
