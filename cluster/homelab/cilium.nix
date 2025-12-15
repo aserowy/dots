@@ -25,7 +25,7 @@
         # NOTE: mtls with spiffe
         authentication.mutual.spire = {
           enabled = true;
-          install.server.dataStorage.storageClass = "longhorn-nobackup";
+          install.server.dataStorage.enabled = false;
         };
 
         hubble = {
