@@ -112,23 +112,7 @@
     xserver.videoDrivers = [ "amdgpu" ];
   };
 
-  system = {
-    autoUpgrade = {
-      enable = true;
-      allowReboot = false;
-      flake = "github:aserowy/dots";
-      # NOTE: no recreate-lock-file because updates are automated with gh actions
-      flags = [
-        "-L"
-      ];
-      dates = "weekly";
-      randomizedDelaySec = "30min";
-      fixedRandomDelay = true;
-    };
-
-    # Did you read the comment?
-    stateVersion = "21.05";
-  };
+  system.stateVersion = "21.05";
 
   systemd = {
     network = {
