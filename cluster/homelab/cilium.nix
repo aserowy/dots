@@ -24,8 +24,8 @@
 
         # NOTE: mtls with spiffe
         authentication.mutual.spire = {
-          enabled = true;
-          install.server.dataStorage.enabled = false;
+          enabled = false;
+          install.server.dataStorage.storageClass = "longhorn-nobackup";
         };
 
         hubble = {
@@ -37,14 +37,6 @@
     };
 
     resources = {
-      # NOTE: maybe fix for cilium/cilium#40533
-      statefulSets.spire-server.spec.template = {
-        spec.containers.cilium-init.securityContext = {
-          runAsUser = 1000;
-          runAsGroup = 1000;
-        };
-      };
-
       ciliumLoadBalancerIPPools = {
         default-loadbalancer-ippool.spec = {
           # TODO: cidr configurable
@@ -54,7 +46,6 @@
           };
         };
       };
-
       ingressRoutes = {
         cilium-dashboard-route.spec = {
           entryPoints = [
