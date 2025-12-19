@@ -34,8 +34,6 @@ in
     in
     mkIf cnfg.enable {
       users = {
-        mutableUsers = false;
-
         users.serowy = {
           # hashedPassword = "";
           hashedPasswordFile = config.sops.secrets."serowy/password".path;

@@ -8,6 +8,11 @@ in
   options.users.root = {
     enable = mkEnableOption "root user";
 
+    mutableUsers = mkOption {
+      type = types.bool;
+      default = false;
+    };
+
     sopsPasswordFilePath = mkOption {
       type = types.str;
       default = "";
@@ -27,7 +32,7 @@ in
     in
     mkIf cnfg.enable {
       users = {
-        mutableUsers = false;
+        mutableUsers = cnfg.mutableUsers;
 
         users.root = {
           hashedPassword = null;

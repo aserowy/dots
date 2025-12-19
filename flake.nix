@@ -160,6 +160,34 @@
           ];
         };
 
+        grans = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            disko.nixosModules.disko
+            sops.nixosModules.sops
+            ./sops.nix
+
+            {
+              nixpkgs.overlays = [
+                yeet.overlays.default
+              ];
+            }
+
+            ./systems/grans
+            {
+              imports = [ ./users ];
+              users = {
+                root = {
+                  enable = true;
+                  mutableUsers = true;
+                  sopsPasswordFilePath = "gran/root_password";
+                };
+                gran.enable = true;
+              };
+            }
+          ];
+        };
+
         musicstation = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
@@ -204,7 +232,10 @@
             {
               imports = [ ./users ];
               users = {
-                root.enable = true;
+                root = {
+                  enable = true;
+                  mutableUsers = true;
+                };
                 sim.enable = true;
               };
             }

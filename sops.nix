@@ -7,6 +7,12 @@
     age.keyFile = "/root/.config/sops/age/keys.txt";
 
     secrets = {
+      "gran/password" = {
+        neededForUsers = true;
+      };
+      "gran/root_password" = {
+        neededForUsers = true;
+      };
       "music/password" = {
         neededForUsers = true;
       };

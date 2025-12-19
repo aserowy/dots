@@ -7,11 +7,11 @@
 with lib;
 
 let
-  cnfg = config.users.music;
+  cnfg = config.users.gran;
 in
 {
-  options.users.music = {
-    enable = mkEnableOption "music user";
+  options.users.gran = {
+    enable = mkEnableOption "gran user";
   };
 
   config =
@@ -19,20 +19,23 @@ in
       extraGroups = [
         "audio"
         "disk"
+        "lpadmin"
         "networkmanager"
         "video"
+        "wheel"
       ];
     in
     mkIf cnfg.enable {
+      security.pam.services.gran.kwallet.enable = true;
+
       users = {
-        users.music = {
+        users.gran = {
           inherit extraGroups;
 
-          # hashedPassword = "";
-          hashedPasswordFile = config.sops.secrets."music/password".path;
+          initialPassword = "changeme!";
           createHome = true;
           group = "users";
-          home = "/home/music";
+          home = "/home/gran";
           isNormalUser = true;
           shell = pkgs.nushell;
           uid = 1000;

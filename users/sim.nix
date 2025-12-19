@@ -27,8 +27,6 @@ in
     in
     mkIf cnfg.enable {
       users = {
-        mutableUsers = false;
-
         users.sim = {
           inherit extraGroups;
 
