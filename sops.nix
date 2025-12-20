@@ -7,9 +7,6 @@
     age.keyFile = "/root/.config/sops/age/keys.txt";
 
     secrets = {
-      "gran/password" = {
-        neededForUsers = true;
-      };
       "gran/root_password" = {
         neededForUsers = true;
       };
@@ -20,9 +17,6 @@
         neededForUsers = true;
       };
       "serowy/password" = {
-        neededForUsers = true;
-      };
-      "sim/password" = {
         neededForUsers = true;
       };
       "k3s/cluster/token" = { };

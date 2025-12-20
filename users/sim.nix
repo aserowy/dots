@@ -30,8 +30,7 @@ in
         users.sim = {
           inherit extraGroups;
 
-          # hashedPassword = "";
-          hashedPasswordFile = config.sops.secrets."sim/password".path;
+          initialPassword = "changeme!";
           createHome = true;
           group = "users";
           home = "/home/sim";
