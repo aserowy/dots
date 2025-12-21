@@ -8,7 +8,7 @@ in
   options.users.root = {
     enable = mkEnableOption "root user";
 
-    mutableUsers = mkOption {
+    setInitialPassword = mkOption {
       type = types.bool;
       default = false;
     };
@@ -24,6 +24,8 @@ in
 
   config =
     let
+      initialPassword = if cnfg.setInitialPassword then "changeme!" else null;
+
       passwordFilePath =
         if cnfg.sopsPasswordFilePath != "" then
           config.sops.secrets."${cnfg.sopsPasswordFilePath}".path
@@ -31,16 +33,12 @@ in
           null;
     in
     mkIf cnfg.enable {
-      users = {
-        mutableUsers = cnfg.mutableUsers;
-
-        users.root = {
-          hashedPassword = null;
-          hashedPasswordFile = passwordFilePath;
-          openssh.authorizedKeys.keys = [
-            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAoChM+zDcZalCCTTF4NTeNyBcrbLBs8b0vBTp/EW1nX serowy"
-          ];
-        };
+      users.users.root = {
+        initialPassword = initialPassword;
+        hashedPasswordFile = passwordFilePath;
+        openssh.authorizedKeys.keys = [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAoChM+zDcZalCCTTF4NTeNyBcrbLBs8b0vBTp/EW1nX serowy"
+        ];
       };
     };
 }

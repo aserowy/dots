@@ -28,8 +28,7 @@ in
         users.music = {
           inherit extraGroups;
 
-          # hashedPassword = "";
-          hashedPasswordFile = config.sops.secrets."music/password".path;
+          initialPassword = "changeme!";
           createHome = true;
           group = "users";
           home = "/home/music";

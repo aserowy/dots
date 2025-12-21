@@ -177,9 +177,10 @@
             {
               imports = [ ./users ];
               users = {
+                setMutableUsers = true;
+
                 root = {
                   enable = true;
-                  mutableUsers = true;
                   sopsPasswordFilePath = "gran/root_password";
                 };
                 gran.enable = true;
@@ -192,8 +193,6 @@
           system = "x86_64-linux";
           modules = [
             disko.nixosModules.disko
-            sops.nixosModules.sops
-            ./sops.nix
 
             {
               nixpkgs.overlays = [
@@ -205,9 +204,11 @@
             {
               imports = [ ./users ];
               users = {
+                setMutableUsers = true;
+
                 root = {
                   enable = true;
-                  sopsPasswordFilePath = "music/root_password";
+                  setInitialPassword = true;
                 };
                 music.enable = true;
               };
@@ -232,10 +233,9 @@
             {
               imports = [ ./users ];
               users = {
-                root = {
-                  enable = true;
-                  mutableUsers = true;
-                };
+                setMutableUsers = true;
+
+                root.enable = true;
                 sim.enable = true;
               };
             }
