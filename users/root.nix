@@ -37,7 +37,7 @@ in
         initialPassword = initialPassword;
         hashedPasswordFile = passwordFilePath;
         openssh.authorizedKeys.keys = [
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAoChM+zDcZalCCTTF4NTeNyBcrbLBs8b0vBTp/EW1nX serowy"
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMfogelxPeps3QgYH6EiAFU+oCm9UR25DaJAlR1lzWAi"
         ];
       };
     };
