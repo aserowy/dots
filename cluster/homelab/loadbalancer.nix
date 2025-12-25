@@ -126,6 +126,8 @@
           tls.secretName = "anderwersede-tls-certificate";
         };
       };
+
+      # TODO: cilium network policy
     };
   };
 }
