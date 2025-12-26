@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
     app.kubernetes.io/role: entrypoint
-    helm.sh/chart: traefik-38.0.0
+    helm.sh/chart: traefik-38.0.1
   name: traefik-loadbalancer
 roleRef:
   apiGroup: rbac.authorization.k8s.io
