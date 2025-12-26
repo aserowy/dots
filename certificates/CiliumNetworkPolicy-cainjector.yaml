@@ -1,7 +1,7 @@
 apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
-  name: rustdesk
+  name: cainjector
   namespace: certificates
 spec:
   egress:
