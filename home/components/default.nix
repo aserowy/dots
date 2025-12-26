@@ -4,10 +4,8 @@
     ./alacritty
     ./bitwarden
     ./brave
-    ./chrome
     ./direnv
     ./docker
-    ./edge
     ./foot
     ./fuzzel
     ./fzf
