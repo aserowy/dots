@@ -19,7 +19,7 @@ in
     };
 
     # NOTE: https://cert-manager.io/docs/installation/best-practice/#network-requirements
-    ciliumNetworkPolicies = {
+    resources.ciliumNetworkPolicies = {
       rustdesk = {
         apiVersion = "cilium.io/v2";
         kind = "CiliumNetworkPolicy";
