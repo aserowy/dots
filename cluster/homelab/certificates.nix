@@ -20,7 +20,7 @@ in
 
     # NOTE: https://cert-manager.io/docs/installation/best-practice/#network-requirements
     resources.ciliumNetworkPolicies = {
-      rustdesk = {
+      cainjector = {
         apiVersion = "cilium.io/v2";
         kind = "CiliumNetworkPolicy";
         metadata = {
