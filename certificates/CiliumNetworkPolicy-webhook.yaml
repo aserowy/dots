@@ -29,12 +29,15 @@ spec:
         - ports:
             - port: "6080"
               protocol: TCP
-    - fromEndpoints:
-        - matchLabels:
-            app.kubernetes.io/name: startupapicheck
-      fromEntities:
+    - fromEntities:
         - kube-apiserver
       toPorts:
         - ports:
             - port: "443"
+              protocol: TCP
+    - fromEntities:
+        - remote-node
+      toPorts:
+        - ports:
+            - port: "10250"
               protocol: TCP
