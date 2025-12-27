@@ -4,9 +4,7 @@
     ../modules
   ];
 
-  boot = {
-    tmp.cleanOnBoot = true;
-  };
+  boot.tmp.cleanOnBoot = true;
 
   environment = {
     defaultPackages = [ ];
@@ -20,9 +18,7 @@
   };
 
   networking = {
-    firewall = {
-      enable = true;
-    };
+    firewall.enable = true;
     nftables.enable = true;
     useDHCP = false;
   };
@@ -51,11 +47,7 @@
     };
   };
 
-  nixpkgs = {
-    config = {
-      allowUnfree = true;
-    };
-  };
+  nixpkgs.config.allowUnfree = true;
 
   security = {
     rtkit.enable = true;

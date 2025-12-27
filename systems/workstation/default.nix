@@ -87,9 +87,9 @@
 
     modules = {
       gtk.enable = true;
-      tuigreet = {
+      sddm = {
         enable = true;
-        command = "niri-session";
+        command = "niri";
       };
     };
 
