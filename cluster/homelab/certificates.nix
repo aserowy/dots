@@ -193,18 +193,27 @@ in
               fromEntities = [
                 "kube-apiserver"
               ];
-              fromEndpoints = [
-                {
-                  matchLabels = {
-                    "app.kubernetes.io/name" = "startupapicheck";
-                  };
-                }
-              ];
               toPorts = [
                 {
                   ports = [
                     {
                       port = "443";
+                      protocol = "TCP";
+                    }
+                  ];
+                }
+              ];
+            }
+            {
+              # NOTE: startupapicheck node
+              fromEntities = [
+                "remote-node"
+              ];
+              toPorts = [
+                {
+                  ports = [
+                    {
+                      port = "10250";
                       protocol = "TCP";
                     }
                   ];
