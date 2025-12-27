@@ -14,6 +14,10 @@ in
 
         values = {
           crds.enabled = true;
+
+          replicaCount = 2;
+          webhook.replicaCount = 3;
+          cainjector.replicaCount = 2;
         };
       };
     };
