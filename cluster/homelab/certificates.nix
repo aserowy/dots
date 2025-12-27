@@ -193,6 +193,13 @@ in
               fromEntities = [
                 "kube-apiserver"
               ];
+              fromEndpoints = [
+                {
+                  matchLabels = {
+                    "app.kubernetes.io/name" = "startupapicheck";
+                  };
+                }
+              ];
               toPorts = [
                 {
                   ports = [
