@@ -74,6 +74,176 @@ in
           ];
         };
       };
+
+      cert-manager = {
+        apiVersion = "cilium.io/v2";
+        kind = "CiliumNetworkPolicy";
+        metadata = {
+          inherit namespace;
+        };
+        spec = {
+          endpointSelector.matchLabels = {
+            "app.kubernetes.io/name" = "cert-manager";
+          };
+          ingress = [
+            # NOTE: metrics collector must get unblocked here
+            {
+              fromEntities = [
+                "host"
+              ];
+              toPorts = [
+                {
+                  ports = [
+                    {
+                      port = "9403";
+                      protocol = "TCP";
+                    }
+                  ];
+                }
+              ];
+            }
+          ];
+          egress = [
+            {
+              toEntities = [
+                "kube-apiserver"
+              ];
+              toPorts = [
+                {
+                  ports = [
+                    {
+                      port = "6443";
+                      protocol = "TCP";
+                    }
+                  ];
+                }
+              ];
+            }
+            {
+              toEntities = [
+                "world"
+              ];
+              toPorts = [
+                {
+                  ports = [
+                    {
+                      port = "443";
+                      protocol = "TCP";
+                    }
+                    {
+                      port = "53";
+                      protocol = "UDP";
+                    }
+                  ];
+                }
+              ];
+            }
+            {
+              toEndpoints = [
+                {
+                  matchLabels = {
+                    "io.kubernetes.pod.namespace" = "kube-system";
+                    "k8s-app" = "kube-dns";
+                  };
+                }
+              ];
+              toPorts = [
+                {
+                  ports = [
+                    {
+                      port = "53";
+                      protocol = "UDP";
+                    }
+                  ];
+                }
+              ];
+            }
+          ];
+        };
+      };
+
+      webhook = {
+        apiVersion = "cilium.io/v2";
+        kind = "CiliumNetworkPolicy";
+        metadata = {
+          inherit namespace;
+        };
+        spec = {
+          endpointSelector.matchLabels = {
+            "app.kubernetes.io/name" = "webhook";
+          };
+          ingress = [
+            # NOTE: metrics collector must get unblocked here
+            {
+              fromEntities = [
+                "host"
+              ];
+              toPorts = [
+                {
+                  ports = [
+                    {
+                      port = "6080";
+                      protocol = "TCP";
+                    }
+                  ];
+                }
+              ];
+            }
+            {
+              fromEntities = [
+                "kube-apiserver"
+              ];
+              toPorts = [
+                {
+                  ports = [
+                    {
+                      port = "443";
+                      protocol = "TCP";
+                    }
+                  ];
+                }
+              ];
+            }
+          ];
+          egress = [
+            {
+              toEntities = [
+                "kube-apiserver"
+              ];
+              toPorts = [
+                {
+                  ports = [
+                    {
+                      port = "6443";
+                      protocol = "TCP";
+                    }
+                  ];
+                }
+              ];
+            }
+            {
+              toEndpoints = [
+                {
+                  matchLabels = {
+                    "io.kubernetes.pod.namespace" = "kube-system";
+                    "k8s-app" = "kube-dns";
+                  };
+                }
+              ];
+              toPorts = [
+                {
+                  ports = [
+                    {
+                      port = "53";
+                      protocol = "UDP";
+                    }
+                  ];
+                }
+              ];
+            }
+          ];
+        };
+      };
     };
   };
 }
