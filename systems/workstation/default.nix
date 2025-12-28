@@ -90,7 +90,7 @@
       sddm = {
         enable = true;
         session = "niri";
-        theme = "pixel_sakura";
+        theme = "black_hole";
       };
     };
 
