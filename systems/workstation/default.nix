@@ -89,7 +89,8 @@
       gtk.enable = true;
       sddm = {
         enable = true;
-        command = "niri";
+        session = "niri";
+        theme = "pixel_sakura";
       };
     };
 
