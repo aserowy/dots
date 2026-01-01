@@ -233,6 +233,26 @@ in
                 toEndpoints = [
                   {
                     matchLabels = {
+                      "io.kubernetes.pod.namespace" = "longhorn-system";
+                      "app.kubernetes.io/app" = "longhorn-ui";
+                    };
+                  }
+                ];
+                toPorts = [
+                  {
+                    ports = [
+                      {
+                        port = "8000";
+                        protocol = "TCP";
+                      }
+                    ];
+                  }
+                ];
+              }
+              {
+                toEndpoints = [
+                  {
+                    matchLabels = {
                       "io.kubernetes.pod.namespace" = "kube-system";
                       "app.kubernetes.io/name" = "hubble-ui";
                     };
