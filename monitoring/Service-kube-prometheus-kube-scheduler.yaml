@@ -6,8 +6,8 @@ metadata:
     app.kubernetes.io/instance: kube-prometheus-stack
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kube-prometheus
-    app.kubernetes.io/version: 80.8.2
-    chart: kube-prometheus-stack-80.8.2
+    app.kubernetes.io/version: 80.9.1
+    chart: kube-prometheus-stack-80.9.1
     heritage: Helm
     jobLabel: kube-scheduler
     release: kube-prometheus-stack
