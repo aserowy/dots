@@ -233,8 +233,28 @@ in
                 toEndpoints = [
                   {
                     matchLabels = {
+                      "io.kubernetes.pod.namespace" = "monitoring";
+                      "app.kubernetes.io/name" = "grafana";
+                    };
+                  }
+                ];
+                toPorts = [
+                  {
+                    ports = [
+                      {
+                        port = "8000";
+                        protocol = "TCP";
+                      }
+                    ];
+                  }
+                ];
+              }
+              {
+                toEndpoints = [
+                  {
+                    matchLabels = {
                       "io.kubernetes.pod.namespace" = "longhorn-system";
-                      "app.kubernetes.io/app" = "longhorn-ui";
+                      "app" = "longhorn-ui";
                     };
                   }
                 ];
