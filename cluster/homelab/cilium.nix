@@ -46,6 +46,7 @@
           };
         };
       };
+
       ingressRoutes = {
         cilium-dashboard-route.spec = {
           entryPoints = [

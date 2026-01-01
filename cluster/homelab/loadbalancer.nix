@@ -1,7 +1,11 @@
 { charts, ... }:
+let
+  namespace = "loadbalancer";
+in
 {
   applications.loadbalancer = {
-    namespace = "loadbalancer";
+    inherit namespace;
+
     createNamespace = true;
 
     helm.releases = {
@@ -127,7 +131,137 @@
         };
       };
 
-      # TODO: cilium network policy
+      ciliumNetworkPolicies = {
+        traefik = {
+          apiVersion = "cilium.io/v2";
+          kind = "CiliumNetworkPolicy";
+          metadata = {
+            inherit namespace;
+          };
+          spec = {
+            endpointSelector = {
+              matchLabels = {
+                "app.kubernetes.io/name" = "traefik";
+              };
+            };
+            ingress = [
+              {
+                fromEntities = [
+                  "host"
+                ];
+                toPorts = [
+                  {
+                    ports = [
+                      {
+                        port = "8080";
+                        protocol = "TCP";
+                      }
+                    ];
+                  }
+                ];
+              }
+              {
+                fromEntities = [
+                  "world"
+                ];
+                toPorts = [
+                  {
+                    ports = [
+                      {
+                        port = 8443;
+                        protocol = "TCP";
+                      }
+                      {
+                        port = 21115;
+                        protocol = "TCP";
+                      }
+                      {
+                        port = 21116;
+                        protocol = "UDP";
+                      }
+                      {
+                        port = 21116;
+                        protocol = "TCP";
+                      }
+                      {
+                        port = 21117;
+                        protocol = "TCP";
+                      }
+                    ];
+                  }
+                ];
+              }
+            ];
+            egress = [
+              {
+                toEntities = [
+                  "kube-apiserver"
+                ];
+                toPorts = [
+                  {
+                    ports = [
+                      {
+                        port = "6443";
+                        protocol = "TCP";
+                      }
+                    ];
+                  }
+                ];
+              }
+              {
+                toEndpoints = [
+                  {
+                    matchLabels = {
+                      "io.kubernetes.pod.namespace" = "argocd";
+                      "app.kubernetes.io/name" = "argocd-server";
+                    };
+                  }
+                ];
+                toPorts = [
+                  {
+                    ports = [
+                      {
+                        port = "8080";
+                        protocol = "TCP";
+                      }
+                    ];
+                  }
+                ];
+              }
+              {
+                toEndpoints = [
+                  {
+                    matchLabels = {
+                      "io.kubernetes.pod.namespace" = "kube-system";
+                      "app.kubernetes.io/name" = "hubble-ui";
+                    };
+                  }
+                ];
+                toPorts = [
+                  {
+                    ports = [
+                      {
+                        port = "8081";
+                        protocol = "TCP";
+                      }
+                    ];
+                  }
+                ];
+              }
+              {
+                toEndpoints = [
+                  {
+                    matchLabels = {
+                      "io.kubernetes.pod.namespace" = "*";
+                      "app.kubernetes.io/component" = "frontend";
+                    };
+                  }
+                ];
+              }
+            ];
+          };
+        };
+      };
     };
   };
 }
