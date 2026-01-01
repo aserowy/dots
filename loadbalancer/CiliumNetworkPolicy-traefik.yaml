@@ -30,10 +30,10 @@ spec:
     - toEndpoints:
         - matchLabels:
             app.kubernetes.io/component: frontend
-            io.kubernetes.pod.namespace: '*'
   endpointSelector:
     matchLabels:
       app.kubernetes.io/name: traefik
+      io.kubernetes.pod.namespace: loadbalancer
   ingress:
     - fromEntities:
         - host
