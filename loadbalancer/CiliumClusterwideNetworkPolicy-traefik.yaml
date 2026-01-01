@@ -21,7 +21,15 @@ spec:
               protocol: TCP
     - toEndpoints:
         - matchLabels:
-            app.kubernetes.io/app: longhorn-ui
+            app.kubernetes.io/name: grafana
+            io.kubernetes.pod.namespace: monitoring
+      toPorts:
+        - ports:
+            - port: "8000"
+              protocol: TCP
+    - toEndpoints:
+        - matchLabels:
+            app: longhorn-ui
             io.kubernetes.pod.namespace: longhorn-system
       toPorts:
         - ports:
