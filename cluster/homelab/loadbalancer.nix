@@ -242,7 +242,7 @@ in
                   {
                     ports = [
                       {
-                        port = "8000";
+                        port = "3000";
                         protocol = "TCP";
                       }
                     ];
