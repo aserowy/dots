@@ -134,7 +134,7 @@ in
       ciliumClusterwideNetworkPolicies = {
         traefik = {
           apiVersion = "cilium.io/v2";
-          kind = "CiliumNetworkPolicy";
+          kind = "CiliumClusterwideNetworkPolicy";
           metadata = {
             inherit namespace;
           };
