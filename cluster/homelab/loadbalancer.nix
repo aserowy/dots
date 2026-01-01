@@ -168,23 +168,23 @@ in
                   {
                     ports = [
                       {
-                        port = 8443;
+                        port = "8443";
                         protocol = "TCP";
                       }
                       {
-                        port = 21115;
+                        port = "21115";
                         protocol = "TCP";
                       }
                       {
-                        port = 21116;
+                        port = "21116";
                         protocol = "UDP";
                       }
                       {
-                        port = 21116;
+                        port = "21116";
                         protocol = "TCP";
                       }
                       {
-                        port = 21117;
+                        port = "21117";
                         protocol = "TCP";
                       }
                     ];
