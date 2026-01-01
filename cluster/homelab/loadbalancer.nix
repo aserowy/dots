@@ -131,7 +131,7 @@ in
         };
       };
 
-      ciliumNetworkPolicies = {
+      ciliumClusterwideNetworkPolicies = {
         traefik = {
           apiVersion = "cilium.io/v2";
           kind = "CiliumNetworkPolicy";
@@ -141,6 +141,7 @@ in
           spec = {
             endpointSelector = {
               matchLabels = {
+                "io.kubernetes.pod.namespace" = "loadbalancer";
                 "app.kubernetes.io/name" = "traefik";
               };
             };
@@ -252,7 +253,6 @@ in
                 toEndpoints = [
                   {
                     matchLabels = {
-                      "io.kubernetes.pod.namespace" = "*";
                       "app.kubernetes.io/component" = "frontend";
                     };
                   }
