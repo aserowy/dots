@@ -21,6 +21,14 @@ spec:
               protocol: TCP
     - toEndpoints:
         - matchLabels:
+            app.kubernetes.io/app: longhorn-ui
+            io.kubernetes.pod.namespace: longhorn-system
+      toPorts:
+        - ports:
+            - port: "8000"
+              protocol: TCP
+    - toEndpoints:
+        - matchLabels:
             app.kubernetes.io/name: hubble-ui
             io.kubernetes.pod.namespace: kube-system
       toPorts:
