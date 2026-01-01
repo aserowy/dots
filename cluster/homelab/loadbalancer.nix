@@ -169,6 +169,10 @@ in
                   {
                     ports = [
                       {
+                        port = "8000";
+                        protocol = "TCP";
+                      }
+                      {
                         port = "8443";
                         protocol = "TCP";
                       }
