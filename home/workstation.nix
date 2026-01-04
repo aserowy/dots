@@ -1,13 +1,15 @@
+{ noctalia }:
 { pkgs, ... }:
 {
   imports = [
+    noctalia.homeModules.default
+
     ./base.nix
   ];
 
   home = {
     components = {
       bitwarden.enable = true;
-      docker.enable = true;
       ghostty.enable = true;
       onedrive.enable = true;
       wpaperd.enable = true;
@@ -20,7 +22,7 @@
       console.enable = true;
       gaming.enable = true;
       gtk.enable = true;
-      niri.enable = true;
+      noctalia.enable = true;
       xdg.enable = true;
     };
 

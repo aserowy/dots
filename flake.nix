@@ -46,6 +46,10 @@
         nixpkgs.follows = "nixpkgs";
       };
     };
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     sops = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -78,6 +82,7 @@
       nixidy,
       nixhelm,
       nixpkgs,
+      noctalia,
       sops,
       yeet,
       zjstatus,
@@ -267,7 +272,7 @@
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                users.serowy = import ./home/workstation.nix;
+                users.serowy = import ./home/workstation.nix { inherit noctalia; };
               };
             }
           ];

@@ -7,6 +7,7 @@
     ./gtk
     ./neocode
     ./niri
+    ./noctalia
     ./nushell
     ./statusbar
     ./xdg

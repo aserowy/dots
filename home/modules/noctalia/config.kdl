@@ -1,0 +1,169 @@
+prefer-no-csd
+screenshot-path "~/pictures/%Y-%m-%d %H-%M-%S.png"
+
+hotkey-overlay {
+    skip-at-startup
+}
+
+input {
+    focus-follows-mouse max-scroll-amount="25%"
+    warp-mouse-to-focus
+
+    keyboard {
+        xkb {
+            layout "us,de"
+        }
+
+        repeat-delay 600
+        repeat-rate 25
+        track-layout "global"
+    }
+}
+
+output "HDMI-A-1" {
+    transform "90"
+}
+
+layout {
+    empty-workspace-above-first
+    center-focused-column "never"
+    default-column-width { proportion 0.33333; }
+    gaps 16
+
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66666
+        proportion 1.0
+    }
+
+    focus-ring {
+        width 2
+        active-color "#FFFFFF"
+        inactive-color "#B9C0CA"
+    }
+
+    border {
+        off
+    }
+
+    shadow {
+        on
+        softness 10
+        spread 5
+        offset x=0 y=5
+        draw-behind-window true
+        color "#272B3375"
+        inactive-color "#272B3375"
+    }
+
+    tab-indicator {
+        gaps-between-tabs 2
+        place-within-column
+    }
+
+    struts {
+        left 14
+        right 50
+    }
+}
+
+layer-rule {
+    match namespace="^launcher$"
+
+    shadow {
+        on
+        softness 10
+        spread 5
+        offset x=0 y=0
+        draw-behind-window true
+        color "#272B3375"
+        inactive-color "#272B3375"
+    }
+
+    geometry-corner-radius 5
+}
+
+window-rule {
+    geometry-corner-radius 7
+    clip-to-geometry true
+}
+
+window-rule {
+    match app-id=r#"pavucontrol$"#
+    open-floating true
+}
+
+window-rule {
+    match is-window-cast-target=true
+
+    focus-ring {
+        off
+    }
+
+    border {
+        on
+        active-color "#FF936A"
+        inactive-color "#FC2F52"
+        width 2
+    }
+
+    tab-indicator {
+        active-color "#FF936A"
+        inactive-color "#FC2F52"
+    }
+}
+
+debug {
+  // Allows notification actions and window activation from Noctalia.
+  honor-xdg-activation-with-invalid-serial
+}
+
+binds {
+    Mod+B { spawn "brave"; }
+    Mod+T { spawn "ghostty"; }
+    Mod+E { spawn "ghostty" "-e" "yeet"; }
+
+    Mod+Space { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
+    Mod+S { spawn "noctalia-shell" "ipc" "call" "controlCenter" "toggle"; }
+
+    XF86AudioRaiseVolume { spawn  "noctalia-shell" "ipc" "call" "volume" "increase"; }
+    XF86AudioLowerVolume { spawn  "noctalia-shell" "ipc" "call" "volume" "decrease"; }
+    XF86AudioMute { spawn  "noctalia-shell" "ipc" "call" "volume" "muteOutput"; }
+
+    XF86MonBrightnessUp { spawn  "noctalia-shell" "ipc" "call" "brightness" "increase"; }
+    XF86MonBrightnessDown { spawn  "noctalia-shell" "ipc" "call" "brightness" "decrease"; }
+
+    Mod+V { spawn  "noctalia-shell" "ipc" "call" "launcher" "clipboard"; }
+    Mod+A { spawn  "noctalia-shell" "ipc" "call" "lockScreen" "lock"; }
+
+    Mod+Shift+C { close-window; }
+
+    Mod+H { focus-column-left; }
+    Mod+J { focus-window-or-workspace-down; }
+    Mod+K { focus-window-or-workspace-up; }
+    Mod+L { focus-column-right; }
+
+    Mod+Shift+H { move-column-left; }
+    Mod+Shift+J { move-window-down-or-to-workspace-down; }
+    Mod+Shift+K { move-window-up-or-to-workspace-up; }
+    Mod+Shift+L { move-column-right; }
+
+    Mod+Shift+U { consume-or-expel-window-left; }
+    Mod+Shift+I { consume-or-expel-window-right; }
+    Mod+Shift+G { toggle-column-tabbed-display; }
+
+    Mod+N { focus-monitor-next; }
+    Mod+P { focus-monitor-previous; }
+    Mod+Shift+N { move-column-to-monitor-next; }
+    Mod+Shift+P { move-column-to-monitor-previous; }
+
+    Mod+O { toggle-overview; }
+    Mod+Z { fullscreen-window; }
+
+    Mod+Alt+Semicolon { switch-preset-column-width; }
+    Mod+Alt+H { set-column-width "-10%"; }
+    Mod+Alt+L { set-column-width "+10%"; }
+    Mod+Alt+J { set-window-height "-10%"; }
+    Mod+Alt+K { set-window-height "+10%"; }
+}
