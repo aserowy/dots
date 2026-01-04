@@ -272,13 +272,7 @@ in
             saveToHistory.low = false;
           };
           audio.preferredPlayer = "spotify";
-          colorSchemes = {
-            predefinedScheme = "Catppuccin-Lavender";
-            schedulingMode = "location";
-          };
           templates = {
-            enableUserTemplates = false;
-
             gtk = true;
             qt = true;
             kcolorscheme = true;
