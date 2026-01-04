@@ -68,30 +68,9 @@ layout {
     }
 }
 
-layer-rule {
-    match namespace="^launcher$"
-
-    shadow {
-        on
-        softness 10
-        spread 5
-        offset x=0 y=0
-        draw-behind-window true
-        color "#272B3375"
-        inactive-color "#272B3375"
-    }
-
-    geometry-corner-radius 5
-}
-
 window-rule {
     geometry-corner-radius 7
     clip-to-geometry true
-}
-
-window-rule {
-    match app-id=r#"pavucontrol$"#
-    open-floating true
 }
 
 window-rule {
