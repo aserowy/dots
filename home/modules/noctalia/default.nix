@@ -75,11 +75,11 @@ in
           settingsVersion = 0;
           bar = {
             position = "left";
+            density = "comfortable";
             monitors = [ "DP-2" ];
             showCapsule = true;
             backgroundOpacity = 0;
             useSeparateOpacity = true;
-            floating = true;
             widgets = {
               left = [
                 {
@@ -144,7 +144,7 @@ in
           };
           general = {
             avatarImage = "/home/serowy/.face";
-            dimmerOpacity = 0.75;
+            dimmerOpacity = 0.55;
             radiusRatio = 0.25;
             iRadiusRatio = 0.5;
             compactLockScreen = true;
@@ -272,6 +272,7 @@ in
             saveToHistory.low = false;
           };
           audio.preferredPlayer = "spotify";
+          colorSchemes.predefinedScheme = "Catppuccin-Lavender";
           templates = {
             gtk = true;
             qt = true;
