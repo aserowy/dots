@@ -1,6 +1,8 @@
 default_layout "compact"
 default_shell "nu"
 
+show_startup_tips false
+
 simplified_ui true
 pane_frames false
 
