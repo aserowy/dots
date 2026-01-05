@@ -270,9 +270,11 @@
             home.nixosModules.home-manager
             {
               home-manager = {
+                extraSpecialArgs = { inherit noctalia; };
+
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                users.serowy = import ./home/workstation.nix { inherit noctalia; };
+                users.serowy = import ./home/workstation.nix;
               };
             }
           ];
