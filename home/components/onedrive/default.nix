@@ -20,6 +20,14 @@ in
         If enabled, init onedrivegui on startup
       '';
     };
+
+    enableNoctaliaIntegration = mkOption {
+      type = types.bool;
+      default = true;
+      description = ''
+        If enabled, init onedrivegui on startup
+      '';
+    };
   };
 
   config = mkIf cnfg.enable {
@@ -29,6 +37,10 @@ in
     ];
 
     home.modules.niri.prependedConfig = mkIf cnfg.enableNiriIntegration ''
+      spawn-at-startup "onedrivegui"
+    '';
+
+    home.modules.noctalia.prependedConfig = mkIf cnfg.enableNoctaliaIntegration ''
       spawn-at-startup "onedrivegui"
     '';
   };
