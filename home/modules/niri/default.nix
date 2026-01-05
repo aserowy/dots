@@ -77,5 +77,10 @@ in
           XDG_SESSION_TYPE = "wayland";
         };
       };
+
+      gtk.theme = {
+        name = "Fluent-Dark-compact";
+        package = pkgs.fluent-gtk-theme;
+      };
     };
 }

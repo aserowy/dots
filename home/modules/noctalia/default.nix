@@ -50,7 +50,9 @@ in
         };
 
         packages = with pkgs; [
+          adw-gtk3
           niri
+          nwg-look
 
           (pkgs.writeShellScriptBin "outputshot" ''
             niri msg action screenshot-screen
@@ -69,6 +71,8 @@ in
           XDG_SESSION_TYPE = "wayland";
         };
       };
+
+      gtk.theme.name = "adw-gtk3";
 
       programs.noctalia-shell = {
         enable = true;

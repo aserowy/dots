@@ -30,17 +30,13 @@ in
         size = 10;
       };
 
-      theme = {
-        name = "Fluent-Dark-compact";
-        package = pkgs.fluent-gtk-theme;
-      };
-
       gtk3.extraConfig = {
         gtk-application-prefer-dark-theme = 1;
       };
 
       gtk4.extraConfig = {
         gtk-application-prefer-dark-theme = 1;
+        color-scheme = "prefer-dark";
       };
     };
   };
