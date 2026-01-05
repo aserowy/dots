@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ lib, ... }:
 {
   imports = [
     ../shared/plasma.nix
@@ -6,14 +6,6 @@
     ./disko.nix
     ./hardware-configuration.nix
   ];
-
-  environment = {
-    systemPackages = with pkgs; [
-      coppwr
-      reaper
-      spotify
-    ];
-  };
 
   networking = {
     hostName = "musicstation";
