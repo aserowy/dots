@@ -146,7 +146,7 @@ in
           };
           general = {
             avatarImage = "/home/serowy/.face";
-            dimmerOpacity = 0.55;
+            dimmerOpacity = 0.33;
             radiusRatio = 0.25;
             iRadiusRatio = 0.5;
             compactLockScreen = true;
@@ -154,7 +154,7 @@ in
           ui = {
             fontDefault = "Inter Variable";
             fontFixed = "JetBrainsMono Nerd Font Mono";
-            panelBackgroundOpacity = 0.4;
+            panelBackgroundOpacity = 0.8;
             settingsPanelMode = "centered";
           };
           location = {
