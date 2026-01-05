@@ -154,7 +154,7 @@ in
           ui = {
             fontDefault = "Inter Variable";
             fontFixed = "JetBrainsMono Nerd Font Mono";
-            panelBackgroundOpacity = 0.8;
+            panelBackgroundOpacity = 0.9;
             settingsPanelMode = "centered";
           };
           location = {
