@@ -36,7 +36,7 @@ in
 
         # FIX: https://github.com/nix-community/home-manager/issues/4313
         environmentVariables = builtins.mapAttrs (
-          name: value: "${builtins.toString value}"
+          name: value: "${toString value}"
         ) config.home.sessionVariables;
 
         shellAliases = {

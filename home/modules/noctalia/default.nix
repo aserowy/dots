@@ -35,7 +35,10 @@ in
             setDefaultBrowserSessionVariable = true;
           };
 
-          ghostty.enable = true;
+          ghostty = {
+            enable = true;
+            theme = "noctalia";
+          };
         };
 
         file = {
@@ -275,9 +278,10 @@ in
           colorSchemes.predefinedScheme = "Catppuccin-Lavender";
           templates = {
             gtk = true;
-            qt = true;
+            ghostty = true;
             kcolorscheme = true;
             niri = true;
+            qt = true;
           };
           desktopWidgets = {
             enabled = true;
