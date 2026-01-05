@@ -11,6 +11,7 @@ spec:
   template:
     metadata:
       labels:
+        app.kubernetes.io/component: frontend
         app.kubernetes.io/name: rustdesk
     spec:
       containers:
