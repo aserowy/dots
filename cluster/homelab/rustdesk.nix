@@ -51,7 +51,10 @@ in
           replicas = 1;
           selector.matchLabels."app.kubernetes.io/name" = "rustdesk";
           template = {
-            metadata.labels."app.kubernetes.io/name" = "rustdesk";
+            metadata.labels = {
+              "app.kubernetes.io/name" = "rustdesk";
+              "app.kubernetes.io/component" = "frontend";
+            };
             spec = {
               securityContext = {
                 fsGroup = 1000;
