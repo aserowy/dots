@@ -241,6 +241,7 @@ in
           };
           dock.enabled = false;
           sessionMenu = {
+            largeButtonsLayout = "single-row";
             largeButtonsStyle = true;
             powerOptions = [
               {
