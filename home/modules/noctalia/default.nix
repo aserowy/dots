@@ -121,7 +121,7 @@ in
                 {
                   blacklist = [
                   ];
-                  colorizeIcons = false;
+                  colorizeIcons = true;
                   drawerEnabled = true;
                   hidePassive = false;
                   id = "Tray";
@@ -133,7 +133,7 @@ in
                   width = 20;
                 }
                 {
-                  customFont = "JetBrainsMono Nerd Font Mono";
+                  customFont = "JetBrainsMono Nerd Font";
                   formatHorizontal = "HH:mm ddd, MMM dd";
                   formatVertical = "HH mm";
                   id = "Clock";
@@ -153,7 +153,7 @@ in
           };
           ui = {
             fontDefault = "Inter Variable";
-            fontFixed = "JetBrainsMono Nerd Font Mono";
+            fontFixed = "JetBrainsMono Nerd Font";
             panelBackgroundOpacity = 0.9;
             settingsPanelMode = "centered";
           };
