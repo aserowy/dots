@@ -54,6 +54,7 @@ in
           kdePackages.qt6ct
           niri
           nwg-look
+          pwvucontrol
 
           (pkgs.writeShellScriptBin "outputshot" ''
             niri msg action screenshot-screen
