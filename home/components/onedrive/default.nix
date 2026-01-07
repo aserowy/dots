@@ -40,12 +40,10 @@ in
       spawn-at-startup "onedrivegui"
     '';
 
-    home.modules.noctalia.prependedConfig = mkIf cnfg.enableNoctaliaIntegration {
-      systemd.user.services = {
-        onedrivegui.Service = {
-          WantedBy = [ "graphical.target" ];
-          ExecStart = pkgs.onedrivegui;
-        };
+    systemd.user.services = mkIf cnfg.enableNoctaliaIntegration {
+      onedrivegui.Service = {
+        WantedBy = [ "graphical.target" ];
+        ExecStart = pkgs.onedrivegui;
       };
     };
   };
