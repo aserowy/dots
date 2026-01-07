@@ -36,10 +36,7 @@ in
           };
 
           fuzzel.enable = true;
-          ghostty = {
-            enable = true;
-            theme = "";
-          };
+          ghostty.enable = true;
         };
 
         file = {

@@ -40,8 +40,13 @@ in
       spawn-at-startup "onedrivegui"
     '';
 
-    home.modules.noctalia.prependedConfig = mkIf cnfg.enableNoctaliaIntegration ''
-      spawn-at-startup "onedrivegui"
-    '';
+    home.modules.noctalia.prependedConfig = mkIf cnfg.enableNoctaliaIntegration {
+      systemd.user.services = {
+        onedrivegui.Service = {
+          WantedBy = [ "graphical.target" ];
+          ExecStart = pkgs.onedrivegui;
+        };
+      };
+    };
   };
 }
