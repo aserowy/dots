@@ -16,7 +16,7 @@ in
     home = {
       file.".config/zellij/config.kdl".source = ./config.kdl;
 
-      file.".config/zellij/layouts/compact.kdl".text = ''
+      file.".config/zellij/layouts/zjstatus.kdl".text = ''
         layout {
             default_tab_template {
                 children

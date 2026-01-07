@@ -207,13 +207,13 @@ in
               ];
               right = [
                 {
-                  id = "Notifications";
-                }
-                {
                   id = "KeepAwake";
                 }
                 {
                   id = "NightLight";
+                }
+                {
+                  id = "DarkMode";
                 }
               ];
             };
