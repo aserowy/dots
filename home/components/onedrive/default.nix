@@ -40,15 +40,11 @@ in
       spawn-at-startup "onedrivegui"
     '';
 
-    systemd.user.services = mkIf cnfg.enableNoctaliaIntegration {
-      onedrivegui = {
-        Unit.After = "graphical-session.target";
-        Install.WantedBy = ["graphical-session.target"];
-        Service = {
-          Type = "oneshot";
-          ExecStart = pkgs.onedrivegui;
-        };
-      };
+    xdg.autostart = mkIf cnfg.enableNoctaliaIntegration {
+      enable = true;
+      entries = [
+        "${pkgs.onedrivegui}/share/applications/OneDriveGUI.desktop"
+      ];
     };
   };
 }
