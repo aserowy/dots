@@ -41,9 +41,13 @@ in
     '';
 
     systemd.user.services = mkIf cnfg.enableNoctaliaIntegration {
-      onedrivegui.Service = {
-        WantedBy = [ "graphical.target" ];
-        ExecStart = pkgs.onedrivegui;
+      onedrivegui = {
+        Unit.After = "graphical-session.target";
+        Install.WantedBy = ["graphical-session.target"];
+        Service = {
+          Type = "oneshot";
+          ExecStart = pkgs.onedrivegui;
+        };
       };
     };
   };

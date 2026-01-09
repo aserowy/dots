@@ -37,6 +37,7 @@ in
 
           fuzzel.enable = true;
           ghostty.enable = true;
+          wpaperd.enable = true;
         };
 
         file = {

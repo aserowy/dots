@@ -11,7 +11,6 @@
       bitwarden.enable = true;
       ghostty.enable = true;
       onedrive.enable = true;
-      wpaperd.enable = true;
 
       # NOTE: fallback terminal
       kitty.enable = true;
