@@ -8,8 +8,8 @@ metadata:
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kyverno-crds
-    app.kubernetes.io/version: 3.6.1
-    helm.sh/chart: crds-3.6.1
+    app.kubernetes.io/version: 3.6.2
+    helm.sh/chart: crds-3.6.2
   name: imagevalidatingpolicies.policies.kyverno.io
 spec:
   group: policies.kyverno.io

@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
     app.kubernetes.io/role: entrypoint
-    helm.sh/chart: traefik-38.0.1
+    helm.sh/chart: traefik-38.0.2
   name: traefik
   namespace: loadbalancer
 spec:
@@ -32,7 +32,7 @@ spec:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: traefik
         app.kubernetes.io/role: entrypoint
-        helm.sh/chart: traefik-38.0.1
+        helm.sh/chart: traefik-38.0.2
     spec:
       automountServiceAccountToken: true
       containers:
@@ -68,7 +68,7 @@ spec:
                   fieldPath: metadata.namespace
             - name: USER
               value: traefik
-          image: docker.io/traefik:v3.6.5
+          image: docker.io/traefik:v3.6.6
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
@@ -132,6 +132,8 @@ spec:
         runAsGroup: 65532
         runAsNonRoot: true
         runAsUser: 65532
+        seccompProfile:
+          type: RuntimeDefault
       serviceAccountName: traefik
       terminationGracePeriodSeconds: 60
       volumes:
