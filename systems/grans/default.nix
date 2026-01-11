@@ -7,6 +7,8 @@
     ./hardware-configuration.nix
   ];
 
+  hardware.bluetooth.enable = true;
+
   networking = {
     hostName = "grans";
 
