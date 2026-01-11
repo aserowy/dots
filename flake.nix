@@ -32,7 +32,7 @@
       };
     };
     nixhelm = {
-      url = "github:farcaller/nixhelm";
+      url = "github:nix-community/nixhelm";
       inputs = {
         nixpkgs.follows = "nixpkgs";
         flake-utils.follows = "flake-utils";

@@ -66,7 +66,7 @@ pkgs.mkShell {
     pkgs.marksman
     pkgs.nixd
     nixidy.packages.${pkgs.stdenv.hostPlatform.system}.default
-    pkgs.nixfmt-rfc-style
+    pkgs.nixfmt
     pkgs.nodejs_24
     pkgs.nodePackages.prettier
     pkgs.nodePackages.vscode-json-languageserver
