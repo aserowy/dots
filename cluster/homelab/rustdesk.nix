@@ -65,7 +65,7 @@ in
               containers = [
                 {
                   name = "rustdesk-server";
-                  image = "docker.io/rustdesk/rustdesk-server:1.1.14"; # docker/rustdesk/rustdesk-server@semver-coerced
+                  image = "docker.io/rustdesk/rustdesk-server:1.1.15"; # docker/rustdesk/rustdesk-server@semver-coerced
                   args = [
                     "hbbs"
                     "-r"
@@ -106,7 +106,7 @@ in
                 }
                 {
                   name = "rustdesk-relay";
-                  image = "docker.io/rustdesk/rustdesk-server:1.1.14"; # docker/rustdesk/rustdesk-server@semver-coerced
+                  image = "docker.io/rustdesk/rustdesk-server:1.1.15"; # docker/rustdesk/rustdesk-server@semver-coerced
                   args = [
                     "hbbr"
                   ];
