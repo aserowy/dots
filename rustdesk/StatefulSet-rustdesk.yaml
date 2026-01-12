@@ -19,7 +19,7 @@ spec:
             - hbbs
             - -r
             - localhost:21117
-          image: docker.io/rustdesk/rustdesk-server:1.1.14
+          image: docker.io/rustdesk/rustdesk-server:1.1.15
           name: rustdesk-server
           ports:
             - containerPort: 21115
@@ -43,7 +43,7 @@ spec:
               name: server-data
         - args:
             - hbbr
-          image: docker.io/rustdesk/rustdesk-server:1.1.14
+          image: docker.io/rustdesk/rustdesk-server:1.1.15
           name: rustdesk-relay
           ports:
             - containerPort: 21117
