@@ -14,6 +14,7 @@ in
       values = {
         nextcloud = {
           host = "nextcloud.anderwerse.de";
+          trustedDomains = [ "nextcloud.anderwerse.de" ];
           existingSecret = {
             enabled = true;
             secretName = "nextcloud";
@@ -25,10 +26,25 @@ in
           enabled = true;
           storageClass = "longhorn";
 
+          global.postgresql = {
+            existingSecret = "database";
+            secretKeys = {
+              adminPasswordKey = "admin_password";
+              userPasswordKey = "user_password";
+              replicationPasswordKey = "replication_password";
+            };
+          };
           nextcloudData = {
             enabled = true;
             storageClass = "longhorn";
             size = "20Gi";
+          };
+        };
+        postgresql = {
+          enabled = true;
+          primary.persistence = {
+            enabled = true;
+            storageClass = "longhorn";
           };
         };
       };
