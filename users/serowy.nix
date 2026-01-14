@@ -28,6 +28,7 @@ in
         "audio"
         "disk"
         "networkmanager"
+        "openrazer"
         "video"
         "wheel"
       ];

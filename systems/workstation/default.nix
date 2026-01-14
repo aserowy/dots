@@ -19,6 +19,12 @@
     };
   };
 
+  hardware.openrazer.enable = true;
+  environment.systemPackages = with pkgs; [
+    openrazer-daemon
+    polychromatic
+  ];
+
   environment.sessionVariables = {
     # INFO: sets ozone wayland support for all chromium based applications
     NIXOS_OZONE_WL = "1";
