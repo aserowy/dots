@@ -77,11 +77,12 @@ in
         settings = {
           settingsVersion = 0;
           bar = {
-            position = "left";
-            density = "comfortable";
+            backgroundOpacity = 1;
+            density = "default";
             monitors = [ "DP-2" ];
-            showCapsule = true;
-            backgroundOpacity = 0;
+            outerCorners = false;
+            position = "left";
+            showCapsule = false;
             useSeparateOpacity = true;
             widgets = {
               left = [
