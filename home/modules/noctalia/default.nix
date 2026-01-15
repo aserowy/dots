@@ -87,15 +87,6 @@ in
             widgets = {
               left = [
                 {
-                  colorizeDistroLogo = false;
-                  colorizeSystemIcon = "none";
-                  customIconPath = "";
-                  enableColorization = false;
-                  icon = "niri";
-                  id = "ControlCenter";
-                  useDistroLogo = false;
-                }
-                {
                   hideWhenZero = false;
                   id = "NotificationHistory";
                   showUnreadBadge = true;
