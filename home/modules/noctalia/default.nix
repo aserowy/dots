@@ -78,7 +78,7 @@ in
           settingsVersion = 0;
           bar = {
             backgroundOpacity = 1;
-            density = "default";
+            density = "comfortable";
             monitors = [ "DP-2" ];
             outerCorners = false;
             position = "left";
