@@ -13,7 +13,8 @@
     hostName = "homelab-02-l430";
     network = {
       adapter = "enp12s0";
-      address = "192.168.178.202/24";
+      # NOTE: solar wlan forces 202... WTH
+      address = "192.168.178.205/24";
       gateway = "192.168.178.1";
     };
     cluster = {
