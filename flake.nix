@@ -290,7 +290,10 @@
             ./systems/homelab-01-nuc
             {
               imports = [ ./users ];
-              users.root.enable = true;
+              users.root = {
+                enable = true;
+                sopsPasswordFilePath = "homelab/root_password";
+              };
             }
           ];
         };
@@ -305,7 +308,10 @@
             ./systems/homelab-02-l430
             {
               imports = [ ./users ];
-              users.root.enable = true;
+              users.root = {
+                enable = true;
+                sopsPasswordFilePath = "homelab/root_password";
+              };
             }
           ];
         };
@@ -320,7 +326,10 @@
             ./systems/homelab-03-t440s
             {
               imports = [ ./users ];
-              users.root.enable = true;
+              users.root = {
+                enable = true;
+                sopsPasswordFilePath = "homelab/root_password";
+              };
             }
           ];
         };
@@ -335,7 +344,10 @@
             ./systems/homelab-04-t450
             {
               imports = [ ./users ];
-              users.root.enable = true;
+              users.root = {
+                enable = true;
+                sopsPasswordFilePath = "homelab/root_password";
+              };
             }
           ];
         };

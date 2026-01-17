@@ -10,6 +10,9 @@
       "gran/root_password" = {
         neededForUsers = true;
       };
+      "homelab/root_password" = {
+        neededForUsers = true;
+      };
       "music/password" = {
         neededForUsers = true;
       };
