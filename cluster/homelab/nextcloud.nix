@@ -32,6 +32,7 @@ in
             size = "20Gi";
           };
         };
+        phpClientHttpsFix.enabled = true;
         # postgresql = {
         #   enabled = true;
         # global.postgresql.auth = {
