@@ -32,6 +32,8 @@ spec:
     spec:
       containers:
         - env:
+            - name: OVERWRITEPROTOCOL
+              value: https
             - name: SQLITE_DATABASE
               value: nextcloud
             - name: NEXTCLOUD_ADMIN_USER
