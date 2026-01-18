@@ -13,11 +13,10 @@ in
 
       values = {
         # conjob.enabled = true;
-        # internalDatabase.enabled = false;
+        internalDatabase.enabled = false;
         nextcloud = {
           host = "nextcloud.anderwerse.de";
           trustedDomains = [ "nextcloud.anderwerse.de" ];
-
           existingSecret = {
             enabled = true;
             secretName = "nextcloud";
@@ -33,21 +32,21 @@ in
           };
         };
         phpClientHttpsFix.enabled = true;
-        # postgresql = {
-        #   enabled = true;
-        # global.postgresql.auth = {
-        #   existingSecret = "database";
-        #   secretKeys = {
-        #     adminPasswordKey = "admin_password";
-        #     userPasswordKey = "user_password";
-        #     replicationPasswordKey = "replication_password";
-        #   };
-        # };
-        #   primary.persistence = {
-        #     enabled = true;
-        #     storageClass = "longhorn";
-        #   };
-        # };
+        postgresql = {
+          enabled = true;
+          global.postgresql.auth = {
+            existingSecret = "database";
+            secretKeys = {
+              adminPasswordKey = "admin_password";
+              userPasswordKey = "user_password";
+              replicationPasswordKey = "replication_password";
+            };
+          };
+          primary.persistence = {
+            enabled = true;
+            storageClass = "longhorn";
+          };
+        };
         livenessProbe = {
           initialDelaySeconds = 120;
           failureThreshold = 15;
