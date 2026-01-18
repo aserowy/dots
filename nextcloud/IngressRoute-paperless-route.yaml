@@ -1,0 +1,17 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: paperless-route
+  namespace: nextcloud
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`nextcloud.anderwerse.de`)
+      services:
+        - name: nextcloud
+          namespace: nextcloud
+          port: 80
+  tls:
+    secretName: anderwersede-tls-certificate
