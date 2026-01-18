@@ -13,7 +13,7 @@ in
 
       values = {
         # conjob.enabled = true;
-        internalDatabase.enabled = false;
+
         nextcloud = {
           host = "nextcloud.anderwerse.de";
           trustedDomains = [ "nextcloud.anderwerse.de" ];
@@ -32,6 +32,9 @@ in
           };
         };
         phpClientHttpsFix.enabled = true;
+
+        externalDatabase.enabled = true;
+        internalDatabase.enabled = false;
         postgresql = {
           enabled = true;
           global.postgresql.auth = {
@@ -47,6 +50,7 @@ in
             storageClass = "longhorn";
           };
         };
+
         livenessProbe = {
           initialDelaySeconds = 120;
           failureThreshold = 15;
