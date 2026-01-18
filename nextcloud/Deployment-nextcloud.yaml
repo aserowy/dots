@@ -26,7 +26,7 @@ spec:
         nextcloud-config-hash: 8266a725d5474acb6adbf9f0609a3494dc3340a3ac306db90eac9ddb1b851960
         php-config-hash: 44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a
       labels:
-        app.kubernetes.io/component: frontend
+        app.kubernetes.io/component: app
         app.kubernetes.io/instance: nextcloud
         app.kubernetes.io/name: nextcloud
     spec:
