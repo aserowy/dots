@@ -49,15 +49,15 @@ spec:
             - name: NEXTCLOUD_ADMIN_USER
               valueFrom:
                 secretKeyRef:
-                  key: username
+                  key: nextcloud-username
                   name: nextcloud
             - name: NEXTCLOUD_ADMIN_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  key: password
+                  key: nextcloud-password
                   name: nextcloud
             - name: NEXTCLOUD_TRUSTED_DOMAINS
-              value: nextcloud.anderwerse.de
+              value: nextcloud.kube.home
             - name: NEXTCLOUD_DATA_DIR
               value: /var/www/html/data
           image: docker.io/library/nextcloud:32.0.3-apache
@@ -67,7 +67,7 @@ spec:
             httpGet:
               httpHeaders:
                 - name: Host
-                  value: nextcloud.anderwerse.de
+                  value: nextcloud.kube.home
               path: /status.php
               port: 80
             initialDelaySeconds: 30
@@ -84,7 +84,7 @@ spec:
             httpGet:
               httpHeaders:
                 - name: Host
-                  value: nextcloud.anderwerse.de
+                  value: nextcloud.kube.home
               path: /status.php
               port: 80
             initialDelaySeconds: 30
