@@ -297,7 +297,7 @@ in
                 toEndpoints = [
                   {
                     matchLabels = {
-                      "app.kubernetes.io/component" = "frontend";
+                      "app.kubernetes.io/component" = "app";
                     };
                   }
                 ];

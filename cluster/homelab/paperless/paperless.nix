@@ -73,7 +73,7 @@ in
             template = {
               metadata.labels = {
                 "app.kubernetes.io/name" = "paperless";
-                "app.kubernetes.io/component" = "frontend";
+                "app.kubernetes.io/component" = "app";
               };
               spec = {
                 securityContext = {

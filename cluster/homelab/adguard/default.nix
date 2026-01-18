@@ -39,7 +39,7 @@ in
             template = {
               metadata.labels = {
                 "app.kubernetes.io/name" = "adguard";
-                "app.kubernetes.io/component" = "frontend";
+                "app.kubernetes.io/component" = "app";
                 "app.kubernetes.io/role" = "entrypoint";
               };
               spec = {

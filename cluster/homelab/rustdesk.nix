@@ -53,7 +53,7 @@ in
           template = {
             metadata.labels = {
               "app.kubernetes.io/name" = "rustdesk";
-              "app.kubernetes.io/component" = "frontend";
+              "app.kubernetes.io/component" = "app";
             };
             spec = {
               securityContext = {
