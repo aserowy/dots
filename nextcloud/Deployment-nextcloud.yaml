@@ -23,7 +23,7 @@ spec:
     metadata:
       annotations:
         hooks-hash: 9525c2748a6c7cd0e28ec740623d0b3fa5a75c83b51ccfd136bc89c76737b204
-        nextcloud-config-hash: 7ce1a3decbca5f8d3b893465cbd2efbdcfd2026e9773f9a0a8068165809e4237
+        nextcloud-config-hash: 8266a725d5474acb6adbf9f0609a3494dc3340a3ac306db90eac9ddb1b851960
         php-config-hash: 44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a
       labels:
         app.kubernetes.io/component: app
@@ -32,8 +32,20 @@ spec:
     spec:
       containers:
         - env:
-            - name: SQLITE_DATABASE
+            - name: POSTGRES_HOST
+              value: nextcloud-postgresql
+            - name: POSTGRES_DB
               value: nextcloud
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  key: db-username
+                  name: nextcloud-db
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: db-password
+                  name: nextcloud-db
             - name: NEXTCLOUD_ADMIN_USER
               valueFrom:
                 secretKeyRef:
@@ -102,42 +114,6 @@ spec:
             - mountPath: /var/www/html/themes
               name: nextcloud-main
               subPath: themes
-            - mountPath: /var/www/html/config/proxy.config.php
-              name: nextcloud-config
-              subPath: proxy.config.php
-            - mountPath: /var/www/html/config/.htaccess
-              name: nextcloud-config
-              subPath: .htaccess
-            - mountPath: /var/www/html/config/apache-pretty-urls.config.php
-              name: nextcloud-config
-              subPath: apache-pretty-urls.config.php
-            - mountPath: /var/www/html/config/apcu.config.php
-              name: nextcloud-config
-              subPath: apcu.config.php
-            - mountPath: /var/www/html/config/apps.config.php
-              name: nextcloud-config
-              subPath: apps.config.php
-            - mountPath: /var/www/html/config/autoconfig.php
-              name: nextcloud-config
-              subPath: autoconfig.php
-            - mountPath: /var/www/html/config/redis.config.php
-              name: nextcloud-config
-              subPath: redis.config.php
-            - mountPath: /var/www/html/config/reverse-proxy.config.php
-              name: nextcloud-config
-              subPath: reverse-proxy.config.php
-            - mountPath: /var/www/html/config/s3.config.php
-              name: nextcloud-config
-              subPath: s3.config.php
-            - mountPath: /var/www/html/config/smtp.config.php
-              name: nextcloud-config
-              subPath: smtp.config.php
-            - mountPath: /var/www/html/config/swift.config.php
-              name: nextcloud-config
-              subPath: swift.config.php
-            - mountPath: /var/www/html/config/upgrade-disable-web.config.php
-              name: nextcloud-config
-              subPath: upgrade-disable-web.config.php
       initContainers:
         - command:
             - sh
@@ -164,6 +140,3 @@ spec:
         - name: nextcloud-data
           persistentVolumeClaim:
             claimName: nextcloud-nextcloud-data
-        - configMap:
-            name: nextcloud-config
-          name: nextcloud-config
