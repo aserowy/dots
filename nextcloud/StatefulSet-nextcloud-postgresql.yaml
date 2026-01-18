@@ -54,9 +54,9 @@ spec:
             - name: POSTGRES_USER
               value: nextcloud
             - name: POSTGRES_PASSWORD_FILE
-              value: /opt/bitnami/postgresql/secrets/user_password
+              value: /opt/bitnami/postgresql/secrets/db-password
             - name: POSTGRES_POSTGRES_PASSWORD_FILE
-              value: /opt/bitnami/postgresql/secrets/admin_password
+              value: /opt/bitnami/postgresql/secrets/db-adminpassword
             - name: POSTGRES_DATABASE
               value: nextcloud
             - name: POSTGRESQL_ENABLE_LDAP
