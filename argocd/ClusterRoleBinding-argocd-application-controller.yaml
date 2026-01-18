@@ -7,8 +7,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-application-controller
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.2.4
-    helm.sh/chart: argo-cd-9.3.3
+    app.kubernetes.io/version: v3.2.5
+    helm.sh/chart: argo-cd-9.3.4
   name: argocd-application-controller
 roleRef:
   apiGroup: rbac.authorization.k8s.io
