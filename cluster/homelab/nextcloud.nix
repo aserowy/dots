@@ -12,17 +12,17 @@ in
       chart = charts.nextcloud.nextcloud;
 
       values = {
-        conjob.enabled = true;
+        # conjob.enabled = true;
         internalDatabase.enabled = false;
         nextcloud = {
-          existingSecret = {
-            enabled = true;
-            secretName = "nextcloud";
-            usernameKey = "username";
-            passwordKey = "password";
-          };
-          host = "nextcloud.anderwerse.de";
-          trustedDomains = [ "nextcloud.anderwerse.de" ];
+          # existingSecret = {
+          #   enabled = true;
+          #   secretName = "nextcloud";
+          #   usernameKey = "username";
+          #   passwordKey = "password";
+          # };
+          # host = "nextcloud.anderwerse.de";
+          # trustedDomains = [ "nextcloud.anderwerse.de" ];
         };
         persistence = {
           enabled = true;
@@ -35,14 +35,14 @@ in
         };
         postgresql = {
           enabled = true;
-          global.postgresql.auth = {
-            existingSecret = "database";
-            secretKeys = {
-              adminPasswordKey = "admin_password";
-              userPasswordKey = "user_password";
-              replicationPasswordKey = "replication_password";
-            };
-          };
+          # global.postgresql.auth = {
+          #   existingSecret = "database";
+          #   secretKeys = {
+          #     adminPasswordKey = "admin_password";
+          #     userPasswordKey = "user_password";
+          #     replicationPasswordKey = "replication_password";
+          #   };
+          # };
           primary.persistence = {
             enabled = true;
             storageClass = "longhorn";
