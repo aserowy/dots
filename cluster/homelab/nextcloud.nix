@@ -14,17 +14,25 @@ in
       values = {
         conjob.enabled = true;
         nextcloud = {
-          host = "nextcloud.anderwerse.de";
-          trustedDomains = [
-            "10.42.0.0/16"
-            "nextcloud.anderwerse.de"
-          ];
+          configs."proxy.config.php" =
+            "<?php
+             $CONFIG = array (
+               'trusted_proxies' => array(
+                 0 => '10.42.0.0/16',
+               ),
+               'forwarded_for_headers' => array('HTTP_X_FORWARDED_FOR'),
+             );";
           existingSecret = {
             enabled = true;
             secretName = "nextcloud";
             usernameKey = "username";
             passwordKey = "password";
           };
+          host = "nextcloud.anderwerse.de";
+          trustedDomains = [
+            "10.42.0.0/16"
+            "nextcloud.anderwerse.de"
+          ];
         };
         persistence = {
           enabled = true;
@@ -51,8 +59,8 @@ in
             storageClass = "longhorn";
           };
         };
-        livenessProbe.initialDelaySeconds = 90;
-        readinessProbe.initialDelaySeconds = 90;
+        livenessProbe.initialDelaySeconds = 30;
+        readinessProbe.initialDelaySeconds = 30;
       };
     };
 
