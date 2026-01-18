@@ -16,7 +16,7 @@ in
         nextcloud = {
           host = "nextcloud.anderwerse.de";
           trustedDomains = [
-            "127.0.0.1"
+            "10.42.0.0/16"
             "nextcloud.anderwerse.de"
           ];
           existingSecret = {
@@ -51,6 +51,8 @@ in
             storageClass = "longhorn";
           };
         };
+        livenessProbe.initialDelaySeconds = 90;
+        readinessProbe.initialDelaySeconds = 90;
       };
     };
 
