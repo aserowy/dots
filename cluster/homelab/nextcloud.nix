@@ -14,13 +14,12 @@ in
       values = {
         # conjob.enabled = true;
         # internalDatabase.enabled = false;
-        # nextcloud = {
-        # existingSecret = {
-        #   enabled = true;
-        #   secretName = "nextcloud";
-        #   usernameKey = "username";
-        #   passwordKey = "password";
-        # };
+        nextcloud = {
+          existingSecret = {
+            enabled = true;
+            secretName = "nextcloud";
+          };
+        };
         # host = "nextcloud.anderwerse.de";
         # trustedDomains = [ "nextcloud.anderwerse.de" ];
         # };
@@ -48,8 +47,14 @@ in
         #     storageClass = "longhorn";
         #   };
         # };
-        livenessProbe.initialDelaySeconds = 30;
-        readinessProbe.initialDelaySeconds = 30;
+        livenessProbe = {
+          initialDelaySeconds = 120;
+          failureThreshold = 15;
+        };
+        readinessProbe = {
+          initialDelaySeconds = 120;
+          failureThreshold = 15;
+        };
       };
     };
 
