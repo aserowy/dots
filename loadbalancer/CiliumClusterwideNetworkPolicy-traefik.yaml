@@ -5,6 +5,9 @@ metadata:
   namespace: loadbalancer
 spec:
   egress:
+    - toEndpoints:
+        - matchLabels:
+            app.kubernetes.io/component: app
     - toEntities:
         - kube-apiserver
       toPorts:
@@ -43,14 +46,14 @@ spec:
         - ports:
             - port: "8081"
               protocol: TCP
-    - toEndpoints:
-        - matchLabels:
-            app.kubernetes.io/component: app
   endpointSelector:
     matchLabels:
       app.kubernetes.io/name: traefik
       io.kubernetes.pod.namespace: loadbalancer
   ingress:
+    - fromEndpoints:
+        - matchLabels:
+            app.kubernetes.io/component: app
     - fromEntities:
         - host
       toPorts:
