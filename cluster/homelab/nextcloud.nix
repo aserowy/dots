@@ -13,16 +13,8 @@ in
 
       values = {
         conjob.enabled = true;
+        internalDatabase.enabled = false;
         nextcloud = {
-          configs."proxy.config.php" =
-            "<?php
-             $CONFIG = array (
-               'trusted_proxies' => array(
-                 0 => '10.42.0.0/16',
-                 1 => '127.0.0.1',
-               ),
-               'forwarded_for_headers' => array('HTTP_X_FORWARDED_FOR'),
-             );";
           existingSecret = {
             enabled = true;
             secretName = "nextcloud";
@@ -35,7 +27,6 @@ in
         persistence = {
           enabled = true;
           storageClass = "longhorn";
-
           nextcloudData = {
             enabled = true;
             storageClass = "longhorn";
