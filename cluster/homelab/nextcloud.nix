@@ -12,6 +12,7 @@ in
       chart = charts.nextcloud.nextcloud;
 
       values = {
+        conjob.enabled = true;
         nextcloud = {
           host = "nextcloud.anderwerse.de";
           trustedDomains = [ "nextcloud.anderwerse.de" ];
