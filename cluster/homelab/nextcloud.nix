@@ -65,7 +65,7 @@ in
 
     resources = {
       ingressRoutes = {
-        paperless-route.spec = {
+        nextcloud-route.spec = {
           entryPoints = [
             "websecure"
           ];
