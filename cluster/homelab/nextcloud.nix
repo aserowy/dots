@@ -14,14 +14,18 @@ in
       values = {
         # conjob.enabled = true;
         # internalDatabase.enabled = false;
+        host = "nextcloud.anderwerse.de";
+        trustedDomains = [ "nextcloud.anderwerse.de" ];
+
         nextcloud = {
           existingSecret = {
             enabled = true;
             secretName = "nextcloud";
           };
         };
-        # host = "nextcloud.anderwerse.de";
-        # trustedDomains = [ "nextcloud.anderwerse.de" ];
+        podLabels = {
+          "app.kubernetes.io/component" = "frontend";
+        };
         # };
         # persistence = {
         #   enabled = true;
