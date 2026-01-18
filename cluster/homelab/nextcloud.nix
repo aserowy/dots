@@ -26,14 +26,6 @@ in
           enabled = true;
           storageClass = "longhorn";
 
-          global.postgresql = {
-            existingSecret = "database";
-            secretKeys = {
-              adminPasswordKey = "admin_password";
-              userPasswordKey = "user_password";
-              replicationPasswordKey = "replication_password";
-            };
-          };
           nextcloudData = {
             enabled = true;
             storageClass = "longhorn";
@@ -42,6 +34,14 @@ in
         };
         postgresql = {
           enabled = true;
+          global.postgresql.auth = {
+            existingSecret = "database";
+            secretKeys = {
+              adminPasswordKey = "admin_password";
+              userPasswordKey = "user_password";
+              replicationPasswordKey = "replication_password";
+            };
+          };
           primary.persistence = {
             enabled = true;
             storageClass = "longhorn";
