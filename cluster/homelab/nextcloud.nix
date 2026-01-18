@@ -14,10 +14,10 @@ in
       values = {
         # conjob.enabled = true;
         # internalDatabase.enabled = false;
-        host = "nextcloud.anderwerse.de";
-        trustedDomains = [ "nextcloud.anderwerse.de" ];
-
         nextcloud = {
+          host = "nextcloud.anderwerse.de";
+          trustedDomains = [ "nextcloud.anderwerse.de" ];
+
           existingSecret = {
             enabled = true;
             secretName = "nextcloud";
