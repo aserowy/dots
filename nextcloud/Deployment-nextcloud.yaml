@@ -34,8 +34,20 @@ spec:
         - env:
             - name: OVERWRITEPROTOCOL
               value: https
-            - name: SQLITE_DATABASE
+            - name: POSTGRES_HOST
+              value: nextcloud-postgresql
+            - name: POSTGRES_DB
               value: nextcloud
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  key: db-username
+                  name: nextcloud-db
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: db-password
+                  name: nextcloud-db
             - name: NEXTCLOUD_ADMIN_USER
               valueFrom:
                 secretKeyRef:
@@ -104,6 +116,23 @@ spec:
             - mountPath: /var/www/html/themes
               name: nextcloud-main
               subPath: themes
+      initContainers:
+        - command:
+            - sh
+            - -c
+            - until pg_isready -h ${POSTGRES_HOST} -U ${POSTGRES_USER} ; do sleep 2 ; done
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  key: db-username
+                  name: nextcloud-db
+            - name: POSTGRES_HOST
+              value: nextcloud-postgresql
+          image: docker.io/bitnamilegacy/postgresql:17.5.0-debian-12-r3
+          name: postgresql-isready
+          resources: {}
+          securityContext: {}
       securityContext:
         fsGroup: 33
       volumes:
