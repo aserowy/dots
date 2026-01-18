@@ -45,7 +45,7 @@ spec:
                   key: password
                   name: nextcloud
             - name: NEXTCLOUD_TRUSTED_DOMAINS
-              value: nextcloud.anderwerse.de
+              value: 127.0.0.1 nextcloud.anderwerse.de
             - name: NEXTCLOUD_DATA_DIR
               value: /var/www/html/data
           image: docker.io/library/nextcloud:32.0.3-apache
