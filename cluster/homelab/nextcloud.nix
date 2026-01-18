@@ -23,16 +23,15 @@ in
             secretName = "nextcloud";
           };
         };
-        # };
-        # persistence = {
-        #   enabled = true;
-        #   storageClass = "longhorn";
-        #   nextcloudData = {
-        #     enabled = true;
-        #     storageClass = "longhorn";
-        #     size = "20Gi";
-        #   };
-        # };
+        persistence = {
+          enabled = true;
+          storageClass = "longhorn";
+          nextcloudData = {
+            enabled = true;
+            storageClass = "longhorn";
+            size = "20Gi";
+          };
+        };
         # postgresql = {
         #   enabled = true;
         # global.postgresql.auth = {
