@@ -12,8 +12,6 @@ in
       chart = charts.nextcloud.nextcloud;
 
       values = {
-        # conjob.enabled = true;
-
         nextcloud = {
           host = "nextcloud.anderwerse.de";
           trustedDomains = [ "nextcloud.anderwerse.de" ];
@@ -31,13 +29,12 @@ in
             size = "20Gi";
           };
         };
+        conjob.enabled = true;
         phpClientHttpsFix.enabled = true;
 
         internalDatabase.enabled = false;
         externalDatabase = {
           enabled = true;
-          # type = "postgresql";
-          # host = "nextcloud-postgresql.nextcloud.svc.cluster.local";
           existingSecret = {
             enabled = true;
             secretName = "database";
