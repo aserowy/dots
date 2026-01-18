@@ -12,6 +12,6 @@ spec:
       services:
         - name: nextcloud
           namespace: nextcloud
-          port: 80
+          port: 8080
   tls:
     secretName: anderwersede-tls-certificate
