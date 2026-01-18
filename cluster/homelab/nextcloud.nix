@@ -15,7 +15,10 @@ in
         conjob.enabled = true;
         nextcloud = {
           host = "nextcloud.anderwerse.de";
-          trustedDomains = [ "nextcloud.anderwerse.de" ];
+          trustedDomains = [
+            "127.0.0.1"
+            "nextcloud.anderwerse.de"
+          ];
           existingSecret = {
             enabled = true;
             secretName = "nextcloud";
