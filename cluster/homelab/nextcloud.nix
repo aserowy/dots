@@ -19,6 +19,7 @@ in
              $CONFIG = array (
                'trusted_proxies' => array(
                  0 => '10.42.0.0/16',
+                 1 => '127.0.0.1',
                ),
                'forwarded_for_headers' => array('HTTP_X_FORWARDED_FOR'),
              );";
@@ -29,10 +30,7 @@ in
             passwordKey = "password";
           };
           host = "nextcloud.anderwerse.de";
-          trustedDomains = [
-            "10.42.0.0/16"
-            "nextcloud.anderwerse.de"
-          ];
+          trustedDomains = [ "nextcloud.anderwerse.de" ];
         };
         persistence = {
           enabled = true;
