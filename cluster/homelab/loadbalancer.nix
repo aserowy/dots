@@ -147,6 +147,15 @@ in
             };
             ingress = [
               {
+                fromEndpoints = [
+                  {
+                    matchLabels = {
+                      "app.kubernetes.io/component" = "app";
+                    };
+                  }
+                ];
+              }
+              {
                 fromEntities = [
                   "host"
                 ];
@@ -198,6 +207,15 @@ in
               }
             ];
             egress = [
+              {
+                toEndpoints = [
+                  {
+                    matchLabels = {
+                      "app.kubernetes.io/component" = "app";
+                    };
+                  }
+                ];
+              }
               {
                 toEntities = [
                   "kube-apiserver"
@@ -290,15 +308,6 @@ in
                         protocol = "TCP";
                       }
                     ];
-                  }
-                ];
-              }
-              {
-                toEndpoints = [
-                  {
-                    matchLabels = {
-                      "app.kubernetes.io/component" = "app";
-                    };
                   }
                 ];
               }
