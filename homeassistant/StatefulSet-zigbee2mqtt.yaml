@@ -11,7 +11,7 @@ spec:
   template:
     metadata:
       labels:
-        app.kubernetes.io/component: frontend
+        app.kubernetes.io/component: app
         app.kubernetes.io/name: zigbee2mqtt
     spec:
       containers:
