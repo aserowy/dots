@@ -51,14 +51,14 @@ spec:
           image: docker.io/library/nextcloud:32.0.3-apache
           imagePullPolicy: IfNotPresent
           livenessProbe:
-            failureThreshold: 3
+            failureThreshold: 15
             httpGet:
               httpHeaders:
                 - name: Host
                   value: nextcloud.kube.home
               path: /status.php
               port: 80
-            initialDelaySeconds: 30
+            initialDelaySeconds: 120
             periodSeconds: 10
             successThreshold: 1
             timeoutSeconds: 5
@@ -68,14 +68,14 @@ spec:
               name: http
               protocol: TCP
           readinessProbe:
-            failureThreshold: 3
+            failureThreshold: 15
             httpGet:
               httpHeaders:
                 - name: Host
                   value: nextcloud.kube.home
               path: /status.php
               port: 80
-            initialDelaySeconds: 30
+            initialDelaySeconds: 120
             periodSeconds: 10
             successThreshold: 1
             timeoutSeconds: 5
