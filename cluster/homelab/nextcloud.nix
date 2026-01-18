@@ -23,9 +23,6 @@ in
             secretName = "nextcloud";
           };
         };
-        podLabels = {
-          "app.kubernetes.io/component" = "frontend";
-        };
         # };
         # persistence = {
         #   enabled = true;
