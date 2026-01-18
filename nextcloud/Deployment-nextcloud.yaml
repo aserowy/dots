@@ -88,7 +88,7 @@ spec:
               name: nextcloud-main
               subPath: html
             - mountPath: /var/www/html/data
-              name: nextcloud-main
+              name: nextcloud-data
               subPath: data
             - mountPath: /var/www/html/config
               name: nextcloud-main
@@ -105,5 +105,9 @@ spec:
       securityContext:
         fsGroup: 33
       volumes:
-        - emptyDir: {}
-          name: nextcloud-main
+        - name: nextcloud-main
+          persistentVolumeClaim:
+            claimName: nextcloud-nextcloud
+        - name: nextcloud-data
+          persistentVolumeClaim:
+            claimName: nextcloud-nextcloud-data
