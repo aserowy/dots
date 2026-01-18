@@ -63,5 +63,28 @@ in
       (builtins.readFile ./nextcloud-secrets.sops.yaml)
     ];
 
+    resources = {
+      ingressRoutes = {
+        paperless-route.spec = {
+          entryPoints = [
+            "websecure"
+          ];
+          routes = [
+            {
+              match = "Host(`nextcloud.anderwerse.de`)";
+              kind = "Rule";
+              services = [
+                {
+                  inherit namespace;
+                  name = "nextcloud";
+                  port = 80;
+                }
+              ];
+            }
+          ];
+          tls.secretName = "anderwersede-tls-certificate";
+        };
+      };
+    };
   };
 }
