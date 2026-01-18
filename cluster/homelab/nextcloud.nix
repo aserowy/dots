@@ -33,16 +33,24 @@ in
         };
         phpClientHttpsFix.enabled = true;
 
-        externalDatabase.enabled = true;
         internalDatabase.enabled = false;
+        externalDatabase = {
+          enabled = true;
+          # type = "postgresql";
+          # host = "nextcloud-postgresql.nextcloud.svc.cluster.local";
+          existingSecret = {
+            enabled = true;
+            secretName = "database";
+          };
+        };
         postgresql = {
           enabled = true;
           global.postgresql.auth = {
             existingSecret = "database";
             secretKeys = {
-              adminPasswordKey = "admin_password";
-              userPasswordKey = "user_password";
-              replicationPasswordKey = "replication_password";
+              adminPasswordKey = "db-adminpassword";
+              userPasswordKey = "db-password";
+              replicationPasswordKey = "db-replicationpassword";
             };
           };
           primary.persistence = {
