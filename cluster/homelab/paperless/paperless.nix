@@ -318,7 +318,12 @@ in
                     }
                     {
                       name = "RCLONE_CONFIG_NEXTCLOUD_URL";
-                      value = "https://nextcloud.anderwerse.de";
+                      valueFrom = {
+                        secretKeyRef = {
+                          name = "nextcloud";
+                          key = "url";
+                        };
+                      };
                     }
                     {
                       name = "RCLONE_CONFIG_NEXTCLOUD_VENDOR";
