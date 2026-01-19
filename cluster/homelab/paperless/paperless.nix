@@ -297,11 +297,7 @@ in
                       podAffinity = {
                         requiredDuringSchedulingIgnoredDuringExecution = [
                           {
-                            labelSelector = {
-                              matchLabels = {
-                                name = "paperless";
-                              };
-                            };
+                            labelSelector.matchLabels."app.kubernetes.io/name" = "paperless";
                             topologyKey = "kubernetes.io/hostname";
                           }
                         ];
