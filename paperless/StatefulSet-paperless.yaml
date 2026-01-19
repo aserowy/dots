@@ -110,7 +110,7 @@ spec:
         - command:
             - sh
             - -c
-            - until nc -z db 5432; do echo 'Waiting for Postgres...'; sleep 5; done
+            - until nc -z postgresql 5432; do echo 'waiting for postgresql.'; sleep 5; done
           image: busybox:1.37
           name: await-db-init
       securityContext:
