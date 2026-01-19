@@ -1,7 +1,7 @@
 {
   application,
   namespace,
-  charts,
+  # charts,
   lib,
   ...
 }:
@@ -102,7 +102,7 @@ in
                     command = [
                       "sh"
                       "-c"
-                      "until nc -z db 5432; do echo 'Waiting for Postgres...'; sleep 5; done"
+                      "until nc -z postgresql 5432; do echo 'waiting for postgresql.'; sleep 5; done"
                     ];
                   }
                 ];
@@ -310,7 +310,7 @@ in
                     containers = [
                       {
                         name = "rclone-move";
-                        image = "rclone/rclone:1.69.1";
+                        image = "rclone/rclone:1.69.1"; # docker/rclone/rclone@semver-coerced
                         imagePullPolicy = "IfNotPresent";
                         args = [
                           "move"
