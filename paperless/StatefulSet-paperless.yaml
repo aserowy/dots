@@ -106,8 +106,9 @@ spec:
           name: tmp
         - emptyDir: {}
           name: export
-        - emptyDir: {}
-          name: consume
+        - name: consume
+          persistentVolumeClaim:
+            claimName: paperless-consume-pvc
         - name: data
           persistentVolumeClaim:
             claimName: paperless-data-pvc
