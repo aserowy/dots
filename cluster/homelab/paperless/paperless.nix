@@ -6,8 +6,9 @@
   ...
 }:
 let
-  paperless-media-pvc = "paperless-media-pvc";
+  paperless-consume-pvc = "paperless-consume-pvc";
   paperless-data-pvc = "paperless-data-pvc";
+  paperless-media-pvc = "paperless-media-pvc";
 in
 {
   applications."${application}" = {
@@ -35,14 +36,14 @@ in
         apiVersion: v1
         kind: PersistentVolumeClaim
         metadata:
-          name: ${paperless-media-pvc}
+          name: ${paperless-consume-pvc}
         spec:
-          storageClassName: "longhorn"
+          storageClassName: "longhorn-nobackup"
           accessModes:
             - ReadWriteOnce
           resources:
             requests:
-              storage: 5Gi
+              storage: 200Mi
       ''
       ''
         apiVersion: v1
@@ -56,6 +57,19 @@ in
           resources:
             requests:
               storage: 8Gi
+      ''
+      ''
+        apiVersion: v1
+        kind: PersistentVolumeClaim
+        metadata:
+          name: ${paperless-media-pvc}
+        spec:
+          storageClassName: "longhorn"
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 5Gi
       ''
     ];
 
@@ -230,19 +244,15 @@ in
                   }
                   {
                     name = "consume";
-                    emptyDir = { };
+                    persistentVolumeClaim.claimName = paperless-consume-pvc;
                   }
                   {
                     name = "data";
-                    persistentVolumeClaim = {
-                      claimName = paperless-data-pvc;
-                    };
+                    persistentVolumeClaim.claimName = paperless-data-pvc;
                   }
                   {
                     name = "media";
-                    persistentVolumeClaim = {
-                      claimName = paperless-media-pvc;
-                    };
+                    persistentVolumeClaim.claimName = paperless-media-pvc;
                   }
                 ];
               };
