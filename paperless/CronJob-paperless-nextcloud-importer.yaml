@@ -13,7 +13,7 @@ spec:
               requiredDuringSchedulingIgnoredDuringExecution:
                 - labelSelector:
                     matchLabels:
-                      name: paperless
+                      app.kubernetes.io/name: paperless
                   topologyKey: kubernetes.io/hostname
           containers:
             - args:
