@@ -121,22 +121,7 @@ in
                   {
                     ports = [
                       {
-                        port = "8080";
-                        protocol = "TCP";
-                      }
-                    ];
-                  }
-                ];
-              }
-              {
-                fromEntities = [
-                  "host"
-                ];
-                toPorts = [
-                  {
-                    ports = [
-                      {
-                        port = "8080";
+                        port = "80";
                         protocol = "TCP";
                       }
                     ];
