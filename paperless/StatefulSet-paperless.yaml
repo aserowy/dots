@@ -66,11 +66,17 @@ spec:
             - name: PAPERLESS_TIKA_ENDPOINT
               value: http://tika.paperless.svc.cluster.local:9998
           image: docker.io/paperlessngx/paperless-ngx:2.20.4
+          livenessProbe:
+            tcpSocket:
+              port: 8000
           name: paperless
           ports:
             - containerPort: 8000
               name: http
               protocol: TCP
+          readinessProbe:
+            tcpSocket:
+              port: 8000
           resources:
             limits:
               cpu: 1000m
@@ -81,6 +87,12 @@ spec:
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
+          startupProbe:
+            failureThreshold: 5
+            initialDelaySeconds: 45
+            periodSeconds: 10
+            tcpSocket:
+              port: 8000
           volumeMounts:
             - mountPath: /run
               name: run
@@ -94,6 +106,13 @@ spec:
               name: export
             - mountPath: /usr/src/paperless/consume
               name: consume
+      initContainers:
+        - command:
+            - sh
+            - -c
+            - until nc -z db 5432; do echo 'Waiting for Postgres...'; sleep 5; done
+          image: busybox:1.37
+          name: await-db-init
       securityContext:
         seccompProfile:
           type: RuntimeDefault
