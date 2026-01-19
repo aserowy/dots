@@ -27,6 +27,6 @@ metadata:
     app.kubernetes.io/name: valkey
     app.kubernetes.io/part-of: valkey
     app.kubernetes.io/version: 9.0.1
-    helm.sh/chart: valkey-5.1.0
+    helm.sh/chart: valkey-5.1.2
   name: valkey-configuration
   namespace: paperless
