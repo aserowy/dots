@@ -587,6 +587,26 @@ in
                   }
                 ];
               }
+              {
+                toEndpoints = [
+                  {
+                    matchLabels = {
+                      "io.kubernetes.pod.namespace" = "kube-system";
+                      "k8s-app" = "kube-dns";
+                    };
+                  }
+                ];
+                toPorts = [
+                  {
+                    ports = [
+                      {
+                        port = "53";
+                        protocol = "UDP";
+                      }
+                    ];
+                  }
+                ];
+              }
             ];
           };
         };
