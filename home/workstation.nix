@@ -28,6 +28,7 @@
       discord
       drawio
       nautilus
+      nextcloud-client
       onlyoffice-desktopeditors
       reaper
       rustdesk-flutter
