@@ -288,80 +288,86 @@ in
           };
           spec = {
             schedule = "*/5 * * * *";
-            jobTemplate.spec.template.spec = {
-              restartPolicy = "Never";
-              affinity.podAffinity.requiredDuringSchedulingIgnoredDuringExecution = [
-                {
-                  labelSelector.matchLabels."app.kubernetes.io/name" = "paperless";
-                  topologyKey = "kubernetes.io/hostname";
-                }
-              ];
-              containers = [
-                {
-                  name = "rclone-move";
-                  image = "rclone/rclone:1.69.1"; # docker/rclone/rclone@semver-coerced
-                  imagePullPolicy = "IfNotPresent";
-                  args = [
-                    "move"
-                    "nextcloud:/Paperless/"
-                    "/consume/"
-                    "--transfers=1"
-                    "--checkers=1"
-                    "--no-traverse"
-                    "--retries=3"
-                    "--log-level=INFO"
-                  ];
-                  env = [
-                    {
-                      name = "RCLONE_CONFIG_NEXTCLOUD_TYPE";
-                      value = "webdav";
-                    }
-                    {
-                      name = "RCLONE_CONFIG_NEXTCLOUD_URL";
-                      valueFrom = {
-                        secretKeyRef = {
-                          name = "nextcloud";
-                          key = "url";
+            jobTemplate.spec.template = {
+              metadata.labels = {
+                "app.kubernetes.io/name" = "paperless-nextcloud-importer";
+                "app.kubernetes.io/component" = "app";
+              };
+              spec = {
+                restartPolicy = "Never";
+                affinity.podAffinity.requiredDuringSchedulingIgnoredDuringExecution = [
+                  {
+                    labelSelector.matchLabels."app.kubernetes.io/name" = "paperless";
+                    topologyKey = "kubernetes.io/hostname";
+                  }
+                ];
+                containers = [
+                  {
+                    name = "rclone-move";
+                    image = "rclone/rclone:1.69.1"; # docker/rclone/rclone@semver-coerced
+                    imagePullPolicy = "IfNotPresent";
+                    args = [
+                      "move"
+                      "nextcloud:/Paperless"
+                      "/consume"
+                      "--transfers=1"
+                      "--checkers=1"
+                      "--no-traverse"
+                      "--retries=3"
+                      "--log-level=DEBUG"
+                    ];
+                    env = [
+                      {
+                        name = "RCLONE_CONFIG_NEXTCLOUD_TYPE";
+                        value = "webdav";
+                      }
+                      {
+                        name = "RCLONE_CONFIG_NEXTCLOUD_URL";
+                        valueFrom = {
+                          secretKeyRef = {
+                            name = "nextcloud";
+                            key = "url";
+                          };
                         };
-                      };
-                    }
-                    {
-                      name = "RCLONE_CONFIG_NEXTCLOUD_VENDOR";
-                      value = "nextcloud";
-                    }
-                    {
-                      name = "RCLONE_CONFIG_NEXTCLOUD_USER";
-                      valueFrom = {
-                        secretKeyRef = {
-                          name = "nextcloud";
-                          key = "user";
+                      }
+                      {
+                        name = "RCLONE_CONFIG_NEXTCLOUD_VENDOR";
+                        value = "nextcloud";
+                      }
+                      {
+                        name = "RCLONE_CONFIG_NEXTCLOUD_USER";
+                        valueFrom = {
+                          secretKeyRef = {
+                            name = "nextcloud";
+                            key = "user";
+                          };
                         };
-                      };
-                    }
-                    {
-                      name = "RCLONE_CONFIG_NEXTCLOUD_PASS";
-                      valueFrom = {
-                        secretKeyRef = {
-                          name = "nextcloud";
-                          key = "password";
+                      }
+                      {
+                        name = "RCLONE_CONFIG_NEXTCLOUD_PASS";
+                        valueFrom = {
+                          secretKeyRef = {
+                            name = "nextcloud";
+                            key = "password";
+                          };
                         };
-                      };
-                    }
-                  ];
-                  volumeMounts = [
-                    {
-                      name = "consume";
-                      mountPath = "/consume";
-                    }
-                  ];
-                }
-              ];
-              volumes = [
-                {
-                  name = "consume";
-                  persistentVolumeClaim.claimName = paperless-consume-pvc;
-                }
-              ];
+                      }
+                    ];
+                    volumeMounts = [
+                      {
+                        name = "consume";
+                        mountPath = "/consume";
+                      }
+                    ];
+                  }
+                ];
+                volumes = [
+                  {
+                    name = "consume";
+                    persistentVolumeClaim.claimName = paperless-consume-pvc;
+                  }
+                ];
+              };
             };
           };
         };
