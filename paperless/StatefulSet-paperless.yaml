@@ -65,7 +65,7 @@ spec:
               value: http://gotenberg.paperless.svc.cluster.local:3000
             - name: PAPERLESS_TIKA_ENDPOINT
               value: http://tika.paperless.svc.cluster.local:9998
-          image: docker.io/paperlessngx/paperless-ngx:2.20.4
+          image: docker.io/paperlessngx/paperless-ngx:2.20.5
           livenessProbe:
             tcpSocket:
               port: 8000
