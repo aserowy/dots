@@ -7,6 +7,10 @@ spec:
   jobTemplate:
     spec:
       template:
+        metadata:
+          labels:
+            app.kubernetes.io/component: app
+            app.kubernetes.io/name: paperless-nextcloud-importer
         spec:
           affinity:
             podAffinity:
@@ -18,13 +22,13 @@ spec:
           containers:
             - args:
                 - move
-                - nextcloud:/Paperless/
-                - /consume/
+                - nextcloud:/Paperless
+                - /consume
                 - --transfers=1
                 - --checkers=1
                 - --no-traverse
                 - --retries=3
-                - --log-level=INFO
+                - --log-level=DEBUG
               env:
                 - name: RCLONE_CONFIG_NEXTCLOUD_TYPE
                   value: webdav
