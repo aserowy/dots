@@ -304,7 +304,7 @@ in
                 containers = [
                   {
                     name = "rclone-move";
-                    image = "rclone/rclone:1.69.1"; # docker/rclone/rclone@semver-coerced
+                    image = "rclone/rclone:1.72.0"; # docker/rclone/rclone@semver-coerced
                     imagePullPolicy = "IfNotPresent";
                     args = [
                       "move"
