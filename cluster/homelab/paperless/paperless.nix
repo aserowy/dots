@@ -422,11 +422,7 @@ in
             inherit namespace;
           };
           spec = {
-            endpointSelector = {
-              matchLabels = {
-                "app.kubernetes.io/name" = "paperless";
-              };
-            };
+            endpointSelector.matchLabels."app.kubernetes.io/name" = "paperless";
             ingress = [
               {
                 fromEndpoints = [
@@ -553,6 +549,38 @@ in
                     ports = [
                       {
                         port = "6379";
+                        protocol = "TCP";
+                      }
+                    ];
+                  }
+                ];
+              }
+            ];
+          };
+        };
+        paperless-nextcloud-importer = {
+          apiVersion = "cilium.io/v2";
+          kind = "CiliumNetworkPolicy";
+          metadata = {
+            inherit namespace;
+          };
+          spec = {
+            endpointSelector.matchLabels."app.kubernetes.io/name" = "paperless-nextcloud-importer";
+            egress = [
+              {
+                toEndpoints = [
+                  {
+                    matchLabels = {
+                      "io.kubernetes.pod.namespace" = "loadbalancer";
+                      "app.kubernetes.io/role" = "entrypoint";
+                    };
+                  }
+                ];
+                toPorts = [
+                  {
+                    ports = [
+                      {
+                        port = "8443";
                         protocol = "TCP";
                       }
                     ];
