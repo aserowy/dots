@@ -100,7 +100,7 @@ in
           secretName = "anderwersede-tls-certificate";
           issuerRef = {
             name = "azure-acme-issuer";
-            kind = "Issuer";
+            kind = "ClusterIssuer";
           };
           duration = "2160h";
           renewBefore = "720h";
