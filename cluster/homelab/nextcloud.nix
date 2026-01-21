@@ -21,15 +21,13 @@ in
           };
           configs = {
             "custom_maintenance.config.php" =
-              "
-              <?php
+              "<?php
               $CONFIG = array (
                 'maintenance_window_start' => 1,
               );
               ";
             "custom_region.config.php" =
-              "
-              <?php
+              "<?php
               $CONFIG = array (
                 'default_language' => 'en',
                 'default_locale' => 'de_DE',
