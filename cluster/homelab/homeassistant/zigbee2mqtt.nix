@@ -210,6 +210,28 @@ in
         };
       };
 
+      ingressRoutes = {
+        zigbee2mqtt-dashboard-route.spec = {
+          entryPoints = [
+            "websecure"
+          ];
+          routes = [
+            {
+              match = "Host(`zigbee.anderwerse.de`)";
+              kind = "Rule";
+              services = [
+                {
+                  inherit namespace;
+                  name = "zigbee2mqtt";
+                  port = 8080;
+                }
+              ];
+            }
+          ];
+          tls.secretName = "anderwersede-tls-certificate";
+        };
+      };
+
       ciliumNetworkPolicies = {
         zigbee2mqtt = {
           apiVersion = "cilium.io/v2";

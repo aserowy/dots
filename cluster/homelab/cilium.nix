@@ -46,6 +46,28 @@
           };
         };
       };
+
+      ingressRoutes = {
+        cilium-dashboard-route.spec = {
+          entryPoints = [
+            "websecure"
+          ];
+          routes = [
+            {
+              match = "Host(`cni.anderwerse.de`)";
+              kind = "Rule";
+              services = [
+                {
+                  name = "hubble-ui";
+                  namespace = "kube-system";
+                  port = 80;
+                }
+              ];
+            }
+          ];
+          tls.secretName = "anderwersede-tls-certificate";
+        };
+      };
     };
   };
 }

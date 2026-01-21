@@ -37,6 +37,27 @@
     };
 
     resources = {
+      ingressRoutes = {
+        longhorn-dashboard-route.spec = {
+          entryPoints = [
+            "websecure"
+          ];
+          routes = [
+            {
+              match = "Host(`csi.anderwerse.de`)";
+              kind = "Rule";
+              services = [
+                {
+                  name = "longhorn-frontend";
+                  namespace = "longhorn-system";
+                  port = 80;
+                }
+              ];
+            }
+          ];
+          tls.secretName = "anderwersede-tls-certificate";
+        };
+      };
       storageClasses = {
         longhorn-nobackup = {
           metadata.name = "longhorn-nobackup";

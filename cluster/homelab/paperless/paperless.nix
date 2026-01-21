@@ -392,6 +392,28 @@ in
         };
       };
 
+      ingressRoutes = {
+        paperless-route.spec = {
+          entryPoints = [
+            "websecure"
+          ];
+          routes = [
+            {
+              match = "Host(`dms.anderwerse.de`)";
+              kind = "Rule";
+              services = [
+                {
+                  inherit namespace;
+                  name = "paperless";
+                  port = 8000;
+                }
+              ];
+            }
+          ];
+          tls.secretName = "anderwersede-tls-certificate";
+        };
+      };
+
       ciliumNetworkPolicies = {
         paperless = {
           apiVersion = "cilium.io/v2";

@@ -272,6 +272,28 @@ in
         };
       };
 
+      ingressRoutes = {
+        homeassistant-dashboard-route.spec = {
+          entryPoints = [
+            "websecure"
+          ];
+          routes = [
+            {
+              match = "Host(`homeassistant.anderwerse.de`)";
+              kind = "Rule";
+              services = [
+                {
+                  inherit namespace;
+                  name = "homeassistant";
+                  port = 8123;
+                }
+              ];
+            }
+          ];
+          tls.secretName = "anderwersede-tls-certificate";
+        };
+      };
+
       ciliumNetworkPolicies = {
         homeassistant = {
           apiVersion = "cilium.io/v2";
