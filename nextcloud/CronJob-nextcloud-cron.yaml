@@ -111,6 +111,45 @@ spec:
                 - mountPath: /var/www/html/themes
                   name: nextcloud-main
                   subPath: themes
+                - mountPath: /var/www/html/config/custom_maintenance.config.php
+                  name: nextcloud-config
+                  subPath: custom_maintenance.config.php
+                - mountPath: /var/www/html/config/custom_region.config.php
+                  name: nextcloud-config
+                  subPath: custom_region.config.php
+                - mountPath: /var/www/html/config/.htaccess
+                  name: nextcloud-config
+                  subPath: .htaccess
+                - mountPath: /var/www/html/config/apache-pretty-urls.config.php
+                  name: nextcloud-config
+                  subPath: apache-pretty-urls.config.php
+                - mountPath: /var/www/html/config/apcu.config.php
+                  name: nextcloud-config
+                  subPath: apcu.config.php
+                - mountPath: /var/www/html/config/apps.config.php
+                  name: nextcloud-config
+                  subPath: apps.config.php
+                - mountPath: /var/www/html/config/autoconfig.php
+                  name: nextcloud-config
+                  subPath: autoconfig.php
+                - mountPath: /var/www/html/config/redis.config.php
+                  name: nextcloud-config
+                  subPath: redis.config.php
+                - mountPath: /var/www/html/config/reverse-proxy.config.php
+                  name: nextcloud-config
+                  subPath: reverse-proxy.config.php
+                - mountPath: /var/www/html/config/s3.config.php
+                  name: nextcloud-config
+                  subPath: s3.config.php
+                - mountPath: /var/www/html/config/smtp.config.php
+                  name: nextcloud-config
+                  subPath: smtp.config.php
+                - mountPath: /var/www/html/config/swift.config.php
+                  name: nextcloud-config
+                  subPath: swift.config.php
+                - mountPath: /var/www/html/config/upgrade-disable-web.config.php
+                  name: nextcloud-config
+                  subPath: upgrade-disable-web.config.php
           restartPolicy: Never
           securityContext:
             fsGroup: 33
@@ -121,5 +160,8 @@ spec:
             - name: nextcloud-data
               persistentVolumeClaim:
                 claimName: nextcloud-nextcloud-data
+            - configMap:
+                name: nextcloud-config
+              name: nextcloud-config
   schedule: '*/5 * * * *'
   successfulJobsHistoryLimit: 3
