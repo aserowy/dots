@@ -24,7 +24,7 @@ let
       };
       crds = [
         "deploy/crds/crd-certificates.yaml"
-        "deploy/crds/crd-issuers.yaml"
+        "deploy/crds/crd-clusterissuers.yaml"
       ];
     };
     cilium = nixidy.packages.${pkgs.stdenv.hostPlatform.system}.generators.fromCRD {

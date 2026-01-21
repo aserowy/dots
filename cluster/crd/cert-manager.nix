@@ -774,7 +774,7 @@ let
       };
 
     };
-    "cert-manager.io.v1.Issuer" = {
+    "cert-manager.io.v1.ClusterIssuer" = {
 
       options = {
         "apiVersion" = mkOption {
@@ -790,12 +790,12 @@ let
           type = (types.nullOr (globalSubmoduleOf "io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta"));
         };
         "spec" = mkOption {
-          description = "Desired state of the Issuer resource.";
-          type = (submoduleOf "cert-manager.io.v1.IssuerSpec");
+          description = "Desired state of the ClusterIssuer resource.";
+          type = (submoduleOf "cert-manager.io.v1.ClusterIssuerSpec");
         };
         "status" = mkOption {
-          description = "Status of the Issuer. This is set and managed automatically.";
-          type = (types.nullOr (submoduleOf "cert-manager.io.v1.IssuerStatus"));
+          description = "Status of the ClusterIssuer. This is set and managed automatically.";
+          type = (types.nullOr (submoduleOf "cert-manager.io.v1.ClusterIssuerStatus"));
         };
       };
 
@@ -807,28 +807,28 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpec" = {
+    "cert-manager.io.v1.ClusterIssuerSpec" = {
 
       options = {
         "acme" = mkOption {
           description = "ACME configures this issuer to communicate with a RFC8555 (ACME) server\nto obtain signed x509 certificates.";
-          type = (types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecAcme"));
+          type = (types.nullOr (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcme"));
         };
         "ca" = mkOption {
           description = "CA configures this issuer to sign certificates using a signing CA keypair\nstored in a Secret resource.\nThis is used to build internal PKIs that are managed by cert-manager.";
-          type = (types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecCa"));
+          type = (types.nullOr (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecCa"));
         };
         "selfSigned" = mkOption {
           description = "SelfSigned configures this issuer to 'self sign' certificates using the\nprivate key used to create the CertificateRequest object.";
-          type = (types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecSelfSigned"));
+          type = (types.nullOr (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecSelfSigned"));
         };
         "vault" = mkOption {
           description = "Vault configures this issuer to sign certificates using a HashiCorp Vault\nPKI backend.";
-          type = (types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecVault"));
+          type = (types.nullOr (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecVault"));
         };
         "venafi" = mkOption {
           description = "Venafi configures this issuer to sign certificates using a Venafi TPP\nor Venafi Cloud policy zone.";
-          type = (types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecVenafi"));
+          type = (types.nullOr (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecVenafi"));
         };
       };
 
@@ -841,7 +841,7 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcme" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcme" = {
 
       options = {
         "caBundle" = mkOption {
@@ -862,7 +862,9 @@ let
         };
         "externalAccountBinding" = mkOption {
           description = "ExternalAccountBinding is a reference to a CA external account of the ACME\nserver.\nIf set, upon registration cert-manager will attempt to associate the given\nexternal account credentials with the registered ACME account.";
-          type = (types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecAcmeExternalAccountBinding"));
+          type = (
+            types.nullOr (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeExternalAccountBinding")
+          );
         };
         "preferredChain" = mkOption {
           description = "PreferredChain is the chain to use if the ACME server outputs multiple.\nPreferredChain is no guarantee that this one gets delivered by the ACME\nendpoint.\nFor example, for Let's Encrypt's DST cross-sign you would use:\n\"DST Root CA X3\" or \"ISRG Root X1\" for the newer Let's Encrypt root CA.\nThis value picks the first certificate bundle in the combined set of\nACME default and alternative chains that has a root-most certificate with\nthis value as its issuer's commonname.";
@@ -870,7 +872,7 @@ let
         };
         "privateKeySecretRef" = mkOption {
           description = "PrivateKey is the name of a Kubernetes Secret resource that will be used to\nstore the automatically generated ACME account private key.\nOptionally, a `key` may be specified to select a specific entry within\nthe named Secret resource.\nIf `key` is not specified, a default of `tls.key` will be used.";
-          type = (submoduleOf "cert-manager.io.v1.IssuerSpecAcmePrivateKeySecretRef");
+          type = (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmePrivateKeySecretRef");
         };
         "profile" = mkOption {
           description = "Profile allows requesting a certificate profile from the ACME server.\nSupported profiles are listed by the server's ACME directory URL.";
@@ -886,7 +888,9 @@ let
         };
         "solvers" = mkOption {
           description = "Solvers is a list of challenge solvers that will be used to solve\nACME challenges for the matching domains.\nSolver configurations must be provided in order to obtain certificates\nfrom an ACME server.\nFor more information, see: https://cert-manager.io/docs/configuration/acme/";
-          type = (types.nullOr (types.listOf (submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolvers")));
+          type = (
+            types.nullOr (types.listOf (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolvers"))
+          );
         };
       };
 
@@ -903,7 +907,7 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcmeExternalAccountBinding" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeExternalAccountBinding" = {
 
       options = {
         "keyAlgorithm" = mkOption {
@@ -916,7 +920,7 @@ let
         };
         "keySecretRef" = mkOption {
           description = "keySecretRef is a Secret Key Selector referencing a data item in a Kubernetes\nSecret which holds the symmetric MAC key of the External Account Binding.\nThe `key` is the index string that is paired with the key data in the\nSecret and should not be confused with the key data itself, or indeed with\nthe External Account Binding keyID above.\nThe secret key stored in the Secret **must** be un-padded, base64 URL\nencoded data.";
-          type = (submoduleOf "cert-manager.io.v1.IssuerSpecAcmeExternalAccountBindingKeySecretRef");
+          type = (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeExternalAccountBindingKeySecretRef");
         };
       };
 
@@ -925,7 +929,7 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcmeExternalAccountBindingKeySecretRef" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeExternalAccountBindingKeySecretRef" = {
 
       options = {
         "key" = mkOption {
@@ -943,7 +947,7 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcmePrivateKeySecretRef" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmePrivateKeySecretRef" = {
 
       options = {
         "key" = mkOption {
@@ -961,20 +965,20 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcmeSolvers" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolvers" = {
 
       options = {
         "dns01" = mkOption {
           description = "Configures cert-manager to attempt to complete authorizations by\nperforming the DNS01 challenge flow.";
-          type = (types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversDns01"));
+          type = (types.nullOr (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01"));
         };
         "http01" = mkOption {
           description = "Configures cert-manager to attempt to complete authorizations by\nperforming the HTTP01 challenge flow.\nIt is not possible to obtain certificates for wildcard domain names\n(e.g., `*.example.com`) using the HTTP01 challenge mechanism.";
-          type = (types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01"));
+          type = (types.nullOr (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01"));
         };
         "selector" = mkOption {
           description = "Selector selects a set of DNSNames on the Certificate resource that\nshould be solved using this challenge solver.\nIf not specified, the solver will be treated as the 'default' solver\nwith the lowest priority, i.e. if any other solver has a more specific\nmatch, it will be used instead.";
-          type = (types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversSelector"));
+          type = (types.nullOr (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversSelector"));
         };
       };
 
@@ -985,28 +989,30 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversDns01" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01" = {
 
       options = {
         "acmeDNS" = mkOption {
           description = "Use the 'ACME DNS' (https://github.com/joohoi/acme-dns) API to manage\nDNS01 challenge records.";
-          type = (types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversDns01AcmeDNS"));
+          type = (types.nullOr (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01AcmeDNS"));
         };
         "akamai" = mkOption {
           description = "Use the Akamai DNS zone management API to manage DNS01 challenge records.";
-          type = (types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversDns01Akamai"));
+          type = (types.nullOr (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01Akamai"));
         };
         "azureDNS" = mkOption {
           description = "Use the Microsoft Azure DNS API to manage DNS01 challenge records.";
-          type = (types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversDns01AzureDNS"));
+          type = (types.nullOr (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01AzureDNS"));
         };
         "cloudDNS" = mkOption {
           description = "Use the Google Cloud DNS API to manage DNS01 challenge records.";
-          type = (types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversDns01CloudDNS"));
+          type = (types.nullOr (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01CloudDNS"));
         };
         "cloudflare" = mkOption {
           description = "Use the Cloudflare API to manage DNS01 challenge records.";
-          type = (types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversDns01Cloudflare"));
+          type = (
+            types.nullOr (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01Cloudflare")
+          );
         };
         "cnameStrategy" = mkOption {
           description = "CNAMEStrategy configures how the DNS01 provider should handle CNAME\nrecords when found in DNS zones.";
@@ -1014,19 +1020,21 @@ let
         };
         "digitalocean" = mkOption {
           description = "Use the DigitalOcean DNS API to manage DNS01 challenge records.";
-          type = (types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversDns01Digitalocean"));
+          type = (
+            types.nullOr (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01Digitalocean")
+          );
         };
         "rfc2136" = mkOption {
           description = "Use RFC2136 (\"Dynamic Updates in the Domain Name System\") (https://datatracker.ietf.org/doc/rfc2136/)\nto manage DNS01 challenge records.";
-          type = (types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversDns01Rfc2136"));
+          type = (types.nullOr (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01Rfc2136"));
         };
         "route53" = mkOption {
           description = "Use the AWS Route53 API to manage DNS01 challenge records.";
-          type = (types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversDns01Route53"));
+          type = (types.nullOr (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01Route53"));
         };
         "webhook" = mkOption {
           description = "Configure an external webhook based DNS01 challenge solver to manage\nDNS01 challenge records.";
-          type = (types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversDns01Webhook"));
+          type = (types.nullOr (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01Webhook"));
         };
       };
 
@@ -1044,12 +1052,12 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversDns01AcmeDNS" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01AcmeDNS" = {
 
       options = {
         "accountSecretRef" = mkOption {
           description = "A reference to a specific 'key' within a Secret resource.\nIn some instances, `key` is a required field.";
-          type = (submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversDns01AcmeDNSAccountSecretRef");
+          type = (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01AcmeDNSAccountSecretRef");
         };
         "host" = mkOption {
           description = "";
@@ -1060,7 +1068,7 @@ let
       config = { };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversDns01AcmeDNSAccountSecretRef" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01AcmeDNSAccountSecretRef" = {
 
       options = {
         "key" = mkOption {
@@ -1078,20 +1086,26 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversDns01Akamai" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01Akamai" = {
 
       options = {
         "accessTokenSecretRef" = mkOption {
           description = "A reference to a specific 'key' within a Secret resource.\nIn some instances, `key` is a required field.";
-          type = (submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversDns01AkamaiAccessTokenSecretRef");
+          type = (
+            submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01AkamaiAccessTokenSecretRef"
+          );
         };
         "clientSecretSecretRef" = mkOption {
           description = "A reference to a specific 'key' within a Secret resource.\nIn some instances, `key` is a required field.";
-          type = (submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversDns01AkamaiClientSecretSecretRef");
+          type = (
+            submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01AkamaiClientSecretSecretRef"
+          );
         };
         "clientTokenSecretRef" = mkOption {
           description = "A reference to a specific 'key' within a Secret resource.\nIn some instances, `key` is a required field.";
-          type = (submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversDns01AkamaiClientTokenSecretRef");
+          type = (
+            submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01AkamaiClientTokenSecretRef"
+          );
         };
         "serviceConsumerDomain" = mkOption {
           description = "";
@@ -1102,7 +1116,7 @@ let
       config = { };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversDns01AkamaiAccessTokenSecretRef" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01AkamaiAccessTokenSecretRef" = {
 
       options = {
         "key" = mkOption {
@@ -1120,7 +1134,7 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversDns01AkamaiClientSecretSecretRef" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01AkamaiClientSecretSecretRef" = {
 
       options = {
         "key" = mkOption {
@@ -1138,7 +1152,7 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversDns01AkamaiClientTokenSecretRef" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01AkamaiClientTokenSecretRef" = {
 
       options = {
         "key" = mkOption {
@@ -1156,7 +1170,7 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversDns01AzureDNS" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01AzureDNS" = {
 
       options = {
         "clientID" = mkOption {
@@ -1167,7 +1181,7 @@ let
           description = "Auth: Azure Service Principal:\nA reference to a Secret containing the password associated with the Service Principal.\nIf set, ClientID and TenantID must also be set.";
           type = (
             types.nullOr (
-              submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversDns01AzureDNSClientSecretSecretRef"
+              submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01AzureDNSClientSecretSecretRef"
             )
           );
         };
@@ -1182,7 +1196,9 @@ let
         "managedIdentity" = mkOption {
           description = "Auth: Azure Workload Identity or Azure Managed Service Identity:\nSettings to enable Azure Workload Identity or Azure Managed Service Identity\nIf set, ClientID, ClientSecret and TenantID must not be set.";
           type = (
-            types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversDns01AzureDNSManagedIdentity")
+            types.nullOr (
+              submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01AzureDNSManagedIdentity"
+            )
           );
         };
         "resourceGroupName" = mkOption {
@@ -1209,7 +1225,7 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversDns01AzureDNSClientSecretSecretRef" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01AzureDNSClientSecretSecretRef" = {
 
       options = {
         "key" = mkOption {
@@ -1227,7 +1243,7 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversDns01AzureDNSManagedIdentity" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01AzureDNSManagedIdentity" = {
 
       options = {
         "clientID" = mkOption {
@@ -1251,7 +1267,7 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversDns01CloudDNS" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01CloudDNS" = {
 
       options = {
         "hostedZoneName" = mkOption {
@@ -1266,7 +1282,7 @@ let
           description = "A reference to a specific 'key' within a Secret resource.\nIn some instances, `key` is a required field.";
           type = (
             types.nullOr (
-              submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversDns01CloudDNSServiceAccountSecretRef"
+              submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01CloudDNSServiceAccountSecretRef"
             )
           );
         };
@@ -1278,7 +1294,7 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversDns01CloudDNSServiceAccountSecretRef" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01CloudDNSServiceAccountSecretRef" = {
 
       options = {
         "key" = mkOption {
@@ -1296,20 +1312,22 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversDns01Cloudflare" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01Cloudflare" = {
 
       options = {
         "apiKeySecretRef" = mkOption {
           description = "API key to use to authenticate with Cloudflare.\nNote: using an API token to authenticate is now the recommended method\nas it allows greater control of permissions.";
           type = (
-            types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversDns01CloudflareApiKeySecretRef")
+            types.nullOr (
+              submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01CloudflareApiKeySecretRef"
+            )
           );
         };
         "apiTokenSecretRef" = mkOption {
           description = "API token used to authenticate with Cloudflare.";
           type = (
             types.nullOr (
-              submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversDns01CloudflareApiTokenSecretRef"
+              submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01CloudflareApiTokenSecretRef"
             )
           );
         };
@@ -1326,7 +1344,7 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversDns01CloudflareApiKeySecretRef" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01CloudflareApiKeySecretRef" = {
 
       options = {
         "key" = mkOption {
@@ -1344,7 +1362,7 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversDns01CloudflareApiTokenSecretRef" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01CloudflareApiTokenSecretRef" = {
 
       options = {
         "key" = mkOption {
@@ -1362,19 +1380,21 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversDns01Digitalocean" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01Digitalocean" = {
 
       options = {
         "tokenSecretRef" = mkOption {
           description = "A reference to a specific 'key' within a Secret resource.\nIn some instances, `key` is a required field.";
-          type = (submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversDns01DigitaloceanTokenSecretRef");
+          type = (
+            submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01DigitaloceanTokenSecretRef"
+          );
         };
       };
 
       config = { };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversDns01DigitaloceanTokenSecretRef" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01DigitaloceanTokenSecretRef" = {
 
       options = {
         "key" = mkOption {
@@ -1392,7 +1412,7 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversDns01Rfc2136" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01Rfc2136" = {
 
       options = {
         "nameserver" = mkOption {
@@ -1410,7 +1430,9 @@ let
         "tsigSecretSecretRef" = mkOption {
           description = "The name of the secret containing the TSIG value.\nIf ``tsigKeyName`` is defined, this field is required.";
           type = (
-            types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversDns01Rfc2136TsigSecretSecretRef")
+            types.nullOr (
+              submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01Rfc2136TsigSecretSecretRef"
+            )
           );
         };
       };
@@ -1422,7 +1444,7 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversDns01Rfc2136TsigSecretSecretRef" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01Rfc2136TsigSecretSecretRef" = {
 
       options = {
         "key" = mkOption {
@@ -1440,7 +1462,7 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversDns01Route53" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01Route53" = {
 
       options = {
         "accessKeyID" = mkOption {
@@ -1451,13 +1473,15 @@ let
           description = "The SecretAccessKey is used for authentication. If set, pull the AWS\naccess key ID from a key within a Kubernetes Secret.\nCannot be set when AccessKeyID is set.\nIf neither the Access Key nor Key ID are set, we fall-back to using env\nvars, shared credentials file or AWS Instance metadata,\nsee: https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials";
           type = (
             types.nullOr (
-              submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversDns01Route53AccessKeyIDSecretRef"
+              submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01Route53AccessKeyIDSecretRef"
             )
           );
         };
         "auth" = mkOption {
           description = "Auth configures how cert-manager authenticates.";
-          type = (types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversDns01Route53Auth"));
+          type = (
+            types.nullOr (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01Route53Auth")
+          );
         };
         "hostedZoneID" = mkOption {
           description = "If set, the provider will manage only this zone in Route53 and will not do a lookup using the route53:ListHostedZonesByName api call.";
@@ -1475,7 +1499,7 @@ let
           description = "The SecretAccessKey is used for authentication.\nIf neither the Access Key nor Key ID are set, we fall-back to using env\nvars, shared credentials file or AWS Instance metadata,\nsee: https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials";
           type = (
             types.nullOr (
-              submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversDns01Route53SecretAccessKeySecretRef"
+              submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01Route53SecretAccessKeySecretRef"
             )
           );
         };
@@ -1492,7 +1516,7 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversDns01Route53AccessKeyIDSecretRef" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01Route53AccessKeyIDSecretRef" = {
 
       options = {
         "key" = mkOption {
@@ -1510,25 +1534,25 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversDns01Route53Auth" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01Route53Auth" = {
 
       options = {
         "kubernetes" = mkOption {
           description = "Kubernetes authenticates with Route53 using AssumeRoleWithWebIdentity\nby passing a bound ServiceAccount token.";
-          type = (submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversDns01Route53AuthKubernetes");
+          type = (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01Route53AuthKubernetes");
         };
       };
 
       config = { };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversDns01Route53AuthKubernetes" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01Route53AuthKubernetes" = {
 
       options = {
         "serviceAccountRef" = mkOption {
           description = "A reference to a service account that will be used to request a bound\ntoken (also known as \"projected token\"). To use this field, you must\nconfigure an RBAC rule to let cert-manager request a token.";
           type = (
-            submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversDns01Route53AuthKubernetesServiceAccountRef"
+            submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01Route53AuthKubernetesServiceAccountRef"
           );
         };
       };
@@ -1536,7 +1560,7 @@ let
       config = { };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversDns01Route53AuthKubernetesServiceAccountRef" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01Route53AuthKubernetesServiceAccountRef" = {
 
       options = {
         "audiences" = mkOption {
@@ -1554,7 +1578,7 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversDns01Route53SecretAccessKeySecretRef" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01Route53SecretAccessKeySecretRef" = {
 
       options = {
         "key" = mkOption {
@@ -1572,7 +1596,7 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversDns01Webhook" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01Webhook" = {
 
       options = {
         "config" = mkOption {
@@ -1594,18 +1618,18 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01" = {
 
       options = {
         "gatewayHTTPRoute" = mkOption {
           description = "The Gateway API is a sig-network community API that models service networking\nin Kubernetes (https://gateway-api.sigs.k8s.io/). The Gateway solver will\ncreate HTTPRoutes with the specified labels in the same namespace as the challenge.\nThis solver is experimental, and fields / behaviour may change in the future.";
           type = (
-            types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoute")
+            types.nullOr (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoute")
           );
         };
         "ingress" = mkOption {
           description = "The ingress based HTTP01 challenge solver will solve challenges by\ncreating or modifying Ingress resources in order to route requests for\n'/.well-known/acme-challenge/XYZ' to 'challenge solver' pods that are\nprovisioned by cert-manager for each Challenge to be completed.";
-          type = (types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01Ingress"));
+          type = (types.nullOr (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01Ingress"));
         };
       };
 
@@ -1615,7 +1639,7 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoute" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoute" = {
 
       options = {
         "labels" = mkOption {
@@ -1627,7 +1651,7 @@ let
           type = (
             types.nullOr (
               coerceAttrsOfSubmodulesToListByKey
-                "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRouteParentRefs"
+                "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRouteParentRefs"
                 "name"
                 [ ]
             )
@@ -1638,7 +1662,7 @@ let
           description = "Optional pod template used to configure the ACME challenge solver pods\nused for HTTP01 challenges.";
           type = (
             types.nullOr (
-              submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplate"
+              submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplate"
             )
           );
         };
@@ -1656,7 +1680,7 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRouteParentRefs" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRouteParentRefs" = {
 
       options = {
         "group" = mkOption {
@@ -1694,14 +1718,14 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplate" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplate" = {
 
       options = {
         "metadata" = mkOption {
           description = "ObjectMeta overrides for the pod used to solve HTTP01 challenges.\nOnly the 'labels' and 'annotations' fields may be set.\nIf labels or annotations overlap with in-built values, the values here\nwill override the in-built values.";
           type = (
             types.nullOr (
-              submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateMetadata"
+              submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateMetadata"
             )
           );
         };
@@ -1709,7 +1733,7 @@ let
           description = "PodSpec defines overrides for the HTTP01 challenge solver pod.\nCheck ACMEChallengeSolverHTTP01IngressPodSpec to find out currently supported fields.\nAll other fields will be ignored.";
           type = (
             types.nullOr (
-              submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpec"
+              submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpec"
             )
           );
         };
@@ -1721,7 +1745,7 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateMetadata" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateMetadata" = {
 
       options = {
         "annotations" = mkOption {
@@ -1740,14 +1764,14 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpec" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpec" = {
 
       options = {
         "affinity" = mkOption {
           description = "If specified, the pod's scheduling constraints";
           type = (
             types.nullOr (
-              submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinity"
+              submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinity"
             )
           );
         };
@@ -1756,7 +1780,7 @@ let
           type = (
             types.nullOr (
               coerceAttrsOfSubmodulesToListByKey
-                "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecImagePullSecrets"
+                "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecImagePullSecrets"
                 "name"
                 [ ]
             )
@@ -1775,7 +1799,7 @@ let
           description = "If specified, the pod's security context";
           type = (
             types.nullOr (
-              submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecSecurityContext"
+              submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecSecurityContext"
             )
           );
         };
@@ -1788,7 +1812,7 @@ let
           type = (
             types.nullOr (
               types.listOf (
-                submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecTolerations"
+                submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecTolerations"
               )
             )
           );
@@ -1806,14 +1830,14 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinity" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinity" = {
 
       options = {
         "nodeAffinity" = mkOption {
           description = "Describes node affinity scheduling rules for the pod.";
           type = (
             types.nullOr (
-              submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityNodeAffinity"
+              submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityNodeAffinity"
             )
           );
         };
@@ -1821,7 +1845,7 @@ let
           description = "Describes pod affinity scheduling rules (e.g. co-locate this pod in the same node, zone, etc. as some other pod(s)).";
           type = (
             types.nullOr (
-              submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAffinity"
+              submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAffinity"
             )
           );
         };
@@ -1829,7 +1853,7 @@ let
           description = "Describes pod anti-affinity scheduling rules (e.g. avoid putting this pod in the same node, zone, etc. as some other pod(s)).";
           type = (
             types.nullOr (
-              submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAntiAffinity"
+              submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAntiAffinity"
             )
           );
         };
@@ -1842,7 +1866,7 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityNodeAffinity" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityNodeAffinity" =
       {
 
         options = {
@@ -1851,7 +1875,7 @@ let
             type = (
               types.nullOr (
                 types.listOf (
-                  submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution"
+                  submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution"
                 )
               )
             );
@@ -1860,7 +1884,7 @@ let
             description = "If the affinity requirements specified by this field are not met at\nscheduling time, the pod will not be scheduled onto the node.\nIf the affinity requirements specified by this field cease to be met\nat some point during pod execution (e.g. due to an update), the system\nmay or may not try to eventually evict the pod from its node.";
             type = (
               types.nullOr (
-                submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution"
+                submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution"
               )
             );
           };
@@ -1872,14 +1896,14 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution" =
       {
 
         options = {
           "preference" = mkOption {
             description = "A node selector term, associated with the corresponding weight.";
             type = (
-              submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference"
+              submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference"
             );
           };
           "weight" = mkOption {
@@ -1891,7 +1915,7 @@ let
         config = { };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference" =
       {
 
         options = {
@@ -1900,7 +1924,7 @@ let
             type = (
               types.nullOr (
                 types.listOf (
-                  submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions"
+                  submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions"
                 )
               )
             );
@@ -1910,7 +1934,7 @@ let
             type = (
               types.nullOr (
                 types.listOf (
-                  submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields"
+                  submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields"
                 )
               )
             );
@@ -1923,7 +1947,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions" =
       {
 
         options = {
@@ -1946,7 +1970,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields" =
       {
 
         options = {
@@ -1969,7 +1993,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution" =
       {
 
         options = {
@@ -1977,7 +2001,7 @@ let
             description = "Required. A list of node selector terms. The terms are ORed.";
             type = (
               types.listOf (
-                submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms"
+                submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms"
               )
             );
           };
@@ -1986,7 +2010,7 @@ let
         config = { };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms" =
       {
 
         options = {
@@ -1995,7 +2019,7 @@ let
             type = (
               types.nullOr (
                 types.listOf (
-                  submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions"
+                  submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions"
                 )
               )
             );
@@ -2005,7 +2029,7 @@ let
             type = (
               types.nullOr (
                 types.listOf (
-                  submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields"
+                  submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields"
                 )
               )
             );
@@ -2018,7 +2042,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions" =
       {
 
         options = {
@@ -2041,7 +2065,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields" =
       {
 
         options = {
@@ -2064,7 +2088,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAffinity" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAffinity" =
       {
 
         options = {
@@ -2073,7 +2097,7 @@ let
             type = (
               types.nullOr (
                 types.listOf (
-                  submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution"
+                  submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution"
                 )
               )
             );
@@ -2083,7 +2107,7 @@ let
             type = (
               types.nullOr (
                 types.listOf (
-                  submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution"
+                  submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution"
                 )
               )
             );
@@ -2096,14 +2120,14 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution" =
       {
 
         options = {
           "podAffinityTerm" = mkOption {
             description = "Required. A pod affinity term, associated with the corresponding weight.";
             type = (
-              submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm"
+              submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm"
             );
           };
           "weight" = mkOption {
@@ -2115,7 +2139,7 @@ let
         config = { };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm" =
       {
 
         options = {
@@ -2123,7 +2147,7 @@ let
             description = "A label query over a set of resources, in this case pods.\nIf it's null, this PodAffinityTerm matches with no Pods.";
             type = (
               types.nullOr (
-                submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector"
+                submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector"
               )
             );
           };
@@ -2139,7 +2163,7 @@ let
             description = "A label query over the set of namespaces that the term applies to.\nThe term is applied to the union of the namespaces selected by this field\nand the ones listed in the namespaces field.\nnull selector and null or empty namespaces list means \"this pod's namespace\".\nAn empty selector ({}) matches all namespaces.";
             type = (
               types.nullOr (
-                submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector"
+                submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector"
               )
             );
           };
@@ -2162,7 +2186,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector" =
       {
 
         options = {
@@ -2171,7 +2195,7 @@ let
             type = (
               types.nullOr (
                 types.listOf (
-                  submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions"
+                  submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions"
                 )
               )
             );
@@ -2188,7 +2212,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions" =
       {
 
         options = {
@@ -2211,7 +2235,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector" =
       {
 
         options = {
@@ -2220,7 +2244,7 @@ let
             type = (
               types.nullOr (
                 types.listOf (
-                  submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions"
+                  submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions"
                 )
               )
             );
@@ -2237,7 +2261,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions" =
       {
 
         options = {
@@ -2260,7 +2284,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution" =
       {
 
         options = {
@@ -2268,7 +2292,7 @@ let
             description = "A label query over a set of resources, in this case pods.\nIf it's null, this PodAffinityTerm matches with no Pods.";
             type = (
               types.nullOr (
-                submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector"
+                submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector"
               )
             );
           };
@@ -2284,7 +2308,7 @@ let
             description = "A label query over the set of namespaces that the term applies to.\nThe term is applied to the union of the namespaces selected by this field\nand the ones listed in the namespaces field.\nnull selector and null or empty namespaces list means \"this pod's namespace\".\nAn empty selector ({}) matches all namespaces.";
             type = (
               types.nullOr (
-                submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector"
+                submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector"
               )
             );
           };
@@ -2307,7 +2331,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector" =
       {
 
         options = {
@@ -2316,7 +2340,7 @@ let
             type = (
               types.nullOr (
                 types.listOf (
-                  submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions"
+                  submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions"
                 )
               )
             );
@@ -2333,7 +2357,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions" =
       {
 
         options = {
@@ -2356,7 +2380,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector" =
       {
 
         options = {
@@ -2365,7 +2389,7 @@ let
             type = (
               types.nullOr (
                 types.listOf (
-                  submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions"
+                  submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions"
                 )
               )
             );
@@ -2382,7 +2406,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions" =
       {
 
         options = {
@@ -2405,7 +2429,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAntiAffinity" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAntiAffinity" =
       {
 
         options = {
@@ -2414,7 +2438,7 @@ let
             type = (
               types.nullOr (
                 types.listOf (
-                  submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution"
+                  submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution"
                 )
               )
             );
@@ -2424,7 +2448,7 @@ let
             type = (
               types.nullOr (
                 types.listOf (
-                  submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution"
+                  submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution"
                 )
               )
             );
@@ -2437,14 +2461,14 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution" =
       {
 
         options = {
           "podAffinityTerm" = mkOption {
             description = "Required. A pod affinity term, associated with the corresponding weight.";
             type = (
-              submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm"
+              submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm"
             );
           };
           "weight" = mkOption {
@@ -2456,7 +2480,7 @@ let
         config = { };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm" =
       {
 
         options = {
@@ -2464,7 +2488,7 @@ let
             description = "A label query over a set of resources, in this case pods.\nIf it's null, this PodAffinityTerm matches with no Pods.";
             type = (
               types.nullOr (
-                submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector"
+                submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector"
               )
             );
           };
@@ -2480,7 +2504,7 @@ let
             description = "A label query over the set of namespaces that the term applies to.\nThe term is applied to the union of the namespaces selected by this field\nand the ones listed in the namespaces field.\nnull selector and null or empty namespaces list means \"this pod's namespace\".\nAn empty selector ({}) matches all namespaces.";
             type = (
               types.nullOr (
-                submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector"
+                submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector"
               )
             );
           };
@@ -2503,7 +2527,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector" =
       {
 
         options = {
@@ -2512,7 +2536,7 @@ let
             type = (
               types.nullOr (
                 types.listOf (
-                  submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions"
+                  submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions"
                 )
               )
             );
@@ -2529,7 +2553,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions" =
       {
 
         options = {
@@ -2552,7 +2576,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector" =
       {
 
         options = {
@@ -2561,7 +2585,7 @@ let
             type = (
               types.nullOr (
                 types.listOf (
-                  submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions"
+                  submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions"
                 )
               )
             );
@@ -2578,7 +2602,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions" =
       {
 
         options = {
@@ -2601,7 +2625,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution" =
       {
 
         options = {
@@ -2609,7 +2633,7 @@ let
             description = "A label query over a set of resources, in this case pods.\nIf it's null, this PodAffinityTerm matches with no Pods.";
             type = (
               types.nullOr (
-                submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector"
+                submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector"
               )
             );
           };
@@ -2625,7 +2649,7 @@ let
             description = "A label query over the set of namespaces that the term applies to.\nThe term is applied to the union of the namespaces selected by this field\nand the ones listed in the namespaces field.\nnull selector and null or empty namespaces list means \"this pod's namespace\".\nAn empty selector ({}) matches all namespaces.";
             type = (
               types.nullOr (
-                submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector"
+                submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector"
               )
             );
           };
@@ -2648,7 +2672,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector" =
       {
 
         options = {
@@ -2657,7 +2681,7 @@ let
             type = (
               types.nullOr (
                 types.listOf (
-                  submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions"
+                  submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions"
                 )
               )
             );
@@ -2674,7 +2698,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions" =
       {
 
         options = {
@@ -2697,7 +2721,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector" =
       {
 
         options = {
@@ -2706,7 +2730,7 @@ let
             type = (
               types.nullOr (
                 types.listOf (
-                  submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions"
+                  submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions"
                 )
               )
             );
@@ -2723,7 +2747,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions" =
       {
 
         options = {
@@ -2746,91 +2770,93 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecImagePullSecrets" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecImagePullSecrets" =
+      {
 
-      options = {
-        "name" = mkOption {
-          description = "Name of the referent.\nThis field is effectively required, but due to backwards compatibility is\nallowed to be empty. Instances of this type with an empty value here are\nalmost certainly wrong.\nMore info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names";
-          type = (types.nullOr types.str);
+        options = {
+          "name" = mkOption {
+            description = "Name of the referent.\nThis field is effectively required, but due to backwards compatibility is\nallowed to be empty. Instances of this type with an empty value here are\nalmost certainly wrong.\nMore info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names";
+            type = (types.nullOr types.str);
+          };
         };
+
+        config = {
+          "name" = mkOverride 1002 null;
+        };
+
       };
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecSecurityContext" =
+      {
 
-      config = {
-        "name" = mkOverride 1002 null;
+        options = {
+          "fsGroup" = mkOption {
+            description = "A special supplemental group that applies to all containers in a pod.\nSome volume types allow the Kubelet to change the ownership of that volume\nto be owned by the pod:\n\n1. The owning GID will be the FSGroup\n2. The setgid bit is set (new files created in the volume will be owned by FSGroup)\n3. The permission bits are OR'd with rw-rw----\n\nIf unset, the Kubelet will not modify the ownership and permissions of any volume.\nNote that this field cannot be set when spec.os.name is windows.";
+            type = (types.nullOr types.int);
+          };
+          "fsGroupChangePolicy" = mkOption {
+            description = "fsGroupChangePolicy defines behavior of changing ownership and permission of the volume\nbefore being exposed inside Pod. This field will only apply to\nvolume types which support fsGroup based ownership(and permissions).\nIt will have no effect on ephemeral volume types such as: secret, configmaps\nand emptydir.\nValid values are \"OnRootMismatch\" and \"Always\". If not specified, \"Always\" is used.\nNote that this field cannot be set when spec.os.name is windows.";
+            type = (types.nullOr types.str);
+          };
+          "runAsGroup" = mkOption {
+            description = "The GID to run the entrypoint of the container process.\nUses runtime default if unset.\nMay also be set in SecurityContext.  If set in both SecurityContext and\nPodSecurityContext, the value specified in SecurityContext takes precedence\nfor that container.\nNote that this field cannot be set when spec.os.name is windows.";
+            type = (types.nullOr types.int);
+          };
+          "runAsNonRoot" = mkOption {
+            description = "Indicates that the container must run as a non-root user.\nIf true, the Kubelet will validate the image at runtime to ensure that it\ndoes not run as UID 0 (root) and fail to start the container if it does.\nIf unset or false, no such validation will be performed.\nMay also be set in SecurityContext.  If set in both SecurityContext and\nPodSecurityContext, the value specified in SecurityContext takes precedence.";
+            type = (types.nullOr types.bool);
+          };
+          "runAsUser" = mkOption {
+            description = "The UID to run the entrypoint of the container process.\nDefaults to user specified in image metadata if unspecified.\nMay also be set in SecurityContext.  If set in both SecurityContext and\nPodSecurityContext, the value specified in SecurityContext takes precedence\nfor that container.\nNote that this field cannot be set when spec.os.name is windows.";
+            type = (types.nullOr types.int);
+          };
+          "seLinuxOptions" = mkOption {
+            description = "The SELinux context to be applied to all containers.\nIf unspecified, the container runtime will allocate a random SELinux context for each\ncontainer.  May also be set in SecurityContext.  If set in\nboth SecurityContext and PodSecurityContext, the value specified in SecurityContext\ntakes precedence for that container.\nNote that this field cannot be set when spec.os.name is windows.";
+            type = (
+              types.nullOr (
+                submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecSecurityContextSeLinuxOptions"
+              )
+            );
+          };
+          "seccompProfile" = mkOption {
+            description = "The seccomp options to use by the containers in this pod.\nNote that this field cannot be set when spec.os.name is windows.";
+            type = (
+              types.nullOr (
+                submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecSecurityContextSeccompProfile"
+              )
+            );
+          };
+          "supplementalGroups" = mkOption {
+            description = "A list of groups applied to the first process run in each container, in addition\nto the container's primary GID, the fsGroup (if specified), and group memberships\ndefined in the container image for the uid of the container process. If unspecified,\nno additional groups are added to any container. Note that group memberships\ndefined in the container image for the uid of the container process are still effective,\neven if they are not included in this list.\nNote that this field cannot be set when spec.os.name is windows.";
+            type = (types.nullOr (types.listOf types.int));
+          };
+          "sysctls" = mkOption {
+            description = "Sysctls hold a list of namespaced sysctls used for the pod. Pods with unsupported\nsysctls (by the container runtime) might fail to launch.\nNote that this field cannot be set when spec.os.name is windows.";
+            type = (
+              types.nullOr (
+                coerceAttrsOfSubmodulesToListByKey
+                  "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecSecurityContextSysctls"
+                  "name"
+                  [ ]
+              )
+            );
+            apply = attrsToList;
+          };
+        };
+
+        config = {
+          "fsGroup" = mkOverride 1002 null;
+          "fsGroupChangePolicy" = mkOverride 1002 null;
+          "runAsGroup" = mkOverride 1002 null;
+          "runAsNonRoot" = mkOverride 1002 null;
+          "runAsUser" = mkOverride 1002 null;
+          "seLinuxOptions" = mkOverride 1002 null;
+          "seccompProfile" = mkOverride 1002 null;
+          "supplementalGroups" = mkOverride 1002 null;
+          "sysctls" = mkOverride 1002 null;
+        };
+
       };
-
-    };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecSecurityContext" = {
-
-      options = {
-        "fsGroup" = mkOption {
-          description = "A special supplemental group that applies to all containers in a pod.\nSome volume types allow the Kubelet to change the ownership of that volume\nto be owned by the pod:\n\n1. The owning GID will be the FSGroup\n2. The setgid bit is set (new files created in the volume will be owned by FSGroup)\n3. The permission bits are OR'd with rw-rw----\n\nIf unset, the Kubelet will not modify the ownership and permissions of any volume.\nNote that this field cannot be set when spec.os.name is windows.";
-          type = (types.nullOr types.int);
-        };
-        "fsGroupChangePolicy" = mkOption {
-          description = "fsGroupChangePolicy defines behavior of changing ownership and permission of the volume\nbefore being exposed inside Pod. This field will only apply to\nvolume types which support fsGroup based ownership(and permissions).\nIt will have no effect on ephemeral volume types such as: secret, configmaps\nand emptydir.\nValid values are \"OnRootMismatch\" and \"Always\". If not specified, \"Always\" is used.\nNote that this field cannot be set when spec.os.name is windows.";
-          type = (types.nullOr types.str);
-        };
-        "runAsGroup" = mkOption {
-          description = "The GID to run the entrypoint of the container process.\nUses runtime default if unset.\nMay also be set in SecurityContext.  If set in both SecurityContext and\nPodSecurityContext, the value specified in SecurityContext takes precedence\nfor that container.\nNote that this field cannot be set when spec.os.name is windows.";
-          type = (types.nullOr types.int);
-        };
-        "runAsNonRoot" = mkOption {
-          description = "Indicates that the container must run as a non-root user.\nIf true, the Kubelet will validate the image at runtime to ensure that it\ndoes not run as UID 0 (root) and fail to start the container if it does.\nIf unset or false, no such validation will be performed.\nMay also be set in SecurityContext.  If set in both SecurityContext and\nPodSecurityContext, the value specified in SecurityContext takes precedence.";
-          type = (types.nullOr types.bool);
-        };
-        "runAsUser" = mkOption {
-          description = "The UID to run the entrypoint of the container process.\nDefaults to user specified in image metadata if unspecified.\nMay also be set in SecurityContext.  If set in both SecurityContext and\nPodSecurityContext, the value specified in SecurityContext takes precedence\nfor that container.\nNote that this field cannot be set when spec.os.name is windows.";
-          type = (types.nullOr types.int);
-        };
-        "seLinuxOptions" = mkOption {
-          description = "The SELinux context to be applied to all containers.\nIf unspecified, the container runtime will allocate a random SELinux context for each\ncontainer.  May also be set in SecurityContext.  If set in\nboth SecurityContext and PodSecurityContext, the value specified in SecurityContext\ntakes precedence for that container.\nNote that this field cannot be set when spec.os.name is windows.";
-          type = (
-            types.nullOr (
-              submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecSecurityContextSeLinuxOptions"
-            )
-          );
-        };
-        "seccompProfile" = mkOption {
-          description = "The seccomp options to use by the containers in this pod.\nNote that this field cannot be set when spec.os.name is windows.";
-          type = (
-            types.nullOr (
-              submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecSecurityContextSeccompProfile"
-            )
-          );
-        };
-        "supplementalGroups" = mkOption {
-          description = "A list of groups applied to the first process run in each container, in addition\nto the container's primary GID, the fsGroup (if specified), and group memberships\ndefined in the container image for the uid of the container process. If unspecified,\nno additional groups are added to any container. Note that group memberships\ndefined in the container image for the uid of the container process are still effective,\neven if they are not included in this list.\nNote that this field cannot be set when spec.os.name is windows.";
-          type = (types.nullOr (types.listOf types.int));
-        };
-        "sysctls" = mkOption {
-          description = "Sysctls hold a list of namespaced sysctls used for the pod. Pods with unsupported\nsysctls (by the container runtime) might fail to launch.\nNote that this field cannot be set when spec.os.name is windows.";
-          type = (
-            types.nullOr (
-              coerceAttrsOfSubmodulesToListByKey
-                "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecSecurityContextSysctls"
-                "name"
-                [ ]
-            )
-          );
-          apply = attrsToList;
-        };
-      };
-
-      config = {
-        "fsGroup" = mkOverride 1002 null;
-        "fsGroupChangePolicy" = mkOverride 1002 null;
-        "runAsGroup" = mkOverride 1002 null;
-        "runAsNonRoot" = mkOverride 1002 null;
-        "runAsUser" = mkOverride 1002 null;
-        "seLinuxOptions" = mkOverride 1002 null;
-        "seccompProfile" = mkOverride 1002 null;
-        "supplementalGroups" = mkOverride 1002 null;
-        "sysctls" = mkOverride 1002 null;
-      };
-
-    };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecSecurityContextSeLinuxOptions" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecSecurityContextSeLinuxOptions" =
       {
 
         options = {
@@ -2860,7 +2886,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecSecurityContextSeccompProfile" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecSecurityContextSeccompProfile" =
       {
 
         options = {
@@ -2879,7 +2905,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecSecurityContextSysctls" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecSecurityContextSysctls" =
       {
 
         options = {
@@ -2896,41 +2922,42 @@ let
         config = { };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecTolerations" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01GatewayHTTPRoutePodTemplateSpecTolerations" =
+      {
 
-      options = {
-        "effect" = mkOption {
-          description = "Effect indicates the taint effect to match. Empty means match all taint effects.\nWhen specified, allowed values are NoSchedule, PreferNoSchedule and NoExecute.";
-          type = (types.nullOr types.str);
+        options = {
+          "effect" = mkOption {
+            description = "Effect indicates the taint effect to match. Empty means match all taint effects.\nWhen specified, allowed values are NoSchedule, PreferNoSchedule and NoExecute.";
+            type = (types.nullOr types.str);
+          };
+          "key" = mkOption {
+            description = "Key is the taint key that the toleration applies to. Empty means match all taint keys.\nIf the key is empty, operator must be Exists; this combination means to match all values and all keys.";
+            type = (types.nullOr types.str);
+          };
+          "operator" = mkOption {
+            description = "Operator represents a key's relationship to the value.\nValid operators are Exists and Equal. Defaults to Equal.\nExists is equivalent to wildcard for value, so that a pod can\ntolerate all taints of a particular category.";
+            type = (types.nullOr types.str);
+          };
+          "tolerationSeconds" = mkOption {
+            description = "TolerationSeconds represents the period of time the toleration (which must be\nof effect NoExecute, otherwise this field is ignored) tolerates the taint. By default,\nit is not set, which means tolerate the taint forever (do not evict). Zero and\nnegative values will be treated as 0 (evict immediately) by the system.";
+            type = (types.nullOr types.int);
+          };
+          "value" = mkOption {
+            description = "Value is the taint value the toleration matches to.\nIf the operator is Exists, the value should be empty, otherwise just a regular string.";
+            type = (types.nullOr types.str);
+          };
         };
-        "key" = mkOption {
-          description = "Key is the taint key that the toleration applies to. Empty means match all taint keys.\nIf the key is empty, operator must be Exists; this combination means to match all values and all keys.";
-          type = (types.nullOr types.str);
+
+        config = {
+          "effect" = mkOverride 1002 null;
+          "key" = mkOverride 1002 null;
+          "operator" = mkOverride 1002 null;
+          "tolerationSeconds" = mkOverride 1002 null;
+          "value" = mkOverride 1002 null;
         };
-        "operator" = mkOption {
-          description = "Operator represents a key's relationship to the value.\nValid operators are Exists and Equal. Defaults to Equal.\nExists is equivalent to wildcard for value, so that a pod can\ntolerate all taints of a particular category.";
-          type = (types.nullOr types.str);
-        };
-        "tolerationSeconds" = mkOption {
-          description = "TolerationSeconds represents the period of time the toleration (which must be\nof effect NoExecute, otherwise this field is ignored) tolerates the taint. By default,\nit is not set, which means tolerate the taint forever (do not evict). Zero and\nnegative values will be treated as 0 (evict immediately) by the system.";
-          type = (types.nullOr types.int);
-        };
-        "value" = mkOption {
-          description = "Value is the taint value the toleration matches to.\nIf the operator is Exists, the value should be empty, otherwise just a regular string.";
-          type = (types.nullOr types.str);
-        };
+
       };
-
-      config = {
-        "effect" = mkOverride 1002 null;
-        "key" = mkOverride 1002 null;
-        "operator" = mkOverride 1002 null;
-        "tolerationSeconds" = mkOverride 1002 null;
-        "value" = mkOverride 1002 null;
-      };
-
-    };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01Ingress" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01Ingress" = {
 
       options = {
         "class" = mkOption {
@@ -2944,7 +2971,9 @@ let
         "ingressTemplate" = mkOption {
           description = "Optional ingress template used to configure the ACME challenge solver\ningress used for HTTP01 challenges.";
           type = (
-            types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressIngressTemplate")
+            types.nullOr (
+              submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressIngressTemplate"
+            )
           );
         };
         "name" = mkOption {
@@ -2954,7 +2983,7 @@ let
         "podTemplate" = mkOption {
           description = "Optional pod template used to configure the ACME challenge solver pods\nused for HTTP01 challenges.";
           type = (
-            types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplate")
+            types.nullOr (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplate")
           );
         };
         "serviceType" = mkOption {
@@ -2973,14 +3002,14 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressIngressTemplate" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressIngressTemplate" = {
 
       options = {
         "metadata" = mkOption {
           description = "ObjectMeta overrides for the ingress used to solve HTTP01 challenges.\nOnly the 'labels' and 'annotations' fields may be set.\nIf labels or annotations overlap with in-built values, the values here\nwill override the in-built values.";
           type = (
             types.nullOr (
-              submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressIngressTemplateMetadata"
+              submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressIngressTemplateMetadata"
             )
           );
         };
@@ -2991,7 +3020,7 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressIngressTemplateMetadata" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressIngressTemplateMetadata" = {
 
       options = {
         "annotations" = mkOption {
@@ -3010,21 +3039,23 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplate" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplate" = {
 
       options = {
         "metadata" = mkOption {
           description = "ObjectMeta overrides for the pod used to solve HTTP01 challenges.\nOnly the 'labels' and 'annotations' fields may be set.\nIf labels or annotations overlap with in-built values, the values here\nwill override the in-built values.";
           type = (
             types.nullOr (
-              submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateMetadata"
+              submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateMetadata"
             )
           );
         };
         "spec" = mkOption {
           description = "PodSpec defines overrides for the HTTP01 challenge solver pod.\nCheck ACMEChallengeSolverHTTP01IngressPodSpec to find out currently supported fields.\nAll other fields will be ignored.";
           type = (
-            types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpec")
+            types.nullOr (
+              submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpec"
+            )
           );
         };
       };
@@ -3035,7 +3066,7 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateMetadata" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateMetadata" = {
 
       options = {
         "annotations" = mkOption {
@@ -3054,14 +3085,14 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpec" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpec" = {
 
       options = {
         "affinity" = mkOption {
           description = "If specified, the pod's scheduling constraints";
           type = (
             types.nullOr (
-              submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity"
+              submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity"
             )
           );
         };
@@ -3070,7 +3101,7 @@ let
           type = (
             types.nullOr (
               coerceAttrsOfSubmodulesToListByKey
-                "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecImagePullSecrets"
+                "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecImagePullSecrets"
                 "name"
                 [ ]
             )
@@ -3089,7 +3120,7 @@ let
           description = "If specified, the pod's security context";
           type = (
             types.nullOr (
-              submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContext"
+              submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContext"
             )
           );
         };
@@ -3102,7 +3133,7 @@ let
           type = (
             types.nullOr (
               types.listOf (
-                submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecTolerations"
+                submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecTolerations"
               )
             )
           );
@@ -3120,14 +3151,14 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinity" = {
 
       options = {
         "nodeAffinity" = mkOption {
           description = "Describes node affinity scheduling rules for the pod.";
           type = (
             types.nullOr (
-              submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinity"
+              submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinity"
             )
           );
         };
@@ -3135,7 +3166,7 @@ let
           description = "Describes pod affinity scheduling rules (e.g. co-locate this pod in the same node, zone, etc. as some other pod(s)).";
           type = (
             types.nullOr (
-              submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinity"
+              submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinity"
             )
           );
         };
@@ -3143,7 +3174,7 @@ let
           description = "Describes pod anti-affinity scheduling rules (e.g. avoid putting this pod in the same node, zone, etc. as some other pod(s)).";
           type = (
             types.nullOr (
-              submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinity"
+              submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinity"
             )
           );
         };
@@ -3156,43 +3187,44 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinity" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinity" =
+      {
 
-      options = {
-        "preferredDuringSchedulingIgnoredDuringExecution" = mkOption {
-          description = "The scheduler will prefer to schedule pods to nodes that satisfy\nthe affinity expressions specified by this field, but it may choose\na node that violates one or more of the expressions. The node that is\nmost preferred is the one with the greatest sum of weights, i.e.\nfor each node that meets all of the scheduling requirements (resource\nrequest, requiredDuringScheduling affinity expressions, etc.),\ncompute a sum by iterating through the elements of this field and adding\n\"weight\" to the sum if the node matches the corresponding matchExpressions; the\nnode(s) with the highest sum are the most preferred.";
-          type = (
-            types.nullOr (
-              types.listOf (
-                submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution"
+        options = {
+          "preferredDuringSchedulingIgnoredDuringExecution" = mkOption {
+            description = "The scheduler will prefer to schedule pods to nodes that satisfy\nthe affinity expressions specified by this field, but it may choose\na node that violates one or more of the expressions. The node that is\nmost preferred is the one with the greatest sum of weights, i.e.\nfor each node that meets all of the scheduling requirements (resource\nrequest, requiredDuringScheduling affinity expressions, etc.),\ncompute a sum by iterating through the elements of this field and adding\n\"weight\" to the sum if the node matches the corresponding matchExpressions; the\nnode(s) with the highest sum are the most preferred.";
+            type = (
+              types.nullOr (
+                types.listOf (
+                  submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution"
+                )
               )
-            )
-          );
+            );
+          };
+          "requiredDuringSchedulingIgnoredDuringExecution" = mkOption {
+            description = "If the affinity requirements specified by this field are not met at\nscheduling time, the pod will not be scheduled onto the node.\nIf the affinity requirements specified by this field cease to be met\nat some point during pod execution (e.g. due to an update), the system\nmay or may not try to eventually evict the pod from its node.";
+            type = (
+              types.nullOr (
+                submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution"
+              )
+            );
+          };
         };
-        "requiredDuringSchedulingIgnoredDuringExecution" = mkOption {
-          description = "If the affinity requirements specified by this field are not met at\nscheduling time, the pod will not be scheduled onto the node.\nIf the affinity requirements specified by this field cease to be met\nat some point during pod execution (e.g. due to an update), the system\nmay or may not try to eventually evict the pod from its node.";
-          type = (
-            types.nullOr (
-              submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution"
-            )
-          );
+
+        config = {
+          "preferredDuringSchedulingIgnoredDuringExecution" = mkOverride 1002 null;
+          "requiredDuringSchedulingIgnoredDuringExecution" = mkOverride 1002 null;
         };
-      };
 
-      config = {
-        "preferredDuringSchedulingIgnoredDuringExecution" = mkOverride 1002 null;
-        "requiredDuringSchedulingIgnoredDuringExecution" = mkOverride 1002 null;
       };
-
-    };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution" =
       {
 
         options = {
           "preference" = mkOption {
             description = "A node selector term, associated with the corresponding weight.";
             type = (
-              submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference"
+              submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference"
             );
           };
           "weight" = mkOption {
@@ -3204,7 +3236,7 @@ let
         config = { };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference" =
       {
 
         options = {
@@ -3213,7 +3245,7 @@ let
             type = (
               types.nullOr (
                 types.listOf (
-                  submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions"
+                  submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions"
                 )
               )
             );
@@ -3223,7 +3255,7 @@ let
             type = (
               types.nullOr (
                 types.listOf (
-                  submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields"
+                  submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields"
                 )
               )
             );
@@ -3236,7 +3268,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions" =
       {
 
         options = {
@@ -3259,7 +3291,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields" =
       {
 
         options = {
@@ -3282,7 +3314,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution" =
       {
 
         options = {
@@ -3290,7 +3322,7 @@ let
             description = "Required. A list of node selector terms. The terms are ORed.";
             type = (
               types.listOf (
-                submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms"
+                submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms"
               )
             );
           };
@@ -3299,7 +3331,7 @@ let
         config = { };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms" =
       {
 
         options = {
@@ -3308,7 +3340,7 @@ let
             type = (
               types.nullOr (
                 types.listOf (
-                  submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions"
+                  submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions"
                 )
               )
             );
@@ -3318,7 +3350,7 @@ let
             type = (
               types.nullOr (
                 types.listOf (
-                  submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields"
+                  submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields"
                 )
               )
             );
@@ -3331,7 +3363,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions" =
       {
 
         options = {
@@ -3354,7 +3386,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields" =
       {
 
         options = {
@@ -3377,7 +3409,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinity" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinity" = {
 
       options = {
         "preferredDuringSchedulingIgnoredDuringExecution" = mkOption {
@@ -3385,7 +3417,7 @@ let
           type = (
             types.nullOr (
               types.listOf (
-                submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution"
+                submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution"
               )
             )
           );
@@ -3395,7 +3427,7 @@ let
           type = (
             types.nullOr (
               types.listOf (
-                submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution"
+                submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution"
               )
             )
           );
@@ -3408,14 +3440,14 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution" =
       {
 
         options = {
           "podAffinityTerm" = mkOption {
             description = "Required. A pod affinity term, associated with the corresponding weight.";
             type = (
-              submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm"
+              submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm"
             );
           };
           "weight" = mkOption {
@@ -3427,7 +3459,7 @@ let
         config = { };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm" =
       {
 
         options = {
@@ -3435,7 +3467,7 @@ let
             description = "A label query over a set of resources, in this case pods.\nIf it's null, this PodAffinityTerm matches with no Pods.";
             type = (
               types.nullOr (
-                submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector"
+                submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector"
               )
             );
           };
@@ -3451,7 +3483,7 @@ let
             description = "A label query over the set of namespaces that the term applies to.\nThe term is applied to the union of the namespaces selected by this field\nand the ones listed in the namespaces field.\nnull selector and null or empty namespaces list means \"this pod's namespace\".\nAn empty selector ({}) matches all namespaces.";
             type = (
               types.nullOr (
-                submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector"
+                submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector"
               )
             );
           };
@@ -3474,7 +3506,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector" =
       {
 
         options = {
@@ -3483,7 +3515,7 @@ let
             type = (
               types.nullOr (
                 types.listOf (
-                  submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions"
+                  submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions"
                 )
               )
             );
@@ -3500,7 +3532,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions" =
       {
 
         options = {
@@ -3523,7 +3555,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector" =
       {
 
         options = {
@@ -3532,7 +3564,7 @@ let
             type = (
               types.nullOr (
                 types.listOf (
-                  submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions"
+                  submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions"
                 )
               )
             );
@@ -3549,7 +3581,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions" =
       {
 
         options = {
@@ -3572,7 +3604,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution" =
       {
 
         options = {
@@ -3580,7 +3612,7 @@ let
             description = "A label query over a set of resources, in this case pods.\nIf it's null, this PodAffinityTerm matches with no Pods.";
             type = (
               types.nullOr (
-                submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector"
+                submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector"
               )
             );
           };
@@ -3596,7 +3628,7 @@ let
             description = "A label query over the set of namespaces that the term applies to.\nThe term is applied to the union of the namespaces selected by this field\nand the ones listed in the namespaces field.\nnull selector and null or empty namespaces list means \"this pod's namespace\".\nAn empty selector ({}) matches all namespaces.";
             type = (
               types.nullOr (
-                submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector"
+                submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector"
               )
             );
           };
@@ -3619,7 +3651,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector" =
       {
 
         options = {
@@ -3628,7 +3660,7 @@ let
             type = (
               types.nullOr (
                 types.listOf (
-                  submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions"
+                  submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions"
                 )
               )
             );
@@ -3645,7 +3677,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions" =
       {
 
         options = {
@@ -3668,7 +3700,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector" =
       {
 
         options = {
@@ -3677,7 +3709,7 @@ let
             type = (
               types.nullOr (
                 types.listOf (
-                  submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions"
+                  submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions"
                 )
               )
             );
@@ -3694,7 +3726,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions" =
       {
 
         options = {
@@ -3717,45 +3749,46 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinity" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinity" =
+      {
 
-      options = {
-        "preferredDuringSchedulingIgnoredDuringExecution" = mkOption {
-          description = "The scheduler will prefer to schedule pods to nodes that satisfy\nthe anti-affinity expressions specified by this field, but it may choose\na node that violates one or more of the expressions. The node that is\nmost preferred is the one with the greatest sum of weights, i.e.\nfor each node that meets all of the scheduling requirements (resource\nrequest, requiredDuringScheduling anti-affinity expressions, etc.),\ncompute a sum by iterating through the elements of this field and adding\n\"weight\" to the sum if the node has pods which matches the corresponding podAffinityTerm; the\nnode(s) with the highest sum are the most preferred.";
-          type = (
-            types.nullOr (
-              types.listOf (
-                submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution"
+        options = {
+          "preferredDuringSchedulingIgnoredDuringExecution" = mkOption {
+            description = "The scheduler will prefer to schedule pods to nodes that satisfy\nthe anti-affinity expressions specified by this field, but it may choose\na node that violates one or more of the expressions. The node that is\nmost preferred is the one with the greatest sum of weights, i.e.\nfor each node that meets all of the scheduling requirements (resource\nrequest, requiredDuringScheduling anti-affinity expressions, etc.),\ncompute a sum by iterating through the elements of this field and adding\n\"weight\" to the sum if the node has pods which matches the corresponding podAffinityTerm; the\nnode(s) with the highest sum are the most preferred.";
+            type = (
+              types.nullOr (
+                types.listOf (
+                  submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution"
+                )
               )
-            )
-          );
-        };
-        "requiredDuringSchedulingIgnoredDuringExecution" = mkOption {
-          description = "If the anti-affinity requirements specified by this field are not met at\nscheduling time, the pod will not be scheduled onto the node.\nIf the anti-affinity requirements specified by this field cease to be met\nat some point during pod execution (e.g. due to a pod label update), the\nsystem may or may not try to eventually evict the pod from its node.\nWhen there are multiple elements, the lists of nodes corresponding to each\npodAffinityTerm are intersected, i.e. all terms must be satisfied.";
-          type = (
-            types.nullOr (
-              types.listOf (
-                submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution"
+            );
+          };
+          "requiredDuringSchedulingIgnoredDuringExecution" = mkOption {
+            description = "If the anti-affinity requirements specified by this field are not met at\nscheduling time, the pod will not be scheduled onto the node.\nIf the anti-affinity requirements specified by this field cease to be met\nat some point during pod execution (e.g. due to a pod label update), the\nsystem may or may not try to eventually evict the pod from its node.\nWhen there are multiple elements, the lists of nodes corresponding to each\npodAffinityTerm are intersected, i.e. all terms must be satisfied.";
+            type = (
+              types.nullOr (
+                types.listOf (
+                  submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution"
+                )
               )
-            )
-          );
+            );
+          };
         };
-      };
 
-      config = {
-        "preferredDuringSchedulingIgnoredDuringExecution" = mkOverride 1002 null;
-        "requiredDuringSchedulingIgnoredDuringExecution" = mkOverride 1002 null;
-      };
+        config = {
+          "preferredDuringSchedulingIgnoredDuringExecution" = mkOverride 1002 null;
+          "requiredDuringSchedulingIgnoredDuringExecution" = mkOverride 1002 null;
+        };
 
-    };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution" =
+      };
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution" =
       {
 
         options = {
           "podAffinityTerm" = mkOption {
             description = "Required. A pod affinity term, associated with the corresponding weight.";
             type = (
-              submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm"
+              submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm"
             );
           };
           "weight" = mkOption {
@@ -3767,7 +3800,7 @@ let
         config = { };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm" =
       {
 
         options = {
@@ -3775,7 +3808,7 @@ let
             description = "A label query over a set of resources, in this case pods.\nIf it's null, this PodAffinityTerm matches with no Pods.";
             type = (
               types.nullOr (
-                submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector"
+                submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector"
               )
             );
           };
@@ -3791,7 +3824,7 @@ let
             description = "A label query over the set of namespaces that the term applies to.\nThe term is applied to the union of the namespaces selected by this field\nand the ones listed in the namespaces field.\nnull selector and null or empty namespaces list means \"this pod's namespace\".\nAn empty selector ({}) matches all namespaces.";
             type = (
               types.nullOr (
-                submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector"
+                submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector"
               )
             );
           };
@@ -3814,7 +3847,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector" =
       {
 
         options = {
@@ -3823,7 +3856,7 @@ let
             type = (
               types.nullOr (
                 types.listOf (
-                  submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions"
+                  submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions"
                 )
               )
             );
@@ -3840,7 +3873,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions" =
       {
 
         options = {
@@ -3863,7 +3896,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector" =
       {
 
         options = {
@@ -3872,7 +3905,7 @@ let
             type = (
               types.nullOr (
                 types.listOf (
-                  submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions"
+                  submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions"
                 )
               )
             );
@@ -3889,7 +3922,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions" =
       {
 
         options = {
@@ -3912,7 +3945,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution" =
       {
 
         options = {
@@ -3920,7 +3953,7 @@ let
             description = "A label query over a set of resources, in this case pods.\nIf it's null, this PodAffinityTerm matches with no Pods.";
             type = (
               types.nullOr (
-                submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector"
+                submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector"
               )
             );
           };
@@ -3936,7 +3969,7 @@ let
             description = "A label query over the set of namespaces that the term applies to.\nThe term is applied to the union of the namespaces selected by this field\nand the ones listed in the namespaces field.\nnull selector and null or empty namespaces list means \"this pod's namespace\".\nAn empty selector ({}) matches all namespaces.";
             type = (
               types.nullOr (
-                submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector"
+                submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector"
               )
             );
           };
@@ -3959,7 +3992,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector" =
       {
 
         options = {
@@ -3968,7 +4001,7 @@ let
             type = (
               types.nullOr (
                 types.listOf (
-                  submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions"
+                  submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions"
                 )
               )
             );
@@ -3985,7 +4018,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions" =
       {
 
         options = {
@@ -4008,7 +4041,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector" =
       {
 
         options = {
@@ -4017,7 +4050,7 @@ let
             type = (
               types.nullOr (
                 types.listOf (
-                  submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions"
+                  submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions"
                 )
               )
             );
@@ -4034,7 +4067,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions" =
       {
 
         options = {
@@ -4057,7 +4090,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecImagePullSecrets" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecImagePullSecrets" = {
 
       options = {
         "name" = mkOption {
@@ -4071,7 +4104,7 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContext" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContext" = {
 
       options = {
         "fsGroup" = mkOption {
@@ -4098,7 +4131,7 @@ let
           description = "The SELinux context to be applied to all containers.\nIf unspecified, the container runtime will allocate a random SELinux context for each\ncontainer.  May also be set in SecurityContext.  If set in\nboth SecurityContext and PodSecurityContext, the value specified in SecurityContext\ntakes precedence for that container.\nNote that this field cannot be set when spec.os.name is windows.";
           type = (
             types.nullOr (
-              submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeLinuxOptions"
+              submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeLinuxOptions"
             )
           );
         };
@@ -4106,7 +4139,7 @@ let
           description = "The seccomp options to use by the containers in this pod.\nNote that this field cannot be set when spec.os.name is windows.";
           type = (
             types.nullOr (
-              submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeccompProfile"
+              submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeccompProfile"
             )
           );
         };
@@ -4119,7 +4152,7 @@ let
           type = (
             types.nullOr (
               coerceAttrsOfSubmodulesToListByKey
-                "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSysctls"
+                "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSysctls"
                 "name"
                 [ ]
             )
@@ -4141,7 +4174,7 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeLinuxOptions" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeLinuxOptions" =
       {
 
         options = {
@@ -4171,7 +4204,7 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeccompProfile" =
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSeccompProfile" =
       {
 
         options = {
@@ -4190,23 +4223,24 @@ let
         };
 
       };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSysctls" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecSecurityContextSysctls" =
+      {
 
-      options = {
-        "name" = mkOption {
-          description = "Name of a property to set";
-          type = types.str;
+        options = {
+          "name" = mkOption {
+            description = "Name of a property to set";
+            type = types.str;
+          };
+          "value" = mkOption {
+            description = "Value of a property to set";
+            type = types.str;
+          };
         };
-        "value" = mkOption {
-          description = "Value of a property to set";
-          type = types.str;
-        };
+
+        config = { };
+
       };
-
-      config = { };
-
-    };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversHttp01IngressPodTemplateSpecTolerations" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversHttp01IngressPodTemplateSpecTolerations" = {
 
       options = {
         "effect" = mkOption {
@@ -4240,7 +4274,7 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecAcmeSolversSelector" = {
+    "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversSelector" = {
 
       options = {
         "dnsNames" = mkOption {
@@ -4264,7 +4298,7 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecCa" = {
+    "cert-manager.io.v1.ClusterIssuerSpecCa" = {
 
       options = {
         "crlDistributionPoints" = mkOption {
@@ -4292,7 +4326,7 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecSelfSigned" = {
+    "cert-manager.io.v1.ClusterIssuerSpecSelfSigned" = {
 
       options = {
         "crlDistributionPoints" = mkOption {
@@ -4306,12 +4340,12 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecVault" = {
+    "cert-manager.io.v1.ClusterIssuerSpecVault" = {
 
       options = {
         "auth" = mkOption {
           description = "Auth configures how cert-manager authenticates with the Vault server.";
-          type = (submoduleOf "cert-manager.io.v1.IssuerSpecVaultAuth");
+          type = (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecVaultAuth");
         };
         "caBundle" = mkOption {
           description = "Base64-encoded bundle of PEM CAs which will be used to validate the certificate\nchain presented by Vault. Only used if using HTTPS to connect to Vault and\nignored for HTTP connections.\nMutually exclusive with CABundleSecretRef.\nIf neither CABundle nor CABundleSecretRef are defined, the certificate bundle in\nthe cert-manager controller container is used to validate the TLS connection.";
@@ -4319,15 +4353,15 @@ let
         };
         "caBundleSecretRef" = mkOption {
           description = "Reference to a Secret containing a bundle of PEM-encoded CAs to use when\nverifying the certificate chain presented by Vault when using HTTPS.\nMutually exclusive with CABundle.\nIf neither CABundle nor CABundleSecretRef are defined, the certificate bundle in\nthe cert-manager controller container is used to validate the TLS connection.\nIf no key for the Secret is specified, cert-manager will default to 'ca.crt'.";
-          type = (types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecVaultCaBundleSecretRef"));
+          type = (types.nullOr (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecVaultCaBundleSecretRef"));
         };
         "clientCertSecretRef" = mkOption {
           description = "Reference to a Secret containing a PEM-encoded Client Certificate to use when the\nVault server requires mTLS.";
-          type = (types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecVaultClientCertSecretRef"));
+          type = (types.nullOr (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecVaultClientCertSecretRef"));
         };
         "clientKeySecretRef" = mkOption {
           description = "Reference to a Secret containing a PEM-encoded Client Private Key to use when the\nVault server requires mTLS.";
-          type = (types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecVaultClientKeySecretRef"));
+          type = (types.nullOr (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecVaultClientKeySecretRef"));
         };
         "namespace" = mkOption {
           description = "Name of the vault namespace. Namespaces is a set of features within Vault Enterprise that allows Vault environments to support Secure Multi-tenancy. e.g: \"ns1\"\nMore about namespaces can be found here https://www.vaultproject.io/docs/enterprise/namespaces";
@@ -4357,24 +4391,26 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecVaultAuth" = {
+    "cert-manager.io.v1.ClusterIssuerSpecVaultAuth" = {
 
       options = {
         "appRole" = mkOption {
           description = "AppRole authenticates with Vault using the App Role auth mechanism,\nwith the role and secret stored in a Kubernetes Secret resource.";
-          type = (types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecVaultAuthAppRole"));
+          type = (types.nullOr (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecVaultAuthAppRole"));
         };
         "clientCertificate" = mkOption {
           description = "ClientCertificate authenticates with Vault by presenting a client\ncertificate during the request's TLS handshake.\nWorks only when using HTTPS protocol.";
-          type = (types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecVaultAuthClientCertificate"));
+          type = (
+            types.nullOr (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecVaultAuthClientCertificate")
+          );
         };
         "kubernetes" = mkOption {
           description = "Kubernetes authenticates with Vault by passing the ServiceAccount\ntoken stored in the named Secret resource to the Vault server.";
-          type = (types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecVaultAuthKubernetes"));
+          type = (types.nullOr (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecVaultAuthKubernetes"));
         };
         "tokenSecretRef" = mkOption {
           description = "TokenSecretRef authenticates with Vault by presenting a token.";
-          type = (types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecVaultAuthTokenSecretRef"));
+          type = (types.nullOr (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecVaultAuthTokenSecretRef"));
         };
       };
 
@@ -4386,7 +4422,7 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecVaultAuthAppRole" = {
+    "cert-manager.io.v1.ClusterIssuerSpecVaultAuthAppRole" = {
 
       options = {
         "path" = mkOption {
@@ -4399,14 +4435,14 @@ let
         };
         "secretRef" = mkOption {
           description = "Reference to a key in a Secret that contains the App Role secret used\nto authenticate with Vault.\nThe `key` field must be specified and denotes which entry within the Secret\nresource is used as the app role secret.";
-          type = (submoduleOf "cert-manager.io.v1.IssuerSpecVaultAuthAppRoleSecretRef");
+          type = (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecVaultAuthAppRoleSecretRef");
         };
       };
 
       config = { };
 
     };
-    "cert-manager.io.v1.IssuerSpecVaultAuthAppRoleSecretRef" = {
+    "cert-manager.io.v1.ClusterIssuerSpecVaultAuthAppRoleSecretRef" = {
 
       options = {
         "key" = mkOption {
@@ -4424,7 +4460,7 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecVaultAuthClientCertificate" = {
+    "cert-manager.io.v1.ClusterIssuerSpecVaultAuthClientCertificate" = {
 
       options = {
         "mountPath" = mkOption {
@@ -4448,7 +4484,7 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecVaultAuthKubernetes" = {
+    "cert-manager.io.v1.ClusterIssuerSpecVaultAuthKubernetes" = {
 
       options = {
         "mountPath" = mkOption {
@@ -4461,12 +4497,16 @@ let
         };
         "secretRef" = mkOption {
           description = "The required Secret field containing a Kubernetes ServiceAccount JWT used\nfor authenticating with Vault. Use of 'ambient credentials' is not\nsupported.";
-          type = (types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecVaultAuthKubernetesSecretRef"));
+          type = (
+            types.nullOr (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecVaultAuthKubernetesSecretRef")
+          );
         };
         "serviceAccountRef" = mkOption {
           description = "A reference to a service account that will be used to request a bound\ntoken (also known as \"projected token\"). Compared to using \"secretRef\",\nusing this field means that you don't rely on statically bound tokens. To\nuse this field, you must configure an RBAC rule to let cert-manager\nrequest a token.";
           type = (
-            types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecVaultAuthKubernetesServiceAccountRef")
+            types.nullOr (
+              submoduleOf "cert-manager.io.v1.ClusterIssuerSpecVaultAuthKubernetesServiceAccountRef"
+            )
           );
         };
       };
@@ -4478,7 +4518,7 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecVaultAuthKubernetesSecretRef" = {
+    "cert-manager.io.v1.ClusterIssuerSpecVaultAuthKubernetesSecretRef" = {
 
       options = {
         "key" = mkOption {
@@ -4496,7 +4536,7 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecVaultAuthKubernetesServiceAccountRef" = {
+    "cert-manager.io.v1.ClusterIssuerSpecVaultAuthKubernetesServiceAccountRef" = {
 
       options = {
         "audiences" = mkOption {
@@ -4514,7 +4554,7 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecVaultAuthTokenSecretRef" = {
+    "cert-manager.io.v1.ClusterIssuerSpecVaultAuthTokenSecretRef" = {
 
       options = {
         "key" = mkOption {
@@ -4532,7 +4572,7 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecVaultCaBundleSecretRef" = {
+    "cert-manager.io.v1.ClusterIssuerSpecVaultCaBundleSecretRef" = {
 
       options = {
         "key" = mkOption {
@@ -4550,7 +4590,7 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecVaultClientCertSecretRef" = {
+    "cert-manager.io.v1.ClusterIssuerSpecVaultClientCertSecretRef" = {
 
       options = {
         "key" = mkOption {
@@ -4568,7 +4608,7 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecVaultClientKeySecretRef" = {
+    "cert-manager.io.v1.ClusterIssuerSpecVaultClientKeySecretRef" = {
 
       options = {
         "key" = mkOption {
@@ -4586,16 +4626,16 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecVenafi" = {
+    "cert-manager.io.v1.ClusterIssuerSpecVenafi" = {
 
       options = {
         "cloud" = mkOption {
           description = "Cloud specifies the Venafi cloud configuration settings.\nOnly one of TPP or Cloud may be specified.";
-          type = (types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecVenafiCloud"));
+          type = (types.nullOr (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecVenafiCloud"));
         };
         "tpp" = mkOption {
           description = "TPP specifies Trust Protection Platform configuration settings.\nOnly one of TPP or Cloud may be specified.";
-          type = (types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecVenafiTpp"));
+          type = (types.nullOr (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecVenafiTpp"));
         };
         "zone" = mkOption {
           description = "Zone is the Venafi Policy Zone to use for this issuer.\nAll requests made to the Venafi platform will be restricted by the named\nzone policy.\nThis field is required.";
@@ -4609,12 +4649,12 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecVenafiCloud" = {
+    "cert-manager.io.v1.ClusterIssuerSpecVenafiCloud" = {
 
       options = {
         "apiTokenSecretRef" = mkOption {
           description = "APITokenSecretRef is a secret key selector for the Venafi Cloud API token.";
-          type = (submoduleOf "cert-manager.io.v1.IssuerSpecVenafiCloudApiTokenSecretRef");
+          type = (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecVenafiCloudApiTokenSecretRef");
         };
         "url" = mkOption {
           description = "URL is the base URL for Venafi Cloud.\nDefaults to \"https://api.venafi.cloud/\".";
@@ -4627,7 +4667,7 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecVenafiCloudApiTokenSecretRef" = {
+    "cert-manager.io.v1.ClusterIssuerSpecVenafiCloudApiTokenSecretRef" = {
 
       options = {
         "key" = mkOption {
@@ -4645,7 +4685,7 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecVenafiTpp" = {
+    "cert-manager.io.v1.ClusterIssuerSpecVenafiTpp" = {
 
       options = {
         "caBundle" = mkOption {
@@ -4654,11 +4694,13 @@ let
         };
         "caBundleSecretRef" = mkOption {
           description = "Reference to a Secret containing a base64-encoded bundle of PEM CAs\nwhich will be used to validate the certificate chain presented by the TPP server.\nOnly used if using HTTPS; ignored for HTTP. Mutually exclusive with CABundle.\nIf neither CABundle nor CABundleSecretRef is defined, the certificate bundle in\nthe cert-manager controller container is used to validate the TLS connection.";
-          type = (types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecVenafiTppCaBundleSecretRef"));
+          type = (
+            types.nullOr (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecVenafiTppCaBundleSecretRef")
+          );
         };
         "credentialsRef" = mkOption {
           description = "CredentialsRef is a reference to a Secret containing the Venafi TPP API credentials.\nThe secret must contain the key 'access-token' for the Access Token Authentication,\nor two keys, 'username' and 'password' for the API Keys Authentication.";
-          type = (submoduleOf "cert-manager.io.v1.IssuerSpecVenafiTppCredentialsRef");
+          type = (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecVenafiTppCredentialsRef");
         };
         "url" = mkOption {
           description = "URL is the base URL for the vedsdk endpoint of the Venafi TPP instance,\nfor example: \"https://tpp.example.com/vedsdk\".";
@@ -4672,7 +4714,7 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecVenafiTppCaBundleSecretRef" = {
+    "cert-manager.io.v1.ClusterIssuerSpecVenafiTppCaBundleSecretRef" = {
 
       options = {
         "key" = mkOption {
@@ -4690,7 +4732,7 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerSpecVenafiTppCredentialsRef" = {
+    "cert-manager.io.v1.ClusterIssuerSpecVenafiTppCredentialsRef" = {
 
       options = {
         "name" = mkOption {
@@ -4702,16 +4744,18 @@ let
       config = { };
 
     };
-    "cert-manager.io.v1.IssuerStatus" = {
+    "cert-manager.io.v1.ClusterIssuerStatus" = {
 
       options = {
         "acme" = mkOption {
           description = "ACME specific status options.\nThis field should only be set if the Issuer is configured to use an ACME\nserver to issue certificates.";
-          type = (types.nullOr (submoduleOf "cert-manager.io.v1.IssuerStatusAcme"));
+          type = (types.nullOr (submoduleOf "cert-manager.io.v1.ClusterIssuerStatusAcme"));
         };
         "conditions" = mkOption {
           description = "List of status conditions to indicate the status of a CertificateRequest.\nKnown condition types are `Ready`.";
-          type = (types.nullOr (types.listOf (submoduleOf "cert-manager.io.v1.IssuerStatusConditions")));
+          type = (
+            types.nullOr (types.listOf (submoduleOf "cert-manager.io.v1.ClusterIssuerStatusConditions"))
+          );
         };
       };
 
@@ -4721,7 +4765,7 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerStatusAcme" = {
+    "cert-manager.io.v1.ClusterIssuerStatusAcme" = {
 
       options = {
         "lastPrivateKeyHash" = mkOption {
@@ -4745,7 +4789,7 @@ let
       };
 
     };
-    "cert-manager.io.v1.IssuerStatusConditions" = {
+    "cert-manager.io.v1.ClusterIssuerStatusConditions" = {
 
       options = {
         "lastTransitionTime" = mkOption {
@@ -4800,11 +4844,13 @@ in
         );
         default = { };
       };
-      "cert-manager.io"."v1"."Issuer" = mkOption {
-        description = "An Issuer represents a certificate issuing authority which can be\nreferenced as part of `issuerRef` fields.\nIt is scoped to a single namespace and can therefore only be referenced by\nresources within the same namespace.";
+      "cert-manager.io"."v1"."ClusterIssuer" = mkOption {
+        description = "A ClusterIssuer represents a certificate issuing authority which can be\nreferenced as part of `issuerRef` fields.\nIt is similar to an Issuer, however it is cluster-scoped and therefore can\nbe referenced by resources that exist in *any* namespace, not just the same\nnamespace as the referent.";
         type = (
           types.attrsOf (
-            submoduleForDefinition "cert-manager.io.v1.Issuer" "issuers" "Issuer" "cert-manager.io" "v1"
+            submoduleForDefinition "cert-manager.io.v1.ClusterIssuer" "clusterissuers" "ClusterIssuer"
+              "cert-manager.io"
+              "v1"
           )
         );
         default = { };
@@ -4823,11 +4869,13 @@ in
         );
         default = { };
       };
-      "issuers" = mkOption {
-        description = "An Issuer represents a certificate issuing authority which can be\nreferenced as part of `issuerRef` fields.\nIt is scoped to a single namespace and can therefore only be referenced by\nresources within the same namespace.";
+      "clusterIssuers" = mkOption {
+        description = "A ClusterIssuer represents a certificate issuing authority which can be\nreferenced as part of `issuerRef` fields.\nIt is similar to an Issuer, however it is cluster-scoped and therefore can\nbe referenced by resources that exist in *any* namespace, not just the same\nnamespace as the referent.";
         type = (
           types.attrsOf (
-            submoduleForDefinition "cert-manager.io.v1.Issuer" "issuers" "Issuer" "cert-manager.io" "v1"
+            submoduleForDefinition "cert-manager.io.v1.ClusterIssuer" "clusterissuers" "ClusterIssuer"
+              "cert-manager.io"
+              "v1"
           )
         );
         default = { };
@@ -4850,17 +4898,17 @@ in
         attrName = "certificates";
       }
       {
-        name = "issuers";
+        name = "clusterissuers";
         group = "cert-manager.io";
         version = "v1";
-        kind = "Issuer";
-        attrName = "issuers";
+        kind = "ClusterIssuer";
+        attrName = "clusterIssuers";
       }
     ];
 
     resources = {
       "cert-manager.io"."v1"."Certificate" = mkAliasDefinitions options.resources."certificates";
-      "cert-manager.io"."v1"."Issuer" = mkAliasDefinitions options.resources."issuers";
+      "cert-manager.io"."v1"."ClusterIssuer" = mkAliasDefinitions options.resources."clusterIssuers";
 
     };
 
@@ -4871,12 +4919,6 @@ in
         group = "cert-manager.io";
         version = "v1";
         kind = "Certificate";
-        default.metadata.namespace = lib.mkDefault config.namespace;
-      }
-      {
-        group = "cert-manager.io";
-        version = "v1";
-        kind = "Issuer";
         default.metadata.namespace = lib.mkDefault config.namespace;
       }
     ];

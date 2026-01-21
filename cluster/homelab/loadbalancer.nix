@@ -70,7 +70,7 @@ in
     ];
 
     resources = {
-      issuers = {
+      clusterIssuers = {
         azure-acme-issuer.spec.acme = {
           email = "serowy@hotmail.com";
           server = "https://acme-v02.api.letsencrypt.org/directory";
