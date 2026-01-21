@@ -29,7 +29,10 @@ in
             size = "20Gi";
           };
         };
-        conjob.enabled = true;
+        cronjob = {
+          enabled = true;
+          type = "cronjob";
+        };
         phpClientHttpsFix.enabled = true;
 
         internalDatabase.enabled = false;
