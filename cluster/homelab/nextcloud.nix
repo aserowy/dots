@@ -37,21 +37,23 @@ in
           cronjob.affinity.podAffinity.preferredDuringSchedulingIgnoredDuringExecution = [
             {
               weight = 100;
-              podAffinityTerm.labelSelector = {
-                matchExpressions = [
-                  {
-                    key = "app.kubernetes.io/name";
-                    operator = "In";
-                    values = [ "nextcloud" ];
-                  }
-                  {
-                    key = "app.kubernetes.io/component";
-                    operator = "In";
-                    values = [ "app" ];
-                  }
-                ];
+              podAffinityTerm = {
+                labelSelector = {
+                  matchExpressions = [
+                    {
+                      key = "app.kubernetes.io/name";
+                      operator = "In";
+                      values = [ "nextcloud" ];
+                    }
+                    {
+                      key = "app.kubernetes.io/component";
+                      operator = "In";
+                      values = [ "app" ];
+                    }
+                  ];
+                };
+                topologyKey = "kubernetes.io/hostname";
               };
-              topologyKey = "kubernetes.io/hostname";
             }
           ];
         };
