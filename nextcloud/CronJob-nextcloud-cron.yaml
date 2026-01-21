@@ -28,6 +28,22 @@ spec:
             app.kubernetes.io/instance: nextcloud
             app.kubernetes.io/name: nextcloud
         spec:
+          affinity:
+            podAffinity:
+              preferredDuringSchedulingIgnoredDuringExecution:
+                - podAffinityTerm:
+                    labelSelector:
+                      matchExpressions:
+                        - key: app.kubernetes.io/name
+                          operator: In
+                          values:
+                            - nextcloud
+                        - key: app.kubernetes.io/component
+                          operator: In
+                          values:
+                            - app
+                    topologyKey: kubernetes.io/hostname
+                  weight: 100
           containers:
             - command:
                 - php
