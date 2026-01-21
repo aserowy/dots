@@ -50,7 +50,7 @@ in
             };
           };
           additionalArguments = [
-            "--log.level=DEBUG"
+            "--log.level=INFO"
           ];
           commonLabels = {
             "app.kubernetes.io/role" = "entrypoint";
