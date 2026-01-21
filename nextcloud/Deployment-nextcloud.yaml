@@ -23,7 +23,7 @@ spec:
     metadata:
       annotations:
         hooks-hash: 9525c2748a6c7cd0e28ec740623d0b3fa5a75c83b51ccfd136bc89c76737b204
-        nextcloud-config-hash: e71b6733b5c713adc4ed4d751b6f5e84924dfdab13e498ef8d62cc27bf103cc6
+        nextcloud-config-hash: a474289dc5f7c125df069cd11017a3a2bc9565a7432492a7c0fb4e1f33d0f05d
         php-config-hash: 44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a
       labels:
         app.kubernetes.io/component: app

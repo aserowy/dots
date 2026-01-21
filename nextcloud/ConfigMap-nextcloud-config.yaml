@@ -81,21 +81,8 @@ data:
     if ($autoconfig_enabled) {
         $AUTOCONFIG['directory'] = getenv('NEXTCLOUD_DATA_DIR') ?: '/var/www/html/data';
     }
-  custom_maintenance.config.php: |2-
-
-    <?php
-    $CONFIG = array (
-      'maintenance_window_start' => 1,
-    );
-  custom_region.config.php: |2-
-
-    <?php
-    $CONFIG = array (
-      'default_language' => 'en',
-      'default_locale' => 'de_DE',
-      'default_phone_region' => 'DE',
-      'default_timezone' => 'Europe/Berlin',
-    );
+  custom_maintenance.config.php: "<?php\n              $CONFIG = array (\n                'maintenance_window_start' => 1,\n              );\n              "
+  custom_region.config.php: "<?php\n              $CONFIG = array (\n                'default_language' => 'en',\n                'default_locale' => 'de_DE',\n                'default_phone_region' => 'DE',\n                'default_timezone' => 'Europe/Berlin',\n              );\n              "
   redis.config.php: |-
     <?php
     if (getenv('REDIS_HOST')) {
