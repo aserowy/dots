@@ -21,7 +21,7 @@ spec:
             - name: PAPERLESS_DBHOST
               value: postgresql.paperless.svc.cluster.local
             - name: PAPERLESS_URL
-              value: https://dms.anderwerse.de
+              value: https://paperless.anderwerse.de
             - name: PAPERLESS_OCR_LANGUAGE
               value: deu
             - name: PAPERLESS_ADMIN_USER

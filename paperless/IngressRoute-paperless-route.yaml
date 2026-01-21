@@ -8,7 +8,7 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`dms.anderwerse.de`)
+      match: Host(`paperless.anderwerse.de`)
       services:
         - name: paperless
           namespace: paperless
