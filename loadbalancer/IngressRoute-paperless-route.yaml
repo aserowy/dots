@@ -1,17 +1,17 @@
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
-  name: zigbee2mqtt-dashboard-route
-  namespace: homeassistant
+  name: paperless-route
+  namespace: loadbalancer
 spec:
   entryPoints:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`zigbee.anderwerse.de`)
+      match: Host(`dms.anderwerse.de`)
       services:
-        - name: zigbee2mqtt
-          namespace: homeassistant
-          port: 8080
+        - name: paperless
+          namespace: paperless
+          port: 8000
   tls:
     secretName: anderwersede-tls-certificate

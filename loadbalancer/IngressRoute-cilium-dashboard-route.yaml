@@ -1,17 +1,17 @@
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
-  name: argocd-dashboard-route
-  namespace: argocd
+  name: cilium-dashboard-route
+  namespace: loadbalancer
 spec:
   entryPoints:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`argo.anderwerse.de`)
+      match: Host(`cni.anderwerse.de`)
       services:
-        - name: argocd-server
-          namespace: argocd
+        - name: hubble-ui
+          namespace: kube-system
           port: 80
   tls:
     secretName: anderwersede-tls-certificate

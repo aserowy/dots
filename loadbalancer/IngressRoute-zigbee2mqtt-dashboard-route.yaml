@@ -1,17 +1,17 @@
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
-  name: cilium-dashboard-route
-  namespace: kube-system
+  name: zigbee2mqtt-dashboard-route
+  namespace: loadbalancer
 spec:
   entryPoints:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`cni.anderwerse.de`)
+      match: Host(`zigbee.anderwerse.de`)
       services:
-        - name: hubble-ui
-          namespace: kube-system
-          port: 80
+        - name: zigbee2mqtt
+          namespace: homeassistant
+          port: 8080
   tls:
     secretName: anderwersede-tls-certificate

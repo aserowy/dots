@@ -1,17 +1,17 @@
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
-  name: nextcloud-route
-  namespace: nextcloud
+  name: longhorn-dashboard-route
+  namespace: loadbalancer
 spec:
   entryPoints:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`nextcloud.anderwerse.de`)
+      match: Host(`csi.anderwerse.de`)
       services:
-        - name: nextcloud
-          namespace: nextcloud
-          port: 8080
+        - name: longhorn-frontend
+          namespace: longhorn-system
+          port: 80
   tls:
     secretName: anderwersede-tls-certificate

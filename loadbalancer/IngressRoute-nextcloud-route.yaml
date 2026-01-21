@@ -1,17 +1,17 @@
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
-  name: adguard-dashboard-route
-  namespace: adguard
+  name: nextcloud-route
+  namespace: loadbalancer
 spec:
   entryPoints:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`dns.anderwerse.de`)
+      match: Host(`nextcloud.anderwerse.de`)
       services:
-        - name: adguard-dashboard
-          namespace: adguard
-          port: 3000
+        - name: nextcloud
+          namespace: nextcloud
+          port: 8080
   tls:
     secretName: anderwersede-tls-certificate
