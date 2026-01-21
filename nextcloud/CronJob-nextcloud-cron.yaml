@@ -30,20 +30,18 @@ spec:
         spec:
           affinity:
             podAffinity:
-              preferredDuringSchedulingIgnoredDuringExecution:
-                - podAffinityTerm:
-                    labelSelector:
-                      matchExpressions:
-                        - key: app.kubernetes.io/name
-                          operator: In
-                          values:
-                            - nextcloud
-                        - key: app.kubernetes.io/component
-                          operator: In
-                          values:
-                            - app
-                    topologyKey: kubernetes.io/hostname
-                  weight: 100
+              requiredDuringSchedulingIgnoredDuringExecution:
+                - labelSelector:
+                    matchExpressions:
+                      - key: app.kubernetes.io/name
+                        operator: In
+                        values:
+                          - nextcloud
+                      - key: app.kubernetes.io/component
+                        operator: In
+                        values:
+                          - app
+                  topologyKey: kubernetes.io/hostname
           containers:
             - command:
                 - php
