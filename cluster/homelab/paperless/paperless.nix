@@ -127,7 +127,7 @@ in
                       }
                       {
                         name = "PAPERLESS_URL";
-                        value = "https://dms.anderwerse.de";
+                        value = "https://paperless.anderwerse.de";
                       }
                       {
                         name = "PAPERLESS_OCR_LANGUAGE";
@@ -392,26 +392,39 @@ in
         };
       };
 
-      ingressRoutes = {
-        paperless-route.spec = {
-          entryPoints = [
-            "websecure"
+      certificates = {
+        anderwersede-tls-certificate.spec = {
+          secretName = "anderwersede-tls-certificate";
+          issuerRef = {
+            name = "azure-acme-issuer";
+            kind = "ClusterIssuer";
+          };
+          duration = "2160h";
+          renewBefore = "720h";
+          dnsNames = [
+            "paperless.anderwerse.de"
           ];
-          routes = [
-            {
-              match = "Host(`dms.anderwerse.de`)";
-              kind = "Rule";
-              services = [
-                {
-                  inherit namespace;
-                  name = "paperless";
-                  port = 8000;
-                }
-              ];
-            }
-          ];
-          tls.secretName = "anderwersede-tls-certificate";
         };
+      };
+
+      ingressRoutes.paperless-route.spec = {
+        entryPoints = [
+          "websecure"
+        ];
+        routes = [
+          {
+            match = "Host(`paperless.anderwerse.de`)";
+            kind = "Rule";
+            services = [
+              {
+                inherit namespace;
+                name = "paperless";
+                port = 8000;
+              }
+            ];
+          }
+        ];
+        tls.secretName = "anderwersede-tls-certificate";
       };
 
       ciliumNetworkPolicies = {
