@@ -20,6 +20,40 @@ in
             secretName = "nextcloud";
           };
         };
+        phpClientHttpsFix.enabled = true;
+
+        cronjob = {
+          enabled = true;
+          type = "cronjob";
+          cronjob = {
+            securityContext = {
+              runAsUser = 33;
+              runAsGroup = 33;
+              runAsNonRoot = true;
+              readOnlyRootFilesystem = true;
+            };
+            affinity.podAffinity.requiredDuringSchedulingIgnoredDuringExecution = [
+              {
+                labelSelector = {
+                  matchExpressions = [
+                    {
+                      key = "app.kubernetes.io/name";
+                      operator = "In";
+                      values = [ "nextcloud" ];
+                    }
+                    {
+                      key = "app.kubernetes.io/component";
+                      operator = "In";
+                      values = [ "app" ];
+                    }
+                  ];
+                };
+                topologyKey = "kubernetes.io/hostname";
+              }
+            ];
+          };
+        };
+
         persistence = {
           enabled = true;
           storageClass = "longhorn";
@@ -28,31 +62,6 @@ in
             storageClass = "longhorn";
             size = "20Gi";
           };
-        };
-        phpClientHttpsFix.enabled = true;
-
-        cronjob = {
-          enabled = true;
-          type = "cronjob";
-          cronjob.affinity.podAffinity.requiredDuringSchedulingIgnoredDuringExecution = [
-            {
-              labelSelector = {
-                matchExpressions = [
-                  {
-                    key = "app.kubernetes.io/name";
-                    operator = "In";
-                    values = [ "nextcloud" ];
-                  }
-                  {
-                    key = "app.kubernetes.io/component";
-                    operator = "In";
-                    values = [ "app" ];
-                  }
-                ];
-              };
-              topologyKey = "kubernetes.io/hostname";
-            }
-          ];
         };
 
         internalDatabase.enabled = false;
