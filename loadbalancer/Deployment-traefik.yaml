@@ -56,7 +56,7 @@ spec:
             - --providers.kubernetesingress.ingressendpoint.publishedservice=loadbalancer/traefik
             - --entryPoints.websecure.http.tls=true
             - --log.level=INFO
-            - --log.level=DEBUG
+            - --log.level=INFO
           env:
             - name: POD_NAME
               valueFrom:
