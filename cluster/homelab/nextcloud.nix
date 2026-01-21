@@ -20,6 +20,13 @@ in
             secretName = "nextcloud";
           };
           configs = {
+            "custom_infrastructure.config.php" =
+              "<?php
+              $CONFIG = array (
+                'trusted_proxies' => ['10.42.0.0/16'],
+                'forwarded_for_headers' => ['HTTP_X_FORWARDED', 'HTTP_FORWARDED_FOR'],
+              );
+              ";
             "custom_maintenance.config.php" =
               "<?php
               $CONFIG = array (
