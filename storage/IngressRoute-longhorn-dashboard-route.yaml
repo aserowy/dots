@@ -1,17 +1,17 @@
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
-  name: adguard-dashboard-route
-  namespace: loadbalancer
+  name: longhorn-dashboard-route
+  namespace: longhorn-system
 spec:
   entryPoints:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`dns.anderwerse.de`)
+      match: Host(`csi.anderwerse.de`)
       services:
-        - name: adguard-dashboard
-          namespace: adguard
-          port: 3000
+        - name: longhorn-frontend
+          namespace: longhorn-system
+          port: 80
   tls:
     secretName: anderwersede-tls-certificate

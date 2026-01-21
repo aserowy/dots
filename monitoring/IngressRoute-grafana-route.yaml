@@ -1,17 +1,17 @@
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
-  name: argocd-dashboard-route
-  namespace: loadbalancer
+  name: grafana-route
+  namespace: monitoring
 spec:
   entryPoints:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`argo.anderwerse.de`)
+      match: Host(`cluster.anderwerse.de`)
       services:
-        - name: argocd-server
-          namespace: argocd
+        - name: kube-prometheus-stack-grafana
+          namespace: monitoring
           port: 80
   tls:
     secretName: anderwersede-tls-certificate
