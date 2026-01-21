@@ -1,0 +1,106 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  labels:
+    app.kubernetes.io/component: cronjob
+    app.kubernetes.io/instance: nextcloud
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: nextcloud
+    app.kubernetes.io/version: 32.0.3
+    helm.sh/chart: nextcloud-8.8.1
+  name: nextcloud-cron
+  namespace: nextcloud
+spec:
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 5
+  jobTemplate:
+    metadata:
+      labels:
+        app.kubernetes.io/component: cronjob
+        app.kubernetes.io/instance: nextcloud
+        app.kubernetes.io/name: nextcloud
+    spec:
+      backoffLimit: 1
+      template:
+        metadata:
+          labels:
+            app.kubernetes.io/component: cronjob
+            app.kubernetes.io/instance: nextcloud
+            app.kubernetes.io/name: nextcloud
+        spec:
+          containers:
+            - command:
+                - php
+                - -f
+                - /var/www/html/cron.php
+                - --
+                - --verbose
+              env:
+                - name: OVERWRITEPROTOCOL
+                  value: https
+                - name: POSTGRES_HOST
+                  value: nextcloud-postgresql
+                - name: POSTGRES_DB
+                  value: nextcloud
+                - name: POSTGRES_USER
+                  valueFrom:
+                    secretKeyRef:
+                      key: db-username
+                      name: database
+                - name: POSTGRES_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      key: db-password
+                      name: database
+                - name: NEXTCLOUD_ADMIN_USER
+                  valueFrom:
+                    secretKeyRef:
+                      key: nextcloud-username
+                      name: nextcloud
+                - name: NEXTCLOUD_ADMIN_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      key: nextcloud-password
+                      name: nextcloud
+                - name: NEXTCLOUD_TRUSTED_DOMAINS
+                  value: nextcloud.anderwerse.de
+                - name: NEXTCLOUD_DATA_DIR
+                  value: /var/www/html/data
+              image: docker.io/library/nextcloud:32.0.3-apache
+              imagePullPolicy: IfNotPresent
+              name: nextcloud-cron
+              resources: {}
+              volumeMounts:
+                - mountPath: /var/www/
+                  name: nextcloud-main
+                  subPath: root
+                - mountPath: /var/www/html
+                  name: nextcloud-main
+                  subPath: html
+                - mountPath: /var/www/html/data
+                  name: nextcloud-data
+                  subPath: data
+                - mountPath: /var/www/html/config
+                  name: nextcloud-main
+                  subPath: config
+                - mountPath: /var/www/html/custom_apps
+                  name: nextcloud-main
+                  subPath: custom_apps
+                - mountPath: /var/www/tmp
+                  name: nextcloud-main
+                  subPath: tmp
+                - mountPath: /var/www/html/themes
+                  name: nextcloud-main
+                  subPath: themes
+          restartPolicy: Never
+          securityContext:
+            fsGroup: 33
+          volumes:
+            - name: nextcloud-main
+              persistentVolumeClaim:
+                claimName: nextcloud-nextcloud
+            - name: nextcloud-data
+              persistentVolumeClaim:
+                claimName: nextcloud-nextcloud-data
+  schedule: '*/5 * * * *'
+  successfulJobsHistoryLimit: 3
