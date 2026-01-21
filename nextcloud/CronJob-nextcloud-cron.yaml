@@ -84,6 +84,11 @@ spec:
               imagePullPolicy: IfNotPresent
               name: nextcloud-cron
               resources: {}
+              securityContext:
+                readOnlyRootFilesystem: true
+                runAsGroup: 33
+                runAsNonRoot: true
+                runAsUser: 33
               volumeMounts:
                 - mountPath: /var/www/
                   name: nextcloud-main
