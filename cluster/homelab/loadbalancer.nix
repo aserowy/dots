@@ -111,6 +111,158 @@ in
       };
 
       ingressRoutes = {
+        adguard-dashboard-route.spec = {
+          entryPoints = [
+            "websecure"
+          ];
+          routes = [
+            {
+              match = "Host(`dns.anderwerse.de`)";
+              kind = "Rule";
+              services = [
+                {
+                  namespace = "adguard";
+                  name = "adguard-dashboard";
+                  port = 3000;
+                }
+              ];
+            }
+          ];
+          tls.secretName = "anderwersede-tls-certificate";
+        };
+        argocd-dashboard-route.spec = {
+          entryPoints = [
+            "websecure"
+          ];
+          routes = [
+            {
+              match = "Host(`argo.anderwerse.de`)";
+              kind = "Rule";
+              services = [
+                {
+                  name = "argocd-server";
+                  namespace = "argocd";
+                  port = 80;
+                }
+              ];
+            }
+          ];
+          tls.secretName = "anderwersede-tls-certificate";
+        };
+        cilium-dashboard-route.spec = {
+          entryPoints = [
+            "websecure"
+          ];
+          routes = [
+            {
+              match = "Host(`cni.anderwerse.de`)";
+              kind = "Rule";
+              services = [
+                {
+                  name = "hubble-ui";
+                  namespace = "kube-system";
+                  port = 80;
+                }
+              ];
+            }
+          ];
+          tls.secretName = "anderwersede-tls-certificate";
+        };
+        grafana-route.spec = {
+          entryPoints = [
+            "websecure"
+          ];
+          routes = [
+            {
+              match = "Host(`cluster.anderwerse.de`)";
+              kind = "Rule";
+              services = [
+                {
+                  name = "kube-prometheus-stack-grafana";
+                  namespace = "monitoring";
+                  port = 80;
+                }
+              ];
+            }
+          ];
+          tls.secretName = "anderwersede-tls-certificate";
+        };
+        homeassistant-dashboard-route.spec = {
+          entryPoints = [
+            "websecure"
+          ];
+          routes = [
+            {
+              match = "Host(`homeassistant.anderwerse.de`)";
+              kind = "Rule";
+              services = [
+                {
+                  namespace = "homeassistant";
+                  name = "homeassistant";
+                  port = 8123;
+                }
+              ];
+            }
+          ];
+          tls.secretName = "anderwersede-tls-certificate";
+        };
+        longhorn-dashboard-route.spec = {
+          entryPoints = [
+            "websecure"
+          ];
+          routes = [
+            {
+              match = "Host(`csi.anderwerse.de`)";
+              kind = "Rule";
+              services = [
+                {
+                  name = "longhorn-frontend";
+                  namespace = "longhorn-system";
+                  port = 80;
+                }
+              ];
+            }
+          ];
+          tls.secretName = "anderwersede-tls-certificate";
+        };
+        nextcloud-route.spec = {
+          entryPoints = [
+            "websecure"
+          ];
+          routes = [
+            {
+              match = "Host(`nextcloud.anderwerse.de`)";
+              kind = "Rule";
+              services = [
+                {
+                  namespace = "nextcloud";
+                  name = "nextcloud";
+                  port = 8080;
+                }
+              ];
+            }
+          ];
+          tls.secretName = "anderwersede-tls-certificate";
+        };
+        paperless-route.spec = {
+          entryPoints = [
+            "websecure"
+          ];
+          routes = [
+            {
+              match = "Host(`dms.anderwerse.de`)";
+              kind = "Rule";
+              services = [
+                {
+                  namespace = "paperless";
+                  name = "paperless";
+                  port = 8000;
+                }
+              ];
+            }
+          ];
+          tls.secretName = "anderwersede-tls-certificate";
+        };
         traefik-dashboard-route.spec = {
           entryPoints = [
             "websecure"
@@ -123,6 +275,25 @@ in
                 {
                   name = "api@internal";
                   kind = "TraefikService";
+                }
+              ];
+            }
+          ];
+          tls.secretName = "anderwersede-tls-certificate";
+        };
+        zigbee2mqtt-dashboard-route.spec = {
+          entryPoints = [
+            "websecure"
+          ];
+          routes = [
+            {
+              match = "Host(`zigbee.anderwerse.de`)";
+              kind = "Rule";
+              services = [
+                {
+                  namespace = "homeassistant";
+                  name = "zigbee2mqtt";
+                  port = 8080;
                 }
               ];
             }

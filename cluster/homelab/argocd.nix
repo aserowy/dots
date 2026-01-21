@@ -22,29 +22,5 @@
         global.networkPolicy.create = true;
       };
     };
-
-    resources = {
-      ingressRoutes = {
-        argocd-dashboard-route.spec = {
-          entryPoints = [
-            "websecure"
-          ];
-          routes = [
-            {
-              match = "Host(`argo.anderwerse.de`)";
-              kind = "Rule";
-              services = [
-                {
-                  name = "argocd-server";
-                  namespace = "argocd";
-                  port = 80;
-                }
-              ];
-            }
-          ];
-          tls.secretName = "anderwersede-tls-certificate";
-        };
-      };
-    };
   };
 }

@@ -128,28 +128,6 @@ in
     ];
 
     resources = {
-      ingressRoutes = {
-        nextcloud-route.spec = {
-          entryPoints = [
-            "websecure"
-          ];
-          routes = [
-            {
-              match = "Host(`nextcloud.anderwerse.de`)";
-              kind = "Rule";
-              services = [
-                {
-                  inherit namespace;
-                  name = "nextcloud";
-                  port = 8080;
-                }
-              ];
-            }
-          ];
-          tls.secretName = "anderwersede-tls-certificate";
-        };
-      };
-
       ciliumNetworkPolicies = {
         nextcloud = {
           apiVersion = "cilium.io/v2";

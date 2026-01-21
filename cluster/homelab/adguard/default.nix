@@ -230,28 +230,6 @@ in
         };
       };
 
-      ingressRoutes = {
-        adguard-dashboard-route.spec = {
-          entryPoints = [
-            "websecure"
-          ];
-          routes = [
-            {
-              match = "Host(`dns.anderwerse.de`)";
-              kind = "Rule";
-              services = [
-                {
-                  inherit namespace;
-                  name = "adguard-dashboard";
-                  port = 3000;
-                }
-              ];
-            }
-          ];
-          tls.secretName = "anderwersede-tls-certificate";
-        };
-      };
-
       ciliumNetworkPolicies = {
         adguard = {
           apiVersion = "cilium.io/v2";

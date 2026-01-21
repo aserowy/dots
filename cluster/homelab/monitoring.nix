@@ -65,26 +65,6 @@
       };
     };
 
-    resources.ingressRoutes.grafana-route.spec = {
-      entryPoints = [
-        "websecure"
-      ];
-      routes = [
-        {
-          match = "Host(`cluster.anderwerse.de`)";
-          kind = "Rule";
-          services = [
-            {
-              name = "kube-prometheus-stack-grafana";
-              namespace = "monitoring";
-              port = 80;
-            }
-          ];
-        }
-      ];
-      tls.secretName = "anderwersede-tls-certificate";
-    };
-
     yamls = [
       (builtins.readFile ./monitoring-secrets.sops.yaml)
     ];
