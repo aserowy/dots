@@ -34,26 +34,23 @@ in
         cronjob = {
           enabled = true;
           type = "cronjob";
-          cronjob.affinity.podAffinity.preferredDuringSchedulingIgnoredDuringExecution = [
+          cronjob.affinity.podAffinity.requiredDuringSchedulingIgnoredDuringExecution = [
             {
-              weight = 100;
-              podAffinityTerm = {
-                labelSelector = {
-                  matchExpressions = [
-                    {
-                      key = "app.kubernetes.io/name";
-                      operator = "In";
-                      values = [ "nextcloud" ];
-                    }
-                    {
-                      key = "app.kubernetes.io/component";
-                      operator = "In";
-                      values = [ "app" ];
-                    }
-                  ];
-                };
-                topologyKey = "kubernetes.io/hostname";
+              labelSelector = {
+                matchExpressions = [
+                  {
+                    key = "app.kubernetes.io/name";
+                    operator = "In";
+                    values = [ "nextcloud" ];
+                  }
+                  {
+                    key = "app.kubernetes.io/component";
+                    operator = "In";
+                    values = [ "app" ];
+                  }
+                ];
               };
+              topologyKey = "kubernetes.io/hostname";
             }
           ];
         };
