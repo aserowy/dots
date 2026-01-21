@@ -29,10 +29,12 @@ in
             size = "20Gi";
           };
         };
+        phpClientHttpsFix.enabled = true;
+
         cronjob = {
           enabled = true;
           type = "cronjob";
-          affinity.podAffinity.preferredDuringSchedulingIgnoredDuringExecution = [
+          cronjob.affinity.podAffinity.preferredDuringSchedulingIgnoredDuringExecution = [
             {
               weight = 100;
               podAffinityTerm.labelSelector = {
@@ -53,7 +55,6 @@ in
             }
           ];
         };
-        phpClientHttpsFix.enabled = true;
 
         internalDatabase.enabled = false;
         externalDatabase = {
