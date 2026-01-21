@@ -128,6 +128,21 @@ in
     ];
 
     resources = {
+      certificates = {
+        anderwersede-tls-certificate.spec = {
+          secretName = "anderwersede-tls-certificate";
+          issuerRef = {
+            name = "azure-acme-issuer";
+            kind = "ClusterIssuer";
+          };
+          duration = "2160h";
+          renewBefore = "720h";
+          dnsNames = [
+            "nextcloud.anderwerse.de"
+          ];
+        };
+      };
+
       ingressRoutes = {
         nextcloud-route.spec = {
           entryPoints = [
