@@ -111,6 +111,9 @@ spec:
                 - mountPath: /var/www/html/themes
                   name: nextcloud-main
                   subPath: themes
+                - mountPath: /var/www/html/config/custom_infrastructure.config.php
+                  name: nextcloud-config
+                  subPath: custom_infrastructure.config.php
                 - mountPath: /var/www/html/config/custom_maintenance.config.php
                   name: nextcloud-config
                   subPath: custom_maintenance.config.php
