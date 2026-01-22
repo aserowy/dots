@@ -1,0 +1,10 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: nextcloud-hsts-middleware
+  namespace: nextcloud
+spec:
+  headers:
+    stsIncludeSubdomains: true
+    stsPreload: true
+    stsSeconds: 15552000

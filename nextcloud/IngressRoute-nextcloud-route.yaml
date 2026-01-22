@@ -9,6 +9,9 @@ spec:
   routes:
     - kind: Rule
       match: Host(`nextcloud.anderwerse.de`)
+      middlewares:
+        - name: nextcloud-hsts-middleware
+          namespace: nextcloud
       services:
         - name: nextcloud
           namespace: nextcloud
