@@ -8,10 +8,10 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`cni.anderwerse.de`)
+      match: Host(`hubble.cluster.anderwerse.de`)
       services:
         - name: hubble-ui
           namespace: kube-system
           port: 80
   tls:
-    secretName: anderwersede-tls-certificate
+    secretName: hubble-tls-certificate

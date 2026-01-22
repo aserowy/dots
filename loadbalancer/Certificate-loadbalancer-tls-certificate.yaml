@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: loadbalancer-tls-certificate
+  namespace: loadbalancer
+spec:
+  dnsNames:
+    - traefik.cluster.anderwerse.de
+  duration: 2160h
+  issuerRef:
+    kind: ClusterIssuer
+    name: azure-acme-issuer
+  renewBefore: 720h
+  secretName: loadbalancer-tls-certificate

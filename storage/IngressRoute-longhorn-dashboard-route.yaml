@@ -8,10 +8,10 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`csi.anderwerse.de`)
+      match: Host(`longhorn.cluster.anderwerse.de`)
       services:
         - name: longhorn-frontend
           namespace: longhorn-system
           port: 80
   tls:
-    secretName: anderwersede-tls-certificate
+    secretName: longhorn-tls-certificate

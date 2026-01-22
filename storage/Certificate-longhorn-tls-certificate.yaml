@@ -1,14 +1,14 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: anderwersede-tls-certificate
-  namespace: paperless
+  name: longhorn-tls-certificate
+  namespace: longhorn-system
 spec:
   dnsNames:
-    - paperless.anderwerse.de
+    - longhorn.cluster.anderwerse.de
   duration: 2160h
   issuerRef:
     kind: ClusterIssuer
     name: azure-acme-issuer
   renewBefore: 720h
-  secretName: anderwersede-tls-certificate
+  secretName: longhorn-tls-certificate

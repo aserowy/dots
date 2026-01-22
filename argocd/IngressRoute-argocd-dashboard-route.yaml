@@ -8,10 +8,10 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`argo.anderwerse.de`)
+      match: Host(`argo.cluster.anderwerse.de`)
       services:
         - name: argocd-server
           namespace: argocd
           port: 80
   tls:
-    secretName: anderwersede-tls-certificate
+    secretName: argo-tls-certificate

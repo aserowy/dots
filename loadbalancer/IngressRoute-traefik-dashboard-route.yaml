@@ -13,4 +13,4 @@ spec:
         - kind: TraefikService
           name: api@internal
   tls:
-    secretName: anderwersede-tls-certificate
+    secretName: loadbalancer-tls-certificate

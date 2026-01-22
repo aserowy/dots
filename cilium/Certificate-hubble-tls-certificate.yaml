@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: hubble-tls-certificate
+  namespace: kube-system
+spec:
+  dnsNames:
+    - hubble.cluster.anderwerse.de
+  duration: 2160h
+  issuerRef:
+    kind: ClusterIssuer
+    name: azure-acme-issuer
+  renewBefore: 720h
+  secretName: hubble-tls-certificate

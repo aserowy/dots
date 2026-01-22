@@ -1,14 +1,14 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: anderwersede-tls-certificate
-  namespace: loadbalancer
+  name: homeassistant-tls-certificate
+  namespace: homeassistant
 spec:
   dnsNames:
-    - traefik.cluster.anderwerse.de
+    - homeassistant.anderwerse.de
   duration: 2160h
   issuerRef:
     kind: ClusterIssuer
     name: azure-acme-issuer
   renewBefore: 720h
-  secretName: anderwersede-tls-certificate
+  secretName: homeassistant-tls-certificate

@@ -8,10 +8,10 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`dns.anderwerse.de`)
+      match: Host(`adguard.anderwerse.de`)
       services:
         - name: adguard-dashboard
           namespace: adguard
           port: 3000
   tls:
-    secretName: anderwersede-tls-certificate
+    secretName: adguard-tls-certificate

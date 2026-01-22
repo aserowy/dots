@@ -14,4 +14,4 @@ spec:
           namespace: paperless
           port: 8000
   tls:
-    secretName: anderwersede-tls-certificate
+    secretName: paperless-tls-certificate
