@@ -8,7 +8,7 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`traefik.anderwerse.de`)
+      match: Host(`traefik.cluster.anderwerse.de`)
       services:
         - kind: TraefikService
           name: api@internal

@@ -8,10 +8,10 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`cluster.anderwerse.de`)
+      match: Host(`grafana.cluster.anderwerse.de`)
       services:
         - name: kube-prometheus-stack-grafana
           namespace: monitoring
           port: 80
   tls:
-    secretName: anderwersede-tls-certificate
+    secretName: monitoring-tls-certificate
