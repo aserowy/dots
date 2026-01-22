@@ -65,28 +65,45 @@
       };
     };
 
-    resources.ingressRoutes.grafana-route.spec = {
-      entryPoints = [
-        "websecure"
-      ];
-      routes = [
-        {
-          match = "Host(`cluster.anderwerse.de`)";
-          kind = "Rule";
-          services = [
-            {
-              name = "kube-prometheus-stack-grafana";
-              namespace = "monitoring";
-              port = 80;
-            }
-          ];
-        }
-      ];
-      tls.secretName = "anderwersede-tls-certificate";
-    };
-
     yamls = [
       (builtins.readFile ./monitoring-secrets.sops.yaml)
     ];
+
+    resources = {
+      certificates = {
+        monitoring-tls-certificate.spec = {
+          secretName = "monitoring-tls-certificate";
+          issuerRef = {
+            name = "azure-acme-issuer";
+            kind = "ClusterIssuer";
+          };
+          duration = "2160h";
+          renewBefore = "720h";
+          dnsNames = [
+            "grafana.cluster.anderwerse.de"
+          ];
+        };
+      };
+
+      ingressRoutes.grafana-route.spec = {
+        entryPoints = [
+          "websecure"
+        ];
+        routes = [
+          {
+            match = "Host(`grafana.cluster.anderwerse.de`)";
+            kind = "Rule";
+            services = [
+              {
+                name = "kube-prometheus-stack-grafana";
+                namespace = "monitoring";
+                port = 80;
+              }
+            ];
+          }
+        ];
+        tls.secretName = "monitoring-tls-certificate";
+      };
+    };
   };
 }

@@ -76,7 +76,7 @@ in
           duration = "2160h";
           renewBefore = "720h";
           dnsNames = [
-            "*.anderwerse.de"
+            "traefik.cluster.anderwerse.de"
           ];
         };
       };
@@ -88,7 +88,7 @@ in
           ];
           routes = [
             {
-              match = "Host(`traefik.anderwerse.de`)";
+              match = "Host(`traefik.cluster.anderwerse.de`)";
               kind = "Rule";
               services = [
                 {
