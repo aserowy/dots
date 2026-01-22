@@ -272,6 +272,21 @@ in
         };
       };
 
+      certificates = {
+        homeassistant-tls-certificate.spec = {
+          secretName = "homeassistant-tls-certificate";
+          issuerRef = {
+            name = "azure-acme-issuer";
+            kind = "ClusterIssuer";
+          };
+          duration = "2160h";
+          renewBefore = "720h";
+          dnsNames = [
+            "homeassistant.anderwerse.de"
+          ];
+        };
+      };
+
       ingressRoutes = {
         homeassistant-dashboard-route.spec = {
           entryPoints = [
@@ -290,7 +305,7 @@ in
               ];
             }
           ];
-          tls.secretName = "anderwersede-tls-certificate";
+          tls.secretName = "homeassistant-tls-certificate";
         };
       };
 

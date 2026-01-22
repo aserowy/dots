@@ -37,6 +37,19 @@
     };
 
     resources = {
+      certificates.longhorn-tls-certificate.spec = {
+        secretName = "longhorn-tls-certificate";
+        issuerRef = {
+          name = "azure-acme-issuer";
+          kind = "ClusterIssuer";
+        };
+        duration = "2160h";
+        renewBefore = "720h";
+        dnsNames = [
+          "longhorn.cluster.anderwerse.de"
+        ];
+      };
+
       ingressRoutes = {
         longhorn-dashboard-route.spec = {
           entryPoints = [
@@ -44,7 +57,7 @@
           ];
           routes = [
             {
-              match = "Host(`csi.anderwerse.de`)";
+              match = "Host(`longhorn.cluster.anderwerse.de`)";
               kind = "Rule";
               services = [
                 {
@@ -55,9 +68,10 @@
               ];
             }
           ];
-          tls.secretName = "anderwersede-tls-certificate";
+          tls.secretName = "longhorn-tls-certificate";
         };
       };
+
       storageClasses = {
         longhorn-nobackup = {
           metadata.name = "longhorn-nobackup";

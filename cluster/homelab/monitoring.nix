@@ -70,19 +70,17 @@
     ];
 
     resources = {
-      certificates = {
-        monitoring-tls-certificate.spec = {
-          secretName = "monitoring-tls-certificate";
-          issuerRef = {
-            name = "azure-acme-issuer";
-            kind = "ClusterIssuer";
-          };
-          duration = "2160h";
-          renewBefore = "720h";
-          dnsNames = [
-            "grafana.cluster.anderwerse.de"
-          ];
+      certificates.monitoring-tls-certificate.spec = {
+        secretName = "monitoring-tls-certificate";
+        issuerRef = {
+          name = "azure-acme-issuer";
+          kind = "ClusterIssuer";
         };
+        duration = "2160h";
+        renewBefore = "720h";
+        dnsNames = [
+          "grafana.cluster.anderwerse.de"
+        ];
       };
 
       ingressRoutes.grafana-route.spec = {

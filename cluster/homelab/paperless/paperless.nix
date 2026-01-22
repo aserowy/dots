@@ -392,19 +392,17 @@ in
         };
       };
 
-      certificates = {
-        anderwersede-tls-certificate.spec = {
-          secretName = "anderwersede-tls-certificate";
-          issuerRef = {
-            name = "azure-acme-issuer";
-            kind = "ClusterIssuer";
-          };
-          duration = "2160h";
-          renewBefore = "720h";
-          dnsNames = [
-            "paperless.anderwerse.de"
-          ];
+      certificates.paperless-tls-certificate.spec = {
+        secretName = "paperless-tls-certificate";
+        issuerRef = {
+          name = "azure-acme-issuer";
+          kind = "ClusterIssuer";
         };
+        duration = "2160h";
+        renewBefore = "720h";
+        dnsNames = [
+          "paperless.anderwerse.de"
+        ];
       };
 
       ingressRoutes.paperless-route.spec = {
@@ -424,7 +422,7 @@ in
             ];
           }
         ];
-        tls.secretName = "anderwersede-tls-certificate";
+        tls.secretName = "paperless-tls-certificate";
       };
 
       ciliumNetworkPolicies = {

@@ -210,6 +210,21 @@ in
         };
       };
 
+      certificates = {
+        zigbee-tls-certificate.spec = {
+          secretName = "zigbee-tls-certificate";
+          issuerRef = {
+            name = "azure-acme-issuer";
+            kind = "ClusterIssuer";
+          };
+          duration = "2160h";
+          renewBefore = "720h";
+          dnsNames = [
+            "zigbee.anderwerse.de"
+          ];
+        };
+      };
+
       ingressRoutes = {
         zigbee2mqtt-dashboard-route.spec = {
           entryPoints = [
@@ -228,7 +243,7 @@ in
               ];
             }
           ];
-          tls.secretName = "anderwersede-tls-certificate";
+          tls.secretName = "zigbee-tls-certificate";
         };
       };
 

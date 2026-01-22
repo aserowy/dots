@@ -230,6 +230,21 @@ in
         };
       };
 
+      certificates = {
+        adguard-tls-certificate.spec = {
+          secretName = "adguard-tls-certificate";
+          issuerRef = {
+            name = "azure-acme-issuer";
+            kind = "ClusterIssuer";
+          };
+          duration = "2160h";
+          renewBefore = "720h";
+          dnsNames = [
+            "adguard.anderwerse.de"
+          ];
+        };
+      };
+
       ingressRoutes = {
         adguard-dashboard-route.spec = {
           entryPoints = [
@@ -237,7 +252,7 @@ in
           ];
           routes = [
             {
-              match = "Host(`dns.anderwerse.de`)";
+              match = "Host(`adguard.anderwerse.de`)";
               kind = "Rule";
               services = [
                 {
@@ -248,7 +263,7 @@ in
               ];
             }
           ];
-          tls.secretName = "anderwersede-tls-certificate";
+          tls.secretName = "adguard-tls-certificate";
         };
       };
 

@@ -47,6 +47,19 @@
         };
       };
 
+      certificates.hubble-tls-certificate.spec = {
+        secretName = "hubble-tls-certificate";
+        issuerRef = {
+          name = "azure-acme-issuer";
+          kind = "ClusterIssuer";
+        };
+        duration = "2160h";
+        renewBefore = "720h";
+        dnsNames = [
+          "hubble.cluster.anderwerse.de"
+        ];
+      };
+
       ingressRoutes = {
         cilium-dashboard-route.spec = {
           entryPoints = [
@@ -54,7 +67,7 @@
           ];
           routes = [
             {
-              match = "Host(`cni.anderwerse.de`)";
+              match = "Host(`hubble.cluster.anderwerse.de`)";
               kind = "Rule";
               services = [
                 {
@@ -65,7 +78,7 @@
               ];
             }
           ];
-          tls.secretName = "anderwersede-tls-certificate";
+          tls.secretName = "hubble-tls-certificate";
         };
       };
     };

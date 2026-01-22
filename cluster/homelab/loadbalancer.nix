@@ -66,19 +66,17 @@ in
     };
 
     resources = {
-      certificates = {
-        anderwersede-tls-certificate.spec = {
-          secretName = "anderwersede-tls-certificate";
-          issuerRef = {
-            name = "azure-acme-issuer";
-            kind = "ClusterIssuer";
-          };
-          duration = "2160h";
-          renewBefore = "720h";
-          dnsNames = [
-            "traefik.cluster.anderwerse.de"
-          ];
+      certificates.loadbalancer-tls-certificate.spec = {
+        secretName = "loadbalancer-tls-certificate";
+        issuerRef = {
+          name = "azure-acme-issuer";
+          kind = "ClusterIssuer";
         };
+        duration = "2160h";
+        renewBefore = "720h";
+        dnsNames = [
+          "traefik.cluster.anderwerse.de"
+        ];
       };
 
       ingressRoutes = {
@@ -98,7 +96,7 @@ in
               ];
             }
           ];
-          tls.secretName = "anderwersede-tls-certificate";
+          tls.secretName = "loadbalancer-tls-certificate";
         };
       };
 
