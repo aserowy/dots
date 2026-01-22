@@ -53,6 +53,7 @@ let
         "crds/traefik.io_ingressroutes.yaml"
         "crds/traefik.io_ingressroutetcps.yaml"
         "crds/traefik.io_ingressrouteudps.yaml"
+        "crds/traefik.io_middlewares.yaml"
       ];
     };
   };
