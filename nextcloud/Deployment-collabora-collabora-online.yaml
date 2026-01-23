@@ -73,7 +73,13 @@ spec:
             periodSeconds: 10
             successThreshold: 1
             timeoutSeconds: 30
-          resources: {}
+          resources:
+            limits:
+              cpu: 500m
+              memory: 1Gi
+            requests:
+              cpu: 100m
+              memory: 128Mi
           securityContext: {}
           startupProbe:
             failureThreshold: 30
