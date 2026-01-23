@@ -1,13 +1,11 @@
-{ charts, ... }:
-let
-  namespace = "nextcloud";
-in
 {
-  applications.nextcloud = {
-    inherit namespace;
-
-    createNamespace = true;
-
+  application,
+  namespace,
+  charts,
+  ...
+}:
+{
+  applications."${application}" = {
     helm.releases.nextcloud = {
       chart = charts.nextcloud.nextcloud;
 
@@ -96,6 +94,8 @@ in
             secretName = "database";
           };
         };
+
+        # TODO: migrate to cloudnative pg
         postgresql = {
           enabled = true;
           global.postgresql.auth = {

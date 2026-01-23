@@ -14,7 +14,7 @@
 
     ./adguard
     ./homeassistant
-    ./nextcloud.nix
+    ./nextcloud
     ./paperless
     ./rustdesk.nix
   ];
