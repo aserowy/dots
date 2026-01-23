@@ -10,7 +10,10 @@
       chart = charts.collabora-online.collabora-online;
 
       values = {
+        # NOTE: without dynamic load hpa is not necessary
         autoscaling.enabled = false;
+        replicaCount = 2;
+
         collabora = {
           aliasgroups = [
             { host = "https://collabora.anderwerse.de:443"; }
@@ -22,13 +25,13 @@
           proofKeysSecretRef = "collabora-proof-key";
         };
         resources = {
-          limits = {
-            cpu = "500m";
-            memory = "1Gi";
-          };
           requests = {
-            cpu = "100m";
-            memory = "128Mi";
+            cpu = "2000m";
+            memory = "2Gi";
+          };
+          limits = {
+            cpu = "4000m";
+            memory = "6Gi";
           };
         };
       };
