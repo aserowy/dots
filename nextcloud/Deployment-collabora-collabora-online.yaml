@@ -11,7 +11,7 @@ metadata:
   namespace: nextcloud
 spec:
   minReadySeconds: 0
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app.kubernetes.io/instance: collabora
@@ -76,11 +76,11 @@ spec:
             timeoutSeconds: 30
           resources:
             limits:
-              cpu: 500m
-              memory: 1Gi
+              cpu: 4000m
+              memory: 6Gi
             requests:
-              cpu: 100m
-              memory: 128Mi
+              cpu: 2000m
+              memory: 2Gi
           securityContext: {}
           startupProbe:
             failureThreshold: 30
