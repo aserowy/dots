@@ -10,6 +10,7 @@
       chart = charts.collabora-online.collabora-online;
 
       values = {
+        autoscaling.enabled = false;
         collabora = {
           aliasgroups = [
             { host = "https://collabora.anderwerse.de:443"; }
