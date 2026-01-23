@@ -32,7 +32,8 @@
       };
     };
     nixhelm = {
-      url = "github:nix-community/nixhelm";
+      # NOTE: using fork for pr driven update process
+      url = "github:aserowy/nixhelm";
       inputs = {
         nixpkgs.follows = "nixpkgs";
         flake-utils.follows = "flake-utils";

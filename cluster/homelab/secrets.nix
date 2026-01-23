@@ -12,7 +12,7 @@
           {
             name = "keys";
             mountPath = "/var/lib/sops/age";
-            # Secret created manually on host.
+            # NOTE: Secret created manually on host.
             secretName = "age-keys";
           }
         ];
