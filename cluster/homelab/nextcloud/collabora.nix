@@ -20,6 +20,16 @@
           };
           proofKeysSecretRef = "collabora-proof-key";
         };
+        resources = {
+          limits = {
+            cpu = "500m";
+            memory = "1Gi";
+          };
+          requests = {
+            cpu = "100m";
+            memory = "128Mi";
+          };
+        };
       };
     };
   };
