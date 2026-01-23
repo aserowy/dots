@@ -165,7 +165,6 @@ in
 
                 disable = [
                   "local-storage"
-                  "metrics-server"
                   "servicelb"
                   "traefik"
                 ];
