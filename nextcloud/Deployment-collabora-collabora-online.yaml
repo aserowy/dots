@@ -1,0 +1,102 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/instance: collabora
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: collabora-online
+    app.kubernetes.io/version: 25.04.8.1.1
+    helm.sh/chart: collabora-online-1.1.54
+  name: collabora-collabora-online
+  namespace: nextcloud
+spec:
+  minReadySeconds: 0
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: collabora
+      app.kubernetes.io/name: collabora-online
+      type: main
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+        confighash: config-75bd80f921e5b63126157ccdc60d08b3
+      labels:
+        app.kubernetes.io/instance: collabora
+        app.kubernetes.io/name: collabora-online
+        type: main
+    spec:
+      containers:
+        - env:
+            - name: username
+              valueFrom:
+                secretKeyRef:
+                  key: username
+                  name: collabora
+            - name: password
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: collabora
+          envFrom:
+            - configMapRef:
+                name: collabora-collabora-online
+          image: collabora/code:25.04.8.1.1
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 4
+            httpGet:
+              path: /
+              port: 9980
+              scheme: HTTP
+            initialDelaySeconds: 0
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 30
+          name: collabora-online
+          ports:
+            - containerPort: 9980
+              name: http
+              protocol: TCP
+          readinessProbe:
+            failureThreshold: 2
+            httpGet:
+              path: /
+              port: 9980
+              scheme: HTTP
+            initialDelaySeconds: 0
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 30
+          resources: {}
+          securityContext: {}
+          startupProbe:
+            failureThreshold: 30
+            httpGet:
+              path: /
+              port: 9980
+              scheme: HTTP
+            periodSeconds: 3
+          volumeMounts:
+            - mountPath: /tmp
+              name: tmp
+            - mountPath: /etc/coolwsd/proof_key
+              name: wopi-proof
+              subPath: proof_key
+            - mountPath: /etc/coolwsd/proof_key.pub
+              name: wopi-proof
+              subPath: proof_key.pub
+      securityContext: {}
+      serviceAccountName: default
+      terminationGracePeriodSeconds: 60
+      volumes:
+        - emptyDir: {}
+          name: tmp
+        - name: wopi-proof
+          secret:
+            secretName: collabora-proof-key

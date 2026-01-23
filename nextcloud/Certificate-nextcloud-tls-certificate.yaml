@@ -5,6 +5,7 @@ metadata:
   namespace: nextcloud
 spec:
   dnsNames:
+    - collabora.anderwerse.de
     - nextcloud.anderwerse.de
   duration: 2160h
   issuerRef:
