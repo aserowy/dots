@@ -17,7 +17,9 @@
         collabora = {
           aliasgroups = [
             { host = "https://collabora.anderwerse.de:443"; }
+            { host = "https://collabora.anderwerse.de:8443"; }
           ];
+          extra_params = "--o:ssl.enable=false --o:ssl.termination=true";
           existingSecret = {
             enabled = true;
             secretName = "collabora";
@@ -44,6 +46,10 @@
             inherit namespace;
             annotations = {
               "cert-manager.io/cluster-issuer" = "azure-acme-issuer";
+              "haproxy.org/timeout-tunnel" = "3600s";
+              "haproxy.org/backend-config-snippet" =
+                "balance url_param WOPISrc check_post
+                hash-type consistent";
             };
           };
           spec = {
