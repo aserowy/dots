@@ -77,209 +77,205 @@ in
         ];
       };
 
-      ingressRoutes = {
-        traefik-dashboard-route.spec = {
-          entryPoints = [
-            "websecure"
-          ];
-          routes = [
+      ingressRoutes.traefik-dashboard-route.spec = {
+        entryPoints = [
+          "websecure"
+        ];
+        routes = [
+          {
+            match = "Host(`traefik.cluster.anderwerse.de`)";
+            kind = "Rule";
+            services = [
+              {
+                name = "api@internal";
+                kind = "TraefikService";
+              }
+            ];
+          }
+        ];
+        tls.secretName = "loadbalancer-tls-certificate";
+      };
+
+      ciliumClusterwideNetworkPolicies.traefik = {
+        apiVersion = "cilium.io/v2";
+        kind = "CiliumClusterwideNetworkPolicy";
+        metadata = {
+          inherit namespace;
+        };
+        spec = {
+          endpointSelector = {
+            matchLabels = {
+              "io.kubernetes.pod.namespace" = "loadbalancer";
+              "app.kubernetes.io/name" = "traefik";
+            };
+          };
+          ingress = [
             {
-              match = "Host(`traefik.cluster.anderwerse.de`)";
-              kind = "Rule";
-              services = [
+              fromEndpoints = [
                 {
-                  name = "api@internal";
-                  kind = "TraefikService";
+                  matchLabels = {
+                    "app.kubernetes.io/component" = "app";
+                  };
+                }
+              ];
+            }
+            {
+              fromEntities = [
+                "host"
+              ];
+              toPorts = [
+                {
+                  ports = [
+                    {
+                      port = "8080";
+                      protocol = "TCP";
+                    }
+                  ];
+                }
+              ];
+            }
+            {
+              fromEntities = [
+                "world"
+              ];
+              toPorts = [
+                {
+                  ports = [
+                    {
+                      port = "8000";
+                      protocol = "TCP";
+                    }
+                    {
+                      port = "8443";
+                      protocol = "TCP";
+                    }
+                    {
+                      port = "21115";
+                      protocol = "TCP";
+                    }
+                    {
+                      port = "21116";
+                      protocol = "UDP";
+                    }
+                    {
+                      port = "21116";
+                      protocol = "TCP";
+                    }
+                    {
+                      port = "21117";
+                      protocol = "TCP";
+                    }
+                  ];
                 }
               ];
             }
           ];
-          tls.secretName = "loadbalancer-tls-certificate";
-        };
-      };
-
-      ciliumClusterwideNetworkPolicies = {
-        traefik = {
-          apiVersion = "cilium.io/v2";
-          kind = "CiliumClusterwideNetworkPolicy";
-          metadata = {
-            inherit namespace;
-          };
-          spec = {
-            endpointSelector = {
-              matchLabels = {
-                "io.kubernetes.pod.namespace" = "loadbalancer";
-                "app.kubernetes.io/name" = "traefik";
-              };
-            };
-            ingress = [
-              {
-                fromEndpoints = [
-                  {
-                    matchLabels = {
-                      "app.kubernetes.io/component" = "app";
-                    };
-                  }
-                ];
-              }
-              {
-                fromEntities = [
-                  "host"
-                ];
-                toPorts = [
-                  {
-                    ports = [
-                      {
-                        port = "8080";
-                        protocol = "TCP";
-                      }
-                    ];
-                  }
-                ];
-              }
-              {
-                fromEntities = [
-                  "world"
-                ];
-                toPorts = [
-                  {
-                    ports = [
-                      {
-                        port = "8000";
-                        protocol = "TCP";
-                      }
-                      {
-                        port = "8443";
-                        protocol = "TCP";
-                      }
-                      {
-                        port = "21115";
-                        protocol = "TCP";
-                      }
-                      {
-                        port = "21116";
-                        protocol = "UDP";
-                      }
-                      {
-                        port = "21116";
-                        protocol = "TCP";
-                      }
-                      {
-                        port = "21117";
-                        protocol = "TCP";
-                      }
-                    ];
-                  }
-                ];
-              }
-            ];
-            egress = [
-              {
-                toEndpoints = [
-                  {
-                    matchLabels = {
-                      "app.kubernetes.io/component" = "app";
-                    };
-                  }
-                ];
-              }
-              {
-                toEntities = [
-                  "kube-apiserver"
-                ];
-                toPorts = [
-                  {
-                    ports = [
-                      {
-                        port = "6443";
-                        protocol = "TCP";
-                      }
-                    ];
-                  }
-                ];
-              }
-              {
-                toEndpoints = [
-                  {
-                    matchLabels = {
-                      "io.kubernetes.pod.namespace" = "argocd";
-                      "app.kubernetes.io/name" = "argocd-server";
-                    };
-                  }
-                ];
-                toPorts = [
-                  {
-                    ports = [
-                      {
-                        port = "8080";
-                        protocol = "TCP";
-                      }
-                    ];
-                  }
-                ];
-              }
-              {
-                toEndpoints = [
-                  {
-                    matchLabels = {
-                      "io.kubernetes.pod.namespace" = "monitoring";
-                      "app.kubernetes.io/name" = "grafana";
-                    };
-                  }
-                ];
-                toPorts = [
-                  {
-                    ports = [
-                      {
-                        port = "3000";
-                        protocol = "TCP";
-                      }
-                    ];
-                  }
-                ];
-              }
-              {
-                toEndpoints = [
-                  {
-                    matchLabels = {
-                      "io.kubernetes.pod.namespace" = "longhorn-system";
-                      "app" = "longhorn-ui";
-                    };
-                  }
-                ];
-                toPorts = [
-                  {
-                    ports = [
-                      {
-                        port = "8000";
-                        protocol = "TCP";
-                      }
-                    ];
-                  }
-                ];
-              }
-              {
-                toEndpoints = [
-                  {
-                    matchLabels = {
-                      "io.kubernetes.pod.namespace" = "kube-system";
-                      "app.kubernetes.io/name" = "hubble-ui";
-                    };
-                  }
-                ];
-                toPorts = [
-                  {
-                    ports = [
-                      {
-                        port = "8081";
-                        protocol = "TCP";
-                      }
-                    ];
-                  }
-                ];
-              }
-            ];
-          };
+          egress = [
+            {
+              toEndpoints = [
+                {
+                  matchLabels = {
+                    "app.kubernetes.io/component" = "app";
+                  };
+                }
+              ];
+            }
+            {
+              toEntities = [
+                "kube-apiserver"
+              ];
+              toPorts = [
+                {
+                  ports = [
+                    {
+                      port = "6443";
+                      protocol = "TCP";
+                    }
+                  ];
+                }
+              ];
+            }
+            {
+              toEndpoints = [
+                {
+                  matchLabels = {
+                    "io.kubernetes.pod.namespace" = "argocd";
+                    "app.kubernetes.io/name" = "argocd-server";
+                  };
+                }
+              ];
+              toPorts = [
+                {
+                  ports = [
+                    {
+                      port = "8080";
+                      protocol = "TCP";
+                    }
+                  ];
+                }
+              ];
+            }
+            {
+              toEndpoints = [
+                {
+                  matchLabels = {
+                    "io.kubernetes.pod.namespace" = "monitoring";
+                    "app.kubernetes.io/name" = "grafana";
+                  };
+                }
+              ];
+              toPorts = [
+                {
+                  ports = [
+                    {
+                      port = "3000";
+                      protocol = "TCP";
+                    }
+                  ];
+                }
+              ];
+            }
+            {
+              toEndpoints = [
+                {
+                  matchLabels = {
+                    "io.kubernetes.pod.namespace" = "longhorn-system";
+                    "app" = "longhorn-ui";
+                  };
+                }
+              ];
+              toPorts = [
+                {
+                  ports = [
+                    {
+                      port = "8000";
+                      protocol = "TCP";
+                    }
+                  ];
+                }
+              ];
+            }
+            {
+              toEndpoints = [
+                {
+                  matchLabels = {
+                    "io.kubernetes.pod.namespace" = "kube-system";
+                    "app.kubernetes.io/name" = "hubble-ui";
+                  };
+                }
+              ];
+              toPorts = [
+                {
+                  ports = [
+                    {
+                      port = "8081";
+                      protocol = "TCP";
+                    }
+                  ];
+                }
+              ];
+            }
+          ];
         };
       };
     };

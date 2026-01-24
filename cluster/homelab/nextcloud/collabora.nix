@@ -13,7 +13,6 @@
         # NOTE: without dynamic load hpa is not necessary
         autoscaling.enabled = false;
         replicaCount = 2;
-
         collabora = {
           aliasgroups = [
             { host = "https://nextcloud.anderwerse.de:443"; }
@@ -24,6 +23,9 @@
             secretName = "collabora";
           };
           proofKeysSecretRef = "collabora-proof-key";
+        };
+        podLabels = {
+          "app.kubernetes.io/component" = "app";
         };
         resources = {
           requests = {
