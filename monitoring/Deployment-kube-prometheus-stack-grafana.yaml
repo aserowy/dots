@@ -5,7 +5,7 @@ metadata:
     app.kubernetes.io/instance: kube-prometheus-stack
     app.kubernetes.io/name: grafana
     app.kubernetes.io/version: 12.3.1
-    helm.sh/chart: grafana-10.5.10
+    helm.sh/chart: grafana-10.5.12
   name: kube-prometheus-stack-grafana
   namespace: monitoring
 spec:
@@ -27,7 +27,7 @@ spec:
         app.kubernetes.io/instance: kube-prometheus-stack
         app.kubernetes.io/name: grafana
         app.kubernetes.io/version: 12.3.1
-        helm.sh/chart: grafana-10.5.10
+        helm.sh/chart: grafana-10.5.12
     spec:
       automountServiceAccountToken: true
       containers:
@@ -166,6 +166,7 @@ spec:
             capabilities:
               drop:
                 - ALL
+            privileged: false
             seccompProfile:
               type: RuntimeDefault
           volumeMounts:

@@ -7,8 +7,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-dex-server
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.2.5
-    helm.sh/chart: argo-cd-9.3.4
+    app.kubernetes.io/version: v3.2.6
+    helm.sh/chart: argo-cd-9.3.5
   name: argocd-dex-server
   namespace: argocd
 roleRef:
