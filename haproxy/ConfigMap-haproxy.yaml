@@ -2,15 +2,16 @@ apiVersion: v1
 data:
   haproxy.cfg: |2
 
-    global
-                log stdout format raw local0
-                maxconn 1024
 
-              defaults
-                log global
-                timeout client 60s
-                timeout connect 60s
-                timeout server 60s
+    global
+      log stdout format raw local0
+      maxconn 1024
+
+    defaults
+      log global
+      timeout client 60s
+      timeout connect 60s
+      timeout server 60s
 kind: ConfigMap
 metadata:
   labels:

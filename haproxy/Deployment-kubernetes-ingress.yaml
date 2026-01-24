@@ -1,0 +1,138 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/instance: kubernetes-ingress
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: kubernetes-ingress
+    app.kubernetes.io/version: 3.2.4
+    helm.sh/chart: kubernetes-ingress-1.47.4
+  name: kubernetes-ingress
+  namespace: haproxy
+spec:
+  minReadySeconds: 0
+  replicas: 2
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: kubernetes-ingress
+      app.kubernetes.io/name: kubernetes-ingress
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: kubernetes-ingress
+        app.kubernetes.io/name: kubernetes-ingress
+    spec:
+      automountServiceAccountToken: true
+      containers:
+        - args:
+            - --default-ssl-certificate=haproxy/kubernetes-ingress-default-cert
+            - --configmap=haproxy/kubernetes-ingress
+            - --http-bind-port=8080
+            - --https-bind-port=8443
+            - --quic-bind-port=8443
+            - --quic-announce-port=443
+            - --ingress.class=haproxy
+            - --publish-service=haproxy/kubernetes-ingress
+            - --log=info
+            - --prometheus
+            - --pprof
+          env:
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+          image: docker.io/haproxytech/kubernetes-ingress:3.2.4
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /healthz
+              port: 1042
+              scheme: HTTP
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          name: kubernetes-ingress-controller
+          ports:
+            - containerPort: 6060
+              name: admin
+              protocol: TCP
+            - containerPort: 8080
+              name: http
+              protocol: TCP
+            - containerPort: 8443
+              name: https
+              protocol: TCP
+            - containerPort: 1024
+              name: stat
+              protocol: TCP
+            - containerPort: 8443
+              name: quic
+              protocol: UDP
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /healthz
+              port: 1042
+              scheme: HTTP
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources:
+            requests:
+              cpu: 250m
+              memory: 400Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              add:
+                - NET_BIND_SERVICE
+              drop:
+                - ALL
+            runAsGroup: 1000
+            runAsNonRoot: true
+            runAsUser: 1000
+            seccompProfile:
+              type: RuntimeDefault
+          startupProbe:
+            failureThreshold: 30
+            httpGet:
+              path: /healthz
+              port: 1042
+              scheme: HTTP
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          volumeMounts:
+            - mountPath: /tmp
+              name: tmp
+              subPath: tmp
+            - mountPath: /run
+              name: tmp
+              subPath: run
+      dnsPolicy: ClusterFirst
+      enableServiceLinks: true
+      securityContext:
+        runAsGroup: 1000
+        runAsNonRoot: true
+        runAsUser: 1000
+      serviceAccountName: kubernetes-ingress
+      terminationGracePeriodSeconds: 60
+      volumes:
+        - emptyDir:
+            medium: Memory
+            sizeLimit: 64Mi
+          name: tmp
