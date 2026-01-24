@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: azure-acme-issuer
+  name: nextcloud
+  namespace: nextcloud
+spec:
+  ingressClassName: haproxy
+  rules:
+    - host: nextcloud.anderwerse.de
+      http:
+        paths:
+          - backend:
+              service:
+                name: nextcloud
+                port:
+                  number: 8080
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - nextcloud.anderwerse.de
+      secretName: nextcloud-tls
