@@ -65,7 +65,7 @@
                 host = "collabora.anderwerse.de";
                 http.paths = [
                   {
-                    pathType = "Prefix";
+                    pathType = "ImplementationSpecific";
                     path = "/";
                     backend.service = {
                       name = "collabora-collabora-online";
