@@ -26,7 +26,7 @@ spec:
     metadata:
       annotations:
         cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
-        confighash: config-a0b855858a4b551aaed24446d7f9b1f3
+        confighash: config-83f632b625409bb222473821ff2757ef
       labels:
         app.kubernetes.io/component: app
         app.kubernetes.io/instance: collabora
