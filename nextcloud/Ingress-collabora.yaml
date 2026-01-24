@@ -3,6 +3,10 @@ kind: Ingress
 metadata:
   annotations:
     cert-manager.io/cluster-issuer: azure-acme-issuer
+    haproxy.org/backend-config-snippet: |-
+      balance url_param WOPISrc check_post
+                      hash-type consistent
+    haproxy.org/timeout-tunnel: 3600s
   name: collabora
   namespace: nextcloud
 spec:
