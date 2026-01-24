@@ -126,6 +126,40 @@
     };
 
     resources = {
+      ingresses.nextcloud = {
+        metadata = {
+          inherit namespace;
+          annotations = {
+            "cert-manager.io/cluster-issuer" = "azure-acme-issuer";
+          };
+        };
+        spec = {
+          ingressClassName = "haproxy";
+          tls = [
+            {
+              hosts = [ "nextcloud.anderwerse.de" ];
+              secretName = "nextcloud-tls";
+            }
+          ];
+          rules = [
+            {
+              host = "nextcloud.anderwerse.de";
+              http.paths = [
+                {
+                  pathType = "Prefix";
+                  path = "/";
+                  backend.service = {
+                    name = "nextcloud";
+                    port.number = 8080;
+                  };
+                }
+              ];
+            }
+          ];
+        };
+      };
+
+      # TODO: remove after traefik migration
       middlewares.nextcloud-hsts-middleware = {
         metadata = {
           inherit namespace;
@@ -138,6 +172,7 @@
         };
       };
 
+      # TODO: remove after traefik migration
       ingressRoutes.nextcloud-route.spec = {
         entryPoints = [
           "websecure"
@@ -173,6 +208,27 @@
         spec = {
           endpointSelector.matchLabels."app.kubernetes.io/name" = "nextcloud";
           ingress = [
+            {
+              fromEndpoints = [
+                {
+                  matchLabels = {
+                    "io.kubernetes.pod.namespace" = "haproxy";
+                    "app.kubernetes.io/name" = "kubernetes-ingress";
+                  };
+                }
+              ];
+              toPorts = [
+                {
+                  ports = [
+                    {
+                      port = "80";
+                      protocol = "TCP";
+                    }
+                  ];
+                }
+              ];
+            }
+            # TODO: remove after traefik migration
             {
               fromEndpoints = [
                 {
@@ -241,6 +297,7 @@
                 {
                   ports = [
                     {
+                      # TODO: change to 443 after traefik migration
                       port = "8443";
                       protocol = "TCP";
                     }
