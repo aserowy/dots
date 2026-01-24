@@ -17,6 +17,7 @@ in
             labels = {
               "app.kubernetes.io/role" = "entrypoint";
             };
+            type = "LoadBalancer";
             ports = {
               http = 8080;
               https = 8443;
