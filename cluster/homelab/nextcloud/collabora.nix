@@ -36,5 +36,33 @@
         };
       };
     };
+
+    resources = {
+      ingresses = {
+        collabora = {
+          metadata = {
+            inherit namespace;
+          };
+          spec = {
+            ingressClassName = "haproxy";
+            rules = [
+              {
+                host = "collabora.anderwerse.de";
+                http.paths = [
+                  {
+                    pathType = "Prefix";
+                    path = "/";
+                    backend.service = {
+                      name = "collabora-collabora-online";
+                      port.number = 9980;
+                    };
+                  }
+                ];
+              }
+            ];
+          };
+        };
+      };
+    };
   };
 }
