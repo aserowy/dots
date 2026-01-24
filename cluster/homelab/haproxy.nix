@@ -14,6 +14,10 @@ in
 
         values = {
           controller.service = {
+            annotations = {
+              "lbipam.cilium.io/sharing-cross-namespace" = "*";
+              "lbipam.cilium.io/sharing-key" = "default-ippool";
+            };
             labels = {
               "app.kubernetes.io/role" = "entrypoint";
             };
