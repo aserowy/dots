@@ -8,58 +8,56 @@ in
 
     createNamespace = true;
 
-    helm.releases = {
-      traefik = {
-        chart = charts.traefik.traefik;
+    helm.releases.traefik = {
+      chart = charts.traefik.traefik;
 
-        values = {
-          ports = {
-            web = {
-              exposedPort = 80;
-              port = 8000;
-              http.redirections.entrypoint = {
-                to = "websecure";
-                scheme = "https";
-                permanent = true;
-              };
-            };
-            websecure = {
-              exposedPort = 443;
-              port = 8443;
-            };
-            tcp-port-21115 = {
-              expose.default = true;
-              exposedPort = 21115;
-              port = 21115;
-            };
-            udp-port-21116 = {
-              expose.default = true;
-              exposedPort = 21116;
-              port = 21116;
-              protocol = "UDP";
-            };
-            tcp-port-21116 = {
-              expose.default = true;
-              exposedPort = 21116;
-              port = 21116;
-            };
-            tcp-port-21117 = {
-              expose.default = true;
-              exposedPort = 21117;
-              port = 21117;
+      values = {
+        ports = {
+          web = {
+            exposedPort = 80;
+            port = 8000;
+            http.redirections.entrypoint = {
+              to = "websecure";
+              scheme = "https";
+              permanent = true;
             };
           };
-          additionalArguments = [
-            "--log.level=INFO"
-          ];
-          commonLabels = {
-            "app.kubernetes.io/role" = "entrypoint";
+          websecure = {
+            exposedPort = 443;
+            port = 8443;
           };
-          service = {
-            annotations = {
-              "lbipam.cilium.io/sharing-cross-namespace" = "*";
-              "lbipam.cilium.io/sharing-key" = "default-ippool";
-            };
+          tcp-port-21115 = {
+            expose.default = true;
+            exposedPort = 21115;
+            port = 21115;
+          };
+          udp-port-21116 = {
+            expose.default = true;
+            exposedPort = 21116;
+            port = 21116;
+            protocol = "UDP";
+          };
+          tcp-port-21116 = {
+            expose.default = true;
+            exposedPort = 21116;
+            port = 21116;
+          };
+          tcp-port-21117 = {
+            expose.default = true;
+            exposedPort = 21117;
+            port = 21117;
+          };
+        };
+        additionalArguments = [
+          "--log.level=INFO"
+        ];
+        commonLabels = {
+          "app.kubernetes.io/role" = "entrypoint";
+        };
+        service = {
+          annotations = {
+            "lbipam.cilium.io/sharing-cross-namespace" = "*";
+            "lbipam.cilium.io/sharing-key" = "default-ippool";
           };
         };
       };

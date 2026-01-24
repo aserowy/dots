@@ -7,6 +7,7 @@
     ./cilium.nix
     ./devices.nix
     ./loadbalancer.nix
+    ./haproxy.nix
     ./monitoring.nix
     ./policies.nix
     ./secrets.nix
