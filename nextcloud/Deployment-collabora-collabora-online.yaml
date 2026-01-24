@@ -28,6 +28,7 @@ spec:
         cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
         confighash: config-83f632b625409bb222473821ff2757ef
       labels:
+        app.kubernetes.io/component: app
         app.kubernetes.io/instance: collabora
         app.kubernetes.io/name: collabora-online
         type: main
