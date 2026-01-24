@@ -12,25 +12,18 @@ in
       kubernetes-ingress = {
         chart = charts.haproxytech.kubernetes-ingress;
 
-        values = { };
+        values = {
+          labels = {
+            "app.kubernetes.io/role" = "entrypoint";
+          };
+          service = {
+            ports = {
+              http = 8080;
+              https = 8443;
+            };
+          };
+        };
       };
-
-      # haproxy = {
-      #   chart = charts.haproxytech.haproxy;
-      #
-      #   values = {
-      #     config = "
-      #     global
-      #       log stdout format raw local0
-      #       maxconn 1024
-      #
-      #     defaults
-      #       log global
-      #       timeout client 60s
-      #       timeout connect 60s
-      #       timeout server 60s";
-      #   };
-      # };
     };
   };
 }
