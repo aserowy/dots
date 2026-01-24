@@ -21,7 +21,7 @@ spec:
                 port:
                   number: 9980
             path: /
-            pathType: Prefix
+            pathType: ImplementationSpecific
   tls:
     - hosts:
         - collabora.anderwerse.de
