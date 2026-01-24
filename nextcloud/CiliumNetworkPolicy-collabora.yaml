@@ -1,0 +1,45 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: collabora
+  namespace: nextcloud
+spec:
+  egress:
+    - toEndpoints:
+        - matchLabels:
+            io.kubernetes.pod.namespace: kube-system
+            k8s-app: kube-dns
+      toPorts:
+        - ports:
+            - port: "53"
+              protocol: UDP
+    - toEndpoints:
+        - matchLabels:
+            app.kubernetes.io/role: entrypoint
+            io.kubernetes.pod.namespace: loadbalancer
+      toPorts:
+        - ports:
+            - port: "443"
+              protocol: TCP
+    - toEndpoints:
+        - matchLabels:
+            app.kubernetes.io/name: kubernetes-ingress
+            io.kubernetes.pod.namespace: haproxy
+      toPorts:
+        - ports:
+            - port: "8443"
+              protocol: TCP
+  endpointSelector:
+    matchLabels:
+      app.kubernetes.io/name: collabora-collabora-online
+  ingress:
+    - fromEndpoints:
+        - matchLabels:
+            app.kubernetes.io/name: kubernetes-ingress
+            io.kubernetes.pod.namespace: haproxy
+      fromEntities:
+        - host
+      toPorts:
+        - ports:
+            - port: "9980"
+              protocol: TCP
