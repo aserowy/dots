@@ -13,10 +13,10 @@ in
         chart = charts.haproxytech.kubernetes-ingress;
 
         values = {
-          labels = {
-            "app.kubernetes.io/role" = "entrypoint";
-          };
-          service = {
+          controller.service = {
+            labels = {
+              "app.kubernetes.io/role" = "entrypoint";
+            };
             ports = {
               http = 8080;
               https = 8443;
