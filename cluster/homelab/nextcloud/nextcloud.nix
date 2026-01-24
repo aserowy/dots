@@ -177,12 +177,6 @@
               fromEndpoints = [
                 {
                   matchLabels = {
-                    "io.kubernetes.pod.namespace" = "haproxy";
-                    "app.kubernetes.io/role" = "entrypoint";
-                  };
-                }
-                {
-                  matchLabels = {
                     "io.kubernetes.pod.namespace" = "loadbalancer";
                     "app.kubernetes.io/role" = "entrypoint";
                   };
@@ -229,6 +223,26 @@
                     {
                       port = "53";
                       protocol = "UDP";
+                    }
+                  ];
+                }
+              ];
+            }
+            {
+              toEndpoints = [
+                {
+                  matchLabels = {
+                    "io.kubernetes.pod.namespace" = "haproxy";
+                    "app.kubernetes.io/name" = "kubernetes-ingress";
+                  };
+                }
+              ];
+              toPorts = [
+                {
+                  ports = [
+                    {
+                      port = "8443";
+                      protocol = "TCP";
                     }
                   ];
                 }

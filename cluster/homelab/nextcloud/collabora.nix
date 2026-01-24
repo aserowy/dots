@@ -19,7 +19,7 @@
             { host = "https://collabora.anderwerse.de:443"; }
             { host = "https://collabora.anderwerse.de:8443"; }
           ];
-          extra_params = "--o:ssl.enable=false --o:ssl.termination=true";
+          extra_params = "--o:storage.wopi.host=nextcloud\\.anderwerse\\.de --o:ssl.enable=false --o:ssl.termination=true";
           existingSecret = {
             enabled = true;
             secretName = "collabora";

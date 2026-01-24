@@ -14,9 +14,6 @@ in
 
         values = {
           controller = {
-            extraLabels = {
-              "app.kubernetes.io/role" = "entrypoint";
-            };
             service = {
               annotations = {
                 "lbipam.cilium.io/sharing-cross-namespace" = "*";
