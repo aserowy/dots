@@ -2,11 +2,11 @@ apiVersion: v1
 data:
   aliasgroup1: https://collabora.anderwerse.de:443
   aliasgroup2: https://collabora.anderwerse.de:8443
-  extra_params: --o:ssl.enable=false --o:ssl.termination=true
+  extra_params: --o:storage.wopi.host=nextcloud\.anderwerse\.de --o:ssl.enable=false --o:ssl.termination=true
 kind: ConfigMap
 metadata:
   annotations:
-    confighash: config-1f0c0a47ea5d68b6309aca01aa5534b5
+    confighash: config-23cdc7791d4d131ab543374d87a8108a
   labels:
     app.kubernetes.io/instance: collabora
     app.kubernetes.io/managed-by: Helm

@@ -21,6 +21,14 @@ spec:
               protocol: UDP
     - toEndpoints:
         - matchLabels:
+            app.kubernetes.io/name: kubernetes-ingress
+            io.kubernetes.pod.namespace: haproxy
+      toPorts:
+        - ports:
+            - port: "8443"
+              protocol: TCP
+    - toEndpoints:
+        - matchLabels:
             app.kubernetes.io/name: postgresql
       toPorts:
         - ports:
@@ -31,9 +39,6 @@ spec:
       app.kubernetes.io/name: nextcloud
   ingress:
     - fromEndpoints:
-        - matchLabels:
-            app.kubernetes.io/role: entrypoint
-            io.kubernetes.pod.namespace: haproxy
         - matchLabels:
             app.kubernetes.io/role: entrypoint
             io.kubernetes.pod.namespace: loadbalancer
