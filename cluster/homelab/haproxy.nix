@@ -8,11 +8,19 @@ in
 
     createNamespace = true;
 
-    helm.releases.haproxy = {
-      chart = charts.haproxytech.haproxy;
+    helm.releases = {
+      kubernetes-ingress = {
+        chart = charts.haproxytech.kubernetes-ingress;
 
-      values = {
-        config = "global
+        values = { };
+      };
+
+      haproxy = {
+        chart = charts.haproxytech.haproxy;
+
+        values = {
+          config = "
+          global
             log stdout format raw local0
             maxconn 1024
 
@@ -21,6 +29,7 @@ in
             timeout client 60s
             timeout connect 60s
             timeout server 60s";
+        };
       };
     };
   };
