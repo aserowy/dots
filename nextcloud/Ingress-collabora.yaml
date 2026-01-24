@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: collabora
+  namespace: nextcloud
+spec:
+  ingressClassName: haproxy
+  rules:
+    - host: collabora.anderwerse.de
+      http:
+        paths:
+          - backend:
+              service:
+                name: collabora-collabora-online
+                port:
+                  number: 9980
+            path: /
+            pathType: Prefix

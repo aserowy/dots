@@ -19,7 +19,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/environment: b45a5beb9370ccef7ad6ccfcb0506aceb4eea375e59cccb3066318774b148dc4
+        checksum/environment: 2de53f34dac196fa1026ba36b309bac8ed986bf2e8b74878c0b0b3aa809726c6
       labels:
         app.kubernetes.io/instance: haproxy
         app.kubernetes.io/name: haproxy
