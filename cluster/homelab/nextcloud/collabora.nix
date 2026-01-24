@@ -42,9 +42,18 @@
         collabora = {
           metadata = {
             inherit namespace;
+            annotations = {
+              "cert-manager.io/cluster-issuer" = "azure-acme-issuer";
+            };
           };
           spec = {
             ingressClassName = "haproxy";
+            tls = [
+              {
+                hosts = [ "collabora.anderwerse.de" ];
+                secretName = "collabora-tls";
+              }
+            ];
             rules = [
               {
                 host = "collabora.anderwerse.de";

@@ -27,7 +27,6 @@ in
         duration = "2160h";
         renewBefore = "720h";
         dnsNames = [
-          "collabora.anderwerse.de"
           "nextcloud.anderwerse.de"
         ];
       };
