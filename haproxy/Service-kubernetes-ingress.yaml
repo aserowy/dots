@@ -38,4 +38,4 @@ spec:
   selector:
     app.kubernetes.io/instance: kubernetes-ingress
     app.kubernetes.io/name: kubernetes-ingress
-  type: NodePort
+  type: LoadBalancer
