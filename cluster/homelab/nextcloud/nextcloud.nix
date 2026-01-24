@@ -177,6 +177,12 @@
               fromEndpoints = [
                 {
                   matchLabels = {
+                    "io.kubernetes.pod.namespace" = "haproxy";
+                    "app.kubernetes.io/role" = "entrypoint";
+                  };
+                }
+                {
+                  matchLabels = {
                     "io.kubernetes.pod.namespace" = "loadbalancer";
                     "app.kubernetes.io/role" = "entrypoint";
                   };
