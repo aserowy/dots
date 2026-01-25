@@ -1,7 +1,11 @@
 { charts, ... }:
+let
+  namespace = "longhorn-system";
+in
 {
   applications.storage = {
-    namespace = "longhorn-system";
+    inherit namespace;
+
     createNamespace = true;
 
     helm.releases.longhorn = {
@@ -37,6 +41,7 @@
     };
 
     resources = {
+      # TODO: remove after traefik migration
       certificates.longhorn-tls-certificate.spec = {
         secretName = "longhorn-tls-certificate";
         issuerRef = {
@@ -50,6 +55,7 @@
         ];
       };
 
+      # TODO: remove after traefik migration
       ingressRoutes = {
         longhorn-dashboard-route.spec = {
           entryPoints = [
@@ -72,21 +78,52 @@
         };
       };
 
-      storageClasses = {
-        longhorn-nobackup = {
-          metadata.name = "longhorn-nobackup";
-          provisioner = "driver.longhorn.io";
-          allowVolumeExpansion = true;
-          parameters = {
-            numberOfReplicas = "2";
-            staleReplicaTimeout = "30";
-            fromBackup = "";
-            fsType = "ext4";
-            dataLocality = "disabled";
-            unmapMarkSnapChainRemoved = "ignored";
-            disableRevisionCounter = "true";
-            dataEngine = "v1";
+      ingresses.longhorn = {
+        metadata = {
+          inherit namespace;
+          annotations = {
+            "cert-manager.io/cluster-issuer" = "azure-acme-issuer";
           };
+        };
+        spec = {
+          ingressClassName = "haproxy";
+          tls = [
+            {
+              hosts = [ "longhorn.cluster.anderwerse.de" ];
+              secretName = "longhorn-tls";
+            }
+          ];
+          rules = [
+            {
+              host = "longhorn.cluster.anderwerse.de";
+              http.paths = [
+                {
+                  pathType = "Prefix";
+                  path = "/";
+                  backend.service = {
+                    name = "longhorn-frontend";
+                    port.number = 80;
+                  };
+                }
+              ];
+            }
+          ];
+        };
+      };
+
+      storageClasses.longhorn-nobackup = {
+        metadata.name = "longhorn-nobackup";
+        provisioner = "driver.longhorn.io";
+        allowVolumeExpansion = true;
+        parameters = {
+          numberOfReplicas = "2";
+          staleReplicaTimeout = "30";
+          fromBackup = "";
+          fsType = "ext4";
+          dataLocality = "disabled";
+          unmapMarkSnapChainRemoved = "ignored";
+          disableRevisionCounter = "true";
+          dataEngine = "v1";
         };
       };
     };

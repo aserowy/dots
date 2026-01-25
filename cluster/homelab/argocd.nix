@@ -1,7 +1,10 @@
 { charts, ... }:
+let
+  namespace = "argocd";
+in
 {
   applications.argocd = {
-    namespace = "argocd";
+    inherit namespace;
 
     helm.releases.argocd = {
       chart = charts.argoproj.argo-cd;
@@ -24,6 +27,40 @@
     };
 
     resources = {
+      ingresses.argocd = {
+        metadata = {
+          inherit namespace;
+          annotations = {
+            "cert-manager.io/cluster-issuer" = "azure-acme-issuer";
+          };
+        };
+        spec = {
+          ingressClassName = "haproxy";
+          tls = [
+            {
+              hosts = [ "argo.cluster.anderwerse.de" ];
+              secretName = "argocd-tls";
+            }
+          ];
+          rules = [
+            {
+              host = "argo.cluster.anderwerse.de";
+              http.paths = [
+                {
+                  pathType = "Prefix";
+                  path = "/";
+                  backend.service = {
+                    name = "argocd-server";
+                    port.number = 80;
+                  };
+                }
+              ];
+            }
+          ];
+        };
+      };
+
+      # TODO: remove after traefik migration
       certificates.argo-tls-certificate.spec = {
         secretName = "argo-tls-certificate";
         issuerRef = {
@@ -37,6 +74,7 @@
         ];
       };
 
+      # TODO: remove after traefik migration
       ingressRoutes.argocd-dashboard-route.spec = {
         entryPoints = [
           "websecure"

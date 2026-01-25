@@ -210,6 +210,7 @@ in
         };
       };
 
+      # TODO: migrate udp and tcp to cilium like adguard for udp
       ingressRouteTCPs = {
         rustdesk-tcp-21115.spec = {
           entryPoints = [

@@ -230,6 +230,40 @@ in
         };
       };
 
+      ingresses.adguard = {
+        metadata = {
+          inherit namespace;
+          annotations = {
+            "cert-manager.io/cluster-issuer" = "azure-acme-issuer";
+          };
+        };
+        spec = {
+          ingressClassName = "haproxy";
+          tls = [
+            {
+              hosts = [ "adguard.anderwerse.de" ];
+              secretName = "adguard-tls";
+            }
+          ];
+          rules = [
+            {
+              host = "adguard.anderwerse.de";
+              http.paths = [
+                {
+                  pathType = "Prefix";
+                  path = "/";
+                  backend.service = {
+                    name = "adguard-dashboard";
+                    port.number = 3000;
+                  };
+                }
+              ];
+            }
+          ];
+        };
+      };
+
+      # TODO: remove after traefik migration
       certificates = {
         adguard-tls-certificate.spec = {
           secretName = "adguard-tls-certificate";
@@ -245,6 +279,7 @@ in
         };
       };
 
+      # TODO: remove after traefik migration
       ingressRoutes = {
         adguard-dashboard-route.spec = {
           entryPoints = [
@@ -267,78 +302,97 @@ in
         };
       };
 
-      ciliumNetworkPolicies = {
-        adguard = {
-          apiVersion = "cilium.io/v2";
-          kind = "CiliumNetworkPolicy";
-          metadata = {
-            inherit namespace;
-          };
-          spec = {
-            endpointSelector = {
-              matchLabels = {
-                "app.kubernetes.io/name" = "adguard";
-              };
+      ciliumNetworkPolicies.adguard = {
+        apiVersion = "cilium.io/v2";
+        kind = "CiliumNetworkPolicy";
+        metadata = {
+          inherit namespace;
+        };
+        spec = {
+          endpointSelector = {
+            matchLabels = {
+              "app.kubernetes.io/name" = "adguard";
             };
-            ingress = [
-              {
-                fromEndpoints = [
-                  {
-                    matchLabels = {
-                      "io.kubernetes.pod.namespace" = "loadbalancer";
-                      "app.kubernetes.io/role" = "entrypoint";
-                    };
-                  }
-                ];
-                toPorts = [
-                  {
-                    ports = [
-                      {
-                        port = "3000";
-                        protocol = "TCP";
-                      }
-                    ];
-                  }
-                ];
-              }
-              {
-                fromEntities = [ "world" ];
-                toPorts = [
-                  {
-                    ports = [
-                      {
-                        port = "53";
-                        protocol = "TCP";
-                      }
-                      {
-                        port = "53";
-                        protocol = "UDP";
-                      }
-                      {
-                        port = "67";
-                        protocol = "UDP";
-                      }
-                    ];
-                  }
-                ];
-              }
-            ];
-            egress = [
-              {
-                toEntities = [ "world" ];
-                toPorts = [
-                  {
-                    ports = [
-                      {
-                        port = "53";
-                        protocol = "UDP";
-                      }
-                    ];
-                  }
-                ];
-              }
-            ];
           };
+          ingress = [
+            {
+              fromEndpoints = [
+                {
+                  matchLabels = {
+                    "io.kubernetes.pod.namespace" = "haproxy";
+                    "app.kubernetes.io/name" = "kubernetes-ingress";
+                  };
+                }
+              ];
+              toPorts = [
+                {
+                  ports = [
+                    {
+                      port = "3000";
+                      protocol = "TCP";
+                    }
+                  ];
+                }
+              ];
+            }
+            # TODO: remove after traefik migration
+            {
+              fromEndpoints = [
+                {
+                  matchLabels = {
+                    "io.kubernetes.pod.namespace" = "loadbalancer";
+                    "app.kubernetes.io/role" = "entrypoint";
+                  };
+                }
+              ];
+              toPorts = [
+                {
+                  ports = [
+                    {
+                      port = "3000";
+                      protocol = "TCP";
+                    }
+                  ];
+                }
+              ];
+            }
+            {
+              fromEntities = [ "world" ];
+              toPorts = [
+                {
+                  ports = [
+                    {
+                      port = "53";
+                      protocol = "TCP";
+                    }
+                    {
+                      port = "53";
+                      protocol = "UDP";
+                    }
+                    {
+                      port = "67";
+                      protocol = "UDP";
+                    }
+                  ];
+                }
+              ];
+            }
+          ];
+          egress = [
+            {
+              toEntities = [ "world" ];
+              toPorts = [
+                {
+                  ports = [
+                    {
+                      port = "53";
+                      protocol = "UDP";
+                    }
+                  ];
+                }
+              ];
+            }
+          ];
         };
       };
     };

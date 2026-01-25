@@ -159,46 +159,6 @@
         };
       };
 
-      # TODO: remove after traefik migration
-      middlewares.nextcloud-hsts-middleware = {
-        metadata = {
-          inherit namespace;
-          name = "nextcloud-hsts-middleware";
-        };
-        spec.headers = {
-          stsSeconds = 15552000;
-          stsIncludeSubdomains = true;
-          stsPreload = true;
-        };
-      };
-
-      # TODO: remove after traefik migration
-      ingressRoutes.nextcloud-route.spec = {
-        entryPoints = [
-          "websecure"
-        ];
-        routes = [
-          {
-            kind = "Rule";
-            match = "Host(`nextcloud.anderwerse.de`)";
-            middlewares = [
-              {
-                inherit namespace;
-                name = "nextcloud-hsts-middleware";
-              }
-            ];
-            services = [
-              {
-                inherit namespace;
-                name = "nextcloud";
-                port = 8080;
-              }
-            ];
-          }
-        ];
-        tls.secretName = "nextcloud-tls-certificate";
-      };
-
       ciliumNetworkPolicies.nextcloud = {
         apiVersion = "cilium.io/v2";
         kind = "CiliumNetworkPolicy";
@@ -326,6 +286,46 @@
             }
           ];
         };
+      };
+
+      # TODO: remove after traefik migration
+      middlewares.nextcloud-hsts-middleware = {
+        metadata = {
+          inherit namespace;
+          name = "nextcloud-hsts-middleware";
+        };
+        spec.headers = {
+          stsSeconds = 15552000;
+          stsIncludeSubdomains = true;
+          stsPreload = true;
+        };
+      };
+
+      # TODO: remove after traefik migration
+      ingressRoutes.nextcloud-route.spec = {
+        entryPoints = [
+          "websecure"
+        ];
+        routes = [
+          {
+            kind = "Rule";
+            match = "Host(`nextcloud.anderwerse.de`)";
+            middlewares = [
+              {
+                inherit namespace;
+                name = "nextcloud-hsts-middleware";
+              }
+            ];
+            services = [
+              {
+                inherit namespace;
+                name = "nextcloud";
+                port = 8080;
+              }
+            ];
+          }
+        ];
+        tls.secretName = "nextcloud-tls-certificate";
       };
     };
   };

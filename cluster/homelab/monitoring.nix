@@ -1,7 +1,11 @@
 { charts, ... }:
+let
+  namespace = "monitoring";
+in
 {
   applications.monitoring = {
-    namespace = "monitoring";
+    inherit namespace;
+
     createNamespace = true;
 
     syncPolicy = {
@@ -70,6 +74,40 @@
     ];
 
     resources = {
+      ingresses.grafana = {
+        metadata = {
+          inherit namespace;
+          annotations = {
+            "cert-manager.io/cluster-issuer" = "azure-acme-issuer";
+          };
+        };
+        spec = {
+          ingressClassName = "haproxy";
+          tls = [
+            {
+              hosts = [ "grafana.cluster.anderwerse.de" ];
+              secretName = "grafana-tls";
+            }
+          ];
+          rules = [
+            {
+              host = "grafana.cluster.anderwerse.de";
+              http.paths = [
+                {
+                  pathType = "Prefix";
+                  path = "/";
+                  backend.service = {
+                    name = "kube-prometheus-stack-grafana";
+                    port.number = 80;
+                  };
+                }
+              ];
+            }
+          ];
+        };
+      };
+
+      # TODO: remove after traefik migration
       certificates.monitoring-tls-certificate.spec = {
         secretName = "monitoring-tls-certificate";
         issuerRef = {
@@ -83,6 +121,7 @@
         ];
       };
 
+      # TODO: remove after traefik migration
       ingressRoutes.grafana-route.spec = {
         entryPoints = [
           "websecure"

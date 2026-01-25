@@ -1,7 +1,10 @@
 { charts, ... }:
+let
+  namespace = "kube-system";
+in
 {
   applications.cilium = {
-    namespace = "kube-system";
+    inherit namespace;
 
     compareOptions.serverSideDiff = true;
 
@@ -37,16 +40,48 @@
     };
 
     resources = {
-      ciliumLoadBalancerIPPools = {
-        default-loadbalancer-ippool.spec = {
-          # TODO: cidr configurable
-          blocks = [ { cidr = "192.168.178.201/32"; } ];
-          serviceSelector.matchLabels = {
-            "app.kubernetes.io/role" = "entrypoint";
-          };
+      ciliumLoadBalancerIPPools.default-loadbalancer-ippool.spec = {
+        # TODO: cidr configurable
+        blocks = [ { cidr = "192.168.178.201/32"; } ];
+        serviceSelector.matchLabels = {
+          "app.kubernetes.io/role" = "entrypoint";
         };
       };
 
+      ingresses.hubble = {
+        metadata = {
+          inherit namespace;
+          annotations = {
+            "cert-manager.io/cluster-issuer" = "azure-acme-issuer";
+          };
+        };
+        spec = {
+          ingressClassName = "haproxy";
+          tls = [
+            {
+              hosts = [ "hubble.cluster.anderwerse.de" ];
+              secretName = "hubble-tls";
+            }
+          ];
+          rules = [
+            {
+              host = "hubble.cluster.anderwerse.de";
+              http.paths = [
+                {
+                  pathType = "Prefix";
+                  path = "/";
+                  backend.service = {
+                    name = "hubble";
+                    port.number = 80;
+                  };
+                }
+              ];
+            }
+          ];
+        };
+      };
+
+      # TODO: remove after traefik migration
       certificates.hubble-tls-certificate.spec = {
         secretName = "hubble-tls-certificate";
         issuerRef = {
@@ -60,26 +95,25 @@
         ];
       };
 
-      ingressRoutes = {
-        cilium-dashboard-route.spec = {
-          entryPoints = [
-            "websecure"
-          ];
-          routes = [
-            {
-              match = "Host(`hubble.cluster.anderwerse.de`)";
-              kind = "Rule";
-              services = [
-                {
-                  name = "hubble-ui";
-                  namespace = "kube-system";
-                  port = 80;
-                }
-              ];
-            }
-          ];
-          tls.secretName = "hubble-tls-certificate";
-        };
+      # TODO: remove after traefik migration
+      ingressRoutes.cilium-dashboard-route.spec = {
+        entryPoints = [
+          "websecure"
+        ];
+        routes = [
+          {
+            match = "Host(`hubble.cluster.anderwerse.de`)";
+            kind = "Rule";
+            services = [
+              {
+                name = "hubble-ui";
+                namespace = "kube-system";
+                port = 80;
+              }
+            ];
+          }
+        ];
+        tls.secretName = "hubble-tls-certificate";
       };
     };
   };
