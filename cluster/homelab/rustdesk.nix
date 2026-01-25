@@ -154,177 +154,88 @@ in
         };
       };
 
-      services = {
-        rustdesk-udp = {
-          metadata = {
-            inherit namespace;
-            name = "rustdesk-udp";
-          };
-          spec = {
-            selector."app.kubernetes.io/name" = "rustdesk";
-            ports = [
-              {
-                name = "udp-port-21116";
-                protocol = "UDP";
-                port = 21116;
-              }
-            ];
+      services.rustdesk = {
+        metadata = {
+          inherit namespace;
+          name = "rustdesk";
+          annotations = {
+            "lbipam.cilium.io/sharing-cross-namespace" = "*";
+            "lbipam.cilium.io/sharing-key" = "default-ippool";
           };
         };
-        rustdesk-tcp = {
-          metadata = {
-            inherit namespace;
-            name = "rustdesk-tcp";
-          };
-          spec = {
-            selector."app.kubernetes.io/name" = "rustdesk";
-            ports = [
-              {
-                name = "tcp-port-21115";
-                protocol = "TCP";
-                port = 21115;
-              }
-              {
-                name = "tcp-port-21116";
-                protocol = "TCP";
-                port = 21116;
-              }
-              {
-                name = "tcp-port-21117";
-                protocol = "TCP";
-                port = 21117;
-              }
-              # NOTE: this will enable web clients
-              # {
-              #   name = "tcp-port-21118";
-              #   protocol = "TCP";
-              #   port = 21118;
-              # }
-              # {
-              #   name = "tcp-port-21119";
-              #   protocol = "TCP";
-              #   port = 21119;
-              # }
-            ];
-          };
-        };
-      };
-
-      # TODO: migrate udp and tcp to cilium like adguard for udp
-      ingressRouteTCPs = {
-        rustdesk-tcp-21115.spec = {
-          entryPoints = [
-            "tcp-port-21115"
-          ];
-          routes = [
+        spec = {
+          type = "LoadBalancer";
+          selector."app.kubernetes.io/name" = "rustdesk";
+          ports = [
             {
-              match = "HostSNI(`*`)";
-              services = [
-                {
-                  inherit namespace;
-                  name = "rustdesk-tcp";
-                  port = 21115;
-                }
-              ];
+              name = "tcp-port-21115";
+              protocol = "TCP";
+              port = 21115;
             }
-          ];
-        };
-        rustdesk-tcp-21116.spec = {
-          entryPoints = [
-            "tcp-port-21116"
-          ];
-          routes = [
             {
-              match = "HostSNI(`*`)";
-              services = [
-                {
-                  inherit namespace;
-                  name = "rustdesk-tcp";
-                  port = 21116;
-                }
-              ];
+              name = "tcp-port-21116";
+              protocol = "TCP";
+              port = 21116;
             }
-          ];
-        };
-        rustdesk-tcp-21117.spec = {
-          entryPoints = [
-            "tcp-port-21117"
-          ];
-          routes = [
             {
-              match = "HostSNI(`*`)";
-              services = [
-                {
-                  inherit namespace;
-                  name = "rustdesk-tcp";
-                  port = 21117;
-                }
-              ];
+              name = "udp-port-21116";
+              protocol = "UDP";
+              port = 21116;
             }
+            {
+              name = "tcp-port-21117";
+              protocol = "TCP";
+              port = 21117;
+            }
+            # NOTE: this will enable web clients
+            # {
+            #   name = "tcp-port-21118";
+            #   protocol = "TCP";
+            #   port = 21118;
+            # }
+            # {
+            #   name = "tcp-port-21119";
+            #   protocol = "TCP";
+            #   port = 21119;
+            # }
           ];
         };
       };
 
-      ingressRouteUDPs.rustdesk-udp-21116.spec = {
-        entryPoints = [
-          "udp-port-21116"
-        ];
-        routes = [
-          {
-            services = [
-              {
-                inherit namespace;
-                name = "rustdesk-udp";
-                port = 21116;
-              }
-            ];
-          }
-        ];
-      };
-
-      ciliumNetworkPolicies = {
-        rustdesk = {
-          apiVersion = "cilium.io/v2";
-          kind = "CiliumNetworkPolicy";
-          metadata = {
-            inherit namespace;
+      ciliumNetworkPolicies.rustdesk = {
+        apiVersion = "cilium.io/v2";
+        kind = "CiliumNetworkPolicy";
+        metadata = {
+          inherit namespace;
+        };
+        spec = {
+          endpointSelector.matchLabels = {
+            "app.kubernetes.io/name" = "rustdesk";
           };
-          spec = {
-            endpointSelector.matchLabels = {
-              "app.kubernetes.io/name" = "rustdesk";
-            };
-            ingress = [
-              {
-                fromEndpoints = [
-                  {
-                    matchLabels = {
-                      "io.kubernetes.pod.namespace" = "loadbalancer";
-                      "app.kubernetes.io/role" = "entrypoint";
-                    };
-                  }
-                ];
-                toPorts = [
-                  {
-                    ports = [
-                      {
-                        port = "21115";
-                        protocol = "TCP";
-                      }
-                      {
-                        port = "21116";
-                        protocol = "UDP";
-                      }
-                      {
-                        port = "21116";
-                        protocol = "TCP";
-                      }
-                    ];
-                  }
-                ];
-              }
-            ];
-            egress = [ { } ];
-          };
+          ingress = [
+            {
+              fromEntities = [ "world" ];
+              toPorts = [
+                {
+                  ports = [
+                    {
+                      port = "21115";
+                      protocol = "TCP";
+                    }
+                    {
+                      port = "21116";
+                      protocol = "UDP";
+                    }
+                    {
+                      port = "21116";
+                      protocol = "TCP";
+                    }
+                  ];
+                }
+              ];
+            }
+          ];
+          egress = [ { } ];
         };
       };
     };

@@ -46,16 +46,6 @@ let
       src = nixhelm.chartsDerivations.${pkgs.stdenv.hostPlatform.system}.isindir.sops-secrets-operator;
       crds = [ "crds/isindir.github.com_sopssecrets.yaml" ];
     };
-    traefik = nixidy.packages.${pkgs.stdenv.hostPlatform.system}.generators.fromCRD {
-      name = "traefik";
-      src = nixhelm.chartsDerivations.${pkgs.stdenv.hostPlatform.system}.traefik.traefik;
-      crds = [
-        "crds/traefik.io_ingressroutes.yaml"
-        "crds/traefik.io_ingressroutetcps.yaml"
-        "crds/traefik.io_ingressrouteudps.yaml"
-        "crds/traefik.io_middlewares.yaml"
-      ];
-    };
   };
 in
 pkgs.mkShell {
@@ -90,7 +80,5 @@ pkgs.mkShell {
     cat ${generators.cilium} > ./cluster/crd/cilium.nix
     echo "generate sops"
     cat ${generators.sops} > ./cluster/crd/sops.nix
-    echo "generate traefik"
-    cat ${generators.traefik} > ./cluster/crd/traefik.nix
   '';
 }

@@ -6,7 +6,6 @@
     ./certificates.nix
     ./cilium.nix
     ./devices.nix
-    ./loadbalancer.nix
     ./haproxy.nix
     ./monitoring.nix
     ./policies.nix
@@ -26,7 +25,6 @@
       ../crd/cert-manager.nix
       ../crd/cilium.nix
       ../crd/sops.nix
-      ../crd/traefik.nix
     ];
 
     target = {
