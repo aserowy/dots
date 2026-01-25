@@ -23,14 +23,6 @@ spec:
         - ports:
             - port: "3000"
               protocol: TCP
-    - fromEndpoints:
-        - matchLabels:
-            app.kubernetes.io/role: entrypoint
-            io.kubernetes.pod.namespace: loadbalancer
-      toPorts:
-        - ports:
-            - port: "3000"
-              protocol: TCP
     - fromEntities:
         - world
       toPorts:

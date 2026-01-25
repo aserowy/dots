@@ -16,17 +16,17 @@ spec:
   ports:
     - appProtocol: http
       name: http
-      port: 8080
+      port: 80
       protocol: TCP
       targetPort: http
     - appProtocol: https
       name: https
-      port: 8443
+      port: 443
       protocol: TCP
       targetPort: https
     - appProtocol: https
       name: quic
-      port: 8443
+      port: 443
       protocol: UDP
       targetPort: quic
     - name: stat

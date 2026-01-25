@@ -59,11 +59,3 @@ spec:
         - ports:
             - port: "8000"
               protocol: TCP
-    - fromEndpoints:
-        - matchLabels:
-            app.kubernetes.io/role: entrypoint
-            io.kubernetes.pod.namespace: loadbalancer
-      toPorts:
-        - ports:
-            - port: "8000"
-              protocol: TCP
