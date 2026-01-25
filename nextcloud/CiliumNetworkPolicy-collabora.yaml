@@ -19,7 +19,7 @@ spec:
             io.kubernetes.pod.namespace: haproxy
       toPorts:
         - ports:
-            - port: "8443"
+            - port: "443"
               protocol: TCP
   endpointSelector:
     matchLabels:
