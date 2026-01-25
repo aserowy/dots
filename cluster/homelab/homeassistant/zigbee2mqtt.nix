@@ -266,7 +266,7 @@ in
                   pathType = "Prefix";
                   path = "/";
                   backend.service = {
-                    name = "zigbee";
+                    name = "zigbee2mqtt";
                     port.number = 8080;
                   };
                 }
