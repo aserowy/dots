@@ -71,7 +71,7 @@ in
                   pathType = "Prefix";
                   path = "/";
                   backend.service = {
-                    name = "hubble";
+                    name = "hubble-ui";
                     port.number = 80;
                   };
                 }
