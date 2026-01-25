@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: azure-acme-issuer
+  name: paperless
+  namespace: paperless
+spec:
+  ingressClassName: haproxy
+  rules:
+    - host: paperless.anderwerse.de
+      http:
+        paths:
+          - backend:
+              service:
+                name: paperless
+                port:
+                  number: 8000
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - paperless.anderwerse.de
+      secretName: paperless-tls

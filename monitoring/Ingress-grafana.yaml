@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: azure-acme-issuer
+  name: grafana
+  namespace: monitoring
+spec:
+  ingressClassName: haproxy
+  rules:
+    - host: grafana.cluster.anderwerse.de
+      http:
+        paths:
+          - backend:
+              service:
+                name: kube-prometheus-stack-grafana
+                port:
+                  number: 80
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - grafana.cluster.anderwerse.de
+      secretName: grafana-tls

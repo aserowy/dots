@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: azure-acme-issuer
+  name: homeassistant
+  namespace: homeassistant
+spec:
+  ingressClassName: haproxy
+  rules:
+    - host: homeassistant.anderwerse.de
+      http:
+        paths:
+          - backend:
+              service:
+                name: homeassistant
+                port:
+                  number: 8123
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - homeassistant.anderwerse.de
+      secretName: homeassistant-tls

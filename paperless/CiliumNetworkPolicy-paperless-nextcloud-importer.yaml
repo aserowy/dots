@@ -7,6 +7,14 @@ spec:
   egress:
     - toEndpoints:
         - matchLabels:
+            app.kubernetes.io/name: kubernetes-ingress
+            io.kubernetes.pod.namespace: haproxy
+      toPorts:
+        - ports:
+            - port: "8443"
+              protocol: TCP
+    - toEndpoints:
+        - matchLabels:
             app.kubernetes.io/role: entrypoint
             io.kubernetes.pod.namespace: loadbalancer
       toPorts:

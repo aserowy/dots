@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: azure-acme-issuer
+  name: longhorn
+  namespace: longhorn-system
+spec:
+  ingressClassName: haproxy
+  rules:
+    - host: longhorn.cluster.anderwerse.de
+      http:
+        paths:
+          - backend:
+              service:
+                name: longhorn-frontend
+                port:
+                  number: 80
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - longhorn.cluster.anderwerse.de
+      secretName: longhorn-tls
