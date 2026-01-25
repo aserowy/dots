@@ -299,45 +299,6 @@ in
         };
       };
 
-      # TODO: remove after traefik migration
-      certificates = {
-        homeassistant-tls-certificate.spec = {
-          secretName = "homeassistant-tls-certificate";
-          issuerRef = {
-            name = "azure-acme-issuer";
-            kind = "ClusterIssuer";
-          };
-          duration = "2160h";
-          renewBefore = "720h";
-          dnsNames = [
-            "homeassistant.anderwerse.de"
-          ];
-        };
-      };
-
-      # TODO: remove after traefik migration
-      ingressRoutes = {
-        homeassistant-dashboard-route.spec = {
-          entryPoints = [
-            "websecure"
-          ];
-          routes = [
-            {
-              match = "Host(`homeassistant.anderwerse.de`)";
-              kind = "Rule";
-              services = [
-                {
-                  inherit namespace;
-                  name = "homeassistant";
-                  port = 8123;
-                }
-              ];
-            }
-          ];
-          tls.secretName = "homeassistant-tls-certificate";
-        };
-      };
-
       ciliumNetworkPolicies = {
         homeassistant = {
           apiVersion = "cilium.io/v2";
@@ -358,27 +319,6 @@ in
                     matchLabels = {
                       "io.kubernetes.pod.namespace" = "haproxy";
                       "app.kubernetes.io/name" = "kubernetes-ingress";
-                    };
-                  }
-                ];
-                toPorts = [
-                  {
-                    ports = [
-                      {
-                        port = "8123";
-                        protocol = "TCP";
-                      }
-                    ];
-                  }
-                ];
-              }
-              # TODO: remove after traefik migration
-              {
-                fromEndpoints = [
-                  {
-                    matchLabels = {
-                      "io.kubernetes.pod.namespace" = "loadbalancer";
-                      "app.kubernetes.io/role" = "entrypoint";
                     };
                   }
                 ];

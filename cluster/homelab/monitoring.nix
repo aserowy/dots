@@ -73,73 +73,36 @@ in
       (builtins.readFile ./monitoring-secrets.sops.yaml)
     ];
 
-    resources = {
-      ingresses.grafana = {
-        metadata = {
-          inherit namespace;
-          annotations = {
-            "cert-manager.io/cluster-issuer" = "azure-acme-issuer";
-          };
-        };
-        spec = {
-          ingressClassName = "haproxy";
-          tls = [
-            {
-              hosts = [ "grafana.cluster.anderwerse.de" ];
-              secretName = "grafana-tls";
-            }
-          ];
-          rules = [
-            {
-              host = "grafana.cluster.anderwerse.de";
-              http.paths = [
-                {
-                  pathType = "Prefix";
-                  path = "/";
-                  backend.service = {
-                    name = "kube-prometheus-stack-grafana";
-                    port.number = 80;
-                  };
-                }
-              ];
-            }
-          ];
+    resources.ingresses.grafana = {
+      metadata = {
+        inherit namespace;
+        annotations = {
+          "cert-manager.io/cluster-issuer" = "azure-acme-issuer";
         };
       };
-
-      # TODO: remove after traefik migration
-      certificates.monitoring-tls-certificate.spec = {
-        secretName = "monitoring-tls-certificate";
-        issuerRef = {
-          name = "azure-acme-issuer";
-          kind = "ClusterIssuer";
-        };
-        duration = "2160h";
-        renewBefore = "720h";
-        dnsNames = [
-          "grafana.cluster.anderwerse.de"
-        ];
-      };
-
-      # TODO: remove after traefik migration
-      ingressRoutes.grafana-route.spec = {
-        entryPoints = [
-          "websecure"
-        ];
-        routes = [
+      spec = {
+        ingressClassName = "haproxy";
+        tls = [
           {
-            match = "Host(`grafana.cluster.anderwerse.de`)";
-            kind = "Rule";
-            services = [
+            hosts = [ "grafana.cluster.anderwerse.de" ];
+            secretName = "grafana-tls";
+          }
+        ];
+        rules = [
+          {
+            host = "grafana.cluster.anderwerse.de";
+            http.paths = [
               {
-                name = "kube-prometheus-stack-grafana";
-                namespace = "monitoring";
-                port = 80;
+                pathType = "Prefix";
+                path = "/";
+                backend.service = {
+                  name = "kube-prometheus-stack-grafana";
+                  port.number = 80;
+                };
               }
             ];
           }
         ];
-        tls.secretName = "monitoring-tls-certificate";
       };
     };
   };

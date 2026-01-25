@@ -133,27 +133,6 @@
               ];
             }
             {
-              # TODO: remove after traefik migration
-              toEndpoints = [
-                {
-                  matchLabels = {
-                    "io.kubernetes.pod.namespace" = "loadbalancer";
-                    "app.kubernetes.io/role" = "entrypoint";
-                  };
-                }
-              ];
-              toPorts = [
-                {
-                  ports = [
-                    {
-                      port = "443";
-                      protocol = "TCP";
-                    }
-                  ];
-                }
-              ];
-            }
-            {
               toEndpoints = [
                 {
                   matchLabels = {

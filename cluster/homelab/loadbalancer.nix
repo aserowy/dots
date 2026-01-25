@@ -13,19 +13,8 @@ in
 
       values = {
         ports = {
-          web = {
-            exposedPort = 80;
-            port = 8000;
-            http.redirections.entrypoint = {
-              to = "websecure";
-              scheme = "https";
-              permanent = true;
-            };
-          };
-          websecure = {
-            exposedPort = 443;
-            port = 8443;
-          };
+          web.expose.default = false;
+          websecure.expose.default = false;
           tcp-port-21115 = {
             expose.default = true;
             exposedPort = 21115;

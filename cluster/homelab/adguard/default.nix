@@ -263,45 +263,6 @@ in
         };
       };
 
-      # TODO: remove after traefik migration
-      certificates = {
-        adguard-tls-certificate.spec = {
-          secretName = "adguard-tls-certificate";
-          issuerRef = {
-            name = "azure-acme-issuer";
-            kind = "ClusterIssuer";
-          };
-          duration = "2160h";
-          renewBefore = "720h";
-          dnsNames = [
-            "adguard.anderwerse.de"
-          ];
-        };
-      };
-
-      # TODO: remove after traefik migration
-      ingressRoutes = {
-        adguard-dashboard-route.spec = {
-          entryPoints = [
-            "websecure"
-          ];
-          routes = [
-            {
-              match = "Host(`adguard.anderwerse.de`)";
-              kind = "Rule";
-              services = [
-                {
-                  inherit namespace;
-                  name = "adguard-dashboard";
-                  port = 3000;
-                }
-              ];
-            }
-          ];
-          tls.secretName = "adguard-tls-certificate";
-        };
-      };
-
       ciliumNetworkPolicies.adguard = {
         apiVersion = "cilium.io/v2";
         kind = "CiliumNetworkPolicy";
@@ -321,27 +282,6 @@ in
                   matchLabels = {
                     "io.kubernetes.pod.namespace" = "haproxy";
                     "app.kubernetes.io/name" = "kubernetes-ingress";
-                  };
-                }
-              ];
-              toPorts = [
-                {
-                  ports = [
-                    {
-                      port = "3000";
-                      protocol = "TCP";
-                    }
-                  ];
-                }
-              ];
-            }
-            # TODO: remove after traefik migration
-            {
-              fromEndpoints = [
-                {
-                  matchLabels = {
-                    "io.kubernetes.pod.namespace" = "loadbalancer";
-                    "app.kubernetes.io/role" = "entrypoint";
                   };
                 }
               ];

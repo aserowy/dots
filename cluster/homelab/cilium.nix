@@ -80,41 +80,6 @@ in
           ];
         };
       };
-
-      # TODO: remove after traefik migration
-      certificates.hubble-tls-certificate.spec = {
-        secretName = "hubble-tls-certificate";
-        issuerRef = {
-          name = "azure-acme-issuer";
-          kind = "ClusterIssuer";
-        };
-        duration = "2160h";
-        renewBefore = "720h";
-        dnsNames = [
-          "hubble.cluster.anderwerse.de"
-        ];
-      };
-
-      # TODO: remove after traefik migration
-      ingressRoutes.cilium-dashboard-route.spec = {
-        entryPoints = [
-          "websecure"
-        ];
-        routes = [
-          {
-            match = "Host(`hubble.cluster.anderwerse.de`)";
-            kind = "Rule";
-            services = [
-              {
-                name = "hubble-ui";
-                namespace = "kube-system";
-                port = 80;
-              }
-            ];
-          }
-        ];
-        tls.secretName = "hubble-tls-certificate";
-      };
     };
   };
 }

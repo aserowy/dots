@@ -188,27 +188,6 @@
                 }
               ];
             }
-            # TODO: remove after traefik migration
-            {
-              fromEndpoints = [
-                {
-                  matchLabels = {
-                    "io.kubernetes.pod.namespace" = "loadbalancer";
-                    "app.kubernetes.io/role" = "entrypoint";
-                  };
-                }
-              ];
-              toPorts = [
-                {
-                  ports = [
-                    {
-                      port = "80";
-                      protocol = "TCP";
-                    }
-                  ];
-                }
-              ];
-            }
           ];
           egress = [
             {
@@ -257,8 +236,7 @@
                 {
                   ports = [
                     {
-                      # TODO: change to 443 after traefik migration
-                      port = "8443";
+                      port = "443";
                       protocol = "TCP";
                     }
                   ];
@@ -286,46 +264,6 @@
             }
           ];
         };
-      };
-
-      # TODO: remove after traefik migration
-      middlewares.nextcloud-hsts-middleware = {
-        metadata = {
-          inherit namespace;
-          name = "nextcloud-hsts-middleware";
-        };
-        spec.headers = {
-          stsSeconds = 15552000;
-          stsIncludeSubdomains = true;
-          stsPreload = true;
-        };
-      };
-
-      # TODO: remove after traefik migration
-      ingressRoutes.nextcloud-route.spec = {
-        entryPoints = [
-          "websecure"
-        ];
-        routes = [
-          {
-            kind = "Rule";
-            match = "Host(`nextcloud.anderwerse.de`)";
-            middlewares = [
-              {
-                inherit namespace;
-                name = "nextcloud-hsts-middleware";
-              }
-            ];
-            services = [
-              {
-                inherit namespace;
-                name = "nextcloud";
-                port = 8080;
-              }
-            ];
-          }
-        ];
-        tls.secretName = "nextcloud-tls-certificate";
       };
     };
   };

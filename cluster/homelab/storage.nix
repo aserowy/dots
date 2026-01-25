@@ -41,43 +41,6 @@ in
     };
 
     resources = {
-      # TODO: remove after traefik migration
-      certificates.longhorn-tls-certificate.spec = {
-        secretName = "longhorn-tls-certificate";
-        issuerRef = {
-          name = "azure-acme-issuer";
-          kind = "ClusterIssuer";
-        };
-        duration = "2160h";
-        renewBefore = "720h";
-        dnsNames = [
-          "longhorn.cluster.anderwerse.de"
-        ];
-      };
-
-      # TODO: remove after traefik migration
-      ingressRoutes = {
-        longhorn-dashboard-route.spec = {
-          entryPoints = [
-            "websecure"
-          ];
-          routes = [
-            {
-              match = "Host(`longhorn.cluster.anderwerse.de`)";
-              kind = "Rule";
-              services = [
-                {
-                  name = "longhorn-frontend";
-                  namespace = "longhorn-system";
-                  port = 80;
-                }
-              ];
-            }
-          ];
-          tls.secretName = "longhorn-tls-certificate";
-        };
-      };
-
       ingresses.longhorn = {
         metadata = {
           inherit namespace;

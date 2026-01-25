@@ -26,73 +26,36 @@ in
       };
     };
 
-    resources = {
-      ingresses.argocd = {
-        metadata = {
-          inherit namespace;
-          annotations = {
-            "cert-manager.io/cluster-issuer" = "azure-acme-issuer";
-          };
-        };
-        spec = {
-          ingressClassName = "haproxy";
-          tls = [
-            {
-              hosts = [ "argo.cluster.anderwerse.de" ];
-              secretName = "argocd-tls";
-            }
-          ];
-          rules = [
-            {
-              host = "argo.cluster.anderwerse.de";
-              http.paths = [
-                {
-                  pathType = "Prefix";
-                  path = "/";
-                  backend.service = {
-                    name = "argocd-server";
-                    port.number = 80;
-                  };
-                }
-              ];
-            }
-          ];
+    resources.ingresses.argocd = {
+      metadata = {
+        inherit namespace;
+        annotations = {
+          "cert-manager.io/cluster-issuer" = "azure-acme-issuer";
         };
       };
-
-      # TODO: remove after traefik migration
-      certificates.argo-tls-certificate.spec = {
-        secretName = "argo-tls-certificate";
-        issuerRef = {
-          name = "azure-acme-issuer";
-          kind = "ClusterIssuer";
-        };
-        duration = "2160h";
-        renewBefore = "720h";
-        dnsNames = [
-          "argo.cluster.anderwerse.de"
-        ];
-      };
-
-      # TODO: remove after traefik migration
-      ingressRoutes.argocd-dashboard-route.spec = {
-        entryPoints = [
-          "websecure"
-        ];
-        routes = [
+      spec = {
+        ingressClassName = "haproxy";
+        tls = [
           {
-            match = "Host(`argo.cluster.anderwerse.de`)";
-            kind = "Rule";
-            services = [
+            hosts = [ "argo.cluster.anderwerse.de" ];
+            secretName = "argocd-tls";
+          }
+        ];
+        rules = [
+          {
+            host = "argo.cluster.anderwerse.de";
+            http.paths = [
               {
-                name = "argocd-server";
-                namespace = "argocd";
-                port = 80;
+                pathType = "Prefix";
+                path = "/";
+                backend.service = {
+                  name = "argocd-server";
+                  port.number = 80;
+                };
               }
             ];
           }
         ];
-        tls.secretName = "argo-tls-certificate";
       };
     };
   };

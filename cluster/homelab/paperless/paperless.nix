@@ -386,41 +386,6 @@ in
         };
       };
 
-      # TODO: remove after traefik migration
-      certificates.paperless-tls-certificate.spec = {
-        secretName = "paperless-tls-certificate";
-        issuerRef = {
-          name = "azure-acme-issuer";
-          kind = "ClusterIssuer";
-        };
-        duration = "2160h";
-        renewBefore = "720h";
-        dnsNames = [
-          "paperless.anderwerse.de"
-        ];
-      };
-
-      # TODO: remove after traefik migration
-      ingressRoutes.paperless-route.spec = {
-        entryPoints = [
-          "websecure"
-        ];
-        routes = [
-          {
-            match = "Host(`paperless.anderwerse.de`)";
-            kind = "Rule";
-            services = [
-              {
-                inherit namespace;
-                name = "paperless";
-                port = 8000;
-              }
-            ];
-          }
-        ];
-        tls.secretName = "paperless-tls-certificate";
-      };
-
       ingresses.paperless = {
         metadata = {
           inherit namespace;
@@ -470,27 +435,6 @@ in
                     matchLabels = {
                       "io.kubernetes.pod.namespace" = "haproxy";
                       "app.kubernetes.io/name" = "kubernetes-ingress";
-                    };
-                  }
-                ];
-                toPorts = [
-                  {
-                    ports = [
-                      {
-                        port = "8000";
-                        protocol = "TCP";
-                      }
-                    ];
-                  }
-                ];
-              }
-              # TODO: remove after traefik migration
-              {
-                fromEndpoints = [
-                  {
-                    matchLabels = {
-                      "io.kubernetes.pod.namespace" = "loadbalancer";
-                      "app.kubernetes.io/role" = "entrypoint";
                     };
                   }
                 ];
@@ -635,27 +579,6 @@ in
                     matchLabels = {
                       "io.kubernetes.pod.namespace" = "haproxy";
                       "app.kubernetes.io/name" = "kubernetes-ingress";
-                    };
-                  }
-                ];
-                toPorts = [
-                  {
-                    ports = [
-                      {
-                        port = "8443";
-                        protocol = "TCP";
-                      }
-                    ];
-                  }
-                ];
-              }
-              # TODO: remove after traefik migration
-              {
-                toEndpoints = [
-                  {
-                    matchLabels = {
-                      "io.kubernetes.pod.namespace" = "loadbalancer";
-                      "app.kubernetes.io/role" = "entrypoint";
                     };
                   }
                 ];

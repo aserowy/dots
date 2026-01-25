@@ -21,11 +21,6 @@ in
               };
               # NOTE: important to comply with cilium requirements
               type = "LoadBalancer";
-              # TODO: remove after parallel proxy configuration with traefik ended
-              ports = {
-                http = 8080;
-                https = 8443;
-              };
             };
           };
         };

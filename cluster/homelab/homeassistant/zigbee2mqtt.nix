@@ -204,45 +204,6 @@ in
         };
       };
 
-      # TODO: remove after traefik migration
-      certificates = {
-        zigbee-tls-certificate.spec = {
-          secretName = "zigbee-tls-certificate";
-          issuerRef = {
-            name = "azure-acme-issuer";
-            kind = "ClusterIssuer";
-          };
-          duration = "2160h";
-          renewBefore = "720h";
-          dnsNames = [
-            "zigbee.anderwerse.de"
-          ];
-        };
-      };
-
-      # TODO: remove after traefik migration
-      ingressRoutes = {
-        zigbee2mqtt-dashboard-route.spec = {
-          entryPoints = [
-            "websecure"
-          ];
-          routes = [
-            {
-              match = "Host(`zigbee.anderwerse.de`)";
-              kind = "Rule";
-              services = [
-                {
-                  inherit namespace;
-                  name = "zigbee2mqtt";
-                  port = 8080;
-                }
-              ];
-            }
-          ];
-          tls.secretName = "zigbee-tls-certificate";
-        };
-      };
-
       ingresses.zigbee = {
         metadata = {
           inherit namespace;
@@ -296,27 +257,6 @@ in
                     matchLabels = {
                       "io.kubernetes.pod.namespace" = "haproxy";
                       "app.kubernetes.io/name" = "kubernetes-ingress";
-                    };
-                  }
-                ];
-                toPorts = [
-                  {
-                    ports = [
-                      {
-                        port = "8080";
-                        protocol = "TCP";
-                      }
-                    ];
-                  }
-                ];
-              }
-              # TODO: remove after traefik migration
-              {
-                fromEndpoints = [
-                  {
-                    matchLabels = {
-                      "io.kubernetes.pod.namespace" = "loadbalancer";
-                      "app.kubernetes.io/role" = "entrypoint";
                     };
                   }
                 ];
