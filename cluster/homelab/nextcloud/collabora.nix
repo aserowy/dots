@@ -49,7 +49,7 @@
             "haproxy.org/timeout-tunnel" = "3600s";
             "haproxy.org/backend-config-snippet" =
               "balance url_param WOPISrc check_post
-                hash-type consistent";
+               hash-type consistent";
           };
         };
         spec = {

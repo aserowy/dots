@@ -236,7 +236,7 @@
                 {
                   ports = [
                     {
-                      port = "443";
+                      port = "8443";
                       protocol = "TCP";
                     }
                   ];
