@@ -10,10 +10,8 @@ spec:
     matchLabels:
       app.kubernetes.io/name: rustdesk
   ingress:
-    - fromEndpoints:
-        - matchLabels:
-            app.kubernetes.io/role: entrypoint
-            io.kubernetes.pod.namespace: loadbalancer
+    - fromEntities:
+        - world
       toPorts:
         - ports:
             - port: "21115"
