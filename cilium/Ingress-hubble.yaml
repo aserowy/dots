@@ -13,7 +13,7 @@ spec:
         paths:
           - backend:
               service:
-                name: hubble
+                name: hubble-ui
                 port:
                   number: 80
             path: /
