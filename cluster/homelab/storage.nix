@@ -74,6 +74,64 @@ in
         };
       };
 
+      ciliumNetworkPolicies.longhorn-ui = {
+        apiVersion = "cilium.io/v2";
+        kind = "CiliumNetworkPolicy";
+        metadata = {
+          inherit namespace;
+        };
+        spec = {
+          endpointSelector = {
+            matchLabels = {
+              "app" = "longhorn-ui";
+            };
+          };
+          ingress = [
+            {
+              fromEndpoints = [
+                {
+                  matchLabels = {
+                    "io.kubernetes.pod.namespace" = "haproxy";
+                    "app.kubernetes.io/name" = "kubernetes-ingress";
+                  };
+                }
+              ];
+              toPorts = [
+                {
+                  ports = [
+                    {
+                      port = "8000";
+                      protocol = "TCP";
+                    }
+                  ];
+                }
+              ];
+            }
+          ];
+          egress = [
+            {
+              toEndpoints = [
+                {
+                  matchLabels = {
+                    "app" = "longhorn-manager";
+                  };
+                }
+              ];
+              toPorts = [
+                {
+                  ports = [
+                    {
+                      port = "9500";
+                      protocol = "TCP";
+                    }
+                  ];
+                }
+              ];
+            }
+          ];
+        };
+      };
+
       storageClasses.longhorn-nobackup = {
         metadata.name = "longhorn-nobackup";
         provisioner = "driver.longhorn.io";

@@ -187,7 +187,7 @@ in
               protocol = "TCP";
               port = 21117;
             }
-            # NOTE: this will enable web clients
+            # NOTE: this will enable web clients WITH extra service!
             # {
             #   name = "tcp-port-21118";
             #   protocol = "TCP";
