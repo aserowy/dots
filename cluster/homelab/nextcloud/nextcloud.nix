@@ -126,6 +126,9 @@
     };
 
     resources = {
+      # NOTE: patch nextcloud deployment to enable labeled ingress in HAProxy
+      deployments.nextcloud.spec.template.metadata.labels."networking/haproxy/ingress" = "allow";
+
       ingresses.nextcloud = {
         metadata = {
           inherit namespace;
