@@ -1,0 +1,26 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: longhorn-ui
+  namespace: longhorn-system
+spec:
+  egress:
+    - toEndpoints:
+        - matchLabels:
+            app: longhorn-manager
+      toPorts:
+        - ports:
+            - port: "9500"
+              protocol: TCP
+  endpointSelector:
+    matchLabels:
+      app: longhorn-ui
+  ingress:
+    - fromEndpoints:
+        - matchLabels:
+            app.kubernetes.io/name: kubernetes-ingress
+            io.kubernetes.pod.namespace: haproxy
+      toPorts:
+        - ports:
+            - port: "8000"
+              protocol: TCP
