@@ -135,8 +135,8 @@
           annotations = {
             "cert-manager.io/cluster-issuer" = "azure-acme-issuer";
 
-            "haproxy.org/frontend-config-snippet" =
-              "http-response set-header Strict-Transport-Security 'max-age=16000000; includeSubDomains; preload;'";
+            "haproxy.org/backend-config-snippet" =
+              "http-response set-header Strict-Transport-Security 'max-age=15552000; includeSubDomains; preload;'";
           };
         };
         spec = {
