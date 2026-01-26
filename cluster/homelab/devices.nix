@@ -15,5 +15,13 @@ in
         };
       };
     };
+
+    ignoreDifferences = {
+      "instances.akri.sh" = {
+        group = "apiextensions.k8s.io";
+        kind = "CustomResourceDefinition";
+        jsonPointers = [ "/spec/names/categories" ];
+      };
+    };
   };
 }
