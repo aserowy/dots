@@ -29,7 +29,7 @@ in
         };
 
         grafana = {
-          podLabels."networking/haproxy/egress" = "allow";
+          podLabels."haproxy/egress" = "allow";
           admin = {
             existingSecret = "grafana";
             userKey = "admin-user";

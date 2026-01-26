@@ -288,7 +288,7 @@ in
           jobTemplate.spec.template = {
             metadata.labels = {
               "app.kubernetes.io/name" = "paperless-nextcloud-importer";
-              "networking/haproxy/ingress" = "allow";
+              "haproxy/ingress" = "allow";
             };
             spec = {
               restartPolicy = "Never";

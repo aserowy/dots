@@ -26,7 +26,7 @@
         };
         podLabels = {
           "app.kubernetes.io/component" = "app";
-          "networking/haproxy/ingress" = "allow";
+          "haproxy/ingress" = "allow";
         };
         resources = {
           requests = {

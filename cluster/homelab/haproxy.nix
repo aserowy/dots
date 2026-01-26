@@ -57,7 +57,7 @@ in
           {
             fromEntities = [ "world" ];
             fromEndpoints = [
-              { matchLabels."networking/haproxy/ingress" = "allow"; }
+              { matchLabels."haproxy/ingress" = "allow"; }
             ];
             toPorts = [
               {
@@ -88,7 +88,7 @@ in
           {
             toEndpoints = [
               { matchLabels."app.kubernetes.io/component" = "app"; }
-              { matchLabels."networking/haproxy/egress" = "allow"; }
+              { matchLabels."haproxy/egress" = "allow"; }
             ];
           }
         ];

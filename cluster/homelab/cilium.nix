@@ -41,7 +41,7 @@ in
 
     resources = {
       # NOTE: patch hubble ui deployment to enable labeled ingress in HAProxy
-      deployments.hubble-ui.spec.template.metadata.labels."networking/haproxy/egress" = "allow";
+      deployments.hubble-ui.spec.template.metadata.labels."haproxy/egress" = "allow";
 
       ciliumLoadBalancerIPPools.default-loadbalancer-ippool.spec = {
         # TODO: cidr configurable

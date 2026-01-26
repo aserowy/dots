@@ -23,7 +23,7 @@ in
           params."server.insecure" = "true";
         };
         global.networkPolicy.create = true;
-        server.podLabels."networking/haproxy/egress" = "allow";
+        server.podLabels."haproxy/egress" = "allow";
       };
     };
 

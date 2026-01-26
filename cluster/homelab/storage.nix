@@ -42,7 +42,7 @@ in
 
     resources = {
       # NOTE: patch longhorn ui deployment to enable labeled ingress in HAProxy
-      deployments.longhorn-ui.spec.template.metadata.labels."networking/haproxy/egress" = "allow";
+      deployments.longhorn-ui.spec.template.metadata.labels."haproxy/egress" = "allow";
 
       ingresses.longhorn = {
         metadata = {
