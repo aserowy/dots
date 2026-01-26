@@ -135,10 +135,8 @@
           annotations = {
             "cert-manager.io/cluster-issuer" = "azure-acme-issuer";
 
-            "haproxy.org/hsts" = "true";
-            "haproxy.org/hsts-max-age" = "15552000";
-            "haproxy.org/hsts-include-subdomains" = "true";
-            "haproxy.org/hsts-preload" = "true";
+            "haproxy.org/frontend-config-snippet" =
+              "http-response set-header Strict-Transport-Security 'max-age=16000000; includeSubDomains; preload;'";
           };
         };
         spec = {
