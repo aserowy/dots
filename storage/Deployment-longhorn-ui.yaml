@@ -24,7 +24,7 @@ spec:
         app.kubernetes.io/name: longhorn
         app.kubernetes.io/version: v1.10.1
         helm.sh/chart: longhorn-1.10.1
-        ingress/target: frontend
+        networking/component: app
     spec:
       affinity:
         podAntiAffinity:
