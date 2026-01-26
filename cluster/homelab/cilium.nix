@@ -33,7 +33,10 @@ in
 
         hubble = {
           relay.enabled = true;
-          ui.enabled = true;
+          ui = {
+            enabled = true;
+            labels."ingress/target" = "frontend";
+          };
           tls.auto.method = "cronJob";
         };
       };

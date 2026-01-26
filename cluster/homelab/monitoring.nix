@@ -28,10 +28,13 @@ in
           resources.requests.storage = "2Gi";
         };
 
-        grafana.admin = {
-          existingSecret = "grafana";
-          userKey = "admin-user";
-          passwordKey = "admin-password";
+        grafana = {
+          podLabels."ingress/target" = "frontend";
+          admin = {
+            existingSecret = "grafana";
+            userKey = "admin-user";
+            passwordKey = "admin-password";
+          };
         };
 
         prometheus = {
