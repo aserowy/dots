@@ -7,6 +7,11 @@ spec:
   destination:
     namespace: devices
     server: https://kubernetes.default.svc
+  ignoreDifferences:
+    - group: apiextensions.k8s.io
+      jsonPointers:
+        - /spec/names/categories
+      kind: CustomResourceDefinition
   project: default
   source:
     path: ./devices

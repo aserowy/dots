@@ -4,7 +4,6 @@ metadata:
   labels:
     app.kubernetes.io/name: hubble-ui
     app.kubernetes.io/part-of: cilium
-    ingress/target: frontend
     k8s-app: hubble-ui
   name: hubble-ui
   namespace: kube-system
@@ -22,6 +21,7 @@ spec:
       labels:
         app.kubernetes.io/name: hubble-ui
         app.kubernetes.io/part-of: cilium
+        ingress/target: frontend
         k8s-app: hubble-ui
     spec:
       automountServiceAccountToken: true
