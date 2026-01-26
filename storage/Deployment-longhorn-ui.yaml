@@ -23,8 +23,8 @@ spec:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: longhorn
         app.kubernetes.io/version: v1.10.1
+        haproxy/egress: allow
         helm.sh/chart: longhorn-1.10.1
-        networking/haproxy/egress: allow
     spec:
       affinity:
         podAntiAffinity:

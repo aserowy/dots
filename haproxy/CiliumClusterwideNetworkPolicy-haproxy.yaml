@@ -15,7 +15,7 @@ spec:
         - matchLabels:
             app.kubernetes.io/component: app
         - matchLabels:
-            networking/haproxy/egress: allow
+            haproxy/egress: allow
   endpointSelector:
     matchLabels:
       app.kubernetes.io/name: kubernetes-ingress
@@ -29,7 +29,7 @@ spec:
               protocol: TCP
     - fromEndpoints:
         - matchLabels:
-            networking/haproxy/ingress: allow
+            haproxy/ingress: allow
       fromEntities:
         - world
       toPorts:

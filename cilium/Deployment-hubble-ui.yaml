@@ -21,8 +21,8 @@ spec:
       labels:
         app.kubernetes.io/name: hubble-ui
         app.kubernetes.io/part-of: cilium
+        haproxy/egress: allow
         k8s-app: hubble-ui
-        networking/haproxy/egress: allow
     spec:
       automountServiceAccountToken: true
       containers:

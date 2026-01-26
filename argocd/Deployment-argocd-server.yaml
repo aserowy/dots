@@ -30,8 +30,8 @@ spec:
         app.kubernetes.io/name: argocd-server
         app.kubernetes.io/part-of: argocd
         app.kubernetes.io/version: v3.2.6
+        haproxy/egress: allow
         helm.sh/chart: argo-cd-9.3.5
-        networking/haproxy/egress: allow
     spec:
       affinity:
         podAntiAffinity:

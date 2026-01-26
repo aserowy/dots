@@ -27,8 +27,8 @@ spec:
         app.kubernetes.io/instance: kube-prometheus-stack
         app.kubernetes.io/name: grafana
         app.kubernetes.io/version: 12.3.1
+        haproxy/egress: allow
         helm.sh/chart: grafana-10.5.12
-        networking/haproxy/egress: allow
     spec:
       automountServiceAccountToken: true
       containers:
