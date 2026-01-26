@@ -29,7 +29,7 @@ in
         };
 
         grafana = {
-          podLabels."ingress/target" = "frontend";
+          podLabels."networking/component" = "app";
           admin = {
             existingSecret = "grafana";
             userKey = "admin-user";

@@ -23,7 +23,7 @@ in
           params."server.insecure" = "true";
         };
         global.networkPolicy.create = true;
-        server.podLabels."ingress/target" = "frontend";
+        server.podLabels."networking/component" = "app";
       };
     };
 
