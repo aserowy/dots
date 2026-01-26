@@ -17,6 +17,7 @@
             enabled = true;
             secretName = "nextcloud";
           };
+          defaultConfigs."imaginary.config.php" = true;
           configs = {
             "custom_infrastructure.config.php" =
               "<?php
@@ -85,6 +86,8 @@
             size = "20Gi";
           };
         };
+
+        imaginary.enabled = true;
 
         internalDatabase.enabled = false;
         externalDatabase = {
