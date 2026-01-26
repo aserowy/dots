@@ -33,16 +33,16 @@ in
 
         hubble = {
           relay.enabled = true;
-          ui = {
-            enabled = true;
-            labels."ingress/target" = "frontend";
-          };
+          ui.enabled = true;
           tls.auto.method = "cronJob";
         };
       };
     };
 
     resources = {
+      # NOTE: patch hubble ui deployment to enable labeled ingress in HAProxy
+      deployments.hubble-ui.spec.template.metadata.labels."ingress/target" = "frontend";
+
       ciliumLoadBalancerIPPools.default-loadbalancer-ippool.spec = {
         # TODO: cidr configurable
         blocks = [ { cidr = "192.168.178.201/32"; } ];
