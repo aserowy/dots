@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/component: imaginary
+    app.kubernetes.io/instance: nextcloud
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: nextcloud
+    app.kubernetes.io/version: 32.0.5
+    helm.sh/chart: nextcloud-8.9.0
+  name: nextcloud-imaginary
+  namespace: nextcloud
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: imaginary
+      app.kubernetes.io/instance: nextcloud
+      app.kubernetes.io/name: nextcloud
+  template:
+    metadata:
+      annotations: {}
+      labels:
+        app.kubernetes.io/component: imaginary
+        app.kubernetes.io/instance: nextcloud
+        app.kubernetes.io/name: nextcloud
+    spec:
+      containers:
+        - env:
+            - name: PORT
+              value: "9000"
+          image: docker.io/h2non/imaginary:1.2.4
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /health
+              port: http
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          name: imaginary
+          ports:
+            - containerPort: 9000
+              name: http
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /health
+              port: http
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000

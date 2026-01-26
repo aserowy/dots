@@ -84,6 +84,30 @@ data:
   custom_infrastructure.config.php: "<?php\n              $CONFIG = array (\n                'trusted_proxies' => ['10.42.0.0/16'],\n                'forwarded_for_headers' => ['HTTP_X_FORWARDED', 'HTTP_FORWARDED_FOR'],\n              );\n              "
   custom_maintenance.config.php: "<?php\n              $CONFIG = array (\n                'maintenance_window_start' => 1,\n              );\n              "
   custom_region.config.php: "<?php\n              $CONFIG = array (\n                'default_language' => 'en',\n                'default_locale' => 'de_DE',\n                'default_phone_region' => 'DE',\n                'default_timezone' => 'Europe/Berlin',\n              );\n              "
+  imaginary.config.php: |-
+    <?php
+    $CONFIG = array (
+      'preview_imaginary_url' => 'http://nextcloud-imaginary',
+      'enable_previews' => true,
+      'enabledPreviewProviders' => array (
+        'OC\Preview\Imaginary',
+        'OC\Preview\ImaginaryPDF',
+        /*
+          defaults:
+          https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/config_sample_php_parameters.html#enabledpreviewproviders
+        */
+        'OC\Preview\BMP',
+        // 'OC\Preview\GIF',
+        // 'OC\Preview\JPEG',
+        'OC\Preview\Krita',
+        'OC\Preview\MarkDown',
+        'OC\Preview\MP3',
+        'OC\Preview\OpenDocument',
+        // 'OC\Preview\PNG',
+        'OC\Preview\TXT',
+        'OC\Preview\XBitmap',
+      ),
+    );
   redis.config.php: |-
     <?php
     if (getenv('REDIS_HOST')) {
