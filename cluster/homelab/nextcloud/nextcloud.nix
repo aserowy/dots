@@ -168,110 +168,172 @@
         };
       };
 
-      ciliumNetworkPolicies.nextcloud = {
-        apiVersion = "cilium.io/v2";
-        kind = "CiliumNetworkPolicy";
-        metadata = {
-          inherit namespace;
+      ciliumNetworkPolicies = {
+        nextcloud = {
+          apiVersion = "cilium.io/v2";
+          kind = "CiliumNetworkPolicy";
+          metadata = {
+            inherit namespace;
+          };
+          spec = {
+            endpointSelector.matchLabels = {
+              "app.kubernetes.io/name" = "nextcloud";
+              "app.kubernetes.io/component" = "app";
+            };
+            ingress = [
+              {
+                fromEndpoints = [
+                  {
+                    matchLabels = {
+                      "io.kubernetes.pod.namespace" = "haproxy";
+                      "app.kubernetes.io/name" = "kubernetes-ingress";
+                    };
+                  }
+                ];
+                toPorts = [
+                  {
+                    ports = [
+                      {
+                        port = "80";
+                        protocol = "TCP";
+                      }
+                    ];
+                  }
+                ];
+              }
+            ];
+            egress = [
+              {
+                toEntities = [ "world" ];
+                toPorts = [
+                  {
+                    ports = [
+                      {
+                        port = "443";
+                        protocol = "TCP";
+                      }
+                    ];
+                  }
+                ];
+              }
+              {
+                toEndpoints = [
+                  {
+                    matchLabels = {
+                      "io.kubernetes.pod.namespace" = "kube-system";
+                      "k8s-app" = "kube-dns";
+                    };
+                  }
+                ];
+                toPorts = [
+                  {
+                    ports = [
+                      {
+                        port = "53";
+                        protocol = "UDP";
+                      }
+                    ];
+                  }
+                ];
+              }
+              {
+                toEndpoints = [
+                  {
+                    matchLabels = {
+                      "io.kubernetes.pod.namespace" = "haproxy";
+                      "app.kubernetes.io/name" = "kubernetes-ingress";
+                    };
+                  }
+                ];
+                toPorts = [
+                  {
+                    ports = [
+                      {
+                        port = "8443";
+                        protocol = "TCP";
+                      }
+                    ];
+                  }
+                ];
+              }
+              {
+                toEndpoints = [
+                  {
+                    matchLabels = {
+                      "app.kubernetes.io/name" = "nextcloud";
+                      "app.kubernetes.io/component" = "imaginary";
+                    };
+                  }
+                ];
+                toPorts = [
+                  {
+                    ports = [
+                      {
+                        port = "9000";
+                        protocol = "TCP";
+                      }
+                    ];
+                  }
+                ];
+              }
+              {
+                toEndpoints = [
+                  {
+                    matchLabels = {
+                      "app.kubernetes.io/name" = "postgresql";
+                    };
+                  }
+                ];
+                toPorts = [
+                  {
+                    ports = [
+                      {
+                        port = "5432";
+                        protocol = "TCP";
+                      }
+                    ];
+                  }
+                ];
+              }
+            ];
+          };
         };
-        spec = {
-          endpointSelector.matchLabels."app.kubernetes.io/name" = "nextcloud";
-          ingress = [
-            {
-              fromEndpoints = [
-                {
-                  matchLabels = {
-                    "io.kubernetes.pod.namespace" = "haproxy";
-                    "app.kubernetes.io/name" = "kubernetes-ingress";
-                  };
-                }
-              ];
-              toPorts = [
-                {
-                  ports = [
-                    {
-                      port = "80";
-                      protocol = "TCP";
-                    }
-                  ];
-                }
-              ];
-            }
-          ];
-          egress = [
-            {
-              toEntities = [ "world" ];
-              toPorts = [
-                {
-                  ports = [
-                    {
-                      port = "443";
-                      protocol = "TCP";
-                    }
-                  ];
-                }
-              ];
-            }
-            {
-              toEndpoints = [
-                {
-                  matchLabels = {
-                    "io.kubernetes.pod.namespace" = "kube-system";
-                    "k8s-app" = "kube-dns";
-                  };
-                }
-              ];
-              toPorts = [
-                {
-                  ports = [
-                    {
-                      port = "53";
-                      protocol = "UDP";
-                    }
-                  ];
-                }
-              ];
-            }
-            {
-              toEndpoints = [
-                {
-                  matchLabels = {
-                    "io.kubernetes.pod.namespace" = "haproxy";
-                    "app.kubernetes.io/name" = "kubernetes-ingress";
-                  };
-                }
-              ];
-              toPorts = [
-                {
-                  ports = [
-                    {
-                      port = "8443";
-                      protocol = "TCP";
-                    }
-                  ];
-                }
-              ];
-            }
-            {
-              toEndpoints = [
-                {
-                  matchLabels = {
-                    "app.kubernetes.io/name" = "postgresql";
-                  };
-                }
-              ];
-              toPorts = [
-                {
-                  ports = [
-                    {
-                      port = "5432";
-                      protocol = "TCP";
-                    }
-                  ];
-                }
-              ];
-            }
-          ];
+
+        nextcloud-imaginary = {
+          apiVersion = "cilium.io/v2";
+          kind = "CiliumNetworkPolicy";
+          metadata = {
+            inherit namespace;
+          };
+          spec = {
+            endpointSelector.matchLabels = {
+              "app.kubernetes.io/name" = "nextcloud";
+              "app.kubernetes.io/component" = "imaginary";
+            };
+            ingress = [
+              {
+                fromEndpoints = [
+                  {
+                    matchLabels = {
+                      "app.kubernetes.io/name" = "nextcloud";
+                      "app.kubernetes.io/component" = "app";
+                    };
+                  }
+                ];
+                toPorts = [
+                  {
+                    ports = [
+                      {
+                        port = "9000";
+                        protocol = "TCP";
+                      }
+                    ];
+                  }
+                ];
+              }
+            ];
+            egress = [ ];
+          };
         };
       };
     };
