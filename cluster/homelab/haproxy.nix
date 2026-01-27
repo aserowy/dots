@@ -21,7 +21,7 @@ in
                 "lbipam.cilium.io/sharing-key" = "default-ippool";
               };
               labels = {
-                "cilium/service-type" = "entrypoint";
+                "cilium/ip-pool" = "external";
               };
               type = "LoadBalancer";
             };

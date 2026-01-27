@@ -25,12 +25,6 @@ in
 
         policyEnforcementMode = "default";
 
-        # NOTE: mtls with spiffe
-        authentication.mutual.spire = {
-          enabled = false;
-          install.server.dataStorage.storageClass = "longhorn-nobackup";
-        };
-
         hubble = {
           relay.enabled = true;
           ui.enabled = true;
@@ -47,7 +41,7 @@ in
         # TODO: cidr configurable
         blocks = [ { cidr = "192.168.178.201/32"; } ];
         serviceSelector.matchLabels = {
-          "cilium/service-type" = "entrypoint";
+          "cilium/ip-pool" = "external";
         };
       };
 

@@ -40,7 +40,6 @@ in
               metadata.labels = {
                 "app.kubernetes.io/name" = "adguard";
                 "app.kubernetes.io/component" = "app";
-                "app.kubernetes.io/role" = "entrypoint";
               };
               spec = {
                 securityContext = {
@@ -206,7 +205,7 @@ in
               "lbipam.cilium.io/sharing-key" = "default-ippool";
             };
             labels = {
-              "cilium/service-type" = "entrypoint";
+              "cilium/ip-pool" = "external";
             };
           };
           spec = {
