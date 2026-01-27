@@ -312,6 +312,9 @@
             };
             ingress = [
               {
+                fromEntities = [
+                  "host"
+                ];
                 fromEndpoints = [
                   {
                     matchLabels = {
