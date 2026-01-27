@@ -155,9 +155,6 @@ spec:
             successThreshold: 1
           terminationMessagePolicy: FallbackToLogsOnError
           volumeMounts:
-            - mountPath: /run/spire/sockets
-              name: spire-agent-socket
-              readOnly: false
             - mountPath: /var/run/cilium/envoy/sockets
               name: envoy-sockets
               readOnly: false
@@ -413,10 +410,6 @@ spec:
             path: /run/xtables.lock
             type: FileOrCreate
           name: xtables-lock
-        - hostPath:
-            path: /run/spire/sockets
-            type: DirectoryOrCreate
-          name: spire-agent-socket
         - hostPath:
             path: /var/run/cilium/envoy/sockets
             type: DirectoryOrCreate

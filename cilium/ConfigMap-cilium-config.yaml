@@ -97,16 +97,8 @@ data:
   max-connected-clusters: "255"
   mesh-auth-enabled: "true"
   mesh-auth-gc-interval: 5m0s
-  mesh-auth-mutual-connect-timeout: 5s
-  mesh-auth-mutual-enabled: "true"
-  mesh-auth-mutual-listener-port: "4250"
   mesh-auth-queue-size: "1024"
   mesh-auth-rotated-identities-queue-size: "1024"
-  mesh-auth-spiffe-trust-domain: spiffe.cilium
-  mesh-auth-spire-admin-socket: /run/spire/sockets/admin.sock
-  mesh-auth-spire-agent-socket: /run/spire/sockets/agent/agent.sock
-  mesh-auth-spire-server-address: spire-server.cilium-spire.svc:8081
-  mesh-auth-spire-server-connection-timeout: 30s
   metrics-sampling-interval: 5m
   monitor-aggregation: medium
   monitor-aggregation-flags: all
