@@ -162,6 +162,9 @@ in
             "lbipam.cilium.io/sharing-cross-namespace" = "*";
             "lbipam.cilium.io/sharing-key" = "default-ippool";
           };
+          labels = {
+            "cilium/service-type" = "entrypoint";
+          };
         };
         spec = {
           type = "LoadBalancer";

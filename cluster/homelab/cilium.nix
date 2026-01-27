@@ -47,7 +47,7 @@ in
         # TODO: cidr configurable
         blocks = [ { cidr = "192.168.178.201/32"; } ];
         serviceSelector.matchLabels = {
-          "app.kubernetes.io/role" = "entrypoint";
+          "cilium/service-type" = "entrypoint";
         };
       };
 

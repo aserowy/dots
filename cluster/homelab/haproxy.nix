@@ -14,12 +14,15 @@ in
 
         values = {
           controller = {
+            # NOTE: important to comply with cilium requirements
             service = {
               annotations = {
                 "lbipam.cilium.io/sharing-cross-namespace" = "*";
                 "lbipam.cilium.io/sharing-key" = "default-ippool";
               };
-              # NOTE: important to comply with cilium requirements
+              labels = {
+                "cilium/service-type" = "entrypoint";
+              };
               type = "LoadBalancer";
             };
           };
