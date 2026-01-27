@@ -30,7 +30,6 @@ in
         bottom
         curl
         lazygit
-        ncurses
 
         yeet
         fd
