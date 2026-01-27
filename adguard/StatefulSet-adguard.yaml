@@ -13,7 +13,6 @@ spec:
       labels:
         app.kubernetes.io/component: app
         app.kubernetes.io/name: adguard
-        app.kubernetes.io/role: entrypoint
     spec:
       containers:
         - image: docker.io/adguard/adguardhome:v0.107.71
