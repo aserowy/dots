@@ -205,7 +205,7 @@ in
               "lbipam.cilium.io/sharing-key" = "default-ippool";
             };
             labels = {
-              "cilium/ip-pool" = "external";
+              "cilium/ippool" = "default-ippool";
             };
           };
           spec = {

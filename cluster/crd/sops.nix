@@ -508,7 +508,7 @@ let
           type = (types.nullOr (types.attrsOf types.str));
         };
         "type" = mkOption {
-          description = "Kubernetes secret type. Default: Opauqe. Possible values: Opauqe,\nkubernetes.io/service-account-token, kubernetes.io/dockercfg,\nkubernetes.io/dockerconfigjson, kubernetes.io/basic-auth,\nkubernetes.io/ssh-auth, kubernetes.io/tls, bootstrap.kubernetes.io/token";
+          description = "Kubernetes secret type. Default: Opaque. Possible values: Opaque,\nkubernetes.io/service-account-token, kubernetes.io/dockercfg,\nkubernetes.io/dockerconfigjson, kubernetes.io/basic-auth,\nkubernetes.io/ssh-auth, kubernetes.io/tls, bootstrap.kubernetes.io/token";
           type = (types.nullOr types.str);
         };
       };
