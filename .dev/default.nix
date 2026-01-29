@@ -19,12 +19,12 @@ let
       src = pkgs.fetchFromGitHub {
         owner = "cert-manager";
         repo = "cert-manager";
-        rev = "v1.18.1";
-        hash = "sha256-X2FWGW3085KKzXOce8j46xiPBjfH+K4clqrpQFpfWPA=";
+        rev = "v1.19.2";
+        hash = "sha256-0m8+J8rECY7+BXTkSAaDUBsz4gJJO7fMMbGscLoKGUA=";
       };
       crds = [
-        "deploy/crds/crd-certificates.yaml"
-        "deploy/crds/crd-clusterissuers.yaml"
+        "deploy/crds/cert-manager.io_certificates.yaml"
+        "deploy/crds/cert-manager.io_clusterissuers.yaml"
       ];
     };
     cilium = nixidy.packages.${pkgs.stdenv.hostPlatform.system}.generators.fromCRD {
