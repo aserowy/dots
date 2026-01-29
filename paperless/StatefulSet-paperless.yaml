@@ -19,7 +19,7 @@ spec:
             - name: PAPERLESS_PORT
               value: "8000"
             - name: PAPERLESS_DBHOST
-              value: postgresql.paperless.svc.cluster.local
+              value: paperless-pg17-rw.paperless.svc.cluster.local
             - name: PAPERLESS_URL
               value: https://paperless.anderwerse.de
             - name: PAPERLESS_OCR_LANGUAGE

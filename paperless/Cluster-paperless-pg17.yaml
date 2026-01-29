@@ -7,23 +7,8 @@ spec:
   bootstrap:
     initdb:
       database: paperless
-      import:
-        databases:
-          - paperless
-        source:
-          externalCluster: bitnami
-        type: microservice
       owner: paperless
       secret:
-        name: paperless-pg
-  externalClusters:
-    - connectionParameters:
-        dbname: paperless
-        host: postgresql.paperless.svc.cluster.local
-        user: paperless
-      name: bitnami
-      password:
-        key: password
         name: paperless-pg
   imageCatalogRef:
     apiGroup: postgresql.cnpg.io
