@@ -6,12 +6,16 @@ metadata:
 spec:
   bootstrap:
     initdb:
+      database: paperless
       import:
         databases:
           - paperless
         source:
           externalCluster: bitnami
         type: microservice
+      owner: paperless
+      secret:
+        name: paperless-pg
   externalClusters:
     - connectionParameters:
         dbname: paperless
@@ -20,7 +24,7 @@ spec:
       name: bitnami
       password:
         key: password
-        name: postgresql
+        name: paperless-pg
   imageCatalogRef:
     apiGroup: postgresql.cnpg.io
     kind: ClusterImageCatalog
