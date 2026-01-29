@@ -6,26 +6,16 @@
 }:
 let
   generators = {
-    akri = nixidy.packages.${pkgs.stdenv.hostPlatform.system}.generators.fromCRD {
+    akri = nixidy.packages.${pkgs.stdenv.hostPlatform.system}.generators.fromChartCRD {
       name = "akri";
-      src = nixhelm.chartsDerivations.${pkgs.stdenv.hostPlatform.system}.project-akri.akri;
-      crds = [
-        "crds/akri-configuration-crd.yaml"
-        "crds/akri-instance-crd.yaml"
-      ];
+      chart = nixhelm.chartsDerivations.${pkgs.stdenv.hostPlatform.system}.project-akri.akri;
     };
-    cert-manager = nixidy.packages.${pkgs.stdenv.hostPlatform.system}.generators.fromCRD {
+    cert-manager = nixidy.packages.${pkgs.stdenv.hostPlatform.system}.generators.fromChartCRD {
       name = "cert-manager";
-      src = pkgs.fetchFromGitHub {
-        owner = "cert-manager";
-        repo = "cert-manager";
-        rev = "v1.19.2";
-        hash = "sha256-0m8+J8rECY7+BXTkSAaDUBsz4gJJO7fMMbGscLoKGUA=";
+      chart = nixhelm.chartsDerivations.${pkgs.stdenv.hostPlatform.system}.jetstack.cert-manager;
+      values = {
+        crds.enabled = true;
       };
-      crds = [
-        "deploy/crds/cert-manager.io_certificates.yaml"
-        "deploy/crds/cert-manager.io_clusterissuers.yaml"
-      ];
     };
     cilium = nixidy.packages.${pkgs.stdenv.hostPlatform.system}.generators.fromCRD {
       name = "cilium";
@@ -44,12 +34,10 @@ let
     cloudnative-pg = nixidy.packages.${pkgs.stdenv.hostPlatform.system}.generators.fromChartCRD {
       name = "cloudnative-pg";
       chart = nixhelm.chartsDerivations.${pkgs.stdenv.hostPlatform.system}.cloudnative-pg.cloudnative-pg;
-      crds = [ "Cluster" ];
     };
-    sops = nixidy.packages.${pkgs.stdenv.hostPlatform.system}.generators.fromCRD {
+    sops = nixidy.packages.${pkgs.stdenv.hostPlatform.system}.generators.fromChartCRD {
       name = "sops";
-      src = nixhelm.chartsDerivations.${pkgs.stdenv.hostPlatform.system}.isindir.sops-secrets-operator;
-      crds = [ "crds/isindir.github.com_sopssecrets.yaml" ];
+      chart = nixhelm.chartsDerivations.${pkgs.stdenv.hostPlatform.system}.isindir.sops-secrets-operator;
     };
   };
 in
