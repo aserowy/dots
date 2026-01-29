@@ -14,5 +14,20 @@ in
 
       values = { };
     };
+
+    resources.clusterImageCatalogs.trixie.spec.images = [
+      {
+        major = 16;
+        image = "ghcr.io/cloudnative-pg/postgresql:16.11-standard-trixie";
+      }
+      {
+        major = 17;
+        image = "ghcr.io/cloudnative-pg/postgresql:17.7-standard-trixie";
+      }
+      {
+        major = 18;
+        image = "ghcr.io/cloudnative-pg/postgresql:18.1-standard-trixie";
+      }
+    ];
   };
 }

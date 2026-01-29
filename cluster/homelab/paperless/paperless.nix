@@ -71,9 +71,15 @@ in
     ];
 
     resources = {
-      clusters.paperless-pg = {
+      clusters.paperless-pg17 = {
         spec = {
-          instances = 2;
+          instances = 1;
+          imageCatalogRef = {
+            apiGroup = "postgresql.cnpg.io";
+            kind = "ClusterImageCatalog";
+            name = "trixie";
+            major = 17;
+          };
           storage.size = "1Gi";
         };
       };
