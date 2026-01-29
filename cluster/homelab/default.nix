@@ -31,6 +31,7 @@
       # ../crd/akri.nix
       ../crd/cert-manager.nix
       ../crd/cilium.nix
+      ../crd/cloudnative-pg.nix
       ../crd/sops.nix
     ];
 

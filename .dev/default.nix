@@ -41,6 +41,11 @@ let
         "pkg/k8s/apis/cilium.io/client/crds/v2/ciliumloadbalancerippools.yaml"
       ];
     };
+    cloudnative-pg = nixidy.packages.${pkgs.stdenv.hostPlatform.system}.generators.fromChartCRD {
+      name = "cloudnative-pg";
+      chart = nixhelm.chartsDerivations.${pkgs.stdenv.hostPlatform.system}.cloudnative-pg.cloudnative-pg;
+      crds = [ "Cluster" ];
+    };
     sops = nixidy.packages.${pkgs.stdenv.hostPlatform.system}.generators.fromCRD {
       name = "sops";
       src = nixhelm.chartsDerivations.${pkgs.stdenv.hostPlatform.system}.isindir.sops-secrets-operator;
@@ -78,6 +83,8 @@ pkgs.mkShell {
     cat ${generators.cert-manager} > ./cluster/crd/cert-manager.nix
     echo "generate cilium"
     cat ${generators.cilium} > ./cluster/crd/cilium.nix
+    echo "generate cloudnative-pg"
+    cat ${generators.cloudnative-pg} > ./cluster/crd/cloudnative-pg.nix
     echo "generate sops"
     cat ${generators.sops} > ./cluster/crd/sops.nix
   '';
