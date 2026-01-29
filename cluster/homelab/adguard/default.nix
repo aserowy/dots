@@ -1,10 +1,9 @@
 { ... }:
 let
-  application = "adguard";
-  namespace = application;
+  namespace = "adguard";
 in
 {
-  applications."${application}" = {
+  applications.adguard = {
     inherit namespace;
     createNamespace = true;
 

@@ -1,7 +1,7 @@
 {
   application,
   namespace,
-  # charts,
+  charts,
   lib,
   ...
 }:
@@ -13,20 +13,21 @@ in
 {
   applications."${application}" = {
     # FIX: Migrate postgres to 18.0
-    helm.releases.postgresql = {
-      # chart = charts.bitnami.postgresql;
-      chart = lib.helm.downloadHelmChart {
-        repo = "https://charts.bitnami.com/bitnami/";
-        chart = "postgresql";
-        version = "16.7.27";
-        chartHash = "sha256-Sl3CjRqPSVl5j8BYNvahUiAZqCUIAK3Xsv/bMFdQ3t8=";
-      };
-      values = {
-        image.repository = "bitnamilegacy/postgresql";
-        auth = {
-          database = "paperless";
-          username = "paperless";
-          existingSecret = "postgresql";
+    helm.releases = {
+      postgresql = {
+        chart = lib.helm.downloadHelmChart {
+          repo = "https://charts.bitnami.com/bitnami/";
+          chart = "postgresql";
+          version = "16.7.27";
+          chartHash = "sha256-Sl3CjRqPSVl5j8BYNvahUiAZqCUIAK3Xsv/bMFdQ3t8=";
+        };
+        values = {
+          image.repository = "bitnamilegacy/postgresql";
+          auth = {
+            database = "paperless";
+            username = "paperless";
+            existingSecret = "postgresql";
+          };
         };
       };
     };

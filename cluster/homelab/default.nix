@@ -13,6 +13,7 @@
     ./storage.nix
 
     ./adguard
+    ./cloudnativepg.nix
     ./homeassistant
     ./nextcloud
     ./paperless
