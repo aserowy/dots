@@ -10,48 +10,6 @@ let
 in
 {
   applications."${application}" = {
-    yamls = [
-      ''
-        apiVersion: v1
-        kind: PersistentVolumeClaim
-        metadata:
-          name: ${paperless-consume-pvc}
-        spec:
-          storageClassName: "longhorn-nobackup"
-          accessModes:
-            - ReadWriteOnce
-          resources:
-            requests:
-              storage: 200Mi
-      ''
-      ''
-        apiVersion: v1
-        kind: PersistentVolumeClaim
-        metadata:
-          name: ${paperless-data-pvc}
-        spec:
-          storageClassName: "longhorn"
-          accessModes:
-            - ReadWriteOnce
-          resources:
-            requests:
-              storage: 8Gi
-      ''
-      ''
-        apiVersion: v1
-        kind: PersistentVolumeClaim
-        metadata:
-          name: ${paperless-media-pvc}
-        spec:
-          storageClassName: "longhorn"
-          accessModes:
-            - ReadWriteOnce
-          resources:
-            requests:
-              storage: 5Gi
-      ''
-    ];
-
     resources = {
       clusters.paperless-pg17 = {
         spec = {
@@ -69,6 +27,11 @@ in
             database = "paperless";
             secret.name = "paperless-pg";
           };
+
+          managed.services.disabledDefaultServices = [
+            "ro"
+            "r"
+          ];
         };
       };
 
@@ -616,5 +579,47 @@ in
         };
       };
     };
+
+    yamls = [
+      ''
+        apiVersion: v1
+        kind: PersistentVolumeClaim
+        metadata:
+          name: ${paperless-consume-pvc}
+        spec:
+          storageClassName: "longhorn-nobackup"
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 200Mi
+      ''
+      ''
+        apiVersion: v1
+        kind: PersistentVolumeClaim
+        metadata:
+          name: ${paperless-data-pvc}
+        spec:
+          storageClassName: "longhorn"
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 8Gi
+      ''
+      ''
+        apiVersion: v1
+        kind: PersistentVolumeClaim
+        metadata:
+          name: ${paperless-media-pvc}
+        spec:
+          storageClassName: "longhorn"
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 5Gi
+      ''
+    ];
   };
 }

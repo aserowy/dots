@@ -1,6 +1,7 @@
 { ... }:
 {
   # TODO: postgresql migrations from bitnami to cloudnativepg
+  # TODO: valkey migrations from bitnami to pure valkey container
   # TODO: alerting for cluster infrastructure
   # TODO: add mailing to monitoring and nextcloud
   # TODO: HPA collabora, gotenberg, tika, imaginary
