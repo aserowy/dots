@@ -7,7 +7,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: valkey
     app.kubernetes.io/version: 9.0.1
-    helm.sh/chart: valkey-5.1.2
+    helm.sh/chart: valkey-5.1.4
   name: valkey-replicas
   namespace: paperless
 spec:
