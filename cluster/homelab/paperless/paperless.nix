@@ -99,7 +99,7 @@ in
                   command = [
                     "sh"
                     "-c"
-                    "until nc -z postgresql 5432; do echo 'waiting for postgresql.'; sleep 5; done"
+                    "until nc -z paperless-pg17-rw 5432; do echo 'waiting for postgresql.'; sleep 5; done"
                   ];
                 }
               ];
@@ -161,8 +161,8 @@ in
                     {
                       name = "PAPERLESS_DBPASS";
                       valueFrom.secretKeyRef = {
-                        name = "postgresql";
-                        key = "password";
+                        name = "paperless";
+                        key = "postgresql-password";
                       };
                     }
                     {
