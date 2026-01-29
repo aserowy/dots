@@ -80,7 +80,28 @@ in
             name = "trixie";
             major = 17;
           };
-          storage.size = "1Gi";
+          storage.size = "2Gi";
+
+          bootstrap.initdb.import = {
+            type = "microservice";
+            databases = [ "paperless" ];
+            source.externalCluster = "bitnami";
+          };
+
+          externalClusters = [
+            {
+              name = "bitnami";
+              connectionParameters = {
+                host = "postgresql.paperless.svc.cluster.local";
+                user = "paperless";
+                dbname = "paperless";
+              };
+              password = {
+                name = "postgresql";
+                key = "password";
+              };
+            }
+          ];
         };
       };
 
