@@ -16,5 +16,10 @@ spec:
     major: 17
     name: trixie
   instances: 1
+  managed:
+    services:
+      disabledDefaultServices:
+        - ro
+        - r
   storage:
     size: 2Gi
