@@ -1,5 +1,11 @@
 { ... }:
 {
+  # TODO: postgresql migrations from bitnami to cloudnativepg
+  # TODO: alerting for cluster infrastructure
+  # TODO: add mailing to monitoring and nextcloud
+  # TODO: HPA collabora, gotenberg, tika, imaginary
+  # TODO: check if HA is possible for adguard, paperless, and other workloads
+
   imports = [
     ./argocd.nix
 
