@@ -1,7 +1,6 @@
 {
   application,
   namespace,
-  lib,
   ...
 }:
 let
@@ -11,23 +10,6 @@ let
 in
 {
   applications."${application}" = {
-    helm.releases.postgresql = {
-      chart = lib.helm.downloadHelmChart {
-        repo = "https://charts.bitnami.com/bitnami/";
-        chart = "postgresql";
-        version = "16.7.27";
-        chartHash = "sha256-Sl3CjRqPSVl5j8BYNvahUiAZqCUIAK3Xsv/bMFdQ3t8=";
-      };
-      values = {
-        image.repository = "bitnamilegacy/postgresql";
-        auth = {
-          database = "paperless";
-          username = "paperless";
-          existingSecret = "postgresql";
-        };
-      };
-    };
-
     yamls = [
       ''
         apiVersion: v1
