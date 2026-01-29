@@ -32,13 +32,13 @@ let
       src = pkgs.fetchFromGitHub {
         owner = "cilium";
         repo = "cilium";
-        rev = "v1.17.5";
-        hash = "sha256-frpu1kJICbZFwmH/KQ2pZHcS2M+XvLvxZpzVxok2eM8=";
+        rev = "v1.18.6";
+        hash = "sha256-V4CbizefPn8VnZnnSxgQP2eq72wNVD0niuEmAlr28Xs=";
       };
       crds = [
         "pkg/k8s/apis/cilium.io/client/crds/v2/ciliumnetworkpolicies.yaml"
         "pkg/k8s/apis/cilium.io/client/crds/v2/ciliumclusterwidenetworkpolicies.yaml"
-        "pkg/k8s/apis/cilium.io/client/crds/v2alpha1/ciliumloadbalancerippools.yaml"
+        "pkg/k8s/apis/cilium.io/client/crds/v2/ciliumloadbalancerippools.yaml"
       ];
     };
     sops = nixidy.packages.${pkgs.stdenv.hostPlatform.system}.generators.fromCRD {
