@@ -86,28 +86,7 @@ in
             owner = "paperless";
             database = "paperless";
             secret.name = "paperless-pg";
-
-            import = {
-              type = "microservice";
-              databases = [ "paperless" ];
-              source.externalCluster = "bitnami";
-            };
           };
-
-          externalClusters = [
-            {
-              name = "bitnami";
-              connectionParameters = {
-                host = "postgresql.paperless.svc.cluster.local";
-                user = "paperless";
-                dbname = "paperless";
-              };
-              password = {
-                name = "paperless-pg";
-                key = "password";
-              };
-            }
-          ];
         };
       };
 
@@ -159,7 +138,7 @@ in
                     }
                     {
                       name = "PAPERLESS_DBHOST";
-                      value = "postgresql.paperless.svc.cluster.local";
+                      value = "paperless-pg17-rw.paperless.svc.cluster.local";
                     }
                     {
                       name = "PAPERLESS_URL";
