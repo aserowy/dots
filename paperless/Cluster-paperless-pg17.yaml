@@ -4,6 +4,23 @@ metadata:
   name: paperless-pg17
   namespace: paperless
 spec:
+  bootstrap:
+    initdb:
+      import:
+        databases:
+          - paperless
+        source:
+          externalCluster: bitnami
+        type: microservice
+  externalClusters:
+    - connectionParameters:
+        dbname: paperless
+        host: postgresql.paperless.svc.cluster.local
+        user: paperless
+      name: bitnami
+      password:
+        key: password
+        name: postgresql
   imageCatalogRef:
     apiGroup: postgresql.cnpg.io
     kind: ClusterImageCatalog
@@ -11,4 +28,4 @@ spec:
     name: trixie
   instances: 1
   storage:
-    size: 1Gi
+    size: 2Gi
