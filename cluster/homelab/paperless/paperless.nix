@@ -82,10 +82,16 @@ in
           };
           storage.size = "2Gi";
 
-          bootstrap.initdb.import = {
-            type = "microservice";
-            databases = [ "paperless" ];
-            source.externalCluster = "bitnami";
+          bootstrap.initdb = {
+            owner = "paperless";
+            database = "paperless";
+            secret.name = "paperless-pg";
+
+            import = {
+              type = "microservice";
+              databases = [ "paperless" ];
+              source.externalCluster = "bitnami";
+            };
           };
 
           externalClusters = [
@@ -97,7 +103,7 @@ in
                 dbname = "paperless";
               };
               password = {
-                name = "postgresql";
+                name = "paperless-pg";
                 key = "password";
               };
             }
