@@ -3,7 +3,7 @@ let
   namespace = "cnpg-system";
 in
 {
-  applications.monitoring = {
+  applications.cloudnativepg = {
     inherit namespace;
 
     createNamespace = true;
