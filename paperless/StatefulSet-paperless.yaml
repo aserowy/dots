@@ -47,8 +47,8 @@ spec:
             - name: PAPERLESS_DBPASS
               valueFrom:
                 secretKeyRef:
-                  key: password
-                  name: postgresql
+                  key: postgresql-password
+                  name: paperless
             - name: PAPERLESS_OUTLOOK_OAUTH_CLIENT_ID
               valueFrom:
                 secretKeyRef:
@@ -110,7 +110,7 @@ spec:
         - command:
             - sh
             - -c
-            - until nc -z postgresql 5432; do echo 'waiting for postgresql.'; sleep 5; done
+            - until nc -z paperless-pg17-rw 5432; do echo 'waiting for postgresql.'; sleep 5; done
           image: busybox:1.37
           name: await-db-init
       securityContext:
