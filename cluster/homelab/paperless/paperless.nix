@@ -622,7 +622,21 @@ in
                 ];
               }
             ];
-            egress = [ { } ];
+            egress = [
+              {
+                toEntities = [ "kube-apiserver" ];
+                toPorts = [
+                  {
+                    ports = [
+                      {
+                        port = "6443";
+                        protocol = "TCP";
+                      }
+                    ];
+                  }
+                ];
+              }
+            ];
           };
         };
       };
