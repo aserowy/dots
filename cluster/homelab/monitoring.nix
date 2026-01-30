@@ -123,6 +123,20 @@ in
             };
           };
           ingress = [
+            # NOTE: combining fromEndpoints and fromEntities is not supported
+            {
+              fromEntities = [ "host" ];
+              toPorts = [
+                {
+                  ports = [
+                    {
+                      port = "3000";
+                      protocol = "TCP";
+                    }
+                  ];
+                }
+              ];
+            }
             {
               fromEndpoints = [
                 {
@@ -136,9 +150,6 @@ in
                     "app.kubernetes.io/name" = "prometheus";
                   };
                 }
-              ];
-              fromEntities = [
-                "host"
               ];
               toPorts = [
                 {

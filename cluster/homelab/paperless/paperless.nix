@@ -589,10 +589,21 @@ in
               "app.kubernetes.io/name" = "postgresql";
             };
             ingress = [
+              # NOTE: combining fromEndpoints and fromEntities is not supported
               {
-                fromEntities = [
-                  "host"
+                fromEntities = [ "host" ];
+                toPorts = [
+                  {
+                    ports = [
+                      {
+                        port = "8000";
+                        protocol = "TCP";
+                      }
+                    ];
+                  }
                 ];
+              }
+              {
                 fromEndpoints = [
                   {
                     matchLabels = {

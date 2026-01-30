@@ -57,8 +57,21 @@ in
               }
             ];
           }
+          # NOTE: combining fromEndpoints and fromEntities is not supported
           {
             fromEntities = [ "world" ];
+            toPorts = [
+              {
+                ports = [
+                  {
+                    port = "8443";
+                    protocol = "TCP";
+                  }
+                ];
+              }
+            ];
+          }
+          {
             fromEndpoints = [
               { matchLabels."haproxy/ingress" = "allow"; }
             ];

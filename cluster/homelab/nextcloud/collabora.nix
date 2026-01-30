@@ -88,10 +88,21 @@
         spec = {
           endpointSelector.matchLabels."app.kubernetes.io/name" = "collabora-collabora-online";
           ingress = [
+            # NOTE: combining fromEndpoints and fromEntities is not supported
             {
-              fromEntities = [
-                "host"
+              fromEntities = [ "host" ];
+              toPorts = [
+                {
+                  ports = [
+                    {
+                      port = "9980";
+                      protocol = "TCP";
+                    }
+                  ];
+                }
               ];
+            }
+            {
               fromEndpoints = [
                 {
                   matchLabels = {

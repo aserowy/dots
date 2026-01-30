@@ -122,9 +122,7 @@ in
             ingress = [
               # NOTE: metrics collector must get unblocked here
               {
-                fromEntities = [
-                  "host"
-                ];
+                fromEntities = [ "host" ];
                 toPorts = [
                   {
                     ports = [
@@ -209,9 +207,7 @@ in
             ingress = [
               # NOTE: metrics collector must get unblocked here
               {
-                fromEntities = [
-                  "host"
-                ];
+                fromEntities = [ "host" ];
                 toPorts = [
                   {
                     ports = [
@@ -224,9 +220,7 @@ in
                 ];
               }
               {
-                fromEntities = [
-                  "kube-apiserver"
-                ];
+                fromEntities = [ "kube-apiserver" ];
                 toPorts = [
                   {
                     ports = [
@@ -240,9 +234,7 @@ in
               }
               {
                 # NOTE: startupapicheck node
-                fromEntities = [
-                  "remote-node"
-                ];
+                fromEntities = [ "remote-node" ];
                 toPorts = [
                   {
                     ports = [
