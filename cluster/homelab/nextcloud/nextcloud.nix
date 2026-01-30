@@ -94,7 +94,7 @@
           enabled = true;
           existingSecret = {
             enabled = true;
-            secretName = "database";
+            secretName = "nextcloud";
           };
         };
 
@@ -131,6 +131,51 @@
     resources = {
       # NOTE: patch nextcloud deployment to enable labeled ingress in HAProxy
       deployments.nextcloud.spec.template.metadata.labels."haproxy/ingress" = "allow";
+
+      clusters.nextcloud-pg17 = {
+        spec = {
+          instances = 1;
+          imageCatalogRef = {
+            apiGroup = "postgresql.cnpg.io";
+            kind = "ClusterImageCatalog";
+            name = "trixie";
+            major = 17;
+          };
+          storage.size = "2Gi";
+
+          bootstrap.initdb = {
+            owner = "nextcloud";
+            database = "nextcloud";
+            secret.name = "nextcloud-pg";
+
+            import = {
+              type = "microservice";
+              databases = [ "nextcloud" ];
+              source.externalCluster = "bitnami";
+            };
+          };
+
+          externalClusters = [
+            {
+              name = "bitnami";
+              connectionParameters = {
+                host = "nextcloud-postgresql.nextcloud.svc.cluster.local";
+                user = "nextcloud";
+                dbname = "nextcloud";
+              };
+              password = {
+                name = "nextcloud-pg";
+                key = "password";
+              };
+            }
+          ];
+
+          managed.services.disabledDefaultServices = [
+            "ro"
+            "r"
+          ];
+        };
+      };
 
       ingresses.nextcloud = {
         metadata = {
