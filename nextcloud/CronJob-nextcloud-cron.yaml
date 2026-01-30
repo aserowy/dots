@@ -60,12 +60,12 @@ spec:
                   valueFrom:
                     secretKeyRef:
                       key: db-username
-                      name: database
+                      name: nextcloud
                 - name: POSTGRES_PASSWORD
                   valueFrom:
                     secretKeyRef:
                       key: db-password
-                      name: database
+                      name: nextcloud
                 - name: NEXTCLOUD_ADMIN_USER
                   valueFrom:
                     secretKeyRef:

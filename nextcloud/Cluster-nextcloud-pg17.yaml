@@ -1,0 +1,40 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: nextcloud-pg17
+  namespace: nextcloud
+spec:
+  bootstrap:
+    initdb:
+      database: nextcloud
+      import:
+        databases:
+          - nextcloud
+        source:
+          externalCluster: bitnami
+        type: microservice
+      owner: nextcloud
+      secret:
+        name: nextcloud-pg
+  externalClusters:
+    - connectionParameters:
+        dbname: nextcloud
+        host: nextcloud-postgresql.nextcloud.svc.cluster.local
+        user: nextcloud
+      name: bitnami
+      password:
+        key: password
+        name: nextcloud-pg
+  imageCatalogRef:
+    apiGroup: postgresql.cnpg.io
+    kind: ClusterImageCatalog
+    major: 17
+    name: trixie
+  instances: 1
+  managed:
+    services:
+      disabledDefaultServices:
+        - ro
+        - r
+  storage:
+    size: 2Gi
