@@ -590,7 +590,17 @@ in
             };
             ingress = [
               {
-                fromEntities = [ "host" ];
+                fromEntities = [
+                  "host"
+                ];
+                fromEndpoints = [
+                  {
+                    matchLabels = {
+                      "io.kubernetes.pod.namespace" = "cnpg-system";
+                      "app.kubernetes.io/name" = "cloudnative-pg";
+                    };
+                  }
+                ];
                 toPorts = [
                   {
                     ports = [
