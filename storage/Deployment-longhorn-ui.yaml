@@ -6,8 +6,8 @@ metadata:
     app.kubernetes.io/instance: longhorn
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: longhorn
-    app.kubernetes.io/version: v1.10.1
-    helm.sh/chart: longhorn-1.10.1
+    app.kubernetes.io/version: v1.10.2
+    helm.sh/chart: longhorn-1.10.2
   name: longhorn-ui
   namespace: longhorn-system
 spec:
@@ -22,9 +22,9 @@ spec:
         app.kubernetes.io/instance: longhorn
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: longhorn
-        app.kubernetes.io/version: v1.10.1
+        app.kubernetes.io/version: v1.10.2
         haproxy/egress: allow
-        helm.sh/chart: longhorn-1.10.1
+        helm.sh/chart: longhorn-1.10.2
     spec:
       affinity:
         podAntiAffinity:
@@ -44,7 +44,7 @@ spec:
               value: http://longhorn-backend:9500
             - name: LONGHORN_UI_PORT
               value: "8000"
-          image: longhornio/longhorn-ui:v1.10.1
+          image: docker.io/longhornio/longhorn-ui:v1.10.2
           imagePullPolicy: IfNotPresent
           name: longhorn-ui
           ports:

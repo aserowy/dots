@@ -4,7 +4,8 @@ metadata:
   name: nextcloud-imaginary
   namespace: nextcloud
 spec:
-  egress: []
+  egress:
+    - {}
   endpointSelector:
     matchLabels:
       app.kubernetes.io/component: imaginary
