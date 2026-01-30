@@ -11,12 +11,16 @@ spec:
       app.kubernetes.io/component: imaginary
       app.kubernetes.io/name: nextcloud
   ingress:
+    - fromEntities:
+        - host
+      toPorts:
+        - ports:
+            - port: "9000"
+              protocol: TCP
     - fromEndpoints:
         - matchLabels:
             app.kubernetes.io/component: app
             app.kubernetes.io/name: nextcloud
-      fromEntities:
-        - host
       toPorts:
         - ports:
             - port: "9000"

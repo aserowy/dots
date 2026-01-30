@@ -25,12 +25,16 @@ spec:
     matchLabels:
       app.kubernetes.io/name: collabora-collabora-online
   ingress:
+    - fromEntities:
+        - host
+      toPorts:
+        - ports:
+            - port: "9980"
+              protocol: TCP
     - fromEndpoints:
         - matchLabels:
             app.kubernetes.io/name: kubernetes-ingress
             io.kubernetes.pod.namespace: haproxy
-      fromEntities:
-        - host
       toPorts:
         - ports:
             - port: "9980"

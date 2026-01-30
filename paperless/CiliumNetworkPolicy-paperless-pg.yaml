@@ -15,12 +15,16 @@ spec:
     matchLabels:
       app.kubernetes.io/name: postgresql
   ingress:
+    - fromEntities:
+        - host
+      toPorts:
+        - ports:
+            - port: "8000"
+              protocol: TCP
     - fromEndpoints:
         - matchLabels:
             app.kubernetes.io/name: cloudnative-pg
             io.kubernetes.pod.namespace: cnpg-system
-      fromEntities:
-        - host
       toPorts:
         - ports:
             - port: "8000"

@@ -27,11 +27,15 @@ spec:
         - ports:
             - port: "1042"
               protocol: TCP
+    - fromEntities:
+        - world
+      toPorts:
+        - ports:
+            - port: "8443"
+              protocol: TCP
     - fromEndpoints:
         - matchLabels:
             haproxy/ingress: allow
-      fromEntities:
-        - world
       toPorts:
         - ports:
             - port: "8443"
