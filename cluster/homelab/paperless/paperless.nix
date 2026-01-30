@@ -577,6 +577,54 @@ in
             ];
           };
         };
+
+        paperless-pg = {
+          apiVersion = "cilium.io/v2";
+          kind = "CiliumNetworkPolicy";
+          metadata = {
+            inherit namespace;
+          };
+          spec = {
+            endpointSelector.matchLabels = {
+              "app.kubernetes.io/name" = "postgresql";
+            };
+            ingress = [
+              {
+                fromEntities = [ "host" ];
+                toPorts = [
+                  {
+                    ports = [
+                      {
+                        port = "8000";
+                        protocol = "TCP";
+                      }
+                    ];
+                  }
+                ];
+              }
+              {
+                fromEndpoints = [
+                  {
+                    matchLabels = {
+                      "app.kubernetes.io/name" = "paperless";
+                    };
+                  }
+                ];
+                toPorts = [
+                  {
+                    ports = [
+                      {
+                        port = "5432";
+                        protocol = "TCP";
+                      }
+                    ];
+                  }
+                ];
+              }
+            ];
+            egress = [ { } ];
+          };
+        };
       };
     };
 
