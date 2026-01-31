@@ -7,23 +7,8 @@ spec:
   bootstrap:
     initdb:
       database: homeassistant_db
-      import:
-        databases:
-          - homeassistant_db
-        source:
-          externalCluster: bitnami
-        type: microservice
       owner: homeassistant
       secret:
-        name: homeassistant-pg
-  externalClusters:
-    - connectionParameters:
-        dbname: homeassistant_db
-        host: postgresql.homeassistant.svc.cluster.local
-        user: homeassistant
-      name: bitnami
-      password:
-        key: password
         name: homeassistant-pg
   imageCatalogRef:
     apiGroup: postgresql.cnpg.io
@@ -37,4 +22,4 @@ spec:
         - ro
         - r
   storage:
-    size: 2Gi
+    size: 8Gi
