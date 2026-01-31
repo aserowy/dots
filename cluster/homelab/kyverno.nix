@@ -1,7 +1,7 @@
 { charts, ... }:
 {
-  applications.policies = {
-    namespace = "policies";
+  applications.kyverno = {
+    namespace = "kyverno";
     createNamespace = true;
 
     annotations = {

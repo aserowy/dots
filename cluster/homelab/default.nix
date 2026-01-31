@@ -15,7 +15,7 @@
     ./devices.nix
     ./haproxy.nix
     ./monitoring.nix
-    ./policies.nix
+    ./kyverno.nix
     ./secrets.nix
     ./storage.nix
 
