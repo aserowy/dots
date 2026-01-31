@@ -48,6 +48,51 @@ in
     ];
 
     resources = {
+      clusters.homeassistant-pg17 = {
+        spec = {
+          instances = 1;
+          imageCatalogRef = {
+            apiGroup = "postgresql.cnpg.io";
+            kind = "ClusterImageCatalog";
+            name = "trixie";
+            major = 17;
+          };
+          storage.size = "2Gi";
+
+          bootstrap.initdb = {
+            owner = "homeassistant";
+            database = "homeassistant_db";
+            secret.name = "homeassistant-pg";
+
+            import = {
+              type = "microservice";
+              databases = [ "homeassistant_db" ];
+              source.externalCluster = "bitnami";
+            };
+          };
+
+          externalClusters = [
+            {
+              name = "bitnami";
+              connectionParameters = {
+                host = "postgresql.homeassistant.svc.cluster.local";
+                user = "homeassistant";
+                dbname = "homeassistant_db";
+              };
+              password = {
+                name = "homeassistant-pg";
+                key = "password";
+              };
+            }
+          ];
+
+          managed.services.disabledDefaultServices = [
+            "ro"
+            "r"
+          ];
+        };
+      };
+
       configMaps.homeassistant-cm = {
         metadata = {
           inherit namespace;
