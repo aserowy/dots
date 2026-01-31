@@ -36,7 +36,7 @@ spec:
             - name: OVERWRITEPROTOCOL
               value: https
             - name: POSTGRES_HOST
-              value: nextcloud-postgresql
+              value: nextcloud-pg17-rw.nextcloud.svc.cluster.local
             - name: POSTGRES_DB
               value: nextcloud
             - name: POSTGRES_USER
@@ -162,23 +162,6 @@ spec:
             - mountPath: /var/www/html/config/upgrade-disable-web.config.php
               name: nextcloud-config
               subPath: upgrade-disable-web.config.php
-      initContainers:
-        - command:
-            - sh
-            - -c
-            - until pg_isready -h ${POSTGRES_HOST} -U ${POSTGRES_USER} ; do sleep 2 ; done
-          env:
-            - name: POSTGRES_USER
-              valueFrom:
-                secretKeyRef:
-                  key: db-username
-                  name: nextcloud
-            - name: POSTGRES_HOST
-              value: nextcloud-postgresql
-          image: docker.io/bitnamilegacy/postgresql:17.5.0-debian-12-r3
-          name: postgresql-isready
-          resources: {}
-          securityContext: {}
       securityContext:
         fsGroup: 33
       volumes:

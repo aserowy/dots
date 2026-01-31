@@ -7,23 +7,8 @@ spec:
   bootstrap:
     initdb:
       database: nextcloud
-      import:
-        databases:
-          - nextcloud
-        source:
-          externalCluster: bitnami
-        type: microservice
       owner: nextcloud
       secret:
-        name: nextcloud-pg
-  externalClusters:
-    - connectionParameters:
-        dbname: nextcloud
-        host: nextcloud-postgresql.nextcloud.svc.cluster.local
-        user: nextcloud
-      name: bitnami
-      password:
-        key: password
         name: nextcloud-pg
   imageCatalogRef:
     apiGroup: postgresql.cnpg.io
