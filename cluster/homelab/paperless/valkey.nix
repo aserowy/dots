@@ -1,29 +1,31 @@
-{ application, namespace, charts, ... }:
+{
+  application,
+  namespace,
+  charts,
+  ...
+}:
 {
   applications."${application}" = {
     inherit namespace;
     createNamespace = true;
 
-    helm.releases = {
-      valkey = {
-        chart = charts.bitnami.valkey;
+    helm.releases.valkey = {
+      chart = charts.valkey.valkey;
 
-        values = {
-          global.defaultStorageClass = "longhorn-nobackup";
-          auth = {
-            existingSecret = "valkey";
-            existingSecretPasswordKey = "password";
+      values = {
+        auth = {
+          enabled = true;
+          usersExistingSecret = "valkey-users";
+          aclUsers = {
+            default.permissions = "~* &* +@all";
+            paperless.permissions = "~* &* +@all";
           };
-          primary = {
-            persistence = {
-              size = "4Gi";
-            };
-          };
-          replica = {
-            persistence = {
-              size = "4Gi";
-            };
-          };
+        };
+
+        dataStorage = {
+          enabled = true;
+          className = "longhorn-nobackup";
+          requestedSize = "2Gi";
         };
       };
     };
