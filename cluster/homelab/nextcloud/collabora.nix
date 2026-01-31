@@ -12,7 +12,7 @@
       values = {
         # NOTE: without dynamic load hpa is not necessary
         autoscaling.enabled = false;
-        replicaCount = 2;
+        replicaCount = 1;
         collabora = {
           aliasgroups = [
             { host = "https://nextcloud.anderwerse.de:443"; }
@@ -34,8 +34,8 @@
             memory = "2Gi";
           };
           limits = {
-            cpu = "4000m";
-            memory = "6Gi";
+            cpu = "8000m";
+            memory = "8Gi";
           };
         };
       };
