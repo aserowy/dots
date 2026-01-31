@@ -1,0 +1,40 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: homeassistant-pg17
+  namespace: homeassistant
+spec:
+  bootstrap:
+    initdb:
+      database: homeassistant_db
+      import:
+        databases:
+          - homeassistant_db
+        source:
+          externalCluster: bitnami
+        type: microservice
+      owner: homeassistant
+      secret:
+        name: homeassistant-pg
+  externalClusters:
+    - connectionParameters:
+        dbname: homeassistant_db
+        host: postgresql.homeassistant.svc.cluster.local
+        user: homeassistant
+      name: bitnami
+      password:
+        key: password
+        name: homeassistant-pg
+  imageCatalogRef:
+    apiGroup: postgresql.cnpg.io
+    kind: ClusterImageCatalog
+    major: 17
+    name: trixie
+  instances: 1
+  managed:
+    services:
+      disabledDefaultServices:
+        - ro
+        - r
+  storage:
+    size: 2Gi
