@@ -1,7 +1,6 @@
 {
   application,
   namespace,
-  lib,
   ...
 }:
 let
@@ -10,25 +9,6 @@ let
 in
 {
   applications."${application}" = {
-    # FIX: Migrate postgres to 18.0
-    helm.releases.postgresql = {
-      # chart = charts.bitnami.postgresql;
-      chart = lib.helm.downloadHelmChart {
-        repo = "https://charts.bitnami.com/bitnami/";
-        chart = "postgresql";
-        version = "16.7.27";
-        chartHash = "sha256-Sl3CjRqPSVl5j8BYNvahUiAZqCUIAK3Xsv/bMFdQ3t8=";
-      };
-      values = {
-        image.repository = "bitnamilegacy/postgresql";
-        auth = {
-          database = "homeassistant_db";
-          username = "homeassistant";
-          existingSecret = "postgresql";
-        };
-      };
-    };
-
     yamls = [
       (builtins.readFile ./homeassistant-secrets.sops.yaml)
 
@@ -57,34 +37,13 @@ in
             name = "trixie";
             major = 17;
           };
-          storage.size = "2Gi";
+          storage.size = "8Gi";
 
           bootstrap.initdb = {
             owner = "homeassistant";
             database = "homeassistant_db";
             secret.name = "homeassistant-pg";
-
-            import = {
-              type = "microservice";
-              databases = [ "homeassistant_db" ];
-              source.externalCluster = "bitnami";
-            };
           };
-
-          externalClusters = [
-            {
-              name = "bitnami";
-              connectionParameters = {
-                host = "postgresql.homeassistant.svc.cluster.local";
-                user = "homeassistant";
-                dbname = "homeassistant_db";
-              };
-              password = {
-                name = "homeassistant-pg";
-                key = "password";
-              };
-            }
-          ];
 
           managed.services.disabledDefaultServices = [
             "ro"
@@ -344,101 +303,186 @@ in
         };
       };
 
-      ciliumNetworkPolicies.homeassistant = {
-        apiVersion = "cilium.io/v2";
-        kind = "CiliumNetworkPolicy";
-        metadata = {
-          inherit namespace;
-        };
-        spec = {
-          endpointSelector = {
-            matchLabels = {
-              "app.kubernetes.io/name" = "homeassistant";
-            };
+      ciliumNetworkPolicies = {
+        homeassistant = {
+          apiVersion = "cilium.io/v2";
+          kind = "CiliumNetworkPolicy";
+          metadata = {
+            inherit namespace;
           };
-          ingress = [
-            {
-              fromEndpoints = [
-                {
-                  matchLabels = {
-                    "io.kubernetes.pod.namespace" = "haproxy";
-                    "app.kubernetes.io/name" = "kubernetes-ingress";
-                  };
-                }
-              ];
-              toPorts = [
-                {
-                  ports = [
-                    {
-                      port = "8123";
-                      protocol = "TCP";
-                    }
-                  ];
-                }
-              ];
-            }
-          ];
-          egress = [
-            { toEntities = [ "world" ]; }
-            {
-              toEndpoints = [
-                {
-                  matchLabels = {
-                    "io.kubernetes.pod.namespace" = "kube-system";
-                    "k8s-app" = "kube-dns";
-                  };
-                }
-              ];
-              toPorts = [
-                {
-                  ports = [
-                    {
-                      port = "53";
-                      protocol = "UDP";
-                    }
-                  ];
-                }
-              ];
-            }
-            {
-              toEndpoints = [
-                {
-                  matchLabels = {
-                    "app.kubernetes.io/name" = "mosquitto";
-                  };
-                }
-              ];
-              toPorts = [
-                {
-                  ports = [
-                    {
-                      port = "1883";
-                      protocol = "TCP";
-                    }
-                  ];
-                }
-              ];
-            }
-            {
-              toEndpoints = [
-                {
-                  matchLabels = {
-                    "app.kubernetes.io/name" = "postgresql";
-                  };
-                }
-              ];
-              toPorts = [
-                {
-                  ports = [
-                    {
-                      port = "5432";
-                      protocol = "TCP";
-                    }
-                  ];
-                }
-              ];
-            }
-          ];
+          spec = {
+            endpointSelector = {
+              matchLabels = {
+                "app.kubernetes.io/name" = "homeassistant";
+              };
+            };
+            ingress = [
+              {
+                fromEndpoints = [
+                  {
+                    matchLabels = {
+                      "io.kubernetes.pod.namespace" = "haproxy";
+                      "app.kubernetes.io/name" = "kubernetes-ingress";
+                    };
+                  }
+                ];
+                toPorts = [
+                  {
+                    ports = [
+                      {
+                        port = "8123";
+                        protocol = "TCP";
+                      }
+                    ];
+                  }
+                ];
+              }
+            ];
+            egress = [
+              { toEntities = [ "world" ]; }
+              {
+                toEndpoints = [
+                  {
+                    matchLabels = {
+                      "io.kubernetes.pod.namespace" = "kube-system";
+                      "k8s-app" = "kube-dns";
+                    };
+                  }
+                ];
+                toPorts = [
+                  {
+                    ports = [
+                      {
+                        port = "53";
+                        protocol = "UDP";
+                      }
+                    ];
+                  }
+                ];
+              }
+              {
+                toEndpoints = [
+                  {
+                    matchLabels = {
+                      "app.kubernetes.io/name" = "mosquitto";
+                    };
+                  }
+                ];
+                toPorts = [
+                  {
+                    ports = [
+                      {
+                        port = "1883";
+                        protocol = "TCP";
+                      }
+                    ];
+                  }
+                ];
+              }
+              {
+                toEndpoints = [
+                  {
+                    matchLabels = {
+                      "app.kubernetes.io/name" = "postgresql";
+                    };
+                  }
+                ];
+                toPorts = [
+                  {
+                    ports = [
+                      {
+                        port = "5432";
+                        protocol = "TCP";
+                      }
+                    ];
+                  }
+                ];
+              }
+            ];
+          };
+        };
+
+        homeassistant-pg = {
+          apiVersion = "cilium.io/v2";
+          kind = "CiliumNetworkPolicy";
+          metadata = {
+            inherit namespace;
+          };
+          spec = {
+            endpointSelector.matchLabels = {
+              "app.kubernetes.io/name" = "postgresql";
+            };
+            ingress = [
+              # NOTE: combining fromEndpoints and fromEntities is not supported
+              {
+                fromEntities = [ "host" ];
+                toPorts = [
+                  {
+                    ports = [
+                      {
+                        port = "8000";
+                        protocol = "TCP";
+                      }
+                    ];
+                  }
+                ];
+              }
+              {
+                fromEndpoints = [
+                  {
+                    matchLabels = {
+                      "io.kubernetes.pod.namespace" = "cnpg-system";
+                      "app.kubernetes.io/name" = "cloudnative-pg";
+                    };
+                  }
+                ];
+                toPorts = [
+                  {
+                    ports = [
+                      {
+                        port = "8000";
+                        protocol = "TCP";
+                      }
+                    ];
+                  }
+                ];
+              }
+              {
+                fromEndpoints = [
+                  {
+                    matchLabels = {
+                      "app.kubernetes.io/name" = "homeassistant";
+                    };
+                  }
+                ];
+                toPorts = [
+                  {
+                    ports = [
+                      {
+                        port = "5432";
+                        protocol = "TCP";
+                      }
+                    ];
+                  }
+                ];
+              }
+            ];
+            egress = [
+              {
+                toEntities = [ "kube-apiserver" ];
+                toPorts = [
+                  {
+                    ports = [
+                      {
+                        port = "6443";
+                        protocol = "TCP";
+                      }
+                    ];
+                  }
+                ];
+              }
+            ];
+          };
         };
       };
     };
