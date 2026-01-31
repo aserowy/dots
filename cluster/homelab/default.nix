@@ -14,8 +14,8 @@
     ./cilium.nix
     ./devices.nix
     ./haproxy.nix
-    ./monitoring.nix
     ./kyverno.nix
+    ./monitoring.nix
     ./secrets.nix
     ./storage.nix
 

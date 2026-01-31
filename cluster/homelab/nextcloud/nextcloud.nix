@@ -92,26 +92,12 @@
         internalDatabase.enabled = false;
         externalDatabase = {
           enabled = true;
+          type = "postgresql";
+          host = "nextcloud-pg17-rw.nextcloud.svc.cluster.local";
+
           existingSecret = {
             enabled = true;
             secretName = "nextcloud";
-          };
-        };
-
-        # TODO: migrate to cloudnative pg
-        postgresql = {
-          enabled = true;
-          global.postgresql.auth = {
-            existingSecret = "database";
-            secretKeys = {
-              adminPasswordKey = "db-adminpassword";
-              userPasswordKey = "db-password";
-              replicationPasswordKey = "db-replicationpassword";
-            };
-          };
-          primary.persistence = {
-            enabled = true;
-            storageClass = "longhorn";
           };
         };
 
@@ -147,28 +133,7 @@
             owner = "nextcloud";
             database = "nextcloud";
             secret.name = "nextcloud-pg";
-
-            import = {
-              type = "microservice";
-              databases = [ "nextcloud" ];
-              source.externalCluster = "bitnami";
-            };
           };
-
-          externalClusters = [
-            {
-              name = "bitnami";
-              connectionParameters = {
-                host = "nextcloud-postgresql.nextcloud.svc.cluster.local";
-                user = "nextcloud";
-                dbname = "nextcloud";
-              };
-              password = {
-                name = "nextcloud-pg";
-                key = "password";
-              };
-            }
-          ];
 
           managed.services.disabledDefaultServices = [
             "ro"
