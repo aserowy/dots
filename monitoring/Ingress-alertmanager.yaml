@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: azure-acme-issuer
+  name: alertmanager
+  namespace: monitoring
+spec:
+  ingressClassName: haproxy
+  rules:
+    - host: alertmanager.cluster.anderwerse.de
+      http:
+        paths:
+          - backend:
+              service:
+                name: kube-prometheus-alertmanager
+                port:
+                  number: 9093
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - alertmanager.cluster.anderwerse.de
+      secretName: alertmanager-tls

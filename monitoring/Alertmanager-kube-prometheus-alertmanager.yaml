@@ -39,6 +39,9 @@ spec:
   logFormat: logfmt
   logLevel: info
   paused: false
+  podMetadata:
+    labels:
+      haproxy/egress: allow
   portName: http-web
   replicas: 1
   retention: 120h
