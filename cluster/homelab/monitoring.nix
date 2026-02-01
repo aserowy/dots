@@ -26,9 +26,9 @@ in
         alertmanager = {
           config = {
             global = {
-              smtp_auth_username = "monitoring@anderwerse.de";
+              smtp_auth_username = "cluster-monitor";
               smtp_auth_password_file = "/etc/alertmanager/secrets/alertmanager-acs-secret/password";
-              smtp_from = "monitoring@anderwerse.de";
+              smtp_from = "DoNotReply@anderwerse.de";
               smtp_smarthost = "smtp.azurecomm.net:587";
             };
 
