@@ -26,15 +26,19 @@ in
         alertmanager = {
           config = {
             global = {
-              smtp_auth_username = "monitoring@anderwerse.de";
-              smtp_auth_password_file = "alertmanager-acs-secret";
-              smtp_from = "monitoring@anderwerse.de";
-              smtp_smarthost = "smtp.azurecomm.net:587";
+              # smtp_auth_username = "monitoring@anderwerse.de";
+              # smtp_auth_password_file = "alertmanager-acs-secret";
+              # smtp_from = "monitoring@anderwerse.de";
+              # smtp_smarthost = "smtp.azurecomm.net:587";
             };
           };
-          alertmanagerSpec.storage.volumeClaimTemplate.spec = {
-            storageClassName = "longhorn";
-            resources.requests.storage = "2Gi";
+          alertmanagerSpec = {
+            podMetadata.labels."haproxy/egress" = "allow";
+
+            storage.volumeClaimTemplate.spec = {
+              storageClassName = "longhorn";
+              resources.requests.storage = "2Gi";
+            };
           };
         };
 
@@ -87,36 +91,70 @@ in
     ];
 
     resources = {
-      ingresses.grafana = {
-        metadata = {
-          inherit namespace;
-          annotations = {
-            "cert-manager.io/cluster-issuer" = "azure-acme-issuer";
+      ingresses = {
+        alertmanager = {
+          metadata = {
+            inherit namespace;
+            annotations = {
+              "cert-manager.io/cluster-issuer" = "azure-acme-issuer";
+            };
+          };
+          spec = {
+            ingressClassName = "haproxy";
+            tls = [
+              {
+                hosts = [ "alertmanager.cluster.anderwerse.de" ];
+                secretName = "alertmanager-tls";
+              }
+            ];
+            rules = [
+              {
+                host = "alertmanager.cluster.anderwerse.de";
+                http.paths = [
+                  {
+                    pathType = "Prefix";
+                    path = "/";
+                    backend.service = {
+                      name = "kube-prometheus-alertmanager";
+                      port.number = 9093;
+                    };
+                  }
+                ];
+              }
+            ];
           };
         };
-        spec = {
-          ingressClassName = "haproxy";
-          tls = [
-            {
-              hosts = [ "grafana.cluster.anderwerse.de" ];
-              secretName = "grafana-tls";
-            }
-          ];
-          rules = [
-            {
-              host = "grafana.cluster.anderwerse.de";
-              http.paths = [
-                {
-                  pathType = "Prefix";
-                  path = "/";
-                  backend.service = {
-                    name = "kube-prometheus-stack-grafana";
-                    port.number = 80;
-                  };
-                }
-              ];
-            }
-          ];
+        grafana = {
+          metadata = {
+            inherit namespace;
+            annotations = {
+              "cert-manager.io/cluster-issuer" = "azure-acme-issuer";
+            };
+          };
+          spec = {
+            ingressClassName = "haproxy";
+            tls = [
+              {
+                hosts = [ "grafana.cluster.anderwerse.de" ];
+                secretName = "grafana-tls";
+              }
+            ];
+            rules = [
+              {
+                host = "grafana.cluster.anderwerse.de";
+                http.paths = [
+                  {
+                    pathType = "Prefix";
+                    path = "/";
+                    backend.service = {
+                      name = "kube-prometheus-stack-grafana";
+                      port.number = 80;
+                    };
+                  }
+                ];
+              }
+            ];
+          };
         };
       };
 
