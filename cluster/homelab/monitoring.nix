@@ -23,9 +23,19 @@ in
         nameOverride = "kube-prometheus";
         fullnameOverride = "kube-prometheus";
 
-        alertmanager.alertmanagerSpec.storage.volumeClaimTemplate.spec = {
-          storageClassName = "longhorn";
-          resources.requests.storage = "2Gi";
+        alertmanager = {
+          config = {
+            global = {
+              smtp_auth_username = "monitoring@anderwerse.de";
+              smtp_auth_password_file = "alertmanager-acs-secret";
+              smtp_from = "monitoring@anderwerse.de";
+              smtp_smarthost = "smtp.azurecomm.net:587";
+            };
+          };
+          alertmanagerSpec.storage.volumeClaimTemplate.spec = {
+            storageClassName = "longhorn";
+            resources.requests.storage = "2Gi";
+          };
         };
 
         grafana = {
