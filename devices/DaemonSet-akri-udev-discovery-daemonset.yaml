@@ -35,12 +35,9 @@ spec:
           image: ghcr.io/project-akri/akri/udev-discovery:v0.13.8
           name: akri-udev-discovery
           resources:
-            limits:
-              cpu: 24m
-              memory: 24Mi
             requests:
-              cpu: 10m
-              memory: 11Mi
+              cpu: 80m
+              memory: 24Mi
           volumeMounts:
             - mountPath: /var/lib/akri
               name: discovery-handlers
