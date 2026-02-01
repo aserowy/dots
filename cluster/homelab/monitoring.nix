@@ -26,10 +26,31 @@ in
         alertmanager = {
           config = {
             global = {
-              # smtp_auth_username = "monitoring@anderwerse.de";
-              # smtp_auth_password_file = "alertmanager-acs-secret";
-              # smtp_from = "monitoring@anderwerse.de";
-              # smtp_smarthost = "smtp.azurecomm.net:587";
+              smtp_auth_username = "monitoring@anderwerse.de";
+              smtp_auth_password_file = "alertmanager-acs-secret";
+              smtp_from = "monitoring@anderwerse.de";
+              smtp_smarthost = "smtp.azurecomm.net:587";
+
+              route = {
+                group_by = [ "namespace" ];
+                group_wait = "30s";
+                group_interval = "5m";
+                repeat_interval = "12h";
+                receiver = "default-receiver";
+                routes = [ ];
+              };
+
+              receivers = [
+                {
+                  name = "default-receiver";
+                  email_configs = [
+                    {
+                      to = "serowy@hotmail.com";
+                      headers.Subject = "[{{ .Status | toUpper }}] {{ .GroupLabels.namespace }}";
+                    }
+                  ];
+                }
+              ];
             };
           };
           alertmanagerSpec = {
