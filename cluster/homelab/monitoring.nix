@@ -27,7 +27,7 @@ in
           config = {
             global = {
               smtp_auth_username = "monitoring@anderwerse.de";
-              smtp_auth_password_file = "alertmanager-acs-secret";
+              smtp_auth_password_file = "/etc/alertmanager/secrets/alertmanager-acs-secret/password";
               smtp_from = "monitoring@anderwerse.de";
               smtp_smarthost = "smtp.azurecomm.net:587";
             };
@@ -53,8 +53,11 @@ in
               }
             ];
           };
+
           alertmanagerSpec = {
             podMetadata.labels."haproxy/egress" = "allow";
+
+            secrets = ["alertmanager-acs-secret"];
 
             storage.volumeClaimTemplate.spec = {
               storageClassName = "longhorn";
