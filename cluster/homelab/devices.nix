@@ -1,4 +1,4 @@
-{ charts, ... }:
+{ charts, lib, ... }:
 let
   namespace = "devices";
 in
@@ -10,9 +10,20 @@ in
     helm.releases = {
       akri = {
         chart = charts.project-akri.akri;
-        values = {
-          udev.discovery.enabled = true;
+
+        values.udev.discovery = {
+          enabled = true;
+          resources = {
+            cpuRequest = "80m";
+            memoryRequest = "24Mi";
+          };
         };
+      };
+    };
+
+    resources = {
+      daemonSets.akri-udev-discovery-daemonset.spec.template = {
+        spec.containers.akri-udev-discovery.resources.limits = lib.mkForce null;
       };
     };
 
