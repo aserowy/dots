@@ -47,6 +47,9 @@ spec:
   logFormat: logfmt
   logLevel: info
   paused: false
+  podMetadata:
+    labels:
+      haproxy/egress: allow
   podMonitorNamespaceSelector: {}
   podMonitorSelector:
     matchLabels:
