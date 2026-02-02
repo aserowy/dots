@@ -89,6 +89,7 @@ in
             };
           };
           prometheusSpec = {
+            podMetadata.labels."haproxy/egress" = "allow";
             scrapeTimeout = "30s";
             scrapeInterval = "60s";
             storageSpec.volumeClaimTemplate.spec = {
@@ -180,8 +181,41 @@ in
             ];
           };
         };
+        prometheus = {
+          metadata = {
+            inherit namespace;
+            annotations = {
+              "cert-manager.io/cluster-issuer" = "azure-acme-issuer";
+            };
+          };
+          spec = {
+            ingressClassName = "haproxy";
+            tls = [
+              {
+                hosts = [ "prometheus.cluster.anderwerse.de" ];
+                secretName = "prometheus-tls";
+              }
+            ];
+            rules = [
+              {
+                host = "prometheus.cluster.anderwerse.de";
+                http.paths = [
+                  {
+                    pathType = "Prefix";
+                    path = "/";
+                    backend.service = {
+                      name = "kube-prometheus-prometheus";
+                      port.number = 9090;
+                    };
+                  }
+                ];
+              }
+            ];
+          };
+        };
       };
 
+      # TODO: netpol alertmanager and prometheus
       ciliumNetworkPolicies.grafana = {
         apiVersion = "cilium.io/v2";
         kind = "CiliumNetworkPolicy";
