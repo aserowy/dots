@@ -1,6 +1,14 @@
 { charts, ... }:
 let
   namespace = "monitoring";
+
+  # NOTE: k3s specific configuration to enable metrics for kube resources
+  endpoints = [
+    "192.168.178.201"
+    "192.168.178.203"
+    "192.168.178.204"
+    "192.168.178.205"
+  ];
 in
 {
   applications.monitoring = {
@@ -106,6 +114,37 @@ in
                 memory = "3Gi";
               };
             };
+          };
+        };
+
+        kubeApiServer . enabled = true;
+
+        kubeControllerManager = {
+          inherit endpoints;
+
+          enabled = true;
+        };
+
+        kubeScheduler = {
+          inherit endpoints;
+
+          enabled = true;
+        };
+
+        kubeProxy = {
+          inherit endpoints;
+
+          enabled = true;
+        };
+
+        kubeEtcd = {
+          inherit endpoints;
+
+          enabled = true;
+          service = {
+            enabled = true;
+            port = 2381;
+            targetPort = 2381;
           };
         };
       };

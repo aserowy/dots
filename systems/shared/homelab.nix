@@ -172,6 +172,23 @@ in
                 kube-apiserver-arg = [
                   "anonymous-auth=true"
                 ];
+
+                # NOTE: prometheus specific settings to allow scraping of metrics
+                kube-controller-manager-arg = [
+                  "address=0.0.0.0"
+                  "bind-address=0.0.0.0"
+                ];
+
+                kube-proxy-arg = [
+                  "metrics-bind-address=0.0.0.0"
+                ];
+
+                kube-scheduler-arg = [
+                  "address=0.0.0.0"
+                  "bind-address=0.0.0.0"
+                ];
+
+                etcd-expose-metrics = true;
               }
             );
           in
