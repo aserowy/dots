@@ -117,25 +117,9 @@ in
           };
         };
 
-        kubeApiServer . enabled = true;
-
-        kubeControllerManager = {
-          inherit endpoints;
-
-          enabled = true;
-        };
-
-        kubeScheduler = {
-          inherit endpoints;
-
-          enabled = true;
-        };
-
-        kubeProxy = {
-          inherit endpoints;
-
-          enabled = true;
-        };
+        kubeControllerManager.enabled = false;
+        kubeScheduler.enabled = false;
+        kubeProxy.enabled = false;
 
         kubeEtcd = {
           inherit endpoints;
