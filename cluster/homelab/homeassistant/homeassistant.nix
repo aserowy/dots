@@ -30,7 +30,7 @@ in
     resources = {
       clusters.homeassistant-pg17 = {
         spec = {
-          instances = 1;
+          instances = 2;
           imageCatalogRef = {
             apiGroup = "postgresql.cnpg.io";
             kind = "ClusterImageCatalog";

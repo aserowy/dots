@@ -65,8 +65,8 @@ in
           alertmanagerSpec = {
             podMetadata.labels."haproxy/egress" = "allow";
 
+            replicas = 2;
             secrets = ["alertmanager-acs-secret"];
-
             storage.volumeClaimTemplate.spec = {
               storageClassName = "longhorn";
               resources.requests.storage = "2Gi";
@@ -97,6 +97,7 @@ in
             };
           };
           prometheusSpec = {
+            replicas = 2;
             podMetadata.labels."haproxy/egress" = "allow";
             scrapeTimeout = "30s";
             scrapeInterval = "60s";
