@@ -451,6 +451,11 @@ in
                 fromEndpoints = [
                   {
                     matchLabels = {
+                      "app.kubernetes.io/name" = "postgresql";
+                    };
+                  }
+                  {
+                    matchLabels = {
                       "app.kubernetes.io/name" = "homeassistant";
                     };
                   }
@@ -496,6 +501,25 @@ in
                       {
                         port = "53";
                         protocol = "UDP";
+                      }
+                    ];
+                  }
+                ];
+              }
+              {
+                toEndpoints = [
+                  {
+                    matchLabels = {
+                      "app.kubernetes.io/name" = "postgresql";
+                    };
+                  }
+                ];
+                toPorts = [
+                  {
+                    ports = [
+                      {
+                        port = "5432";
+                        protocol = "TCP";
                       }
                     ];
                   }
