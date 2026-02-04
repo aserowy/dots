@@ -454,6 +454,24 @@ in
                       "app.kubernetes.io/name" = "postgresql";
                     };
                   }
+                ];
+                toPorts = [
+                  {
+                    ports = [
+                      {
+                        port = "5432";
+                        protocol = "TCP";
+                      }
+                      {
+                        port = "8000";
+                        protocol = "TCP";
+                      }
+                    ];
+                  }
+                ];
+              }
+              {
+                fromEndpoints = [
                   {
                     matchLabels = {
                       "app.kubernetes.io/name" = "homeassistant";
@@ -519,6 +537,10 @@ in
                     ports = [
                       {
                         port = "5432";
+                        protocol = "TCP";
+                      }
+                      {
+                        port = "8000";
                         protocol = "TCP";
                       }
                     ];
