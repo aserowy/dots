@@ -32,7 +32,7 @@ spec:
             - --engine-image
             - docker.io/longhornio/longhorn-engine:v1.11.0
             - --instance-manager-image
-            - docker.io/longhornio/longhorn-instance-manager:v1.11.0
+            - docker.io/longhornio/longhorn-instance-manager:v1.11.0-hotfix-1
             - --share-manager-image
             - docker.io/longhornio/longhorn-share-manager:v1.11.0
             - --backing-image-manager-image
