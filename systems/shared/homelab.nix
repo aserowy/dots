@@ -75,6 +75,7 @@ in
             22
             2379 # etcd client
             2380 # etcd peer
+            2381 # etcd metrics
             4240 # cilium health checks
             4244 # Hubble server
             4245 # Hubble Relay
@@ -84,6 +85,7 @@ in
             6061 # cilium-operator pprof server (listening on 127.0.0.1)
             6062 # Hubble Relay pprof server (listening on 127.0.0.1)
             6443 # kube api server
+            9100 # node exporter metrics
             9878 # cilium-envoy health listener (listening on 127.0.0.1)
             9879 # cilium-agent health status API (listening on 127.0.0.1 and/or ::1)
             9890 # cilium-agent gops server (listening on 127.0.0.1)
