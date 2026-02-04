@@ -7,8 +7,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-repo-server
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.2.6
-    helm.sh/chart: argo-cd-9.3.7
+    app.kubernetes.io/version: v3.3.0
+    helm.sh/chart: argo-cd-9.4.0
   name: argocd-repo-server
   namespace: argocd
 spec:
@@ -21,16 +21,16 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/cm: cf28a8c40d82676f50e7cda145c5a51af8bcc07e315b5c8fcb332b8c25b32332
-        checksum/cmd-params: 219a63466a326309c5f0604192789132bb55732ed8754d0123ffd69bcd308cf4
+        checksum/cm: ee9a91baaf4e805f16f8c2ce124c232ae56a44c631f237183695e06b04d943e5
+        checksum/cmd-params: d6d7db285c49b11ca07def3e855d5c30c38b965700ca9de79c4637f861f02781
       labels:
         app.kubernetes.io/component: repo-server
         app.kubernetes.io/instance: argocd
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: argocd-repo-server
         app.kubernetes.io/part-of: argocd
-        app.kubernetes.io/version: v3.2.6
-        helm.sh/chart: argo-cd-9.3.7
+        app.kubernetes.io/version: v3.3.0
+        helm.sh/chart: argo-cd-9.4.0
     spec:
       affinity:
         podAntiAffinity:
@@ -308,7 +308,7 @@ spec:
               value: /helm-working-dir
             - name: HELM_DATA_HOME
               value: /helm-working-dir
-          image: quay.io/argoproj/argocd:v3.2.6
+          image: quay.io/argoproj/argocd:v3.3.0
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
@@ -365,12 +365,12 @@ spec:
               name: tmp
       dnsPolicy: ClusterFirst
       initContainers:
-        - command:
-            - /bin/cp
-            - --update=none
-            - /usr/local/bin/argocd
-            - /var/run/argocd/argocd-cmp-server
-          image: quay.io/argoproj/argocd:v3.2.6
+        - args:
+            - /bin/cp --update=none /usr/local/bin/argocd /var/run/argocd/argocd && /bin/ln -s /var/run/argocd/argocd /var/run/argocd/argocd-cmp-server
+          command:
+            - sh
+            - -c
+          image: quay.io/argoproj/argocd:v3.3.0
           imagePullPolicy: IfNotPresent
           name: copyutil
           resources: {}

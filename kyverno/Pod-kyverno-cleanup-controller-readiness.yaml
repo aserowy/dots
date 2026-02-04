@@ -8,18 +8,21 @@ metadata:
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: 3.6.2
-    helm.sh/chart: kyverno-3.6.2
+    app.kubernetes.io/version: 3.7.0
+    helm.sh/chart: kyverno-3.7.0
   name: kyverno-cleanup-controller-readiness
   namespace: kyverno
 spec:
   automountServiceAccountToken: true
   containers:
-    - command:
-        - /bin/sh
-        - -c
-        - sleep 20 ; wget -O- -S --no-check-certificate https://kyverno-cleanup-controller.kyverno:443/health/readiness
-      image: curlimages/curl:8.10.1
+    - args:
+        - check-http
+        - --service-name=kyverno-cleanup-controller
+        - --namespace=kyverno
+        - --port=443
+        - --path=health/readiness
+        - --https
+      image: ghcr.io/kyverno/readiness-checker:v0.1.0
       imagePullPolicy: IfNotPresent
       name: test
       resources:

@@ -6,8 +6,8 @@ metadata:
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: 3.6.2
-    helm.sh/chart: kyverno-3.6.2
+    app.kubernetes.io/version: 3.7.0
+    helm.sh/chart: kyverno-3.7.0
   name: kyverno:admission-controller:core
 rules:
   - apiGroups:
@@ -87,8 +87,12 @@ rules:
       - namespacedimagevalidatingpolicies/status
       - generatingpolicies
       - generatingpolicies/status
+      - namespacedgeneratingpolicies
+      - namespacedgeneratingpolicies/status
       - mutatingpolicies
       - mutatingpolicies/status
+      - namespacedmutatingpolicies
+      - namespacedmutatingpolicies/status
     verbs:
       - create
       - delete

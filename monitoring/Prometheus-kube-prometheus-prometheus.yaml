@@ -59,7 +59,7 @@ spec:
   probeSelector:
     matchLabels:
       release: kube-prometheus-stack
-  replicas: 1
+  replicas: 2
   resources:
     limits:
       cpu: "1"

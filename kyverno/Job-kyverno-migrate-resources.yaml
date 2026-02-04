@@ -9,8 +9,8 @@ metadata:
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: 3.6.2
-    helm.sh/chart: kyverno-3.6.2
+    app.kubernetes.io/version: 3.7.0
+    helm.sh/chart: kyverno-3.7.0
   name: kyverno-migrate-resources
   namespace: kyverno
 spec:
@@ -42,18 +42,22 @@ spec:
             - --resource
             - imagevalidatingpolicies.policies.kyverno.io
             - --resource
-            - namespacedimagevalidatingpolicies.policies.kyverno.io
-            - --resource
             - mutatingpolicies.policies.kyverno.io
             - --resource
             - namespaceddeletingpolicies.policies.kyverno.io
+            - --resource
+            - namespacedgeneratingpolicies.policies.kyverno.io
+            - --resource
+            - namespacedimagevalidatingpolicies.policies.kyverno.io
+            - --resource
+            - namespacedmutatingpolicies.policies.kyverno.io
             - --resource
             - namespacedvalidatingpolicies.policies.kyverno.io
             - --resource
             - policyexceptions.policies.kyverno.io
             - --resource
             - validatingpolicies.policies.kyverno.io
-          image: reg.kyverno.io/kyverno/kyverno-cli:v1.16.2
+          image: reg.kyverno.io/kyverno/kyverno-cli:v1.17.0
           imagePullPolicy: IfNotPresent
           name: kubectl
           resources:

@@ -15,7 +15,7 @@ spec:
     kind: ClusterImageCatalog
     major: 17
     name: trixie
-  instances: 1
+  instances: 2
   managed:
     services:
       disabledDefaultServices:

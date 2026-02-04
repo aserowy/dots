@@ -6,8 +6,8 @@ metadata:
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: 3.6.2
-    helm.sh/chart: kyverno-3.6.2
+    app.kubernetes.io/version: 3.7.0
+    helm.sh/chart: kyverno-3.7.0
   name: kyverno-admission-controller
   namespace: kyverno
 spec:
@@ -29,8 +29,8 @@ spec:
         app.kubernetes.io/instance: kyverno
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/part-of: kyverno
-        app.kubernetes.io/version: 3.6.2
-        helm.sh/chart: kyverno-3.6.2
+        app.kubernetes.io/version: 3.7.0
+        helm.sh/chart: kyverno-3.7.0
     spec:
       affinity:
         podAntiAffinity:
@@ -49,6 +49,7 @@ spec:
         - args:
             - --caSecretName=kyverno-svc.kyverno.svc.kyverno-tls-ca
             - --tlsSecretName=kyverno-svc.kyverno.svc.kyverno-tls-pair
+            - --tlsKeyAlgorithm=RSA
             - --backgroundServiceAccountName=system:serviceaccount:kyverno:kyverno-background-controller
             - --reportsServiceAccountName=system:serviceaccount:kyverno:kyverno-reports-controller
             - --servicePort=443
@@ -101,7 +102,7 @@ spec:
               value: /.sigstore
             - name: KYVERNO_DEPLOYMENT
               value: kyverno-admission-controller
-          image: reg.kyverno.io/kyverno/kyverno:v1.16.2
+          image: reg.kyverno.io/kyverno/kyverno:v1.17.0
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 2
@@ -185,7 +186,7 @@ spec:
               value: kyverno-admission-controller
             - name: KYVERNO_SVC
               value: kyverno-svc
-          image: reg.kyverno.io/kyverno/kyvernopre:v1.16.2
+          image: reg.kyverno.io/kyverno/kyvernopre:v1.17.0
           imagePullPolicy: IfNotPresent
           name: kyverno-pre
           resources:
@@ -205,6 +206,8 @@ spec:
             runAsNonRoot: true
             seccompProfile:
               type: RuntimeDefault
+      nodeSelector:
+        kubernetes.io/os: linux
       serviceAccountName: kyverno-admission-controller
       volumes:
         - emptyDir: {}

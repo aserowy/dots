@@ -6,8 +6,8 @@ metadata:
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: 3.6.2
-    helm.sh/chart: kyverno-3.6.2
+    app.kubernetes.io/version: 3.7.0
+    helm.sh/chart: kyverno-3.7.0
   name: kyverno-cleanup-controller
   namespace: kyverno
 spec:
@@ -29,8 +29,8 @@ spec:
         app.kubernetes.io/instance: kyverno
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/part-of: kyverno
-        app.kubernetes.io/version: 3.6.2
-        helm.sh/chart: kyverno-3.6.2
+        app.kubernetes.io/version: 3.7.0
+        helm.sh/chart: kyverno-3.7.0
     spec:
       affinity:
         podAntiAffinity:
@@ -49,6 +49,7 @@ spec:
         - args:
             - --caSecretName=kyverno-cleanup-controller.kyverno.svc.kyverno-tls-ca
             - --tlsSecretName=kyverno-cleanup-controller.kyverno.svc.kyverno-tls-pair
+            - --tlsKeyAlgorithm=RSA
             - --servicePort=443
             - --resyncPeriod=15m
             - --cleanupServerPort=9443
@@ -83,7 +84,7 @@ spec:
                   fieldPath: metadata.namespace
             - name: KYVERNO_SVC
               value: kyverno-cleanup-controller
-          image: reg.kyverno.io/kyverno/cleanup-controller:v1.16.2
+          image: reg.kyverno.io/kyverno/cleanup-controller:v1.17.0
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 2
@@ -138,4 +139,6 @@ spec:
             initialDelaySeconds: 2
             periodSeconds: 6
       dnsPolicy: ClusterFirst
+      nodeSelector:
+        kubernetes.io/os: linux
       serviceAccountName: kyverno-cleanup-controller

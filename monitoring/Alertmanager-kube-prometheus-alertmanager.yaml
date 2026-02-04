@@ -43,7 +43,7 @@ spec:
     labels:
       haproxy/egress: allow
   portName: http-web
-  replicas: 1
+  replicas: 2
   retention: 120h
   routePrefix: /
   secrets:
