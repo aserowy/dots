@@ -123,26 +123,25 @@ in
           };
         };
 
-        # NOTE: kube proxy is disabled in favor of cilium
+        # NOTE: kube proxy and manager are disabled in favor of cilium
         kubeProxy.enabled = false;
+        kubeControllerManager.enabled = false;
 
-        kubeControllerManager = {
+        kubeScheduler = {
           enabled = true;
 
-          # NOTE: k3s specific configuration to enable metrics for controller manager
+          # NOTE: k3s specific configuration to enable metrics for scheduler
           endpoints = nodeEndpoints;
           service = {
             enabled = true;
-            port = 10257;
-            targetPort = 10257;
+            port = 10259;
+            targetPort = 10259;
           };
           serviceMonitor = {
             enabled = true;
             https = true;
           };
         };
-
-        kubeScheduler.enabled = false;
 
         kubeEtcd = {
           enabled = true;
