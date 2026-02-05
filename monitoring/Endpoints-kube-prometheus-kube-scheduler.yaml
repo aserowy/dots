@@ -17,7 +17,6 @@ subsets:
   - addresses:
       - ip: 192.168.178.201
       - ip: 192.168.178.203
-      - ip: 192.168.178.204
       - ip: 192.168.178.205
     ports:
       - name: http-metrics
