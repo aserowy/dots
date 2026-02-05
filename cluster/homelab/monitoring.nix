@@ -128,6 +128,9 @@ in
 
         kubeControllerManager = {
           enabled = false;
+
+          # NOTE: k3s specific configuration to enable metrics for controller manager
+          endpoints = nodeEndpoints;
           service = {
             enabled = true;
             port = 10257;
