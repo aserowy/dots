@@ -6,8 +6,8 @@ metadata:
     app.kubernetes.io/instance: kube-prometheus-stack
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kube-prometheus
-    app.kubernetes.io/version: 81.4.2
-    chart: kube-prometheus-stack-81.4.2
+    app.kubernetes.io/version: 81.5.0
+    chart: kube-prometheus-stack-81.5.0
     heritage: Helm
     release: kube-prometheus-stack
   name: kube-prometheus-alertmanager.rules
@@ -66,7 +66,7 @@ spec:
             min by (namespace,service, integration) (
               rate(alertmanager_notifications_failed_total{job="kube-prometheus-alertmanager",container="alertmanager",namespace="monitoring", integration=~`.*`}[15m])
             /
-              ignoring (reason) group_left rate(alertmanager_notifications_total{job="kube-prometheus-alertmanager",container="alertmanager",namespace="monitoring", integration=~`.*`}[15m])
+              ignoring (reason) group_left rate(alertmanager_notifications_total{job="kube-prometheus-alertmanager",container="alertmanager",namespace="monitoring", integration=~`.*`}[15m]) > 0
             )
             > 0.01
           for: 5m
@@ -81,7 +81,7 @@ spec:
             min by (namespace,service, integration) (
               rate(alertmanager_notifications_failed_total{job="kube-prometheus-alertmanager",container="alertmanager",namespace="monitoring", integration!~`.*`}[15m])
             /
-              ignoring (reason) group_left rate(alertmanager_notifications_total{job="kube-prometheus-alertmanager",container="alertmanager",namespace="monitoring", integration!~`.*`}[15m])
+              ignoring (reason) group_left rate(alertmanager_notifications_total{job="kube-prometheus-alertmanager",container="alertmanager",namespace="monitoring", integration!~`.*`}[15m]) > 0
             )
             > 0.01
           for: 5m
