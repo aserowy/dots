@@ -97,6 +97,7 @@ in
             9963 # cilium-operator Prometheus metrics
             9964 # cilium-envoy Prometheus metrics
             10250 # kubelet
+            10257 # kube controller manager metrics
             10259 # kube scheduler metrics
           ];
           allowedUDPPorts = [
@@ -175,6 +176,10 @@ in
 
                 kube-apiserver-arg = [
                   "anonymous-auth=true"
+                ];
+
+                kube-controller-manager-arg = [
+                  "bind-address=0.0.0.0"
                 ];
 
                 kube-scheduler-arg = [
