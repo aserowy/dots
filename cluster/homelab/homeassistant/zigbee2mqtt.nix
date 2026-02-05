@@ -152,12 +152,7 @@ in
                     requests = {
                       "akri.sh/akri-zigbee-stick" = "1";
                       cpu = "200m";
-                      memory = "600Mi";
-                    };
-                    limits = {
-                      "akri.sh/akri-zigbee-stick" = "1";
-                      cpu = "200m";
-                      memory = "600Mi";
+                      memory = "500Mi";
                     };
                   };
                   volumeMounts = [
