@@ -2,16 +2,16 @@ apiVersion: v1
 kind: Endpoints
 metadata:
   labels:
-    app: kube-prometheus-kube-controller-manager
+    app: kube-prometheus-kube-scheduler
     app.kubernetes.io/instance: kube-prometheus-stack
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kube-prometheus
     app.kubernetes.io/version: 81.5.0
     chart: kube-prometheus-stack-81.5.0
     heritage: Helm
-    k8s-app: kube-controller-manager
+    k8s-app: kube-scheduler
     release: kube-prometheus-stack
-  name: kube-prometheus-kube-controller-manager
+  name: kube-prometheus-kube-scheduler
   namespace: kube-system
 subsets:
   - addresses:
@@ -21,5 +21,5 @@ subsets:
       - ip: 192.168.178.205
     ports:
       - name: http-metrics
-        port: 10257
+        port: 10259
         protocol: TCP

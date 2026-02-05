@@ -2,7 +2,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   labels:
-    app: kube-prometheus-kube-controller-manager
+    app: kube-prometheus-kube-scheduler
     app.kubernetes.io/instance: kube-prometheus-stack
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kube-prometheus
@@ -10,7 +10,7 @@ metadata:
     chart: kube-prometheus-stack-81.5.0
     heritage: Helm
     release: kube-prometheus-stack
-  name: kube-prometheus-kube-controller-manager
+  name: kube-prometheus-kube-scheduler
   namespace: monitoring
 spec:
   endpoints:
@@ -26,5 +26,5 @@ spec:
       - kube-system
   selector:
     matchLabels:
-      app: kube-prometheus-kube-controller-manager
+      app: kube-prometheus-kube-scheduler
       release: kube-prometheus-stack
