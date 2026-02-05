@@ -117,11 +117,6 @@ in
         kubeEtcd = {
           enabled = true;
 
-          # NOTE: k3s specific configuration to enable metrics for kube resources
-          endpoints = [
-            "192.168.178.201"
-            "192.168.178.203"
-          ];
           service = {
             enabled = true;
             port = 2381;
