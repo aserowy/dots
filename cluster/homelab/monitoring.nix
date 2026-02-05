@@ -1,6 +1,19 @@
 { charts, ... }:
 let
   namespace = "monitoring";
+
+  nodeEndpoints = [
+    "192.168.178.201"
+    "192.168.178.203"
+    "192.168.178.204"
+    "192.168.178.205"
+  ];
+
+  etcdEndpoints = [
+    "192.168.178.201"
+    "192.168.178.203"
+    "192.168.178.205"
+  ];
 in
 {
   applications.monitoring = {
@@ -110,13 +123,29 @@ in
           };
         };
 
-        kubeControllerManager.enabled = false;
-        kubeScheduler.enabled = false;
+        # NOTE: kube proxy is disabled in favor of cilium
         kubeProxy.enabled = false;
+
+        kubeControllerManager = {
+          enabled = false;
+          service = {
+            enabled = true;
+            port = 10257;
+            targetPort = 10257;
+          };
+          serviceMonitor = {
+            enabled = true;
+            https = true;
+          };
+        };
+
+        kubeScheduler.enabled = false;
 
         kubeEtcd = {
           enabled = true;
 
+          # NOTE: k3s specific configuration to enable metrics on etcd nodes
+          endpoints = etcdEndpoints;
           service = {
             enabled = true;
             port = 2381;

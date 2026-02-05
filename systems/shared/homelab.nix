@@ -9,6 +9,7 @@ with lib;
 let
   cnfg = config.homelab;
   isMasterNode = cnfg.cluster.masterAddress == "";
+  serverRole = if cnfg.cluster.isAgentNode then "agent" else "server";
 in
 {
   options.homelab = {
@@ -96,6 +97,7 @@ in
             9963 # cilium-operator Prometheus metrics
             9964 # cilium-envoy Prometheus metrics
             10250 # kubelet
+            10257 # kube controller manager metrics
           ];
           allowedUDPPorts = [
             8472 # vxlan
@@ -148,7 +150,7 @@ in
         enable = true;
 
         clusterInit = isMasterNode;
-        role = mkIf cnfg.cluster.isAgentNode "agent";
+        role = serverRole;
         serverAddr = cnfg.cluster.masterAddress;
 
         tokenFile = config.sops.secrets."k3s/cluster/token".path;
@@ -175,21 +177,6 @@ in
                   "anonymous-auth=true"
                 ];
 
-                # # NOTE: prometheus specific settings to allow scraping of metrics
-                # kube-controller-manager-arg = [
-                #   "address=0.0.0.0"
-                #   "bind-address=0.0.0.0"
-                # ];
-                #
-                # kube-proxy-arg = [
-                #   "metrics-bind-address=0.0.0.0"
-                # ];
-                #
-                # kube-scheduler-arg = [
-                #   "address=0.0.0.0"
-                #   "bind-address=0.0.0.0"
-                # ];
-                #
                 etcd-expose-metrics = true;
               }
             );
