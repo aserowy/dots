@@ -24,14 +24,10 @@ spec:
           ports:
             - containerPort: 8080
           resources:
-            limits:
-              akri.sh/akri-zigbee-stick: "1"
-              cpu: 200m
-              memory: 600Mi
             requests:
               akri.sh/akri-zigbee-stick: "1"
               cpu: 200m
-              memory: 600Mi
+              memory: 500Mi
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
