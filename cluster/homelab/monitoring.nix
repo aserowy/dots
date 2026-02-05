@@ -127,7 +127,7 @@ in
         kubeProxy.enabled = false;
 
         kubeControllerManager = {
-          enabled = false;
+          enabled = true;
 
           # NOTE: k3s specific configuration to enable metrics for controller manager
           endpoints = nodeEndpoints;
