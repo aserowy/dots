@@ -2,14 +2,7 @@
 let
   namespace = "monitoring";
 
-  nodeEndpoints = [
-    "192.168.178.201"
-    "192.168.178.203"
-    "192.168.178.204"
-    "192.168.178.205"
-  ];
-
-  etcdEndpoints = [
+  serverEndpoints = [
     "192.168.178.201"
     "192.168.178.203"
     "192.168.178.205"
@@ -131,7 +124,7 @@ in
           enabled = true;
 
           # NOTE: k3s specific configuration to enable metrics for scheduler
-          endpoints = nodeEndpoints;
+          endpoints = serverEndpoints;
           service = {
             enabled = true;
             port = 10259;
@@ -147,7 +140,7 @@ in
           enabled = true;
 
           # NOTE: k3s specific configuration to enable metrics on etcd nodes
-          endpoints = etcdEndpoints;
+          endpoints = serverEndpoints;
           service = {
             enabled = true;
             port = 2381;

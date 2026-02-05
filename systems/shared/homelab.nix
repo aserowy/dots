@@ -177,6 +177,10 @@ in
                   "anonymous-auth=true"
                 ];
 
+                kube-scheduler-arg = [
+                  "bind-address=0.0.0.0"
+                ];
+
                 etcd-expose-metrics = true;
               }
             );
