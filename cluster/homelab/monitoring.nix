@@ -110,7 +110,7 @@ in
             resources = {
               requests = {
                 cpu = "500m";
-                memory = "2.5Gi";
+                memory = "3Gi";
               };
             };
           };
