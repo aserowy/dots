@@ -20,6 +20,9 @@
       isAgentNode = true;
       masterAddress = "https://192.168.178.201:6443";
     };
+    labels = {
+      "hardware/ram" = "high";
+    };
   };
 
   # lsblk --discard to ensure ssd supports trim (disc-gran and disc-max should be non zero)

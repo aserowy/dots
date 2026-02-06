@@ -10,6 +10,7 @@ let
   cnfg = config.homelab;
   isMasterNode = cnfg.cluster.masterAddress == "";
   serverRole = if cnfg.cluster.isAgentNode then "agent" else "server";
+  labels = map (key: "${key}=${cnfg.labels.${key}}") (builtins.attrNames cnfg.labels);
 in
 {
   options.homelab = {
@@ -61,6 +62,14 @@ in
           Specify the master node address for the cluster and configure the node as agent.
         '';
       };
+    };
+
+    labels = mkOption {
+      type = types.attrs;
+      default = { };
+      description = ''
+        Specify the node labels.
+      '';
     };
   };
 
@@ -155,43 +164,51 @@ in
         serverAddr = cnfg.cluster.masterAddress;
 
         tokenFile = config.sops.secrets."k3s/cluster/token".path;
-        extraFlags = mkIf (!cnfg.cluster.isAgentNode) (
+        extraFlags =
           let
-            serverConfig = pkgs.writeText "k3s-config.yaml" (
-              lib.generators.toYAML { } {
-                # NOTE: instead cilium will be deployed
-                flannel-backend = "none";
-                disable-cloud-controller = true;
-                disable-kube-proxy = true;
-                disable-network-policy = true;
+            serverConfig =
+              if serverRole == "agent" then
+                {
+                  node-label = labels;
+                }
+              else
+                {
+                  # NOTE: instead cilium will be deployed
+                  flannel-backend = "none";
+                  disable-cloud-controller = true;
+                  disable-kube-proxy = true;
+                  disable-network-policy = true;
 
-                cluster-cidr = "10.42.0.0/16";
-                service-cidr = "10.43.0.0/16";
+                  cluster-cidr = "10.42.0.0/16";
+                  service-cidr = "10.43.0.0/16";
 
-                disable = [
-                  "local-storage"
-                  "servicelb"
-                  "traefik"
-                ];
+                  disable = [
+                    "local-storage"
+                    "servicelb"
+                    "traefik"
+                  ];
 
-                kube-apiserver-arg = [
-                  "anonymous-auth=true"
-                ];
+                  kube-apiserver-arg = [
+                    "anonymous-auth=true"
+                  ];
 
-                kube-controller-manager-arg = [
-                  "bind-address=0.0.0.0"
-                ];
+                  kube-controller-manager-arg = [
+                    "bind-address=0.0.0.0"
+                  ];
 
-                kube-scheduler-arg = [
-                  "bind-address=0.0.0.0"
-                ];
+                  kube-scheduler-arg = [
+                    "bind-address=0.0.0.0"
+                  ];
 
-                etcd-expose-metrics = true;
-              }
-            );
+                  etcd-expose-metrics = true;
+
+                  node-label = labels;
+                };
+
+            serverConfigYaml = lib.generators.toYAML { } serverConfig;
+            serverConfigFile = pkgs.writeText "k3s-config.yaml" serverConfigYaml;
           in
-          "--config ${serverConfig}"
-        );
+          "--config ${serverConfigFile}";
       };
     };
 

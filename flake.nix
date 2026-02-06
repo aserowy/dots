@@ -103,6 +103,8 @@
         };
       };
 
+      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-tree;
+
       darwinConfigurations."FR6NP4LHY7" = darwin.lib.darwinSystem {
         modules = [
           {
