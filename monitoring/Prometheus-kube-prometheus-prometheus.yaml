@@ -59,15 +59,12 @@ spec:
   probeSelector:
     matchLabels:
       release: kube-prometheus-stack
-  replicas: 2
+  replicas: 1
   resources:
-    limits:
-      cpu: "1"
-      memory: 3Gi
     requests:
-      cpu: "0.25"
-      memory: 1Gi
-  retention: 10d
+      cpu: 500m
+      memory: 2.5Gi
+  retention: 7d
   routePrefix: /
   ruleNamespaceSelector: {}
   ruleSelector:
