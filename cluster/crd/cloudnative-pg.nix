@@ -477,6 +477,10 @@ let
             types.nullOr (submoduleOf "postgresql.cnpg.io.v1.BackupStatusAzureCredentialsStorageSasToken")
           );
         };
+        "useDefaultAzureCredentials" = mkOption {
+          description = "Use the default Azure authentication flow, which includes DefaultAzureCredential.\nThis allows authentication using environment variables and managed identities.";
+          type = (types.nullOr types.bool);
+        };
       };
 
       config = {
@@ -485,6 +489,7 @@ let
         "storageAccount" = mkOverride 1002 null;
         "storageKey" = mkOverride 1002 null;
         "storageSasToken" = mkOverride 1002 null;
+        "useDefaultAzureCredentials" = mkOverride 1002 null;
       };
 
     };
@@ -618,11 +623,16 @@ let
           description = "The pod name";
           type = (types.nullOr types.str);
         };
+        "sessionID" = mkOption {
+          description = "The instance manager session ID. This is a unique identifier generated at instance manager\nstartup and changes on every restart (including container reboots). Used to detect if\nthe instance manager was restarted during long-running operations like backups, which\nwould terminate any running backup process.";
+          type = (types.nullOr types.str);
+        };
       };
 
       config = {
         "ContainerID" = mkOverride 1002 null;
         "podName" = mkOverride 1002 null;
+        "sessionID" = mkOverride 1002 null;
       };
 
     };
@@ -2119,7 +2129,7 @@ let
           type = (types.nullOr types.str);
         };
         "operator" = mkOption {
-          description = "Operator represents a key's relationship to the value.\nValid operators are Exists and Equal. Defaults to Equal.\nExists is equivalent to wildcard for value, so that a pod can\ntolerate all taints of a particular category.";
+          description = "Operator represents a key's relationship to the value.\nValid operators are Exists, Equal, Lt, and Gt. Defaults to Equal.\nExists is equivalent to wildcard for value, so that a pod can\ntolerate all taints of a particular category.\nLt and Gt perform numeric comparisons (requires feature gate TaintTolerationComparisonOperators).";
           type = (types.nullOr types.str);
         };
         "tolerationSeconds" = mkOption {
@@ -2284,6 +2294,10 @@ let
             )
           );
         };
+        "useDefaultAzureCredentials" = mkOption {
+          description = "Use the default Azure authentication flow, which includes DefaultAzureCredential.\nThis allows authentication using environment variables and managed identities.";
+          type = (types.nullOr types.bool);
+        };
       };
 
       config = {
@@ -2292,6 +2306,7 @@ let
         "storageAccount" = mkOverride 1002 null;
         "storageKey" = mkOverride 1002 null;
         "storageSasToken" = mkOverride 1002 null;
+        "useDefaultAzureCredentials" = mkOverride 1002 null;
       };
 
     };
@@ -3253,7 +3268,7 @@ let
           type = (types.nullOr types.str);
         };
         "targetTime" = mkOption {
-          description = "The target time as a timestamp in the RFC3339 standard";
+          description = "The target time as a timestamp in RFC3339 format or PostgreSQL timestamp format.\nTimestamps without an explicit timezone are interpreted as UTC.";
           type = (types.nullOr types.str);
         };
         "targetXID" = mkOption {
@@ -3685,7 +3700,7 @@ let
           );
         };
         "resources" = mkOption {
-          description = "resources represents the minimum resources the volume should have.\nIf RecoverVolumeExpansionFailure feature is enabled users are allowed to specify resource requirements\nthat are lower than previous value but must still be higher than capacity recorded in the\nstatus field of the claim.\nMore info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#resources";
+          description = "resources represents the minimum resources the volume should have.\nUsers are allowed to specify resource requirements\nthat are lower than previous value but must still be higher than capacity recorded in the\nstatus field of the claim.\nMore info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#resources";
           type = (
             types.nullOr (
               submoduleOf "postgresql.cnpg.io.v1.ClusterSpecEphemeralVolumeSourceVolumeClaimTemplateSpecResources"
@@ -4038,6 +4053,10 @@ let
             )
           );
         };
+        "useDefaultAzureCredentials" = mkOption {
+          description = "Use the default Azure authentication flow, which includes DefaultAzureCredential.\nThis allows authentication using environment variables and managed identities.";
+          type = (types.nullOr types.bool);
+        };
       };
 
       config = {
@@ -4046,6 +4065,7 @@ let
         "storageAccount" = mkOverride 1002 null;
         "storageKey" = mkOverride 1002 null;
         "storageSasToken" = mkOverride 1002 null;
+        "useDefaultAzureCredentials" = mkOverride 1002 null;
       };
 
     };
@@ -6229,6 +6249,10 @@ let
           description = "Kubelet's generated CSRs will be addressed to this signer.";
           type = types.str;
         };
+        "userAnnotations" = mkOption {
+          description = "userAnnotations allow pod authors to pass additional information to\nthe signer implementation.  Kubernetes does not restrict or validate this\nmetadata in any way.\n\nThese values are copied verbatim into the `spec.unverifiedUserAnnotations` field of\nthe PodCertificateRequest objects that Kubelet creates.\n\nEntries are subject to the same validation as object metadata annotations,\nwith the addition that all keys must be domain-prefixed. No restrictions\nare placed on values, except an overall size limitation on the entire field.\n\nSigners should document the keys and values they support. Signers should\ndeny requests that contain keys they do not recognize.";
+          type = (types.nullOr (types.attrsOf types.str));
+        };
       };
 
       config = {
@@ -6236,6 +6260,7 @@ let
         "credentialBundlePath" = mkOverride 1002 null;
         "keyPath" = mkOverride 1002 null;
         "maxExpirationSeconds" = mkOverride 1002 null;
+        "userAnnotations" = mkOverride 1002 null;
       };
 
     };
@@ -6762,7 +6787,7 @@ let
           );
         };
         "resources" = mkOption {
-          description = "resources represents the minimum resources the volume should have.\nIf RecoverVolumeExpansionFailure feature is enabled users are allowed to specify resource requirements\nthat are lower than previous value but must still be higher than capacity recorded in the\nstatus field of the claim.\nMore info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#resources";
+          description = "resources represents the minimum resources the volume should have.\nUsers are allowed to specify resource requirements\nthat are lower than previous value but must still be higher than capacity recorded in the\nstatus field of the claim.\nMore info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#resources";
           type = (types.nullOr (submoduleOf "postgresql.cnpg.io.v1.ClusterSpecStoragePvcTemplateResources"));
         };
         "selector" = mkOption {
@@ -7023,7 +7048,7 @@ let
           );
         };
         "resources" = mkOption {
-          description = "resources represents the minimum resources the volume should have.\nIf RecoverVolumeExpansionFailure feature is enabled users are allowed to specify resource requirements\nthat are lower than previous value but must still be higher than capacity recorded in the\nstatus field of the claim.\nMore info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#resources";
+          description = "resources represents the minimum resources the volume should have.\nUsers are allowed to specify resource requirements\nthat are lower than previous value but must still be higher than capacity recorded in the\nstatus field of the claim.\nMore info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#resources";
           type = (
             types.nullOr (submoduleOf "postgresql.cnpg.io.v1.ClusterSpecTablespacesStoragePvcTemplateResources")
           );
@@ -7324,7 +7349,7 @@ let
           );
         };
         "resources" = mkOption {
-          description = "resources represents the minimum resources the volume should have.\nIf RecoverVolumeExpansionFailure feature is enabled users are allowed to specify resource requirements\nthat are lower than previous value but must still be higher than capacity recorded in the\nstatus field of the claim.\nMore info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#resources";
+          description = "resources represents the minimum resources the volume should have.\nUsers are allowed to specify resource requirements\nthat are lower than previous value but must still be higher than capacity recorded in the\nstatus field of the claim.\nMore info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#resources";
           type = (
             types.nullOr (submoduleOf "postgresql.cnpg.io.v1.ClusterSpecWalStoragePvcTemplateResources")
           );
@@ -9551,7 +9576,7 @@ let
           );
         };
         "resourceClaims" = mkOption {
-          description = "ResourceClaims defines which ResourceClaims must be allocated\nand reserved before the Pod is allowed to start. The resources\nwill be made available to those containers which consume them\nby name.\n\nThis is an alpha field and requires enabling the\nDynamicResourceAllocation feature gate.\n\nThis field is immutable.";
+          description = "ResourceClaims defines which ResourceClaims must be allocated\nand reserved before the Pod is allowed to start. The resources\nwill be made available to those containers which consume them\nby name.\n\nThis is a stable field but requires that the\nDynamicResourceAllocation feature gate is enabled.\n\nThis field is immutable.";
           type = (
             types.nullOr (
               coerceAttrsOfSubmodulesToListByKey "postgresql.cnpg.io.v1.PoolerSpecTemplateSpecResourceClaims"
@@ -9641,6 +9666,10 @@ let
           );
           apply = attrsToList;
         };
+        "workloadRef" = mkOption {
+          description = "WorkloadRef provides a reference to the Workload object that this Pod belongs to.\nThis field is used by the scheduler to identify the PodGroup and apply the\ncorrect group scheduling policies. The Workload object referenced\nby this field may not exist at the time the Pod is created.\nThis field is immutable, but a Workload object with the same name\nmay be recreated with different policies. Doing this during pod scheduling\nmay result in the placement not conforming to the expected policies.";
+          type = (types.nullOr (submoduleOf "postgresql.cnpg.io.v1.PoolerSpecTemplateSpecWorkloadRef"));
+        };
       };
 
       config = {
@@ -9684,6 +9713,7 @@ let
         "tolerations" = mkOverride 1002 null;
         "topologySpreadConstraints" = mkOverride 1002 null;
         "volumes" = mkOverride 1002 null;
+        "workloadRef" = mkOverride 1002 null;
       };
 
     };
@@ -10693,7 +10723,7 @@ let
           );
         };
         "resizePolicy" = mkOption {
-          description = "Resources resize policy for the container.";
+          description = "Resources resize policy for the container.\nThis field cannot be set on ephemeral containers.";
           type = (
             types.nullOr (
               types.listOf (submoduleOf "postgresql.cnpg.io.v1.PoolerSpecTemplateSpecContainersResizePolicy")
@@ -14237,7 +14267,7 @@ let
           );
         };
         "resizePolicy" = mkOption {
-          description = "Resources resize policy for the container.";
+          description = "Resources resize policy for the container.\nThis field cannot be set on ephemeral containers.";
           type = (
             types.nullOr (
               types.listOf (submoduleOf "postgresql.cnpg.io.v1.PoolerSpecTemplateSpecInitContainersResizePolicy")
@@ -16215,7 +16245,7 @@ let
           type = (types.nullOr types.str);
         };
         "operator" = mkOption {
-          description = "Operator represents a key's relationship to the value.\nValid operators are Exists and Equal. Defaults to Equal.\nExists is equivalent to wildcard for value, so that a pod can\ntolerate all taints of a particular category.";
+          description = "Operator represents a key's relationship to the value.\nValid operators are Exists, Equal, Lt, and Gt. Defaults to Equal.\nExists is equivalent to wildcard for value, so that a pod can\ntolerate all taints of a particular category.\nLt and Gt perform numeric comparisons (requires feature gate TaintTolerationComparisonOperators).";
           type = (types.nullOr types.str);
         };
         "tolerationSeconds" = mkOption {
@@ -16986,7 +17016,7 @@ let
           );
         };
         "resources" = mkOption {
-          description = "resources represents the minimum resources the volume should have.\nIf RecoverVolumeExpansionFailure feature is enabled users are allowed to specify resource requirements\nthat are lower than previous value but must still be higher than capacity recorded in the\nstatus field of the claim.\nMore info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#resources";
+          description = "resources represents the minimum resources the volume should have.\nUsers are allowed to specify resource requirements\nthat are lower than previous value but must still be higher than capacity recorded in the\nstatus field of the claim.\nMore info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#resources";
           type = (
             types.nullOr (
               submoduleOf "postgresql.cnpg.io.v1.PoolerSpecTemplateSpecVolumesEphemeralVolumeClaimTemplateSpecResources"
@@ -17868,6 +17898,10 @@ let
           description = "Kubelet's generated CSRs will be addressed to this signer.";
           type = types.str;
         };
+        "userAnnotations" = mkOption {
+          description = "userAnnotations allow pod authors to pass additional information to\nthe signer implementation.  Kubernetes does not restrict or validate this\nmetadata in any way.\n\nThese values are copied verbatim into the `spec.unverifiedUserAnnotations` field of\nthe PodCertificateRequest objects that Kubelet creates.\n\nEntries are subject to the same validation as object metadata annotations,\nwith the addition that all keys must be domain-prefixed. No restrictions\nare placed on values, except an overall size limitation on the entire field.\n\nSigners should document the keys and values they support. Signers should\ndeny requests that contain keys they do not recognize.";
+          type = (types.nullOr (types.attrsOf types.str));
+        };
       };
 
       config = {
@@ -17875,6 +17909,7 @@ let
         "credentialBundlePath" = mkOverride 1002 null;
         "keyPath" = mkOverride 1002 null;
         "maxExpirationSeconds" = mkOverride 1002 null;
+        "userAnnotations" = mkOverride 1002 null;
       };
 
     };
@@ -18253,6 +18288,28 @@ let
         "fsType" = mkOverride 1002 null;
         "storagePolicyID" = mkOverride 1002 null;
         "storagePolicyName" = mkOverride 1002 null;
+      };
+
+    };
+    "postgresql.cnpg.io.v1.PoolerSpecTemplateSpecWorkloadRef" = {
+
+      options = {
+        "name" = mkOption {
+          description = "Name defines the name of the Workload object this Pod belongs to.\nWorkload must be in the same namespace as the Pod.\nIf it doesn't match any existing Workload, the Pod will remain unschedulable\nuntil a Workload object is created and observed by the kube-scheduler.\nIt must be a DNS subdomain.";
+          type = types.str;
+        };
+        "podGroup" = mkOption {
+          description = "PodGroup is the name of the PodGroup within the Workload that this Pod\nbelongs to. If it doesn't match any existing PodGroup within the Workload,\nthe Pod will remain unschedulable until the Workload object is recreated\nand observed by the kube-scheduler. It must be a DNS label.";
+          type = types.str;
+        };
+        "podGroupReplicaKey" = mkOption {
+          description = "PodGroupReplicaKey specifies the replica key of the PodGroup to which this\nPod belongs. It is used to distinguish pods belonging to different replicas\nof the same pod group. The pod group policy is applied separately to each replica.\nWhen set, it must be a DNS label.";
+          type = (types.nullOr types.str);
+        };
+      };
+
+      config = {
+        "podGroupReplicaKey" = mkOverride 1002 null;
       };
 
     };
