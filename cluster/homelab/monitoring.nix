@@ -1,4 +1,4 @@
-{ charts, ... }:
+{ charts, lib, ... }:
 let
   namespace = "monitoring";
 
@@ -22,6 +22,8 @@ in
       syncOptions.serverSideApply = true;
     };
 
+    # TODO: taint prometheus to use 16gb nodes only
+    # TODO: netpol (flavor cilium) with helm chart
     helm.releases.kube-prometheus-stack = {
       chart = charts.prometheus-community.kube-prometheus-stack;
 
@@ -95,8 +97,10 @@ in
             };
           };
           prometheusSpec = {
-            replicas = 2;
+            # TODO: increase to 2 after tainting
+            replicas = 1;
             podMetadata.labels."haproxy/egress" = "allow";
+            retention = "7d";
             scrapeTimeout = "30s";
             scrapeInterval = "60s";
             storageSpec.volumeClaimTemplate.spec = {
@@ -105,12 +109,8 @@ in
             };
             resources = {
               requests = {
-                cpu = "0.25";
-                memory = "1Gi";
-              };
-              limits = {
-                cpu = "1";
-                memory = "3Gi";
+                cpu = "500m";
+                memory = "2.5Gi";
               };
             };
           };
@@ -170,6 +170,10 @@ in
     ];
 
     resources = {
+      statefulSets.prometheus-kube-prometheus-prometheus.spec.template = {
+        spec.containers.prometheus.resources.limits = lib.mkForce null;
+      };
+
       ingresses = {
         alertmanager = {
           metadata = {

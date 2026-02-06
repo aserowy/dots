@@ -9,7 +9,7 @@
           name = "tika";
         };
         spec = {
-          replicas = 3;
+          replicas = 1;
           selector.matchLabels."app.kubernetes.io/name" = "tika";
           strategy.type = "RollingUpdate";
           template = {
@@ -37,12 +37,8 @@
                   ];
                   resources = {
                     requests = {
-                      cpu = "100m";
-                      memory = "128Mi";
-                    };
-                    limits = {
-                      cpu = "1000m";
-                      memory = "1Gi";
+                      cpu = "400m";
+                      memory = "320Mi";
                     };
                   };
                   volumeMounts = [
