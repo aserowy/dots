@@ -170,10 +170,6 @@ in
     ];
 
     resources = {
-      statefulSets.prometheus-kube-prometheus-prometheus.spec.template = {
-        spec.containers.prometheus.resources.limits = lib.mkForce null;
-      };
-
       ingresses = {
         alertmanager = {
           metadata = {
