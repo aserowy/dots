@@ -46,6 +46,8 @@ spec:
   listenLocal: false
   logFormat: logfmt
   logLevel: info
+  nodeSelector:
+    hardware/ram: high
   paused: false
   podMetadata:
     labels:
