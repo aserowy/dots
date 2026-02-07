@@ -24,6 +24,8 @@ spec:
           ports:
             - containerPort: 8080
           resources:
+            limits:
+              akri.sh/akri-zigbee-stick: "1"
             requests:
               akri.sh/akri-zigbee-stick: "1"
               cpu: 200m
