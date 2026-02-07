@@ -354,6 +354,24 @@
             }
           ];
         };
+
+        homelab-05-t540p = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            disko.nixosModules.disko
+            sops.nixosModules.sops
+            ./sops.nix
+
+            ./systems/homelab-05-t540p
+            {
+              imports = [ ./users ];
+              users.root = {
+                enable = true;
+                sopsPasswordFilePath = "homelab/root_password";
+              };
+            }
+          ];
+        };
       };
 
       nixidyEnvs.x86_64-linux =
