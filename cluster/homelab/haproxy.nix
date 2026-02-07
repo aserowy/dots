@@ -8,23 +8,21 @@ in
 
     createNamespace = true;
 
-    helm.releases = {
-      kubernetes-ingress = {
-        chart = charts.haproxytech.kubernetes-ingress;
+    helm.releases.kubernetes-ingress = {
+      chart = charts.haproxytech.kubernetes-ingress;
 
-        values = {
-          controller = {
-            # NOTE: important to comply with cilium requirements
-            service = {
-              annotations = {
-                "lbipam.cilium.io/sharing-cross-namespace" = "*";
-                "lbipam.cilium.io/sharing-key" = "default-ippool";
-              };
-              labels = {
-                "cilium/ippool" = "default-ippool";
-              };
-              type = "LoadBalancer";
+      values = {
+        controller = {
+          # NOTE: important to comply with cilium requirements
+          service = {
+            annotations = {
+              "lbipam.cilium.io/sharing-cross-namespace" = "*";
+              "lbipam.cilium.io/sharing-key" = "default-ippool";
             };
+            labels = {
+              "cilium/ippool" = "default-ippool";
+            };
+            type = "LoadBalancer";
           };
         };
       };

@@ -162,15 +162,9 @@ in
                       protocol = "TCP";
                     }
                   ];
-                  resources = {
-                    requests = {
-                      cpu = "100m";
-                      memory = "128Mi";
-                    };
-                    limits = {
-                      cpu = "1000m";
-                      memory = "2Gi";
-                    };
+                  resources.requests = {
+                    cpu = "500m";
+                    memory = "1600Mi";
                   };
                   startupProbe = {
                     tcpSocket.port = 8000;
