@@ -133,6 +133,17 @@ in
                       ];
                     };
                   };
+                  ports = [ { containerPort = 8080; } ];
+                  resources = {
+                    requests = {
+                      "akri.sh/akri-zigbee-stick" = "1";
+                      cpu = "200m";
+                      memory = "600Mi";
+                    };
+                    limits = {
+                      "akri.sh/akri-zigbee-stick" = "1";
+                    };
+                  };
                   startupProbe = {
                     httpGet = {
                       path = "/";
@@ -146,12 +157,6 @@ in
                       path = "/";
                       port = 8080;
                     };
-                  };
-                  ports = [ { containerPort = 8080; } ];
-                  resources.requests = {
-                    "akri.sh/akri-zigbee-stick" = "1";
-                    cpu = "200m";
-                    memory = "600Mi";
                   };
                   volumeMounts = [
                     {
