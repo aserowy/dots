@@ -24,7 +24,9 @@
     "commands": [
       "bash ./.github/update-nixhelm-sha.sh {file}"
     ],
-    "fileFilters": "cluster/charts/**/*.nix"
+    "fileFilters": [
+      "cluster/charts/**/*.nix"
+    ]
   }
 }
 
