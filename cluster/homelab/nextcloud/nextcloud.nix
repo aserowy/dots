@@ -44,6 +44,10 @@
           };
         };
         phpClientHttpsFix.enabled = true;
+        resources.requests = {
+          cpu = "750m";
+          memory = "1Gi";
+        };
 
         cronjob = {
           enabled = true;
@@ -87,7 +91,13 @@
           };
         };
 
-        imaginary.enabled = true;
+        imaginary = {
+          enabled = true;
+          resources.requests = {
+            cpu = "100m";
+            memory = "1Gi";
+          };
+        };
 
         internalDatabase.enabled = false;
         externalDatabase = {
