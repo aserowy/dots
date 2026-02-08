@@ -12,7 +12,12 @@ in
     helm.releases.cloudnativepg = {
       chart = charts.cloudnative-pg.cloudnative-pg;
 
-      values = { };
+      values = {
+        resources.requests = {
+          cpu = "100m";
+          memory = "200Mi";
+        };
+      };
     };
 
     resources.clusterImageCatalogs.trixie.spec.images = [

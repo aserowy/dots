@@ -45,6 +45,11 @@ in
             secret.name = "homeassistant-pg";
           };
 
+          resources.requests = {
+            cpu = "300m";
+            memory = "500Mi";
+          };
+
           managed.services.disabledDefaultServices = [
             "ro"
             "r"

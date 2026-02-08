@@ -28,6 +28,11 @@ in
             secret.name = "paperless-pg";
           };
 
+          resources.requests = {
+            cpu = "150m";
+            memory = "300Mi";
+          };
+
           managed.services.disabledDefaultServices = [
             "ro"
             "r"
