@@ -22,8 +22,17 @@ in
     };
 
     resources = {
+      daemonSets.akri-agent-daemonset.spec.template = {
+        spec.containers.akri-agent.resources.limits = lib.mkForce null;
+      };
       daemonSets.akri-udev-discovery-daemonset.spec.template = {
         spec.containers.akri-udev-discovery.resources.limits = lib.mkForce null;
+      };
+      deployments.akri-controller-deployment.spec.template = {
+        spec.containers.akri-controller.resources.limits = lib.mkForce null;
+      };
+      deployments.akri-webhook-configuration.spec.template = {
+        spec.containers.webhook.resources.limits = lib.mkForce null;
       };
     };
 
