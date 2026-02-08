@@ -87,15 +87,9 @@ in
                     }
                     { containerPort = 21118; }
                   ];
-                  resources = {
-                    requests = {
-                      cpu = "200m";
-                      memory = "250Mi";
-                    };
-                    limits = {
-                      cpu = "200m";
-                      memory = "250Mi";
-                    };
+                  resources.requests = {
+                    cpu = "10m";
+                    memory = "50Mi";
                   };
                   volumeMounts = [
                     {
@@ -121,15 +115,9 @@ in
                     { containerPort = 21117; }
                     { containerPort = 21119; }
                   ];
-                  resources = {
-                    requests = {
-                      cpu = "200m";
-                      memory = "250Mi";
-                    };
-                    limits = {
-                      cpu = "200m";
-                      memory = "250Mi";
-                    };
+                  resources.requests = {
+                    cpu = "10m";
+                    memory = "50Mi";
                   };
                   volumeMounts = [
                     {

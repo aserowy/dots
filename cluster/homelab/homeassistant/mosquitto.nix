@@ -64,15 +64,9 @@ in
                       readOnlyRootFilesystem = true;
                     };
                     ports = [ { containerPort = 1883; } ];
-                    resources = {
-                      requests = {
-                        cpu = "100m";
-                        memory = "128Mi";
-                      };
-                      limits = {
-                        cpu = "500m";
-                        memory = "1Gi";
-                      };
+                    resources.requests = {
+                      cpu = "10m";
+                      memory = "20Mi";
                     };
                     volumeMounts = [
                       {

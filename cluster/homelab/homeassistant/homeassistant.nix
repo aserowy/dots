@@ -213,13 +213,11 @@ in
                   resources = {
                     requests = {
                       "akri.sh/akri-enocean-stick" = "1";
-                      cpu = "200m";
-                      memory = "500Mi";
+                      cpu = "300m";
+                      memory = "1000Mi";
                     };
                     limits = {
                       "akri.sh/akri-enocean-stick" = "1";
-                      cpu = "1000m";
-                      memory = "1000Mi";
                     };
                   };
                   volumeMounts = [

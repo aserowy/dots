@@ -163,7 +163,7 @@ in
                     }
                   ];
                   resources.requests = {
-                    cpu = "500m";
+                    cpu = "350m";
                     memory = "1600Mi";
                   };
                   startupProbe = {

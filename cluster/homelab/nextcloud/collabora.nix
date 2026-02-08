@@ -28,15 +28,9 @@
           "app.kubernetes.io/component" = "app";
           "haproxy/ingress" = "allow";
         };
-        resources = {
-          requests = {
-            cpu = "2000m";
-            memory = "2Gi";
-          };
-          limits = {
-            cpu = "8000m";
-            memory = "8Gi";
-          };
+        resources.requests = {
+          cpu = "500m";
+          memory = "2Gi";
         };
       };
     };

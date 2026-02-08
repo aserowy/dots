@@ -46,15 +46,9 @@
                         protocol = "TCP";
                       }
                     ];
-                    resources = {
-                      requests = {
-                        cpu = "200m";
-                        memory = "512Mi";
-                      };
-                      limits = {
-                        cpu = "1000m";
-                        memory = "512Mi";
-                      };
+                    resources.requests = {
+                      cpu = "100m";
+                      memory = "600Mi";
                     };
                     volumeMounts = [
                       {
