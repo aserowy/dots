@@ -32,4 +32,4 @@ jobs:
       - name: commit and push changes
         uses: stefanzweifel/git-auto-commit-action@v7
         with:
-          commit_message: updated flake inputs
+          commit_message: update flake inputs

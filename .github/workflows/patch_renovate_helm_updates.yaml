@@ -1,0 +1,53 @@
+on:
+  push:
+    branches: main
+  pull_request:
+
+env:
+  GITHUB_PR_BRANCH: ""
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: get pr base branch
+        id: pr-base-branch-name
+        if: github.event_name == 'pull_request'
+        run: |
+          echo "GITHUB_PR_BRANCH=${{ github.head_ref }}" >> $GITHUB_ENV
+
+      - name: install nix
+        if: "startsWith(env.GITHUB_PR_BRANCH, 'renovate/')"
+        uses: cachix/install-nix-action@v31
+        with:
+          nix_path: nixpkgs=channel:nixos-unstable
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+
+      - name: update sha
+        if: "startsWith(env.GITHUB_PR_BRANCH, 'renovate/')"
+        run: |
+          git config --local user.email "serowy@hotmail.com"
+          git config --local user.name "aserowy"
+
+          apt-get install curl gpg apt-transport-https --yes
+          curl -fsSL https://packages.buildkite.com/helm-linux/helm-debian/gpgkey | gpg --dearmor | tee /usr/share/keyrings/helm.gpg > /dev/null
+          echo "deb [signed-by=/usr/share/keyrings/helm.gpg] https://packages.buildkite.com/helm-linux/helm-debian/any/ any main" | tee /etc/apt/sources.list.d/helm-stable-debian.list
+          apt-get update
+          apt-get install helm
+
+          bash ./.github/update-nixhelm-sha.sh
+
+      - name: commit and push changes
+        if: "startsWith(env.GITHUB_PR_BRANCH, 'renovate/')"
+        uses: stefanzweifel/git-auto-commit-action@v7
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          commit_message: update helm sha
+
+
