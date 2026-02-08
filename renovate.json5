@@ -3,9 +3,6 @@
   "extends": [
     "config:recommended"
   ],
-  "allowedCommands": [
-    "^bash ./.github/update-nixhelm-sha.sh [\\.a-z/]+$"
-  ],
   "customManagers": [
     {
       "customType": "regex",
@@ -22,14 +19,5 @@
       ],
       "datasourceTemplate": "helm"
     }
-  ],
-  "postUpgradeTasks": {
-    "commands": [
-      "bash ./.github/update-nixhelm-sha.sh {file}"
-    ],
-    "fileFilters": [
-      "cluster/charts/**/*.nix"
-    ]
-  }
+  ]
 }
-
