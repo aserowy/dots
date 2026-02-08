@@ -10,6 +10,15 @@
       "matchStrings": [
         "\\s*image = \".+?:(?<currentValue>.+?)\"; # (?<datasource>.+?)\/(?<depName>.+?)@(?<versioning>.*)"
       ]
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["cluster/charts/**/*.nix"],
+      "matchStrings": [
+        "repo\\s*=\\s*\"(?<registryUrl>.*?)\".*?\\n.*?chart\\s*=\\s*\"(?<depName>.*?)\".*?\\n.*?version\\s*=\\s*\"(?<currentValue>.*?)\".*?\\n.*?chartHash\\s*=\\s*\"(?<currentDigest>sha256-.*?)\""
+      ],
+      "datasourceTemplate": "helm"
     }
   ]
 }
+
