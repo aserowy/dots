@@ -15,10 +15,16 @@
       "customType": "regex",
       "managerFilePatterns": ["cluster/charts/**/*.nix"],
       "matchStrings": [
-        "repo\\s*=\\s*\"(?<registryUrl>.*?)\".*?\\n.*?chart\\s*=\\s*\"(?<depName>.*?)\".*?\\n.*?version\\s*=\\s*\"(?<currentValue>.*?)\".*?\\n.*?digest\\s*=\\s*\"(?<currentDigest>.*?)\""
+        "repo\\s*=\\s*\"(?<registryUrl>.*?)\".*?\\n.*?chart\\s*=\\s*\"(?<depName>.*?)\".*?\\n.*?version\\s*=\\s*\"(?<currentValue>.*?)\".*?"
       ],
       "datasourceTemplate": "helm"
     }
-  ]
+  ],
+  "postUpgradeTasks": {
+    "commands": [
+      "bash ./.github/update-nixhelm-sha.sh {file}"
+    ],
+    "fileFilters": "cluster/charts/**/*.nix"
+  }
 }
 

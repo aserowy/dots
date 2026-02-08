@@ -43,9 +43,8 @@ let
 in
 pkgs.mkShell {
   packages = [
-    # pkgs.azure-cli
-    # pkgs.kubectl
-    # pkgs.renovate
+    pkgs.kubernetes-helm
+    pkgs.renovate
 
     pkgs.marksman
     pkgs.nixd
