@@ -38,9 +38,6 @@ spec:
           imagePullPolicy: Always
           name: webhook
           resources:
-            limits:
-              cpu: 26m
-              memory: 100Mi
             requests:
               cpu: 15m
               memory: 100Mi

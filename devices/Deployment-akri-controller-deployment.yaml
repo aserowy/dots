@@ -34,9 +34,6 @@ spec:
           imagePullPolicy: Always
           name: akri-controller
           resources:
-            limits:
-              cpu: 26m
-              memory: 100Mi
             requests:
               cpu: 10m
               memory: 11Mi

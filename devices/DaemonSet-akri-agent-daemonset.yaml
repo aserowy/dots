@@ -39,9 +39,6 @@ spec:
           image: ghcr.io/project-akri/akri/agent:v0.13.8
           name: akri-agent
           resources:
-            limits:
-              cpu: 26m
-              memory: 79Mi
             requests:
               cpu: 10m
               memory: 11Mi
