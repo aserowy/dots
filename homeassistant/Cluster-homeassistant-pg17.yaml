@@ -21,5 +21,9 @@ spec:
       disabledDefaultServices:
         - ro
         - r
+  resources:
+    requests:
+      cpu: 300m
+      memory: 500Mi
   storage:
     size: 8Gi
