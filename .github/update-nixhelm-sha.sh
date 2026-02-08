@@ -1,7 +1,11 @@
 #!/bin/bash
 set -e
 
-find ./cluster/charts/ -name "*.nix" -print0 | while IFS= read -r -d '' NIX_FILE; do
+echo "Start sha update"
+
+git diff --name-only HEAD~1  | grep '^cluster/charts/.*\.nix$' | while IFS= read -r NIX_FILE; do
+    echo "Processing $NIX_FILE"
+
     CHART_NAME=$(grep -o 'chart\s*=\s*"[^"]*"' "$NIX_FILE" | sed -E 's/.*"([^"]+)".*/\1/')
     REPO_URL=$(grep -o 'repo\s*=\s*"[^"]*"' "$NIX_FILE" | sed -E 's/.*"([^"]+)".*/\1/')
     VERSION=$(grep -o 'version\s*=\s*"[^"]*"' "$NIX_FILE" | sed -E 's/.*"([^"]+)".*/\1/')
@@ -26,5 +30,6 @@ find ./cluster/charts/ -name "*.nix" -print0 | while IFS= read -r -d '' NIX_FILE
     echo $NIX_HASH
 
     cd "$CURRENT_DIR"
-    sed -i "s/chartHash = \".*\"/chartHash = \"$NIX_HASH\"/" "$NIX_FILE"
+    sed -i "s|chartHash = \".*\"|chartHash = \"$NIX_HASH\"|" "$NIX_FILE"
 done
+
