@@ -79,7 +79,7 @@ spec:
               port: 8000
           resources:
             requests:
-              cpu: 500m
+              cpu: 350m
               memory: 1600Mi
           securityContext:
             allowPrivilegeEscalation: false

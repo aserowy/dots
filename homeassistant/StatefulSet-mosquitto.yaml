@@ -19,12 +19,9 @@ spec:
           ports:
             - containerPort: 1883
           resources:
-            limits:
-              cpu: 500m
-              memory: 1Gi
             requests:
-              cpu: 100m
-              memory: 128Mi
+              cpu: 10m
+              memory: 20Mi
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true

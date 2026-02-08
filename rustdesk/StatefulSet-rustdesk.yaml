@@ -26,12 +26,9 @@ spec:
             - containerPort: 21116
             - containerPort: 21118
           resources:
-            limits:
-              cpu: 200m
-              memory: 250Mi
             requests:
-              cpu: 200m
-              memory: 250Mi
+              cpu: 10m
+              memory: 50Mi
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
@@ -49,12 +46,9 @@ spec:
             - containerPort: 21117
             - containerPort: 21119
           resources:
-            limits:
-              cpu: 200m
-              memory: 250Mi
             requests:
-              cpu: 200m
-              memory: 250Mi
+              cpu: 10m
+              memory: 50Mi
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:

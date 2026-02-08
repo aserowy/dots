@@ -31,12 +31,9 @@ spec:
               name: http
               protocol: TCP
           resources:
-            limits:
-              cpu: 500m
-              memory: 256Mi
             requests:
               cpu: 50m
-              memory: 128Mi
+              memory: 200Mi
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true

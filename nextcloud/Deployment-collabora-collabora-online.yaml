@@ -77,11 +77,8 @@ spec:
             successThreshold: 1
             timeoutSeconds: 30
           resources:
-            limits:
-              cpu: 8000m
-              memory: 8Gi
             requests:
-              cpu: 2000m
+              cpu: 500m
               memory: 2Gi
           securityContext: {}
           startupProbe:
