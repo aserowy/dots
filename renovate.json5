@@ -21,6 +21,7 @@
     }
   ],
   "postUpgradeTasks": {
+    "allowedCommands": ["bash"],
     "commands": [
       "bash ./.github/update-nixhelm-sha.sh {file}"
     ],
