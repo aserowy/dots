@@ -3,6 +3,9 @@
   "extends": [
     "config:recommended"
   ],
+  "allowedCommands": [
+    "^bash ./.github/update-nixhelm-sha.sh [\\.a-z/]+$"
+  ],
   "customManagers": [
     {
       "customType": "regex",
@@ -21,7 +24,6 @@
     }
   ],
   "postUpgradeTasks": {
-    "allowedCommands": ["bash"],
     "commands": [
       "bash ./.github/update-nixhelm-sha.sh {file}"
     ],
