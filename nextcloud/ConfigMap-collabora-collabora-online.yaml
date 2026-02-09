@@ -10,7 +10,7 @@ metadata:
     app.kubernetes.io/instance: collabora
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: collabora-online
-    app.kubernetes.io/version: 25.04.8.2.1
-    helm.sh/chart: collabora-online-1.1.55
+    app.kubernetes.io/version: 25.04.8.3.1
+    helm.sh/chart: collabora-online-1.1.56
   name: collabora-collabora-online
   namespace: nextcloud
