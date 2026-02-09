@@ -6,11 +6,7 @@ in
   applications.argocd = {
     inherit namespace;
 
-    # FIX: prevent client migrations to work around argoproj/argo-helm#3704
-    syncPolicy.syncOptions = {
-      # clientSideApplyMigration = false;
-      serverSideApply = true;
-    };
+    syncPolicy.syncOptions.serverSideApply = true;
 
     helm.releases.argocd = {
       chart = charts.argoproj.argo-cd;
