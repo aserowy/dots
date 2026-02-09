@@ -8,7 +8,7 @@ in
 
     # FIX: prevent client migrations to work around argoproj/argo-helm#3704
     syncPolicy.syncOptions = {
-      clientSideApplyMigration = false;
+      # clientSideApplyMigration = false;
       serverSideApply = true;
     };
 

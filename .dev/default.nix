@@ -6,6 +6,10 @@
 }:
 let
   generators = {
+    argo = nixidy.packages.${pkgs.stdenv.hostPlatform.system}.generators.fromChartCRD {
+      name = "argo";
+      chart = charts.argoproj.argo-cd;
+    };
     akri = nixidy.packages.${pkgs.stdenv.hostPlatform.system}.generators.fromChartCRD {
       name = "akri";
       chart = charts.project-akri.akri;
@@ -66,6 +70,8 @@ pkgs.mkShell {
   shellHook = ''
     echo "generate akri crds"
     cat ${generators.akri} > ./cluster/crd/akri.nix
+    echo "generate argo crds"
+    cat ${generators.argo} > ./cluster/crd/argo.nix
     echo "generate cert-manager"
     cat ${generators.cert-manager} > ./cluster/crd/cert-manager.nix
     echo "generate cilium"
