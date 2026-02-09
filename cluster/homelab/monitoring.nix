@@ -14,13 +14,7 @@ in
 
     createNamespace = true;
 
-    syncPolicy = {
-      autoSync = {
-        prune = false;
-        selfHeal = false;
-      };
-      syncOptions.serverSideApply = true;
-    };
+    syncPolicy. syncOptions.serverSideApply = true;
 
     # TODO: netpol (flavor cilium) with helm chart
     helm.releases.kube-prometheus-stack = {
