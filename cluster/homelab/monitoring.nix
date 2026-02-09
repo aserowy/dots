@@ -97,20 +97,9 @@ in
           };
           prometheusSpec = {
             replicas = 2;
-            podMetadata.labels."haproxy/egress" = "allow";
-
             nodeSelector."hardware/ram" = "high";
-            affinity.podAntiAffinity.requiredDuringSchedulingIgnoredDuringExecution = [
-              {
-                labelSelector.matchExpressions = [
-                  {
-                    key = "app.kubernetes.io/instance";
-                    operator = "In";
-                    values = [ "kube-prometheus-prometheus" ];
-                  }
-                ];
-              }
-            ];
+            podAntiAffinity = "hard";
+            podMetadata.labels."haproxy/egress" = "allow";
 
             retention = "7d";
             scrapeTimeout = "30s";
