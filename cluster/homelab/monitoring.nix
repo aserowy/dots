@@ -96,17 +96,31 @@ in
             };
           };
           prometheusSpec = {
-            # TODO: increase to 2 after second high ram node
-            replicas = 1;
-            nodeSelector."hardware/ram" = "high";
+            replicas = 2;
             podMetadata.labels."haproxy/egress" = "allow";
+
+            nodeSelector."hardware/ram" = "high";
+            affinity.podAntiAffinity.requiredDuringSchedulingIgnoredDuringExecution = [
+              {
+                labelSelector.matchExpressions = [
+                  {
+                    key = "app.kubernetes.io/instance";
+                    operator = "In";
+                    values = [ "kube-prometheus-prometheus" ];
+                  }
+                ];
+              }
+            ];
+
             retention = "7d";
             scrapeTimeout = "30s";
             scrapeInterval = "60s";
+
             storageSpec.volumeClaimTemplate.spec = {
               storageClassName = "longhorn-nobackup";
               resources.requests.storage = "15Gi";
             };
+
             resources = {
               requests = {
                 cpu = "500m";
