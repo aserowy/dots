@@ -19,21 +19,18 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    haumea = {
+      url = "github:nix-community/haumea/v0.2.2";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     hardware.url = "github:NixOS/nixos-hardware/master";
     home = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-kube-generators.url = "github:farcaller/nix-kube-generators";
     nixidy = {
       url = "github:arnarg/nixidy";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-utils.follows = "flake-utils";
-      };
-    };
-    nixhelm = {
-      # NOTE: using fork for pr driven update process
-      url = "github:aserowy/nixhelm";
       inputs = {
         nixpkgs.follows = "nixpkgs";
         flake-utils.follows = "flake-utils";
@@ -78,10 +75,11 @@
       self,
       darwin,
       disko,
+      haumea,
       home,
       neocode,
+      nix-kube-generators,
       nixidy,
-      nixhelm,
       nixpkgs,
       noctalia,
       sops,
@@ -89,18 +87,25 @@
       zjstatus,
       ...
     }:
+    let
+      chartsBuilder =
+        { pkgs }:
+        let
+          kubelib = nix-kube-generators.lib { inherit pkgs; };
+        in
+        haumea.lib.load {
+          src = ./cluster/charts;
+          loader = { ... }: p: kubelib.downloadHelmChart (import p);
+          transformer = haumea.lib.transformers.liftDefault;
+        };
+    in
     {
-      devShells = {
-        aarch64-darwin.default = import ./.dev {
-          inherit nixidy nixhelm;
-          lib = nixpkgs.lib;
-          pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-        };
-        x86_64-linux.default = import ./.dev {
-          inherit nixidy nixhelm;
-          lib = nixpkgs.lib;
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        };
+      devShells.x86_64-linux.default = import ./.dev {
+        inherit nixidy;
+
+        charts = chartsBuilder { pkgs = nixpkgs.legacyPackages.x86_64-linux; };
+        lib = nixpkgs.lib;
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
       };
 
       formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-tree;
@@ -374,17 +379,12 @@
         };
       };
 
-      nixidyEnvs.x86_64-linux =
-        let
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        in
-        nixidy.lib.mkEnvs {
-          inherit pkgs;
-
-          charts = nixhelm.chartsDerivations.${pkgs.stdenv.hostPlatform.system};
-          envs = {
-            homelab.modules = [ ./cluster/homelab/default.nix ];
-          };
+      nixidyEnvs.x86_64-linux = nixidy.lib.mkEnvs {
+        charts = chartsBuilder { pkgs = nixpkgs.legacyPackages.x86_64-linux; };
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        envs = {
+          homelab.modules = [ ./cluster/homelab/default.nix ];
         };
+      };
     };
 }

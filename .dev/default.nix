@@ -1,18 +1,18 @@
 {
   lib,
   nixidy,
-  nixhelm,
   pkgs,
+  charts,
 }:
 let
   generators = {
     akri = nixidy.packages.${pkgs.stdenv.hostPlatform.system}.generators.fromChartCRD {
       name = "akri";
-      chart = nixhelm.chartsDerivations.${pkgs.stdenv.hostPlatform.system}.project-akri.akri;
+      chart = charts.project-akri.akri;
     };
     cert-manager = nixidy.packages.${pkgs.stdenv.hostPlatform.system}.generators.fromChartCRD {
       name = "cert-manager";
-      chart = nixhelm.chartsDerivations.${pkgs.stdenv.hostPlatform.system}.jetstack.cert-manager;
+      chart = charts.jetstack.cert-manager;
       values = {
         crds.enabled = true;
       };
@@ -33,11 +33,11 @@ let
     };
     cloudnative-pg = nixidy.packages.${pkgs.stdenv.hostPlatform.system}.generators.fromChartCRD {
       name = "cloudnative-pg";
-      chart = nixhelm.chartsDerivations.${pkgs.stdenv.hostPlatform.system}.cloudnative-pg.cloudnative-pg;
+      chart = charts.cloudnative-pg.cloudnative-pg;
     };
     sops = nixidy.packages.${pkgs.stdenv.hostPlatform.system}.generators.fromChartCRD {
       name = "sops";
-      chart = nixhelm.chartsDerivations.${pkgs.stdenv.hostPlatform.system}.isindir.sops-secrets-operator;
+      chart = charts.isindir.sops-secrets-operator;
     };
   };
 in
