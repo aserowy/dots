@@ -7,7 +7,7 @@ in
     inherit namespace;
 
     syncPolicy.syncOptions = {
-      # clientSideApplyMigration = false;
+      clientSideApplyMigration = false;
       serverSideApply = true;
     };
 
