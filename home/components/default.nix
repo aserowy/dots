@@ -14,6 +14,7 @@
     ./lf
     ./logseq
     ./onedrive
+    ./opencode
     ./starship
     ./swaync
     ./swww

@@ -17,6 +17,7 @@ in
       components = {
         fzf.enable = true;
         git.enable = true;
+        opencode.enable = true;
         zellij.enable = true;
       };
 
@@ -31,7 +32,6 @@ in
         curl
         fd
         lazygit
-        opencode
         yeet
 
         unixtools.watch

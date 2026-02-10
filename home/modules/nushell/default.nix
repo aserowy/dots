@@ -73,6 +73,8 @@ in
           ll = "ls -l";
           lla = "ls -la";
 
+          oc = "opencode";
+
           zls = "zellij ls";
           zs = "zellij --session";
           za = "zellij attach";
