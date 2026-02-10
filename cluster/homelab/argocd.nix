@@ -6,7 +6,10 @@ in
   applications.argocd = {
     inherit namespace;
 
-    syncPolicy.syncOptions.serverSideApply = true;
+    syncPolicy.syncOptions = {
+      # clientSideApplyMigration = false;
+      serverSideApply = true;
+    };
 
     helm.releases.argocd = {
       chart = charts.argoproj.argo-cd;
