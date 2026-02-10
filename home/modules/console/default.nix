@@ -29,10 +29,10 @@ in
         bat
         bottom
         curl
-        lazygit
-
-        yeet
         fd
+        lazygit
+        opencode
+        yeet
 
         unixtools.watch
       ];
