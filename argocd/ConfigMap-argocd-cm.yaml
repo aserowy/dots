@@ -44,7 +44,7 @@ data:
       - /ports
   resource.exclusions: |
     - apiGroups:
-      - cilium.io
+        - cilium.io
       kinds:
         - CiliumIdentity
       clusters:
