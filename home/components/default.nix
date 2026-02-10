@@ -5,7 +5,6 @@
     ./bitwarden
     ./brave
     ./direnv
-    ./docker
     ./foot
     ./fuzzel
     ./fzf

@@ -16,7 +16,7 @@ in
           # TODO: introduce module to configure from outside
           cm."resource.exclusions" = ''
             - apiGroups:
-              - cilium.io
+                - cilium.io
               kinds:
                 - CiliumIdentity
               clusters:

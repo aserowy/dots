@@ -14,9 +14,8 @@ in
 
     createNamespace = true;
 
-    syncPolicy. syncOptions.serverSideApply = true;
+    syncPolicy.syncOptions.serverSideApply = true;
 
-    # TODO: netpol (flavor cilium) with helm chart
     helm.releases.kube-prometheus-stack = {
       chart = charts.prometheus-community.kube-prometheus-stack;
 
@@ -266,7 +265,6 @@ in
         };
       };
 
-      # TODO: netpol alertmanager and prometheus
       ciliumNetworkPolicies.grafana = {
         apiVersion = "cilium.io/v2";
         kind = "CiliumNetworkPolicy";

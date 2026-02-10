@@ -15,11 +15,11 @@
         enable = true;
         setDefaultBrowserSessionVariable = true;
       };
-      docker.enable = true;
       ghostty.enable = true;
     };
 
     modules = {
+      docker.enable = true;
       console.enable = true;
     };
 

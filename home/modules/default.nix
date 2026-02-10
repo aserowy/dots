@@ -3,6 +3,7 @@
   imports = [
     ./clipboard
     ./console
+    ./docker
     ./gaming
     ./gtk
     ./neocode

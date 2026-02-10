@@ -14,9 +14,6 @@ in
       values = {
         operator.replicas = 2;
 
-        # TODO: mtls with spiffe/spire + wireguard
-        # TODO: l2 announcements
-
         # NOTE: replicate k3s environment
         ipam.operator.clusterPoolIPv4PodCIDRList = [ "10.42.0.0/16" ];
 

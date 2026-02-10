@@ -10,11 +10,8 @@
     homeDirectory = "/Users/alexander.serowy";
     username = "alexander.serowy";
 
-    components = {
-      docker.enable = true;
-    };
-
     modules = {
+      docker.enable = true;
       console.enable = true;
     };
 
