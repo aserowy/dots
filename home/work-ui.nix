@@ -29,7 +29,7 @@
     };
 
     packages = with pkgs; [
-      firefox
+      github-copilot-cli
       inter
       powerline-fonts
       nerd-fonts.fira-code
