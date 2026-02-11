@@ -195,10 +195,10 @@ in
             name = "adguard-dns";
             annotations = {
               "lbipam.cilium.io/sharing-cross-namespace" = "*";
-              "lbipam.cilium.io/sharing-key" = "default-ippool";
+              "lbipam.cilium.io/sharing-key" = "default";
             };
             labels = {
-              "cilium/ippool" = "default-ippool";
+              "cilium/ippool" = "default";
             };
           };
           spec = {

@@ -12,18 +12,12 @@ in
       chart = charts.haproxytech.kubernetes-ingress;
 
       values = {
-        controller = {
-          # NOTE: important to comply with cilium requirements
-          service = {
-            annotations = {
-              "lbipam.cilium.io/sharing-cross-namespace" = "*";
-              "lbipam.cilium.io/sharing-key" = "default-ippool";
-            };
-            labels = {
-              "cilium/ippool" = "default-ippool";
-            };
-            type = "LoadBalancer";
+        controller.service = {
+          labels = {
+            "cilium/ippool" = "haproxy";
+            "cilium/l2" = "announce";
           };
+          type = "LoadBalancer";
         };
       };
     };

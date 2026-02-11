@@ -1,5 +1,4 @@
 {
-  lib,
   nixidy,
   pkgs,
   charts,
@@ -28,6 +27,7 @@ let
       crds = [
         "pkg/k8s/apis/cilium.io/client/crds/v2/ciliumnetworkpolicies.yaml"
         "pkg/k8s/apis/cilium.io/client/crds/v2/ciliumclusterwidenetworkpolicies.yaml"
+        "pkg/k8s/apis/cilium.io/client/crds/v2alpha1/ciliuml2announcementpolicies.yaml"
         "pkg/k8s/apis/cilium.io/client/crds/v2/ciliumloadbalancerippools.yaml"
       ];
     };

@@ -104,7 +104,6 @@
         inherit nixidy;
 
         charts = chartsBuilder { pkgs = nixpkgs.legacyPackages.x86_64-linux; };
-        lib = nixpkgs.lib;
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
       };
 
