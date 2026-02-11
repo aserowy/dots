@@ -10,6 +10,11 @@
     homeDirectory = "/home/uitdeveloper";
     username = "uitdeveloper";
 
+    sessionVariables = {
+      NODE_TLS_REJECT_UNAUTHORIZED = 0;
+      NODE_EXTRA_CA_CERTS = "/etc/ssl/certs/ca-certificates.crt";
+    };
+
     components = {
       brave = {
         enable = true;
