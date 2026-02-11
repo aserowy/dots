@@ -107,8 +107,8 @@ in
                     }
                   ];
                   resources.requests = {
-                    cpu = "50m";
-                    memory = "200Mi";
+                    cpu = "300m";
+                    memory = "500Mi";
                   };
                   volumeMounts = [
                     {
