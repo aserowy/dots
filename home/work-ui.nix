@@ -29,7 +29,10 @@
     };
 
     packages = with pkgs; [
+      # FIX: while opencode is not running
+      bashInteractive
       github-copilot-cli
+
       inter
       powerline-fonts
       nerd-fonts.fira-code
