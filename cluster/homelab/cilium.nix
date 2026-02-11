@@ -17,7 +17,6 @@ in
         # NOTE: replicate k3s environment
         ipam.operator.clusterPoolIPv4PodCIDRList = [ "10.42.0.0/16" ];
 
-        # TODO: is host dependent: should come as modul option
         k8sServiceHost = "192.168.178.201";
         k8sServicePort = 6443;
 

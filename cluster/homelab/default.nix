@@ -3,7 +3,6 @@
   # TODO: HPA collabora, gotenberg, tika, imaginary
   # TODO: check if HA is possible for adguard, paperless, and other workloads
   # TODO: mtls with spiffe/spire + wireguard
-  # TODO: l2 announcements
   # TODO: netpol (flavor cilium) with helm chart
 
   imports = [

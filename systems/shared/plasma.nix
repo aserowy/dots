@@ -138,7 +138,6 @@
   system.stateVersion = "21.05";
 
   systemd = {
-    # TODO: lutris specific, but unable to set with home manager?
     user.extraConfig = ''
       DefaultLimitNOFILE=1048576
     '';

@@ -16,7 +16,6 @@ in
 
       values = {
         configs = {
-          # TODO: introduce module to configure from outside
           cm."resource.exclusions" = ''
             - apiGroups:
                 - cilium.io
