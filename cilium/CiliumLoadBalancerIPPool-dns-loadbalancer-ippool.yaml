@@ -1,10 +1,10 @@
 apiVersion: cilium.io/v2
 kind: CiliumLoadBalancerIPPool
 metadata:
-  name: default-loadbalancer-ippool
+  name: dns-loadbalancer-ippool
 spec:
   blocks:
-    - cidr: 192.168.178.201/32
+    - cidr: 192.168.178.230/32
   serviceSelector:
     matchLabels:
-      cilium/ippool: default
+      cilium/ippool: dns
