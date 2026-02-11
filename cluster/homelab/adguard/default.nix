@@ -193,12 +193,9 @@ in
           metadata = {
             inherit namespace;
             name = "adguard-dns";
-            annotations = {
-              "lbipam.cilium.io/sharing-cross-namespace" = "*";
-              "lbipam.cilium.io/sharing-key" = "default";
-            };
             labels = {
-              "cilium/ippool" = "default";
+              "cilium/ippool" = "dns";
+              "cilium/l2" = "announce";
             };
           };
           spec = {

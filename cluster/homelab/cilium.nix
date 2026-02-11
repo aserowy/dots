@@ -56,13 +56,6 @@ in
       };
 
       ciliumLoadBalancerIPPools = {
-        default-loadbalancer-ippool.spec = {
-          # TODO: cidr configurable
-          blocks = [ { cidr = "192.168.178.201/32"; } ];
-          serviceSelector.matchLabels = {
-            "cilium/ippool" = "default";
-          };
-        };
         dns-loadbalancer-ippool.spec = {
           blocks = [ { cidr = "192.168.178.230/32"; } ];
           serviceSelector.matchLabels = {
