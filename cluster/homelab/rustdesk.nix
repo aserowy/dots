@@ -146,12 +146,9 @@ in
         metadata = {
           inherit namespace;
           name = "rustdesk";
-          annotations = {
-            "lbipam.cilium.io/sharing-cross-namespace" = "*";
-            "lbipam.cilium.io/sharing-key" = "default";
-          };
           labels = {
-            "cilium/ippool" = "default";
+            "cilium/ippool" = "rustdesk";
+            "cilium/l2" = "announce";
           };
         };
         spec = {

@@ -75,6 +75,12 @@ in
             "cilium/ippool" = "haproxy";
           };
         };
+        rustdesk-loadbalancer-ippool.spec = {
+          blocks = [ { cidr = "192.168.178.232/32"; } ];
+          serviceSelector.matchLabels = {
+            "cilium/ippool" = "rustdesk";
+          };
+        };
       };
 
       ingresses.hubble = {
