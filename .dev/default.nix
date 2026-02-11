@@ -6,10 +6,6 @@
 }:
 let
   generators = {
-    argo = nixidy.packages.${pkgs.stdenv.hostPlatform.system}.generators.fromChartCRD {
-      name = "argo";
-      chart = charts.argoproj.argo-cd;
-    };
     akri = nixidy.packages.${pkgs.stdenv.hostPlatform.system}.generators.fromChartCRD {
       name = "akri";
       chart = charts.project-akri.akri;
@@ -47,38 +43,33 @@ let
 in
 pkgs.mkShell {
   packages = [
+    nixidy.packages.${pkgs.stdenv.hostPlatform.system}.default
+    pkgs.doas-sudo-shim
     pkgs.kubernetes-helm
-    pkgs.renovate
-
+    pkgs.lua-language-server
     pkgs.marksman
     pkgs.nixd
-    nixidy.packages.${pkgs.stdenv.hostPlatform.system}.default
     pkgs.nixfmt
-    pkgs.nodejs_24
     pkgs.nodePackages.prettier
     pkgs.nodePackages.vscode-json-languageserver
+    pkgs.nodejs_24
     pkgs.nufmt
+    pkgs.renovate
     pkgs.sops
     pkgs.stylua
-    pkgs.lua-language-server
     pkgs.taplo
-  ]
-  ++ lib.optionals (!pkgs.pkgs.stdenv.isDarwin) [
-    pkgs.doas-sudo-shim
   ];
 
   shellHook = ''
     echo "generate akri crds"
     cat ${generators.akri} > ./cluster/crd/akri.nix
-    echo "generate argo crds"
-    cat ${generators.argo} > ./cluster/crd/argo.nix
-    echo "generate cert-manager"
+    echo "generate cert-manager crds"
     cat ${generators.cert-manager} > ./cluster/crd/cert-manager.nix
-    echo "generate cilium"
+    echo "generate cilium crds"
     cat ${generators.cilium} > ./cluster/crd/cilium.nix
-    echo "generate cloudnative-pg"
+    echo "generate cloudnative-pg crds"
     cat ${generators.cloudnative-pg} > ./cluster/crd/cloudnative-pg.nix
-    echo "generate sops"
+    echo "generate sops crds"
     cat ${generators.sops} > ./cluster/crd/sops.nix
   '';
 }
