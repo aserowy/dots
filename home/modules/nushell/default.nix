@@ -64,7 +64,7 @@ in
           gst = "git status";
           gsw = "git switch";
           gswc = "git switch -c";
-          gwta = "git worktree add -fb";
+          gwta = "git worktree add";
           gwtls = "git worktree list -v";
           gwtrm = "git worktree remove";
           gta = "git tag";
