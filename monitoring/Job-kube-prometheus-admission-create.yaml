@@ -11,8 +11,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: kube-prometheus-prometheus-operator
     app.kubernetes.io/part-of: kube-prometheus
-    app.kubernetes.io/version: 81.6.3
-    chart: kube-prometheus-stack-81.6.3
+    app.kubernetes.io/version: 81.6.5
+    chart: kube-prometheus-stack-81.6.5
     heritage: Helm
     release: kube-prometheus-stack
   name: kube-prometheus-admission-create
@@ -27,8 +27,8 @@ spec:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kube-prometheus-prometheus-operator
         app.kubernetes.io/part-of: kube-prometheus
-        app.kubernetes.io/version: 81.6.3
-        chart: kube-prometheus-stack-81.6.3
+        app.kubernetes.io/version: 81.6.5
+        chart: kube-prometheus-stack-81.6.5
         heritage: Helm
         release: kube-prometheus-stack
       name: kube-prometheus-admission-create
@@ -39,7 +39,7 @@ spec:
             - --host=kube-prometheus-operator,kube-prometheus-operator.monitoring.svc
             - --namespace=monitoring
             - --secret-name=kube-prometheus-admission
-          image: ghcr.io/jkroepke/kube-webhook-certgen:1.7.6
+          image: ghcr.io/jkroepke/kube-webhook-certgen:1.7.7
           imagePullPolicy: IfNotPresent
           name: create
           resources: {}
