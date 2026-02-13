@@ -26,17 +26,23 @@
     modules = {
       docker.enable = true;
       console.enable = true;
+
+      nushell.appendedConfig = ''
+        $env.SSH_AUTH_SOCK = "/run/user/1000/rbw/ssh-agent-socket"
+      '';
     };
 
     packages = with pkgs; [
+      rbw
+
       # FIX: while opencode is not running
       bashInteractive
       github-copilot-cli
 
       inter
-      powerline-fonts
-      nerd-fonts.fira-code
       nerd-fonts.jetbrains-mono
+      nerd-fonts.fira-code
+      powerline-fonts
     ];
   };
 

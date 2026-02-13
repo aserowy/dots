@@ -22,6 +22,10 @@ in
         bitwarden-desktop
       ];
 
+      modules.nushell.appendedConfig = ''
+        $env.SSH_AUTH_SOCK = ($nu.home-dir | path join ".bitwarden-ssh-agent.sock")
+      '';
+
       activation.bitwarden = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
         run ${pkgs.nushell}/bin/nu ${configure}
       '';

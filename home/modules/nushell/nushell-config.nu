@@ -122,8 +122,6 @@ source ~/.cache/nushell/carapace.nu
 source ~/.cache/nushell/starship.nu
 source ~/.cache/nushell/zoxide.nu
 
-$env.SSH_AUTH_SOCK = ($nu.home-dir | path join ".bitwarden-ssh-agent.sock")
-
 $env.PROMPT_INDICATOR = ""
 $env.TRANSIENT_PROMPT_INDICATOR = ""
 $env.PROMPT_INDICATOR_VI_INSERT = ""
