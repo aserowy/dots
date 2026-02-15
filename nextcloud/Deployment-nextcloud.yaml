@@ -6,8 +6,8 @@ metadata:
     app.kubernetes.io/instance: nextcloud
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: nextcloud
-    app.kubernetes.io/version: 32.0.5
-    helm.sh/chart: nextcloud-8.9.0
+    app.kubernetes.io/version: 32.0.6
+    helm.sh/chart: nextcloud-8.9.1
   name: nextcloud
   namespace: nextcloud
 spec:
@@ -63,7 +63,7 @@ spec:
               value: nextcloud.anderwerse.de
             - name: NEXTCLOUD_DATA_DIR
               value: /var/www/html/data
-          image: docker.io/library/nextcloud:32.0.5-apache
+          image: docker.io/library/nextcloud:32.0.6-apache
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 60
