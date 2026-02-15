@@ -69,7 +69,7 @@ spec:
 
               echo "Move temp configuration and replace configuration.yaml"
               mv --force configuration.temp configuration.yaml
-          image: mikefarah/yq:4.52.2
+          image: mikefarah/yq:4.52.4
           name: copy-base-config
           securityContext:
             allowPrivilegeEscalation: false
