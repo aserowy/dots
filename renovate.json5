@@ -3,6 +3,11 @@
   "extends": [
     "config:recommended"
   ],
+  "separateMajorMinor": true,
+  "separateMinorPatch": true,
+  "prConcurrentLimit": 0,
+  "branchConcurrentLimit": 0,
+  "minimumReleaseAge": "14 days",
   "customManagers": [
     {
       "customType": "regex",
