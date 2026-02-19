@@ -30,7 +30,7 @@ in
     resources = {
       clusterIssuers = {
         azure-acme-issuer.spec.acme = {
-          email = "serowy@hotmail.com";
+          email = "alexander.serowy+dots@proton.me";
           server = "https://acme-v02.api.letsencrypt.org/directory";
           privateKeySecretRef.name = "azure-issuer-account-key";
           solvers = [

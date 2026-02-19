@@ -28,7 +28,7 @@ in
           push.autoSetupRemote = "true";
           user = {
             name = "aserowy";
-            email = "serowy@hotmail.com";
+            email = "alexander.serowy+dots@proton.me";
           };
         };
         lfs = {

@@ -46,7 +46,7 @@ in
                 name = "default-receiver";
                 email_configs = [
                   {
-                    to = "serowy@hotmail.com";
+                    to = "alexander.serowy+dots@proton.me";
                     headers.Subject = "[{{ .Status | toUpper }}] {{ .GroupLabels.namespace }}";
                   }
                 ];
