@@ -18,7 +18,10 @@ in
         opencode
       ];
 
-      file.".config/opencode/opencode.json".source = ./opencode.json;
+      file = {
+        ".config/opencode/opencode.json".source = ./opencode.json;
+        ".config/opencode/plugins/github-copilot_business.ts".source = ./github-copilot_business.ts;
+      };
     };
   };
 }
