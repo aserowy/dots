@@ -4,7 +4,7 @@ metadata:
   name: azure-acme-issuer
 spec:
   acme:
-    email: serowy@hotmail.com
+    email: alexander.serowy+dots@proton.me
     privateKeySecretRef:
       name: azure-issuer-account-key
     server: https://acme-v02.api.letsencrypt.org/directory
