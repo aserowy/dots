@@ -74,6 +74,7 @@ in
       '';
 
       packages = with pkgs; [
+        chafa
         zellij
       ];
     };
