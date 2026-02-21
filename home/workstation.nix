@@ -4,6 +4,7 @@
     noctalia.homeModules.default
 
     ./base.nix
+    ./modules/noctalia
   ];
 
   home = {
