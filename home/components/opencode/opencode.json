@@ -12,5 +12,19 @@
         "todoread": "allow",
         "todowrite": "allow"
     },
+    "provider": {
+        "adesso-ai-hub": {
+            "npm": "@ai-sdk/openai-compatible",
+            "name": "Adesso AI Hub LiteLLM",
+            "options": {
+                "baseURL": "https://adesso-ai-hub.3asabc.de/v1"
+            },
+            "models": {
+                "claude-opus-4-5*": {
+                    "name": "claude-opus-4-5*",
+                }
+            }
+        }
+    },
     "theme": "system"
 }
