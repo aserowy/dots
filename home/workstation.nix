@@ -28,7 +28,7 @@
     packages = with pkgs; [
       discord
       drawio
-      kdePackages.dolphin
+      nautilus
       nextcloud-client
       onlyoffice-desktopeditors
       reaper
