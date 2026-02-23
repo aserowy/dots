@@ -33,6 +33,7 @@
       onlyoffice-desktopeditors
       reaper
       rustdesk-flutter
+      signal-desktop-bin
       spotify
     ];
   };
