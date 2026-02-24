@@ -420,11 +420,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1771869737,
-        "narHash": "sha256-GDBF70K8AoeHgtcK/gn/B4uuXEoAoUjsFllLG9XD3yQ=",
+        "lastModified": 1771915736,
+        "narHash": "sha256-RfFt12Hb50aOyMvTZV3dqcLi/jma578yYwDZx9Hfcas=",
         "owner": "aserowy",
         "repo": "yeet",
-        "rev": "8e5197d4479541f4bb20269d31df9273c7ac4dfa",
+        "rev": "709e3dcf6d6f59236078e18ccda5ecce6b7cba51",
         "type": "github"
       },
       "original": {
