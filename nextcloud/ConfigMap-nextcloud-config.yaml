@@ -84,6 +84,7 @@ data:
   custom_infrastructure.config.php: "<?php\n              $CONFIG = array (\n                'trusted_proxies' => ['10.42.0.0/16'],\n                'forwarded_for_headers' => ['HTTP_X_FORWARDED', 'HTTP_FORWARDED_FOR'],\n              );\n              "
   custom_maintenance.config.php: "<?php\n              $CONFIG = array (\n                'maintenance_window_start' => 1,\n              );\n              "
   custom_region.config.php: "<?php\n              $CONFIG = array (\n                'default_language' => 'en',\n                'default_locale' => 'de_DE',\n                'default_phone_region' => 'DE',\n                'default_timezone' => 'Europe/Berlin',\n              );\n              "
+  custom_user_oidc.config.php: "<?php\n              $CONFIG = array (\n                'user_oidc' => [\n                  'send_userinfo_claims' => false,\n                ],\n              );\n              "
   imaginary.config.php: |-
     <?php
     $CONFIG = array (

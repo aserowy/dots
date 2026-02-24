@@ -23,7 +23,7 @@ spec:
     metadata:
       annotations:
         hooks-hash: 9525c2748a6c7cd0e28ec740623d0b3fa5a75c83b51ccfd136bc89c76737b204
-        nextcloud-config-hash: 55aab50446b3be7d3d3c9741cdf598d852f29b48f3dea0ed94235178d08e2343
+        nextcloud-config-hash: c5bf1b79317c0a19cac05c16511ae3fb19f77e29ac53f678cc00fee68dc31359
         php-config-hash: 44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a
       labels:
         app.kubernetes.io/component: app
@@ -129,6 +129,9 @@ spec:
             - mountPath: /var/www/html/config/custom_region.config.php
               name: nextcloud-config
               subPath: custom_region.config.php
+            - mountPath: /var/www/html/config/custom_user_oidc.config.php
+              name: nextcloud-config
+              subPath: custom_user_oidc.config.php
             - mountPath: /var/www/html/config/.htaccess
               name: nextcloud-config
               subPath: .htaccess

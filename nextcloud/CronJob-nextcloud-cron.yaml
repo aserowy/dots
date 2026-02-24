@@ -120,6 +120,9 @@ spec:
                 - mountPath: /var/www/html/config/custom_region.config.php
                   name: nextcloud-config
                   subPath: custom_region.config.php
+                - mountPath: /var/www/html/config/custom_user_oidc.config.php
+                  name: nextcloud-config
+                  subPath: custom_user_oidc.config.php
                 - mountPath: /var/www/html/config/.htaccess
                   name: nextcloud-config
                   subPath: .htaccess
