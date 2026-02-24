@@ -41,6 +41,14 @@
                 'default_timezone' => 'Europe/Berlin',
               );
               ";
+            "custom_user_oidc.config.php" =
+              "<?php
+              $CONFIG = array (
+                'user_oidc' => [
+                  'send_userinfo_claims' => false,
+                ],
+              );
+              ";
           };
         };
         phpClientHttpsFix.enabled = true;
