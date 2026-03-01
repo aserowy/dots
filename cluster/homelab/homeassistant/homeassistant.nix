@@ -80,6 +80,7 @@ in
             metadata.labels = {
               "app.kubernetes.io/name" = "homeassistant";
               "app.kubernetes.io/component" = "app";
+              "haproxy/ingress" = "allow";
             };
             spec = {
               initContainers = [
@@ -342,6 +343,26 @@ in
               }
             ];
             egress = [
+              {
+                toEndpoints = [
+                  {
+                    matchLabels = {
+                      "io.kubernetes.pod.namespace" = "haproxy";
+                      "app.kubernetes.io/name" = "kubernetes-ingress";
+                    };
+                  }
+                ];
+                toPorts = [
+                  {
+                    ports = [
+                      {
+                        port = "8443";
+                        protocol = "TCP";
+                      }
+                    ];
+                  }
+                ];
+              }
               { toEntities = [ "world" ]; }
               {
                 toEndpoints = [
