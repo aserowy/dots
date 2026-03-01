@@ -5,6 +5,14 @@ metadata:
   namespace: homeassistant
 spec:
   egress:
+    - toEndpoints:
+        - matchLabels:
+            app.kubernetes.io/name: kubernetes-ingress
+            io.kubernetes.pod.namespace: haproxy
+      toPorts:
+        - ports:
+            - port: "8443"
+              protocol: TCP
     - toEntities:
         - world
     - toEndpoints:

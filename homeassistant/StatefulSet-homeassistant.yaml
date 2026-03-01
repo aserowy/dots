@@ -13,6 +13,7 @@ spec:
       labels:
         app.kubernetes.io/component: app
         app.kubernetes.io/name: homeassistant
+        haproxy/ingress: allow
     spec:
       containers:
         - env:
