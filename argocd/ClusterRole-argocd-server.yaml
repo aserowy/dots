@@ -7,8 +7,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-server
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.3.0
-    helm.sh/chart: argo-cd-9.4.2
+    app.kubernetes.io/version: v3.3.1
+    helm.sh/chart: argo-cd-9.4.3
   name: argocd-server
 rules:
   - apiGroups:
