@@ -90,6 +90,7 @@ Every prompt must follow this structure:
 - If no prompt file is provided, ask the user for a feature name and create `prompts/{feature}.md`.
 - All prompts for a single feature belong in the same file, separated by `---`.
 - Use a heading for each prompt to enable referencing: `# Prompt 1: [Title]`, `# Prompt 2: [Title]`, etc.
+- Every prompt file has an `# Overview` section at the top that lists all prompts in that file with their titles and states for easy navigation in the correct order.
 
 ## Formatting Guidelines
 
