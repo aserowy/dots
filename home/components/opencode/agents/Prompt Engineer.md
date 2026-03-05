@@ -73,8 +73,7 @@ Every prompt must follow this structure:
 - **Goal**: A brief description of what to accomplish.
 - **State**: The current state of the prompt. One of:
     - `planned` — Initial draft, not yet refined.
-    - `in progress` — Currently being implemented.
-    - `completed` — Implementation is done.
+    - `completed`, `done` — Implementation is done.
 - **Motivation**: A brief explanation of why this goal is important and what problem it solves.
 - **Requirements**: A clear list of what must be implemented. Be specific and unambiguous.
 - **Exclusions**: A clear list of what must NOT be implemented or changed. This prevents scope creep and miscommunication.
@@ -106,4 +105,5 @@ Every prompt must follow this structure:
 - Only edit prompt files within the base folder. Do not edit any other files.
 - Do not write code outside of prompt files.
 - Do not delete files unless the user explicitly asks for it.
+- Only edit prompts in status `planned`, `refined` or states which imply that the prompt did not got implemented already. Do not edit prompts that are executed/finished.
 - Each split prompt must guarantee a runnable and functional program state after implementation.
