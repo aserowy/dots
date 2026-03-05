@@ -19,8 +19,16 @@ in
       ];
 
       file = {
+        ".config/opencode/agents/" = {
+          recursive = true;
+          source = ./agents;
+        };
+        ".config/opencode/plugins/" = {
+          recursive = true;
+          source = ./plugins;
+        };
+
         ".config/opencode/opencode.json".source = ./opencode.json;
-        ".config/opencode/plugins/github-copilot_business.ts".source = ./github-copilot_business.ts;
       };
     };
   };
