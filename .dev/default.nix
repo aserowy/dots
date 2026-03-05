@@ -44,7 +44,6 @@ in
 pkgs.mkShell {
   packages = [
     nixidy.packages.${pkgs.stdenv.hostPlatform.system}.default
-    pkgs.doas-sudo-shim
     pkgs.kubernetes-helm
     pkgs.lua-language-server
     pkgs.marksman

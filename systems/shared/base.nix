@@ -53,7 +53,7 @@
     rtkit.enable = true;
 
     sudo.enable = false;
-    doas.enable = true;
+    sudo-rs.enable = true;
   };
 
   services = {

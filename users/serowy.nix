@@ -47,15 +47,5 @@ in
           uid = 1000;
         };
       };
-
-      security.doas = {
-        extraRules = [
-          {
-            users = [ "serowy" ];
-            keepEnv = true;
-            persist = true;
-          }
-        ];
-      };
     };
 }
