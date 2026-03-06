@@ -1,5 +1,5 @@
 {
-    "settingsVersion": 53,
+    "settingsVersion": 56,
     "bar": {
         "barType": "simple",
         "position": "left",
@@ -11,6 +11,9 @@
         "showCapsule": false,
         "capsuleOpacity": 1,
         "capsuleColorKey": "none",
+        "widgetSpacing": 6,
+        "contentPadding": 2,
+        "fontScale": 1,
         "backgroundOpacity": 1,
         "useSeparateOpacity": true,
         "floating": false,
@@ -23,6 +26,7 @@
         "displayMode": "always_visible",
         "autoHideDelay": 500,
         "autoShowDelay": 150,
+        "showOnWorkspaceSwitch": true,
         "widgets": {
             "left": [
                 {
@@ -86,12 +90,15 @@
                 },
                 {
                     "blacklist": [],
-                    "chevronColor": "none",
-                    "colorizeIcons": true,
+                    "chevronColor": "tertiary",
+                    "colorizeIcons": false,
                     "drawerEnabled": true,
                     "hidePassive": false,
                     "id": "Tray",
-                    "pinned": []
+                    "pinned": [
+                        "nextcloud: Last sync was successful.",
+                        "Bitwarden"
+                    ]
                 },
                 {
                     "id": "Spacer",
@@ -108,6 +115,15 @@
                 }
             ]
         },
+        "mouseWheelAction": "none",
+        "reverseScroll": false,
+        "mouseWheelWrap": true,
+        "middleClickAction": "none",
+        "middleClickFollowMouse": false,
+        "middleClickCommand": "",
+        "rightClickAction": "controlCenter",
+        "rightClickFollowMouse": true,
+        "rightClickCommand": "",
         "screenOverrides": []
     },
     "general": {
@@ -127,6 +143,7 @@
         "lockOnSuspend": true,
         "showSessionButtonsOnLockScreen": true,
         "showHibernateOnLockScreen": false,
+        "enableLockScreenMediaControls": false,
         "enableShadows": true,
         "shadowDirection": "bottom_right",
         "shadowOffsetX": 2,
@@ -159,7 +176,8 @@
                 "Right"
             ],
             "keyEnter": [
-                "Return"
+                "Return",
+                "Enter"
             ],
             "keyEscape": [
                 "Esc"
@@ -176,14 +194,11 @@
         "fontDefaultScale": 1,
         "fontFixedScale": 1,
         "tooltipsEnabled": true,
+        "boxBorderEnabled": false,
         "panelBackgroundOpacity": 0.9,
         "panelsAttachedToBar": true,
         "settingsPanelMode": "centered",
-        "wifiDetailsViewMode": "grid",
-        "bluetoothDetailsViewMode": "grid",
-        "networkPanelView": "wifi",
-        "bluetoothHideUnnamedDevices": false,
-        "boxBorderEnabled": false
+        "settingsPanelSideBarCardStyle": false
     },
     "location": {
         "name": "Drensteinfurt, Germany",
@@ -360,22 +375,32 @@
         "colorizeIcons": false,
         "showLauncherIcon": false,
         "launcherPosition": "end",
+        "launcherIconColor": "none",
         "pinnedStatic": false,
         "inactiveIndicators": false,
+        "groupApps": false,
+        "groupContextMenuMode": "extended",
+        "groupClickAction": "cycle",
+        "groupIndicatorStyle": "dots",
         "deadOpacity": 0.6,
         "animationSpeed": 1,
         "sitOnFrame": false,
-        "showFrameIndicator": true
+        "showDockIndicator": false,
+        "indicatorThickness": 3,
+        "indicatorColor": "primary",
+        "indicatorOpacity": 0.6
     },
     "network": {
         "wifiEnabled": true,
         "airplaneModeEnabled": false,
         "bluetoothRssiPollingEnabled": false,
         "bluetoothRssiPollIntervalMs": 10000,
+        "networkPanelView": "wifi",
         "wifiDetailsViewMode": "grid",
         "bluetoothDetailsViewMode": "grid",
         "bluetoothHideUnnamedDevices": false,
-        "disableDiscoverability": false
+        "disableDiscoverability": false,
+        "bluetoothAutoConnect": true
     },
     "sessionMenu": {
         "enableCountdown": true,
@@ -471,12 +496,14 @@
         "visualizerType": "linear",
         "mprisBlacklist": [],
         "preferredPlayer": "spotify",
-        "volumeFeedback": false
+        "volumeFeedback": false,
+        "volumeFeedbackSoundFile": ""
     },
     "brightness": {
         "brightnessStep": 5,
         "enforceMinimum": true,
-        "enableDdcSupport": false
+        "enableDdcSupport": false,
+        "backlightDeviceMappings": []
     },
     "colorSchemes": {
         "useWallpaperColors": false,
@@ -536,8 +563,23 @@
     "plugins": {
         "autoUpdate": false
     },
+    "idle": {
+        "enabled": false,
+        "screenOffTimeout": 600,
+        "lockTimeout": 660,
+        "suspendTimeout": 1800,
+        "fadeDuration": 5,
+        "screenOffCommand": "",
+        "lockCommand": "",
+        "suspendCommand": "",
+        "resumeScreenOffCommand": "",
+        "resumeLockCommand": "",
+        "resumeSuspendCommand": "",
+        "customCommands": "[]"
+    },
     "desktopWidgets": {
         "enabled": true,
+        "overviewEnabled": true,
         "gridSnap": true,
         "monitorWidgets": [
             {
