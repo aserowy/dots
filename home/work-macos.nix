@@ -13,6 +13,10 @@
     modules = {
       docker.enable = true;
       console.enable = true;
+
+      nushell.appendedConfig = ''
+        $env.SSH_AUTH_SOCK = ($nu.home-dir | path join ".bitwarden-ssh-agent.sock")
+      '';
     };
 
     file = {
