@@ -24,6 +24,7 @@
 
       nushell.appendedConfig = ''
         $env.SSH_AUTH_SOCK = "/run/user/1000/rbw/ssh-agent-socket"
+        $env.NODE_TLS_REJECT_UNAUTHORIZED = 0
       '';
     };
 

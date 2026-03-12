@@ -13,6 +13,11 @@
         "todowrite": "allow"
     },
     "provider": {
+        "github-copilot": {
+            "options": {
+                "baseURL": "https://api.business.githubcopilot.com"
+            }
+        },
         "adesso-ai-hub": {
             "npm": "@ai-sdk/openai-compatible",
             "name": "Adesso AI Hub LiteLLM",
