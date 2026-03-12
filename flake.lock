@@ -458,11 +458,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1773216813,
-        "narHash": "sha256-bF1E2xosO3Fs1u4gGNvI9ue7xisiExpoVp71EcCByvY=",
+        "lastModified": 1773310933,
+        "narHash": "sha256-ilbnNwL63i98LxlkguGPI3zKdppnwv1BGLySjDHE6I8=",
         "owner": "aserowy",
         "repo": "yeet",
-        "rev": "285c5b6da176ee5f961e4fc9e558b83ceb717840",
+        "rev": "1c074a1ed251bc99b993918508d5210d3c6a2ab8",
         "type": "github"
       },
       "original": {
