@@ -5,10 +5,10 @@ metadata:
     app.kubernetes.io/instance: kubernetes-ingress
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: kubernetes-ingress
-    app.kubernetes.io/version: 3.2.5
+    app.kubernetes.io/version: 3.2.6
     cilium/ippool: haproxy
     cilium/l2: announce
-    helm.sh/chart: kubernetes-ingress-1.48.0
+    helm.sh/chart: kubernetes-ingress-1.49.0
   name: kubernetes-ingress
   namespace: haproxy
 spec:
