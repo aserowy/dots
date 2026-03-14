@@ -74,7 +74,7 @@ in
               containers = [
                 {
                   name = "paperless";
-                  image = "docker.io/paperlessngx/paperless-ngx:2.20.8"; # docker/paperlessngx/paperless-ngx@semver-coerced
+                  image = "docker.io/paperlessngx/paperless-ngx:2.20.9"; # docker/paperlessngx/paperless-ngx@semver-coerced
                   securityContext = {
                     allowPrivilegeEscalation = false;
                     readOnlyRootFilesystem = true;
