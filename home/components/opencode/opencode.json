@@ -12,22 +12,6 @@
         "todoread": "allow",
         "todowrite": "allow"
     },
-    "lsp": {
-        "bash": {},
-        "csharp": {},
-        "gopls": {},
-        "lua": {},
-        "nixd": {},
-        "rust": {
-            "env": {
-                "RUST_LOG": "debug"
-            }
-        },
-        "terraform": {},
-        "typescript": {},
-        "yaml-ls": {},
-        "zls": {}
-    },
     "provider": {
         "github-copilot": {
             "options": {
