@@ -19,10 +19,10 @@ in
       ];
 
       file = {
-        ".config/opencode/agents/" = {
-          recursive = true;
-          source = ./agents;
-        };
+        # ".config/opencode/agents/" = {
+        #   recursive = true;
+        #   source = ./agents;
+        # };
         # ".config/opencode/plugins/" = {
         #   recursive = true;
         #   source = ./plugins;
