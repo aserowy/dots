@@ -9,6 +9,7 @@ metadata:
   namespace: kube-system
 spec:
   concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 1
   jobTemplate:
     spec:
       template:
@@ -64,7 +65,6 @@ spec:
           securityContext:
             seccompProfile:
               type: RuntimeDefault
-          serviceAccount: hubble-generate-certs
           serviceAccountName: hubble-generate-certs
-      ttlSecondsAfterFinished: 1800
   schedule: 0 0 1 */4 *
+  successfulJobsHistoryLimit: 3
