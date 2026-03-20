@@ -464,6 +464,10 @@ let
     "isindir.github.com.v1alpha3.SopsSecretSpec" = {
 
       options = {
+        "enforceOwnership" = mkOption {
+          description = "EnforceOwnership tells the controller to take ownership of pre-existing secrets\nthat are not currently owned by this SopsSecret. This is useful after backup restore\noperations where the secret exists but has stale owner references.\nWhen set to true, the controller will update the secret's owner reference to point\nto this SopsSecret, effectively taking control of the secret.\nWhen not set, the global default (--default-enforce-ownership flag) is used.";
+          type = (types.nullOr types.bool);
+        };
         "secretTemplates" = mkOption {
           description = "Secrets template is a list of definitions to create Kubernetes Secrets";
           type = (
@@ -480,6 +484,7 @@ let
       };
 
       config = {
+        "enforceOwnership" = mkOverride 1002 null;
         "suspend" = mkOverride 1002 null;
       };
 
