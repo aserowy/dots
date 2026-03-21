@@ -15,9 +15,9 @@ in
   config = mkIf cnfg.enable {
     home = {
       components = {
-        fzf.enable = true;
         git.enable = true;
         opencode.enable = true;
+        television.enable = true;
         zellij.enable = true;
       };
 

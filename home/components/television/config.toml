@@ -1,0 +1,3 @@
+[source]
+command = "docker ps"
+watch = 2.0

@@ -18,6 +18,7 @@
     ./starship
     ./swaync
     ./swww
+    ./television
     ./wpaperd
     ./zellij
   ];
