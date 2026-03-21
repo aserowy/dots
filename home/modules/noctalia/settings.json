@@ -1,5 +1,5 @@
 {
-    "settingsVersion": 56,
+    "settingsVersion": 59,
     "bar": {
         "barType": "simple",
         "position": "left",
@@ -14,6 +14,7 @@
         "widgetSpacing": 6,
         "contentPadding": 2,
         "fontScale": 1,
+        "enableExclusionZoneInset": true,
         "backgroundOpacity": 1,
         "useSeparateOpacity": true,
         "floating": false,
@@ -30,12 +31,13 @@
         "widgets": {
             "left": [
                 {
-                    "hideWhenZero": false,
-                    "hideWhenZeroUnread": false,
+                    "colorizeSystemIcon": "tertiary",
+                    "customIconPath": "",
+                    "enableColorization": true,
+                    "icon": "rocket",
                     "iconColor": "none",
-                    "id": "NotificationHistory",
-                    "showUnreadBadge": true,
-                    "unreadBadgeColor": "primary"
+                    "id": "Launcher",
+                    "useDistroLogo": true
                 }
             ],
             "center": [
@@ -46,6 +48,7 @@
                     "enableScrollWheel": true,
                     "focusedColor": "primary",
                     "followFocusedScreen": true,
+                    "fontWeight": "bold",
                     "groupedBorderOpacity": 1,
                     "hideUnoccupied": false,
                     "iconScale": 0.8,
@@ -54,12 +57,21 @@
                     "occupiedColor": "secondary",
                     "pillSize": 0.6,
                     "showApplications": false,
+                    "showApplicationsHover": false,
                     "showBadge": true,
                     "showLabelsOnlyWhenOccupied": true,
                     "unfocusedIconsOpacity": 1
                 }
             ],
             "right": [
+                {
+                    "hideWhenZero": false,
+                    "hideWhenZeroUnread": false,
+                    "iconColor": "none",
+                    "id": "NotificationHistory",
+                    "showUnreadBadge": true,
+                    "unreadBadgeColor": "primary"
+                },
                 {
                     "displayMode": "onhover",
                     "iconColor": "none",
@@ -145,6 +157,7 @@
         "showHibernateOnLockScreen": false,
         "enableLockScreenMediaControls": false,
         "enableShadows": true,
+        "enableBlurBehind": true,
         "shadowDirection": "bottom_right",
         "shadowOffsetX": 2,
         "shadowOffsetY": 3,
@@ -194,8 +207,10 @@
         "fontDefaultScale": 1,
         "fontFixedScale": 1,
         "tooltipsEnabled": true,
+        "scrollbarAlwaysVisible": true,
         "boxBorderEnabled": false,
         "panelBackgroundOpacity": 0.9,
+        "translucentWidgets": false,
         "panelsAttachedToBar": true,
         "settingsPanelMode": "centered",
         "settingsPanelSideBarCardStyle": false
@@ -234,7 +249,18 @@
         "enabled": true,
         "overviewEnabled": false,
         "directory": "/home/serowy/onedrive/Wallpapers",
-        "monitorDirectories": [],
+        "monitorDirectories": [
+            {
+                "directory": "/home/serowy/onedrive/Wallpapers",
+                "name": "DP-2",
+                "wallpaper": ""
+            },
+            {
+                "directory": "/home/serowy/onedrive/Wallpapers",
+                "name": "HDMI-A-1",
+                "wallpaper": ""
+            }
+        ],
         "enableMultiMonitorDirectories": false,
         "showHiddenFiles": false,
         "viewMode": "single",
@@ -247,7 +273,9 @@
         "wallpaperChangeMode": "random",
         "randomIntervalSec": 7200,
         "transitionDuration": 1500,
-        "transitionType": "fade",
+        "transitionType": [
+            "fade"
+        ],
         "skipStartupTransition": false,
         "transitionEdgeSmoothness": 0.05,
         "panelPosition": "center",
@@ -273,11 +301,12 @@
         "autoPasteClipboard": false,
         "enableClipPreview": true,
         "clipboardWrapText": true,
+        "enableClipboardSmartIcons": true,
+        "enableClipboardChips": true,
         "clipboardWatchTextCommand": "wl-paste --type text --watch cliphist store",
         "clipboardWatchImageCommand": "wl-paste --type image --watch cliphist store",
         "position": "center",
         "pinnedApps": [],
-        "useApp2Unit": false,
         "sortByMostUsed": true,
         "terminalCommand": "ghostty -e",
         "customLaunchPrefixEnabled": false,
@@ -291,7 +320,7 @@
         "enableSessionSearch": true,
         "ignoreMouseInput": false,
         "screenshotAnnotationTool": "",
-        "overviewLayer": false,
+        "overviewLayer": true,
         "density": "default"
     },
     "controlCenter": {
@@ -361,6 +390,10 @@
         "criticalColor": "",
         "externalMonitor": "resources || missioncenter || jdsystemmonitor || corestats || system-monitoring-center || gnome-system-monitor || plasma-systemmonitor || mate-system-monitor || ukui-system-monitor || deepin-system-monitor || pantheon-system-monitor"
     },
+    "noctaliaPerformance": {
+        "disableWallpaper": true,
+        "disableDesktopWidgets": true
+    },
     "dock": {
         "enabled": false,
         "position": "bottom",
@@ -375,6 +408,8 @@
         "colorizeIcons": false,
         "showLauncherIcon": false,
         "launcherPosition": "end",
+        "launcherUseDistroLogo": false,
+        "launcherIcon": "",
         "launcherIconColor": "none",
         "pinnedStatic": false,
         "inactiveIndicators": false,
@@ -492,7 +527,7 @@
     "audio": {
         "volumeStep": 5,
         "volumeOverdrive": false,
-        "cavaFrameRate": 30,
+        "spectrumFrameRate": 30,
         "visualizerType": "linear",
         "mprisBlacklist": [],
         "preferredPlayer": "spotify",
@@ -516,28 +551,7 @@
         "monitorForColors": ""
     },
     "templates": {
-        "activeTemplates": [
-            {
-                "enabled": true,
-                "id": "gtk"
-            },
-            {
-                "enabled": true,
-                "id": "qt"
-            },
-            {
-                "enabled": true,
-                "id": "kcolorscheme"
-            },
-            {
-                "enabled": true,
-                "id": "ghostty"
-            },
-            {
-                "enabled": true,
-                "id": "niri"
-            }
-        ],
+        "activeTemplates": [],
         "enableUserTheming": false
     },
     "nightLight": {
@@ -558,10 +572,12 @@
         "performanceModeEnabled": "",
         "performanceModeDisabled": "",
         "startup": "",
-        "session": ""
+        "session": "",
+        "colorGeneration": ""
     },
     "plugins": {
-        "autoUpdate": false
+        "autoUpdate": false,
+        "notifyUpdates": true
     },
     "idle": {
         "enabled": false,
@@ -581,6 +597,7 @@
         "enabled": true,
         "overviewEnabled": true,
         "gridSnap": true,
+        "gridSnapScale": false,
         "monitorWidgets": [
             {
                 "name": "DP-2",
