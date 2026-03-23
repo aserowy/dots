@@ -68,7 +68,7 @@ spec:
           image: docker.io/library/nextcloud:33.0.0-apache
           imagePullPolicy: IfNotPresent
           livenessProbe:
-            failureThreshold: 60
+            failureThreshold: 300
             httpGet:
               httpHeaders:
                 - name: Host
@@ -85,7 +85,7 @@ spec:
               name: http
               protocol: TCP
           readinessProbe:
-            failureThreshold: 60
+            failureThreshold: 300
             httpGet:
               httpHeaders:
                 - name: Host
