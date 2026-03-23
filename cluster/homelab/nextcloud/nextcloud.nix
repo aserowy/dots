@@ -122,12 +122,12 @@
         livenessProbe = {
           initialDelaySeconds = 60;
           # NOTE: high failure threshold to accomodate for possible version migrations
-          failureThreshold = 60;
+          failureThreshold = 300;
         };
         readinessProbe = {
           initialDelaySeconds = 60;
           # NOTE: high failure threshold to accomodate for possible version migrations
-          failureThreshold = 60;
+          failureThreshold = 300;
         };
       };
     };
