@@ -6,8 +6,8 @@ metadata:
     app.kubernetes.io/instance: nextcloud
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: nextcloud
-    app.kubernetes.io/version: 32.0.6
-    helm.sh/chart: nextcloud-8.9.1
+    app.kubernetes.io/version: 33.0.0
+    helm.sh/chart: nextcloud-9.0.3
   name: nextcloud-cron
   namespace: nextcloud
 spec:
@@ -78,9 +78,11 @@ spec:
                       name: nextcloud
                 - name: NEXTCLOUD_TRUSTED_DOMAINS
                   value: nextcloud.anderwerse.de
+                - name: OPENMETRICS_ALLOWED_CLIENTS
+                  value: 127.0.0.1,10.42.0.0/16,10.43.0.0/16
                 - name: NEXTCLOUD_DATA_DIR
                   value: /var/www/html/data
-              image: docker.io/library/nextcloud:32.0.6-apache
+              image: docker.io/library/nextcloud:33.0.0-apache
               imagePullPolicy: IfNotPresent
               name: nextcloud-cron
               resources: {}
@@ -138,6 +140,9 @@ spec:
                 - mountPath: /var/www/html/config/autoconfig.php
                   name: nextcloud-config
                   subPath: autoconfig.php
+                - mountPath: /var/www/html/config/helm-metrics.config.php
+                  name: nextcloud-config
+                  subPath: helm-metrics.config.php
                 - mountPath: /var/www/html/config/imaginary.config.php
                   name: nextcloud-config
                   subPath: imaginary.config.php

@@ -8,8 +8,8 @@ metadata:
     app.kubernetes.io/instance: nextcloud
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: nextcloud
-    app.kubernetes.io/version: 32.0.6
-    helm.sh/chart: nextcloud-8.9.1
+    app.kubernetes.io/version: 33.0.0
+    helm.sh/chart: nextcloud-9.0.3
   name: nextcloud-nextcloud
   namespace: nextcloud
 spec:

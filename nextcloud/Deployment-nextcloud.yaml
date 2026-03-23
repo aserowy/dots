@@ -6,8 +6,8 @@ metadata:
     app.kubernetes.io/instance: nextcloud
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: nextcloud
-    app.kubernetes.io/version: 32.0.6
-    helm.sh/chart: nextcloud-8.9.1
+    app.kubernetes.io/version: 33.0.0
+    helm.sh/chart: nextcloud-9.0.3
   name: nextcloud
   namespace: nextcloud
 spec:
@@ -23,7 +23,7 @@ spec:
     metadata:
       annotations:
         hooks-hash: 9525c2748a6c7cd0e28ec740623d0b3fa5a75c83b51ccfd136bc89c76737b204
-        nextcloud-config-hash: c5bf1b79317c0a19cac05c16511ae3fb19f77e29ac53f678cc00fee68dc31359
+        nextcloud-config-hash: cbb6c2de040877ff05463124c15462f86a64108c62bfca7a849e85919b4c2ca3
         php-config-hash: 44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a
       labels:
         app.kubernetes.io/component: app
@@ -61,9 +61,11 @@ spec:
                   name: nextcloud
             - name: NEXTCLOUD_TRUSTED_DOMAINS
               value: nextcloud.anderwerse.de
+            - name: OPENMETRICS_ALLOWED_CLIENTS
+              value: 127.0.0.1,10.42.0.0/16,10.43.0.0/16
             - name: NEXTCLOUD_DATA_DIR
               value: /var/www/html/data
-          image: docker.io/library/nextcloud:32.0.6-apache
+          image: docker.io/library/nextcloud:33.0.0-apache
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 60
@@ -147,6 +149,9 @@ spec:
             - mountPath: /var/www/html/config/autoconfig.php
               name: nextcloud-config
               subPath: autoconfig.php
+            - mountPath: /var/www/html/config/helm-metrics.config.php
+              name: nextcloud-config
+              subPath: helm-metrics.config.php
             - mountPath: /var/www/html/config/imaginary.config.php
               name: nextcloud-config
               subPath: imaginary.config.php
