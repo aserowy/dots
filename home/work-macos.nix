@@ -15,7 +15,7 @@
       console.enable = true;
 
       nushell.appendedConfig = ''
-        $env.SSH_AUTH_SOCK = ($nu.home-dir | path join ".bitwarden-ssh-agent.sock")
+        $env.SSH_AUTH_SOCK = "/Users/alexander.serowy/.bitwarden-ssh-agent.sock"
       '';
     };
 
