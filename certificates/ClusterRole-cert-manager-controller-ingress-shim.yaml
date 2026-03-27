@@ -7,8 +7,8 @@ metadata:
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: cert-manager
-    app.kubernetes.io/version: v1.19.4
-    helm.sh/chart: cert-manager-v1.19.4
+    app.kubernetes.io/version: v1.20.0
+    helm.sh/chart: cert-manager-v1.20.0
   name: cert-manager-controller-ingress-shim
 rules:
   - apiGroups:
@@ -50,6 +50,7 @@ rules:
     resources:
       - gateways
       - httproutes
+      - listenersets
     verbs:
       - get
       - list
@@ -59,6 +60,7 @@ rules:
     resources:
       - gateways/finalizers
       - httproutes/finalizers
+      - listenersets/finalizers
     verbs:
       - update
   - apiGroups:
