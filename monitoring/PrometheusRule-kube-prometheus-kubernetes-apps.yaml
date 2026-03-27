@@ -6,8 +6,8 @@ metadata:
     app.kubernetes.io/instance: kube-prometheus-stack
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kube-prometheus
-    app.kubernetes.io/version: 82.10.1
-    chart: kube-prometheus-stack-82.10.1
+    app.kubernetes.io/version: 82.10.3
+    chart: kube-prometheus-stack-82.10.3
     heritage: Helm
     release: kube-prometheus-stack
   name: kube-prometheus-kubernetes-apps
@@ -248,9 +248,16 @@ spec:
             runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubehpamaxedout
             summary: HPA is running at max replicas
           expr: |-
-            kube_horizontalpodautoscaler_status_current_replicas{job="kube-state-metrics", namespace=~".*"}
-              ==
-            kube_horizontalpodautoscaler_spec_max_replicas{job="kube-state-metrics", namespace=~".*"}
+            (
+              kube_horizontalpodautoscaler_status_current_replicas{job="kube-state-metrics", namespace=~".*"}
+                ==
+              kube_horizontalpodautoscaler_spec_max_replicas{job="kube-state-metrics", namespace=~".*"}
+            )
+            and on (namespace, horizontalpodautoscaler) (
+              kube_horizontalpodautoscaler_spec_max_replicas{job="kube-state-metrics", namespace=~".*"}
+                !=
+              kube_horizontalpodautoscaler_spec_min_replicas{job="kube-state-metrics", namespace=~".*"}
+            )
           for: 15m
           labels:
             severity: warning
