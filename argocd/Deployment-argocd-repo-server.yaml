@@ -7,8 +7,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-repo-server
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.3.2
-    helm.sh/chart: argo-cd-9.4.9
+    app.kubernetes.io/version: v3.3.3
+    helm.sh/chart: argo-cd-9.4.10
   name: argocd-repo-server
   namespace: argocd
 spec:
@@ -21,16 +21,16 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/cm: 929f9614048d04a167386914e85143166fe15b2bd178bc7d05a2bdb25e220eeb
-        checksum/cmd-params: 943facc2afac459e0719ecf0dbecfa4e7620689f86e8cc02178511394818ea33
+        checksum/cm: 40404d7599794812b9591c605553b6c881fb1d2910a8b853e91323bcad20d0f6
+        checksum/cmd-params: 348d0b39b78eace16d62a8744fa5197c97be62240b62417ab28795cf0826be0b
       labels:
         app.kubernetes.io/component: repo-server
         app.kubernetes.io/instance: argocd
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: argocd-repo-server
         app.kubernetes.io/part-of: argocd
-        app.kubernetes.io/version: v3.3.2
-        helm.sh/chart: argo-cd-9.4.9
+        app.kubernetes.io/version: v3.3.3
+        helm.sh/chart: argo-cd-9.4.10
     spec:
       affinity:
         podAntiAffinity:
@@ -308,7 +308,7 @@ spec:
               value: /helm-working-dir
             - name: HELM_DATA_HOME
               value: /helm-working-dir
-          image: quay.io/argoproj/argocd:v3.3.2
+          image: quay.io/argoproj/argocd:v3.3.3
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
@@ -370,7 +370,7 @@ spec:
           command:
             - sh
             - -c
-          image: quay.io/argoproj/argocd:v3.3.2
+          image: quay.io/argoproj/argocd:v3.3.3
           imagePullPolicy: IfNotPresent
           name: copyutil
           resources: {}
