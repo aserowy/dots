@@ -517,6 +517,10 @@ let
           description = "Auth: Azure Service Principal:\nThe TenantID of the Azure Service Principal used to authenticate with Azure DNS.\nIf set, ClientID and ClientSecret must also be set.";
           type = (types.nullOr types.str);
         };
+        "zoneType" = mkOption {
+          description = "ZoneType determines which type of Azure DNS zone to use.\n\nValid values are:\n  - AzurePublicZone  (default): Use a public Azure DNS zone.\n  - AzurePrivateZone: Use an Azure Private DNS zone.\n\nIf not specified, AzurePublicZone is used.\n\nSupport for Azure Private DNS zones is currently\nexperimental and may change in future releases.";
+          type = (types.nullOr types.str);
+        };
       };
 
       config = {
@@ -526,6 +530,7 @@ let
         "hostedZoneName" = mkOverride 1002 null;
         "managedIdentity" = mkOverride 1002 null;
         "tenantID" = mkOverride 1002 null;
+        "zoneType" = mkOverride 1002 null;
       };
 
     };
@@ -718,7 +723,7 @@ let
 
       options = {
         "nameserver" = mkOption {
-          description = "The IP address or hostname of an authoritative DNS server supporting\nRFC2136 in the form host:port. If the host is an IPv6 address it must be\nenclosed in square brackets (e.g [2001:db8::1]) ; port is optional.\nThis field is required.";
+          description = "The IP address or hostname of an authoritative DNS server supporting\nRFC2136 in the form host:port. If the host is an IPv6 address it must be\nenclosed in square brackets (e.g [2001:db8::1]); port is optional.\nThis field is required.";
           type = types.str;
         };
         "protocol" = mkOption {
@@ -773,11 +778,11 @@ let
 
       options = {
         "accessKeyID" = mkOption {
-          description = "The AccessKeyID is used for authentication.\nCannot be set when SecretAccessKeyID is set.\nIf neither the Access Key nor Key ID are set, we fall-back to using env\nvars, shared credentials file or AWS Instance metadata,\nsee: https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials";
+          description = "The AccessKeyID is used for authentication.\nCannot be set when SecretAccessKeyID is set.\nIf neither the Access Key nor Key ID are set, we fall back to using env\nvars, shared credentials file, or AWS Instance metadata,\nsee: https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials";
           type = (types.nullOr types.str);
         };
         "accessKeyIDSecretRef" = mkOption {
-          description = "The SecretAccessKey is used for authentication. If set, pull the AWS\naccess key ID from a key within a Kubernetes Secret.\nCannot be set when AccessKeyID is set.\nIf neither the Access Key nor Key ID are set, we fall-back to using env\nvars, shared credentials file or AWS Instance metadata,\nsee: https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials";
+          description = "The SecretAccessKey is used for authentication. If set, pull the AWS\naccess key ID from a key within a Kubernetes Secret.\nCannot be set when AccessKeyID is set.\nIf neither the Access Key nor Key ID are set, we fall back to using env\nvars, shared credentials file, or AWS Instance metadata,\nsee: https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials";
           type = (
             types.nullOr (
               submoduleOf "acme.cert-manager.io.v1.ChallengeSpecSolverDns01Route53AccessKeyIDSecretRef"
@@ -801,7 +806,7 @@ let
           type = (types.nullOr types.str);
         };
         "secretAccessKeySecretRef" = mkOption {
-          description = "The SecretAccessKey is used for authentication.\nIf neither the Access Key nor Key ID are set, we fall-back to using env\nvars, shared credentials file or AWS Instance metadata,\nsee: https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials";
+          description = "The SecretAccessKey is used for authentication.\nIf neither the Access Key nor Key ID are set, we fall back to using env\nvars, shared credentials file, or AWS Instance metadata,\nsee: https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials";
           type = (
             types.nullOr (
               submoduleOf "acme.cert-manager.io.v1.ChallengeSpecSolverDns01Route53SecretAccessKeySecretRef"
@@ -2267,7 +2272,7 @@ let
           type = (types.nullOr types.str);
         };
         "operator" = mkOption {
-          description = "Operator represents a key's relationship to the value.\nValid operators are Exists and Equal. Defaults to Equal.\nExists is equivalent to wildcard for value, so that a pod can\ntolerate all taints of a particular category.";
+          description = "Operator represents a key's relationship to the value.\nValid operators are Exists, Equal, Lt, and Gt. Defaults to Equal.\nExists is equivalent to wildcard for value, so that a pod can\ntolerate all taints of a particular category.\nLt and Gt perform numeric comparisons (requires feature gate TaintTolerationComparisonOperators).";
           type = (types.nullOr types.str);
         };
         "tolerationSeconds" = mkOption {
@@ -3605,7 +3610,7 @@ let
           type = (types.nullOr types.str);
         };
         "operator" = mkOption {
-          description = "Operator represents a key's relationship to the value.\nValid operators are Exists and Equal. Defaults to Equal.\nExists is equivalent to wildcard for value, so that a pod can\ntolerate all taints of a particular category.";
+          description = "Operator represents a key's relationship to the value.\nValid operators are Exists, Equal, Lt, and Gt. Defaults to Equal.\nExists is equivalent to wildcard for value, so that a pod can\ntolerate all taints of a particular category.\nLt and Gt perform numeric comparisons (requires feature gate TaintTolerationComparisonOperators).";
           type = (types.nullOr types.str);
         };
         "tolerationSeconds" = mkOption {
@@ -4475,7 +4480,7 @@ let
           type = (types.nullOr types.str);
         };
         "rotationPolicy" = mkOption {
-          description = "RotationPolicy controls how private keys should be regenerated when a\nre-issuance is being processed.\n\nIf set to `Never`, a private key will only be generated if one does not\nalready exist in the target `spec.secretName`. If one does exist but it\ndoes not have the correct algorithm or size, a warning will be raised\nto await user intervention.\nIf set to `Always`, a private key matching the specified requirements\nwill be generated whenever a re-issuance occurs.\nDefault is `Always`.\nThe default was changed from `Never` to `Always` in cert-manager >=v1.18.0.\nThe new default can be disabled by setting the\n`--feature-gates=DefaultPrivateKeyRotationPolicyAlways=false` option on\nthe controller component.";
+          description = "RotationPolicy controls how private keys should be regenerated when a\nre-issuance is being processed.\n\nIf set to `Never`, a private key will only be generated if one does not\nalready exist in the target `spec.secretName`. If one does exist but it\ndoes not have the correct algorithm or size, a warning will be raised\nto await user intervention.\nIf set to `Always`, a private key matching the specified requirements\nwill be generated whenever a re-issuance occurs.\nDefault is `Always`.\nThe default was changed from `Never` to `Always` in cert-manager >=v1.18.0.";
           type = (types.nullOr types.str);
         };
         "size" = mkOption {
@@ -4699,7 +4704,7 @@ let
           type = (types.nullOr (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecVault"));
         };
         "venafi" = mkOption {
-          description = "Venafi configures this issuer to sign certificates using a Venafi TPP\nor Venafi Cloud policy zone.";
+          description = "Venafi configures this issuer to sign certificates using a CyberArk Certificate Manager Self-Hosted\nor SaaS policy zone.";
           type = (types.nullOr (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecVenafi"));
         };
       };
@@ -5085,6 +5090,10 @@ let
           description = "Auth: Azure Service Principal:\nThe TenantID of the Azure Service Principal used to authenticate with Azure DNS.\nIf set, ClientID and ClientSecret must also be set.";
           type = (types.nullOr types.str);
         };
+        "zoneType" = mkOption {
+          description = "ZoneType determines which type of Azure DNS zone to use.\n\nValid values are:\n  - AzurePublicZone  (default): Use a public Azure DNS zone.\n  - AzurePrivateZone: Use an Azure Private DNS zone.\n\nIf not specified, AzurePublicZone is used.\n\nSupport for Azure Private DNS zones is currently\nexperimental and may change in future releases.";
+          type = (types.nullOr types.str);
+        };
       };
 
       config = {
@@ -5094,6 +5103,7 @@ let
         "hostedZoneName" = mkOverride 1002 null;
         "managedIdentity" = mkOverride 1002 null;
         "tenantID" = mkOverride 1002 null;
+        "zoneType" = mkOverride 1002 null;
       };
 
     };
@@ -5288,7 +5298,7 @@ let
 
       options = {
         "nameserver" = mkOption {
-          description = "The IP address or hostname of an authoritative DNS server supporting\nRFC2136 in the form host:port. If the host is an IPv6 address it must be\nenclosed in square brackets (e.g [2001:db8::1]) ; port is optional.\nThis field is required.";
+          description = "The IP address or hostname of an authoritative DNS server supporting\nRFC2136 in the form host:port. If the host is an IPv6 address it must be\nenclosed in square brackets (e.g [2001:db8::1]); port is optional.\nThis field is required.";
           type = types.str;
         };
         "protocol" = mkOption {
@@ -5343,11 +5353,11 @@ let
 
       options = {
         "accessKeyID" = mkOption {
-          description = "The AccessKeyID is used for authentication.\nCannot be set when SecretAccessKeyID is set.\nIf neither the Access Key nor Key ID are set, we fall-back to using env\nvars, shared credentials file or AWS Instance metadata,\nsee: https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials";
+          description = "The AccessKeyID is used for authentication.\nCannot be set when SecretAccessKeyID is set.\nIf neither the Access Key nor Key ID are set, we fall back to using env\nvars, shared credentials file, or AWS Instance metadata,\nsee: https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials";
           type = (types.nullOr types.str);
         };
         "accessKeyIDSecretRef" = mkOption {
-          description = "The SecretAccessKey is used for authentication. If set, pull the AWS\naccess key ID from a key within a Kubernetes Secret.\nCannot be set when AccessKeyID is set.\nIf neither the Access Key nor Key ID are set, we fall-back to using env\nvars, shared credentials file or AWS Instance metadata,\nsee: https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials";
+          description = "The SecretAccessKey is used for authentication. If set, pull the AWS\naccess key ID from a key within a Kubernetes Secret.\nCannot be set when AccessKeyID is set.\nIf neither the Access Key nor Key ID are set, we fall back to using env\nvars, shared credentials file, or AWS Instance metadata,\nsee: https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials";
           type = (
             types.nullOr (
               submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01Route53AccessKeyIDSecretRef"
@@ -5373,7 +5383,7 @@ let
           type = (types.nullOr types.str);
         };
         "secretAccessKeySecretRef" = mkOption {
-          description = "The SecretAccessKey is used for authentication.\nIf neither the Access Key nor Key ID are set, we fall-back to using env\nvars, shared credentials file or AWS Instance metadata,\nsee: https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials";
+          description = "The SecretAccessKey is used for authentication.\nIf neither the Access Key nor Key ID are set, we fall back to using env\nvars, shared credentials file, or AWS Instance metadata,\nsee: https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials";
           type = (
             types.nullOr (
               submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversDns01Route53SecretAccessKeySecretRef"
@@ -6840,7 +6850,7 @@ let
             type = (types.nullOr types.str);
           };
           "operator" = mkOption {
-            description = "Operator represents a key's relationship to the value.\nValid operators are Exists and Equal. Defaults to Equal.\nExists is equivalent to wildcard for value, so that a pod can\ntolerate all taints of a particular category.";
+            description = "Operator represents a key's relationship to the value.\nValid operators are Exists, Equal, Lt, and Gt. Defaults to Equal.\nExists is equivalent to wildcard for value, so that a pod can\ntolerate all taints of a particular category.\nLt and Gt perform numeric comparisons (requires feature gate TaintTolerationComparisonOperators).";
             type = (types.nullOr types.str);
           };
           "tolerationSeconds" = mkOption {
@@ -8185,7 +8195,7 @@ let
           type = (types.nullOr types.str);
         };
         "operator" = mkOption {
-          description = "Operator represents a key's relationship to the value.\nValid operators are Exists and Equal. Defaults to Equal.\nExists is equivalent to wildcard for value, so that a pod can\ntolerate all taints of a particular category.";
+          description = "Operator represents a key's relationship to the value.\nValid operators are Exists, Equal, Lt, and Gt. Defaults to Equal.\nExists is equivalent to wildcard for value, so that a pod can\ntolerate all taints of a particular category.\nLt and Gt perform numeric comparisons (requires feature gate TaintTolerationComparisonOperators).";
           type = (types.nullOr types.str);
         };
         "tolerationSeconds" = mkOption {
@@ -8473,7 +8483,7 @@ let
 
       options = {
         "audiences" = mkOption {
-          description = "TokenAudiences is an optional list of extra audiences to include in the token passed to Vault. The default token\nconsisting of the issuer's namespace and name is always included.";
+          description = "TokenAudiences is an optional list of extra audiences to include in the token passed to Vault.\nThe default audiences are always included in the token.";
           type = (types.nullOr (types.listOf types.str));
         };
         "name" = mkOption {
@@ -8563,15 +8573,15 @@ let
 
       options = {
         "cloud" = mkOption {
-          description = "Cloud specifies the Venafi cloud configuration settings.\nOnly one of TPP or Cloud may be specified.";
+          description = "Cloud specifies the CyberArk Certificate Manager SaaS configuration settings.\nOnly one of CyberArk Certificate Manager may be specified.";
           type = (types.nullOr (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecVenafiCloud"));
         };
         "tpp" = mkOption {
-          description = "TPP specifies Trust Protection Platform configuration settings.\nOnly one of TPP or Cloud may be specified.";
+          description = "TPP specifies CyberArk Certificate Manager Self-Hosted configuration settings.\nOnly one of CyberArk Certificate Manager may be specified.";
           type = (types.nullOr (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecVenafiTpp"));
         };
         "zone" = mkOption {
-          description = "Zone is the Venafi Policy Zone to use for this issuer.\nAll requests made to the Venafi platform will be restricted by the named\nzone policy.\nThis field is required.";
+          description = "Zone is the Certificate Manager Policy Zone to use for this issuer.\nAll requests made to the Certificate Manager platform will be restricted by the named\nzone policy.\nThis field is required.";
           type = types.str;
         };
       };
@@ -8586,11 +8596,11 @@ let
 
       options = {
         "apiTokenSecretRef" = mkOption {
-          description = "APITokenSecretRef is a secret key selector for the Venafi Cloud API token.";
+          description = "APITokenSecretRef is a secret key selector for the CyberArk Certificate Manager SaaS API token.";
           type = (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecVenafiCloudApiTokenSecretRef");
         };
         "url" = mkOption {
-          description = "URL is the base URL for Venafi Cloud.\nDefaults to \"https://api.venafi.cloud/\".";
+          description = "URL is the base URL for CyberArk Certificate Manager SaaS.\nDefaults to \"https://api.venafi.cloud/\".";
           type = (types.nullOr types.str);
         };
       };
@@ -8622,21 +8632,21 @@ let
 
       options = {
         "caBundle" = mkOption {
-          description = "Base64-encoded bundle of PEM CAs which will be used to validate the certificate\nchain presented by the TPP server. Only used if using HTTPS; ignored for HTTP.\nIf undefined, the certificate bundle in the cert-manager controller container\nis used to validate the chain.";
+          description = "Base64-encoded bundle of PEM CAs which will be used to validate the certificate\nchain presented by the CyberArk Certificate Manager Self-Hosted server. Only used if using HTTPS; ignored for HTTP.\nIf undefined, the certificate bundle in the cert-manager controller container\nis used to validate the chain.";
           type = (types.nullOr types.str);
         };
         "caBundleSecretRef" = mkOption {
-          description = "Reference to a Secret containing a base64-encoded bundle of PEM CAs\nwhich will be used to validate the certificate chain presented by the TPP server.\nOnly used if using HTTPS; ignored for HTTP. Mutually exclusive with CABundle.\nIf neither CABundle nor CABundleSecretRef is defined, the certificate bundle in\nthe cert-manager controller container is used to validate the TLS connection.";
+          description = "Reference to a Secret containing a base64-encoded bundle of PEM CAs\nwhich will be used to validate the certificate chain presented by the CyberArk Certificate Manager Self-Hosted server.\nOnly used if using HTTPS; ignored for HTTP. Mutually exclusive with CABundle.\nIf neither CABundle nor CABundleSecretRef is defined, the certificate bundle in\nthe cert-manager controller container is used to validate the TLS connection.";
           type = (
             types.nullOr (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecVenafiTppCaBundleSecretRef")
           );
         };
         "credentialsRef" = mkOption {
-          description = "CredentialsRef is a reference to a Secret containing the Venafi TPP API credentials.\nThe secret must contain the key 'access-token' for the Access Token Authentication,\nor two keys, 'username' and 'password' for the API Keys Authentication.";
+          description = "CredentialsRef is a reference to a Secret containing the CyberArk Certificate Manager Self-Hosted API credentials.\nThe secret must contain the key 'access-token' for the Access Token Authentication,\nor two keys, 'username' and 'password' for the API Keys Authentication.";
           type = (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecVenafiTppCredentialsRef");
         };
         "url" = mkOption {
-          description = "URL is the base URL for the vedsdk endpoint of the Venafi TPP instance,\nfor example: \"https://tpp.example.com/vedsdk\".";
+          description = "URL is the base URL for the vedsdk endpoint of the CyberArk Certificate Manager Self-Hosted instance,\nfor example: \"https://tpp.example.com/vedsdk\".";
           type = types.str;
         };
       };
@@ -8812,7 +8822,7 @@ let
           type = (types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecVault"));
         };
         "venafi" = mkOption {
-          description = "Venafi configures this issuer to sign certificates using a Venafi TPP\nor Venafi Cloud policy zone.";
+          description = "Venafi configures this issuer to sign certificates using a CyberArk Certificate Manager Self-Hosted\nor SaaS policy zone.";
           type = (types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecVenafi"));
         };
       };
@@ -9182,6 +9192,10 @@ let
           description = "Auth: Azure Service Principal:\nThe TenantID of the Azure Service Principal used to authenticate with Azure DNS.\nIf set, ClientID and ClientSecret must also be set.";
           type = (types.nullOr types.str);
         };
+        "zoneType" = mkOption {
+          description = "ZoneType determines which type of Azure DNS zone to use.\n\nValid values are:\n  - AzurePublicZone  (default): Use a public Azure DNS zone.\n  - AzurePrivateZone: Use an Azure Private DNS zone.\n\nIf not specified, AzurePublicZone is used.\n\nSupport for Azure Private DNS zones is currently\nexperimental and may change in future releases.";
+          type = (types.nullOr types.str);
+        };
       };
 
       config = {
@@ -9191,6 +9205,7 @@ let
         "hostedZoneName" = mkOverride 1002 null;
         "managedIdentity" = mkOverride 1002 null;
         "tenantID" = mkOverride 1002 null;
+        "zoneType" = mkOverride 1002 null;
       };
 
     };
@@ -9381,7 +9396,7 @@ let
 
       options = {
         "nameserver" = mkOption {
-          description = "The IP address or hostname of an authoritative DNS server supporting\nRFC2136 in the form host:port. If the host is an IPv6 address it must be\nenclosed in square brackets (e.g [2001:db8::1]) ; port is optional.\nThis field is required.";
+          description = "The IP address or hostname of an authoritative DNS server supporting\nRFC2136 in the form host:port. If the host is an IPv6 address it must be\nenclosed in square brackets (e.g [2001:db8::1]); port is optional.\nThis field is required.";
           type = types.str;
         };
         "protocol" = mkOption {
@@ -9434,11 +9449,11 @@ let
 
       options = {
         "accessKeyID" = mkOption {
-          description = "The AccessKeyID is used for authentication.\nCannot be set when SecretAccessKeyID is set.\nIf neither the Access Key nor Key ID are set, we fall-back to using env\nvars, shared credentials file or AWS Instance metadata,\nsee: https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials";
+          description = "The AccessKeyID is used for authentication.\nCannot be set when SecretAccessKeyID is set.\nIf neither the Access Key nor Key ID are set, we fall back to using env\nvars, shared credentials file, or AWS Instance metadata,\nsee: https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials";
           type = (types.nullOr types.str);
         };
         "accessKeyIDSecretRef" = mkOption {
-          description = "The SecretAccessKey is used for authentication. If set, pull the AWS\naccess key ID from a key within a Kubernetes Secret.\nCannot be set when AccessKeyID is set.\nIf neither the Access Key nor Key ID are set, we fall-back to using env\nvars, shared credentials file or AWS Instance metadata,\nsee: https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials";
+          description = "The SecretAccessKey is used for authentication. If set, pull the AWS\naccess key ID from a key within a Kubernetes Secret.\nCannot be set when AccessKeyID is set.\nIf neither the Access Key nor Key ID are set, we fall back to using env\nvars, shared credentials file, or AWS Instance metadata,\nsee: https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials";
           type = (
             types.nullOr (
               submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversDns01Route53AccessKeyIDSecretRef"
@@ -9462,7 +9477,7 @@ let
           type = (types.nullOr types.str);
         };
         "secretAccessKeySecretRef" = mkOption {
-          description = "The SecretAccessKey is used for authentication.\nIf neither the Access Key nor Key ID are set, we fall-back to using env\nvars, shared credentials file or AWS Instance metadata,\nsee: https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials";
+          description = "The SecretAccessKey is used for authentication.\nIf neither the Access Key nor Key ID are set, we fall back to using env\nvars, shared credentials file, or AWS Instance metadata,\nsee: https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials";
           type = (
             types.nullOr (
               submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversDns01Route53SecretAccessKeySecretRef"
@@ -10926,7 +10941,7 @@ let
           type = (types.nullOr types.str);
         };
         "operator" = mkOption {
-          description = "Operator represents a key's relationship to the value.\nValid operators are Exists and Equal. Defaults to Equal.\nExists is equivalent to wildcard for value, so that a pod can\ntolerate all taints of a particular category.";
+          description = "Operator represents a key's relationship to the value.\nValid operators are Exists, Equal, Lt, and Gt. Defaults to Equal.\nExists is equivalent to wildcard for value, so that a pod can\ntolerate all taints of a particular category.\nLt and Gt perform numeric comparisons (requires feature gate TaintTolerationComparisonOperators).";
           type = (types.nullOr types.str);
         };
         "tolerationSeconds" = mkOption {
@@ -12264,7 +12279,7 @@ let
           type = (types.nullOr types.str);
         };
         "operator" = mkOption {
-          description = "Operator represents a key's relationship to the value.\nValid operators are Exists and Equal. Defaults to Equal.\nExists is equivalent to wildcard for value, so that a pod can\ntolerate all taints of a particular category.";
+          description = "Operator represents a key's relationship to the value.\nValid operators are Exists, Equal, Lt, and Gt. Defaults to Equal.\nExists is equivalent to wildcard for value, so that a pod can\ntolerate all taints of a particular category.\nLt and Gt perform numeric comparisons (requires feature gate TaintTolerationComparisonOperators).";
           type = (types.nullOr types.str);
         };
         "tolerationSeconds" = mkOption {
@@ -12546,7 +12561,7 @@ let
 
       options = {
         "audiences" = mkOption {
-          description = "TokenAudiences is an optional list of extra audiences to include in the token passed to Vault. The default token\nconsisting of the issuer's namespace and name is always included.";
+          description = "TokenAudiences is an optional list of extra audiences to include in the token passed to Vault.\nThe default audiences are always included in the token.";
           type = (types.nullOr (types.listOf types.str));
         };
         "name" = mkOption {
@@ -12636,15 +12651,15 @@ let
 
       options = {
         "cloud" = mkOption {
-          description = "Cloud specifies the Venafi cloud configuration settings.\nOnly one of TPP or Cloud may be specified.";
+          description = "Cloud specifies the CyberArk Certificate Manager SaaS configuration settings.\nOnly one of CyberArk Certificate Manager may be specified.";
           type = (types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecVenafiCloud"));
         };
         "tpp" = mkOption {
-          description = "TPP specifies Trust Protection Platform configuration settings.\nOnly one of TPP or Cloud may be specified.";
+          description = "TPP specifies CyberArk Certificate Manager Self-Hosted configuration settings.\nOnly one of CyberArk Certificate Manager may be specified.";
           type = (types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecVenafiTpp"));
         };
         "zone" = mkOption {
-          description = "Zone is the Venafi Policy Zone to use for this issuer.\nAll requests made to the Venafi platform will be restricted by the named\nzone policy.\nThis field is required.";
+          description = "Zone is the Certificate Manager Policy Zone to use for this issuer.\nAll requests made to the Certificate Manager platform will be restricted by the named\nzone policy.\nThis field is required.";
           type = types.str;
         };
       };
@@ -12659,11 +12674,11 @@ let
 
       options = {
         "apiTokenSecretRef" = mkOption {
-          description = "APITokenSecretRef is a secret key selector for the Venafi Cloud API token.";
+          description = "APITokenSecretRef is a secret key selector for the CyberArk Certificate Manager SaaS API token.";
           type = (submoduleOf "cert-manager.io.v1.IssuerSpecVenafiCloudApiTokenSecretRef");
         };
         "url" = mkOption {
-          description = "URL is the base URL for Venafi Cloud.\nDefaults to \"https://api.venafi.cloud/\".";
+          description = "URL is the base URL for CyberArk Certificate Manager SaaS.\nDefaults to \"https://api.venafi.cloud/\".";
           type = (types.nullOr types.str);
         };
       };
@@ -12695,19 +12710,19 @@ let
 
       options = {
         "caBundle" = mkOption {
-          description = "Base64-encoded bundle of PEM CAs which will be used to validate the certificate\nchain presented by the TPP server. Only used if using HTTPS; ignored for HTTP.\nIf undefined, the certificate bundle in the cert-manager controller container\nis used to validate the chain.";
+          description = "Base64-encoded bundle of PEM CAs which will be used to validate the certificate\nchain presented by the CyberArk Certificate Manager Self-Hosted server. Only used if using HTTPS; ignored for HTTP.\nIf undefined, the certificate bundle in the cert-manager controller container\nis used to validate the chain.";
           type = (types.nullOr types.str);
         };
         "caBundleSecretRef" = mkOption {
-          description = "Reference to a Secret containing a base64-encoded bundle of PEM CAs\nwhich will be used to validate the certificate chain presented by the TPP server.\nOnly used if using HTTPS; ignored for HTTP. Mutually exclusive with CABundle.\nIf neither CABundle nor CABundleSecretRef is defined, the certificate bundle in\nthe cert-manager controller container is used to validate the TLS connection.";
+          description = "Reference to a Secret containing a base64-encoded bundle of PEM CAs\nwhich will be used to validate the certificate chain presented by the CyberArk Certificate Manager Self-Hosted server.\nOnly used if using HTTPS; ignored for HTTP. Mutually exclusive with CABundle.\nIf neither CABundle nor CABundleSecretRef is defined, the certificate bundle in\nthe cert-manager controller container is used to validate the TLS connection.";
           type = (types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecVenafiTppCaBundleSecretRef"));
         };
         "credentialsRef" = mkOption {
-          description = "CredentialsRef is a reference to a Secret containing the Venafi TPP API credentials.\nThe secret must contain the key 'access-token' for the Access Token Authentication,\nor two keys, 'username' and 'password' for the API Keys Authentication.";
+          description = "CredentialsRef is a reference to a Secret containing the CyberArk Certificate Manager Self-Hosted API credentials.\nThe secret must contain the key 'access-token' for the Access Token Authentication,\nor two keys, 'username' and 'password' for the API Keys Authentication.";
           type = (submoduleOf "cert-manager.io.v1.IssuerSpecVenafiTppCredentialsRef");
         };
         "url" = mkOption {
-          description = "URL is the base URL for the vedsdk endpoint of the Venafi TPP instance,\nfor example: \"https://tpp.example.com/vedsdk\".";
+          description = "URL is the base URL for the vedsdk endpoint of the CyberArk Certificate Manager Self-Hosted instance,\nfor example: \"https://tpp.example.com/vedsdk\".";
           type = types.str;
         };
       };
