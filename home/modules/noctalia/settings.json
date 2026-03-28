@@ -34,10 +34,10 @@
                     "colorizeSystemIcon": "tertiary",
                     "customIconPath": "",
                     "enableColorization": true,
-                    "icon": "rocket",
+                    "icon": "plant-2",
                     "iconColor": "none",
                     "id": "Launcher",
-                    "useDistroLogo": true
+                    "useDistroLogo": false
                 }
             ],
             "center": [
@@ -127,7 +127,7 @@
                 }
             ]
         },
-        "mouseWheelAction": "none",
+        "mouseWheelAction": "workspace",
         "reverseScroll": false,
         "mouseWheelWrap": true,
         "middleClickAction": "none",
