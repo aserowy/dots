@@ -19,6 +19,7 @@
     ./swaync
     ./swww
     ./television
+    ./uv
     ./wpaperd
     ./zellij
   ];

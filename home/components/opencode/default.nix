@@ -19,16 +19,14 @@ in
       ];
 
       file = {
-        # ".config/opencode/agents/" = {
-        #   recursive = true;
-        #   source = ./agents;
-        # };
-        # ".config/opencode/plugins/" = {
-        #   recursive = true;
-        #   source = ./plugins;
-        # };
-
         ".config/opencode/opencode.json".source = ./opencode.json;
+      };
+
+      components.uv = {
+        enable = true;
+        tools = [
+          "uv tool install specify-cli --from git+https://github.com/github/spec-kit.git"
+        ];
       };
     };
   };
