@@ -52,6 +52,7 @@ in
 
         modules = {
           clipboard.enable = true;
+          gtk.enable = true;
           statusbar.enable = true;
         };
 
@@ -68,11 +69,6 @@ in
             niri msg action screenshot-window
           '')
         ];
-      };
-
-      gtk.theme = {
-        name = "Fluent-Dark-compact";
-        package = pkgs.fluent-gtk-theme;
       };
     };
 }

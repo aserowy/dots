@@ -14,6 +14,7 @@ in
 
   config = mkIf cnfg.enable {
     home.packages = with pkgs; [
+      adw-gtk3
       gnome-tweaks
     ];
 
@@ -30,9 +31,7 @@ in
         size = 10;
       };
 
-      gtk3.extraConfig = {
-        gtk-application-prefer-dark-theme = 1;
-      };
+      theme.name = "adw-gtk3";
 
       gtk4.extraConfig = {
         gtk-application-prefer-dark-theme = 1;

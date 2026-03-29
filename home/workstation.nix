@@ -19,9 +19,7 @@
     modules = {
       console.enable = true;
       gaming.enable = true;
-      gtk.enable = true;
       noctalia.enable = true;
-      xdg.enable = true;
     };
 
     packages = with pkgs; [

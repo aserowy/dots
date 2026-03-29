@@ -41,6 +41,8 @@ in
           };
         };
 
+        modules.gtk.enable = true;
+
         file = {
           ".config/niri/config.kdl".source = builtins.toFile "niri-config" ''
             ${cnfg.prependedConfig}
@@ -52,7 +54,6 @@ in
         };
 
         packages = with pkgs; [
-          adw-gtk3
           kdePackages.qt6ct
           niri
           nwg-look
@@ -69,8 +70,6 @@ in
           '')
         ];
       };
-
-      gtk.theme.name = "adw-gtk3";
 
       programs.noctalia-shell = {
         enable = true;
