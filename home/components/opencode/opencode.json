@@ -25,8 +25,8 @@
                 "baseURL": "https://adesso-ai-hub.3asabc.de/v1"
             },
             "models": {
-                "claude-opus-4-5*": {
-                    "name": "claude-opus-4-5*",
+                "claude-opus-4-6*": {
+                    "name": "claude-opus-4-6*",
                     "limit": {
                         "context": 200000,
                         "output": 65536
