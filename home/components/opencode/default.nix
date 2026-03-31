@@ -25,7 +25,7 @@ in
       components.uv = {
         enable = true;
         tools = [
-          "uv tool install specify-cli --from git+https://github.com/github/spec-kit.git"
+          # "uv tool install specify-cli --from git+https://github.com/github/spec-kit.git"
         ];
       };
     };
