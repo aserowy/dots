@@ -11,10 +11,6 @@
       };
     };
 
-    darwin = {
-      url = "github:LnL7/nix-darwin";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -73,7 +69,6 @@
   outputs =
     {
       self,
-      darwin,
       disko,
       haumea,
       home,
@@ -109,30 +104,22 @@
 
       formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-tree;
 
-      darwinConfigurations."FR6NP4LHY7" = darwin.lib.darwinSystem {
-        modules = [
-          {
-            nixpkgs.overlays = [
-              neocode.overlays.default
-              yeet.overlays.default
-              (final: prev: { zjstatus = zjstatus.packages.${prev.stdenv.hostPlatform.system}.default; })
-            ];
-          }
-
-          home.darwinModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users."alexander.serowy" = import ./home/work-macos.nix;
-            };
-          }
-
-          (import ./systems/fr6np4lhy7 self.rev or self.dirtyRev or null)
-        ];
-      };
-
       homeConfigurations = {
+        "alexander.serowy" = home.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+
+          modules = [
+            {
+              nixpkgs.overlays = [
+                neocode.overlays.default
+                yeet.overlays.default
+                (final: prev: { zjstatus = zjstatus.packages.${prev.stdenv.hostPlatform.system}.default; })
+              ];
+            }
+
+            ./home/work-macos.nix
+          ];
+        };
         "uitdeveloper" = home.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
 
