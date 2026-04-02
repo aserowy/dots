@@ -42,9 +42,5 @@
             }
         }
     },
-    "plugin": [
-        "@mohak34/opencode-notifier@latest",
-        "@ex-machina/opencode-anthropic-auth"
-    ],
     "theme": "system"
 }
