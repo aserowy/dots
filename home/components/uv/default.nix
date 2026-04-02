@@ -33,7 +33,6 @@ let
       echo "❌ uv not found at $HOME/.nix-profile/bin/uv, skipping uv tool installs"
     fi
   '';
-
 in
 {
   options.home.components.uv = {
