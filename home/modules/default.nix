@@ -1,6 +1,7 @@
 { ... }:
 {
   imports = [
+    ./aiagents
     ./clipboard
     ./console
     ./docker

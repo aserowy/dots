@@ -16,12 +16,12 @@ in
     home = {
       components = {
         git.enable = true;
-        opencode.enable = true;
         television.enable = true;
         zellij.enable = true;
       };
 
       modules = {
+        aiagents.enable = true;
         neocode.enable = true;
         nushell.enable = true;
       };

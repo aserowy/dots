@@ -16,18 +16,10 @@ in
     home = {
       packages = with pkgs; [
         opencode
-        openspec
       ];
 
       file = {
         ".config/opencode/opencode.json".source = ./opencode.json;
-      };
-
-      components.uv = {
-        enable = true;
-        tools = [
-          # "uv tool install specify-cli --from git+https://github.com/github/spec-kit.git"
-        ];
       };
     };
   };
