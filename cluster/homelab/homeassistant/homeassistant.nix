@@ -188,7 +188,7 @@ in
               containers = [
                 {
                   name = "homeassistant";
-                  image = "homeassistant/home-assistant:2026.3.2"; # docker/homeassistant/home-assistant@semver-coerced
+                  image = "homeassistant/home-assistant:2026.3.3"; # docker/homeassistant/home-assistant@semver-coerced
                   securityContext = {
                     allowPrivilegeEscalation = false;
                     capabilities = {
