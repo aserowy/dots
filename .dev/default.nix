@@ -49,8 +49,8 @@ pkgs.mkShell {
     pkgs.marksman
     pkgs.nixd
     pkgs.nixfmt
-    pkgs.nodePackages.prettier
-    pkgs.nodePackages.vscode-json-languageserver
+    pkgs.prettier
+    pkgs.vscode-json-languageserver
     pkgs.nodejs_24
     pkgs.nufmt
     pkgs.renovate
