@@ -86,7 +86,7 @@ in
               initContainers = [
                 {
                   name = "copy-base-config";
-                  image = "mikefarah/yq:4.52.4"; # docker/mikefarah/yq@semver-coerced
+                  image = "mikefarah/yq:4.52.5"; # docker/mikefarah/yq@semver-coerced
                   securityContext = {
                     allowPrivilegeEscalation = false;
                     readOnlyRootFilesystem = true;
