@@ -32,8 +32,6 @@ in
         source = pkgs.neocode.override {
           theme = "bluloco";
           style = "dark";
-
-          syncBuild = !cnfg.parallelTsBuild;
         };
       };
 
@@ -42,6 +40,7 @@ in
         gnumake
         neovim
         ripgrep
+        tree-sitter
         unzip
         yeet
       ];
