@@ -11,7 +11,6 @@
         },
         "doom_loop": "deny",
         "edit": "allow",
-        "external_directory": "deny",
         "glob": "allow",
         "grep": "allow",
         "list": "allow",
