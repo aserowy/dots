@@ -11,7 +11,6 @@
         "ehci_pci"
         "ahci"
         "usb_storage"
-        "usbhid"
       ];
       kernelModules = [ "dm-snapshot" ];
     };

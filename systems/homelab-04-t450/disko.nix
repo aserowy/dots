@@ -45,20 +45,9 @@
                     ];
                     mountpoint = "/nix";
                   };
-                  "/swap" = {
-                    mountpoint = "/.swapvol";
-                    swap = {
-                      swapfile.size = "12G";
-                    };
-                  };
                 };
 
                 mountpoint = "/partition-root";
-                swap = {
-                  swapfile = {
-                    size = "12G";
-                  };
-                };
               };
             };
           };
