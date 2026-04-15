@@ -2,5 +2,5 @@
   repo = "https://cloudnative-pg.github.io/charts/";
   chart = "cloudnative-pg";
   version = "0.28.0";
-  chartHash = "sha256-JxR/KG7tQff3fUdu49RclgSuJZBvan2NV5v7OemdZD0=";
+  chartHash = "sha256-IE5HEzMotxW00cdnmgJgDedNS42iBiuiwYRo9pe/10w=";
 }
