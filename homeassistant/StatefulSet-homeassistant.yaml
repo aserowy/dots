@@ -19,7 +19,7 @@ spec:
         - env:
             - name: TZ
               value: Europe/Berlin
-          image: homeassistant/home-assistant:2026.3.4
+          image: homeassistant/home-assistant:2026.4.1
           livenessProbe:
             httpGet:
               path: /
