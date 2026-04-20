@@ -390,6 +390,14 @@ let
           description = "A map containing the plugin metadata";
           type = (types.nullOr (types.attrsOf types.str));
         };
+        "reconciliationStartedAt" = mkOption {
+          description = "When the backup process was started by the operator";
+          type = (types.nullOr types.str);
+        };
+        "reconciliationTerminatedAt" = mkOption {
+          description = "When the reconciliation was terminated by the operator (either successfully or not)";
+          type = (types.nullOr types.str);
+        };
         "s3Credentials" = mkOption {
           description = "The credentials to use to upload data to S3";
           type = (types.nullOr (submoduleOf "postgresql.cnpg.io.v1.BackupStatusS3Credentials"));
@@ -403,11 +411,11 @@ let
           type = (types.nullOr (submoduleOf "postgresql.cnpg.io.v1.BackupStatusSnapshotBackupStatus"));
         };
         "startedAt" = mkOption {
-          description = "When the backup was started";
+          description = "When the backup execution was started by the backup tool";
           type = (types.nullOr types.str);
         };
         "stoppedAt" = mkOption {
-          description = "When the backup was terminated";
+          description = "When the backup execution was terminated by the backup tool";
           type = (types.nullOr types.str);
         };
         "tablespaceMapFile" = mkOption {
@@ -439,6 +447,8 @@ let
         "online" = mkOverride 1002 null;
         "phase" = mkOverride 1002 null;
         "pluginMetadata" = mkOverride 1002 null;
+        "reconciliationStartedAt" = mkOverride 1002 null;
+        "reconciliationTerminatedAt" = mkOverride 1002 null;
         "s3Credentials" = mkOverride 1002 null;
         "serverName" = mkOverride 1002 null;
         "snapshotBackupStatus" = mkOverride 1002 null;
@@ -853,6 +863,17 @@ let
     "postgresql.cnpg.io.v1.ClusterImageCatalogSpecImages" = {
 
       options = {
+        "extensions" = mkOption {
+          description = "The configuration of the extensions to be added";
+          type = (
+            types.nullOr (
+              coerceAttrsOfSubmodulesToListByKey "postgresql.cnpg.io.v1.ClusterImageCatalogSpecImagesExtensions"
+                "name"
+                [ "name" ]
+            )
+          );
+          apply = attrsToList;
+        };
         "image" = mkOption {
           description = "The image reference";
           type = types.str;
@@ -863,7 +884,97 @@ let
         };
       };
 
+      config = {
+        "extensions" = mkOverride 1002 null;
+      };
+
+    };
+    "postgresql.cnpg.io.v1.ClusterImageCatalogSpecImagesExtensions" = {
+
+      options = {
+        "bin_path" = mkOption {
+          description = "A list of directories within the image to be appended to the\nPostgreSQL process's `PATH` environment variable.";
+          type = (types.nullOr (types.listOf types.str));
+        };
+        "dynamic_library_path" = mkOption {
+          description = "The list of directories inside the image which should be added to dynamic_library_path.\nIf not defined, defaults to \"/lib\".";
+          type = (types.nullOr (types.listOf types.str));
+        };
+        "env" = mkOption {
+          description = "Env is a list of custom environment variables to be set in the\nPostgreSQL process for this extension. It is the responsibility of the\ncluster administrator to ensure the variables are correct for the\nspecific extension. Note that changes to these variables require\na manual cluster restart to take effect.";
+          type = (
+            types.nullOr (
+              coerceAttrsOfSubmodulesToListByKey
+                "postgresql.cnpg.io.v1.ClusterImageCatalogSpecImagesExtensionsEnv"
+                "name"
+                [ "name" ]
+            )
+          );
+          apply = attrsToList;
+        };
+        "extension_control_path" = mkOption {
+          description = "The list of directories inside the image which should be added to extension_control_path.\nIf not defined, defaults to \"/share\".";
+          type = (types.nullOr (types.listOf types.str));
+        };
+        "image" = mkOption {
+          description = "The image containing the extension.";
+          type = (
+            types.nullOr (submoduleOf "postgresql.cnpg.io.v1.ClusterImageCatalogSpecImagesExtensionsImage")
+          );
+        };
+        "ld_library_path" = mkOption {
+          description = "The list of directories inside the image which should be added to ld_library_path.";
+          type = (types.nullOr (types.listOf types.str));
+        };
+        "name" = mkOption {
+          description = "The name of the extension, required";
+          type = types.str;
+        };
+      };
+
+      config = {
+        "bin_path" = mkOverride 1002 null;
+        "dynamic_library_path" = mkOverride 1002 null;
+        "env" = mkOverride 1002 null;
+        "extension_control_path" = mkOverride 1002 null;
+        "image" = mkOverride 1002 null;
+        "ld_library_path" = mkOverride 1002 null;
+      };
+
+    };
+    "postgresql.cnpg.io.v1.ClusterImageCatalogSpecImagesExtensionsEnv" = {
+
+      options = {
+        "name" = mkOption {
+          description = "Name of the environment variable to be injected into the\nPostgreSQL process.";
+          type = types.str;
+        };
+        "value" = mkOption {
+          description = "Value of the environment variable. CloudNativePG performs a direct\nreplacement of this value, with support for placeholder expansion.\nThe \${`image_root`} placeholder resolves to the absolute mount path\nof the extension's volume (e.g., `/extensions/my-extension`). This\nis particularly useful for allowing applications or libraries to\nlocate specific directories within the mounted image.\nUnrecognized placeholders are rejected. To include a literal \${...}\nin the value, escape it as $\${...}.";
+          type = types.str;
+        };
+      };
+
       config = { };
+
+    };
+    "postgresql.cnpg.io.v1.ClusterImageCatalogSpecImagesExtensionsImage" = {
+
+      options = {
+        "pullPolicy" = mkOption {
+          description = "Policy for pulling OCI objects. Possible values are:\nAlways: the kubelet always attempts to pull the reference. Container creation will fail If the pull fails.\nNever: the kubelet never pulls the reference and only uses a local image or artifact. Container creation will fail if the reference isn't present.\nIfNotPresent: the kubelet pulls if the reference isn't already present on disk. Container creation will fail if the reference isn't present and the pull fails.\nDefaults to Always if :latest tag is specified, or IfNotPresent otherwise.";
+          type = (types.nullOr types.str);
+        };
+        "reference" = mkOption {
+          description = "Required: Image or artifact reference to be used.\nBehaves in the same way as pod.spec.containers[*].image.\nPull secrets will be assembled in the same way as for the container image by looking up node credentials, SA image pull secrets, and pod spec image pull secrets.\nMore info: https://kubernetes.io/docs/concepts/containers/images\nThis field is optional to allow higher level config management to default or override\ncontainer images in workload controllers like Deployments and StatefulSets.";
+          type = (types.nullOr types.str);
+        };
+      };
+
+      config = {
+        "pullPolicy" = mkOverride 1002 null;
+        "reference" = mkOverride 1002 null;
+      };
 
     };
     "postgresql.cnpg.io.v1.ClusterSpec" = {
@@ -999,6 +1110,17 @@ let
           description = "Override the PodSecurityContext applied to every Pod of the cluster.\nWhen set, this overrides the operator's default PodSecurityContext for the cluster.\nIf omitted, the operator defaults are used.\nThis field doesn't have any effect if SecurityContextConstraints are present.";
           type = (types.nullOr (submoduleOf "postgresql.cnpg.io.v1.ClusterSpecPodSecurityContext"));
         };
+        "podSelectorRefs" = mkOption {
+          description = "PodSelectorRefs defines named pod label selectors that can be referenced\nin pg_hba rules using the \${podselector:NAME} syntax in the address field.\nThe operator resolves matching pod IPs and the instance manager expands\npg_hba lines accordingly. Only pods in the Cluster's own namespace are considered.";
+          type = (
+            types.nullOr (
+              coerceAttrsOfSubmodulesToListByKey "postgresql.cnpg.io.v1.ClusterSpecPodSelectorRefs" "name" [
+                "name"
+              ]
+            )
+          );
+          apply = attrsToList;
+        };
         "postgresGID" = mkOption {
           description = "The GID of the `postgres` user inside the image, defaults to `26`";
           type = (types.nullOr types.int);
@@ -1054,6 +1176,10 @@ let
         "securityContext" = mkOption {
           description = "Override the SecurityContext applied to every Container in the Pod of the cluster.\nWhen set, this overrides the operator's default Container SecurityContext.\nIf omitted, the operator defaults are used.";
           type = (types.nullOr (submoduleOf "postgresql.cnpg.io.v1.ClusterSpecSecurityContext"));
+        };
+        "serviceAccountName" = mkOption {
+          description = "Name of an existing ServiceAccount in the same namespace to use for the cluster.\nWhen specified, the operator will not create a new ServiceAccount\nbut will use the provided one. This is useful for sharing a single\nServiceAccount across multiple clusters (e.g., for cloud IAM configurations).\nIf not specified, a ServiceAccount will be created with the cluster name.\nMutually exclusive with ServiceAccountTemplate.";
+          type = (types.nullOr types.str);
         };
         "serviceAccountTemplate" = mkOption {
           description = "Configure the generation of the service account";
@@ -1134,6 +1260,7 @@ let
         "nodeMaintenanceWindow" = mkOverride 1002 null;
         "plugins" = mkOverride 1002 null;
         "podSecurityContext" = mkOverride 1002 null;
+        "podSelectorRefs" = mkOverride 1002 null;
         "postgresGID" = mkOverride 1002 null;
         "postgresUID" = mkOverride 1002 null;
         "postgresql" = mkOverride 1002 null;
@@ -1148,6 +1275,7 @@ let
         "schedulerName" = mkOverride 1002 null;
         "seccompProfile" = mkOverride 1002 null;
         "securityContext" = mkOverride 1002 null;
+        "serviceAccountName" = mkOverride 1002 null;
         "serviceAccountTemplate" = mkOverride 1002 null;
         "smartShutdownTimeout" = mkOverride 1002 null;
         "startDelay" = mkOverride 1002 null;
@@ -5414,6 +5542,69 @@ let
       };
 
     };
+    "postgresql.cnpg.io.v1.ClusterSpecPodSelectorRefs" = {
+
+      options = {
+        "name" = mkOption {
+          description = "Name is the identifier used to reference this selector in pg_hba rules\nvia the \${podselector:NAME} syntax in the address field.";
+          type = types.str;
+        };
+        "selector" = mkOption {
+          description = "Selector is a label selector that identifies the pods whose IPs\nshould be resolved. Only pods in the Cluster's namespace are considered.";
+          type = (submoduleOf "postgresql.cnpg.io.v1.ClusterSpecPodSelectorRefsSelector");
+        };
+      };
+
+      config = { };
+
+    };
+    "postgresql.cnpg.io.v1.ClusterSpecPodSelectorRefsSelector" = {
+
+      options = {
+        "matchExpressions" = mkOption {
+          description = "matchExpressions is a list of label selector requirements. The requirements are ANDed.";
+          type = (
+            types.nullOr (
+              types.listOf (
+                submoduleOf "postgresql.cnpg.io.v1.ClusterSpecPodSelectorRefsSelectorMatchExpressions"
+              )
+            )
+          );
+        };
+        "matchLabels" = mkOption {
+          description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
+          type = (types.nullOr (types.attrsOf types.str));
+        };
+      };
+
+      config = {
+        "matchExpressions" = mkOverride 1002 null;
+        "matchLabels" = mkOverride 1002 null;
+      };
+
+    };
+    "postgresql.cnpg.io.v1.ClusterSpecPodSelectorRefsSelectorMatchExpressions" = {
+
+      options = {
+        "key" = mkOption {
+          description = "key is the label key that the selector applies to.";
+          type = types.str;
+        };
+        "operator" = mkOption {
+          description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
+          type = types.str;
+        };
+        "values" = mkOption {
+          description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
+          type = (types.nullOr (types.listOf types.str));
+        };
+      };
+
+      config = {
+        "values" = mkOverride 1002 null;
+      };
+
+    };
     "postgresql.cnpg.io.v1.ClusterSpecPostgresql" = {
 
       options = {
@@ -5425,8 +5616,9 @@ let
           description = "The configuration of the extensions to be added";
           type = (
             types.nullOr (
-              coerceAttrsOfSubmodulesToListByKey "postgresql.cnpg.io.v1.ClusterSpecPostgresqlExtensions" "name"
-                [ ]
+              coerceAttrsOfSubmodulesToListByKey "postgresql.cnpg.io.v1.ClusterSpecPostgresqlExtensions" "name" [
+                "name"
+              ]
             )
           );
           apply = attrsToList;
@@ -5440,7 +5632,7 @@ let
           type = (types.nullOr (types.attrsOf types.str));
         };
         "pg_hba" = mkOption {
-          description = "PostgreSQL Host Based Authentication rules (lines to be appended\nto the pg_hba.conf file)";
+          description = "PostgreSQL Host Based Authentication rules (lines to be appended\nto the pg_hba.conf file).\nUse the \${podselector:NAME} syntax to reference a pod selector;\nthe rule will be expanded for each Pod IP matching that selector.";
           type = (types.nullOr (types.listOf types.str));
         };
         "pg_ident" = mkOption {
@@ -5486,17 +5678,31 @@ let
     "postgresql.cnpg.io.v1.ClusterSpecPostgresqlExtensions" = {
 
       options = {
+        "bin_path" = mkOption {
+          description = "A list of directories within the image to be appended to the\nPostgreSQL process's `PATH` environment variable.";
+          type = (types.nullOr (types.listOf types.str));
+        };
         "dynamic_library_path" = mkOption {
           description = "The list of directories inside the image which should be added to dynamic_library_path.\nIf not defined, defaults to \"/lib\".";
           type = (types.nullOr (types.listOf types.str));
+        };
+        "env" = mkOption {
+          description = "Env is a list of custom environment variables to be set in the\nPostgreSQL process for this extension. It is the responsibility of the\ncluster administrator to ensure the variables are correct for the\nspecific extension. Note that changes to these variables require\na manual cluster restart to take effect.";
+          type = (
+            types.nullOr (
+              coerceAttrsOfSubmodulesToListByKey "postgresql.cnpg.io.v1.ClusterSpecPostgresqlExtensionsEnv" "name"
+                [ "name" ]
+            )
+          );
+          apply = attrsToList;
         };
         "extension_control_path" = mkOption {
           description = "The list of directories inside the image which should be added to extension_control_path.\nIf not defined, defaults to \"/share\".";
           type = (types.nullOr (types.listOf types.str));
         };
         "image" = mkOption {
-          description = "The image containing the extension, required";
-          type = (submoduleOf "postgresql.cnpg.io.v1.ClusterSpecPostgresqlExtensionsImage");
+          description = "The image containing the extension.";
+          type = (types.nullOr (submoduleOf "postgresql.cnpg.io.v1.ClusterSpecPostgresqlExtensionsImage"));
         };
         "ld_library_path" = mkOption {
           description = "The list of directories inside the image which should be added to ld_library_path.";
@@ -5509,10 +5715,29 @@ let
       };
 
       config = {
+        "bin_path" = mkOverride 1002 null;
         "dynamic_library_path" = mkOverride 1002 null;
+        "env" = mkOverride 1002 null;
         "extension_control_path" = mkOverride 1002 null;
+        "image" = mkOverride 1002 null;
         "ld_library_path" = mkOverride 1002 null;
       };
+
+    };
+    "postgresql.cnpg.io.v1.ClusterSpecPostgresqlExtensionsEnv" = {
+
+      options = {
+        "name" = mkOption {
+          description = "Name of the environment variable to be injected into the\nPostgreSQL process.";
+          type = types.str;
+        };
+        "value" = mkOption {
+          description = "Value of the environment variable. CloudNativePG performs a direct\nreplacement of this value, with support for placeholder expansion.\nThe \${`image_root`} placeholder resolves to the absolute mount path\nof the extension's volume (e.g., `/extensions/my-extension`). This\nis particularly useful for allowing applications or libraries to\nlocate specific directories within the mounted image.\nUnrecognized placeholders are rejected. To include a literal \${...}\nin the value, escape it as $\${...}.";
+          type = types.str;
+        };
+      };
+
+      config = { };
 
     };
     "postgresql.cnpg.io.v1.ClusterSpecPostgresqlExtensionsImage" = {
@@ -7646,6 +7871,17 @@ let
           );
           apply = attrsToList;
         };
+        "podSelectorRefs" = mkOption {
+          description = "PodSelectorRefs contains the resolved pod IPs for each named selector\ndefined in spec.podSelectorRefs.";
+          type = (
+            types.nullOr (
+              coerceAttrsOfSubmodulesToListByKey "postgresql.cnpg.io.v1.ClusterStatusPodSelectorRefs" "name" [
+                "name"
+              ]
+            )
+          );
+          apply = attrsToList;
+        };
         "poolerIntegrations" = mkOption {
           description = "The integration needed by poolers referencing the cluster";
           type = (types.nullOr (submoduleOf "postgresql.cnpg.io.v1.ClusterStatusPoolerIntegrations"));
@@ -7746,6 +7982,7 @@ let
         "phase" = mkOverride 1002 null;
         "phaseReason" = mkOverride 1002 null;
         "pluginStatus" = mkOverride 1002 null;
+        "podSelectorRefs" = mkOverride 1002 null;
         "poolerIntegrations" = mkOverride 1002 null;
         "pvcCount" = mkOverride 1002 null;
         "readService" = mkOverride 1002 null;
@@ -7894,6 +8131,17 @@ let
     "postgresql.cnpg.io.v1.ClusterStatusPgDataImageInfo" = {
 
       options = {
+        "extensions" = mkOption {
+          description = "Extensions contains the container image extensions available for the current Image";
+          type = (
+            types.nullOr (
+              coerceAttrsOfSubmodulesToListByKey "postgresql.cnpg.io.v1.ClusterStatusPgDataImageInfoExtensions"
+                "name"
+                [ ]
+            )
+          );
+          apply = attrsToList;
+        };
         "image" = mkOption {
           description = "Image is the image name";
           type = types.str;
@@ -7904,7 +8152,96 @@ let
         };
       };
 
+      config = {
+        "extensions" = mkOverride 1002 null;
+      };
+
+    };
+    "postgresql.cnpg.io.v1.ClusterStatusPgDataImageInfoExtensions" = {
+
+      options = {
+        "bin_path" = mkOption {
+          description = "A list of directories within the image to be appended to the\nPostgreSQL process's `PATH` environment variable.";
+          type = (types.nullOr (types.listOf types.str));
+        };
+        "dynamic_library_path" = mkOption {
+          description = "The list of directories inside the image which should be added to dynamic_library_path.\nIf not defined, defaults to \"/lib\".";
+          type = (types.nullOr (types.listOf types.str));
+        };
+        "env" = mkOption {
+          description = "Env is a list of custom environment variables to be set in the\nPostgreSQL process for this extension. It is the responsibility of the\ncluster administrator to ensure the variables are correct for the\nspecific extension. Note that changes to these variables require\na manual cluster restart to take effect.";
+          type = (
+            types.nullOr (
+              coerceAttrsOfSubmodulesToListByKey "postgresql.cnpg.io.v1.ClusterStatusPgDataImageInfoExtensionsEnv"
+                "name"
+                [ "name" ]
+            )
+          );
+          apply = attrsToList;
+        };
+        "extension_control_path" = mkOption {
+          description = "The list of directories inside the image which should be added to extension_control_path.\nIf not defined, defaults to \"/share\".";
+          type = (types.nullOr (types.listOf types.str));
+        };
+        "image" = mkOption {
+          description = "The image containing the extension.";
+          type = (
+            types.nullOr (submoduleOf "postgresql.cnpg.io.v1.ClusterStatusPgDataImageInfoExtensionsImage")
+          );
+        };
+        "ld_library_path" = mkOption {
+          description = "The list of directories inside the image which should be added to ld_library_path.";
+          type = (types.nullOr (types.listOf types.str));
+        };
+        "name" = mkOption {
+          description = "The name of the extension, required";
+          type = types.str;
+        };
+      };
+
+      config = {
+        "bin_path" = mkOverride 1002 null;
+        "dynamic_library_path" = mkOverride 1002 null;
+        "env" = mkOverride 1002 null;
+        "extension_control_path" = mkOverride 1002 null;
+        "image" = mkOverride 1002 null;
+        "ld_library_path" = mkOverride 1002 null;
+      };
+
+    };
+    "postgresql.cnpg.io.v1.ClusterStatusPgDataImageInfoExtensionsEnv" = {
+
+      options = {
+        "name" = mkOption {
+          description = "Name of the environment variable to be injected into the\nPostgreSQL process.";
+          type = types.str;
+        };
+        "value" = mkOption {
+          description = "Value of the environment variable. CloudNativePG performs a direct\nreplacement of this value, with support for placeholder expansion.\nThe \${`image_root`} placeholder resolves to the absolute mount path\nof the extension's volume (e.g., `/extensions/my-extension`). This\nis particularly useful for allowing applications or libraries to\nlocate specific directories within the mounted image.\nUnrecognized placeholders are rejected. To include a literal \${...}\nin the value, escape it as $\${...}.";
+          type = types.str;
+        };
+      };
+
       config = { };
+
+    };
+    "postgresql.cnpg.io.v1.ClusterStatusPgDataImageInfoExtensionsImage" = {
+
+      options = {
+        "pullPolicy" = mkOption {
+          description = "Policy for pulling OCI objects. Possible values are:\nAlways: the kubelet always attempts to pull the reference. Container creation will fail If the pull fails.\nNever: the kubelet never pulls the reference and only uses a local image or artifact. Container creation will fail if the reference isn't present.\nIfNotPresent: the kubelet pulls if the reference isn't already present on disk. Container creation will fail if the reference isn't present and the pull fails.\nDefaults to Always if :latest tag is specified, or IfNotPresent otherwise.";
+          type = (types.nullOr types.str);
+        };
+        "reference" = mkOption {
+          description = "Required: Image or artifact reference to be used.\nBehaves in the same way as pod.spec.containers[*].image.\nPull secrets will be assembled in the same way as for the container image by looking up node credentials, SA image pull secrets, and pod spec image pull secrets.\nMore info: https://kubernetes.io/docs/concepts/containers/images\nThis field is optional to allow higher level config management to default or override\ncontainer images in workload controllers like Deployments and StatefulSets.";
+          type = (types.nullOr types.str);
+        };
+      };
+
+      config = {
+        "pullPolicy" = mkOverride 1002 null;
+        "reference" = mkOverride 1002 null;
+      };
 
     };
     "postgresql.cnpg.io.v1.ClusterStatusPluginStatus" = {
@@ -7951,6 +8288,24 @@ let
         "restoreJobHookCapabilities" = mkOverride 1002 null;
         "status" = mkOverride 1002 null;
         "walCapabilities" = mkOverride 1002 null;
+      };
+
+    };
+    "postgresql.cnpg.io.v1.ClusterStatusPodSelectorRefs" = {
+
+      options = {
+        "ips" = mkOption {
+          description = "IPs is the list of pod IPs matching the selector.\nEach IP is a single address (no CIDR notation).";
+          type = (types.nullOr (types.listOf types.str));
+        };
+        "name" = mkOption {
+          description = "Name corresponds to the name in the spec's PodSelectorRef.";
+          type = types.str;
+        };
+      };
+
+      config = {
+        "ips" = mkOverride 1002 null;
       };
 
     };
@@ -8779,6 +9134,17 @@ let
     "postgresql.cnpg.io.v1.ImageCatalogSpecImages" = {
 
       options = {
+        "extensions" = mkOption {
+          description = "The configuration of the extensions to be added";
+          type = (
+            types.nullOr (
+              coerceAttrsOfSubmodulesToListByKey "postgresql.cnpg.io.v1.ImageCatalogSpecImagesExtensions" "name" [
+                "name"
+              ]
+            )
+          );
+          apply = attrsToList;
+        };
         "image" = mkOption {
           description = "The image reference";
           type = types.str;
@@ -8789,7 +9155,94 @@ let
         };
       };
 
+      config = {
+        "extensions" = mkOverride 1002 null;
+      };
+
+    };
+    "postgresql.cnpg.io.v1.ImageCatalogSpecImagesExtensions" = {
+
+      options = {
+        "bin_path" = mkOption {
+          description = "A list of directories within the image to be appended to the\nPostgreSQL process's `PATH` environment variable.";
+          type = (types.nullOr (types.listOf types.str));
+        };
+        "dynamic_library_path" = mkOption {
+          description = "The list of directories inside the image which should be added to dynamic_library_path.\nIf not defined, defaults to \"/lib\".";
+          type = (types.nullOr (types.listOf types.str));
+        };
+        "env" = mkOption {
+          description = "Env is a list of custom environment variables to be set in the\nPostgreSQL process for this extension. It is the responsibility of the\ncluster administrator to ensure the variables are correct for the\nspecific extension. Note that changes to these variables require\na manual cluster restart to take effect.";
+          type = (
+            types.nullOr (
+              coerceAttrsOfSubmodulesToListByKey "postgresql.cnpg.io.v1.ImageCatalogSpecImagesExtensionsEnv"
+                "name"
+                [ "name" ]
+            )
+          );
+          apply = attrsToList;
+        };
+        "extension_control_path" = mkOption {
+          description = "The list of directories inside the image which should be added to extension_control_path.\nIf not defined, defaults to \"/share\".";
+          type = (types.nullOr (types.listOf types.str));
+        };
+        "image" = mkOption {
+          description = "The image containing the extension.";
+          type = (types.nullOr (submoduleOf "postgresql.cnpg.io.v1.ImageCatalogSpecImagesExtensionsImage"));
+        };
+        "ld_library_path" = mkOption {
+          description = "The list of directories inside the image which should be added to ld_library_path.";
+          type = (types.nullOr (types.listOf types.str));
+        };
+        "name" = mkOption {
+          description = "The name of the extension, required";
+          type = types.str;
+        };
+      };
+
+      config = {
+        "bin_path" = mkOverride 1002 null;
+        "dynamic_library_path" = mkOverride 1002 null;
+        "env" = mkOverride 1002 null;
+        "extension_control_path" = mkOverride 1002 null;
+        "image" = mkOverride 1002 null;
+        "ld_library_path" = mkOverride 1002 null;
+      };
+
+    };
+    "postgresql.cnpg.io.v1.ImageCatalogSpecImagesExtensionsEnv" = {
+
+      options = {
+        "name" = mkOption {
+          description = "Name of the environment variable to be injected into the\nPostgreSQL process.";
+          type = types.str;
+        };
+        "value" = mkOption {
+          description = "Value of the environment variable. CloudNativePG performs a direct\nreplacement of this value, with support for placeholder expansion.\nThe \${`image_root`} placeholder resolves to the absolute mount path\nof the extension's volume (e.g., `/extensions/my-extension`). This\nis particularly useful for allowing applications or libraries to\nlocate specific directories within the mounted image.\nUnrecognized placeholders are rejected. To include a literal \${...}\nin the value, escape it as $\${...}.";
+          type = types.str;
+        };
+      };
+
       config = { };
+
+    };
+    "postgresql.cnpg.io.v1.ImageCatalogSpecImagesExtensionsImage" = {
+
+      options = {
+        "pullPolicy" = mkOption {
+          description = "Policy for pulling OCI objects. Possible values are:\nAlways: the kubelet always attempts to pull the reference. Container creation will fail If the pull fails.\nNever: the kubelet never pulls the reference and only uses a local image or artifact. Container creation will fail if the reference isn't present.\nIfNotPresent: the kubelet pulls if the reference isn't already present on disk. Container creation will fail if the reference isn't present and the pull fails.\nDefaults to Always if :latest tag is specified, or IfNotPresent otherwise.";
+          type = (types.nullOr types.str);
+        };
+        "reference" = mkOption {
+          description = "Required: Image or artifact reference to be used.\nBehaves in the same way as pod.spec.containers[*].image.\nPull secrets will be assembled in the same way as for the container image by looking up node credentials, SA image pull secrets, and pod spec image pull secrets.\nMore info: https://kubernetes.io/docs/concepts/containers/images\nThis field is optional to allow higher level config management to default or override\ncontainer images in workload controllers like Deployments and StatefulSets.";
+          type = (types.nullOr types.str);
+        };
+      };
+
+      config = {
+        "pullPolicy" = mkOverride 1002 null;
+        "reference" = mkOverride 1002 null;
+      };
 
     };
     "postgresql.cnpg.io.v1.Pooler" = {
@@ -8847,6 +9300,10 @@ let
           description = "The PgBouncer configuration";
           type = (submoduleOf "postgresql.cnpg.io.v1.PoolerSpecPgbouncer");
         };
+        "serviceAccountName" = mkOption {
+          description = "Name of an existing ServiceAccount in the same namespace to use for the pooler.\nWhen specified, the operator will not create a new ServiceAccount\nbut will use the provided one. This is useful for sharing a single\nServiceAccount across multiple poolers (e.g., for cloud IAM configurations).\nIf not specified, a ServiceAccount will be created with the pooler name.";
+          type = (types.nullOr types.str);
+        };
         "serviceTemplate" = mkOption {
           description = "Template for the Service to be created";
           type = (types.nullOr (submoduleOf "postgresql.cnpg.io.v1.PoolerSpecServiceTemplate"));
@@ -8865,6 +9322,7 @@ let
         "deploymentStrategy" = mkOverride 1002 null;
         "instances" = mkOverride 1002 null;
         "monitoring" = mkOverride 1002 null;
+        "serviceAccountName" = mkOverride 1002 null;
         "serviceTemplate" = mkOverride 1002 null;
         "template" = mkOverride 1002 null;
         "type" = mkOverride 1002 null;
