@@ -119,6 +119,19 @@
           ];
           egress = [
             {
+              toEntities = [ "world" ];
+              toPorts = [
+                {
+                  ports = [
+                    {
+                      port = "53";
+                      protocol = "UDP";
+                    }
+                  ];
+                }
+              ];
+            }
+            {
               toEndpoints = [
                 {
                   matchLabels = {
