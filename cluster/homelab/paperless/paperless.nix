@@ -134,17 +134,17 @@ in
                       };
                     }
                     {
-                      name = "PAPERLESS_OUTLOOK_OAUTH_CLIENT_ID";
+                      name = "PAPERLESS_APPS";
                       valueFrom.secretKeyRef = {
                         name = "paperless";
-                        key = "outlook-client-id";
+                        key = "paperless-apps";
                       };
                     }
                     {
-                      name = "PAPERLESS_OUTLOOK_OAUTH_CLIENT_SECRET";
+                      name = "PAPERLESS_SOCIALACCOUNT_PROVIDERS";
                       valueFrom.secretKeyRef = {
                         name = "paperless";
-                        key = "outlook-client-secret";
+                        key = "paperless-socialaccount-providers";
                       };
                     }
                     {
