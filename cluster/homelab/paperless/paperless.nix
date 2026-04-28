@@ -412,19 +412,6 @@ in
             ];
             egress = [
               {
-                toEntities = [ "world" ];
-                toPorts = [
-                  {
-                    ports = [
-                      {
-                        port = "993";
-                        protocol = "TCP";
-                      }
-                    ];
-                  }
-                ];
-              }
-              {
                 toEndpoints = [
                   {
                     matchLabels = {
@@ -439,6 +426,23 @@ in
                       {
                         port = "53";
                         protocol = "UDP";
+                      }
+                    ];
+                  }
+                ];
+              }
+              {
+                toFQDNs = [
+                  {
+                    matchName = "oauth2.googleapis.com";
+                  }
+                ];
+                toPorts = [
+                  {
+                    ports = [
+                      {
+                        port = "443";
+                        protocol = "TCP";
                       }
                     ];
                   }
