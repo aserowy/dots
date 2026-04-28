@@ -13,12 +13,6 @@ spec:
         - ports:
             - port: "53"
               protocol: UDP
-    - toFQDNs:
-        - matchName: oauth2.googleapis.com
-      toPorts:
-        - ports:
-            - port: "443"
-              protocol: TCP
     - toEndpoints:
         - matchLabels:
             app.kubernetes.io/name: gotenberg
