@@ -137,14 +137,14 @@ in
                       name = "PAPERLESS_APPS";
                       valueFrom.secretKeyRef = {
                         name = "paperless";
-                        key = "paperless-apps";
+                        key = "apps";
                       };
                     }
                     {
                       name = "PAPERLESS_SOCIALACCOUNT_PROVIDERS";
                       valueFrom.secretKeyRef = {
                         name = "paperless";
-                        key = "paperless-socialaccount-providers";
+                        key = "socialaccount-providers";
                       };
                     }
                     {
