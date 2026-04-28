@@ -52,12 +52,12 @@ spec:
             - name: PAPERLESS_APPS
               valueFrom:
                 secretKeyRef:
-                  key: paperless-apps
+                  key: apps
                   name: paperless
             - name: PAPERLESS_SOCIALACCOUNT_PROVIDERS
               valueFrom:
                 secretKeyRef:
-                  key: paperless-socialaccount-providers
+                  key: socialaccount-providers
                   name: paperless
             - name: PAPERLESS_TIKA_ENABLED
               value: "1"
