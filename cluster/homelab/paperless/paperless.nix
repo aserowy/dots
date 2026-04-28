@@ -411,6 +411,7 @@ in
               }
             ];
             egress = [
+              { toEntities = [ "world" ]; }
               {
                 toEndpoints = [
                   {
@@ -511,60 +512,60 @@ in
           };
         };
 
-        paperless-fqdn = {
-          apiVersion = "cilium.io/v2";
-          kind = "CiliumNetworkPolicy";
-          metadata = {
-            inherit namespace;
-          };
-          spec = {
-            endpointSelector.matchLabels."app.kubernetes.io/name" = "paperless";
-            egress = [
-              {
-                toEndpoints = [
-                  {
-                    matchLabels = {
-                      "io.kubernetes.pod.namespace" = "kube-system";
-                      "k8s-app" = "kube-dns";
-                    };
-                  }
-                ];
-                toPorts = [
-                  {
-                    ports = [
-                      {
-                        port = "53";
-                        protocol = "UDP";
-                      }
-                    ];
-                    rules.dns = [
-                      {
-                        matchPattern = "*";
-                      }
-                    ];
-                  }
-                ];
-              }
-              {
-                toFQDNs = [
-                  {
-                    matchName = "oauth2.googleapis.com";
-                  }
-                ];
-                toPorts = [
-                  {
-                    ports = [
-                      {
-                        port = "443";
-                        protocol = "TCP";
-                      }
-                    ];
-                  }
-                ];
-              }
-            ];
-          };
-        };
+        # paperless-fqdn = {
+        #   apiVersion = "cilium.io/v2";
+        #   kind = "CiliumNetworkPolicy";
+        #   metadata = {
+        #     inherit namespace;
+        #   };
+        #   spec = {
+        #     endpointSelector.matchLabels."app.kubernetes.io/name" = "paperless";
+        #     egress = [
+        #       {
+        #         toEndpoints = [
+        #           {
+        #             matchLabels = {
+        #               "io.kubernetes.pod.namespace" = "kube-system";
+        #               "k8s-app" = "kube-dns";
+        #             };
+        #           }
+        #         ];
+        #         toPorts = [
+        #           {
+        #             ports = [
+        #               {
+        #                 port = "53";
+        #                 protocol = "UDP";
+        #               }
+        #             ];
+        #             rules.dns = [
+        #               {
+        #                 matchPattern = "*";
+        #               }
+        #             ];
+        #           }
+        #         ];
+        #       }
+        #       {
+        #         toFQDNs = [
+        #           {
+        #             matchName = "oauth2.googleapis.com";
+        #           }
+        #         ];
+        #         toPorts = [
+        #           {
+        #             ports = [
+        #               {
+        #                 port = "443";
+        #                 protocol = "TCP";
+        #               }
+        #             ];
+        #           }
+        #         ];
+        #       }
+        #     ];
+        #   };
+        # };
 
         paperless-nextcloud-importer = {
           apiVersion = "cilium.io/v2";
