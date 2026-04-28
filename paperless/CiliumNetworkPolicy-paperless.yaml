@@ -5,6 +5,8 @@ metadata:
   namespace: paperless
 spec:
   egress:
+    - toEntities:
+        - world
     - toEndpoints:
         - matchLabels:
             io.kubernetes.pod.namespace: kube-system
