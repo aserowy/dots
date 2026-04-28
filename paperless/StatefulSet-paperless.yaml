@@ -49,15 +49,15 @@ spec:
                 secretKeyRef:
                   key: postgresql-password
                   name: paperless
-            - name: PAPERLESS_OUTLOOK_OAUTH_CLIENT_ID
+            - name: PAPERLESS_APPS
               valueFrom:
                 secretKeyRef:
-                  key: outlook-client-id
+                  key: paperless-apps
                   name: paperless
-            - name: PAPERLESS_OUTLOOK_OAUTH_CLIENT_SECRET
+            - name: PAPERLESS_SOCIALACCOUNT_PROVIDERS
               valueFrom:
                 secretKeyRef:
-                  key: outlook-client-secret
+                  key: paperless-socialaccount-providers
                   name: paperless
             - name: PAPERLESS_TIKA_ENABLED
               value: "1"
