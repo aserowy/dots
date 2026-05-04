@@ -49,7 +49,7 @@ spec:
                     secretKeyRef:
                       key: password
                       name: nextcloud
-              image: rclone/rclone:1.73.4
+              image: rclone/rclone:1.73.5
               imagePullPolicy: IfNotPresent
               name: rclone-move
               volumeMounts:
