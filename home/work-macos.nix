@@ -16,6 +16,7 @@
 
       nushell.appendedConfig = ''
         $env.SSH_AUTH_SOCK = "/Users/alexander.serowy/.bitwarden-ssh-agent.sock"
+        $env.PATH = ($env.PATH | prepend '/opt/homebrew/bin')
       '';
     };
 
