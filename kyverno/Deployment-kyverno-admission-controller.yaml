@@ -6,8 +6,8 @@ metadata:
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: 3.7.1
-    helm.sh/chart: kyverno-3.7.1
+    app.kubernetes.io/version: 3.7.2
+    helm.sh/chart: kyverno-3.7.2
   name: kyverno-admission-controller
   namespace: kyverno
 spec:
@@ -29,8 +29,8 @@ spec:
         app.kubernetes.io/instance: kyverno
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/part-of: kyverno
-        app.kubernetes.io/version: 3.7.1
-        helm.sh/chart: kyverno-3.7.1
+        app.kubernetes.io/version: 3.7.2
+        helm.sh/chart: kyverno-3.7.2
     spec:
       affinity:
         podAntiAffinity:
@@ -102,7 +102,7 @@ spec:
               value: /.sigstore
             - name: KYVERNO_DEPLOYMENT
               value: kyverno-admission-controller
-          image: reg.kyverno.io/kyverno/kyverno:v1.17.1
+          image: reg.kyverno.io/kyverno/kyverno:v1.17.2
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 2
@@ -159,6 +159,9 @@ spec:
           volumeMounts:
             - mountPath: /.sigstore
               name: sigstore
+            - mountPath: /var/run/secrets/kyverno/apicall
+              name: apicall-token
+              readOnly: true
       dnsPolicy: ClusterFirst
       initContainers:
         - args:
@@ -186,7 +189,7 @@ spec:
               value: kyverno-admission-controller
             - name: KYVERNO_SVC
               value: kyverno-svc
-          image: reg.kyverno.io/kyverno/kyvernopre:v1.17.1
+          image: reg.kyverno.io/kyverno/kyvernopre:v1.17.2
           imagePullPolicy: IfNotPresent
           name: kyverno-pre
           resources:
@@ -212,3 +215,11 @@ spec:
       volumes:
         - emptyDir: {}
           name: sigstore
+        - name: apicall-token
+          projected:
+            defaultMode: 292
+            sources:
+              - serviceAccountToken:
+                  audience: kyverno-svc.kyverno.io
+                  expirationSeconds: 3600
+                  path: token
