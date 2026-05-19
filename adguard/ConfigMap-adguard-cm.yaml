@@ -49,6 +49,8 @@ data:
       parental_block_host: family-block.dns.adguard.com
       safebrowsing_enabled: false
       safebrowsing_block_host: standard-block.dns.adguard.com
+    user_rules:
+      - '@@||svc.ui.com^$important'
     clients:
       runtime_sources:
         whois: true
