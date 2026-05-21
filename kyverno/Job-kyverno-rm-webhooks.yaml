@@ -9,10 +9,11 @@ metadata:
     app.kubernetes.io/component: hooks
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: kyverno-hooks
     app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: 3.7.2
-    helm.sh/chart: kyverno-3.7.2
-  name: kyverno-rm-validatingwhconfig
+    app.kubernetes.io/version: 3.8.0
+    helm.sh/chart: kyverno-3.8.0
+  name: kyverno-rm-webhooks
   namespace: kyverno
 spec:
   backoffLimit: 2
@@ -20,13 +21,9 @@ spec:
     spec:
       automountServiceAccountToken: true
       containers:
-        - command:
-            - kubectl
-            - delete
-            - validatingwebhookconfiguration
-            - -l
-            - webhook.kyverno.io/managed-by=kyverno
-          image: registry.k8s.io/kubectl:v1.34.3
+        - args:
+            - delete-webhooks
+          image: ghcr.io/kyverno/readiness-checker:v1.18.0
           name: kubectl
           resources:
             limits:

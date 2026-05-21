@@ -5,9 +5,10 @@ metadata:
     app.kubernetes.io/component: admission-controller
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: kyverno-admission-controller
     app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: 3.7.2
-    helm.sh/chart: kyverno-3.7.2
+    app.kubernetes.io/version: 3.8.0
+    helm.sh/chart: kyverno-3.8.0
   name: kyverno-admission-controller
   namespace: kyverno
 spec:
@@ -28,9 +29,10 @@ spec:
         app.kubernetes.io/component: admission-controller
         app.kubernetes.io/instance: kyverno
         app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: kyverno-admission-controller
         app.kubernetes.io/part-of: kyverno
-        app.kubernetes.io/version: 3.7.2
-        helm.sh/chart: kyverno-3.7.2
+        app.kubernetes.io/version: 3.8.0
+        helm.sh/chart: kyverno-3.8.0
     spec:
       affinity:
         podAntiAffinity:
@@ -71,6 +73,7 @@ spec:
             - --generateMutatingAdmissionPolicy=false
             - --dumpPatches=false
             - --maxAPICallResponseLength=2000000
+            - --apiCallTimeout=30s
             - --loggingFormat=text
             - --v=2
             - --omitEvents=PolicyApplied,PolicySkipped
@@ -102,7 +105,7 @@ spec:
               value: /.sigstore
             - name: KYVERNO_DEPLOYMENT
               value: kyverno-admission-controller
-          image: reg.kyverno.io/kyverno/kyverno:v1.17.2
+          image: reg.kyverno.io/kyverno/kyverno:v1.18.0
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 2
@@ -145,7 +148,9 @@ spec:
                 - ALL
             privileged: false
             readOnlyRootFilesystem: true
+            runAsGroup: 65534
             runAsNonRoot: true
+            runAsUser: 65534
             seccompProfile:
               type: RuntimeDefault
           startupProbe:
@@ -189,7 +194,7 @@ spec:
               value: kyverno-admission-controller
             - name: KYVERNO_SVC
               value: kyverno-svc
-          image: reg.kyverno.io/kyverno/kyvernopre:v1.17.2
+          image: reg.kyverno.io/kyverno/kyvernopre:v1.18.0
           imagePullPolicy: IfNotPresent
           name: kyverno-pre
           resources:
@@ -206,7 +211,9 @@ spec:
                 - ALL
             privileged: false
             readOnlyRootFilesystem: true
+            runAsGroup: 65534
             runAsNonRoot: true
+            runAsUser: 65534
             seccompProfile:
               type: RuntimeDefault
       nodeSelector:

@@ -8,8 +8,8 @@ metadata:
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: 3.7.2
-    helm.sh/chart: kyverno-3.7.2
+    app.kubernetes.io/version: 3.8.0
+    helm.sh/chart: kyverno-3.8.0
   name: kyverno-cleanup-controller-readiness
   namespace: kyverno
 spec:
@@ -22,7 +22,7 @@ spec:
         - --port=443
         - --path=health/readiness
         - --https
-      image: ghcr.io/kyverno/readiness-checker:v0.1.0
+      image: ghcr.io/kyverno/readiness-checker:latest
       imagePullPolicy: IfNotPresent
       name: test
       resources:
