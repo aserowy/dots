@@ -6,8 +6,8 @@ metadata:
     app.kubernetes.io/instance: kube-prometheus-stack
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kube-prometheus
-    app.kubernetes.io/version: 84.1.2
-    chart: kube-prometheus-stack-84.1.2
+    app.kubernetes.io/version: 84.5.0
+    chart: kube-prometheus-stack-84.5.0
     heritage: Helm
     release: kube-prometheus-stack
   name: kube-prometheus-alertmanager
@@ -34,7 +34,7 @@ spec:
   automountServiceAccountToken: true
   externalUrl: http://kube-prometheus-alertmanager.monitoring:9093
   hostNetwork: false
-  image: quay.io/prometheus/alertmanager:v0.32.0
+  image: quay.io/prometheus/alertmanager:v0.32.1
   imagePullPolicy: IfNotPresent
   listenLocal: false
   logFormat: logfmt
@@ -64,4 +64,4 @@ spec:
           requests:
             storage: 2Gi
         storageClassName: longhorn
-  version: v0.32.0
+  version: v0.32.1
