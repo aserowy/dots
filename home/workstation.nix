@@ -24,7 +24,6 @@
 
     packages = with pkgs; [
       discord
-      drawio
       nautilus
       nextcloud-client
       onlyoffice-desktopeditors
