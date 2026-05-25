@@ -122,7 +122,7 @@ in
               containers = [
                 {
                   name = "zigbee2mqtt";
-                  image = "docker.io/koenkk/zigbee2mqtt:2.10.0"; # docker/koenkk/zigbee2mqtt@semver-coerced
+                  image = "docker.io/koenkk/zigbee2mqtt:2.10.1"; # docker/koenkk/zigbee2mqtt@semver-coerced
                   securityContext = {
                     allowPrivilegeEscalation = false;
                     readOnlyRootFilesystem = true;
