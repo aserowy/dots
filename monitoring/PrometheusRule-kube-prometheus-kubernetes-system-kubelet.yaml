@@ -6,8 +6,8 @@ metadata:
     app.kubernetes.io/instance: kube-prometheus-stack
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kube-prometheus
-    app.kubernetes.io/version: 85.0.0
-    chart: kube-prometheus-stack-85.0.0
+    app.kubernetes.io/version: 85.0.2
+    chart: kube-prometheus-stack-85.0.2
     heritage: Helm
     release: kube-prometheus-stack
   name: kube-prometheus-kubernetes-system-kubelet
@@ -175,6 +175,15 @@ spec:
             runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeletservercertificaterenewalerrors
             summary: Kubelet has failed to renew its server certificate.
           expr: increase(kubelet_server_expiration_renew_errors[5m]) > 0
+          for: 15m
+          labels:
+            severity: warning
+        - alert: KubeletInstanceUnreachable
+          annotations:
+            description: A Kubelet instance has been unreachable for more than 15 minutes.
+            runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeletinstanceunreachable
+            summary: Kubelet instance is unreachable.
+          expr: up{job="kubelet", metrics_path="/metrics"} == 0
           for: 15m
           labels:
             severity: warning
