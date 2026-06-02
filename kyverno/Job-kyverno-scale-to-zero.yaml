@@ -11,8 +11,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: kyverno-hooks
     app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: 3.8.0
-    helm.sh/chart: kyverno-3.8.0
+    app.kubernetes.io/version: 3.8.1
+    helm.sh/chart: kyverno-3.8.1
   name: kyverno-scale-to-zero
   namespace: kyverno
 spec:
@@ -23,7 +23,7 @@ spec:
       containers:
         - args:
             - scale-deploy
-          image: ghcr.io/kyverno/readiness-checker:v1.18.0
+          image: ghcr.io/kyverno/readiness-checker:v1.18.1
           name: kubectl
           resources:
             limits:

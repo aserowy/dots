@@ -10,8 +10,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: kyverno-hooks
     app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: 3.8.0
-    helm.sh/chart: kyverno-3.8.0
+    app.kubernetes.io/version: 3.8.1
+    helm.sh/chart: kyverno-3.8.1
   name: kyverno-migrate-resources
   namespace: kyverno
 spec:
@@ -58,7 +58,7 @@ spec:
             - policyexceptions.policies.kyverno.io
             - --resource
             - validatingpolicies.policies.kyverno.io
-          image: reg.kyverno.io/kyverno/kyverno-cli:v1.18.0
+          image: reg.kyverno.io/kyverno/kyverno-cli:v1.18.1
           imagePullPolicy: IfNotPresent
           name: kyverno-cli
           resources:
