@@ -254,6 +254,9 @@
                 yeet.overlays.default
                 (final: prev: { zjstatus = zjstatus.packages.${prev.stdenv.hostPlatform.system}.default; })
               ];
+              nixpkgs.config.permittedInsecurePackages = [
+                "electron-39.8.10"
+              ];
             }
 
             ./systems/workstation
