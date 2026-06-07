@@ -5,8 +5,8 @@ metadata:
     app.kubernetes.io/instance: kubernetes-ingress
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: kubernetes-ingress
-    app.kubernetes.io/version: 3.2.6
-    helm.sh/chart: kubernetes-ingress-1.49.0
+    app.kubernetes.io/version: 3.2.9
+    helm.sh/chart: kubernetes-ingress-1.52.0
   name: kubernetes-ingress
   namespace: haproxy
 spec:
@@ -24,7 +24,6 @@ spec:
         app.kubernetes.io/instance: kubernetes-ingress
         app.kubernetes.io/name: kubernetes-ingress
     spec:
-      automountServiceAccountToken: true
       containers:
         - args:
             - --default-ssl-certificate=haproxy/kubernetes-ingress-default-cert
@@ -51,7 +50,7 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: status.podIP
-          image: docker.io/haproxytech/kubernetes-ingress:3.2.6
+          image: docker.io/haproxytech/kubernetes-ingress:3.2.9
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
@@ -101,9 +100,6 @@ spec:
                 - NET_BIND_SERVICE
               drop:
                 - ALL
-            runAsGroup: 1000
-            runAsNonRoot: true
-            runAsUser: 1000
             seccompProfile:
               type: RuntimeDefault
           startupProbe:

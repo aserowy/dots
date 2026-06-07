@@ -10,9 +10,9 @@ metadata:
     app.kubernetes.io/instance: kubernetes-ingress
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: kubernetes-ingress-proxy
-    app.kubernetes.io/version: 3.2.6
-    helm.sh/chart: kubernetes-ingress-1.49.0
-  name: kubernetes-ingress-crdjob-1
+    app.kubernetes.io/version: 3.2.9
+    helm.sh/chart: kubernetes-ingress-1.52.0
+  name: kubernetes-ingress-crdjob
   namespace: haproxy
 spec:
   backoffLimit: 0
@@ -26,7 +26,7 @@ spec:
         - command:
             - /haproxy-ingress-controller
             - --job-check-crd
-          image: docker.io/haproxytech/kubernetes-ingress:3.2.6
+          image: docker.io/haproxytech/kubernetes-ingress:3.2.9
           imagePullPolicy: IfNotPresent
           name: crd
           resources:
@@ -50,5 +50,5 @@ spec:
         runAsGroup: 1000
         runAsNonRoot: true
         runAsUser: 1000
-      serviceAccountName: kubernetes-ingress
+      serviceAccountName: kubernetes-ingress-crdjob
   ttlSecondsAfterFinished: 600
