@@ -50,7 +50,7 @@ in
             ${niriConfig}
           '';
 
-          ".config/noctalia/settings.json".source = ./settings.json;
+          ".config/noctalia/settings.toml".source = ./settings.toml;
         };
 
         packages = with pkgs; [
@@ -71,8 +71,9 @@ in
         ];
       };
 
-      programs.noctalia-shell = {
+      programs.noctalia = {
         enable = true;
+        systemd.enable = true;
       };
     };
 }

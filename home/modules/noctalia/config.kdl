@@ -1,8 +1,6 @@
 prefer-no-csd
 screenshot-path "~/pictures/%Y-%m-%d %H-%M-%S.png"
 
-spawn-at-startup "noctalia-shell"
-
 hotkey-overlay {
     skip-at-startup
 }
@@ -70,9 +68,22 @@ layout {
     }
 }
 
+layer-rule {
+  match namespace="^noctalia-(bar-[^\"]+|notification|dock|panel|attached-panel|osd)$"
+  background-effect {
+    blur true
+    xray false
+  }
+}
+
 window-rule {
     geometry-corner-radius 7
     clip-to-geometry true
+
+    background-effect {
+        blur true
+        xray false
+    }
 }
 
 window-rule {
@@ -105,18 +116,18 @@ binds {
     Mod+T { spawn "ghostty"; }
     Mod+E { spawn "ghostty" "-e" "yeet"; }
 
-    Mod+Space { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
-    Mod+S { spawn "noctalia-shell" "ipc" "call" "controlCenter" "toggle"; }
+    Mod+Space { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
+    Mod+V { spawn  "noctalia" "msg" "panel-toggle" "clipboard"; }
+    Mod+S { spawn "noctalia" "msg" "panel-toggle" "control-center"; }
 
-    XF86AudioRaiseVolume { spawn  "noctalia-shell" "ipc" "call" "volume" "increase"; }
-    XF86AudioLowerVolume { spawn  "noctalia-shell" "ipc" "call" "volume" "decrease"; }
-    XF86AudioMute { spawn  "noctalia-shell" "ipc" "call" "volume" "muteOutput"; }
+    XF86AudioRaiseVolume { spawn  "noctalia" "msg" "volume-up"; }
+    XF86AudioLowerVolume { spawn  "noctalia" "msg" "volume-down"; }
+    XF86AudioMute { spawn  "noctalia" "msg" "volume-mute"; }
 
-    XF86MonBrightnessUp { spawn  "noctalia-shell" "ipc" "call" "brightness" "increase"; }
-    XF86MonBrightnessDown { spawn  "noctalia-shell" "ipc" "call" "brightness" "decrease"; }
+    XF86MonBrightnessUp { spawn  "noctalia" "msg" "brightness-up"; }
+    XF86MonBrightnessDown { spawn  "noctalia" "msg" "brightness-down"; }
 
-    Mod+V { spawn  "noctalia-shell" "ipc" "call" "launcher" "clipboard"; }
-    Mod+A { spawn  "noctalia-shell" "ipc" "call" "lockScreen" "lock"; }
+    Mod+A { spawn  "noctalia" "msg" "session" "lock"; }
 
     Mod+Shift+C { close-window; }
 
@@ -155,4 +166,11 @@ binds {
 environment {
     QT_QPA_PLATFORMTHEME "qt6ct"
     QT_QPA_PLATFORMTHEME_QT6 "qt6ct"
+}
+
+blur {
+    passes 2
+    offset 3.0
+    noise 0.03
+    saturation 1.0
 }
