@@ -2,7 +2,7 @@
 background_opacity = 0.79999998211860657
 center = [ "workspaces" ]
 contact_shadow = true
-end = [ "notifications", "keyboard_layout", "network", "volume", "screenshot", "tray", "spacer_clock", "clock" ]
+end = [ "notifications", "keyboard_layout", "volume", "screenshot", "tray", "spacer_clock", "clock" ]
 margin_edge = 0
 margin_ends = 0
 position = "left"
@@ -240,16 +240,16 @@ transition = [ "fade" ]
     enabled = true
 
     [wallpaper.default]
-    path = "/home/serowy/nextcloud/Wallpapers/backiee-98927.jpg"
+    path = "/home/serowy/nextcloud/Wallpapers/backiee-212071.jpg"
 
     [wallpaper.last]
-    path = "/home/serowy/nextcloud/Wallpapers/backiee-98927.jpg"
+    path = "/home/serowy/nextcloud/Wallpapers/backiee-212071.jpg"
 
     [wallpaper.monitors.DP-2]
-    path = "/home/serowy/nextcloud/Wallpapers/backiee-98927.jpg"
+    path = "/home/serowy/nextcloud/Wallpapers/backiee-212071.jpg"
 
     [wallpaper.monitors.HDMI-A-1]
-    path = "/home/serowy/nextcloud/Wallpapers/backiee-98927.jpg"
+    path = "/home/serowy/nextcloud/Wallpapers/backiee-212071.jpg"
 
 [widget.bongocat]
 script = "scripts/bongocat.lua"
@@ -260,6 +260,10 @@ scale = 0.90000000000000013
 
 [widget.keyboard_layout]
 show_icon = false
+
+[widget.network_rx]
+highlight_color = "primary"
+show_label = false
 
 [widget.spacer_clock]
 length = 25
