@@ -22,7 +22,14 @@ shortcuts = []
 
 [desktop_widgets]
 schema_version = 2
-widget_order = [ "desktop-widget-0000000000000002", "desktop-widget-0000000000000003" ]
+widget_order = [
+    "desktop-widget-0000000000000002",
+    "desktop-widget-0000000000000004",
+    "desktop-widget-0000000000000005",
+    "desktop-widget-0000000000000006",
+    "desktop-widget-0000000000000007",
+    "desktop-widget-0000000000000008"
+]
 
     [desktop_widgets.grid]
     cell_size = 16
@@ -49,6 +56,74 @@ widget_order = [ "desktop-widget-0000000000000002", "desktop-widget-000000000000
 
         [desktop_widgets.widget.desktop-widget-0000000000000003.settings]
         stat2 = "ram_pct"
+
+    [desktop_widgets.widget.desktop-widget-0000000000000004]
+    box_height = 128.0
+    box_width = 128.0
+    cx = 488.0
+    cy = 192.0
+    output = "HDMI-A-1"
+    rotation = 0.0
+    type = "audio_visualizer"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000004.settings]
+        aspect_ratio = 2.5
+        background_padding = 0.0
+        bands = 52.0
+        centered = true
+        mirrored = false
+        show_when_idle = true
+
+    [desktop_widgets.widget.desktop-widget-0000000000000005]
+    box_height = 128.0
+    box_width = 192.0
+    cx = 600.0
+    cy = 336.0
+    output = "HDMI-A-1"
+    rotation = 0.0
+    type = "sysmon"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000005.settings]
+        color = "secondary"
+        stat = "ram_pct"
+
+    [desktop_widgets.widget.desktop-widget-0000000000000006]
+    box_height = 128.0
+    box_width = 192.0
+    cx = 392.0
+    cy = 336.0
+    output = "HDMI-A-1"
+    rotation = 0.0
+    type = "sysmon"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000006.settings]
+        stat2 = "cpu_temp"
+
+    [desktop_widgets.widget.desktop-widget-0000000000000007]
+    box_height = 128.0
+    box_width = 192.0
+    cx = 183.5
+    cy = 336.0
+    output = "HDMI-A-1"
+    rotation = 0.0
+    type = "sysmon"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000007.settings]
+        shadow = true
+        stat = "net_rx"
+        stat2 = "net_tx"
+
+    [desktop_widgets.widget.desktop-widget-0000000000000008]
+    box_height = 128.0
+    box_width = 288.0
+    cx = 231.5
+    cy = 480.0
+    output = "HDMI-A-1"
+    rotation = 0.0
+    type = "weather"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000008.settings]
+        background = true
 
 [idle]
 behavior_order = [ "lock", "screen-off", "lock-and-suspend" ]
@@ -165,16 +240,16 @@ transition = [ "fade" ]
     enabled = true
 
     [wallpaper.default]
-    path = "/home/serowy/nextcloud/Wallpapers/backiee-212071.jpg"
+    path = "/home/serowy/nextcloud/Wallpapers/backiee-98927.jpg"
 
     [wallpaper.last]
-    path = "/home/serowy/nextcloud/Wallpapers/backiee-212071.jpg"
+    path = "/home/serowy/nextcloud/Wallpapers/backiee-98927.jpg"
 
     [wallpaper.monitors.DP-2]
-    path = "/home/serowy/nextcloud/Wallpapers/backiee-212071.jpg"
+    path = "/home/serowy/nextcloud/Wallpapers/backiee-98927.jpg"
 
     [wallpaper.monitors.HDMI-A-1]
-    path = "/home/serowy/nextcloud/Wallpapers/backiee-212071.jpg"
+    path = "/home/serowy/nextcloud/Wallpapers/backiee-98927.jpg"
 
 [widget.bongocat]
 script = "scripts/bongocat.lua"
