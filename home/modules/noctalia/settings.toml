@@ -17,8 +17,17 @@ widget_spacing = 15
     [bar.default.monitor.HDMI-A-1]
     enabled = false
 
-[control_center]
-shortcuts = []
+[[control_center.shortcuts]]
+type = "clipboard"
+
+[[control_center.shortcuts]]
+type = "notification"
+
+[[control_center.shortcuts]]
+type = "screen_recorder"
+
+[[control_center.shortcuts]]
+type = "bluetooth"
 
 [desktop_widgets]
 schema_version = 2
@@ -240,16 +249,16 @@ transition = [ "fade" ]
     enabled = true
 
     [wallpaper.default]
-    path = "/home/serowy/nextcloud/Wallpapers/backiee-212071.jpg"
+    path = "/home/serowy/nextcloud/Wallpapers/backiee-286628-landscape.jpg"
 
     [wallpaper.last]
-    path = "/home/serowy/nextcloud/Wallpapers/backiee-212071.jpg"
+    path = "/home/serowy/nextcloud/Wallpapers/backiee-286628-landscape.jpg"
 
     [wallpaper.monitors.DP-2]
-    path = "/home/serowy/nextcloud/Wallpapers/backiee-212071.jpg"
+    path = "/home/serowy/nextcloud/Wallpapers/backiee-286628-landscape.jpg"
 
     [wallpaper.monitors.HDMI-A-1]
-    path = "/home/serowy/nextcloud/Wallpapers/backiee-212071.jpg"
+    path = "/home/serowy/nextcloud/Wallpapers/backiee-286628-landscape.jpg"
 
 [widget.bongocat]
 script = "scripts/bongocat.lua"
