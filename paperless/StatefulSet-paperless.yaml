@@ -108,7 +108,7 @@ spec:
             - sh
             - -c
             - until nc -z paperless-pg17-rw 5432; do echo 'waiting for postgresql.'; sleep 5; done
-          image: busybox:1.37
+          image: busybox:1.38.0
           name: await-db-init
       securityContext:
         seccompProfile:
