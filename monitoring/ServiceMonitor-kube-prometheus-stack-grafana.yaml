@@ -5,7 +5,7 @@ metadata:
     app.kubernetes.io/instance: kube-prometheus-stack
     app.kubernetes.io/name: grafana
     app.kubernetes.io/version: 13.0.1-security-01
-    helm.sh/chart: grafana-12.4.0
+    helm.sh/chart: grafana-12.4.1
     release: kube-prometheus-stack
   name: kube-prometheus-stack-grafana
   namespace: monitoring
@@ -15,7 +15,6 @@ spec:
       path: /metrics
       port: http-web
       scheme: http
-      scrapeTimeout: 30s
   jobLabel: kube-prometheus-stack
   namespaceSelector:
     matchNames:
