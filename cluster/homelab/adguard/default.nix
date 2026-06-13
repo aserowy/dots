@@ -44,7 +44,7 @@ in
               initContainers = [
                 {
                   name = "copy-base-config";
-                  image = "busybox:1.37.0"; # docker/busybox@semver-coerced
+                  image = "busybox:1.38.0"; # docker/busybox@semver-coerced
                   command = [
                     "/bin/sh"
                     "-c"

@@ -63,7 +63,7 @@ in
               initContainers = [
                 {
                   name = "await-db-init";
-                  image = "busybox:1.37"; # docker/busybox@semver-coerced
+                  image = "busybox:1.38.0"; # docker/busybox@semver-coerced
                   command = [
                     "sh"
                     "-c"
