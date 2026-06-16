@@ -138,9 +138,9 @@
   system.stateVersion = "21.05";
 
   systemd = {
-    user.extraConfig = ''
-      DefaultLimitNOFILE=1048576
-    '';
+    user.settings.Manager = {
+      DefaultLimitNOFILE = 1048576;
+    };
 
     # NOTE: adds flathub as flatpak repo for all users
     services.flatpak-repo = {

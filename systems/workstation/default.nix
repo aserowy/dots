@@ -137,8 +137,8 @@
       };
     };
 
-    user.extraConfig = ''
-      DefaultLimitNOFILE=1048576
-    '';
+    user.settings.Manager = {
+      DefaultLimitNOFILE = 1048576;
+    };
   };
 }
