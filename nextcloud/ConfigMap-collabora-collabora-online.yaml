@@ -5,7 +5,7 @@ data:
 kind: ConfigMap
 metadata:
   annotations:
-    confighash: config-83f632b625409bb222473821ff2757ef
+    confighash: config-82f527af0d9f1c645610650e06390847
   labels:
     app.kubernetes.io/instance: collabora
     app.kubernetes.io/managed-by: Helm

@@ -6,8 +6,8 @@ metadata:
     app.kubernetes.io/instance: nextcloud
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: nextcloud
-    app.kubernetes.io/version: 33.0.3
-    helm.sh/chart: nextcloud-9.1.0
+    app.kubernetes.io/version: 33.0.4
+    helm.sh/chart: nextcloud-9.1.2
   name: nextcloud
   namespace: nextcloud
 spec:
@@ -22,7 +22,7 @@ spec:
   template:
     metadata:
       annotations:
-        hooks-hash: 9525c2748a6c7cd0e28ec740623d0b3fa5a75c83b51ccfd136bc89c76737b204
+        hooks-hash: 44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a
         nextcloud-config-hash: cbb6c2de040877ff05463124c15462f86a64108c62bfca7a849e85919b4c2ca3
         php-config-hash: 44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a
       labels:
@@ -65,7 +65,7 @@ spec:
               value: 127.0.0.1,10.42.0.0/16,10.43.0.0/16
             - name: NEXTCLOUD_DATA_DIR
               value: /var/www/html/data
-          image: docker.io/library/nextcloud:33.0.3-apache
+          image: docker.io/library/nextcloud:33.0.4-apache
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 300

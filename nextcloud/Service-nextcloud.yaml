@@ -7,8 +7,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/monitor: enabled
     app.kubernetes.io/name: nextcloud
-    app.kubernetes.io/version: 33.0.3
-    helm.sh/chart: nextcloud-9.1.0
+    app.kubernetes.io/version: 33.0.4
+    helm.sh/chart: nextcloud-9.1.2
   name: nextcloud
   namespace: nextcloud
 spec:
