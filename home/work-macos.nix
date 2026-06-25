@@ -16,7 +16,7 @@
 
       nushell.appendedConfig = ''
         $env.SSH_AUTH_SOCK = "/Users/alexander.serowy/.bitwarden-ssh-agent.sock"
-        $env.PATH = ($env.PATH | prepend '/opt/homebrew/bin')
+        $env.PATH = ($env.PATH | prepend '/opt/homebrew/bin' | prepend "/Users/alexander.serowy/.bun/bin")
       '';
     };
 
@@ -25,7 +25,6 @@
       ".config/ghostty/config".source = ./components/ghostty/ghostty.config;
 
       ".zshrc".source = builtins.toFile "user-zshrc" ''
-        export PATH=/run/current-system/sw/bin:/etc/profiles/per-user/alexander.serowy/bin:$PATH
         nu; exit
       '';
     };
