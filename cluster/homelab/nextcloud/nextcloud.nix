@@ -145,7 +145,7 @@
             name = "trixie";
             major = 17;
           };
-          storage.size = "2Gi";
+          storage.size = "4Gi";
 
           bootstrap.initdb = {
             owner = "nextcloud";
