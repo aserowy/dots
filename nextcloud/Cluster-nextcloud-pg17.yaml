@@ -26,4 +26,4 @@ spec:
       cpu: 150m
       memory: 400Mi
   storage:
-    size: 2Gi
+    size: 4Gi
