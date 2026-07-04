@@ -24,7 +24,7 @@ in
         "spinner" = "#3476ff";
         "header" = "#7a82da";
       };
-      fileWidgetOptions = [ "--preview 'bat {}'" ];
+      fileWidget.options = [ "--preview 'bat {}'" ];
     };
   };
 }
