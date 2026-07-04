@@ -196,10 +196,13 @@ settings_show_advanced = true
 
     [shell.panel]
     borders = false
-    control_center_placement = "centered"
-    session_placement = "centered"
+    control_center_placement = "floating"
+    control_center_position = "center"
+    session_placement = "floating"
+    session_position = "center"
     transparency_mode = "glass"
-    wallpaper_placement = "centered"
+    wallpaper_placement = "floating"
+    wallpaper_position = "center"
 
     [shell.screenshot]
     directory = "/home/serowy/pictures"
@@ -239,6 +242,8 @@ settings_show_advanced = true
 
 [theme]
 builtin = "Catppuccin"
+mode = "dark"
+source = "builtin"
 wallpaper_scheme = "m3-tonal-spot"
 
 [wallpaper]
@@ -249,16 +254,16 @@ transition = [ "fade" ]
     enabled = true
 
     [wallpaper.default]
-    path = "/home/serowy/nextcloud/Wallpapers/backiee-286628-landscape.jpg"
+    path = "/home/serowy/nextcloud/Wallpapers/backiee-263614.jpg"
 
     [wallpaper.last]
-    path = "/home/serowy/nextcloud/Wallpapers/backiee-286628-landscape.jpg"
+    path = "/home/serowy/nextcloud/Wallpapers/backiee-263614.jpg"
 
     [wallpaper.monitors.DP-2]
-    path = "/home/serowy/nextcloud/Wallpapers/backiee-286628-landscape.jpg"
+    path = "/home/serowy/nextcloud/Wallpapers/backiee-263614.jpg"
 
     [wallpaper.monitors.HDMI-A-1]
-    path = "/home/serowy/nextcloud/Wallpapers/backiee-286628-landscape.jpg"
+    path = "/home/serowy/nextcloud/Wallpapers/backiee-263614.jpg"
 
 [widget.bongocat]
 script = "scripts/bongocat.lua"
