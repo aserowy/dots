@@ -289,7 +289,7 @@ metadata:
     app.kubernetes.io/instance: nextcloud
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: nextcloud
-    app.kubernetes.io/version: 33.0.4
-    helm.sh/chart: nextcloud-9.1.2
+    app.kubernetes.io/version: 33.0.5
+    helm.sh/chart: nextcloud-9.1.3
   name: nextcloud-config
   namespace: nextcloud
