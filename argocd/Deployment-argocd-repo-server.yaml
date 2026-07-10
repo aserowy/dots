@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/name: argocd-repo-server
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v3.4.4
-    helm.sh/chart: argo-cd-9.7.0
+    helm.sh/chart: argo-cd-9.7.1
   name: argocd-repo-server
   namespace: argocd
 spec:
@@ -21,8 +21,8 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/cm: fac6f232e6d99b7ac5c589516a2b757f84443c6c8f6f39d66d4c9f613e4e386e
-        checksum/cmd-params: 7a88064db676cf1027299fc2273713785478cbff759a4178ce53430f058a384f
+        checksum/cm: 1071a868101bb16cd088050a14f55d00cbd5c0f4e4f6242ad234aeb7c952681d
+        checksum/cmd-params: 7e3f958915a3c5bbbfc2d604502bed2e947ab75445ee6a0243c96bcd61567dd1
       labels:
         app.kubernetes.io/component: repo-server
         app.kubernetes.io/instance: argocd
@@ -30,7 +30,7 @@ spec:
         app.kubernetes.io/name: argocd-repo-server
         app.kubernetes.io/part-of: argocd
         app.kubernetes.io/version: v3.4.4
-        helm.sh/chart: argo-cd-9.7.0
+        helm.sh/chart: argo-cd-9.7.1
     spec:
       affinity:
         podAntiAffinity:
