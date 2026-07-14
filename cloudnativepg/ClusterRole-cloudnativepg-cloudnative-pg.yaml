@@ -5,8 +5,8 @@ metadata:
     app.kubernetes.io/instance: cloudnativepg
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: cloudnative-pg
-    app.kubernetes.io/version: 1.29.1
-    helm.sh/chart: cloudnative-pg-0.28.3
+    app.kubernetes.io/version: 1.30.0
+    helm.sh/chart: cloudnative-pg-0.29.0
   name: cloudnativepg-cloudnative-pg
 rules:
   - apiGroups:
@@ -123,7 +123,17 @@ rules:
     verbs:
       - create
       - get
+      - list
       - update
+      - watch
+  - apiGroups:
+      - discovery.k8s.io
+    resources:
+      - endpointslices
+    verbs:
+      - get
+      - list
+      - watch
   - apiGroups:
       - monitoring.coreos.com
     resources:
@@ -152,6 +162,7 @@ rules:
     resources:
       - backups
       - clusters
+      - databaseroles
       - databases
       - poolers
       - publications
@@ -199,6 +210,7 @@ rules:
       - postgresql.cnpg.io
     resources:
       - clusters/finalizers
+      - databaseroles/finalizers
       - poolers/finalizers
     verbs:
       - update
@@ -206,6 +218,7 @@ rules:
       - postgresql.cnpg.io
     resources:
       - clusters/status
+      - databaseroles/status
       - poolers/status
       - failoverquorums/status
     verbs:
