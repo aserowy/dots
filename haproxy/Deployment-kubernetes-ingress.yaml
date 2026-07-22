@@ -5,8 +5,8 @@ metadata:
     app.kubernetes.io/instance: kubernetes-ingress
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: kubernetes-ingress
-    app.kubernetes.io/version: 3.2.9
-    helm.sh/chart: kubernetes-ingress-1.52.0
+    app.kubernetes.io/version: 3.2.12
+    helm.sh/chart: kubernetes-ingress-1.52.1
   name: kubernetes-ingress
   namespace: haproxy
 spec:
@@ -50,7 +50,7 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: status.podIP
-          image: docker.io/haproxytech/kubernetes-ingress:3.2.9
+          image: docker.io/haproxytech/kubernetes-ingress:3.2.12
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
