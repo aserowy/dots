@@ -9,7 +9,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: nextcloud
     app.kubernetes.io/version: 34.0.1
-    helm.sh/chart: nextcloud-9.2.0
+    helm.sh/chart: nextcloud-9.2.1
   name: nextcloud-nextcloud
   namespace: nextcloud
 spec:
