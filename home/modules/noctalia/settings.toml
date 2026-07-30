@@ -186,10 +186,11 @@ widget_order = [ "lockscreen-login-box@HDMI-A-1", "lockscreen-login-box@DP-2" ]
         show_weather = false
 
     [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1"]
-    box_height = 196.0
+    box_height = 82.0
     box_width = 810.0
     cx = 600.0
     cy = 1797.0
+    enabled = false
     output = "HDMI-A-1"
     rotation = 0.0
     type = "login_box"
@@ -197,13 +198,13 @@ widget_order = [ "lockscreen-login-box@HDMI-A-1", "lockscreen-login-box@DP-2" ]
         [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1".settings]
         center_password_text = false
         layout = "regular"
-        show_caps_lock = true
-        show_keyboard_layout = true
-        show_login_button = true
-        show_media = true
-        show_session_buttons = true
-        show_unlock_hint = true
-        show_weather = true
+        show_caps_lock = false
+        show_keyboard_layout = false
+        show_login_button = false
+        show_media = false
+        show_session_buttons = false
+        show_unlock_hint = false
+        show_weather = false
 
 [osd.kinds]
 bluetooth = false
@@ -276,16 +277,16 @@ transition = [ "fade" ]
     enabled = true
 
     [wallpaper.default]
-    path = "/home/serowy/nextcloud/Wallpapers/backiee-65443.jpg"
+    path = "/home/serowy/nextcloud/Wallpapers/backiee-215180.jpg"
 
     [wallpaper.last]
-    path = "/home/serowy/nextcloud/Wallpapers/backiee-65443.jpg"
+    path = "/home/serowy/nextcloud/Wallpapers/backiee-215180.jpg"
 
     [wallpaper.monitors.DP-2]
-    path = "/home/serowy/nextcloud/Wallpapers/backiee-65443.jpg"
+    path = "/home/serowy/nextcloud/Wallpapers/backiee-215180.jpg"
 
     [wallpaper.monitors.HDMI-A-1]
-    path = "/home/serowy/nextcloud/Wallpapers/backiee-65443.jpg"
+    path = "/home/serowy/nextcloud/Wallpapers/backiee-215180.jpg"
 
 [widget.bongocat]
 script = "scripts/bongocat.lua"
