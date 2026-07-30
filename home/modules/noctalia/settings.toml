@@ -140,23 +140,23 @@ behavior_order = [ "lock", "screen-off", "lock-and-suspend" ]
     [idle.behavior.lock]
     action = "lock"
     enabled = true
-    timeout = 600
+    timeout = 600.0
 
     [idle.behavior.lock-and-suspend]
     action = "lock_and_suspend"
-    enabled = false
-    timeout = 900
+    enabled = true
+    timeout = 1800.0
 
     [idle.behavior.screen-off]
     action = "screen_off"
-    enabled = false
-    timeout = 660
+    enabled = true
+    timeout = 660.0
 
 [location]
 address = "Drensteinfurt, Deutschland"
 
 [lockscreen_widgets]
-enabled = false
+enabled = true
 schema_version = 2
 widget_order = [ "lockscreen-login-box@HDMI-A-1", "lockscreen-login-box@DP-2" ]
 
@@ -166,22 +166,44 @@ widget_order = [ "lockscreen-login-box@HDMI-A-1", "lockscreen-login-box@DP-2" ]
     visible = true
 
     [lockscreen_widgets.widget."lockscreen-login-box@DP-2"]
-    box_height = 0.0
-    box_width = 0.0
+    box_height = 82.0
+    box_width = 810.0
     cx = 1720.0
     cy = 1317.0
     output = "DP-2"
     rotation = 0.0
     type = "login_box"
 
+        [lockscreen_widgets.widget."lockscreen-login-box@DP-2".settings]
+        center_password_text = false
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = false
+        show_session_buttons = false
+        show_unlock_hint = false
+        show_weather = false
+
     [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1"]
-    box_height = 0.0
-    box_width = 0.0
+    box_height = 196.0
+    box_width = 810.0
     cx = 600.0
     cy = 1797.0
     output = "HDMI-A-1"
     rotation = 0.0
     type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1".settings]
+        center_password_text = false
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
 
 [osd.kinds]
 bluetooth = false
@@ -254,16 +276,16 @@ transition = [ "fade" ]
     enabled = true
 
     [wallpaper.default]
-    path = "/home/serowy/nextcloud/Wallpapers/backiee-263614.jpg"
+    path = "/home/serowy/nextcloud/Wallpapers/backiee-65443.jpg"
 
     [wallpaper.last]
-    path = "/home/serowy/nextcloud/Wallpapers/backiee-263614.jpg"
+    path = "/home/serowy/nextcloud/Wallpapers/backiee-65443.jpg"
 
     [wallpaper.monitors.DP-2]
-    path = "/home/serowy/nextcloud/Wallpapers/backiee-263614.jpg"
+    path = "/home/serowy/nextcloud/Wallpapers/backiee-65443.jpg"
 
     [wallpaper.monitors.HDMI-A-1]
-    path = "/home/serowy/nextcloud/Wallpapers/backiee-263614.jpg"
+    path = "/home/serowy/nextcloud/Wallpapers/backiee-65443.jpg"
 
 [widget.bongocat]
 script = "scripts/bongocat.lua"
