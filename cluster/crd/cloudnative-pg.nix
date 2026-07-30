@@ -848,9 +848,35 @@ let
     "postgresql.cnpg.io.v1.ClusterImageCatalogSpec" = {
 
       options = {
+        "componentImages" = mkOption {
+          description = "ComponentImages is a list of named images for components other than PostgreSQL\n(e.g. pgbouncer). Keys must be unique within a catalog.";
+          type = (
+            types.nullOr (
+              types.listOf (submoduleOf "postgresql.cnpg.io.v1.ClusterImageCatalogSpecComponentImages")
+            )
+          );
+        };
         "images" = mkOption {
           description = "List of CatalogImages available in the catalog";
           type = (types.listOf (submoduleOf "postgresql.cnpg.io.v1.ClusterImageCatalogSpecImages"));
+        };
+      };
+
+      config = {
+        "componentImages" = mkOverride 1002 null;
+      };
+
+    };
+    "postgresql.cnpg.io.v1.ClusterImageCatalogSpecComponentImages" = {
+
+      options = {
+        "image" = mkOption {
+          description = "Image is the container image reference.";
+          type = types.str;
+        };
+        "key" = mkOption {
+          description = "Key is the unique identifier for this image within the catalog.";
+          type = types.str;
         };
       };
 
@@ -924,7 +950,7 @@ let
           type = (types.nullOr (types.listOf types.str));
         };
         "name" = mkOption {
-          description = "The name of the extension, required";
+          description = "The name of the extension, required. The limit of 59 characters\nleaves room for the prefix the operator adds when deriving the\nextension's Kubernetes Volume name (capped at 63 characters).";
           type = types.str;
         };
       };
@@ -1130,6 +1156,10 @@ let
           description = "Configuration of the PostgreSQL server";
           type = (types.nullOr (submoduleOf "postgresql.cnpg.io.v1.ClusterSpecPostgresql"));
         };
+        "primaryLease" = mkOption {
+          description = "Configuration of the Kubernetes `Lease` used to coordinate safe primary\nelection within the cluster. When omitted, the operator applies built-in\ndefaults; tune these values only if you understand the consequences for\nfailover timing.";
+          type = (types.nullOr (submoduleOf "postgresql.cnpg.io.v1.ClusterSpecPrimaryLease"));
+        };
         "primaryUpdateMethod" = mkOption {
           description = "Method to follow to upgrade the primary server during a rolling\nupdate procedure, after all replicas have been successfully updated:\nit can be with a switchover (`switchover`) or in-place (`restart` - default).\nNote: when using `switchover`, the operator will reject updates that change both\nthe image name and PostgreSQL configuration parameters simultaneously to avoid\nconfiguration mismatches during the switchover process.";
           type = (types.nullOr types.str);
@@ -1261,6 +1291,7 @@ let
         "postgresGID" = mkOverride 1002 null;
         "postgresUID" = mkOverride 1002 null;
         "postgresql" = mkOverride 1002 null;
+        "primaryLease" = mkOverride 1002 null;
         "primaryUpdateMethod" = mkOverride 1002 null;
         "primaryUpdateStrategy" = mkOverride 1002 null;
         "priorityClassName" = mkOverride 1002 null;
@@ -2507,7 +2538,7 @@ let
           type = (types.nullOr (types.listOf types.str));
         };
         "compression" = mkOption {
-          description = "Compress a backup file (a tar file per tablespace) while streaming it\nto the object store. Available options are empty string (no\ncompression, default), `gzip`, `bzip2`, and `snappy`.";
+          description = "Compress a backup file (a tar file per tablespace) while streaming it\nto the object store. Available options are empty string (no\ncompression, default), `gzip`, `bzip2`, `lz4`, and `snappy`.";
           type = (types.nullOr types.str);
         };
         "encryption" = mkOption {
@@ -4269,7 +4300,7 @@ let
           type = (types.nullOr (types.listOf types.str));
         };
         "compression" = mkOption {
-          description = "Compress a backup file (a tar file per tablespace) while streaming it\nto the object store. Available options are empty string (no\ncompression, default), `gzip`, `bzip2`, and `snappy`.";
+          description = "Compress a backup file (a tar file per tablespace) while streaming it\nto the object store. Available options are empty string (no\ncompression, default), `gzip`, `bzip2`, `lz4`, and `snappy`.";
           type = (types.nullOr types.str);
         };
         "encryption" = mkOption {
@@ -4732,11 +4763,11 @@ let
           type = (types.nullOr types.str);
         };
         "inRoles" = mkOption {
-          description = "List of one or more existing roles to which this role will be\nimmediately added as a new member. Default empty.";
+          description = "List of one or more existing roles to which this role will be\nimmediately added as a new member. Default empty.\nChanges to the list are applied to an existing role through\n`GRANT` and `REVOKE` statements, not only at role creation.";
           type = (types.nullOr (types.listOf types.str));
         };
         "inherit" = mkOption {
-          description = "Whether a role \"inherits\" the privileges of roles it is a member of.\nDefaults is `true`.";
+          description = "Whether a role \"inherits\" the privileges of roles it is a member of.\nDefault is `true`.";
           type = (types.nullOr types.bool);
         };
         "login" = mkOption {
@@ -4748,7 +4779,7 @@ let
           type = types.str;
         };
         "passwordSecret" = mkOption {
-          description = "Secret containing the password of the role (if present)\nIf null, the password will be ignored unless DisablePassword is set";
+          description = "Secret containing the password of the role (if present).\nIf null, the password will be ignored unless DisablePassword is set.\nWhen set, the secret must follow the `kubernetes.io/basic-auth` format\nand contain both a `username` and a `password` field.";
           type = (types.nullOr (submoduleOf "postgresql.cnpg.io.v1.ClusterSpecManagedRolesPasswordSecret"));
         };
         "replication" = mkOption {
@@ -5706,7 +5737,7 @@ let
           type = (types.nullOr (types.listOf types.str));
         };
         "name" = mkOption {
-          description = "The name of the extension, required";
+          description = "The name of the extension, required. The limit of 59 characters\nleaves room for the prefix the operator adds when deriving the\nextension's Kubernetes Volume name (capped at 63 characters).";
           type = types.str;
         };
       };
@@ -5932,6 +5963,35 @@ let
         "maxStandbyNamesFromCluster" = mkOverride 1002 null;
         "standbyNamesPost" = mkOverride 1002 null;
         "standbyNamesPre" = mkOverride 1002 null;
+      };
+
+    };
+    "postgresql.cnpg.io.v1.ClusterSpecPrimaryLease" = {
+
+      options = {
+        "leaseDurationSeconds" = mkOption {
+          description = "How long, in seconds, the primary lease is considered valid before it\nexpires and another instance may acquire it. It must be greater than\n`renewDeadlineSeconds`.\nDefaults to 15.";
+          type = (types.nullOr types.int);
+        };
+        "releasedLeaseDurationSeconds" = mkOption {
+          description = "The TTL, in seconds, written when the primary explicitly releases the\nlease on a clean shutdown, allowing a replica to promote without waiting\nfor the full lease duration to expire.\nDefaults to 1.";
+          type = (types.nullOr types.int);
+        };
+        "renewDeadlineSeconds" = mkOption {
+          description = "How long, in seconds, the current primary keeps retrying to renew the\nlease before giving up and stopping. It must be smaller than\n`leaseDurationSeconds`.\nDefaults to 10.";
+          type = (types.nullOr types.int);
+        };
+        "retryPeriodSeconds" = mkOption {
+          description = "How frequently, in seconds, a non-holder instance retries acquiring or\nrenewing the lease.\nDefaults to 2.";
+          type = (types.nullOr types.int);
+        };
+      };
+
+      config = {
+        "leaseDurationSeconds" = mkOverride 1002 null;
+        "releasedLeaseDurationSeconds" = mkOverride 1002 null;
+        "renewDeadlineSeconds" = mkOverride 1002 null;
+        "retryPeriodSeconds" = mkOverride 1002 null;
       };
 
     };
@@ -7836,7 +7896,7 @@ let
           type = (types.nullOr (types.attrsOf types.str));
         };
         "latestGeneratedNode" = mkOption {
-          description = "ID of the latest generated node (used to avoid node name clashing)";
+          description = "ID of the latest generated node (used to avoid node name clashing)\n\nDeprecated: this field is not set anymore";
           type = (types.nullOr types.int);
         };
         "managedRolesStatus" = mkOption {
@@ -7846,6 +7906,10 @@ let
         "onlineUpdateEnabled" = mkOption {
           description = "OnlineUpdateEnabled shows if the online upgrade is enabled inside the cluster";
           type = (types.nullOr types.bool);
+        };
+        "operatorCertificateFingerprint" = mkOption {
+          description = "OperatorCertificateFingerprint is the SHA256 fingerprint of the operator's\nin-memory client certificate public key. The instance manager pins this\nfingerprint to authenticate requests from the operator.";
+          type = (types.nullOr types.str);
         };
         "pgDataImageInfo" = mkOption {
           description = "PGDataImageInfo contains the details of the latest image that has run on the current data directory.";
@@ -7903,6 +7967,10 @@ let
           description = "The list of resource versions of the secrets\nmanaged by the operator. Every change here is done in the\ninterest of the instance manager, which will refresh the\nsecret data";
           type = (types.nullOr (submoduleOf "postgresql.cnpg.io.v1.ClusterStatusSecretsResourceVersion"));
         };
+        "selector" = mkOption {
+          description = "Selector is the serialized form of the label selector that identifies\nthe pods managed by this cluster. Populated by the operator and exposed\nthrough the scale sub-resource so an autoscaler (such as HPA or VPA)\ncan discover the managed instance pods.";
+          type = (types.nullOr types.str);
+        };
         "switchReplicaClusterStatus" = mkOption {
           description = "SwitchReplicaClusterStatus is the status of the switch to replica cluster";
           type = (types.nullOr (submoduleOf "postgresql.cnpg.io.v1.ClusterStatusSwitchReplicaClusterStatus"));
@@ -7919,6 +7987,10 @@ let
             )
           );
           apply = attrsToList;
+        };
+        "targetPgDataImageInfo" = mkOption {
+          description = "TargetPGDataImageInfo contains the details of the target image for an\nin-progress major upgrade. It is set before the upgrade Job is created,\nand cleared on successful completion or when the upgrade is rolled back.";
+          type = (types.nullOr (submoduleOf "postgresql.cnpg.io.v1.ClusterStatusTargetPgDataImageInfo"));
         };
         "targetPrimary" = mkOption {
           description = "Target primary instance, this is different from the previous one\nduring a switchover or a failover";
@@ -7975,6 +8047,7 @@ let
         "latestGeneratedNode" = mkOverride 1002 null;
         "managedRolesStatus" = mkOverride 1002 null;
         "onlineUpdateEnabled" = mkOverride 1002 null;
+        "operatorCertificateFingerprint" = mkOverride 1002 null;
         "pgDataImageInfo" = mkOverride 1002 null;
         "phase" = mkOverride 1002 null;
         "phaseReason" = mkOverride 1002 null;
@@ -7986,9 +8059,11 @@ let
         "readyInstances" = mkOverride 1002 null;
         "resizingPVC" = mkOverride 1002 null;
         "secretsResourceVersion" = mkOverride 1002 null;
+        "selector" = mkOverride 1002 null;
         "switchReplicaClusterStatus" = mkOverride 1002 null;
         "systemID" = mkOverride 1002 null;
         "tablespacesStatus" = mkOverride 1002 null;
+        "targetPgDataImageInfo" = mkOverride 1002 null;
         "targetPrimary" = mkOverride 1002 null;
         "targetPrimaryTimestamp" = mkOverride 1002 null;
         "timelineID" = mkOverride 1002 null;
@@ -8109,7 +8184,7 @@ let
           type = (types.nullOr (types.loaOf types.str));
         };
         "cannotReconcile" = mkOption {
-          description = "CannotReconcile lists roles that cannot be reconciled in PostgreSQL,\nwith an explanation of the cause";
+          description = "CannotReconcile lists roles that cannot be reconciled, with an\nexplanation of the cause. Failures may originate in PostgreSQL\n(e.g. dropping a role that owns objects) or in Kubernetes (e.g.\nthe referenced password Secret cannot be fetched).";
           type = (types.nullOr (types.loaOf types.str));
         };
         "passwordStatus" = mkOption {
@@ -8191,7 +8266,7 @@ let
           type = (types.nullOr (types.listOf types.str));
         };
         "name" = mkOption {
-          description = "The name of the extension, required";
+          description = "The name of the extension, required. The limit of 59 characters\nleaves room for the prefix the operator adds when deriving the\nextension's Kubernetes Volume name (capped at 63 characters).";
           type = types.str;
         };
       };
@@ -8443,6 +8518,124 @@ let
       };
 
     };
+    "postgresql.cnpg.io.v1.ClusterStatusTargetPgDataImageInfo" = {
+
+      options = {
+        "extensions" = mkOption {
+          description = "Extensions contains the container image extensions available for the current Image";
+          type = (
+            types.nullOr (
+              coerceAttrsOfSubmodulesToListByKey
+                "postgresql.cnpg.io.v1.ClusterStatusTargetPgDataImageInfoExtensions"
+                "name"
+                [ ]
+            )
+          );
+          apply = attrsToList;
+        };
+        "image" = mkOption {
+          description = "Image is the image name";
+          type = types.str;
+        };
+        "majorVersion" = mkOption {
+          description = "MajorVersion is the major version of the image";
+          type = types.int;
+        };
+      };
+
+      config = {
+        "extensions" = mkOverride 1002 null;
+      };
+
+    };
+    "postgresql.cnpg.io.v1.ClusterStatusTargetPgDataImageInfoExtensions" = {
+
+      options = {
+        "bin_path" = mkOption {
+          description = "A list of directories within the image to be appended to the\nPostgreSQL process's `PATH` environment variable.";
+          type = (types.nullOr (types.listOf types.str));
+        };
+        "dynamic_library_path" = mkOption {
+          description = "The list of directories inside the image which should be added to dynamic_library_path.\nIf not defined, defaults to \"/lib\".";
+          type = (types.nullOr (types.listOf types.str));
+        };
+        "env" = mkOption {
+          description = "Env is a list of custom environment variables to be set in the\nPostgreSQL process for this extension. It is the responsibility of the\ncluster administrator to ensure the variables are correct for the\nspecific extension. Note that changes to these variables require\na manual cluster restart to take effect.";
+          type = (
+            types.nullOr (
+              coerceAttrsOfSubmodulesToListByKey
+                "postgresql.cnpg.io.v1.ClusterStatusTargetPgDataImageInfoExtensionsEnv"
+                "name"
+                [ "name" ]
+            )
+          );
+          apply = attrsToList;
+        };
+        "extension_control_path" = mkOption {
+          description = "The list of directories inside the image which should be added to extension_control_path.\nIf not defined, defaults to \"/share\".";
+          type = (types.nullOr (types.listOf types.str));
+        };
+        "image" = mkOption {
+          description = "The image containing the extension.";
+          type = (
+            types.nullOr (submoduleOf "postgresql.cnpg.io.v1.ClusterStatusTargetPgDataImageInfoExtensionsImage")
+          );
+        };
+        "ld_library_path" = mkOption {
+          description = "The list of directories inside the image which should be added to ld_library_path.";
+          type = (types.nullOr (types.listOf types.str));
+        };
+        "name" = mkOption {
+          description = "The name of the extension, required. The limit of 59 characters\nleaves room for the prefix the operator adds when deriving the\nextension's Kubernetes Volume name (capped at 63 characters).";
+          type = types.str;
+        };
+      };
+
+      config = {
+        "bin_path" = mkOverride 1002 null;
+        "dynamic_library_path" = mkOverride 1002 null;
+        "env" = mkOverride 1002 null;
+        "extension_control_path" = mkOverride 1002 null;
+        "image" = mkOverride 1002 null;
+        "ld_library_path" = mkOverride 1002 null;
+      };
+
+    };
+    "postgresql.cnpg.io.v1.ClusterStatusTargetPgDataImageInfoExtensionsEnv" = {
+
+      options = {
+        "name" = mkOption {
+          description = "Name of the environment variable to be injected into the\nPostgreSQL process.";
+          type = types.str;
+        };
+        "value" = mkOption {
+          description = "Value of the environment variable. CloudNativePG performs a direct\nreplacement of this value, with support for placeholder expansion.\nThe \${`image_root`} placeholder resolves to the absolute mount path\nof the extension's volume (e.g., `/extensions/my-extension`). This\nis particularly useful for allowing applications or libraries to\nlocate specific directories within the mounted image.\nUnrecognized placeholders are rejected. To include a literal \${...}\nin the value, escape it as $\${...}.";
+          type = types.str;
+        };
+      };
+
+      config = { };
+
+    };
+    "postgresql.cnpg.io.v1.ClusterStatusTargetPgDataImageInfoExtensionsImage" = {
+
+      options = {
+        "pullPolicy" = mkOption {
+          description = "Policy for pulling OCI objects. Possible values are:\nAlways: the kubelet always attempts to pull the reference. Container creation will fail If the pull fails.\nNever: the kubelet never pulls the reference and only uses a local image or artifact. Container creation will fail if the reference isn't present.\nIfNotPresent: the kubelet pulls if the reference isn't already present on disk. Container creation will fail if the reference isn't present and the pull fails.\nDefaults to Always if :latest tag is specified, or IfNotPresent otherwise.";
+          type = (types.nullOr types.str);
+        };
+        "reference" = mkOption {
+          description = "Required: Image or artifact reference to be used.\nBehaves in the same way as pod.spec.containers[*].image.\nPull secrets will be assembled in the same way as for the container image by looking up node credentials, SA image pull secrets, and pod spec image pull secrets.\nMore info: https://kubernetes.io/docs/concepts/containers/images\nThis field is optional to allow higher level config management to default or override\ncontainer images in workload controllers like Deployments and StatefulSets.";
+          type = (types.nullOr types.str);
+        };
+      };
+
+      config = {
+        "pullPolicy" = mkOverride 1002 null;
+        "reference" = mkOverride 1002 null;
+      };
+
+    };
     "postgresql.cnpg.io.v1.ClusterStatusTopology" = {
 
       options = {
@@ -8496,6 +8689,269 @@ let
         "apiVersion" = mkOverride 1002 null;
         "kind" = mkOverride 1002 null;
         "status" = mkOverride 1002 null;
+      };
+
+    };
+    "postgresql.cnpg.io.v1.DatabaseRole" = {
+
+      options = {
+        "apiVersion" = mkOption {
+          description = "APIVersion defines the versioned schema of this representation of an object.\nServers should convert recognized schemas to the latest internal value, and\nmay reject unrecognized values.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources";
+          type = (types.nullOr types.str);
+        };
+        "kind" = mkOption {
+          description = "Kind is a string value representing the REST resource this object represents.\nServers may infer this from the endpoint the client submits requests to.\nCannot be updated.\nIn CamelCase.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds";
+          type = (types.nullOr types.str);
+        };
+        "metadata" = mkOption {
+          description = "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata";
+          type = (globalSubmoduleOf "io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta");
+        };
+        "spec" = mkOption {
+          description = "Specification of the desired DatabaseRole.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status";
+          type = (submoduleOf "postgresql.cnpg.io.v1.DatabaseRoleSpec");
+        };
+        "status" = mkOption {
+          description = "Most recently observed status of the DatabaseRole. This data may not be up\nto date. Populated by the system. Read-only.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status";
+          type = (types.nullOr (submoduleOf "postgresql.cnpg.io.v1.DatabaseRoleStatus"));
+        };
+      };
+
+      config = {
+        "apiVersion" = mkOverride 1002 null;
+        "kind" = mkOverride 1002 null;
+        "status" = mkOverride 1002 null;
+      };
+
+    };
+    "postgresql.cnpg.io.v1.DatabaseRoleSpec" = {
+
+      options = {
+        "bypassrls" = mkOption {
+          description = "Whether a role bypasses every row-level security (RLS) policy.\nDefault is `false`.";
+          type = (types.nullOr types.bool);
+        };
+        "clientCertificate" = mkOption {
+          description = "ClientCertificate configures the operator to generate and renew a TLS client\ncertificate for this role, signed by the cluster's client CA. The certificate\nis stored in a Secret named `<databaserole-name>-client-cert`.\nRequires login to be true.";
+          type = (types.nullOr (submoduleOf "postgresql.cnpg.io.v1.DatabaseRoleSpecClientCertificate"));
+        };
+        "cluster" = mkOption {
+          description = "The corresponding cluster";
+          type = (submoduleOf "postgresql.cnpg.io.v1.DatabaseRoleSpecCluster");
+        };
+        "comment" = mkOption {
+          description = "Description of the role";
+          type = (types.nullOr types.str);
+        };
+        "connectionLimit" = mkOption {
+          description = "If the role can log in, this specifies how many concurrent\nconnections the role can make. `-1` (the default) means no limit.";
+          type = (types.nullOr types.int);
+        };
+        "createdb" = mkOption {
+          description = "When set to `true`, the role being defined will be allowed to create\nnew databases. Specifying `false` (default) will deny a role the\nability to create databases.";
+          type = (types.nullOr types.bool);
+        };
+        "createrole" = mkOption {
+          description = "Whether the role will be permitted to create, alter, drop, comment\non, change the security label for, and grant or revoke membership in\nother roles. Default is `false`.";
+          type = (types.nullOr types.bool);
+        };
+        "databaseRoleReclaimPolicy" = mkOption {
+          description = "The policy for end-of-life maintenance of this role";
+          type = (types.nullOr types.str);
+        };
+        "disablePassword" = mkOption {
+          description = "DisablePassword indicates that a role's password should be set to NULL in Postgres";
+          type = (types.nullOr types.bool);
+        };
+        "ensure" = mkOption {
+          description = "Ensure the role is `present` or `absent` - defaults to \"present\"";
+          type = (types.nullOr types.str);
+        };
+        "inRoles" = mkOption {
+          description = "List of one or more existing roles to which this role will be\nimmediately added as a new member. Default empty.\nChanges to the list are applied to an existing role through\n`GRANT` and `REVOKE` statements, not only at role creation.";
+          type = (types.nullOr (types.listOf types.str));
+        };
+        "inherit" = mkOption {
+          description = "Whether a role \"inherits\" the privileges of roles it is a member of.\nDefault is `true`.";
+          type = (types.nullOr types.bool);
+        };
+        "login" = mkOption {
+          description = "Whether the role is allowed to log in. A role having the `login`\nattribute can be thought of as a user. Roles without this attribute\nare useful for managing database privileges, but are not users in\nthe usual sense of the word. Default is `false`.";
+          type = (types.nullOr types.bool);
+        };
+        "name" = mkOption {
+          description = "Name of the role";
+          type = types.str;
+        };
+        "passwordSecret" = mkOption {
+          description = "Secret containing the password of the role (if present).\nIf null, the password will be ignored unless DisablePassword is set.\nWhen set, the secret must follow the `kubernetes.io/basic-auth` format\nand contain both a `username` and a `password` field.";
+          type = (types.nullOr (submoduleOf "postgresql.cnpg.io.v1.DatabaseRoleSpecPasswordSecret"));
+        };
+        "replication" = mkOption {
+          description = "Whether a role is a replication role. A role must have this\nattribute (or be a superuser) in order to be able to connect to the\nserver in replication mode (physical or logical replication) and in\norder to be able to create or drop replication slots. A role having\nthe `replication` attribute is a very highly privileged role, and\nshould only be used on roles actually used for replication. Default\nis `false`.";
+          type = (types.nullOr types.bool);
+        };
+        "superuser" = mkOption {
+          description = "Whether the role is a `superuser` who can override all access\nrestrictions within the database - superuser status is dangerous and\nshould be used only when really needed. You must yourself be a\nsuperuser to create a new superuser. Defaults is `false`.";
+          type = (types.nullOr types.bool);
+        };
+        "validUntil" = mkOption {
+          description = "Date and time after which the role's password is no longer valid.\nWhen omitted, the password will never expire (default).";
+          type = (types.nullOr types.str);
+        };
+      };
+
+      config = {
+        "bypassrls" = mkOverride 1002 null;
+        "clientCertificate" = mkOverride 1002 null;
+        "comment" = mkOverride 1002 null;
+        "connectionLimit" = mkOverride 1002 null;
+        "createdb" = mkOverride 1002 null;
+        "createrole" = mkOverride 1002 null;
+        "databaseRoleReclaimPolicy" = mkOverride 1002 null;
+        "disablePassword" = mkOverride 1002 null;
+        "ensure" = mkOverride 1002 null;
+        "inRoles" = mkOverride 1002 null;
+        "inherit" = mkOverride 1002 null;
+        "login" = mkOverride 1002 null;
+        "passwordSecret" = mkOverride 1002 null;
+        "replication" = mkOverride 1002 null;
+        "superuser" = mkOverride 1002 null;
+        "validUntil" = mkOverride 1002 null;
+      };
+
+    };
+    "postgresql.cnpg.io.v1.DatabaseRoleSpecClientCertificate" = {
+
+      options = {
+        "enabled" = mkOption {
+          description = "Enabled turns on client certificate issuance for this role. When true,\nthe role must have login enabled. Defaults to true when the block is present.";
+          type = (types.nullOr types.bool);
+        };
+      };
+
+      config = {
+        "enabled" = mkOverride 1002 null;
+      };
+
+    };
+    "postgresql.cnpg.io.v1.DatabaseRoleSpecCluster" = {
+
+      options = {
+        "name" = mkOption {
+          description = "Name of the referent.\nThis field is effectively required, but due to backwards compatibility is\nallowed to be empty. Instances of this type with an empty value here are\nalmost certainly wrong.\nMore info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names";
+          type = (types.nullOr types.str);
+        };
+      };
+
+      config = {
+        "name" = mkOverride 1002 null;
+      };
+
+    };
+    "postgresql.cnpg.io.v1.DatabaseRoleSpecPasswordSecret" = {
+
+      options = {
+        "name" = mkOption {
+          description = "Name of the referent.";
+          type = types.str;
+        };
+      };
+
+      config = { };
+
+    };
+    "postgresql.cnpg.io.v1.DatabaseRoleStatus" = {
+
+      options = {
+        "applied" = mkOption {
+          description = "Applied is true if the role was reconciled correctly";
+          type = (types.nullOr types.bool);
+        };
+        "clientCertificate" = mkOption {
+          description = "ClientCertificate holds the observed state of the generated TLS client\ncertificate, when client certificate issuance is enabled.";
+          type = (types.nullOr (submoduleOf "postgresql.cnpg.io.v1.DatabaseRoleStatusClientCertificate"));
+        };
+        "conditions" = mkOption {
+          description = "Conditions for the DatabaseRole object";
+          type = (
+            types.nullOr (types.listOf (submoduleOf "postgresql.cnpg.io.v1.DatabaseRoleStatusConditions"))
+          );
+        };
+        "message" = mkOption {
+          description = "Message is the reconciliation error message";
+          type = (types.nullOr types.str);
+        };
+        "observedGeneration" = mkOption {
+          description = "A sequence number representing the latest\ndesired state that was synchronized";
+          type = (types.nullOr types.int);
+        };
+        "secretResourceVersion" = mkOption {
+          description = "SecretResourceVersion is the resource version of the password secret\nlast applied to the role; a change to it triggers reconciliation.";
+          type = (types.nullOr types.str);
+        };
+      };
+
+      config = {
+        "applied" = mkOverride 1002 null;
+        "clientCertificate" = mkOverride 1002 null;
+        "conditions" = mkOverride 1002 null;
+        "message" = mkOverride 1002 null;
+        "observedGeneration" = mkOverride 1002 null;
+        "secretResourceVersion" = mkOverride 1002 null;
+      };
+
+    };
+    "postgresql.cnpg.io.v1.DatabaseRoleStatusClientCertificate" = {
+
+      options = {
+        "expiration" = mkOption {
+          description = "Expiration is the expiration time of the generated client certificate, in RFC3339 format.";
+          type = (types.nullOr types.str);
+        };
+        "message" = mkOption {
+          description = "Message contains a human-readable explanation of the current certificate status,\nsuch as why issuance was skipped or why an existing Secret was left untouched.";
+          type = (types.nullOr types.str);
+        };
+      };
+
+      config = {
+        "expiration" = mkOverride 1002 null;
+        "message" = mkOverride 1002 null;
+      };
+
+    };
+    "postgresql.cnpg.io.v1.DatabaseRoleStatusConditions" = {
+
+      options = {
+        "lastTransitionTime" = mkOption {
+          description = "lastTransitionTime is the last time the condition transitioned from one status to another.\nThis should be when the underlying condition changed.  If that is not known, then using the time when the API field changed is acceptable.";
+          type = types.str;
+        };
+        "message" = mkOption {
+          description = "message is a human readable message indicating details about the transition.\nThis may be an empty string.";
+          type = types.str;
+        };
+        "observedGeneration" = mkOption {
+          description = "observedGeneration represents the .metadata.generation that the condition was set based upon.\nFor instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date\nwith respect to the current state of the instance.";
+          type = (types.nullOr types.int);
+        };
+        "reason" = mkOption {
+          description = "reason contains a programmatic identifier indicating the reason for the condition's last transition.\nProducers of specific condition types may define expected values and meanings for this field,\nand whether the values are considered a guaranteed API.\nThe value should be a CamelCase string.\nThis field may not be empty.";
+          type = types.str;
+        };
+        "status" = mkOption {
+          description = "status of the condition, one of True, False, Unknown.";
+          type = types.str;
+        };
+        "type" = mkOption {
+          description = "type of condition in CamelCase or in foo.example.com/CamelCase.";
+          type = types.str;
+        };
+      };
+
+      config = {
+        "observedGeneration" = mkOverride 1002 null;
       };
 
     };
@@ -9119,9 +9575,33 @@ let
     "postgresql.cnpg.io.v1.ImageCatalogSpec" = {
 
       options = {
+        "componentImages" = mkOption {
+          description = "ComponentImages is a list of named images for components other than PostgreSQL\n(e.g. pgbouncer). Keys must be unique within a catalog.";
+          type = (
+            types.nullOr (types.listOf (submoduleOf "postgresql.cnpg.io.v1.ImageCatalogSpecComponentImages"))
+          );
+        };
         "images" = mkOption {
           description = "List of CatalogImages available in the catalog";
           type = (types.listOf (submoduleOf "postgresql.cnpg.io.v1.ImageCatalogSpecImages"));
+        };
+      };
+
+      config = {
+        "componentImages" = mkOverride 1002 null;
+      };
+
+    };
+    "postgresql.cnpg.io.v1.ImageCatalogSpecComponentImages" = {
+
+      options = {
+        "image" = mkOption {
+          description = "Image is the container image reference.";
+          type = types.str;
+        };
+        "key" = mkOption {
+          description = "Key is the unique identifier for this image within the catalog.";
+          type = types.str;
         };
       };
 
@@ -9192,7 +9672,7 @@ let
           type = (types.nullOr (types.listOf types.str));
         };
         "name" = mkOption {
-          description = "The name of the extension, required";
+          description = "The name of the extension, required. The limit of 59 characters\nleaves room for the prefix the operator adds when deriving the\nextension's Kubernetes Volume name (capped at 63 characters).";
           type = types.str;
         };
       };
@@ -9290,7 +9770,7 @@ let
           type = (types.nullOr types.int);
         };
         "monitoring" = mkOption {
-          description = "The configuration of the monitoring infrastructure of this pooler.\n\nDeprecated: This feature will be removed in an upcoming release. If\nyou need this functionality, you can create a PodMonitor manually.";
+          description = "The configuration of the monitoring infrastructure of this pooler.";
           type = (types.nullOr (submoduleOf "postgresql.cnpg.io.v1.PoolerSpecMonitoring"));
         };
         "pgbouncer" = mkOption {
@@ -9382,11 +9862,11 @@ let
 
       options = {
         "enablePodMonitor" = mkOption {
-          description = "Enable or disable the `PodMonitor`";
+          description = "Enable or disable the `PodMonitor`\n\nDeprecated: This feature will be removed in an upcoming release. If\nyou need this functionality, you can create a PodMonitor manually.";
           type = (types.nullOr types.bool);
         };
         "podMonitorMetricRelabelings" = mkOption {
-          description = "The list of metric relabelings for the `PodMonitor`. Applied to samples before ingestion.";
+          description = "The list of metric relabelings for the `PodMonitor`. Applied to samples before ingestion.\n\nDeprecated: This feature will be removed in an upcoming release. If\nyou need this functionality, you can create a PodMonitor manually.";
           type = (
             types.nullOr (
               types.listOf (submoduleOf "postgresql.cnpg.io.v1.PoolerSpecMonitoringPodMonitorMetricRelabelings")
@@ -9394,12 +9874,16 @@ let
           );
         };
         "podMonitorRelabelings" = mkOption {
-          description = "The list of relabelings for the `PodMonitor`. Applied to samples before scraping.";
+          description = "The list of relabelings for the `PodMonitor`. Applied to samples before scraping.\n\nDeprecated: This feature will be removed in an upcoming release. If\nyou need this functionality, you can create a PodMonitor manually.";
           type = (
             types.nullOr (
               types.listOf (submoduleOf "postgresql.cnpg.io.v1.PoolerSpecMonitoringPodMonitorRelabelings")
             )
           );
+        };
+        "tls" = mkOption {
+          description = "Configure TLS communication for the metrics endpoint.\nChanging tls.enabled option will force a rollout of all instances.";
+          type = (types.nullOr (submoduleOf "postgresql.cnpg.io.v1.PoolerSpecMonitoringTls"));
         };
       };
 
@@ -9407,6 +9891,7 @@ let
         "enablePodMonitor" = mkOverride 1002 null;
         "podMonitorMetricRelabelings" = mkOverride 1002 null;
         "podMonitorRelabelings" = mkOverride 1002 null;
+        "tls" = mkOverride 1002 null;
       };
 
     };
@@ -9498,6 +9983,20 @@ let
       };
 
     };
+    "postgresql.cnpg.io.v1.PoolerSpecMonitoringTls" = {
+
+      options = {
+        "enabled" = mkOption {
+          description = "Enable TLS for the monitoring endpoint.\nChanging this option will force a rollout of all instances.";
+          type = (types.nullOr types.bool);
+        };
+      };
+
+      config = {
+        "enabled" = mkOverride 1002 null;
+      };
+
+    };
     "postgresql.cnpg.io.v1.PoolerSpecPgbouncer" = {
 
       options = {
@@ -9516,6 +10015,14 @@ let
         "clientTLSSecret" = mkOption {
           description = "ClientTLSSecret provides PgBouncer’s client_tls_key_file (private key)\nand client_tls_cert_file (certificate) used to accept client connections";
           type = (types.nullOr (submoduleOf "postgresql.cnpg.io.v1.PoolerSpecPgbouncerClientTLSSecret"));
+        };
+        "image" = mkOption {
+          description = "Image is the pgbouncer container image to use. When set, it takes\nprecedence over ImageCatalogRef and the operator default, but is\noverridden by an explicit image set in the pod template.";
+          type = (types.nullOr types.str);
+        };
+        "imageCatalogRef" = mkOption {
+          description = "ImageCatalogRef points to an entry in an ImageCatalog or ClusterImageCatalog.\nMutually exclusive with Image.";
+          type = (types.nullOr (submoduleOf "postgresql.cnpg.io.v1.PoolerSpecPgbouncerImageCatalogRef"));
         };
         "parameters" = mkOption {
           description = "Additional parameters to be passed to PgBouncer - please check\nthe CNPG documentation for a list of options you can configure";
@@ -9548,6 +10055,8 @@ let
         "authQuerySecret" = mkOverride 1002 null;
         "clientCASecret" = mkOverride 1002 null;
         "clientTLSSecret" = mkOverride 1002 null;
+        "image" = mkOverride 1002 null;
+        "imageCatalogRef" = mkOverride 1002 null;
         "parameters" = mkOverride 1002 null;
         "paused" = mkOverride 1002 null;
         "pg_hba" = mkOverride 1002 null;
@@ -9591,6 +10100,32 @@ let
       };
 
       config = { };
+
+    };
+    "postgresql.cnpg.io.v1.PoolerSpecPgbouncerImageCatalogRef" = {
+
+      options = {
+        "apiGroup" = mkOption {
+          description = "APIGroup is the group for the resource being referenced.\nIf APIGroup is not specified, the specified Kind must be in the core API group.\nFor any other third-party types, APIGroup is required.";
+          type = (types.nullOr types.str);
+        };
+        "key" = mkOption {
+          description = "Key identifies the entry within the catalog's componentImages list.";
+          type = types.str;
+        };
+        "kind" = mkOption {
+          description = "Kind is the type of resource being referenced";
+          type = types.str;
+        };
+        "name" = mkOption {
+          description = "Name is the name of resource being referenced";
+          type = types.str;
+        };
+      };
+
+      config = {
+        "apiGroup" = mkOverride 1002 null;
+      };
 
     };
     "postgresql.cnpg.io.v1.PoolerSpecPgbouncerServerCASecret" = {
@@ -18763,9 +19298,25 @@ let
     "postgresql.cnpg.io.v1.PoolerStatus" = {
 
       options = {
+        "error" = mkOption {
+          description = "Error is the latest admission validation error";
+          type = (types.nullOr types.str);
+        };
+        "image" = mkOption {
+          description = "Image is the resolved pgbouncer container image that the operator is\nusing for this Pooler, including any override coming from spec.template.\nWhile Phase is Active or Paused this field reflects what the Deployment\nactually runs; while Phase is Inactive or Failed it may carry the last\nsuccessfully resolved value (or be empty if the Pooler has never reconciled\nsuccessfully).";
+          type = (types.nullOr types.str);
+        };
         "instances" = mkOption {
           description = "The number of pods trying to be scheduled";
           type = (types.nullOr types.int);
+        };
+        "phase" = mkOption {
+          description = "Phase summarizes the overall lifecycle state of the Pooler.";
+          type = (types.nullOr types.str);
+        };
+        "phaseReason" = mkOption {
+          description = "PhaseReason is a human-readable explanation of the current Phase.";
+          type = (types.nullOr types.str);
         };
         "secrets" = mkOption {
           description = "The resource version of the config object";
@@ -18774,7 +19325,11 @@ let
       };
 
       config = {
+        "error" = mkOverride 1002 null;
+        "image" = mkOverride 1002 null;
         "instances" = mkOverride 1002 null;
+        "phase" = mkOverride 1002 null;
+        "phaseReason" = mkOverride 1002 null;
         "secrets" = mkOverride 1002 null;
       };
 
@@ -19238,6 +19793,10 @@ let
     "postgresql.cnpg.io.v1.ScheduledBackupStatus" = {
 
       options = {
+        "error" = mkOption {
+          description = "Error is the latest admission validation error";
+          type = (types.nullOr types.str);
+        };
         "lastCheckTime" = mkOption {
           description = "The latest time the schedule";
           type = (types.nullOr types.str);
@@ -19253,6 +19812,7 @@ let
       };
 
       config = {
+        "error" = mkOverride 1002 null;
         "lastCheckTime" = mkOverride 1002 null;
         "lastScheduleTime" = mkOverride 1002 null;
         "nextScheduleTime" = mkOverride 1002 null;
@@ -19421,6 +19981,17 @@ in
         );
         default = { };
       };
+      "postgresql.cnpg.io"."v1"."DatabaseRole" = mkOption {
+        description = "DatabaseRole is the Schema for the databaseroles API";
+        type = (
+          types.attrsOf (
+            submoduleForDefinition "postgresql.cnpg.io.v1.DatabaseRole" "databaseroles" "DatabaseRole"
+              "postgresql.cnpg.io"
+              "v1"
+          )
+        );
+        default = { };
+      };
       "postgresql.cnpg.io"."v1"."FailoverQuorum" = mkOption {
         description = "FailoverQuorum contains the information about the current failover\nquorum status of a PG cluster. It is updated by the instance manager\nof the primary node and reset to zero by the operator to trigger\nan update.";
         type = (
@@ -19529,6 +20100,17 @@ in
         );
         default = { };
       };
+      "databaseRoles" = mkOption {
+        description = "DatabaseRole is the Schema for the databaseroles API";
+        type = (
+          types.attrsOf (
+            submoduleForDefinition "postgresql.cnpg.io.v1.DatabaseRole" "databaseroles" "DatabaseRole"
+              "postgresql.cnpg.io"
+              "v1"
+          )
+        );
+        default = { };
+      };
       "failoverQuorums" = mkOption {
         description = "FailoverQuorum contains the information about the current failover\nquorum status of a PG cluster. It is updated by the instance manager\nof the primary node and reset to zero by the operator to trigger\nan update.";
         type = (
@@ -19632,6 +20214,13 @@ in
         attrName = "databases";
       }
       {
+        name = "databaseroles";
+        group = "postgresql.cnpg.io";
+        version = "v1";
+        kind = "DatabaseRole";
+        attrName = "databaseRoles";
+      }
+      {
         name = "failoverquorums";
         group = "postgresql.cnpg.io";
         version = "v1";
@@ -19682,6 +20271,7 @@ in
         mkAliasDefinitions
           options.resources."clusterImageCatalogs";
       "postgresql.cnpg.io"."v1"."Database" = mkAliasDefinitions options.resources."databases";
+      "postgresql.cnpg.io"."v1"."DatabaseRole" = mkAliasDefinitions options.resources."databaseRoles";
       "postgresql.cnpg.io"."v1"."FailoverQuorum" = mkAliasDefinitions options.resources."failoverQuorums";
       "postgresql.cnpg.io"."v1"."ImageCatalog" = mkAliasDefinitions options.resources."imageCatalogs";
       "postgresql.cnpg.io"."v1"."Pooler" = mkAliasDefinitions options.resources."poolers";
@@ -19712,6 +20302,12 @@ in
         group = "postgresql.cnpg.io";
         version = "v1";
         kind = "Database";
+        default.metadata.namespace = lib.mkDefault config.namespace;
+      }
+      {
+        group = "postgresql.cnpg.io";
+        version = "v1";
+        kind = "DatabaseRole";
         default.metadata.namespace = lib.mkDefault config.namespace;
       }
       {

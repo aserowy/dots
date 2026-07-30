@@ -293,12 +293,17 @@ let
           description = "Selector selects a set of DNSNames on the Certificate resource that\nshould be solved using this challenge solver.\nIf not specified, the solver will be treated as the 'default' solver\nwith the lowest priority, i.e. if any other solver has a more specific\nmatch, it will be used instead.";
           type = (types.nullOr (submoduleOf "acme.cert-manager.io.v1.ChallengeSpecSolverSelector"));
         };
+        "waitInsteadOfSelfCheck" = mkOption {
+          description = "WaitInsteadOfSelfCheck, if set, skips cert-manager's self-check and\ninstead waits this long after presentation before asking the ACME server\nto validate the challenge.\n\nThis is an advanced escape hatch for environments where cert-manager's\nself-check cannot succeed from its own network or DNS viewpoint even\nthough the ACME server can still validate successfully, for example due\nto split-horizon DNS or NAT hairpinning.\n\nA value of 0 skips the self-check and asks the ACME server to validate\nimmediately after presentation, relying on the ACME server's own\nvalidation retries (RFC 8555 section 8.2) to succeed once the challenge\nhas propagated. A negative duration is rejected.\nValue must be in units accepted by Go time.ParseDuration https://golang.org/pkg/time/#ParseDuration,\nfor example `30s` or `2m`.";
+          type = (types.nullOr types.str);
+        };
       };
 
       config = {
         "dns01" = mkOverride 1002 null;
         "http01" = mkOverride 1002 null;
         "selector" = mkOverride 1002 null;
+        "waitInsteadOfSelfCheck" = mkOverride 1002 null;
       };
 
     };
@@ -3657,8 +3662,12 @@ let
 
       options = {
         "presented" = mkOption {
-          description = "presented will be set to true if the challenge values for this challenge\nare currently 'presented'.\nThis *does not* imply the self check is passing. Only that the values\nhave been 'submitted' for the appropriate challenge mechanism (i.e. the\nDNS01 TXT record has been presented, or the HTTP01 configuration has been\nconfigured).";
+          description = "Presented is true once cert-manager has configured the solver resources\nneeded to expose this challenge's validation material.\nFor example, the DNS01 TXT record has been created, or the HTTP01 solver\nhas been configured to serve the challenge token.\nThis does not imply the self check is passing, that the ACME server has\nvalidated the challenge, or that cert-manager has already accepted the\nchallenge with the ACME server.";
           type = (types.nullOr types.bool);
+        };
+        "presentedAt" = mkOption {
+          description = "PresentedAt records when cert-manager first configured the solver\nresources for this challenge. This is used by the optional delay-based\nreadiness logic.";
+          type = (types.nullOr types.str);
         };
         "processing" = mkOption {
           description = "Used to denote whether this challenge should be processed or not.\nThis field will only be set to true by the 'scheduling' component.\nIt will only be set to false by the 'challenges' controller, after the\nchallenge has reached a final state or timed out.\nIf this field is set to false, the challenge controller will not take\nany more action.";
@@ -3676,6 +3685,7 @@ let
 
       config = {
         "presented" = mkOverride 1002 null;
+        "presentedAt" = mkOverride 1002 null;
         "processing" = mkOverride 1002 null;
         "reason" = mkOverride 1002 null;
         "state" = mkOverride 1002 null;
@@ -3726,7 +3736,7 @@ let
           type = (types.nullOr (types.listOf types.str));
         };
         "duration" = mkOption {
-          description = "Duration is the duration for the not after date for the requested certificate.\nthis is set on order creation as pe the ACME spec.";
+          description = "Duration is the duration for the not after date for the requested certificate.\nThis is set on order creation as per the ACME spec.";
           type = (types.nullOr types.str);
         };
         "ipAddresses" = mkOption {
@@ -3741,6 +3751,10 @@ let
           description = "Profile allows requesting a certificate profile from the ACME server.\nSupported profiles are listed by the server's ACME directory URL.";
           type = (types.nullOr types.str);
         };
+        "replaces" = mkOption {
+          description = "Replaces is the ARI CertID (RFC 9773 §4.1) of the certificate that this\nOrder is intended to replace. When set, cert-manager will include the\n\"replaces\" field on the newOrder request to the ACME server if and only\nif the server advertises ARI support in its directory. The CertID has\nthe form \"base64url(AKI).base64url(serial)\" and is derived locally from\nthe currently issued leaf certificate.";
+          type = (types.nullOr types.str);
+        };
         "request" = mkOption {
           description = "Certificate signing request bytes in DER encoding.\nThis will be used when finalizing the order.\nThis field must be set on the order.";
           type = types.str;
@@ -3753,6 +3767,7 @@ let
         "duration" = mkOverride 1002 null;
         "ipAddresses" = mkOverride 1002 null;
         "profile" = mkOverride 1002 null;
+        "replaces" = mkOverride 1002 null;
       };
 
     };
@@ -4159,6 +4174,10 @@ let
           description = "`renewBeforePercentage` is like `renewBefore`, except it is a relative percentage\nrather than an absolute duration. For example, if a certificate is valid for 60\nminutes, and  `renewBeforePercentage=25`, cert-manager will begin to attempt to\nrenew the certificate 45 minutes after it was issued (i.e. when there are 15\nminutes (25%) remaining until the certificate is no longer valid).\n\nNOTE: The actual lifetime of the issued certificate is used to determine the\nrenewal time. If an issuer returns a certificate with a different lifetime than\nthe one requested, cert-manager will use the lifetime of the issued certificate.\n\nValue must be an integer in the range (0,100). The minimum effective\n`renewBefore` derived from the `renewBeforePercentage` and `duration` fields is 5\nminutes.\nCannot be set if the `renewBefore` field is set.";
           type = (types.nullOr types.int);
         };
+        "renewal" = mkOption {
+          description = "`renewal` allows configuration of how your certificate is renewed. If the policy mentioned is\n`RenewBefore` then the controller respects `renewBefore` and `renewBeforePercentage`.";
+          type = (types.nullOr (submoduleOf "cert-manager.io.v1.CertificateSpecRenewal"));
+        };
         "revisionHistoryLimit" = mkOption {
           description = "The maximum number of CertificateRequest revisions that are maintained in\nthe Certificate's history. Each revision represents a single `CertificateRequest`\ncreated by this Certificate, either when it was created, renewed, or Spec\nwas changed. Revisions will be removed by oldest first if the number of\nrevisions exceeds this number.\n\nIf set, revisionHistoryLimit must be a value of `1` or greater.\nDefault value is `1`.";
           type = (types.nullOr types.int);
@@ -4205,6 +4224,7 @@ let
         "privateKey" = mkOverride 1002 null;
         "renewBefore" = mkOverride 1002 null;
         "renewBeforePercentage" = mkOverride 1002 null;
+        "renewal" = mkOverride 1002 null;
         "revisionHistoryLimit" = mkOverride 1002 null;
         "secretTemplate" = mkOverride 1002 null;
         "signatureAlgorithm" = mkOverride 1002 null;
@@ -4334,7 +4354,7 @@ let
           );
         };
         "profile" = mkOption {
-          description = "Profile specifies the key and certificate encryption algorithms and the HMAC algorithm\nused to create the PKCS12 keystore. Default value is `LegacyRC2` for backward compatibility.\n\nIf provided, allowed values are:\n`LegacyRC2`: Deprecated. Not supported by default in OpenSSL 3 or Java 20.\n`LegacyDES`: Less secure algorithm. Use this option for maximal compatibility.\n`Modern2023`: Secure algorithm. Use this option in case you have to always use secure algorithms\n(e.g., because of company policy). Please note that the security of the algorithm is not that important\nin reality, because the unencrypted certificate and private key are also stored in the Secret.";
+          description = "Profile specifies the key and certificate encryption algorithms and the HMAC algorithm\nused to create the PKCS12 keystore. Default value is `LegacyRC2` for backward compatibility.\n\nIf provided, allowed values are:\n`LegacyRC2`: Deprecated. Not supported by default in OpenSSL 3 or Java 20.\n`LegacyDES`: Less secure algorithm. Use this option for maximal compatibility.\n`Modern2023`: Secure algorithm. Use this option in case you have to always use secure algorithms\n(e.g., because of company policy). Please note that the security of the algorithm is not that important\nin reality, because the unencrypted certificate and private key are also stored in the Secret.\n`Modern2026`: Encodes PKCS#12 files using algorithms that are considered modern as of 2026.\nPrivate keys and certificates are encrypted using PBES2 with PBKDF2-HMAC-SHA-256 and AES-256-CBC.\nThe MAC algorithm is PBMAC1 with PBKDF2-HMAC-SHA-256 and HMAC-SHA256.\nFiles produced with this profile can be read by OpenSSL 3.4.0 and higher, Java 26 and higher,\nor with Java using compatible versions of Bouncy Castle. Meets FIPS 140-3 requirements.";
           type = (types.nullOr types.str);
         };
       };
@@ -4494,6 +4514,49 @@ let
       };
 
     };
+    "cert-manager.io.v1.CertificateSpecRenewal" = {
+
+      options = {
+        "policy" = mkOption {
+          description = "`policy` must be one of `Disabled`, `RenewBefore`.";
+          type = (types.nullOr types.str);
+        };
+        "windows" = mkOption {
+          description = "`windows` mentions the behavior of when the renewal must happen.";
+          type = (
+            types.nullOr (types.listOf (submoduleOf "cert-manager.io.v1.CertificateSpecRenewalWindows"))
+          );
+        };
+      };
+
+      config = {
+        "policy" = mkOverride 1002 null;
+        "windows" = mkOverride 1002 null;
+      };
+
+    };
+    "cert-manager.io.v1.CertificateSpecRenewalWindows" = {
+
+      options = {
+        "cron" = mkOption {
+          description = "`cron` is a cron compliant string to allow when the renewal should be allowed. Format is as shown below:\n* * * * *\n| | | | |\n| | | | day of the week (0–6) (Sunday to Saturday;\n| | | month (1–12)             7 is also Sunday on some systems)\n| | day of the month (1–31)\n| hour (0–23)\nminute (0–59)";
+          type = types.str;
+        };
+        "timezone" = mkOption {
+          description = "`timezone` is IANA compliant timezone. For example America/Denver.\nIf this field is not set, timezone is treated as UTC.";
+          type = (types.nullOr types.str);
+        };
+        "windowDuration" = mkOption {
+          description = "`windowDuration` is how long the cron definition is active for.\nValue must be in units accepted by Go time.ParseDuration https://golang.org/pkg/time/#ParseDuration.";
+          type = types.str;
+        };
+      };
+
+      config = {
+        "timezone" = mkOverride 1002 null;
+      };
+
+    };
     "cert-manager.io.v1.CertificateSpecSecretTemplate" = {
 
       options = {
@@ -4565,6 +4628,10 @@ let
     "cert-manager.io.v1.CertificateStatus" = {
 
       options = {
+        "acme" = mkOption {
+          description = "ACME stores information that is fetched from the ACME CA server.";
+          type = (types.nullOr (submoduleOf "cert-manager.io.v1.CertificateStatusAcme"));
+        };
         "conditions" = mkOption {
           description = "List of status conditions to indicate the status of certificates.\nKnown condition types are `Ready` and `Issuing`.";
           type = (types.nullOr (types.listOf (submoduleOf "cert-manager.io.v1.CertificateStatusConditions")));
@@ -4600,6 +4667,7 @@ let
       };
 
       config = {
+        "acme" = mkOverride 1002 null;
         "conditions" = mkOverride 1002 null;
         "failedIssuanceAttempts" = mkOverride 1002 null;
         "lastFailureTime" = mkOverride 1002 null;
@@ -4609,6 +4677,70 @@ let
         "renewalTime" = mkOverride 1002 null;
         "revision" = mkOverride 1002 null;
       };
+
+    };
+    "cert-manager.io.v1.CertificateStatusAcme" = {
+
+      options = {
+        "ari" = mkOption {
+          description = "ARI stores the ACME Renewal Information that is fetched from the ACME server\nin accordance with RFC 9773. This is only populated if the ARI feature gate is enabled.";
+          type = (types.nullOr (submoduleOf "cert-manager.io.v1.CertificateStatusAcmeAri"));
+        };
+      };
+
+      config = {
+        "ari" = mkOverride 1002 null;
+      };
+
+    };
+    "cert-manager.io.v1.CertificateStatusAcmeAri" = {
+
+      options = {
+        "explanationURL" = mkOption {
+          description = "ExplanationURL is a human-readable URL that may explain why the suggested window\nhas its current value.";
+          type = (types.nullOr types.str);
+        };
+        "lastChecked" = mkOption {
+          description = "LastChecked is the time at which the ACME server was last checked for renewal information.";
+          type = (types.nullOr types.str);
+        };
+        "lastError" = mkOption {
+          description = "LastError is the last error encountered when checking the ACME server for renewal information, if any.";
+          type = (types.nullOr types.str);
+        };
+        "nextCheck" = mkOption {
+          description = "NextCheck is the time at which the ACME server will next be checked for renewal information.";
+          type = (types.nullOr types.str);
+        };
+        "suggestedWindow" = mkOption {
+          description = "SuggestedWindow is the suggested renewal window as returned by the ACME server in accordance with RFC 9773.";
+          type = (types.nullOr (submoduleOf "cert-manager.io.v1.CertificateStatusAcmeAriSuggestedWindow"));
+        };
+      };
+
+      config = {
+        "explanationURL" = mkOverride 1002 null;
+        "lastChecked" = mkOverride 1002 null;
+        "lastError" = mkOverride 1002 null;
+        "nextCheck" = mkOverride 1002 null;
+        "suggestedWindow" = mkOverride 1002 null;
+      };
+
+    };
+    "cert-manager.io.v1.CertificateStatusAcmeAriSuggestedWindow" = {
+
+      options = {
+        "end" = mkOption {
+          description = "End is the end of the suggested renewal window.";
+          type = types.str;
+        };
+        "start" = mkOption {
+          description = "Start is the start of the suggested renewal window.";
+          type = types.str;
+        };
+      };
+
+      config = { };
 
     };
     "cert-manager.io.v1.CertificateStatusConditions" = {
@@ -4854,12 +4986,17 @@ let
           description = "Selector selects a set of DNSNames on the Certificate resource that\nshould be solved using this challenge solver.\nIf not specified, the solver will be treated as the 'default' solver\nwith the lowest priority, i.e. if any other solver has a more specific\nmatch, it will be used instead.";
           type = (types.nullOr (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecAcmeSolversSelector"));
         };
+        "waitInsteadOfSelfCheck" = mkOption {
+          description = "WaitInsteadOfSelfCheck, if set, skips cert-manager's self-check and\ninstead waits this long after presentation before asking the ACME server\nto validate the challenge.\n\nThis is an advanced escape hatch for environments where cert-manager's\nself-check cannot succeed from its own network or DNS viewpoint even\nthough the ACME server can still validate successfully, for example due\nto split-horizon DNS or NAT hairpinning.\n\nA value of 0 skips the self-check and asks the ACME server to validate\nimmediately after presentation, relying on the ACME server's own\nvalidation retries (RFC 8555 section 8.2) to succeed once the challenge\nhas propagated. A negative duration is rejected.\nValue must be in units accepted by Go time.ParseDuration https://golang.org/pkg/time/#ParseDuration,\nfor example `30s` or `2m`.";
+          type = (types.nullOr types.str);
+        };
       };
 
       config = {
         "dns01" = mkOverride 1002 null;
         "http01" = mkOverride 1002 null;
         "selector" = mkOverride 1002 null;
+        "waitInsteadOfSelfCheck" = mkOverride 1002 null;
       };
 
     };
@@ -8338,6 +8475,10 @@ let
           description = "AppRole authenticates with Vault using the App Role auth mechanism,\nwith the role and secret stored in a Kubernetes Secret resource.";
           type = (types.nullOr (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecVaultAuthAppRole"));
         };
+        "aws" = mkOption {
+          description = "AWS authenticates with Vault using AWS IAM authentication.\nThis allows authentication using IAM roles for service accounts (IRSA),\nEKS Pod Identity (PIA), or ambient credentials (EC2 instance profiles, ECS task role).";
+          type = (types.nullOr (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecVaultAuthAws"));
+        };
         "clientCertificate" = mkOption {
           description = "ClientCertificate authenticates with Vault by presenting a client\ncertificate during the request's TLS handshake.\nWorks only when using HTTPS protocol.";
           type = (
@@ -8356,6 +8497,7 @@ let
 
       config = {
         "appRole" = mkOverride 1002 null;
+        "aws" = mkOverride 1002 null;
         "clientCertificate" = mkOverride 1002 null;
         "kubernetes" = mkOverride 1002 null;
         "tokenSecretRef" = mkOverride 1002 null;
@@ -8397,6 +8539,64 @@ let
 
       config = {
         "key" = mkOverride 1002 null;
+      };
+
+    };
+    "cert-manager.io.v1.ClusterIssuerSpecVaultAuthAws" = {
+
+      options = {
+        "iamRoleArn" = mkOption {
+          description = "The ARN of the AWS IAM role to assume using the Kubernetes service account\ntoken. Required when using IRSA (serviceAccountRef is set).\nThis role must have a trust policy that allows the OIDC provider to assume it.";
+          type = (types.nullOr types.str);
+        };
+        "mountPath" = mkOption {
+          description = "The Vault mountPath here is the mount path to use when authenticating with\nVault. For example, setting a value to `/v1/auth/foo`, will use the path\n`/v1/auth/foo/login` to authenticate with Vault. If unspecified, the\ndefault value \"/v1/auth/aws\" will be used.";
+          type = (types.nullOr types.str);
+        };
+        "region" = mkOption {
+          description = "The AWS region to use for authentication. If not specified, the region\nwill be determined from AWS_REGION or AWS_DEFAULT_REGION environment\nvariables, falling back to \"us-east-1\" if not set.";
+          type = (types.nullOr types.str);
+        };
+        "role" = mkOption {
+          description = "A required field containing the Vault Role to assume when authenticating.";
+          type = types.str;
+        };
+        "serviceAccountRef" = mkOption {
+          description = "A reference to a service account that will be used to request a web identity\ntoken for IRSA (IAM Roles for Service Accounts) authentication.";
+          type = (
+            types.nullOr (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecVaultAuthAwsServiceAccountRef")
+          );
+        };
+        "vaultHeaderValue" = mkOption {
+          description = "The Vault header value to include in the STS signing request.\nThis is used to prevent replay attacks.";
+          type = (types.nullOr types.str);
+        };
+      };
+
+      config = {
+        "iamRoleArn" = mkOverride 1002 null;
+        "mountPath" = mkOverride 1002 null;
+        "region" = mkOverride 1002 null;
+        "serviceAccountRef" = mkOverride 1002 null;
+        "vaultHeaderValue" = mkOverride 1002 null;
+      };
+
+    };
+    "cert-manager.io.v1.ClusterIssuerSpecVaultAuthAwsServiceAccountRef" = {
+
+      options = {
+        "audiences" = mkOption {
+          description = "TokenAudiences is an optional list of extra audiences to include in the token passed to Vault.\nThe default audiences are always included in the token.";
+          type = (types.nullOr (types.listOf types.str));
+        };
+        "name" = mkOption {
+          description = "Name of the ServiceAccount used to request a token.";
+          type = types.str;
+        };
+      };
+
+      config = {
+        "audiences" = mkOverride 1002 null;
       };
 
     };
@@ -8573,6 +8773,10 @@ let
           description = "Cloud specifies the CyberArk Certificate Manager SaaS configuration settings.\nOnly one of CyberArk Certificate Manager may be specified.";
           type = (types.nullOr (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecVenafiCloud"));
         };
+        "ngts" = mkOption {
+          description = "NGTS specifies Palo Alto Networks Next Generation Trust Services (NGTS) configuration\nusing OAuth 2.0 Client Credentials. Only one of tpp, cloud, or ngts may be specified.";
+          type = (types.nullOr (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecVenafiNgts"));
+        };
         "tpp" = mkOption {
           description = "TPP specifies CyberArk Certificate Manager Self-Hosted configuration settings.\nOnly one of CyberArk Certificate Manager may be specified.";
           type = (types.nullOr (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecVenafiTpp"));
@@ -8585,6 +8789,7 @@ let
 
       config = {
         "cloud" = mkOverride 1002 null;
+        "ngts" = mkOverride 1002 null;
         "tpp" = mkOverride 1002 null;
       };
 
@@ -8623,6 +8828,45 @@ let
       config = {
         "key" = mkOverride 1002 null;
       };
+
+    };
+    "cert-manager.io.v1.ClusterIssuerSpecVenafiNgts" = {
+
+      options = {
+        "credentialsRef" = mkOption {
+          description = "CredentialsRef is a reference to a Kubernetes Secret containing the OAuth 2.0\nClient ID and Client Secret. The secret must contain the keys 'client-id' and\n'client-secret'.";
+          type = (submoduleOf "cert-manager.io.v1.ClusterIssuerSpecVenafiNgtsCredentialsRef");
+        };
+        "tokenEndpoint" = mkOption {
+          description = "TokenEndpoint is the OAuth 2.0 token endpoint URL used to obtain access tokens,\nfor example \"https://auth.apps.paloaltonetworks.com/oauth2/access_token\".\nDefaults to \"https://auth.apps.paloaltonetworks.com/oauth2/access_token\" if not set.";
+          type = (types.nullOr types.str);
+        };
+        "tsgID" = mkOption {
+          description = "TSGID is the Tenant Service Group ID used to scope the OAuth 2.0 access token,\nfor example \"1234567890\". The tsg_id: prefix is added automatically.\nThis field is required.";
+          type = types.str;
+        };
+        "url" = mkOption {
+          description = "URL is the base URL for the NGTS API endpoint.\nDefaults to \"https://api.strata.paloaltonetworks.com/ngts\" if not set.";
+          type = (types.nullOr types.str);
+        };
+      };
+
+      config = {
+        "tokenEndpoint" = mkOverride 1002 null;
+        "url" = mkOverride 1002 null;
+      };
+
+    };
+    "cert-manager.io.v1.ClusterIssuerSpecVenafiNgtsCredentialsRef" = {
+
+      options = {
+        "name" = mkOption {
+          description = "Name of the resource being referred to.\nMore info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names";
+          type = types.str;
+        };
+      };
+
+      config = { };
 
     };
     "cert-manager.io.v1.ClusterIssuerSpecVenafiTpp" = {
@@ -8968,12 +9212,17 @@ let
           description = "Selector selects a set of DNSNames on the Certificate resource that\nshould be solved using this challenge solver.\nIf not specified, the solver will be treated as the 'default' solver\nwith the lowest priority, i.e. if any other solver has a more specific\nmatch, it will be used instead.";
           type = (types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecAcmeSolversSelector"));
         };
+        "waitInsteadOfSelfCheck" = mkOption {
+          description = "WaitInsteadOfSelfCheck, if set, skips cert-manager's self-check and\ninstead waits this long after presentation before asking the ACME server\nto validate the challenge.\n\nThis is an advanced escape hatch for environments where cert-manager's\nself-check cannot succeed from its own network or DNS viewpoint even\nthough the ACME server can still validate successfully, for example due\nto split-horizon DNS or NAT hairpinning.\n\nA value of 0 skips the self-check and asks the ACME server to validate\nimmediately after presentation, relying on the ACME server's own\nvalidation retries (RFC 8555 section 8.2) to succeed once the challenge\nhas propagated. A negative duration is rejected.\nValue must be in units accepted by Go time.ParseDuration https://golang.org/pkg/time/#ParseDuration,\nfor example `30s` or `2m`.";
+          type = (types.nullOr types.str);
+        };
       };
 
       config = {
         "dns01" = mkOverride 1002 null;
         "http01" = mkOverride 1002 null;
         "selector" = mkOverride 1002 null;
+        "waitInsteadOfSelfCheck" = mkOverride 1002 null;
       };
 
     };
@@ -12422,6 +12671,10 @@ let
           description = "AppRole authenticates with Vault using the App Role auth mechanism,\nwith the role and secret stored in a Kubernetes Secret resource.";
           type = (types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecVaultAuthAppRole"));
         };
+        "aws" = mkOption {
+          description = "AWS authenticates with Vault using AWS IAM authentication.\nThis allows authentication using IAM roles for service accounts (IRSA),\nEKS Pod Identity (PIA), or ambient credentials (EC2 instance profiles, ECS task role).";
+          type = (types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecVaultAuthAws"));
+        };
         "clientCertificate" = mkOption {
           description = "ClientCertificate authenticates with Vault by presenting a client\ncertificate during the request's TLS handshake.\nWorks only when using HTTPS protocol.";
           type = (types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecVaultAuthClientCertificate"));
@@ -12438,6 +12691,7 @@ let
 
       config = {
         "appRole" = mkOverride 1002 null;
+        "aws" = mkOverride 1002 null;
         "clientCertificate" = mkOverride 1002 null;
         "kubernetes" = mkOverride 1002 null;
         "tokenSecretRef" = mkOverride 1002 null;
@@ -12479,6 +12733,62 @@ let
 
       config = {
         "key" = mkOverride 1002 null;
+      };
+
+    };
+    "cert-manager.io.v1.IssuerSpecVaultAuthAws" = {
+
+      options = {
+        "iamRoleArn" = mkOption {
+          description = "The ARN of the AWS IAM role to assume using the Kubernetes service account\ntoken. Required when using IRSA (serviceAccountRef is set).\nThis role must have a trust policy that allows the OIDC provider to assume it.";
+          type = (types.nullOr types.str);
+        };
+        "mountPath" = mkOption {
+          description = "The Vault mountPath here is the mount path to use when authenticating with\nVault. For example, setting a value to `/v1/auth/foo`, will use the path\n`/v1/auth/foo/login` to authenticate with Vault. If unspecified, the\ndefault value \"/v1/auth/aws\" will be used.";
+          type = (types.nullOr types.str);
+        };
+        "region" = mkOption {
+          description = "The AWS region to use for authentication. If not specified, the region\nwill be determined from AWS_REGION or AWS_DEFAULT_REGION environment\nvariables, falling back to \"us-east-1\" if not set.";
+          type = (types.nullOr types.str);
+        };
+        "role" = mkOption {
+          description = "A required field containing the Vault Role to assume when authenticating.";
+          type = types.str;
+        };
+        "serviceAccountRef" = mkOption {
+          description = "A reference to a service account that will be used to request a web identity\ntoken for IRSA (IAM Roles for Service Accounts) authentication.";
+          type = (types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecVaultAuthAwsServiceAccountRef"));
+        };
+        "vaultHeaderValue" = mkOption {
+          description = "The Vault header value to include in the STS signing request.\nThis is used to prevent replay attacks.";
+          type = (types.nullOr types.str);
+        };
+      };
+
+      config = {
+        "iamRoleArn" = mkOverride 1002 null;
+        "mountPath" = mkOverride 1002 null;
+        "region" = mkOverride 1002 null;
+        "serviceAccountRef" = mkOverride 1002 null;
+        "vaultHeaderValue" = mkOverride 1002 null;
+      };
+
+    };
+    "cert-manager.io.v1.IssuerSpecVaultAuthAwsServiceAccountRef" = {
+
+      options = {
+        "audiences" = mkOption {
+          description = "TokenAudiences is an optional list of extra audiences to include in the token passed to Vault.\nThe default audiences are always included in the token.";
+          type = (types.nullOr (types.listOf types.str));
+        };
+        "name" = mkOption {
+          description = "Name of the ServiceAccount used to request a token.";
+          type = types.str;
+        };
+      };
+
+      config = {
+        "audiences" = mkOverride 1002 null;
       };
 
     };
@@ -12651,6 +12961,10 @@ let
           description = "Cloud specifies the CyberArk Certificate Manager SaaS configuration settings.\nOnly one of CyberArk Certificate Manager may be specified.";
           type = (types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecVenafiCloud"));
         };
+        "ngts" = mkOption {
+          description = "NGTS specifies Palo Alto Networks Next Generation Trust Services (NGTS) configuration\nusing OAuth 2.0 Client Credentials. Only one of tpp, cloud, or ngts may be specified.";
+          type = (types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecVenafiNgts"));
+        };
         "tpp" = mkOption {
           description = "TPP specifies CyberArk Certificate Manager Self-Hosted configuration settings.\nOnly one of CyberArk Certificate Manager may be specified.";
           type = (types.nullOr (submoduleOf "cert-manager.io.v1.IssuerSpecVenafiTpp"));
@@ -12663,6 +12977,7 @@ let
 
       config = {
         "cloud" = mkOverride 1002 null;
+        "ngts" = mkOverride 1002 null;
         "tpp" = mkOverride 1002 null;
       };
 
@@ -12701,6 +13016,45 @@ let
       config = {
         "key" = mkOverride 1002 null;
       };
+
+    };
+    "cert-manager.io.v1.IssuerSpecVenafiNgts" = {
+
+      options = {
+        "credentialsRef" = mkOption {
+          description = "CredentialsRef is a reference to a Kubernetes Secret containing the OAuth 2.0\nClient ID and Client Secret. The secret must contain the keys 'client-id' and\n'client-secret'.";
+          type = (submoduleOf "cert-manager.io.v1.IssuerSpecVenafiNgtsCredentialsRef");
+        };
+        "tokenEndpoint" = mkOption {
+          description = "TokenEndpoint is the OAuth 2.0 token endpoint URL used to obtain access tokens,\nfor example \"https://auth.apps.paloaltonetworks.com/oauth2/access_token\".\nDefaults to \"https://auth.apps.paloaltonetworks.com/oauth2/access_token\" if not set.";
+          type = (types.nullOr types.str);
+        };
+        "tsgID" = mkOption {
+          description = "TSGID is the Tenant Service Group ID used to scope the OAuth 2.0 access token,\nfor example \"1234567890\". The tsg_id: prefix is added automatically.\nThis field is required.";
+          type = types.str;
+        };
+        "url" = mkOption {
+          description = "URL is the base URL for the NGTS API endpoint.\nDefaults to \"https://api.strata.paloaltonetworks.com/ngts\" if not set.";
+          type = (types.nullOr types.str);
+        };
+      };
+
+      config = {
+        "tokenEndpoint" = mkOverride 1002 null;
+        "url" = mkOverride 1002 null;
+      };
+
+    };
+    "cert-manager.io.v1.IssuerSpecVenafiNgtsCredentialsRef" = {
+
+      options = {
+        "name" = mkOption {
+          description = "Name of the resource being referred to.\nMore info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names";
+          type = types.str;
+        };
+      };
+
+      config = { };
 
     };
     "cert-manager.io.v1.IssuerSpecVenafiTpp" = {

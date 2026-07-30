@@ -264,6 +264,10 @@ let
           description = "Mac - sops setting";
           type = (types.nullOr types.str);
         };
+        "mac_only_encrypted" = mkOption {
+          description = "MacOnlyEncrypted - sops setting; when true the MAC is computed\nover values that end up encrypted only (sops --mac-only-encrypted).";
+          type = (types.nullOr types.bool);
+        };
         "pgp" = mkOption {
           description = "PGP configuration";
           type = (types.nullOr (types.listOf (submoduleOf "isindir.github.com.v1alpha3.SopsSecretSopsPgp")));
@@ -284,6 +288,7 @@ let
         "kms" = mkOverride 1002 null;
         "lastmodified" = mkOverride 1002 null;
         "mac" = mkOverride 1002 null;
+        "mac_only_encrypted" = mkOverride 1002 null;
         "pgp" = mkOverride 1002 null;
         "version" = mkOverride 1002 null;
       };
