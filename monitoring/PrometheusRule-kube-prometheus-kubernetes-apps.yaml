@@ -6,8 +6,8 @@ metadata:
     app.kubernetes.io/instance: kube-prometheus-stack
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kube-prometheus
-    app.kubernetes.io/version: 87.15.1
-    chart: kube-prometheus-stack-87.15.1
+    app.kubernetes.io/version: 87.16.1
+    chart: kube-prometheus-stack-87.16.1
     heritage: Helm
     release: kube-prometheus-stack
   name: kube-prometheus-kubernetes-apps
@@ -44,6 +44,8 @@ spec:
                 1, max by (namespace, pod, owner_kind, cluster) (kube_pod_owner{owner_kind!="Job"})
               )
             ) > 0
+            unless on (namespace, pod, cluster)
+            kube_pod_status_reason{job="kube-state-metrics", namespace=~".*", reason="SchedulingGated"} == 1
           for: 15m
           labels:
             severity: warning
