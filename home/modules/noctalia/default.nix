@@ -58,6 +58,7 @@ in
           niri
           nwg-look
           pwvucontrol
+          xrandr
 
           (pkgs.writeShellScriptBin "outputshot" ''
             niri msg action screenshot-screen

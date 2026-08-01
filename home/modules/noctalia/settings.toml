@@ -134,6 +134,9 @@ widget_order = [
         [desktop_widgets.widget.desktop-widget-0000000000000008.settings]
         background = true
 
+[hooks]
+session_unlocked = "xrandr --output DP-2 --primary"
+
 [idle]
 behavior_order = [ "lock", "screen-off", "lock-and-suspend" ]
 
@@ -277,16 +280,16 @@ transition = [ "fade" ]
     enabled = true
 
     [wallpaper.default]
-    path = "/home/serowy/nextcloud/Wallpapers/backiee-215180.jpg"
+    path = "/home/serowy/nextcloud/Wallpapers/backiee-104565-landscape.jpg"
 
     [wallpaper.last]
-    path = "/home/serowy/nextcloud/Wallpapers/backiee-215180.jpg"
+    path = "/home/serowy/nextcloud/Wallpapers/backiee-104565-landscape.jpg"
 
     [wallpaper.monitors.DP-2]
-    path = "/home/serowy/nextcloud/Wallpapers/backiee-215180.jpg"
+    path = "/home/serowy/nextcloud/Wallpapers/backiee-104565-landscape.jpg"
 
     [wallpaper.monitors.HDMI-A-1]
-    path = "/home/serowy/nextcloud/Wallpapers/backiee-215180.jpg"
+    path = "/home/serowy/nextcloud/Wallpapers/backiee-104565-landscape.jpg"
 
 [widget.bongocat]
 script = "scripts/bongocat.lua"
@@ -296,7 +299,7 @@ type = "scripted"
 scale = 0.90000000000000013
 
 [widget.keyboard_layout]
-show_icon = false
+show_glyph = false
 
 [widget.network_rx]
 highlight_color = "primary"

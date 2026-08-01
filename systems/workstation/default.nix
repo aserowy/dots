@@ -59,10 +59,16 @@
     niri.enable = true;
 
     seahorse.enable = true;
+
     steam = {
       enable = true;
-      protontricks.enable = true;
+      gamescopeSession.enable = true;
+      extraCompatPackages = with pkgs; [
+        proton-ge-bin
+        gamescope
+      ];
     };
+    gamemode.enable = true;
   };
 
   # NOTE: registers steamtinkerlaunch in steam
