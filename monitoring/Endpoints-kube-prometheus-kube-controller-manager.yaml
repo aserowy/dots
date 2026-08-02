@@ -6,8 +6,8 @@ metadata:
     app.kubernetes.io/instance: kube-prometheus-stack
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kube-prometheus
-    app.kubernetes.io/version: 87.16.1
-    chart: kube-prometheus-stack-87.16.1
+    app.kubernetes.io/version: 87.17.0
+    chart: kube-prometheus-stack-87.17.0
     heritage: Helm
     k8s-app: kube-controller-manager
     release: kube-prometheus-stack
