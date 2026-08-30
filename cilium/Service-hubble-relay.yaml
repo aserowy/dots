@@ -4,6 +4,7 @@ metadata:
   labels:
     app.kubernetes.io/name: hubble-relay
     app.kubernetes.io/part-of: cilium
+    helm.sh/chart: cilium-1.20.0
     k8s-app: hubble-relay
   name: hubble-relay
   namespace: kube-system

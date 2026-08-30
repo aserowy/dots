@@ -4,6 +4,7 @@ metadata:
   labels:
     app.kubernetes.io/name: hubble-ui
     app.kubernetes.io/part-of: cilium
+    helm.sh/chart: cilium-1.20.0
     k8s-app: hubble-ui
   name: hubble-ui
   namespace: kube-system
@@ -22,6 +23,7 @@ spec:
         app.kubernetes.io/name: hubble-ui
         app.kubernetes.io/part-of: cilium
         haproxy/egress: allow
+        helm.sh/chart: cilium-1.20.0
         k8s-app: hubble-ui
     spec:
       automountServiceAccountToken: true
@@ -42,6 +44,9 @@ spec:
               port: http
           securityContext:
             allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
           terminationMessagePolicy: FallbackToLogsOnError
           volumeMounts:
             - mountPath: /etc/nginx/conf.d/default.conf
@@ -62,18 +67,25 @@ spec:
               name: grpc
           securityContext:
             allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
           terminationMessagePolicy: FallbackToLogsOnError
       nodeSelector:
         kubernetes.io/os: linux
       securityContext:
         fsGroup: 1001
         runAsGroup: 1001
+        runAsNonRoot: true
         runAsUser: 1001
+        seccompProfile:
+          type: RuntimeDefault
       serviceAccountName: hubble-ui
       volumes:
         - configMap:
             defaultMode: 420
             name: hubble-ui-nginx
           name: hubble-ui-nginx-conf
-        - emptyDir: {}
+        - emptyDir:
+            sizeLimit: 256Mi
           name: tmp-dir
