@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/name: argocd-redis
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v3.4.5
-    helm.sh/chart: argo-cd-10.1.4
+    helm.sh/chart: argo-cd-10.2.0
   name: argocd-redis
   namespace: argocd
 spec:
@@ -26,7 +26,7 @@ spec:
         app.kubernetes.io/name: argocd-redis
         app.kubernetes.io/part-of: argocd
         app.kubernetes.io/version: v3.4.5
-        helm.sh/chart: argo-cd-10.1.4
+        helm.sh/chart: argo-cd-10.2.0
     spec:
       affinity:
         podAntiAffinity:
