@@ -8,8 +8,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: kube-prometheus-prometheus-operator
     app.kubernetes.io/part-of: kube-prometheus
-    app.kubernetes.io/version: 87.17.0
-    chart: kube-prometheus-stack-87.17.0
+    app.kubernetes.io/version: 88.0.0
+    chart: kube-prometheus-stack-88.0.0
     heritage: Helm
     release: kube-prometheus-stack
   name: kube-prometheus-operator
@@ -30,8 +30,8 @@ spec:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kube-prometheus-prometheus-operator
         app.kubernetes.io/part-of: kube-prometheus
-        app.kubernetes.io/version: 87.17.0
-        chart: kube-prometheus-stack-87.17.0
+        app.kubernetes.io/version: 88.0.0
+        chart: kube-prometheus-stack-88.0.0
         heritage: Helm
         release: kube-prometheus-stack
     spec:
@@ -42,12 +42,12 @@ spec:
             - --kubelet-endpoints=true
             - --kubelet-endpointslice=false
             - --localhost=127.0.0.1
-            - --prometheus-config-reloader=quay.io/prometheus-operator/prometheus-config-reloader:v0.92.1
+            - --prometheus-config-reloader=quay.io/prometheus-operator/prometheus-config-reloader:v0.93.0
             - --config-reloader-cpu-request=0
             - --config-reloader-cpu-limit=0
             - --config-reloader-memory-request=0
             - --config-reloader-memory-limit=0
-            - --thanos-default-base-image=quay.io/thanos/thanos:v0.42.0
+            - --thanos-default-base-image=quay.io/thanos/thanos:v0.42.2
             - --secret-field-selector=type!=kubernetes.io/dockercfg,type!=kubernetes.io/service-account-token,type!=helm.sh/release.v1
             - --web.enable-tls=true
             - --web.cert-file=/cert/cert
@@ -57,7 +57,7 @@ spec:
           env:
             - name: GOGC
               value: "30"
-          image: quay.io/prometheus-operator/prometheus-operator:v0.92.1
+          image: quay.io/prometheus-operator/prometheus-operator:v0.93.0
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3

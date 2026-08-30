@@ -6,8 +6,8 @@ metadata:
     app.kubernetes.io/instance: kube-prometheus-stack
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kube-prometheus
-    app.kubernetes.io/version: 87.17.0
-    chart: kube-prometheus-stack-87.17.0
+    app.kubernetes.io/version: 88.0.0
+    chart: kube-prometheus-stack-88.0.0
     heritage: Helm
     release: kube-prometheus-stack
   name: kube-prometheus-k8s.rules.container-memory-rss
