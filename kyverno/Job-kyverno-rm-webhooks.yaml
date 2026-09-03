@@ -11,8 +11,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: kyverno-hooks
     app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: 3.8.2
-    helm.sh/chart: kyverno-3.8.2
+    app.kubernetes.io/version: 3.9.0
+    helm.sh/chart: kyverno-3.9.0
   name: kyverno-rm-webhooks
   namespace: kyverno
 spec:
@@ -23,7 +23,7 @@ spec:
       containers:
         - args:
             - delete-webhooks
-          image: ghcr.io/kyverno/readiness-checker:v1.18.2
+          image: ghcr.io/kyverno/readiness-checker:v1.19.0
           name: kubectl
           resources:
             limits:
@@ -44,5 +44,7 @@ spec:
             runAsUser: 65534
             seccompProfile:
               type: RuntimeDefault
+      nodeSelector:
+        kubernetes.io/os: linux
       restartPolicy: Never
       serviceAccountName: kyverno-admission-controller

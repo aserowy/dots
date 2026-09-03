@@ -7,8 +7,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: kyverno-background-controller
     app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: 3.8.2
-    helm.sh/chart: kyverno-3.8.2
+    app.kubernetes.io/version: 3.9.0
+    helm.sh/chart: kyverno-3.9.0
   name: kyverno-background-controller
   namespace: kyverno
 spec:
@@ -31,8 +31,8 @@ spec:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kyverno-background-controller
         app.kubernetes.io/part-of: kyverno
-        app.kubernetes.io/version: 3.8.2
-        helm.sh/chart: kyverno-3.8.2
+        app.kubernetes.io/version: 3.9.0
+        helm.sh/chart: kyverno-3.9.0
     spec:
       affinity:
         podAntiAffinity:
@@ -58,6 +58,7 @@ spec:
             - --enableDeferredLoading=true
             - --maxAPICallResponseLength=2000000
             - --apiCallTimeout=30s
+            - --maxGlobalContextEntries=0
             - --loggingFormat=text
             - --v=2
             - --omitEvents=PolicyApplied,PolicySkipped
@@ -80,7 +81,7 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
-          image: reg.kyverno.io/kyverno/background-controller:v1.18.2
+          image: reg.kyverno.io/kyverno/background-controller:v1.19.0
           imagePullPolicy: IfNotPresent
           name: controller
           ports:

@@ -7,8 +7,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: kyverno-admission-controller
     app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: 3.8.2
-    helm.sh/chart: kyverno-3.8.2
+    app.kubernetes.io/version: 3.9.0
+    helm.sh/chart: kyverno-3.9.0
   name: kyverno-admission-controller
   namespace: kyverno
 spec:
@@ -31,8 +31,8 @@ spec:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kyverno-admission-controller
         app.kubernetes.io/part-of: kyverno
-        app.kubernetes.io/version: 3.8.2
-        helm.sh/chart: kyverno-3.8.2
+        app.kubernetes.io/version: 3.9.0
+        helm.sh/chart: kyverno-3.9.0
     spec:
       affinity:
         podAntiAffinity:
@@ -64,6 +64,7 @@ spec:
             - --admissionReports=true
             - --maxAdmissionReports=1000
             - --autoUpdateWebhooks=true
+            - --excludeBootstrapResources=false
             - --enableConfigMapCaching=true
             - --controllerRuntimeMetricsAddress=:8080
             - --enableDeferredLoading=true
@@ -74,6 +75,7 @@ spec:
             - --dumpPatches=false
             - --maxAPICallResponseLength=2000000
             - --apiCallTimeout=30s
+            - --maxGlobalContextEntries=0
             - --loggingFormat=text
             - --v=2
             - --omitEvents=PolicyApplied,PolicySkipped
@@ -105,7 +107,7 @@ spec:
               value: /.sigstore
             - name: KYVERNO_DEPLOYMENT
               value: kyverno-admission-controller
-          image: reg.kyverno.io/kyverno/kyverno:v1.18.2
+          image: reg.kyverno.io/kyverno/kyverno:v1.19.0
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 2
@@ -194,7 +196,7 @@ spec:
               value: kyverno-admission-controller
             - name: KYVERNO_SVC
               value: kyverno-svc
-          image: reg.kyverno.io/kyverno/kyvernopre:v1.18.2
+          image: reg.kyverno.io/kyverno/kyvernopre:v1.19.0
           imagePullPolicy: IfNotPresent
           name: kyverno-pre
           resources:
