@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: kubernetes-ingress
     app.kubernetes.io/version: 3.2.13
-    helm.sh/chart: kubernetes-ingress-1.53.0
+    helm.sh/chart: kubernetes-ingress-1.53.1
   name: kubernetes-ingress
 rules:
   - apiGroups:
