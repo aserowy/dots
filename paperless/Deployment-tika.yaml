@@ -16,7 +16,7 @@ spec:
         app.kubernetes.io/name: tika
     spec:
       containers:
-        - image: docker.io/apache/tika:3.2.0.0
+        - image: docker.io/apache/tika:4.0.0
           name: tika
           ports:
             - containerPort: 9998
