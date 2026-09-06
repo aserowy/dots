@@ -76,6 +76,52 @@ let
           wrapped = finalType;
         };
       };
+
+    # Numeric bounds.
+    withMinimum =
+      min: base:
+      lib.types.addCheck base (x: x >= min)
+      // {
+        description = "${base.description} (minimum ${toString min})";
+      };
+    withMaximum =
+      max: base:
+      lib.types.addCheck base (x: x <= max)
+      // {
+        description = "${base.description} (maximum ${toString max})";
+      };
+    withExclusiveMinimum =
+      min: base:
+      lib.types.addCheck base (x: x > min)
+      // {
+        description = "${base.description} (exclusive minimum ${toString min})";
+      };
+    withExclusiveMaximum =
+      max: base:
+      lib.types.addCheck base (x: x < max)
+      // {
+        description = "${base.description} (exclusive maximum ${toString max})";
+      };
+    withMultipleOf =
+      m: base:
+      lib.types.addCheck base (x: mod x m == 0)
+      // {
+        description = "${base.description} (multiple of ${toString m})";
+      };
+
+    # String constraints.
+    withMinLength =
+      n: base:
+      lib.types.addCheck base (x: stringLength x >= n)
+      // {
+        description = "${base.description} (min length ${toString n})";
+      };
+    withMaxLength =
+      n: base:
+      lib.types.addCheck base (x: stringLength x <= n)
+      // {
+        description = "${base.description} (max length ${toString n})";
+      };
   };
 
   mkOptionDefault = mkOverride 1001;
@@ -238,7 +284,12 @@ let
         };
         "type" = mkOption {
           description = "The type of ACME challenge this resource represents.\nOne of \"HTTP-01\" or \"DNS-01\".";
-          type = types.str;
+          type = (
+            types.enum [
+              "HTTP-01"
+              "DNS-01"
+            ]
+          );
         };
         "url" = mkOption {
           description = "The URL of the ACME Challenge resource for this challenge.\nThis can be used to lookup details about the status of this challenge.";
@@ -332,7 +383,14 @@ let
         };
         "cnameStrategy" = mkOption {
           description = "CNAMEStrategy configures how the DNS01 provider should handle CNAME\nrecords when found in DNS zones.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "None"
+                "Follow"
+              ]
+            )
+          );
         };
         "digitalocean" = mkOption {
           description = "Use the DigitalOcean DNS API to manage DNS01 challenge records.";
@@ -495,7 +553,16 @@ let
         };
         "environment" = mkOption {
           description = "name of the Azure environment (default AzurePublicCloud)";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "AzurePublicCloud"
+                "AzureChinaCloud"
+                "AzureGermanCloud"
+                "AzureUSGovernmentCloud"
+              ]
+            )
+          );
         };
         "hostedZoneName" = mkOption {
           description = "name of the DNS zone that should be used";
@@ -521,7 +588,14 @@ let
         };
         "zoneType" = mkOption {
           description = "ZoneType determines which type of Azure DNS zone to use.\n\nValid values are:\n  - AzurePublicZone  (default): Use a public Azure DNS zone.\n  - AzurePrivateZone: Use an Azure Private DNS zone.\n\nIf not specified, AzurePublicZone is used.\n\nSupport for Azure Private DNS zones is currently\nexperimental and may change in future releases.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "AzurePublicZone"
+                "AzurePrivateZone"
+              ]
+            )
+          );
         };
       };
 
@@ -730,7 +804,14 @@ let
         };
         "protocol" = mkOption {
           description = "Protocol to use for dynamic DNS update queries. Valid values are (case-sensitive) ``TCP`` and ``UDP``; ``UDP`` (default).";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "TCP"
+                "UDP"
+              ]
+            )
+          );
         };
         "tsigAlgorithm" = mkOption {
           description = "The TSIG Algorithm configured in the DNS supporting RFC2136. Used only\nwhen ``tsigSecretSecretRef`` and ``tsigKeyName`` are defined.\nSupported values are (case-insensitive): ``HMACMD5`` (default),\n``HMACSHA1``, ``HMACSHA256`` or ``HMACSHA512``.";
@@ -997,27 +1078,27 @@ let
       options = {
         "group" = mkOption {
           description = "Group is the group of the referent.\nWhen unspecified, \"gateway.networking.k8s.io\" is inferred.\nTo set the core API group (such as for a \"Service\" kind referent),\nGroup must be explicitly set to \"\" (empty string).\n\nSupport: Core";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 253 types.str));
         };
         "kind" = mkOption {
           description = "Kind is kind of the referent.\n\nThere are two kinds of parent resources with \"Core\" support:\n\n* Gateway (Gateway conformance profile)\n* Service (Mesh conformance profile, ClusterIP Services only)\n\nSupport for other resources is Implementation-Specific.";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 63 (types.withMinLength 1 types.str)));
         };
         "name" = mkOption {
           description = "Name is the name of the referent.\n\nSupport: Core";
-          type = types.str;
+          type = (types.withMaxLength 253 (types.withMinLength 1 types.str));
         };
         "namespace" = mkOption {
           description = "Namespace is the namespace of the referent. When unspecified, this refers\nto the local namespace of the Route.\n\nNote that there are specific rules for ParentRefs which cross namespace\nboundaries. Cross-namespace references are only valid if they are explicitly\nallowed by something in the namespace they are referring to. For example:\nGateway has the AllowedRoutes field, and ReferenceGrant provides a\ngeneric way to enable any other kind of cross-namespace reference.\n\n<gateway:experimental:description>\nParentRefs from a Route to a Service in the same namespace are \"producer\"\nroutes, which apply default routing rules to inbound connections from\nany namespace to the Service.\n\nParentRefs from a Route to a Service in a different namespace are\n\"consumer\" routes, and these routing rules are only applied to outbound\nconnections originating from the same namespace as the Route, for which\nthe intended destination of the connections are a Service targeted as a\nParentRef of the Route.\n</gateway:experimental:description>\n\nSupport: Core";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 63 (types.withMinLength 1 types.str)));
         };
         "port" = mkOption {
           description = "Port is the network port this Route targets. It can be interpreted\ndifferently based on the type of parent resource.\n\nWhen the parent resource is a Gateway, this targets all listeners\nlistening on the specified port that also support this kind of Route(and\nselect this Route). It's not recommended to set `Port` unless the\nnetworking behaviors specified in a Route must apply to a specific port\nas opposed to a listener(s) whose port(s) may be changed. When both Port\nand SectionName are specified, the name and port of the selected listener\nmust match both specified values.\n\n<gateway:experimental:description>\nWhen the parent resource is a Service, this targets a specific port in the\nService spec. When both Port (experimental) and SectionName are specified,\nthe name and port of the selected port must match both specified values.\n</gateway:experimental:description>\n\nImplementations MAY choose to support other parent resources.\nImplementations supporting other types of parent resources MUST clearly\ndocument how/if Port is interpreted.\n\nFor the purpose of status, an attachment is considered successful as\nlong as the parent resource accepts it partially. For example, Gateway\nlisteners can restrict which Routes can attach to them by Route kind,\nnamespace, or hostname. If 1 of 2 Gateway listeners accept attachment\nfrom the referencing Route, the Route MUST be considered successfully\nattached. If no Gateway listeners accept attachment from this Route,\nthe Route MUST be considered detached from the Gateway.\n\nSupport: Extended";
-          type = (types.nullOr types.int);
+          type = (types.nullOr (types.withMaximum 65535 (types.withMinimum 1 types.int)));
         };
         "sectionName" = mkOption {
           description = "SectionName is the name of a section within the target resource. In the\nfollowing resources, SectionName is interpreted as the following:\n\n* Gateway: Listener name. When both Port (experimental) and SectionName\nare specified, the name and port of the selected listener must match\nboth specified values.\n* Service: Port name. When both Port (experimental) and SectionName\nare specified, the name and port of the selected listener must match\nboth specified values.\n\nImplementations MAY choose to support attaching Routes to other resources.\nIf that is the case, they MUST clearly document how SectionName is\ninterpreted.\n\nWhen unspecified (empty string), this will reference the entire resource.\nFor the purpose of status, an attachment is considered successful if at\nleast one section in the parent resource accepts it. For example, Gateway\nlisteners can restrict which Routes can attach to them by Route kind,\nnamespace, or hostname. If 1 of 2 Gateway listeners accept attachment from\nthe referencing Route, the Route MUST be considered successfully\nattached. If no Gateway listeners accept attachment from this Route, the\nRoute MUST be considered detached from the Gateway.\n\nSupport: Core";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 253 (types.withMinLength 1 types.str)));
         };
       };
 
@@ -3679,7 +3760,19 @@ let
         };
         "state" = mkOption {
           description = "Contains the current 'state' of the challenge.\nIf not set, the state of the challenge is unknown.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "valid"
+                "ready"
+                "pending"
+                "processing"
+                "invalid"
+                "expired"
+                "errored"
+              ]
+            )
+          );
         };
       };
 
@@ -3821,7 +3914,19 @@ let
         };
         "state" = mkOption {
           description = "State contains the current state of this Order resource.\nStates 'success' and 'expired' are 'final'";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "valid"
+                "ready"
+                "pending"
+                "processing"
+                "invalid"
+                "expired"
+                "errored"
+              ]
+            )
+          );
         };
         "url" = mkOption {
           description = "URL of the Order.\nThis will initially be empty when the resource is first created.\nThe Order controller will populate this field when the Order is first processed.\nThis field will be immutable after it is initially set.";
@@ -3857,7 +3962,19 @@ let
         };
         "initialState" = mkOption {
           description = "InitialState is the initial state of the ACME authorization when first\nfetched from the ACME server.\nIf an Authorization is already 'valid', the Order controller will not\ncreate a Challenge resource for the authorization. This will occur when\nworking with an ACME server that enables 'authz reuse' (such as Let's\nEncrypt's production endpoint).\nIf not set and 'identifier' is set, the state is assumed to be pending\nand a Challenge will be created.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "valid"
+                "ready"
+                "pending"
+                "processing"
+                "invalid"
+                "expired"
+                "errored"
+              ]
+            )
+          );
         };
         "url" = mkOption {
           description = "URL is the URL of the Authorization that must be completed";
@@ -3998,7 +4115,37 @@ let
         };
         "usages" = mkOption {
           description = "Requested key usages and extended key usages.\n\nNOTE: If the CSR in the `Request` field has uses the KeyUsage or\nExtKeyUsage extension, these extensions must have the same values\nas specified here without any additional values.\n\nIf unset, defaults to `digital signature` and `key encipherment`.";
-          type = (types.nullOr (types.listOf types.str));
+          type = (
+            types.nullOr (
+              types.listOf (
+                types.enum [
+                  "signing"
+                  "digital signature"
+                  "content commitment"
+                  "key encipherment"
+                  "key agreement"
+                  "data encipherment"
+                  "cert sign"
+                  "crl sign"
+                  "encipher only"
+                  "decipher only"
+                  "any"
+                  "server auth"
+                  "client auth"
+                  "code signing"
+                  "email protection"
+                  "s/mime"
+                  "ipsec end system"
+                  "ipsec tunnel"
+                  "ipsec user"
+                  "timestamping"
+                  "ocsp signing"
+                  "microsoft sgc"
+                  "netscape sgc"
+                ]
+              )
+            )
+          );
         };
         "username" = mkOption {
           description = "Username contains the name of the user that created the CertificateRequest.\nPopulated by the cert-manager webhook on creation and immutable.";
@@ -4088,7 +4235,13 @@ let
         };
         "status" = mkOption {
           description = "Status of the condition, one of (`True`, `False`, `Unknown`).";
-          type = types.str;
+          type = (
+            types.enum [
+              "True"
+              "False"
+              "Unknown"
+            ]
+          );
         };
         "type" = mkOption {
           description = "Type of the condition, known values are (`Ready`, `InvalidRequest`,\n`Approved`, `Denied`).";
@@ -4192,7 +4345,19 @@ let
         };
         "signatureAlgorithm" = mkOption {
           description = "Signature algorithm to use.\nAllowed values for RSA keys: SHA256WithRSA, SHA384WithRSA, SHA512WithRSA.\nAllowed values for ECDSA keys: ECDSAWithSHA256, ECDSAWithSHA384, ECDSAWithSHA512.\nAllowed values for Ed25519 keys: PureEd25519.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "SHA256WithRSA"
+                "SHA384WithRSA"
+                "SHA512WithRSA"
+                "ECDSAWithSHA256"
+                "ECDSAWithSHA384"
+                "ECDSAWithSHA512"
+                "PureEd25519"
+              ]
+            )
+          );
         };
         "subject" = mkOption {
           description = "Requested set of X509 certificate subject attributes.\nMore info: https://datatracker.ietf.org/doc/html/rfc5280#section-4.1.2.6\n\nThe common name attribute is specified separately in the `commonName` field.\nCannot be set if the `literalSubject` field is set.";
@@ -4204,7 +4369,37 @@ let
         };
         "usages" = mkOption {
           description = "Requested key usages and extended key usages.\nThese usages are used to set the `usages` field on the created CertificateRequest\nresources. If `encodeUsagesInRequest` is unset or set to `true`, the usages\nwill additionally be encoded in the `request` field which contains the CSR blob.\n\nIf unset, defaults to `digital signature` and `key encipherment`.";
-          type = (types.nullOr (types.listOf types.str));
+          type = (
+            types.nullOr (
+              types.listOf (
+                types.enum [
+                  "signing"
+                  "digital signature"
+                  "content commitment"
+                  "key encipherment"
+                  "key agreement"
+                  "data encipherment"
+                  "cert sign"
+                  "crl sign"
+                  "encipher only"
+                  "decipher only"
+                  "any"
+                  "server auth"
+                  "client auth"
+                  "code signing"
+                  "email protection"
+                  "s/mime"
+                  "ipsec end system"
+                  "ipsec tunnel"
+                  "ipsec user"
+                  "timestamping"
+                  "ocsp signing"
+                  "microsoft sgc"
+                  "netscape sgc"
+                ]
+              )
+            )
+          );
         };
       };
 
@@ -4239,7 +4434,12 @@ let
       options = {
         "type" = mkOption {
           description = "Type is the name of the format type that should be written to the\nCertificate's target Secret.";
-          type = types.str;
+          type = (
+            types.enum [
+              "DER"
+              "CombinedPEM"
+            ]
+          );
         };
       };
 
@@ -4355,7 +4555,16 @@ let
         };
         "profile" = mkOption {
           description = "Profile specifies the key and certificate encryption algorithms and the HMAC algorithm\nused to create the PKCS12 keystore. Default value is `LegacyRC2` for backward compatibility.\n\nIf provided, allowed values are:\n`LegacyRC2`: Deprecated. Not supported by default in OpenSSL 3 or Java 20.\n`LegacyDES`: Less secure algorithm. Use this option for maximal compatibility.\n`Modern2023`: Secure algorithm. Use this option in case you have to always use secure algorithms\n(e.g., because of company policy). Please note that the security of the algorithm is not that important\nin reality, because the unencrypted certificate and private key are also stored in the Secret.\n`Modern2026`: Encodes PKCS#12 files using algorithms that are considered modern as of 2026.\nPrivate keys and certificates are encrypted using PBES2 with PBKDF2-HMAC-SHA-256 and AES-256-CBC.\nThe MAC algorithm is PBMAC1 with PBKDF2-HMAC-SHA-256 and HMAC-SHA256.\nFiles produced with this profile can be read by OpenSSL 3.4.0 and higher, Java 26 and higher,\nor with Java using compatible versions of Bouncy Castle. Meets FIPS 140-3 requirements.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "LegacyRC2"
+                "LegacyDES"
+                "Modern2023"
+                "Modern2026"
+              ]
+            )
+          );
         };
       };
 
@@ -4490,15 +4699,37 @@ let
       options = {
         "algorithm" = mkOption {
           description = "Algorithm is the private key algorithm of the corresponding private key\nfor this certificate.\n\nIf provided, allowed values are either `RSA`, `ECDSA` or `Ed25519`.\nIf `algorithm` is specified and `size` is not provided,\nkey size of 2048 will be used for `RSA` key algorithm and\nkey size of 256 will be used for `ECDSA` key algorithm.\nkey size is ignored when using the `Ed25519` key algorithm.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "RSA"
+                "ECDSA"
+                "Ed25519"
+              ]
+            )
+          );
         };
         "encoding" = mkOption {
           description = "The private key cryptography standards (PKCS) encoding for this\ncertificate's private key to be encoded in.\n\nIf provided, allowed values are `PKCS1` and `PKCS8` standing for PKCS#1\nand PKCS#8, respectively.\nDefaults to `PKCS1` if not specified.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "PKCS1"
+                "PKCS8"
+              ]
+            )
+          );
         };
         "rotationPolicy" = mkOption {
           description = "RotationPolicy controls how private keys should be regenerated when a\nre-issuance is being processed.\n\nIf set to `Never`, a private key will only be generated if one does not\nalready exist in the target `spec.secretName`. If one does exist but it\ndoes not have the correct algorithm or size, a warning will be raised\nto await user intervention.\nIf set to `Always`, a private key matching the specified requirements\nwill be generated whenever a re-issuance occurs.\nDefault is `Always`.\nThe default was changed from `Never` to `Always` in cert-manager >=v1.18.0.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "Never"
+                "Always"
+              ]
+            )
+          );
         };
         "size" = mkOption {
           description = "Size is the key bit size of the corresponding private key for this certificate.\n\nIf `algorithm` is set to `RSA`, valid values are `2048`, `4096` or `8192`,\nand will default to `2048` if not specified.\nIf `algorithm` is set to `ECDSA`, valid values are `256`, `384` or `521`,\nand will default to `256` if not specified.\nIf `algorithm` is set to `Ed25519`, Size is ignored.\nNo other values are allowed.";
@@ -4519,7 +4750,14 @@ let
       options = {
         "policy" = mkOption {
           description = "`policy` must be one of `Disabled`, `RenewBefore`.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "RenewBefore"
+                "Disabled"
+              ]
+            )
+          );
         };
         "windows" = mkOption {
           description = "`windows` mentions the behavior of when the renewal must happen.";
@@ -4540,11 +4778,11 @@ let
       options = {
         "cron" = mkOption {
           description = "`cron` is a cron compliant string to allow when the renewal should be allowed. Format is as shown below:\n* * * * *\n| | | | |\n| | | | day of the week (0–6) (Sunday to Saturday;\n| | | month (1–12)             7 is also Sunday on some systems)\n| | day of the month (1–31)\n| hour (0–23)\nminute (0–59)";
-          type = types.str;
+          type = (types.withMinLength 1 types.str);
         };
         "timezone" = mkOption {
           description = "`timezone` is IANA compliant timezone. For example America/Denver.\nIf this field is not set, timezone is treated as UTC.";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMinLength 1 types.str));
         };
         "windowDuration" = mkOption {
           description = "`windowDuration` is how long the cron definition is active for.\nValue must be in units accepted by Go time.ParseDuration https://golang.org/pkg/time/#ParseDuration.";
@@ -4764,7 +5002,13 @@ let
         };
         "status" = mkOption {
           description = "Status of the condition, one of (`True`, `False`, `Unknown`).";
-          type = types.str;
+          type = (
+            types.enum [
+              "True"
+              "False"
+              "Unknown"
+            ]
+          );
         };
         "type" = mkOption {
           description = "Type of the condition, known values are (`Ready`, `Issuing`).";
@@ -4874,7 +5118,7 @@ let
         };
         "preferredChain" = mkOption {
           description = "PreferredChain is the chain to use if the ACME server outputs multiple.\nPreferredChain is no guarantee that this one gets delivered by the ACME\nendpoint.\nFor example, for Let's Encrypt's DST cross-sign you would use:\n\"DST Root CA X3\" or \"ISRG Root X1\" for the newer Let's Encrypt root CA.\nThis value picks the first certificate bundle in the combined set of\nACME default and alternative chains that has a root-most certificate with\nthis value as its issuer's commonname.";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 64 types.str));
         };
         "privateKeySecretRef" = mkOption {
           description = "PrivateKey is the name of a Kubernetes Secret resource that will be used to\nstore the automatically generated ACME account private key.\nOptionally, a `key` may be specified to select a specific entry within\nthe named Secret resource.\nIf `key` is not specified, a default of `tls.key` will be used.";
@@ -4918,7 +5162,15 @@ let
       options = {
         "keyAlgorithm" = mkOption {
           description = "Deprecated: keyAlgorithm field exists for historical compatibility\nreasons and should not be used. The algorithm is now hardcoded to HS256\nin golang/x/crypto/acme.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "HS256"
+                "HS384"
+                "HS512"
+              ]
+            )
+          );
         };
         "keyID" = mkOption {
           description = "keyID is the ID of the CA key that the External Account is bound to.";
@@ -5027,7 +5279,14 @@ let
         };
         "cnameStrategy" = mkOption {
           description = "CNAMEStrategy configures how the DNS01 provider should handle CNAME\nrecords when found in DNS zones.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "None"
+                "Follow"
+              ]
+            )
+          );
         };
         "digitalocean" = mkOption {
           description = "Use the DigitalOcean DNS API to manage DNS01 challenge records.";
@@ -5198,7 +5457,16 @@ let
         };
         "environment" = mkOption {
           description = "name of the Azure environment (default AzurePublicCloud)";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "AzurePublicCloud"
+                "AzureChinaCloud"
+                "AzureGermanCloud"
+                "AzureUSGovernmentCloud"
+              ]
+            )
+          );
         };
         "hostedZoneName" = mkOption {
           description = "name of the DNS zone that should be used";
@@ -5226,7 +5494,14 @@ let
         };
         "zoneType" = mkOption {
           description = "ZoneType determines which type of Azure DNS zone to use.\n\nValid values are:\n  - AzurePublicZone  (default): Use a public Azure DNS zone.\n  - AzurePrivateZone: Use an Azure Private DNS zone.\n\nIf not specified, AzurePublicZone is used.\n\nSupport for Azure Private DNS zones is currently\nexperimental and may change in future releases.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "AzurePublicZone"
+                "AzurePrivateZone"
+              ]
+            )
+          );
         };
       };
 
@@ -5437,7 +5712,14 @@ let
         };
         "protocol" = mkOption {
           description = "Protocol to use for dynamic DNS update queries. Valid values are (case-sensitive) ``TCP`` and ``UDP``; ``UDP`` (default).";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "TCP"
+                "UDP"
+              ]
+            )
+          );
         };
         "tsigAlgorithm" = mkOption {
           description = "The TSIG Algorithm configured in the DNS supporting RFC2136. Used only\nwhen ``tsigSecretSecretRef`` and ``tsigKeyName`` are defined.\nSupported values are (case-insensitive): ``HMACMD5`` (default),\n``HMACSHA1``, ``HMACSHA256`` or ``HMACSHA512``.";
@@ -5706,27 +5988,27 @@ let
       options = {
         "group" = mkOption {
           description = "Group is the group of the referent.\nWhen unspecified, \"gateway.networking.k8s.io\" is inferred.\nTo set the core API group (such as for a \"Service\" kind referent),\nGroup must be explicitly set to \"\" (empty string).\n\nSupport: Core";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 253 types.str));
         };
         "kind" = mkOption {
           description = "Kind is kind of the referent.\n\nThere are two kinds of parent resources with \"Core\" support:\n\n* Gateway (Gateway conformance profile)\n* Service (Mesh conformance profile, ClusterIP Services only)\n\nSupport for other resources is Implementation-Specific.";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 63 (types.withMinLength 1 types.str)));
         };
         "name" = mkOption {
           description = "Name is the name of the referent.\n\nSupport: Core";
-          type = types.str;
+          type = (types.withMaxLength 253 (types.withMinLength 1 types.str));
         };
         "namespace" = mkOption {
           description = "Namespace is the namespace of the referent. When unspecified, this refers\nto the local namespace of the Route.\n\nNote that there are specific rules for ParentRefs which cross namespace\nboundaries. Cross-namespace references are only valid if they are explicitly\nallowed by something in the namespace they are referring to. For example:\nGateway has the AllowedRoutes field, and ReferenceGrant provides a\ngeneric way to enable any other kind of cross-namespace reference.\n\n<gateway:experimental:description>\nParentRefs from a Route to a Service in the same namespace are \"producer\"\nroutes, which apply default routing rules to inbound connections from\nany namespace to the Service.\n\nParentRefs from a Route to a Service in a different namespace are\n\"consumer\" routes, and these routing rules are only applied to outbound\nconnections originating from the same namespace as the Route, for which\nthe intended destination of the connections are a Service targeted as a\nParentRef of the Route.\n</gateway:experimental:description>\n\nSupport: Core";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 63 (types.withMinLength 1 types.str)));
         };
         "port" = mkOption {
           description = "Port is the network port this Route targets. It can be interpreted\ndifferently based on the type of parent resource.\n\nWhen the parent resource is a Gateway, this targets all listeners\nlistening on the specified port that also support this kind of Route(and\nselect this Route). It's not recommended to set `Port` unless the\nnetworking behaviors specified in a Route must apply to a specific port\nas opposed to a listener(s) whose port(s) may be changed. When both Port\nand SectionName are specified, the name and port of the selected listener\nmust match both specified values.\n\n<gateway:experimental:description>\nWhen the parent resource is a Service, this targets a specific port in the\nService spec. When both Port (experimental) and SectionName are specified,\nthe name and port of the selected port must match both specified values.\n</gateway:experimental:description>\n\nImplementations MAY choose to support other parent resources.\nImplementations supporting other types of parent resources MUST clearly\ndocument how/if Port is interpreted.\n\nFor the purpose of status, an attachment is considered successful as\nlong as the parent resource accepts it partially. For example, Gateway\nlisteners can restrict which Routes can attach to them by Route kind,\nnamespace, or hostname. If 1 of 2 Gateway listeners accept attachment\nfrom the referencing Route, the Route MUST be considered successfully\nattached. If no Gateway listeners accept attachment from this Route,\nthe Route MUST be considered detached from the Gateway.\n\nSupport: Extended";
-          type = (types.nullOr types.int);
+          type = (types.nullOr (types.withMaximum 65535 (types.withMinimum 1 types.int)));
         };
         "sectionName" = mkOption {
           description = "SectionName is the name of a section within the target resource. In the\nfollowing resources, SectionName is interpreted as the following:\n\n* Gateway: Listener name. When both Port (experimental) and SectionName\nare specified, the name and port of the selected listener must match\nboth specified values.\n* Service: Port name. When both Port (experimental) and SectionName\nare specified, the name and port of the selected listener must match\nboth specified values.\n\nImplementations MAY choose to support attaching Routes to other resources.\nIf that is the case, they MUST clearly document how SectionName is\ninterpreted.\n\nWhen unspecified (empty string), this will reference the entire resource.\nFor the purpose of status, an attachment is considered successful if at\nleast one section in the parent resource accepts it. For example, Gateway\nlisteners can restrict which Routes can attach to them by Route kind,\nnamespace, or hostname. If 1 of 2 Gateway listeners accept attachment from\nthe referencing Route, the Route MUST be considered successfully\nattached. If no Gateway listeners accept attachment from this Route, the\nRoute MUST be considered detached from the Gateway.\n\nSupport: Core";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 253 (types.withMinLength 1 types.str)));
         };
       };
 
@@ -8559,7 +8841,7 @@ let
         };
         "role" = mkOption {
           description = "A required field containing the Vault Role to assume when authenticating.";
-          type = types.str;
+          type = (types.withMinLength 1 types.str);
         };
         "serviceAccountRef" = mkOption {
           description = "A reference to a service account that will be used to request a web identity\ntoken for IRSA (IAM Roles for Service Accounts) authentication.";
@@ -8994,7 +9276,13 @@ let
         };
         "status" = mkOption {
           description = "Status of the condition, one of (`True`, `False`, `Unknown`).";
-          type = types.str;
+          type = (
+            types.enum [
+              "True"
+              "False"
+              "Unknown"
+            ]
+          );
         };
         "type" = mkOption {
           description = "Type of the condition, known values are (`Ready`).";
@@ -9102,7 +9390,7 @@ let
         };
         "preferredChain" = mkOption {
           description = "PreferredChain is the chain to use if the ACME server outputs multiple.\nPreferredChain is no guarantee that this one gets delivered by the ACME\nendpoint.\nFor example, for Let's Encrypt's DST cross-sign you would use:\n\"DST Root CA X3\" or \"ISRG Root X1\" for the newer Let's Encrypt root CA.\nThis value picks the first certificate bundle in the combined set of\nACME default and alternative chains that has a root-most certificate with\nthis value as its issuer's commonname.";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 64 types.str));
         };
         "privateKeySecretRef" = mkOption {
           description = "PrivateKey is the name of a Kubernetes Secret resource that will be used to\nstore the automatically generated ACME account private key.\nOptionally, a `key` may be specified to select a specific entry within\nthe named Secret resource.\nIf `key` is not specified, a default of `tls.key` will be used.";
@@ -9144,7 +9432,15 @@ let
       options = {
         "keyAlgorithm" = mkOption {
           description = "Deprecated: keyAlgorithm field exists for historical compatibility\nreasons and should not be used. The algorithm is now hardcoded to HS256\nin golang/x/crypto/acme.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "HS256"
+                "HS384"
+                "HS512"
+              ]
+            )
+          );
         };
         "keyID" = mkOption {
           description = "keyID is the ID of the CA key that the External Account is bound to.";
@@ -9251,7 +9547,14 @@ let
         };
         "cnameStrategy" = mkOption {
           description = "CNAMEStrategy configures how the DNS01 provider should handle CNAME\nrecords when found in DNS zones.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "None"
+                "Follow"
+              ]
+            )
+          );
         };
         "digitalocean" = mkOption {
           description = "Use the DigitalOcean DNS API to manage DNS01 challenge records.";
@@ -9414,7 +9717,16 @@ let
         };
         "environment" = mkOption {
           description = "name of the Azure environment (default AzurePublicCloud)";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "AzurePublicCloud"
+                "AzureChinaCloud"
+                "AzureGermanCloud"
+                "AzureUSGovernmentCloud"
+              ]
+            )
+          );
         };
         "hostedZoneName" = mkOption {
           description = "name of the DNS zone that should be used";
@@ -9440,7 +9752,14 @@ let
         };
         "zoneType" = mkOption {
           description = "ZoneType determines which type of Azure DNS zone to use.\n\nValid values are:\n  - AzurePublicZone  (default): Use a public Azure DNS zone.\n  - AzurePrivateZone: Use an Azure Private DNS zone.\n\nIf not specified, AzurePublicZone is used.\n\nSupport for Azure Private DNS zones is currently\nexperimental and may change in future releases.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "AzurePublicZone"
+                "AzurePrivateZone"
+              ]
+            )
+          );
         };
       };
 
@@ -9647,7 +9966,14 @@ let
         };
         "protocol" = mkOption {
           description = "Protocol to use for dynamic DNS update queries. Valid values are (case-sensitive) ``TCP`` and ``UDP``; ``UDP`` (default).";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "TCP"
+                "UDP"
+              ]
+            )
+          );
         };
         "tsigAlgorithm" = mkOption {
           description = "The TSIG Algorithm configured in the DNS supporting RFC2136. Used only\nwhen ``tsigSecretSecretRef`` and ``tsigKeyName`` are defined.\nSupported values are (case-insensitive): ``HMACMD5`` (default),\n``HMACSHA1``, ``HMACSHA256`` or ``HMACSHA512``.";
@@ -9912,27 +10238,27 @@ let
       options = {
         "group" = mkOption {
           description = "Group is the group of the referent.\nWhen unspecified, \"gateway.networking.k8s.io\" is inferred.\nTo set the core API group (such as for a \"Service\" kind referent),\nGroup must be explicitly set to \"\" (empty string).\n\nSupport: Core";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 253 types.str));
         };
         "kind" = mkOption {
           description = "Kind is kind of the referent.\n\nThere are two kinds of parent resources with \"Core\" support:\n\n* Gateway (Gateway conformance profile)\n* Service (Mesh conformance profile, ClusterIP Services only)\n\nSupport for other resources is Implementation-Specific.";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 63 (types.withMinLength 1 types.str)));
         };
         "name" = mkOption {
           description = "Name is the name of the referent.\n\nSupport: Core";
-          type = types.str;
+          type = (types.withMaxLength 253 (types.withMinLength 1 types.str));
         };
         "namespace" = mkOption {
           description = "Namespace is the namespace of the referent. When unspecified, this refers\nto the local namespace of the Route.\n\nNote that there are specific rules for ParentRefs which cross namespace\nboundaries. Cross-namespace references are only valid if they are explicitly\nallowed by something in the namespace they are referring to. For example:\nGateway has the AllowedRoutes field, and ReferenceGrant provides a\ngeneric way to enable any other kind of cross-namespace reference.\n\n<gateway:experimental:description>\nParentRefs from a Route to a Service in the same namespace are \"producer\"\nroutes, which apply default routing rules to inbound connections from\nany namespace to the Service.\n\nParentRefs from a Route to a Service in a different namespace are\n\"consumer\" routes, and these routing rules are only applied to outbound\nconnections originating from the same namespace as the Route, for which\nthe intended destination of the connections are a Service targeted as a\nParentRef of the Route.\n</gateway:experimental:description>\n\nSupport: Core";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 63 (types.withMinLength 1 types.str)));
         };
         "port" = mkOption {
           description = "Port is the network port this Route targets. It can be interpreted\ndifferently based on the type of parent resource.\n\nWhen the parent resource is a Gateway, this targets all listeners\nlistening on the specified port that also support this kind of Route(and\nselect this Route). It's not recommended to set `Port` unless the\nnetworking behaviors specified in a Route must apply to a specific port\nas opposed to a listener(s) whose port(s) may be changed. When both Port\nand SectionName are specified, the name and port of the selected listener\nmust match both specified values.\n\n<gateway:experimental:description>\nWhen the parent resource is a Service, this targets a specific port in the\nService spec. When both Port (experimental) and SectionName are specified,\nthe name and port of the selected port must match both specified values.\n</gateway:experimental:description>\n\nImplementations MAY choose to support other parent resources.\nImplementations supporting other types of parent resources MUST clearly\ndocument how/if Port is interpreted.\n\nFor the purpose of status, an attachment is considered successful as\nlong as the parent resource accepts it partially. For example, Gateway\nlisteners can restrict which Routes can attach to them by Route kind,\nnamespace, or hostname. If 1 of 2 Gateway listeners accept attachment\nfrom the referencing Route, the Route MUST be considered successfully\nattached. If no Gateway listeners accept attachment from this Route,\nthe Route MUST be considered detached from the Gateway.\n\nSupport: Extended";
-          type = (types.nullOr types.int);
+          type = (types.nullOr (types.withMaximum 65535 (types.withMinimum 1 types.int)));
         };
         "sectionName" = mkOption {
           description = "SectionName is the name of a section within the target resource. In the\nfollowing resources, SectionName is interpreted as the following:\n\n* Gateway: Listener name. When both Port (experimental) and SectionName\nare specified, the name and port of the selected listener must match\nboth specified values.\n* Service: Port name. When both Port (experimental) and SectionName\nare specified, the name and port of the selected listener must match\nboth specified values.\n\nImplementations MAY choose to support attaching Routes to other resources.\nIf that is the case, they MUST clearly document how SectionName is\ninterpreted.\n\nWhen unspecified (empty string), this will reference the entire resource.\nFor the purpose of status, an attachment is considered successful if at\nleast one section in the parent resource accepts it. For example, Gateway\nlisteners can restrict which Routes can attach to them by Route kind,\nnamespace, or hostname. If 1 of 2 Gateway listeners accept attachment from\nthe referencing Route, the Route MUST be considered successfully\nattached. If no Gateway listeners accept attachment from this Route, the\nRoute MUST be considered detached from the Gateway.\n\nSupport: Core";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 253 (types.withMinLength 1 types.str)));
         };
       };
 
@@ -12753,7 +13079,7 @@ let
         };
         "role" = mkOption {
           description = "A required field containing the Vault Role to assume when authenticating.";
-          type = types.str;
+          type = (types.withMinLength 1 types.str);
         };
         "serviceAccountRef" = mkOption {
           description = "A reference to a service account that will be used to request a web identity\ntoken for IRSA (IAM Roles for Service Accounts) authentication.";
@@ -13178,7 +13504,13 @@ let
         };
         "status" = mkOption {
           description = "Status of the condition, one of (`True`, `False`, `Unknown`).";
-          type = types.str;
+          type = (
+            types.enum [
+              "True"
+              "False"
+              "Unknown"
+            ]
+          );
         };
         "type" = mkOption {
           description = "Type of the condition, known values are (`Ready`).";

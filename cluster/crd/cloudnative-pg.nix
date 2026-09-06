@@ -76,6 +76,52 @@ let
           wrapped = finalType;
         };
       };
+
+    # Numeric bounds.
+    withMinimum =
+      min: base:
+      lib.types.addCheck base (x: x >= min)
+      // {
+        description = "${base.description} (minimum ${toString min})";
+      };
+    withMaximum =
+      max: base:
+      lib.types.addCheck base (x: x <= max)
+      // {
+        description = "${base.description} (maximum ${toString max})";
+      };
+    withExclusiveMinimum =
+      min: base:
+      lib.types.addCheck base (x: x > min)
+      // {
+        description = "${base.description} (exclusive minimum ${toString min})";
+      };
+    withExclusiveMaximum =
+      max: base:
+      lib.types.addCheck base (x: x < max)
+      // {
+        description = "${base.description} (exclusive maximum ${toString max})";
+      };
+    withMultipleOf =
+      m: base:
+      lib.types.addCheck base (x: mod x m == 0)
+      // {
+        description = "${base.description} (multiple of ${toString m})";
+      };
+
+    # String constraints.
+    withMinLength =
+      n: base:
+      lib.types.addCheck base (x: stringLength x >= n)
+      // {
+        description = "${base.description} (min length ${toString n})";
+      };
+    withMaxLength =
+      n: base:
+      lib.types.addCheck base (x: stringLength x <= n)
+      // {
+        description = "${base.description} (max length ${toString n})";
+      };
   };
 
   mkOptionDefault = mkOverride 1001;
@@ -218,7 +264,15 @@ let
         };
         "method" = mkOption {
           description = "The backup method to be used, possible options are `barmanObjectStore`,\n`volumeSnapshot` or `plugin`. Defaults to: `barmanObjectStore`.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "barmanObjectStore"
+                "volumeSnapshot"
+                "plugin"
+              ]
+            )
+          );
         };
         "online" = mkOption {
           description = "Whether the default type of backup with volume snapshots is\nonline/hot (`true`, default) or offline/cold (`false`)\nOverrides the default setting specified in the cluster field '.spec.backup.volumeSnapshot.online'";
@@ -234,7 +288,14 @@ let
         };
         "target" = mkOption {
           description = "The policy to decide which instance should perform this backup. If empty,\nit defaults to `cluster.spec.backup.target`.\nAvailable options are empty string, `primary` and `prefer-standby`.\n`primary` to have backups run always on primary instances,\n`prefer-standby` to have backups run preferably on the most updated\nstandby, if available.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "primary"
+                "prefer-standby"
+              ]
+            )
+          );
         };
       };
 
@@ -876,7 +937,7 @@ let
         };
         "key" = mkOption {
           description = "Key is the unique identifier for this image within the catalog.";
-          type = types.str;
+          type = (types.withMaxLength 63 types.str);
         };
       };
 
@@ -903,7 +964,7 @@ let
         };
         "major" = mkOption {
           description = "The PostgreSQL major version of the image. Must be unique within the catalog.";
-          type = types.int;
+          type = (types.withMinimum 10 types.int);
         };
       };
 
@@ -951,7 +1012,7 @@ let
         };
         "name" = mkOption {
           description = "The name of the extension, required. The limit of 59 characters\nleaves room for the prefix the operator adds when deriving the\nextension's Kubernetes Volume name (capped at 63 characters).";
-          type = types.str;
+          type = (types.withMaxLength 59 (types.withMinLength 1 types.str));
         };
       };
 
@@ -970,11 +1031,11 @@ let
       options = {
         "name" = mkOption {
           description = "Name of the environment variable to be injected into the\nPostgreSQL process.";
-          type = types.str;
+          type = (types.withMinLength 1 types.str);
         };
         "value" = mkOption {
           description = "Value of the environment variable. CloudNativePG performs a direct\nreplacement of this value, with support for placeholder expansion.\nThe \${`image_root`} placeholder resolves to the absolute mount path\nof the extension's volume (e.g., `/extensions/my-extension`). This\nis particularly useful for allowing applications or libraries to\nlocate specific directories within the mounted image.\nUnrecognized placeholders are rejected. To include a literal \${...}\nin the value, escape it as $\${...}.";
-          type = types.str;
+          type = (types.withMinLength 1 types.str);
         };
       };
 
@@ -1090,7 +1151,7 @@ let
         };
         "instances" = mkOption {
           description = "Number of instances required in the cluster";
-          type = types.int;
+          type = (types.withMinimum 1 types.int);
         };
         "livenessProbeTimeout" = mkOption {
           description = "LivenessProbeTimeout is the time (in seconds) that is allowed for a PostgreSQL instance\nto successfully respond to the liveness probe (default 30).\nThe Liveness probe failure threshold is derived from this value using the formula:\nceiling(livenessProbe / 10).";
@@ -1098,7 +1159,17 @@ let
         };
         "logLevel" = mkOption {
           description = "The instances' log level, one of the following values: error, warning, info (default), debug, trace";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "error"
+                "warning"
+                "info"
+                "debug"
+                "trace"
+              ]
+            )
+          );
         };
         "managed" = mkOption {
           description = "The configuration that is used by the portions of PostgreSQL that are managed by the instance manager";
@@ -1106,11 +1177,11 @@ let
         };
         "maxSyncReplicas" = mkOption {
           description = "The target value for the synchronous replication quorum, that can be\ndecreased if the number of ready standbys is lower than this.\nUndefined or 0 disable synchronous replication.";
-          type = (types.nullOr types.int);
+          type = (types.nullOr (types.withMinimum 0 types.int));
         };
         "minSyncReplicas" = mkOption {
           description = "Minimum number of instances required in synchronous replication with the\nprimary. Undefined or 0 allow writes to complete when no standby is\navailable.";
-          type = (types.nullOr types.int);
+          type = (types.nullOr (types.withMinimum 0 types.int));
         };
         "monitoring" = mkOption {
           description = "The configuration of the monitoring infrastructure of this cluster";
@@ -1162,11 +1233,25 @@ let
         };
         "primaryUpdateMethod" = mkOption {
           description = "Method to follow to upgrade the primary server during a rolling\nupdate procedure, after all replicas have been successfully updated:\nit can be with a switchover (`switchover`) or in-place (`restart` - default).\nNote: when using `switchover`, the operator will reject updates that change both\nthe image name and PostgreSQL configuration parameters simultaneously to avoid\nconfiguration mismatches during the switchover process.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "switchover"
+                "restart"
+              ]
+            )
+          );
         };
         "primaryUpdateStrategy" = mkOption {
           description = "Deployment strategy to follow to upgrade the primary server during a rolling\nupdate procedure, after all replicas have been successfully updated:\nit can be automated (`unsupervised` - default) or manual (`supervised`)";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "unsupervised"
+                "supervised"
+              ]
+            )
+          );
         };
         "priorityClassName" = mkOption {
           description = "Name of the priority class which will be used in every generated Pod, if the PriorityClass\nspecified does not exist, the pod will not be able to schedule.  Please refer to\nhttps://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/#priorityclass\nfor more information";
@@ -1206,7 +1291,7 @@ let
         };
         "serviceAccountName" = mkOption {
           description = "Name of an existing ServiceAccount in the same namespace to use for the cluster.\nWhen specified, the operator will not create a new ServiceAccount\nbut will use the provided one. This is useful for sharing a single\nServiceAccount across multiple clusters (e.g., for cloud IAM configurations).\nIf not specified, a ServiceAccount will be created with the cluster name.\nMutually exclusive with ServiceAccountTemplate.";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 253 types.str));
         };
         "serviceAccountTemplate" = mkOption {
           description = "Configure the generation of the service account";
@@ -2320,7 +2405,14 @@ let
         };
         "target" = mkOption {
           description = "The policy to decide which instance should perform backups. Available\noptions are empty string, which will default to `prefer-standby` policy,\n`primary` to have backups run always on primary instances, `prefer-standby`\nto have backups run preferably on the most updated standby, if available.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "primary"
+                "prefer-standby"
+              ]
+            )
+          );
         };
         "volumeSnapshot" = mkOption {
           description = "VolumeSnapshot provides the configuration for the execution of volume snapshot backups.";
@@ -2353,7 +2445,7 @@ let
         };
         "destinationPath" = mkOption {
           description = "The path where to store the backup (i.e. s3://bucket/path/to/folder)\nthis path, with different destination folders, will be used for WALs\nand for data";
-          type = types.str;
+          type = (types.withMinLength 1 types.str);
         };
         "endpointCA" = mkOption {
           description = "EndpointCA store the CA bundle of the barman endpoint.\nUseful when using self-signed certificates to avoid\nerrors with certificate issuer and barman-cloud-wal-archive";
@@ -2539,11 +2631,27 @@ let
         };
         "compression" = mkOption {
           description = "Compress a backup file (a tar file per tablespace) while streaming it\nto the object store. Available options are empty string (no\ncompression, default), `gzip`, `bzip2`, `lz4`, and `snappy`.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "bzip2"
+                "gzip"
+                "lz4"
+                "snappy"
+              ]
+            )
+          );
         };
         "encryption" = mkOption {
           description = "Whenever to force the encryption of files (if the bucket is\nnot already configured for that).\nAllowed options are empty string (use the bucket policy, default),\n`AES256` and `aws:kms`";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "AES256"
+                "aws:kms"
+              ]
+            )
+          );
         };
         "immediateCheckpoint" = mkOption {
           description = "Control whether the I/O workload for the backup initial checkpoint will\nbe limited, according to the `checkpoint_completion_target` setting on\nthe PostgreSQL server. If set to true, an immediate checkpoint will be\nused, meaning PostgreSQL will complete the checkpoint as soon as\npossible. `false` by default.";
@@ -2551,7 +2659,7 @@ let
         };
         "jobs" = mkOption {
           description = "The number of parallel jobs to be used to upload the backup, defaults\nto 2";
-          type = (types.nullOr types.int);
+          type = (types.nullOr (types.withMinimum 1 types.int));
         };
       };
 
@@ -2743,15 +2851,33 @@ let
         };
         "compression" = mkOption {
           description = "Compress a WAL file before sending it to the object store. Available\noptions are empty string (no compression, default), `gzip`, `bzip2`,\n`lz4`, `snappy`, `xz`, and `zstd`.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "bzip2"
+                "gzip"
+                "lz4"
+                "snappy"
+                "xz"
+                "zstd"
+              ]
+            )
+          );
         };
         "encryption" = mkOption {
           description = "Whenever to force the encryption of files (if the bucket is\nnot already configured for that).\nAllowed options are empty string (use the bucket policy, default),\n`AES256` and `aws:kms`";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "AES256"
+                "aws:kms"
+              ]
+            )
+          );
         };
         "maxParallel" = mkOption {
           description = "Number of WAL files to be either archived in parallel (when the\nPostgreSQL instance is archiving to a backup object store) or\nrestored in parallel (when a PostgreSQL standby is fetching WAL\nfiles from a recovery object store). If not specified, WAL files\nwill be processed one at a time. It accepts a positive integer as a\nvalue - with 1 being the minimum accepted value.";
-          type = (types.nullOr types.int);
+          type = (types.nullOr (types.withMinimum 1 types.int));
         };
         "restoreAdditionalCommandArgs" = mkOption {
           description = "Additional arguments that can be appended to the 'barman-cloud-wal-restore'\ncommand-line invocation. These arguments provide flexibility to customize\nthe WAL restore process further, according to specific requirements or configurations.\n\nExample:\nIn a scenario where specialized backup options are required, such as setting\na specific timeout or defining custom behavior, users can use this field\nto specify additional command arguments.\n\nNote:\nIt's essential to ensure that the provided arguments are valid and supported\nby the 'barman-cloud-wal-restore' command, to avoid potential errors or unintended\nbehavior during execution.";
@@ -2797,7 +2923,15 @@ let
         };
         "snapshotOwnerReference" = mkOption {
           description = "SnapshotOwnerReference indicates the type of owner reference the snapshot should have";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "none"
+                "cluster"
+                "backup"
+              ]
+            )
+          );
         };
         "tablespaceClassName" = mkOption {
           description = "TablespaceClassName specifies the Snapshot Class to be used for the tablespaces.\ndefaults to the PGDATA Snapshot Class, if set";
@@ -2957,7 +3091,7 @@ let
         };
         "walSegmentSize" = mkOption {
           description = "The value in megabytes (1 to 1024) to be passed to the `--wal-segsize`\noption for initdb (default: empty, resulting in PostgreSQL default: 16MB)";
-          type = (types.nullOr types.int);
+          type = (types.nullOr (types.withMaximum 1024 (types.withMinimum 1 types.int)));
         };
       };
 
@@ -3031,7 +3165,12 @@ let
         };
         "type" = mkOption {
           description = "The import type. Can be `microservice` or `monolith`.";
-          type = types.str;
+          type = (
+            types.enum [
+              "microservice"
+              "monolith"
+            ]
+          );
         };
       };
 
@@ -3289,7 +3428,7 @@ let
         };
         "source" = mkOption {
           description = "The name of the server of which we need to take a physical backup";
-          type = types.str;
+          type = (types.withMinLength 1 types.str);
         };
       };
 
@@ -4106,7 +4245,7 @@ let
         };
         "destinationPath" = mkOption {
           description = "The path where to store the backup (i.e. s3://bucket/path/to/folder)\nthis path, with different destination folders, will be used for WALs\nand for data";
-          type = types.str;
+          type = (types.withMinLength 1 types.str);
         };
         "endpointCA" = mkOption {
           description = "EndpointCA store the CA bundle of the barman endpoint.\nUseful when using self-signed certificates to avoid\nerrors with certificate issuer and barman-cloud-wal-archive";
@@ -4301,11 +4440,27 @@ let
         };
         "compression" = mkOption {
           description = "Compress a backup file (a tar file per tablespace) while streaming it\nto the object store. Available options are empty string (no\ncompression, default), `gzip`, `bzip2`, `lz4`, and `snappy`.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "bzip2"
+                "gzip"
+                "lz4"
+                "snappy"
+              ]
+            )
+          );
         };
         "encryption" = mkOption {
           description = "Whenever to force the encryption of files (if the bucket is\nnot already configured for that).\nAllowed options are empty string (use the bucket policy, default),\n`AES256` and `aws:kms`";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "AES256"
+                "aws:kms"
+              ]
+            )
+          );
         };
         "immediateCheckpoint" = mkOption {
           description = "Control whether the I/O workload for the backup initial checkpoint will\nbe limited, according to the `checkpoint_completion_target` setting on\nthe PostgreSQL server. If set to true, an immediate checkpoint will be\nused, meaning PostgreSQL will complete the checkpoint as soon as\npossible. `false` by default.";
@@ -4313,7 +4468,7 @@ let
         };
         "jobs" = mkOption {
           description = "The number of parallel jobs to be used to upload the backup, defaults\nto 2";
-          type = (types.nullOr types.int);
+          type = (types.nullOr (types.withMinimum 1 types.int));
         };
       };
 
@@ -4505,15 +4660,33 @@ let
         };
         "compression" = mkOption {
           description = "Compress a WAL file before sending it to the object store. Available\noptions are empty string (no compression, default), `gzip`, `bzip2`,\n`lz4`, `snappy`, `xz`, and `zstd`.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "bzip2"
+                "gzip"
+                "lz4"
+                "snappy"
+                "xz"
+                "zstd"
+              ]
+            )
+          );
         };
         "encryption" = mkOption {
           description = "Whenever to force the encryption of files (if the bucket is\nnot already configured for that).\nAllowed options are empty string (use the bucket policy, default),\n`AES256` and `aws:kms`";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "AES256"
+                "aws:kms"
+              ]
+            )
+          );
         };
         "maxParallel" = mkOption {
           description = "Number of WAL files to be either archived in parallel (when the\nPostgreSQL instance is archiving to a backup object store) or\nrestored in parallel (when a PostgreSQL standby is fetching WAL\nfiles from a recovery object store). If not specified, WAL files\nwill be processed one at a time. It accepts a positive integer as a\nvalue - with 1 being the minimum accepted value.";
-          type = (types.nullOr types.int);
+          type = (types.nullOr (types.withMinimum 1 types.int));
         };
         "restoreAdditionalCommandArgs" = mkOption {
           description = "Additional arguments that can be appended to the 'barman-cloud-wal-restore'\ncommand-line invocation. These arguments provide flexibility to customize\nthe WAL restore process further, according to specific requirements or configurations.\n\nExample:\nIn a scenario where specialized backup options are required, such as setting\na specific timeout or defining custom behavior, users can use this field\nto specify additional command arguments.\n\nNote:\nIt's essential to ensure that the provided arguments are valid and supported\nby the 'barman-cloud-wal-restore' command, to avoid potential errors or unintended\nbehavior during execution.";
@@ -4760,7 +4933,14 @@ let
         };
         "ensure" = mkOption {
           description = "Ensure the role is `present` or `absent` - defaults to \"present\"";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "present"
+                "absent"
+              ]
+            )
+          );
         };
         "inRoles" = mkOption {
           description = "List of one or more existing roles to which this role will be\nimmediately added as a new member. Default empty.\nChanges to the list are applied to an existing role through\n`GRANT` and `REVOKE` statements, not only at role creation.";
@@ -4839,7 +5019,17 @@ let
         };
         "disabledDefaultServices" = mkOption {
           description = "DisabledDefaultServices is a list of service types that are disabled by default.\nValid values are \"r\", and \"ro\", representing read, and read-only services.";
-          type = (types.nullOr (types.listOf types.str));
+          type = (
+            types.nullOr (
+              types.listOf (
+                types.enum [
+                  "rw"
+                  "r"
+                  "ro"
+                ]
+              )
+            )
+          );
         };
       };
 
@@ -4854,7 +5044,13 @@ let
       options = {
         "selectorType" = mkOption {
           description = "SelectorType specifies the type of selectors that the service will have.\nValid values are \"rw\", \"r\", and \"ro\", representing read-write, read, and read-only services.";
-          type = types.str;
+          type = (
+            types.enum [
+              "rw"
+              "r"
+              "ro"
+            ]
+          );
         };
         "serviceTemplate" = mkOption {
           description = "ServiceTemplate is the template specification for the service.";
@@ -4862,7 +5058,14 @@ let
         };
         "updateStrategy" = mkOption {
           description = "UpdateStrategy describes how the service differences should be reconciled";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "patch"
+                "replace"
+              ]
+            )
+          );
         };
       };
 
@@ -5227,7 +5430,34 @@ let
       options = {
         "action" = mkOption {
           description = "action to perform based on the regex matching.\n\n`Uppercase` and `Lowercase` actions require Prometheus >= v2.36.0.\n`DropEqual` and `KeepEqual` actions require Prometheus >= v2.41.0.\n\nDefault: \"Replace\"";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "replace"
+                "Replace"
+                "keep"
+                "Keep"
+                "drop"
+                "Drop"
+                "hashmod"
+                "HashMod"
+                "labelmap"
+                "LabelMap"
+                "labeldrop"
+                "LabelDrop"
+                "labelkeep"
+                "LabelKeep"
+                "lowercase"
+                "Lowercase"
+                "uppercase"
+                "Uppercase"
+                "keepequal"
+                "KeepEqual"
+                "dropequal"
+                "DropEqual"
+              ]
+            )
+          );
         };
         "modulus" = mkOption {
           description = "modulus to take of the hash of the source label values.\n\nOnly applicable when the action is `HashMod`.";
@@ -5271,7 +5501,34 @@ let
       options = {
         "action" = mkOption {
           description = "action to perform based on the regex matching.\n\n`Uppercase` and `Lowercase` actions require Prometheus >= v2.36.0.\n`DropEqual` and `KeepEqual` actions require Prometheus >= v2.41.0.\n\nDefault: \"Replace\"";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "replace"
+                "Replace"
+                "keep"
+                "Keep"
+                "drop"
+                "Drop"
+                "hashmod"
+                "HashMod"
+                "labelmap"
+                "LabelMap"
+                "labeldrop"
+                "LabelDrop"
+                "labelkeep"
+                "LabelKeep"
+                "lowercase"
+                "Lowercase"
+                "uppercase"
+                "Uppercase"
+                "keepequal"
+                "KeepEqual"
+                "dropequal"
+                "DropEqual"
+              ]
+            )
+          );
         };
         "modulus" = mkOption {
           description = "modulus to take of the hash of the source label values.\n\nOnly applicable when the action is `HashMod`.";
@@ -5575,7 +5832,7 @@ let
       options = {
         "name" = mkOption {
           description = "Name is the identifier used to reference this selector in pg_hba rules\nvia the \${podselector:NAME} syntax in the address field.";
-          type = types.str;
+          type = (types.withMinLength 1 types.str);
         };
         "selector" = mkOption {
           description = "Selector is a label selector that identifies the pods whose IPs\nshould be resolved. Only pods in the Cluster's namespace are considered.";
@@ -5738,7 +5995,7 @@ let
         };
         "name" = mkOption {
           description = "The name of the extension, required. The limit of 59 characters\nleaves room for the prefix the operator adds when deriving the\nextension's Kubernetes Volume name (capped at 63 characters).";
-          type = types.str;
+          type = (types.withMaxLength 59 (types.withMinLength 1 types.str));
         };
       };
 
@@ -5757,11 +6014,11 @@ let
       options = {
         "name" = mkOption {
           description = "Name of the environment variable to be injected into the\nPostgreSQL process.";
-          type = types.str;
+          type = (types.withMinLength 1 types.str);
         };
         "value" = mkOption {
           description = "Value of the environment variable. CloudNativePG performs a direct\nreplacement of this value, with support for placeholder expansion.\nThe \${`image_root`} placeholder resolves to the absolute mount path\nof the extension's volume (e.g., `/extensions/my-extension`). This\nis particularly useful for allowing applications or libraries to\nlocate specific directories within the mounted image.\nUnrecognized placeholders are rejected. To include a literal \${...}\nin the value, escape it as $\${...}.";
-          type = types.str;
+          type = (types.withMinLength 1 types.str);
         };
       };
 
@@ -5804,7 +6061,14 @@ let
         };
         "scheme" = mkOption {
           description = "LDAP schema to be used, possible options are `ldap` and `ldaps`";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "ldap"
+                "ldaps"
+              ]
+            )
+          );
         };
         "server" = mkOption {
           description = "LDAP hostname or IP address";
@@ -5929,7 +6193,14 @@ let
       options = {
         "dataDurability" = mkOption {
           description = "If set to \"required\", data durability is strictly enforced. Write operations\nwith synchronous commit settings (`on`, `remote_write`, or `remote_apply`) will\nblock if there are insufficient healthy replicas, ensuring data persistence.\nIf set to \"preferred\", data durability is maintained when healthy replicas\nare available, but the required number of instances will adjust dynamically\nif replicas become unavailable. This setting relaxes strict durability enforcement\nto allow for operational continuity. This setting is only applicable if both\n`standbyNamesPre` and `standbyNamesPost` are unset (empty).";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "required"
+                "preferred"
+              ]
+            )
+          );
         };
         "failoverQuorum" = mkOption {
           description = "FailoverQuorum enables a quorum-based check before failover, improving\ndata durability and safety during failover events in CloudNativePG-managed\nPostgreSQL clusters.";
@@ -5941,7 +6212,12 @@ let
         };
         "method" = mkOption {
           description = "Method to select synchronous replication standbys from the listed\nservers, accepting 'any' (quorum-based synchronous replication) or\n'first' (priority-based synchronous replication) as values.";
-          type = types.str;
+          type = (
+            types.enum [
+              "any"
+              "first"
+            ]
+          );
         };
         "number" = mkOption {
           description = "Specifies the number of synchronous standby servers that\ntransactions must wait for responses from.";
@@ -5971,19 +6247,19 @@ let
       options = {
         "leaseDurationSeconds" = mkOption {
           description = "How long, in seconds, the primary lease is considered valid before it\nexpires and another instance may acquire it. It must be greater than\n`renewDeadlineSeconds`.\nDefaults to 15.";
-          type = (types.nullOr types.int);
+          type = (types.nullOr (types.withMinimum 1 types.int));
         };
         "releasedLeaseDurationSeconds" = mkOption {
           description = "The TTL, in seconds, written when the primary explicitly releases the\nlease on a clean shutdown, allowing a replica to promote without waiting\nfor the full lease duration to expire.\nDefaults to 1.";
-          type = (types.nullOr types.int);
+          type = (types.nullOr (types.withMinimum 1 types.int));
         };
         "renewDeadlineSeconds" = mkOption {
           description = "How long, in seconds, the current primary keeps retrying to renew the\nlease before giving up and stopping. It must be smaller than\n`leaseDurationSeconds`.\nDefaults to 10.";
-          type = (types.nullOr types.int);
+          type = (types.nullOr (types.withMinimum 1 types.int));
         };
         "retryPeriodSeconds" = mkOption {
           description = "How frequently, in seconds, a non-holder instance retries acquiring or\nrenewing the lease.\nDefaults to 2.";
-          type = (types.nullOr types.int);
+          type = (types.nullOr (types.withMinimum 1 types.int));
         };
       };
 
@@ -6120,7 +6396,15 @@ let
         };
         "type" = mkOption {
           description = "The probe strategy";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "pg_isready"
+                "streaming"
+                "query"
+              ]
+            )
+          );
         };
       };
 
@@ -6169,7 +6453,15 @@ let
         };
         "type" = mkOption {
           description = "The probe strategy";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "pg_isready"
+                "streaming"
+                "query"
+              ]
+            )
+          );
         };
       };
 
@@ -6646,7 +6938,7 @@ let
         };
         "source" = mkOption {
           description = "The name of the external cluster which is the replication origin";
-          type = types.str;
+          type = (types.withMinLength 1 types.str);
         };
       };
 
@@ -6676,7 +6968,7 @@ let
         };
         "updateInterval" = mkOption {
           description = "Standby will update the status of the local replication slots\nevery `updateInterval` seconds (default 30).";
-          type = (types.nullOr types.int);
+          type = (types.nullOr (types.withMinimum 1 types.int));
         };
       };
 
@@ -8137,23 +8429,29 @@ let
         };
         "message" = mkOption {
           description = "message is a human readable message indicating details about the transition.\nThis may be an empty string.";
-          type = types.str;
+          type = (types.withMaxLength 32768 types.str);
         };
         "observedGeneration" = mkOption {
           description = "observedGeneration represents the .metadata.generation that the condition was set based upon.\nFor instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date\nwith respect to the current state of the instance.";
-          type = (types.nullOr types.int);
+          type = (types.nullOr (types.withMinimum 0 types.int));
         };
         "reason" = mkOption {
           description = "reason contains a programmatic identifier indicating the reason for the condition's last transition.\nProducers of specific condition types may define expected values and meanings for this field,\nand whether the values are considered a guaranteed API.\nThe value should be a CamelCase string.\nThis field may not be empty.";
-          type = types.str;
+          type = (types.withMaxLength 1024 (types.withMinLength 1 types.str));
         };
         "status" = mkOption {
           description = "status of the condition, one of True, False, Unknown.";
-          type = types.str;
+          type = (
+            types.enum [
+              "True"
+              "False"
+              "Unknown"
+            ]
+          );
         };
         "type" = mkOption {
           description = "type of condition in CamelCase or in foo.example.com/CamelCase.";
-          type = types.str;
+          type = (types.withMaxLength 316 types.str);
         };
       };
 
@@ -8267,7 +8565,7 @@ let
         };
         "name" = mkOption {
           description = "The name of the extension, required. The limit of 59 characters\nleaves room for the prefix the operator adds when deriving the\nextension's Kubernetes Volume name (capped at 63 characters).";
-          type = types.str;
+          type = (types.withMaxLength 59 (types.withMinLength 1 types.str));
         };
       };
 
@@ -8286,11 +8584,11 @@ let
       options = {
         "name" = mkOption {
           description = "Name of the environment variable to be injected into the\nPostgreSQL process.";
-          type = types.str;
+          type = (types.withMinLength 1 types.str);
         };
         "value" = mkOption {
           description = "Value of the environment variable. CloudNativePG performs a direct\nreplacement of this value, with support for placeholder expansion.\nThe \${`image_root`} placeholder resolves to the absolute mount path\nof the extension's volume (e.g., `/extensions/my-extension`). This\nis particularly useful for allowing applications or libraries to\nlocate specific directories within the mounted image.\nUnrecognized placeholders are rejected. To include a literal \${...}\nin the value, escape it as $\${...}.";
-          type = types.str;
+          type = (types.withMinLength 1 types.str);
         };
       };
 
@@ -8587,7 +8885,7 @@ let
         };
         "name" = mkOption {
           description = "The name of the extension, required. The limit of 59 characters\nleaves room for the prefix the operator adds when deriving the\nextension's Kubernetes Volume name (capped at 63 characters).";
-          type = types.str;
+          type = (types.withMaxLength 59 (types.withMinLength 1 types.str));
         };
       };
 
@@ -8606,11 +8904,11 @@ let
       options = {
         "name" = mkOption {
           description = "Name of the environment variable to be injected into the\nPostgreSQL process.";
-          type = types.str;
+          type = (types.withMinLength 1 types.str);
         };
         "value" = mkOption {
           description = "Value of the environment variable. CloudNativePG performs a direct\nreplacement of this value, with support for placeholder expansion.\nThe \${`image_root`} placeholder resolves to the absolute mount path\nof the extension's volume (e.g., `/extensions/my-extension`). This\nis particularly useful for allowing applications or libraries to\nlocate specific directories within the mounted image.\nUnrecognized placeholders are rejected. To include a literal \${...}\nin the value, escape it as $\${...}.";
-          type = types.str;
+          type = (types.withMinLength 1 types.str);
         };
       };
 
@@ -8757,7 +9055,14 @@ let
         };
         "databaseRoleReclaimPolicy" = mkOption {
           description = "The policy for end-of-life maintenance of this role";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "delete"
+                "retain"
+              ]
+            )
+          );
         };
         "disablePassword" = mkOption {
           description = "DisablePassword indicates that a role's password should be set to NULL in Postgres";
@@ -8765,7 +9070,14 @@ let
         };
         "ensure" = mkOption {
           description = "Ensure the role is `present` or `absent` - defaults to \"present\"";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "present"
+                "absent"
+              ]
+            )
+          );
         };
         "inRoles" = mkOption {
           description = "List of one or more existing roles to which this role will be\nimmediately added as a new member. Default empty.\nChanges to the list are applied to an existing role through\n`GRANT` and `REVOKE` statements, not only at role creation.";
@@ -8930,23 +9242,29 @@ let
         };
         "message" = mkOption {
           description = "message is a human readable message indicating details about the transition.\nThis may be an empty string.";
-          type = types.str;
+          type = (types.withMaxLength 32768 types.str);
         };
         "observedGeneration" = mkOption {
           description = "observedGeneration represents the .metadata.generation that the condition was set based upon.\nFor instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date\nwith respect to the current state of the instance.";
-          type = (types.nullOr types.int);
+          type = (types.nullOr (types.withMinimum 0 types.int));
         };
         "reason" = mkOption {
           description = "reason contains a programmatic identifier indicating the reason for the condition's last transition.\nProducers of specific condition types may define expected values and meanings for this field,\nand whether the values are considered a guaranteed API.\nThe value should be a CamelCase string.\nThis field may not be empty.";
-          type = types.str;
+          type = (types.withMaxLength 1024 (types.withMinLength 1 types.str));
         };
         "status" = mkOption {
           description = "status of the condition, one of True, False, Unknown.";
-          type = types.str;
+          type = (
+            types.enum [
+              "True"
+              "False"
+              "Unknown"
+            ]
+          );
         };
         "type" = mkOption {
           description = "type of condition in CamelCase or in foo.example.com/CamelCase.";
-          type = types.str;
+          type = (types.withMaxLength 316 types.str);
         };
       };
 
@@ -8980,7 +9298,14 @@ let
         };
         "databaseReclaimPolicy" = mkOption {
           description = "The policy for end-of-life maintenance of this database.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "delete"
+                "retain"
+              ]
+            )
+          );
         };
         "encoding" = mkOption {
           description = "Maps to the `ENCODING` parameter of `CREATE DATABASE`. This setting\ncannot be changed. Character set encoding to use in the database.";
@@ -8988,7 +9313,14 @@ let
         };
         "ensure" = mkOption {
           description = "Ensure the PostgreSQL database is `present` or `absent` - defaults to \"present\".";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "present"
+                "absent"
+              ]
+            )
+          );
         };
         "extensions" = mkOption {
           description = "The list of extensions to be managed in the database";
@@ -9115,7 +9447,14 @@ let
       options = {
         "ensure" = mkOption {
           description = "Specifies whether an object (e.g schema) should be present or absent\nin the database. If set to `present`, the object will be created if\nit does not exist. If set to `absent`, the extension/schema will be\nremoved if it exists.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "present"
+                "absent"
+              ]
+            )
+          );
         };
         "name" = mkOption {
           description = "Name of the object (extension, schema, FDW, server)";
@@ -9143,7 +9482,14 @@ let
       options = {
         "ensure" = mkOption {
           description = "Specifies whether an object (e.g schema) should be present or absent\nin the database. If set to `present`, the object will be created if\nit does not exist. If set to `absent`, the extension/schema will be\nremoved if it exists.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "present"
+                "absent"
+              ]
+            )
+          );
         };
         "handler" = mkOption {
           description = "Name of the handler function (e.g., \"postgres_fdw_handler\").\nThis will be empty if no handler is specified. In that case,\nthe default handler is registered when the FDW extension is created.";
@@ -9196,7 +9542,14 @@ let
       options = {
         "ensure" = mkOption {
           description = "Specifies whether an option should be present or absent in\nthe database. If set to `present`, the option will be\ncreated if it does not exist. If set to `absent`, the\noption will be removed if it exists.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "present"
+                "absent"
+              ]
+            )
+          );
         };
         "name" = mkOption {
           description = "Name of the option";
@@ -9222,7 +9575,14 @@ let
         };
         "type" = mkOption {
           description = "The type of usage";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "grant"
+                "revoke"
+              ]
+            )
+          );
         };
       };
 
@@ -9236,7 +9596,14 @@ let
       options = {
         "ensure" = mkOption {
           description = "Specifies whether an object (e.g schema) should be present or absent\nin the database. If set to `present`, the object will be created if\nit does not exist. If set to `absent`, the extension/schema will be\nremoved if it exists.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "present"
+                "absent"
+              ]
+            )
+          );
         };
         "name" = mkOption {
           description = "Name of the object (extension, schema, FDW, server)";
@@ -9259,7 +9626,14 @@ let
       options = {
         "ensure" = mkOption {
           description = "Specifies whether an object (e.g schema) should be present or absent\nin the database. If set to `present`, the object will be created if\nit does not exist. If set to `absent`, the extension/schema will be\nremoved if it exists.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "present"
+                "absent"
+              ]
+            )
+          );
         };
         "fdw" = mkOption {
           description = "The name of the Foreign Data Wrapper (FDW)";
@@ -9301,7 +9675,14 @@ let
       options = {
         "ensure" = mkOption {
           description = "Specifies whether an option should be present or absent in\nthe database. If set to `present`, the option will be\ncreated if it does not exist. If set to `absent`, the\noption will be removed if it exists.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "present"
+                "absent"
+              ]
+            )
+          );
         };
         "name" = mkOption {
           description = "Name of the option";
@@ -9327,7 +9708,14 @@ let
         };
         "type" = mkOption {
           description = "The type of usage";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "grant"
+                "revoke"
+              ]
+            )
+          );
         };
       };
 
@@ -9601,7 +9989,7 @@ let
         };
         "key" = mkOption {
           description = "Key is the unique identifier for this image within the catalog.";
-          type = types.str;
+          type = (types.withMaxLength 63 types.str);
         };
       };
 
@@ -9628,7 +10016,7 @@ let
         };
         "major" = mkOption {
           description = "The PostgreSQL major version of the image. Must be unique within the catalog.";
-          type = types.int;
+          type = (types.withMinimum 10 types.int);
         };
       };
 
@@ -9673,7 +10061,7 @@ let
         };
         "name" = mkOption {
           description = "The name of the extension, required. The limit of 59 characters\nleaves room for the prefix the operator adds when deriving the\nextension's Kubernetes Volume name (capped at 63 characters).";
-          type = types.str;
+          type = (types.withMaxLength 59 (types.withMinLength 1 types.str));
         };
       };
 
@@ -9692,11 +10080,11 @@ let
       options = {
         "name" = mkOption {
           description = "Name of the environment variable to be injected into the\nPostgreSQL process.";
-          type = types.str;
+          type = (types.withMinLength 1 types.str);
         };
         "value" = mkOption {
           description = "Value of the environment variable. CloudNativePG performs a direct\nreplacement of this value, with support for placeholder expansion.\nThe \${`image_root`} placeholder resolves to the absolute mount path\nof the extension's volume (e.g., `/extensions/my-extension`). This\nis particularly useful for allowing applications or libraries to\nlocate specific directories within the mounted image.\nUnrecognized placeholders are rejected. To include a literal \${...}\nin the value, escape it as $\${...}.";
-          type = types.str;
+          type = (types.withMinLength 1 types.str);
         };
       };
 
@@ -9779,7 +10167,7 @@ let
         };
         "serviceAccountName" = mkOption {
           description = "Name of an existing ServiceAccount in the same namespace to use for the pooler.\nWhen specified, the operator will not create a new ServiceAccount\nbut will use the provided one. This is useful for sharing a single\nServiceAccount across multiple poolers (e.g., for cloud IAM configurations).\nIf not specified, a ServiceAccount will be created with the pooler name.";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 253 types.str));
         };
         "serviceTemplate" = mkOption {
           description = "Template for the Service to be created";
@@ -9791,7 +10179,15 @@ let
         };
         "type" = mkOption {
           description = "Type of service to forward traffic to. Default: `rw`.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "rw"
+                "ro"
+                "r"
+              ]
+            )
+          );
         };
       };
 
@@ -9900,7 +10296,34 @@ let
       options = {
         "action" = mkOption {
           description = "action to perform based on the regex matching.\n\n`Uppercase` and `Lowercase` actions require Prometheus >= v2.36.0.\n`DropEqual` and `KeepEqual` actions require Prometheus >= v2.41.0.\n\nDefault: \"Replace\"";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "replace"
+                "Replace"
+                "keep"
+                "Keep"
+                "drop"
+                "Drop"
+                "hashmod"
+                "HashMod"
+                "labelmap"
+                "LabelMap"
+                "labeldrop"
+                "LabelDrop"
+                "labelkeep"
+                "LabelKeep"
+                "lowercase"
+                "Lowercase"
+                "uppercase"
+                "Uppercase"
+                "keepequal"
+                "KeepEqual"
+                "dropequal"
+                "DropEqual"
+              ]
+            )
+          );
         };
         "modulus" = mkOption {
           description = "modulus to take of the hash of the source label values.\n\nOnly applicable when the action is `HashMod`.";
@@ -9944,7 +10367,34 @@ let
       options = {
         "action" = mkOption {
           description = "action to perform based on the regex matching.\n\n`Uppercase` and `Lowercase` actions require Prometheus >= v2.36.0.\n`DropEqual` and `KeepEqual` actions require Prometheus >= v2.41.0.\n\nDefault: \"Replace\"";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "replace"
+                "Replace"
+                "keep"
+                "Keep"
+                "drop"
+                "Drop"
+                "hashmod"
+                "HashMod"
+                "labelmap"
+                "LabelMap"
+                "labeldrop"
+                "LabelDrop"
+                "labelkeep"
+                "LabelKeep"
+                "lowercase"
+                "Lowercase"
+                "uppercase"
+                "Uppercase"
+                "keepequal"
+                "KeepEqual"
+                "dropequal"
+                "DropEqual"
+              ]
+            )
+          );
         };
         "modulus" = mkOption {
           description = "modulus to take of the hash of the source label values.\n\nOnly applicable when the action is `HashMod`.";
@@ -10038,7 +10488,14 @@ let
         };
         "poolMode" = mkOption {
           description = "The pool mode. Default: `session`.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "session"
+                "transaction"
+              ]
+            )
+          );
         };
         "serverCASecret" = mkOption {
           description = "ServerCASecret provides PgBouncer’s server_tls_ca_file, the root\nCA for validating PostgreSQL certificates";
@@ -10111,7 +10568,7 @@ let
         };
         "key" = mkOption {
           description = "Key identifies the entry within the catalog's componentImages list.";
-          type = types.str;
+          type = (types.withMaxLength 63 types.str);
         };
         "kind" = mkOption {
           description = "Kind is the type of resource being referenced";
@@ -19312,7 +19769,16 @@ let
         };
         "phase" = mkOption {
           description = "Phase summarizes the overall lifecycle state of the Pooler.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "active"
+                "paused"
+                "inactive"
+                "failed"
+              ]
+            )
+          );
         };
         "phaseReason" = mkOption {
           description = "PhaseReason is a human-readable explanation of the current Phase.";
@@ -19532,7 +19998,14 @@ let
         };
         "publicationReclaimPolicy" = mkOption {
           description = "The policy for end-of-life maintenance of this publication";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "delete"
+                "retain"
+              ]
+            )
+          );
         };
         "target" = mkOption {
           description = "Target of the publication as expected by PostgreSQL `CREATE PUBLICATION` command";
@@ -19689,7 +20162,15 @@ let
       options = {
         "backupOwnerReference" = mkOption {
           description = "Indicates which ownerReference should be put inside the created backup resources.<br />\n- none: no owner reference for created backup objects (same behavior as before the field was introduced)<br />\n- self: sets the Scheduled backup object as owner of the backup<br />\n- cluster: set the cluster as owner of the backup<br />";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "none"
+                "self"
+                "cluster"
+              ]
+            )
+          );
         };
         "cluster" = mkOption {
           description = "The cluster to backup";
@@ -19701,7 +20182,15 @@ let
         };
         "method" = mkOption {
           description = "The backup method to be used, possible options are `barmanObjectStore`,\n`volumeSnapshot` or `plugin`. Defaults to: `barmanObjectStore`.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "barmanObjectStore"
+                "volumeSnapshot"
+                "plugin"
+              ]
+            )
+          );
         };
         "online" = mkOption {
           description = "Whether the default type of backup with volume snapshots is\nonline/hot (`true`, default) or offline/cold (`false`)\nOverrides the default setting specified in the cluster field '.spec.backup.volumeSnapshot.online'";
@@ -19725,7 +20214,14 @@ let
         };
         "target" = mkOption {
           description = "The policy to decide which instance should perform this backup. If empty,\nit defaults to `cluster.spec.backup.target`.\nAvailable options are empty string, `primary` and `prefer-standby`.\n`primary` to have backups run always on primary instances,\n`prefer-standby` to have backups run preferably on the most updated\nstandby, if available.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "primary"
+                "prefer-standby"
+              ]
+            )
+          );
         };
       };
 
@@ -19884,7 +20380,14 @@ let
         };
         "subscriptionReclaimPolicy" = mkOption {
           description = "The policy for end-of-life maintenance of this subscription";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "delete"
+                "retain"
+              ]
+            )
+          );
         };
       };
 

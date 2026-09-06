@@ -76,6 +76,52 @@ let
           wrapped = finalType;
         };
       };
+
+    # Numeric bounds.
+    withMinimum =
+      min: base:
+      lib.types.addCheck base (x: x >= min)
+      // {
+        description = "${base.description} (minimum ${toString min})";
+      };
+    withMaximum =
+      max: base:
+      lib.types.addCheck base (x: x <= max)
+      // {
+        description = "${base.description} (maximum ${toString max})";
+      };
+    withExclusiveMinimum =
+      min: base:
+      lib.types.addCheck base (x: x > min)
+      // {
+        description = "${base.description} (exclusive minimum ${toString min})";
+      };
+    withExclusiveMaximum =
+      max: base:
+      lib.types.addCheck base (x: x < max)
+      // {
+        description = "${base.description} (exclusive maximum ${toString max})";
+      };
+    withMultipleOf =
+      m: base:
+      lib.types.addCheck base (x: mod x m == 0)
+      // {
+        description = "${base.description} (multiple of ${toString m})";
+      };
+
+    # String constraints.
+    withMinLength =
+      n: base:
+      lib.types.addCheck base (x: stringLength x >= n)
+      // {
+        description = "${base.description} (min length ${toString n})";
+      };
+    withMaxLength =
+      n: base:
+      lib.types.addCheck base (x: stringLength x <= n)
+      // {
+        description = "${base.description} (max length ${toString n})";
+      };
   };
 
   mkOptionDefault = mkOverride 1001;
@@ -272,6 +318,10 @@ let
           description = "PGP configuration";
           type = (types.nullOr (types.listOf (submoduleOf "isindir.github.com.v1alpha3.SopsSecretSopsPgp")));
         };
+        "unencrypted_regex" = mkOption {
+          description = "Regex used to select the values which stay unencrypted in SopsSecret resource.\nAll the other values are encrypted. Use this option to keep non-secret\nconfiguration readable in git. The regex must also match apiVersion, kind,\nmetadata, status and name, because Kubernetes adds plain text fields to the\nresource, for example metadata.uid.";
+          type = (types.nullOr types.str);
+        };
         "version" = mkOption {
           description = "Version of the sops tool used to encrypt SopsSecret";
           type = (types.nullOr types.str);
@@ -290,6 +340,7 @@ let
         "mac" = mkOverride 1002 null;
         "mac_only_encrypted" = mkOverride 1002 null;
         "pgp" = mkOverride 1002 null;
+        "unencrypted_regex" = mkOverride 1002 null;
         "version" = mkOverride 1002 null;
       };
 

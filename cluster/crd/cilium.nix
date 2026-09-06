@@ -76,6 +76,52 @@ let
           wrapped = finalType;
         };
       };
+
+    # Numeric bounds.
+    withMinimum =
+      min: base:
+      lib.types.addCheck base (x: x >= min)
+      // {
+        description = "${base.description} (minimum ${toString min})";
+      };
+    withMaximum =
+      max: base:
+      lib.types.addCheck base (x: x <= max)
+      // {
+        description = "${base.description} (maximum ${toString max})";
+      };
+    withExclusiveMinimum =
+      min: base:
+      lib.types.addCheck base (x: x > min)
+      // {
+        description = "${base.description} (exclusive minimum ${toString min})";
+      };
+    withExclusiveMaximum =
+      max: base:
+      lib.types.addCheck base (x: x < max)
+      // {
+        description = "${base.description} (exclusive maximum ${toString max})";
+      };
+    withMultipleOf =
+      m: base:
+      lib.types.addCheck base (x: mod x m == 0)
+      // {
+        description = "${base.description} (multiple of ${toString m})";
+      };
+
+    # String constraints.
+    withMinLength =
+      n: base:
+      lib.types.addCheck base (x: stringLength x >= n)
+      // {
+        description = "${base.description} (min length ${toString n})";
+      };
+    withMaxLength =
+      n: base:
+      lib.types.addCheck base (x: stringLength x <= n)
+      // {
+        description = "${base.description} (max length ${toString n})";
+      };
   };
 
   mkOptionDefault = mkOverride 1001;
@@ -333,7 +379,25 @@ let
         };
         "toEntities" = mkOption {
           description = "ToEntities is a list of special entities to which the endpoint subject\nto the rule is allowed to initiate connections. Supported entities are\n`world`, `cluster`, `host`, `remote-node`, `kube-apiserver`, `ingress`, `init`,\n`health`, `unmanaged`, `none` and `all`.";
-          type = (types.nullOr (types.listOf types.str));
+          type = (
+            types.nullOr (
+              types.listOf (
+                types.enum [
+                  "all"
+                  "world"
+                  "cluster"
+                  "host"
+                  "init"
+                  "ingress"
+                  "unmanaged"
+                  "remote-node"
+                  "health"
+                  "none"
+                  "kube-apiserver"
+                ]
+              )
+            )
+          );
         };
         "toFQDNs" = mkOption {
           description = "ToFQDN allows whitelisting DNS names in place of IPs. The IPs that result\nfrom DNS resolution of `ToFQDN.MatchName`s are added to the same\nEgressRule object as ToCIDRSet entries, and behave accordingly. Any L4 and\nL7 rules within this EgressRule will also apply to these IPs.\nThe DNS -> IP mapping is re-resolved periodically from within the\ncilium-agent, and the IPs in the DNS response are effected in the policy\nfor selected pods as-is (i.e. the list of IPs is not modified in any way).\nNote: An explicit rule to allow for DNS traffic is needed for the pods, as\nToFQDN counts as an egress rule and will enforce egress policy when\nPolicyEnforcment=default.\nNote: If the resolved IPs are IPs within the kubernetes cluster, the\nToFQDN rule will not apply to that IP.\nNote: ToFQDN cannot occur in the same policy as other To* rules.";
@@ -406,7 +470,13 @@ let
       options = {
         "mode" = mkOption {
           description = "Mode is the required authentication mode for the allowed traffic, if any.";
-          type = types.str;
+          type = (
+            types.enum [
+              "disabled"
+              "required"
+              "test-always-fail"
+            ]
+          );
         };
       };
 
@@ -446,7 +516,25 @@ let
         };
         "toEntities" = mkOption {
           description = "ToEntities is a list of special entities to which the endpoint subject\nto the rule is allowed to initiate connections. Supported entities are\n`world`, `cluster`, `host`, `remote-node`, `kube-apiserver`, `ingress`, `init`,\n`health`, `unmanaged`, `none` and `all`.";
-          type = (types.nullOr (types.listOf types.str));
+          type = (
+            types.nullOr (
+              types.listOf (
+                types.enum [
+                  "all"
+                  "world"
+                  "cluster"
+                  "host"
+                  "init"
+                  "ingress"
+                  "unmanaged"
+                  "remote-node"
+                  "health"
+                  "none"
+                  "kube-apiserver"
+                ]
+              )
+            )
+          );
         };
         "toGroups" = mkOption {
           description = "ToGroups is a directive that allows the integration with multiple outside\nproviders. Currently, only AWS is supported, and the rule can select by\nmultiple sub directives:\n\nExample:\ntoGroups:\n- aws:\n    securityGroupsIds:\n    - 'sg-XXXXXXXXXXXXX'";
@@ -527,7 +615,14 @@ let
       options = {
         "family" = mkOption {
           description = "Family is a IP address version.\nCurrently, we support `IPv4` and `IPv6`.\n`IPv4` is set as default.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "IPv4"
+                "IPv6"
+              ]
+            )
+          );
         };
         "type" = mkOption {
           description = "Type is a ICMP-type.\nIt should be an 8bit code (0-255), or it's CamelCase name (for example, \"EchoReply\").\nAllowed ICMP types are:\n    Ipv4: EchoReply | DestinationUnreachable | Redirect | Echo | EchoRequest |\n\t\t     RouterAdvertisement | RouterSelection | TimeExceeded | ParameterProblem |\n\t\t\t Timestamp | TimestampReply | Photuris | ExtendedEcho Request | ExtendedEcho Reply\n    Ipv6: DestinationUnreachable | PacketTooBig | TimeExceeded | ParameterProblem |\n\t\t\t EchoRequest | EchoReply | MulticastListenerQuery| MulticastListenerReport |\n\t\t\t MulticastListenerDone | RouterSolicitation | RouterAdvertisement | NeighborSolicitation |\n\t\t\t NeighborAdvertisement | RedirectMessage | RouterRenumbering | ICMPNodeInformationQuery |\n\t\t\t ICMPNodeInformationResponse | InverseNeighborDiscoverySolicitation | InverseNeighborDiscoveryAdvertisement |\n\t\t\t HomeAgentAddressDiscoveryRequest | HomeAgentAddressDiscoveryReply | MobilePrefixSolicitation |\n\t\t\t MobilePrefixAdvertisement | DuplicateAddressRequestCodeSuffix | DuplicateAddressConfirmationCodeSuffix |\n\t\t\t ExtendedEchoRequest | ExtendedEchoReply";
@@ -549,7 +644,7 @@ let
         };
         "cidrGroupRef" = mkOption {
           description = "CIDRGroupRef is a reference to a CiliumCIDRGroup object.\nA CiliumCIDRGroup contains a list of CIDRs that the endpoint, subject to\nthe rule, can (Ingress/Egress) or cannot (IngressDeny/EgressDeny) receive\nconnections from.";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 253 types.str));
         };
         "cidrGroupSelector" = mkOption {
           description = "CIDRGroupSelector selects CiliumCIDRGroups by their labels,\nrather than by name.";
@@ -588,7 +683,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -608,7 +703,14 @@ let
           };
           "operator" = mkOption {
             description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-            type = types.str;
+            type = (
+              types.enum [
+                "In"
+                "NotIn"
+                "Exists"
+                "DoesNotExist"
+              ]
+            );
           };
           "values" = mkOption {
             description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -636,7 +738,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -655,7 +757,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -728,7 +837,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -747,7 +856,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -783,7 +899,7 @@ let
       options = {
         "endPort" = mkOption {
           description = "EndPort can only be an L4 port number.";
-          type = (types.nullOr types.int);
+          type = (types.nullOr (types.withMaximum 65535 (types.withMinimum 0 types.int)));
         };
         "port" = mkOption {
           description = "Port can be an L4 port number, or a name in the form of \"http\"\nor \"http-8080\".";
@@ -791,7 +907,16 @@ let
         };
         "protocol" = mkOption {
           description = "Protocol is the L4 protocol. If omitted or empty, any protocol\nmatches. Accepted values: \"TCP\", \"UDP\", \"SCTP\", \"ANY\"\n\nMatching on ICMP is not supported.\n\nNamed port specified for a container may narrow this down, but may not\ncontradict this.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "TCP"
+                "UDP"
+                "SCTP"
+                "ANY"
+              ]
+            )
+          );
         };
       };
 
@@ -816,7 +941,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -835,7 +960,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -929,7 +1061,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -949,7 +1081,14 @@ let
           };
           "operator" = mkOption {
             description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-            type = types.str;
+            type = (
+              types.enum [
+                "In"
+                "NotIn"
+                "Exists"
+                "DoesNotExist"
+              ]
+            );
           };
           "values" = mkOption {
             description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -985,7 +1124,14 @@ let
       options = {
         "family" = mkOption {
           description = "Family is a IP address version.\nCurrently, we support `IPv4` and `IPv6`.\n`IPv4` is set as default.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "IPv4"
+                "IPv6"
+              ]
+            )
+          );
         };
         "type" = mkOption {
           description = "Type is a ICMP-type.\nIt should be an 8bit code (0-255), or it's CamelCase name (for example, \"EchoReply\").\nAllowed ICMP types are:\n    Ipv4: EchoReply | DestinationUnreachable | Redirect | Echo | EchoRequest |\n\t\t     RouterAdvertisement | RouterSelection | TimeExceeded | ParameterProblem |\n\t\t\t Timestamp | TimestampReply | Photuris | ExtendedEcho Request | ExtendedEcho Reply\n    Ipv6: DestinationUnreachable | PacketTooBig | TimeExceeded | ParameterProblem |\n\t\t\t EchoRequest | EchoReply | MulticastListenerQuery| MulticastListenerReport |\n\t\t\t MulticastListenerDone | RouterSolicitation | RouterAdvertisement | NeighborSolicitation |\n\t\t\t NeighborAdvertisement | RedirectMessage | RouterRenumbering | ICMPNodeInformationQuery |\n\t\t\t ICMPNodeInformationResponse | InverseNeighborDiscoverySolicitation | InverseNeighborDiscoveryAdvertisement |\n\t\t\t HomeAgentAddressDiscoveryRequest | HomeAgentAddressDiscoveryReply | MobilePrefixSolicitation |\n\t\t\t MobilePrefixAdvertisement | DuplicateAddressRequestCodeSuffix | DuplicateAddressConfirmationCodeSuffix |\n\t\t\t ExtendedEchoRequest | ExtendedEchoReply";
@@ -1007,7 +1153,7 @@ let
         };
         "cidrGroupRef" = mkOption {
           description = "CIDRGroupRef is a reference to a CiliumCIDRGroup object.\nA CiliumCIDRGroup contains a list of CIDRs that the endpoint, subject to\nthe rule, can (Ingress/Egress) or cannot (IngressDeny/EgressDeny) receive\nconnections from.";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 253 types.str));
         };
         "cidrGroupSelector" = mkOption {
           description = "CIDRGroupSelector selects CiliumCIDRGroups by their labels,\nrather than by name.";
@@ -1046,7 +1192,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -1066,7 +1212,14 @@ let
           };
           "operator" = mkOption {
             description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-            type = types.str;
+            type = (
+              types.enum [
+                "In"
+                "NotIn"
+                "Exists"
+                "DoesNotExist"
+              ]
+            );
           };
           "values" = mkOption {
             description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -1094,7 +1247,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -1113,7 +1266,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -1131,11 +1291,11 @@ let
       options = {
         "matchName" = mkOption {
           description = "MatchName matches literal DNS names. A trailing \".\" is automatically added\nwhen missing.";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 255 types.str));
         };
         "matchPattern" = mkOption {
           description = "MatchPattern allows using wildcards to match DNS names. All wildcards are\ncase insensitive. The wildcards are:\n- \"*\" matches 0 or more DNS valid characters, and may occur anywhere in\nthe pattern. As a special case a \"*\" as the leftmost character, without a\nfollowing \".\" matches all subdomains as well as the name to the right.\nA trailing \".\" is automatically added when missing.\n\nExamples:\n`*.cilium.io` matches subdomains of cilium at that level\n  www.cilium.io and blog.cilium.io match, cilium.io and google.com do not\n`*cilium.io` matches cilium.io and all subdomains ends with \"cilium.io\"\n  except those containing \".\" separator, subcilium.io and sub-cilium.io match,\n  www.cilium.io and blog.cilium.io does not\nsub*.cilium.io matches subdomains of cilium where the subdomain component\nbegins with \"sub\"\n  sub.cilium.io and subdomain.cilium.io match, www.cilium.io,\n  blog.cilium.io, cilium.io and google.com do not";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 255 types.str));
         };
       };
 
@@ -1205,7 +1365,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -1224,7 +1384,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -1270,7 +1437,7 @@ let
         };
         "serverNames" = mkOption {
           description = "ServerNames is a list of allowed TLS SNI values. If not empty, then\nTLS must be present and one of the provided SNIs must be indicated in the\nTLS handshake.";
-          type = (types.nullOr (types.listOf types.str));
+          type = (types.nullOr (types.listOf (types.withMaxLength 255 types.str)));
         };
         "terminatingTLS" = mkOption {
           description = "TerminatingTLS is the TLS context for the connection terminated by\nthe L7 proxy.  For egress policy this specifies the server-side TLS\nparameters to be applied on the connections originated from the local\nendpoint and terminated by the L7 proxy. For ingress policy this specifies\nthe server-side TLS parameters to be applied on the connections\noriginated from a remote source and terminated by the L7 proxy.";
@@ -1303,11 +1470,11 @@ let
         };
         "name" = mkOption {
           description = "Name is the name of the listener.";
-          type = types.str;
+          type = (types.withMinLength 1 types.str);
         };
         "priority" = mkOption {
           description = "Priority for this Listener that is used when multiple rules would apply different\nlisteners to a policy map entry. Behavior of this is implementation dependent.";
-          type = (types.nullOr types.int);
+          type = (types.nullOr (types.withMaximum 100 (types.withMinimum 1 types.int)));
         };
       };
 
@@ -1321,11 +1488,18 @@ let
       options = {
         "kind" = mkOption {
           description = "Kind is the resource type being referred to. Defaults to CiliumEnvoyConfig or\nCiliumClusterwideEnvoyConfig for CiliumNetworkPolicy and CiliumClusterwideNetworkPolicy,\nrespectively. The only case this is currently explicitly needed is when referring to a\nCiliumClusterwideEnvoyConfig from CiliumNetworkPolicy, as using a namespaced listener\nfrom a cluster scoped policy is not allowed.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "CiliumEnvoyConfig"
+                "CiliumClusterwideEnvoyConfig"
+              ]
+            )
+          );
         };
         "name" = mkOption {
           description = "Name is the resource name of the CiliumEnvoyConfig or CiliumClusterwideEnvoyConfig where\nthe listener is defined in.";
-          type = types.str;
+          type = (types.withMinLength 1 types.str);
         };
       };
 
@@ -1387,7 +1561,7 @@ let
       options = {
         "endPort" = mkOption {
           description = "EndPort can only be an L4 port number.";
-          type = (types.nullOr types.int);
+          type = (types.nullOr (types.withMaximum 65535 (types.withMinimum 0 types.int)));
         };
         "port" = mkOption {
           description = "Port can be an L4 port number, or a name in the form of \"http\"\nor \"http-8080\".";
@@ -1395,7 +1569,16 @@ let
         };
         "protocol" = mkOption {
           description = "Protocol is the L4 protocol. If omitted or empty, any protocol\nmatches. Accepted values: \"TCP\", \"UDP\", \"SCTP\", \"ANY\"\n\nMatching on ICMP is not supported.\n\nNamed port specified for a container may narrow this down, but may not\ncontradict this.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "TCP"
+                "UDP"
+                "SCTP"
+                "ANY"
+              ]
+            )
+          );
         };
       };
 
@@ -1456,11 +1639,11 @@ let
       options = {
         "matchName" = mkOption {
           description = "MatchName matches literal DNS names. A trailing \".\" is automatically added\nwhen missing.";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 255 types.str));
         };
         "matchPattern" = mkOption {
           description = "MatchPattern allows using wildcards to match DNS names. All wildcards are\ncase insensitive. The wildcards are:\n- \"*\" matches 0 or more DNS valid characters, and may occur anywhere in\nthe pattern. As a special case a \"*\" as the leftmost character, without a\nfollowing \".\" matches all subdomains as well as the name to the right.\nA trailing \".\" is automatically added when missing.\n\nExamples:\n`*.cilium.io` matches subdomains of cilium at that level\n  www.cilium.io and blog.cilium.io match, cilium.io and google.com do not\n`*cilium.io` matches cilium.io and all subdomains ends with \"cilium.io\"\n  except those containing \".\" separator, subcilium.io and sub-cilium.io match,\n  www.cilium.io and blog.cilium.io does not\nsub*.cilium.io matches subdomains of cilium where the subdomain component\nbegins with \"sub\"\n  sub.cilium.io and subdomain.cilium.io match, www.cilium.io,\n  blog.cilium.io, cilium.io and google.com do not";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 255 types.str));
         };
       };
 
@@ -1517,11 +1700,20 @@ let
       options = {
         "mismatch" = mkOption {
           description = "Mismatch identifies what to do in case there is no match. The default is\nto drop the request. Otherwise the overall rule is still considered as\nmatching, but the mismatches are logged in the access log.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "LOG"
+                "ADD"
+                "DELETE"
+                "REPLACE"
+              ]
+            )
+          );
         };
         "name" = mkOption {
           description = "Name identifies the header.";
-          type = types.str;
+          type = (types.withMinLength 1 types.str);
         };
         "secret" = mkOption {
           description = "Secret refers to a secret that contains the value to be matched against.\nThe secret must only contain one entry. If the referred secret does not\nexist, and there is no \"Value\" specified, the match will fail.";
@@ -1579,11 +1771,18 @@ let
         };
         "role" = mkOption {
           description = "Role is a case-insensitive string and describes a group of API keys\nnecessary to perform certain higher-level Kafka operations such as \"produce\"\nor \"consume\". A Role automatically expands into all APIKeys required\nto perform the specified higher-level operation.\n\nThe following values are supported:\n - \"produce\": Allow producing to the topics specified in the rule\n - \"consume\": Allow consuming from the topics specified in the rule\n\nThis field is incompatible with the APIKey field, i.e APIKey and Role\ncannot both be specified in the same rule.\n\nIf omitted or empty, and if APIKey is not specified, then all keys are\nallowed.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "produce"
+                "consume"
+              ]
+            )
+          );
         };
         "topic" = mkOption {
           description = "Topic is the topic name contained in the message. If a Kafka request\ncontains multiple topics, then all topics must be allowed or the\nmessage will be rejected.\n\nThis constraint is ignored if the matched request message type\ndoesn't contain any topic. Maximum size of Topic can be 249\ncharacters as per recent Kafka spec and allowed characters are\na-z, A-Z, 0-9, -, . and _.\n\nOlder Kafka versions had longer topic lengths of 255, but in Kafka 0.10\nversion the length was changed from 255 to 249. For compatibility\nreasons we are using 255.\n\nIf omitted or empty, all topics are allowed.";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 255 types.str));
         };
       };
 
@@ -1659,7 +1858,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -1678,7 +1877,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -1772,7 +1978,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -1792,7 +1998,14 @@ let
           };
           "operator" = mkOption {
             description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-            type = types.str;
+            type = (
+              types.enum [
+                "In"
+                "NotIn"
+                "Exists"
+                "DoesNotExist"
+              ]
+            );
           };
           "values" = mkOption {
             description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -1839,7 +2052,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -1858,7 +2071,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -1902,7 +2122,25 @@ let
         };
         "fromEntities" = mkOption {
           description = "FromEntities is a list of special entities which the endpoint subject\nto the rule is allowed to receive connections from. Supported entities are\n`world`, `cluster`, `host`, `remote-node`, `kube-apiserver`, `ingress`, `init`,\n`health`, `unmanaged`, `none` and `all`.";
-          type = (types.nullOr (types.listOf types.str));
+          type = (
+            types.nullOr (
+              types.listOf (
+                types.enum [
+                  "all"
+                  "world"
+                  "cluster"
+                  "host"
+                  "init"
+                  "ingress"
+                  "unmanaged"
+                  "remote-node"
+                  "health"
+                  "none"
+                  "kube-apiserver"
+                ]
+              )
+            )
+          );
         };
         "fromGroups" = mkOption {
           description = "FromGroups is a directive that allows the integration with multiple outside\nproviders. Currently, only AWS is supported, and the rule can select by\nmultiple sub directives:\n\nExample:\nFromGroups:\n- aws:\n    securityGroupsIds:\n    - 'sg-XXXXXXXXXXXXX'";
@@ -1965,7 +2203,13 @@ let
       options = {
         "mode" = mkOption {
           description = "Mode is the required authentication mode for the allowed traffic, if any.";
-          type = types.str;
+          type = (
+            types.enum [
+              "disabled"
+              "required"
+              "test-always-fail"
+            ]
+          );
         };
       };
 
@@ -1997,7 +2241,25 @@ let
         };
         "fromEntities" = mkOption {
           description = "FromEntities is a list of special entities which the endpoint subject\nto the rule is allowed to receive connections from. Supported entities are\n`world`, `cluster`, `host`, `remote-node`, `kube-apiserver`, `ingress`, `init`,\n`health`, `unmanaged`, `none` and `all`.";
-          type = (types.nullOr (types.listOf types.str));
+          type = (
+            types.nullOr (
+              types.listOf (
+                types.enum [
+                  "all"
+                  "world"
+                  "cluster"
+                  "host"
+                  "init"
+                  "ingress"
+                  "unmanaged"
+                  "remote-node"
+                  "health"
+                  "none"
+                  "kube-apiserver"
+                ]
+              )
+            )
+          );
         };
         "fromGroups" = mkOption {
           description = "FromGroups is a directive that allows the integration with multiple outside\nproviders. Currently, only AWS is supported, and the rule can select by\nmultiple sub directives:\n\nExample:\nFromGroups:\n- aws:\n    securityGroupsIds:\n    - 'sg-XXXXXXXXXXXXX'";
@@ -2063,7 +2325,7 @@ let
         };
         "cidrGroupRef" = mkOption {
           description = "CIDRGroupRef is a reference to a CiliumCIDRGroup object.\nA CiliumCIDRGroup contains a list of CIDRs that the endpoint, subject to\nthe rule, can (Ingress/Egress) or cannot (IngressDeny/EgressDeny) receive\nconnections from.";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 253 types.str));
         };
         "cidrGroupSelector" = mkOption {
           description = "CIDRGroupSelector selects CiliumCIDRGroups by their labels,\nrather than by name.";
@@ -2102,7 +2364,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -2122,7 +2384,14 @@ let
           };
           "operator" = mkOption {
             description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-            type = types.str;
+            type = (
+              types.enum [
+                "In"
+                "NotIn"
+                "Exists"
+                "DoesNotExist"
+              ]
+            );
           };
           "values" = mkOption {
             description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -2150,7 +2419,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -2169,7 +2438,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -2242,7 +2518,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -2261,7 +2537,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -2289,7 +2572,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -2308,7 +2591,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -2344,7 +2634,14 @@ let
       options = {
         "family" = mkOption {
           description = "Family is a IP address version.\nCurrently, we support `IPv4` and `IPv6`.\n`IPv4` is set as default.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "IPv4"
+                "IPv6"
+              ]
+            )
+          );
         };
         "type" = mkOption {
           description = "Type is a ICMP-type.\nIt should be an 8bit code (0-255), or it's CamelCase name (for example, \"EchoReply\").\nAllowed ICMP types are:\n    Ipv4: EchoReply | DestinationUnreachable | Redirect | Echo | EchoRequest |\n\t\t     RouterAdvertisement | RouterSelection | TimeExceeded | ParameterProblem |\n\t\t\t Timestamp | TimestampReply | Photuris | ExtendedEcho Request | ExtendedEcho Reply\n    Ipv6: DestinationUnreachable | PacketTooBig | TimeExceeded | ParameterProblem |\n\t\t\t EchoRequest | EchoReply | MulticastListenerQuery| MulticastListenerReport |\n\t\t\t MulticastListenerDone | RouterSolicitation | RouterAdvertisement | NeighborSolicitation |\n\t\t\t NeighborAdvertisement | RedirectMessage | RouterRenumbering | ICMPNodeInformationQuery |\n\t\t\t ICMPNodeInformationResponse | InverseNeighborDiscoverySolicitation | InverseNeighborDiscoveryAdvertisement |\n\t\t\t HomeAgentAddressDiscoveryRequest | HomeAgentAddressDiscoveryReply | MobilePrefixSolicitation |\n\t\t\t MobilePrefixAdvertisement | DuplicateAddressRequestCodeSuffix | DuplicateAddressConfirmationCodeSuffix |\n\t\t\t ExtendedEchoRequest | ExtendedEchoReply";
@@ -2380,7 +2677,7 @@ let
       options = {
         "endPort" = mkOption {
           description = "EndPort can only be an L4 port number.";
-          type = (types.nullOr types.int);
+          type = (types.nullOr (types.withMaximum 65535 (types.withMinimum 0 types.int)));
         };
         "port" = mkOption {
           description = "Port can be an L4 port number, or a name in the form of \"http\"\nor \"http-8080\".";
@@ -2388,7 +2685,16 @@ let
         };
         "protocol" = mkOption {
           description = "Protocol is the L4 protocol. If omitted or empty, any protocol\nmatches. Accepted values: \"TCP\", \"UDP\", \"SCTP\", \"ANY\"\n\nMatching on ICMP is not supported.\n\nNamed port specified for a container may narrow this down, but may not\ncontradict this.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "TCP"
+                "UDP"
+                "SCTP"
+                "ANY"
+              ]
+            )
+          );
         };
       };
 
@@ -2407,7 +2713,7 @@ let
         };
         "cidrGroupRef" = mkOption {
           description = "CIDRGroupRef is a reference to a CiliumCIDRGroup object.\nA CiliumCIDRGroup contains a list of CIDRs that the endpoint, subject to\nthe rule, can (Ingress/Egress) or cannot (IngressDeny/EgressDeny) receive\nconnections from.";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 253 types.str));
         };
         "cidrGroupSelector" = mkOption {
           description = "CIDRGroupSelector selects CiliumCIDRGroups by their labels,\nrather than by name.";
@@ -2446,7 +2752,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -2466,7 +2772,14 @@ let
           };
           "operator" = mkOption {
             description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-            type = types.str;
+            type = (
+              types.enum [
+                "In"
+                "NotIn"
+                "Exists"
+                "DoesNotExist"
+              ]
+            );
           };
           "values" = mkOption {
             description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -2494,7 +2807,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -2513,7 +2826,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -2586,7 +2906,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -2605,7 +2925,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -2633,7 +2960,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -2652,7 +2979,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -2688,7 +3022,14 @@ let
       options = {
         "family" = mkOption {
           description = "Family is a IP address version.\nCurrently, we support `IPv4` and `IPv6`.\n`IPv4` is set as default.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "IPv4"
+                "IPv6"
+              ]
+            )
+          );
         };
         "type" = mkOption {
           description = "Type is a ICMP-type.\nIt should be an 8bit code (0-255), or it's CamelCase name (for example, \"EchoReply\").\nAllowed ICMP types are:\n    Ipv4: EchoReply | DestinationUnreachable | Redirect | Echo | EchoRequest |\n\t\t     RouterAdvertisement | RouterSelection | TimeExceeded | ParameterProblem |\n\t\t\t Timestamp | TimestampReply | Photuris | ExtendedEcho Request | ExtendedEcho Reply\n    Ipv6: DestinationUnreachable | PacketTooBig | TimeExceeded | ParameterProblem |\n\t\t\t EchoRequest | EchoReply | MulticastListenerQuery| MulticastListenerReport |\n\t\t\t MulticastListenerDone | RouterSolicitation | RouterAdvertisement | NeighborSolicitation |\n\t\t\t NeighborAdvertisement | RedirectMessage | RouterRenumbering | ICMPNodeInformationQuery |\n\t\t\t ICMPNodeInformationResponse | InverseNeighborDiscoverySolicitation | InverseNeighborDiscoveryAdvertisement |\n\t\t\t HomeAgentAddressDiscoveryRequest | HomeAgentAddressDiscoveryReply | MobilePrefixSolicitation |\n\t\t\t MobilePrefixAdvertisement | DuplicateAddressRequestCodeSuffix | DuplicateAddressConfirmationCodeSuffix |\n\t\t\t ExtendedEchoRequest | ExtendedEchoReply";
@@ -2734,7 +3075,7 @@ let
         };
         "serverNames" = mkOption {
           description = "ServerNames is a list of allowed TLS SNI values. If not empty, then\nTLS must be present and one of the provided SNIs must be indicated in the\nTLS handshake.";
-          type = (types.nullOr (types.listOf types.str));
+          type = (types.nullOr (types.listOf (types.withMaxLength 255 types.str)));
         };
         "terminatingTLS" = mkOption {
           description = "TerminatingTLS is the TLS context for the connection terminated by\nthe L7 proxy.  For egress policy this specifies the server-side TLS\nparameters to be applied on the connections originated from the local\nendpoint and terminated by the L7 proxy. For ingress policy this specifies\nthe server-side TLS parameters to be applied on the connections\noriginated from a remote source and terminated by the L7 proxy.";
@@ -2767,11 +3108,11 @@ let
         };
         "name" = mkOption {
           description = "Name is the name of the listener.";
-          type = types.str;
+          type = (types.withMinLength 1 types.str);
         };
         "priority" = mkOption {
           description = "Priority for this Listener that is used when multiple rules would apply different\nlisteners to a policy map entry. Behavior of this is implementation dependent.";
-          type = (types.nullOr types.int);
+          type = (types.nullOr (types.withMaximum 100 (types.withMinimum 1 types.int)));
         };
       };
 
@@ -2785,11 +3126,18 @@ let
       options = {
         "kind" = mkOption {
           description = "Kind is the resource type being referred to. Defaults to CiliumEnvoyConfig or\nCiliumClusterwideEnvoyConfig for CiliumNetworkPolicy and CiliumClusterwideNetworkPolicy,\nrespectively. The only case this is currently explicitly needed is when referring to a\nCiliumClusterwideEnvoyConfig from CiliumNetworkPolicy, as using a namespaced listener\nfrom a cluster scoped policy is not allowed.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "CiliumEnvoyConfig"
+                "CiliumClusterwideEnvoyConfig"
+              ]
+            )
+          );
         };
         "name" = mkOption {
           description = "Name is the resource name of the CiliumEnvoyConfig or CiliumClusterwideEnvoyConfig where\nthe listener is defined in.";
-          type = types.str;
+          type = (types.withMinLength 1 types.str);
         };
       };
 
@@ -2851,7 +3199,7 @@ let
       options = {
         "endPort" = mkOption {
           description = "EndPort can only be an L4 port number.";
-          type = (types.nullOr types.int);
+          type = (types.nullOr (types.withMaximum 65535 (types.withMinimum 0 types.int)));
         };
         "port" = mkOption {
           description = "Port can be an L4 port number, or a name in the form of \"http\"\nor \"http-8080\".";
@@ -2859,7 +3207,16 @@ let
         };
         "protocol" = mkOption {
           description = "Protocol is the L4 protocol. If omitted or empty, any protocol\nmatches. Accepted values: \"TCP\", \"UDP\", \"SCTP\", \"ANY\"\n\nMatching on ICMP is not supported.\n\nNamed port specified for a container may narrow this down, but may not\ncontradict this.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "TCP"
+                "UDP"
+                "SCTP"
+                "ANY"
+              ]
+            )
+          );
         };
       };
 
@@ -2920,11 +3277,11 @@ let
       options = {
         "matchName" = mkOption {
           description = "MatchName matches literal DNS names. A trailing \".\" is automatically added\nwhen missing.";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 255 types.str));
         };
         "matchPattern" = mkOption {
           description = "MatchPattern allows using wildcards to match DNS names. All wildcards are\ncase insensitive. The wildcards are:\n- \"*\" matches 0 or more DNS valid characters, and may occur anywhere in\nthe pattern. As a special case a \"*\" as the leftmost character, without a\nfollowing \".\" matches all subdomains as well as the name to the right.\nA trailing \".\" is automatically added when missing.\n\nExamples:\n`*.cilium.io` matches subdomains of cilium at that level\n  www.cilium.io and blog.cilium.io match, cilium.io and google.com do not\n`*cilium.io` matches cilium.io and all subdomains ends with \"cilium.io\"\n  except those containing \".\" separator, subcilium.io and sub-cilium.io match,\n  www.cilium.io and blog.cilium.io does not\nsub*.cilium.io matches subdomains of cilium where the subdomain component\nbegins with \"sub\"\n  sub.cilium.io and subdomain.cilium.io match, www.cilium.io,\n  blog.cilium.io, cilium.io and google.com do not";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 255 types.str));
         };
       };
 
@@ -2981,11 +3338,20 @@ let
       options = {
         "mismatch" = mkOption {
           description = "Mismatch identifies what to do in case there is no match. The default is\nto drop the request. Otherwise the overall rule is still considered as\nmatching, but the mismatches are logged in the access log.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "LOG"
+                "ADD"
+                "DELETE"
+                "REPLACE"
+              ]
+            )
+          );
         };
         "name" = mkOption {
           description = "Name identifies the header.";
-          type = types.str;
+          type = (types.withMinLength 1 types.str);
         };
         "secret" = mkOption {
           description = "Secret refers to a secret that contains the value to be matched against.\nThe secret must only contain one entry. If the referred secret does not\nexist, and there is no \"Value\" specified, the match will fail.";
@@ -3043,11 +3409,18 @@ let
         };
         "role" = mkOption {
           description = "Role is a case-insensitive string and describes a group of API keys\nnecessary to perform certain higher-level Kafka operations such as \"produce\"\nor \"consume\". A Role automatically expands into all APIKeys required\nto perform the specified higher-level operation.\n\nThe following values are supported:\n - \"produce\": Allow producing to the topics specified in the rule\n - \"consume\": Allow consuming from the topics specified in the rule\n\nThis field is incompatible with the APIKey field, i.e APIKey and Role\ncannot both be specified in the same rule.\n\nIf omitted or empty, and if APIKey is not specified, then all keys are\nallowed.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "produce"
+                "consume"
+              ]
+            )
+          );
         };
         "topic" = mkOption {
           description = "Topic is the topic name contained in the message. If a Kafka request\ncontains multiple topics, then all topics must be allowed or the\nmessage will be rejected.\n\nThis constraint is ignored if the matched request message type\ndoesn't contain any topic. Maximum size of Topic can be 249\ncharacters as per recent Kafka spec and allowed characters are\na-z, A-Z, 0-9, -, . and _.\n\nOlder Kafka versions had longer topic lengths of 255, but in Kafka 0.10\nversion the length was changed from 255 to 249. For compatibility\nreasons we are using 255.\n\nIf omitted or empty, all topics are allowed.";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 255 types.str));
         };
       };
 
@@ -3136,7 +3509,7 @@ let
       options = {
         "value" = mkOption {
           description = "Value is a free-form string that is included in Hubble flows\nthat match this policy. The string is limited to 32 printable characters.";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 32 types.str));
         };
       };
 
@@ -3160,7 +3533,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -3179,7 +3552,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -3308,7 +3688,25 @@ let
         };
         "toEntities" = mkOption {
           description = "ToEntities is a list of special entities to which the endpoint subject\nto the rule is allowed to initiate connections. Supported entities are\n`world`, `cluster`, `host`, `remote-node`, `kube-apiserver`, `ingress`, `init`,\n`health`, `unmanaged`, `none` and `all`.";
-          type = (types.nullOr (types.listOf types.str));
+          type = (
+            types.nullOr (
+              types.listOf (
+                types.enum [
+                  "all"
+                  "world"
+                  "cluster"
+                  "host"
+                  "init"
+                  "ingress"
+                  "unmanaged"
+                  "remote-node"
+                  "health"
+                  "none"
+                  "kube-apiserver"
+                ]
+              )
+            )
+          );
         };
         "toFQDNs" = mkOption {
           description = "ToFQDN allows whitelisting DNS names in place of IPs. The IPs that result\nfrom DNS resolution of `ToFQDN.MatchName`s are added to the same\nEgressRule object as ToCIDRSet entries, and behave accordingly. Any L4 and\nL7 rules within this EgressRule will also apply to these IPs.\nThe DNS -> IP mapping is re-resolved periodically from within the\ncilium-agent, and the IPs in the DNS response are effected in the policy\nfor selected pods as-is (i.e. the list of IPs is not modified in any way).\nNote: An explicit rule to allow for DNS traffic is needed for the pods, as\nToFQDN counts as an egress rule and will enforce egress policy when\nPolicyEnforcment=default.\nNote: If the resolved IPs are IPs within the kubernetes cluster, the\nToFQDN rule will not apply to that IP.\nNote: ToFQDN cannot occur in the same policy as other To* rules.";
@@ -3381,7 +3779,13 @@ let
       options = {
         "mode" = mkOption {
           description = "Mode is the required authentication mode for the allowed traffic, if any.";
-          type = types.str;
+          type = (
+            types.enum [
+              "disabled"
+              "required"
+              "test-always-fail"
+            ]
+          );
         };
       };
 
@@ -3421,7 +3825,25 @@ let
         };
         "toEntities" = mkOption {
           description = "ToEntities is a list of special entities to which the endpoint subject\nto the rule is allowed to initiate connections. Supported entities are\n`world`, `cluster`, `host`, `remote-node`, `kube-apiserver`, `ingress`, `init`,\n`health`, `unmanaged`, `none` and `all`.";
-          type = (types.nullOr (types.listOf types.str));
+          type = (
+            types.nullOr (
+              types.listOf (
+                types.enum [
+                  "all"
+                  "world"
+                  "cluster"
+                  "host"
+                  "init"
+                  "ingress"
+                  "unmanaged"
+                  "remote-node"
+                  "health"
+                  "none"
+                  "kube-apiserver"
+                ]
+              )
+            )
+          );
         };
         "toGroups" = mkOption {
           description = "ToGroups is a directive that allows the integration with multiple outside\nproviders. Currently, only AWS is supported, and the rule can select by\nmultiple sub directives:\n\nExample:\ntoGroups:\n- aws:\n    securityGroupsIds:\n    - 'sg-XXXXXXXXXXXXX'";
@@ -3502,7 +3924,14 @@ let
       options = {
         "family" = mkOption {
           description = "Family is a IP address version.\nCurrently, we support `IPv4` and `IPv6`.\n`IPv4` is set as default.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "IPv4"
+                "IPv6"
+              ]
+            )
+          );
         };
         "type" = mkOption {
           description = "Type is a ICMP-type.\nIt should be an 8bit code (0-255), or it's CamelCase name (for example, \"EchoReply\").\nAllowed ICMP types are:\n    Ipv4: EchoReply | DestinationUnreachable | Redirect | Echo | EchoRequest |\n\t\t     RouterAdvertisement | RouterSelection | TimeExceeded | ParameterProblem |\n\t\t\t Timestamp | TimestampReply | Photuris | ExtendedEcho Request | ExtendedEcho Reply\n    Ipv6: DestinationUnreachable | PacketTooBig | TimeExceeded | ParameterProblem |\n\t\t\t EchoRequest | EchoReply | MulticastListenerQuery| MulticastListenerReport |\n\t\t\t MulticastListenerDone | RouterSolicitation | RouterAdvertisement | NeighborSolicitation |\n\t\t\t NeighborAdvertisement | RedirectMessage | RouterRenumbering | ICMPNodeInformationQuery |\n\t\t\t ICMPNodeInformationResponse | InverseNeighborDiscoverySolicitation | InverseNeighborDiscoveryAdvertisement |\n\t\t\t HomeAgentAddressDiscoveryRequest | HomeAgentAddressDiscoveryReply | MobilePrefixSolicitation |\n\t\t\t MobilePrefixAdvertisement | DuplicateAddressRequestCodeSuffix | DuplicateAddressConfirmationCodeSuffix |\n\t\t\t ExtendedEchoRequest | ExtendedEchoReply";
@@ -3524,7 +3953,7 @@ let
         };
         "cidrGroupRef" = mkOption {
           description = "CIDRGroupRef is a reference to a CiliumCIDRGroup object.\nA CiliumCIDRGroup contains a list of CIDRs that the endpoint, subject to\nthe rule, can (Ingress/Egress) or cannot (IngressDeny/EgressDeny) receive\nconnections from.";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 253 types.str));
         };
         "cidrGroupSelector" = mkOption {
           description = "CIDRGroupSelector selects CiliumCIDRGroups by their labels,\nrather than by name.";
@@ -3563,7 +3992,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -3583,7 +4012,14 @@ let
           };
           "operator" = mkOption {
             description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-            type = types.str;
+            type = (
+              types.enum [
+                "In"
+                "NotIn"
+                "Exists"
+                "DoesNotExist"
+              ]
+            );
           };
           "values" = mkOption {
             description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -3611,7 +4047,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -3630,7 +4066,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -3703,7 +4146,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -3722,7 +4165,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -3758,7 +4208,7 @@ let
       options = {
         "endPort" = mkOption {
           description = "EndPort can only be an L4 port number.";
-          type = (types.nullOr types.int);
+          type = (types.nullOr (types.withMaximum 65535 (types.withMinimum 0 types.int)));
         };
         "port" = mkOption {
           description = "Port can be an L4 port number, or a name in the form of \"http\"\nor \"http-8080\".";
@@ -3766,7 +4216,16 @@ let
         };
         "protocol" = mkOption {
           description = "Protocol is the L4 protocol. If omitted or empty, any protocol\nmatches. Accepted values: \"TCP\", \"UDP\", \"SCTP\", \"ANY\"\n\nMatching on ICMP is not supported.\n\nNamed port specified for a container may narrow this down, but may not\ncontradict this.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "TCP"
+                "UDP"
+                "SCTP"
+                "ANY"
+              ]
+            )
+          );
         };
       };
 
@@ -3791,7 +4250,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -3810,7 +4269,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -3904,7 +4370,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -3924,7 +4390,14 @@ let
           };
           "operator" = mkOption {
             description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-            type = types.str;
+            type = (
+              types.enum [
+                "In"
+                "NotIn"
+                "Exists"
+                "DoesNotExist"
+              ]
+            );
           };
           "values" = mkOption {
             description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -3960,7 +4433,14 @@ let
       options = {
         "family" = mkOption {
           description = "Family is a IP address version.\nCurrently, we support `IPv4` and `IPv6`.\n`IPv4` is set as default.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "IPv4"
+                "IPv6"
+              ]
+            )
+          );
         };
         "type" = mkOption {
           description = "Type is a ICMP-type.\nIt should be an 8bit code (0-255), or it's CamelCase name (for example, \"EchoReply\").\nAllowed ICMP types are:\n    Ipv4: EchoReply | DestinationUnreachable | Redirect | Echo | EchoRequest |\n\t\t     RouterAdvertisement | RouterSelection | TimeExceeded | ParameterProblem |\n\t\t\t Timestamp | TimestampReply | Photuris | ExtendedEcho Request | ExtendedEcho Reply\n    Ipv6: DestinationUnreachable | PacketTooBig | TimeExceeded | ParameterProblem |\n\t\t\t EchoRequest | EchoReply | MulticastListenerQuery| MulticastListenerReport |\n\t\t\t MulticastListenerDone | RouterSolicitation | RouterAdvertisement | NeighborSolicitation |\n\t\t\t NeighborAdvertisement | RedirectMessage | RouterRenumbering | ICMPNodeInformationQuery |\n\t\t\t ICMPNodeInformationResponse | InverseNeighborDiscoverySolicitation | InverseNeighborDiscoveryAdvertisement |\n\t\t\t HomeAgentAddressDiscoveryRequest | HomeAgentAddressDiscoveryReply | MobilePrefixSolicitation |\n\t\t\t MobilePrefixAdvertisement | DuplicateAddressRequestCodeSuffix | DuplicateAddressConfirmationCodeSuffix |\n\t\t\t ExtendedEchoRequest | ExtendedEchoReply";
@@ -3982,7 +4462,7 @@ let
         };
         "cidrGroupRef" = mkOption {
           description = "CIDRGroupRef is a reference to a CiliumCIDRGroup object.\nA CiliumCIDRGroup contains a list of CIDRs that the endpoint, subject to\nthe rule, can (Ingress/Egress) or cannot (IngressDeny/EgressDeny) receive\nconnections from.";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 253 types.str));
         };
         "cidrGroupSelector" = mkOption {
           description = "CIDRGroupSelector selects CiliumCIDRGroups by their labels,\nrather than by name.";
@@ -4021,7 +4501,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -4041,7 +4521,14 @@ let
           };
           "operator" = mkOption {
             description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-            type = types.str;
+            type = (
+              types.enum [
+                "In"
+                "NotIn"
+                "Exists"
+                "DoesNotExist"
+              ]
+            );
           };
           "values" = mkOption {
             description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -4069,7 +4556,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -4088,7 +4575,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -4106,11 +4600,11 @@ let
       options = {
         "matchName" = mkOption {
           description = "MatchName matches literal DNS names. A trailing \".\" is automatically added\nwhen missing.";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 255 types.str));
         };
         "matchPattern" = mkOption {
           description = "MatchPattern allows using wildcards to match DNS names. All wildcards are\ncase insensitive. The wildcards are:\n- \"*\" matches 0 or more DNS valid characters, and may occur anywhere in\nthe pattern. As a special case a \"*\" as the leftmost character, without a\nfollowing \".\" matches all subdomains as well as the name to the right.\nA trailing \".\" is automatically added when missing.\n\nExamples:\n`*.cilium.io` matches subdomains of cilium at that level\n  www.cilium.io and blog.cilium.io match, cilium.io and google.com do not\n`*cilium.io` matches cilium.io and all subdomains ends with \"cilium.io\"\n  except those containing \".\" separator, subcilium.io and sub-cilium.io match,\n  www.cilium.io and blog.cilium.io does not\nsub*.cilium.io matches subdomains of cilium where the subdomain component\nbegins with \"sub\"\n  sub.cilium.io and subdomain.cilium.io match, www.cilium.io,\n  blog.cilium.io, cilium.io and google.com do not";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 255 types.str));
         };
       };
 
@@ -4180,7 +4674,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -4199,7 +4693,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -4245,7 +4746,7 @@ let
         };
         "serverNames" = mkOption {
           description = "ServerNames is a list of allowed TLS SNI values. If not empty, then\nTLS must be present and one of the provided SNIs must be indicated in the\nTLS handshake.";
-          type = (types.nullOr (types.listOf types.str));
+          type = (types.nullOr (types.listOf (types.withMaxLength 255 types.str)));
         };
         "terminatingTLS" = mkOption {
           description = "TerminatingTLS is the TLS context for the connection terminated by\nthe L7 proxy.  For egress policy this specifies the server-side TLS\nparameters to be applied on the connections originated from the local\nendpoint and terminated by the L7 proxy. For ingress policy this specifies\nthe server-side TLS parameters to be applied on the connections\noriginated from a remote source and terminated by the L7 proxy.";
@@ -4278,11 +4779,11 @@ let
         };
         "name" = mkOption {
           description = "Name is the name of the listener.";
-          type = types.str;
+          type = (types.withMinLength 1 types.str);
         };
         "priority" = mkOption {
           description = "Priority for this Listener that is used when multiple rules would apply different\nlisteners to a policy map entry. Behavior of this is implementation dependent.";
-          type = (types.nullOr types.int);
+          type = (types.nullOr (types.withMaximum 100 (types.withMinimum 1 types.int)));
         };
       };
 
@@ -4296,11 +4797,18 @@ let
       options = {
         "kind" = mkOption {
           description = "Kind is the resource type being referred to. Defaults to CiliumEnvoyConfig or\nCiliumClusterwideEnvoyConfig for CiliumNetworkPolicy and CiliumClusterwideNetworkPolicy,\nrespectively. The only case this is currently explicitly needed is when referring to a\nCiliumClusterwideEnvoyConfig from CiliumNetworkPolicy, as using a namespaced listener\nfrom a cluster scoped policy is not allowed.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "CiliumEnvoyConfig"
+                "CiliumClusterwideEnvoyConfig"
+              ]
+            )
+          );
         };
         "name" = mkOption {
           description = "Name is the resource name of the CiliumEnvoyConfig or CiliumClusterwideEnvoyConfig where\nthe listener is defined in.";
-          type = types.str;
+          type = (types.withMinLength 1 types.str);
         };
       };
 
@@ -4362,7 +4870,7 @@ let
       options = {
         "endPort" = mkOption {
           description = "EndPort can only be an L4 port number.";
-          type = (types.nullOr types.int);
+          type = (types.nullOr (types.withMaximum 65535 (types.withMinimum 0 types.int)));
         };
         "port" = mkOption {
           description = "Port can be an L4 port number, or a name in the form of \"http\"\nor \"http-8080\".";
@@ -4370,7 +4878,16 @@ let
         };
         "protocol" = mkOption {
           description = "Protocol is the L4 protocol. If omitted or empty, any protocol\nmatches. Accepted values: \"TCP\", \"UDP\", \"SCTP\", \"ANY\"\n\nMatching on ICMP is not supported.\n\nNamed port specified for a container may narrow this down, but may not\ncontradict this.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "TCP"
+                "UDP"
+                "SCTP"
+                "ANY"
+              ]
+            )
+          );
         };
       };
 
@@ -4431,11 +4948,11 @@ let
       options = {
         "matchName" = mkOption {
           description = "MatchName matches literal DNS names. A trailing \".\" is automatically added\nwhen missing.";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 255 types.str));
         };
         "matchPattern" = mkOption {
           description = "MatchPattern allows using wildcards to match DNS names. All wildcards are\ncase insensitive. The wildcards are:\n- \"*\" matches 0 or more DNS valid characters, and may occur anywhere in\nthe pattern. As a special case a \"*\" as the leftmost character, without a\nfollowing \".\" matches all subdomains as well as the name to the right.\nA trailing \".\" is automatically added when missing.\n\nExamples:\n`*.cilium.io` matches subdomains of cilium at that level\n  www.cilium.io and blog.cilium.io match, cilium.io and google.com do not\n`*cilium.io` matches cilium.io and all subdomains ends with \"cilium.io\"\n  except those containing \".\" separator, subcilium.io and sub-cilium.io match,\n  www.cilium.io and blog.cilium.io does not\nsub*.cilium.io matches subdomains of cilium where the subdomain component\nbegins with \"sub\"\n  sub.cilium.io and subdomain.cilium.io match, www.cilium.io,\n  blog.cilium.io, cilium.io and google.com do not";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 255 types.str));
         };
       };
 
@@ -4492,11 +5009,20 @@ let
       options = {
         "mismatch" = mkOption {
           description = "Mismatch identifies what to do in case there is no match. The default is\nto drop the request. Otherwise the overall rule is still considered as\nmatching, but the mismatches are logged in the access log.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "LOG"
+                "ADD"
+                "DELETE"
+                "REPLACE"
+              ]
+            )
+          );
         };
         "name" = mkOption {
           description = "Name identifies the header.";
-          type = types.str;
+          type = (types.withMinLength 1 types.str);
         };
         "secret" = mkOption {
           description = "Secret refers to a secret that contains the value to be matched against.\nThe secret must only contain one entry. If the referred secret does not\nexist, and there is no \"Value\" specified, the match will fail.";
@@ -4554,11 +5080,18 @@ let
         };
         "role" = mkOption {
           description = "Role is a case-insensitive string and describes a group of API keys\nnecessary to perform certain higher-level Kafka operations such as \"produce\"\nor \"consume\". A Role automatically expands into all APIKeys required\nto perform the specified higher-level operation.\n\nThe following values are supported:\n - \"produce\": Allow producing to the topics specified in the rule\n - \"consume\": Allow consuming from the topics specified in the rule\n\nThis field is incompatible with the APIKey field, i.e APIKey and Role\ncannot both be specified in the same rule.\n\nIf omitted or empty, and if APIKey is not specified, then all keys are\nallowed.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "produce"
+                "consume"
+              ]
+            )
+          );
         };
         "topic" = mkOption {
           description = "Topic is the topic name contained in the message. If a Kafka request\ncontains multiple topics, then all topics must be allowed or the\nmessage will be rejected.\n\nThis constraint is ignored if the matched request message type\ndoesn't contain any topic. Maximum size of Topic can be 249\ncharacters as per recent Kafka spec and allowed characters are\na-z, A-Z, 0-9, -, . and _.\n\nOlder Kafka versions had longer topic lengths of 255, but in Kafka 0.10\nversion the length was changed from 255 to 249. For compatibility\nreasons we are using 255.\n\nIf omitted or empty, all topics are allowed.";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 255 types.str));
         };
       };
 
@@ -4634,7 +5167,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -4653,7 +5186,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -4747,7 +5287,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -4767,7 +5307,14 @@ let
           };
           "operator" = mkOption {
             description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-            type = types.str;
+            type = (
+              types.enum [
+                "In"
+                "NotIn"
+                "Exists"
+                "DoesNotExist"
+              ]
+            );
           };
           "values" = mkOption {
             description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -4814,7 +5361,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -4833,7 +5380,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -4877,7 +5431,25 @@ let
         };
         "fromEntities" = mkOption {
           description = "FromEntities is a list of special entities which the endpoint subject\nto the rule is allowed to receive connections from. Supported entities are\n`world`, `cluster`, `host`, `remote-node`, `kube-apiserver`, `ingress`, `init`,\n`health`, `unmanaged`, `none` and `all`.";
-          type = (types.nullOr (types.listOf types.str));
+          type = (
+            types.nullOr (
+              types.listOf (
+                types.enum [
+                  "all"
+                  "world"
+                  "cluster"
+                  "host"
+                  "init"
+                  "ingress"
+                  "unmanaged"
+                  "remote-node"
+                  "health"
+                  "none"
+                  "kube-apiserver"
+                ]
+              )
+            )
+          );
         };
         "fromGroups" = mkOption {
           description = "FromGroups is a directive that allows the integration with multiple outside\nproviders. Currently, only AWS is supported, and the rule can select by\nmultiple sub directives:\n\nExample:\nFromGroups:\n- aws:\n    securityGroupsIds:\n    - 'sg-XXXXXXXXXXXXX'";
@@ -4940,7 +5512,13 @@ let
       options = {
         "mode" = mkOption {
           description = "Mode is the required authentication mode for the allowed traffic, if any.";
-          type = types.str;
+          type = (
+            types.enum [
+              "disabled"
+              "required"
+              "test-always-fail"
+            ]
+          );
         };
       };
 
@@ -4974,7 +5552,25 @@ let
         };
         "fromEntities" = mkOption {
           description = "FromEntities is a list of special entities which the endpoint subject\nto the rule is allowed to receive connections from. Supported entities are\n`world`, `cluster`, `host`, `remote-node`, `kube-apiserver`, `ingress`, `init`,\n`health`, `unmanaged`, `none` and `all`.";
-          type = (types.nullOr (types.listOf types.str));
+          type = (
+            types.nullOr (
+              types.listOf (
+                types.enum [
+                  "all"
+                  "world"
+                  "cluster"
+                  "host"
+                  "init"
+                  "ingress"
+                  "unmanaged"
+                  "remote-node"
+                  "health"
+                  "none"
+                  "kube-apiserver"
+                ]
+              )
+            )
+          );
         };
         "fromGroups" = mkOption {
           description = "FromGroups is a directive that allows the integration with multiple outside\nproviders. Currently, only AWS is supported, and the rule can select by\nmultiple sub directives:\n\nExample:\nFromGroups:\n- aws:\n    securityGroupsIds:\n    - 'sg-XXXXXXXXXXXXX'";
@@ -5040,7 +5636,7 @@ let
         };
         "cidrGroupRef" = mkOption {
           description = "CIDRGroupRef is a reference to a CiliumCIDRGroup object.\nA CiliumCIDRGroup contains a list of CIDRs that the endpoint, subject to\nthe rule, can (Ingress/Egress) or cannot (IngressDeny/EgressDeny) receive\nconnections from.";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 253 types.str));
         };
         "cidrGroupSelector" = mkOption {
           description = "CIDRGroupSelector selects CiliumCIDRGroups by their labels,\nrather than by name.";
@@ -5079,7 +5675,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -5099,7 +5695,14 @@ let
           };
           "operator" = mkOption {
             description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-            type = types.str;
+            type = (
+              types.enum [
+                "In"
+                "NotIn"
+                "Exists"
+                "DoesNotExist"
+              ]
+            );
           };
           "values" = mkOption {
             description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -5127,7 +5730,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -5146,7 +5749,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -5221,7 +5831,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -5240,7 +5850,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -5268,7 +5885,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -5287,7 +5904,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -5323,7 +5947,14 @@ let
       options = {
         "family" = mkOption {
           description = "Family is a IP address version.\nCurrently, we support `IPv4` and `IPv6`.\n`IPv4` is set as default.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "IPv4"
+                "IPv6"
+              ]
+            )
+          );
         };
         "type" = mkOption {
           description = "Type is a ICMP-type.\nIt should be an 8bit code (0-255), or it's CamelCase name (for example, \"EchoReply\").\nAllowed ICMP types are:\n    Ipv4: EchoReply | DestinationUnreachable | Redirect | Echo | EchoRequest |\n\t\t     RouterAdvertisement | RouterSelection | TimeExceeded | ParameterProblem |\n\t\t\t Timestamp | TimestampReply | Photuris | ExtendedEcho Request | ExtendedEcho Reply\n    Ipv6: DestinationUnreachable | PacketTooBig | TimeExceeded | ParameterProblem |\n\t\t\t EchoRequest | EchoReply | MulticastListenerQuery| MulticastListenerReport |\n\t\t\t MulticastListenerDone | RouterSolicitation | RouterAdvertisement | NeighborSolicitation |\n\t\t\t NeighborAdvertisement | RedirectMessage | RouterRenumbering | ICMPNodeInformationQuery |\n\t\t\t ICMPNodeInformationResponse | InverseNeighborDiscoverySolicitation | InverseNeighborDiscoveryAdvertisement |\n\t\t\t HomeAgentAddressDiscoveryRequest | HomeAgentAddressDiscoveryReply | MobilePrefixSolicitation |\n\t\t\t MobilePrefixAdvertisement | DuplicateAddressRequestCodeSuffix | DuplicateAddressConfirmationCodeSuffix |\n\t\t\t ExtendedEchoRequest | ExtendedEchoReply";
@@ -5359,7 +5990,7 @@ let
       options = {
         "endPort" = mkOption {
           description = "EndPort can only be an L4 port number.";
-          type = (types.nullOr types.int);
+          type = (types.nullOr (types.withMaximum 65535 (types.withMinimum 0 types.int)));
         };
         "port" = mkOption {
           description = "Port can be an L4 port number, or a name in the form of \"http\"\nor \"http-8080\".";
@@ -5367,7 +5998,16 @@ let
         };
         "protocol" = mkOption {
           description = "Protocol is the L4 protocol. If omitted or empty, any protocol\nmatches. Accepted values: \"TCP\", \"UDP\", \"SCTP\", \"ANY\"\n\nMatching on ICMP is not supported.\n\nNamed port specified for a container may narrow this down, but may not\ncontradict this.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "TCP"
+                "UDP"
+                "SCTP"
+                "ANY"
+              ]
+            )
+          );
         };
       };
 
@@ -5386,7 +6026,7 @@ let
         };
         "cidrGroupRef" = mkOption {
           description = "CIDRGroupRef is a reference to a CiliumCIDRGroup object.\nA CiliumCIDRGroup contains a list of CIDRs that the endpoint, subject to\nthe rule, can (Ingress/Egress) or cannot (IngressDeny/EgressDeny) receive\nconnections from.";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 253 types.str));
         };
         "cidrGroupSelector" = mkOption {
           description = "CIDRGroupSelector selects CiliumCIDRGroups by their labels,\nrather than by name.";
@@ -5425,7 +6065,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -5445,7 +6085,14 @@ let
           };
           "operator" = mkOption {
             description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-            type = types.str;
+            type = (
+              types.enum [
+                "In"
+                "NotIn"
+                "Exists"
+                "DoesNotExist"
+              ]
+            );
           };
           "values" = mkOption {
             description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -5473,7 +6120,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -5492,7 +6139,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -5565,7 +6219,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -5584,7 +6238,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -5612,7 +6273,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -5631,7 +6292,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -5667,7 +6335,14 @@ let
       options = {
         "family" = mkOption {
           description = "Family is a IP address version.\nCurrently, we support `IPv4` and `IPv6`.\n`IPv4` is set as default.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "IPv4"
+                "IPv6"
+              ]
+            )
+          );
         };
         "type" = mkOption {
           description = "Type is a ICMP-type.\nIt should be an 8bit code (0-255), or it's CamelCase name (for example, \"EchoReply\").\nAllowed ICMP types are:\n    Ipv4: EchoReply | DestinationUnreachable | Redirect | Echo | EchoRequest |\n\t\t     RouterAdvertisement | RouterSelection | TimeExceeded | ParameterProblem |\n\t\t\t Timestamp | TimestampReply | Photuris | ExtendedEcho Request | ExtendedEcho Reply\n    Ipv6: DestinationUnreachable | PacketTooBig | TimeExceeded | ParameterProblem |\n\t\t\t EchoRequest | EchoReply | MulticastListenerQuery| MulticastListenerReport |\n\t\t\t MulticastListenerDone | RouterSolicitation | RouterAdvertisement | NeighborSolicitation |\n\t\t\t NeighborAdvertisement | RedirectMessage | RouterRenumbering | ICMPNodeInformationQuery |\n\t\t\t ICMPNodeInformationResponse | InverseNeighborDiscoverySolicitation | InverseNeighborDiscoveryAdvertisement |\n\t\t\t HomeAgentAddressDiscoveryRequest | HomeAgentAddressDiscoveryReply | MobilePrefixSolicitation |\n\t\t\t MobilePrefixAdvertisement | DuplicateAddressRequestCodeSuffix | DuplicateAddressConfirmationCodeSuffix |\n\t\t\t ExtendedEchoRequest | ExtendedEchoReply";
@@ -5713,7 +6388,7 @@ let
         };
         "serverNames" = mkOption {
           description = "ServerNames is a list of allowed TLS SNI values. If not empty, then\nTLS must be present and one of the provided SNIs must be indicated in the\nTLS handshake.";
-          type = (types.nullOr (types.listOf types.str));
+          type = (types.nullOr (types.listOf (types.withMaxLength 255 types.str)));
         };
         "terminatingTLS" = mkOption {
           description = "TerminatingTLS is the TLS context for the connection terminated by\nthe L7 proxy.  For egress policy this specifies the server-side TLS\nparameters to be applied on the connections originated from the local\nendpoint and terminated by the L7 proxy. For ingress policy this specifies\nthe server-side TLS parameters to be applied on the connections\noriginated from a remote source and terminated by the L7 proxy.";
@@ -5746,11 +6421,11 @@ let
         };
         "name" = mkOption {
           description = "Name is the name of the listener.";
-          type = types.str;
+          type = (types.withMinLength 1 types.str);
         };
         "priority" = mkOption {
           description = "Priority for this Listener that is used when multiple rules would apply different\nlisteners to a policy map entry. Behavior of this is implementation dependent.";
-          type = (types.nullOr types.int);
+          type = (types.nullOr (types.withMaximum 100 (types.withMinimum 1 types.int)));
         };
       };
 
@@ -5764,11 +6439,18 @@ let
       options = {
         "kind" = mkOption {
           description = "Kind is the resource type being referred to. Defaults to CiliumEnvoyConfig or\nCiliumClusterwideEnvoyConfig for CiliumNetworkPolicy and CiliumClusterwideNetworkPolicy,\nrespectively. The only case this is currently explicitly needed is when referring to a\nCiliumClusterwideEnvoyConfig from CiliumNetworkPolicy, as using a namespaced listener\nfrom a cluster scoped policy is not allowed.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "CiliumEnvoyConfig"
+                "CiliumClusterwideEnvoyConfig"
+              ]
+            )
+          );
         };
         "name" = mkOption {
           description = "Name is the resource name of the CiliumEnvoyConfig or CiliumClusterwideEnvoyConfig where\nthe listener is defined in.";
-          type = types.str;
+          type = (types.withMinLength 1 types.str);
         };
       };
 
@@ -5830,7 +6512,7 @@ let
       options = {
         "endPort" = mkOption {
           description = "EndPort can only be an L4 port number.";
-          type = (types.nullOr types.int);
+          type = (types.nullOr (types.withMaximum 65535 (types.withMinimum 0 types.int)));
         };
         "port" = mkOption {
           description = "Port can be an L4 port number, or a name in the form of \"http\"\nor \"http-8080\".";
@@ -5838,7 +6520,16 @@ let
         };
         "protocol" = mkOption {
           description = "Protocol is the L4 protocol. If omitted or empty, any protocol\nmatches. Accepted values: \"TCP\", \"UDP\", \"SCTP\", \"ANY\"\n\nMatching on ICMP is not supported.\n\nNamed port specified for a container may narrow this down, but may not\ncontradict this.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "TCP"
+                "UDP"
+                "SCTP"
+                "ANY"
+              ]
+            )
+          );
         };
       };
 
@@ -5901,11 +6592,11 @@ let
       options = {
         "matchName" = mkOption {
           description = "MatchName matches literal DNS names. A trailing \".\" is automatically added\nwhen missing.";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 255 types.str));
         };
         "matchPattern" = mkOption {
           description = "MatchPattern allows using wildcards to match DNS names. All wildcards are\ncase insensitive. The wildcards are:\n- \"*\" matches 0 or more DNS valid characters, and may occur anywhere in\nthe pattern. As a special case a \"*\" as the leftmost character, without a\nfollowing \".\" matches all subdomains as well as the name to the right.\nA trailing \".\" is automatically added when missing.\n\nExamples:\n`*.cilium.io` matches subdomains of cilium at that level\n  www.cilium.io and blog.cilium.io match, cilium.io and google.com do not\n`*cilium.io` matches cilium.io and all subdomains ends with \"cilium.io\"\n  except those containing \".\" separator, subcilium.io and sub-cilium.io match,\n  www.cilium.io and blog.cilium.io does not\nsub*.cilium.io matches subdomains of cilium where the subdomain component\nbegins with \"sub\"\n  sub.cilium.io and subdomain.cilium.io match, www.cilium.io,\n  blog.cilium.io, cilium.io and google.com do not";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 255 types.str));
         };
       };
 
@@ -5962,11 +6653,20 @@ let
       options = {
         "mismatch" = mkOption {
           description = "Mismatch identifies what to do in case there is no match. The default is\nto drop the request. Otherwise the overall rule is still considered as\nmatching, but the mismatches are logged in the access log.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "LOG"
+                "ADD"
+                "DELETE"
+                "REPLACE"
+              ]
+            )
+          );
         };
         "name" = mkOption {
           description = "Name identifies the header.";
-          type = types.str;
+          type = (types.withMinLength 1 types.str);
         };
         "secret" = mkOption {
           description = "Secret refers to a secret that contains the value to be matched against.\nThe secret must only contain one entry. If the referred secret does not\nexist, and there is no \"Value\" specified, the match will fail.";
@@ -6024,11 +6724,18 @@ let
         };
         "role" = mkOption {
           description = "Role is a case-insensitive string and describes a group of API keys\nnecessary to perform certain higher-level Kafka operations such as \"produce\"\nor \"consume\". A Role automatically expands into all APIKeys required\nto perform the specified higher-level operation.\n\nThe following values are supported:\n - \"produce\": Allow producing to the topics specified in the rule\n - \"consume\": Allow consuming from the topics specified in the rule\n\nThis field is incompatible with the APIKey field, i.e APIKey and Role\ncannot both be specified in the same rule.\n\nIf omitted or empty, and if APIKey is not specified, then all keys are\nallowed.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "produce"
+                "consume"
+              ]
+            )
+          );
         };
         "topic" = mkOption {
           description = "Topic is the topic name contained in the message. If a Kafka request\ncontains multiple topics, then all topics must be allowed or the\nmessage will be rejected.\n\nThis constraint is ignored if the matched request message type\ndoesn't contain any topic. Maximum size of Topic can be 249\ncharacters as per recent Kafka spec and allowed characters are\na-z, A-Z, 0-9, -, . and _.\n\nOlder Kafka versions had longer topic lengths of 255, but in Kafka 0.10\nversion the length was changed from 255 to 249. For compatibility\nreasons we are using 255.\n\nIf omitted or empty, all topics are allowed.";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 255 types.str));
         };
       };
 
@@ -6117,7 +6824,7 @@ let
       options = {
         "value" = mkOption {
           description = "Value is a free-form string that is included in Hubble flows\nthat match this policy. The string is limited to 32 printable characters.";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 32 types.str));
         };
       };
 
@@ -6141,7 +6848,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -6160,7 +6867,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -6265,7 +6979,14 @@ let
       options = {
         "allowFirstLastIPs" = mkOption {
           description = "AllowFirstLastIPs, if set to `Yes` or undefined means that the first and last IPs of each CIDR will be allocatable.\nIf `No`, these IPs will be reserved. This field is ignored for /{31,32} and /{127,128} CIDRs since\nreserving the first and last IPs would make the CIDRs unusable.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "Yes"
+                "No"
+              ]
+            )
+          );
         };
         "blocks" = mkOption {
           description = "Blocks is a list of CIDRs comprising this IP Pool";
@@ -6330,7 +7051,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -6349,7 +7070,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -6387,23 +7115,29 @@ let
         };
         "message" = mkOption {
           description = "message is a human readable message indicating details about the transition.\nThis may be an empty string.";
-          type = types.str;
+          type = (types.withMaxLength 32768 types.str);
         };
         "observedGeneration" = mkOption {
           description = "observedGeneration represents the .metadata.generation that the condition was set based upon.\nFor instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date\nwith respect to the current state of the instance.";
-          type = (types.nullOr types.int);
+          type = (types.nullOr (types.withMinimum 0 types.int));
         };
         "reason" = mkOption {
           description = "reason contains a programmatic identifier indicating the reason for the condition's last transition.\nProducers of specific condition types may define expected values and meanings for this field,\nand whether the values are considered a guaranteed API.\nThe value should be a CamelCase string.\nThis field may not be empty.";
-          type = types.str;
+          type = (types.withMaxLength 1024 (types.withMinLength 1 types.str));
         };
         "status" = mkOption {
           description = "status of the condition, one of True, False, Unknown.";
-          type = types.str;
+          type = (
+            types.enum [
+              "True"
+              "False"
+              "Unknown"
+            ]
+          );
         };
         "type" = mkOption {
           description = "type of condition in CamelCase or in foo.example.com/CamelCase.";
-          type = types.str;
+          type = (types.withMaxLength 316 types.str);
         };
       };
 
@@ -6542,7 +7276,25 @@ let
         };
         "toEntities" = mkOption {
           description = "ToEntities is a list of special entities to which the endpoint subject\nto the rule is allowed to initiate connections. Supported entities are\n`world`, `cluster`, `host`, `remote-node`, `kube-apiserver`, `ingress`, `init`,\n`health`, `unmanaged`, `none` and `all`.";
-          type = (types.nullOr (types.listOf types.str));
+          type = (
+            types.nullOr (
+              types.listOf (
+                types.enum [
+                  "all"
+                  "world"
+                  "cluster"
+                  "host"
+                  "init"
+                  "ingress"
+                  "unmanaged"
+                  "remote-node"
+                  "health"
+                  "none"
+                  "kube-apiserver"
+                ]
+              )
+            )
+          );
         };
         "toFQDNs" = mkOption {
           description = "ToFQDN allows whitelisting DNS names in place of IPs. The IPs that result\nfrom DNS resolution of `ToFQDN.MatchName`s are added to the same\nEgressRule object as ToCIDRSet entries, and behave accordingly. Any L4 and\nL7 rules within this EgressRule will also apply to these IPs.\nThe DNS -> IP mapping is re-resolved periodically from within the\ncilium-agent, and the IPs in the DNS response are effected in the policy\nfor selected pods as-is (i.e. the list of IPs is not modified in any way).\nNote: An explicit rule to allow for DNS traffic is needed for the pods, as\nToFQDN counts as an egress rule and will enforce egress policy when\nPolicyEnforcment=default.\nNote: If the resolved IPs are IPs within the kubernetes cluster, the\nToFQDN rule will not apply to that IP.\nNote: ToFQDN cannot occur in the same policy as other To* rules.";
@@ -6603,7 +7355,13 @@ let
       options = {
         "mode" = mkOption {
           description = "Mode is the required authentication mode for the allowed traffic, if any.";
-          type = types.str;
+          type = (
+            types.enum [
+              "disabled"
+              "required"
+              "test-always-fail"
+            ]
+          );
         };
       };
 
@@ -6639,7 +7397,25 @@ let
         };
         "toEntities" = mkOption {
           description = "ToEntities is a list of special entities to which the endpoint subject\nto the rule is allowed to initiate connections. Supported entities are\n`world`, `cluster`, `host`, `remote-node`, `kube-apiserver`, `ingress`, `init`,\n`health`, `unmanaged`, `none` and `all`.";
-          type = (types.nullOr (types.listOf types.str));
+          type = (
+            types.nullOr (
+              types.listOf (
+                types.enum [
+                  "all"
+                  "world"
+                  "cluster"
+                  "host"
+                  "init"
+                  "ingress"
+                  "unmanaged"
+                  "remote-node"
+                  "health"
+                  "none"
+                  "kube-apiserver"
+                ]
+              )
+            )
+          );
         };
         "toGroups" = mkOption {
           description = "ToGroups is a directive that allows the integration with multiple outside\nproviders. Currently, only AWS is supported, and the rule can select by\nmultiple sub directives:\n\nExample:\ntoGroups:\n- aws:\n    securityGroupsIds:\n    - 'sg-XXXXXXXXXXXXX'";
@@ -6710,7 +7486,14 @@ let
       options = {
         "family" = mkOption {
           description = "Family is a IP address version.\nCurrently, we support `IPv4` and `IPv6`.\n`IPv4` is set as default.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "IPv4"
+                "IPv6"
+              ]
+            )
+          );
         };
         "type" = mkOption {
           description = "Type is a ICMP-type.\nIt should be an 8bit code (0-255), or it's CamelCase name (for example, \"EchoReply\").\nAllowed ICMP types are:\n    Ipv4: EchoReply | DestinationUnreachable | Redirect | Echo | EchoRequest |\n\t\t     RouterAdvertisement | RouterSelection | TimeExceeded | ParameterProblem |\n\t\t\t Timestamp | TimestampReply | Photuris | ExtendedEcho Request | ExtendedEcho Reply\n    Ipv6: DestinationUnreachable | PacketTooBig | TimeExceeded | ParameterProblem |\n\t\t\t EchoRequest | EchoReply | MulticastListenerQuery| MulticastListenerReport |\n\t\t\t MulticastListenerDone | RouterSolicitation | RouterAdvertisement | NeighborSolicitation |\n\t\t\t NeighborAdvertisement | RedirectMessage | RouterRenumbering | ICMPNodeInformationQuery |\n\t\t\t ICMPNodeInformationResponse | InverseNeighborDiscoverySolicitation | InverseNeighborDiscoveryAdvertisement |\n\t\t\t HomeAgentAddressDiscoveryRequest | HomeAgentAddressDiscoveryReply | MobilePrefixSolicitation |\n\t\t\t MobilePrefixAdvertisement | DuplicateAddressRequestCodeSuffix | DuplicateAddressConfirmationCodeSuffix |\n\t\t\t ExtendedEchoRequest | ExtendedEchoReply";
@@ -6732,7 +7515,7 @@ let
         };
         "cidrGroupRef" = mkOption {
           description = "CIDRGroupRef is a reference to a CiliumCIDRGroup object.\nA CiliumCIDRGroup contains a list of CIDRs that the endpoint, subject to\nthe rule, can (Ingress/Egress) or cannot (IngressDeny/EgressDeny) receive\nconnections from.";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 253 types.str));
         };
         "cidrGroupSelector" = mkOption {
           description = "CIDRGroupSelector selects CiliumCIDRGroups by their labels,\nrather than by name.";
@@ -6771,7 +7554,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -6790,7 +7573,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -6818,7 +7608,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -6837,7 +7627,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -6906,7 +7703,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -6925,7 +7722,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -6961,7 +7765,7 @@ let
       options = {
         "endPort" = mkOption {
           description = "EndPort can only be an L4 port number.";
-          type = (types.nullOr types.int);
+          type = (types.nullOr (types.withMaximum 65535 (types.withMinimum 0 types.int)));
         };
         "port" = mkOption {
           description = "Port can be an L4 port number, or a name in the form of \"http\"\nor \"http-8080\".";
@@ -6969,7 +7773,16 @@ let
         };
         "protocol" = mkOption {
           description = "Protocol is the L4 protocol. If omitted or empty, any protocol\nmatches. Accepted values: \"TCP\", \"UDP\", \"SCTP\", \"ANY\"\n\nMatching on ICMP is not supported.\n\nNamed port specified for a container may narrow this down, but may not\ncontradict this.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "TCP"
+                "UDP"
+                "SCTP"
+                "ANY"
+              ]
+            )
+          );
         };
       };
 
@@ -6994,7 +7807,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -7013,7 +7826,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -7105,7 +7925,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -7125,7 +7945,14 @@ let
           };
           "operator" = mkOption {
             description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-            type = types.str;
+            type = (
+              types.enum [
+                "In"
+                "NotIn"
+                "Exists"
+                "DoesNotExist"
+              ]
+            );
           };
           "values" = mkOption {
             description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -7159,7 +7986,14 @@ let
       options = {
         "family" = mkOption {
           description = "Family is a IP address version.\nCurrently, we support `IPv4` and `IPv6`.\n`IPv4` is set as default.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "IPv4"
+                "IPv6"
+              ]
+            )
+          );
         };
         "type" = mkOption {
           description = "Type is a ICMP-type.\nIt should be an 8bit code (0-255), or it's CamelCase name (for example, \"EchoReply\").\nAllowed ICMP types are:\n    Ipv4: EchoReply | DestinationUnreachable | Redirect | Echo | EchoRequest |\n\t\t     RouterAdvertisement | RouterSelection | TimeExceeded | ParameterProblem |\n\t\t\t Timestamp | TimestampReply | Photuris | ExtendedEcho Request | ExtendedEcho Reply\n    Ipv6: DestinationUnreachable | PacketTooBig | TimeExceeded | ParameterProblem |\n\t\t\t EchoRequest | EchoReply | MulticastListenerQuery| MulticastListenerReport |\n\t\t\t MulticastListenerDone | RouterSolicitation | RouterAdvertisement | NeighborSolicitation |\n\t\t\t NeighborAdvertisement | RedirectMessage | RouterRenumbering | ICMPNodeInformationQuery |\n\t\t\t ICMPNodeInformationResponse | InverseNeighborDiscoverySolicitation | InverseNeighborDiscoveryAdvertisement |\n\t\t\t HomeAgentAddressDiscoveryRequest | HomeAgentAddressDiscoveryReply | MobilePrefixSolicitation |\n\t\t\t MobilePrefixAdvertisement | DuplicateAddressRequestCodeSuffix | DuplicateAddressConfirmationCodeSuffix |\n\t\t\t ExtendedEchoRequest | ExtendedEchoReply";
@@ -7181,7 +8015,7 @@ let
         };
         "cidrGroupRef" = mkOption {
           description = "CIDRGroupRef is a reference to a CiliumCIDRGroup object.\nA CiliumCIDRGroup contains a list of CIDRs that the endpoint, subject to\nthe rule, can (Ingress/Egress) or cannot (IngressDeny/EgressDeny) receive\nconnections from.";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 253 types.str));
         };
         "cidrGroupSelector" = mkOption {
           description = "CIDRGroupSelector selects CiliumCIDRGroups by their labels,\nrather than by name.";
@@ -7218,7 +8052,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -7237,7 +8071,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -7263,7 +8104,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -7282,7 +8123,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -7300,11 +8148,11 @@ let
       options = {
         "matchName" = mkOption {
           description = "MatchName matches literal DNS names. A trailing \".\" is automatically added\nwhen missing.";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 255 types.str));
         };
         "matchPattern" = mkOption {
           description = "MatchPattern allows using wildcards to match DNS names. All wildcards are\ncase insensitive. The wildcards are:\n- \"*\" matches 0 or more DNS valid characters, and may occur anywhere in\nthe pattern. As a special case a \"*\" as the leftmost character, without a\nfollowing \".\" matches all subdomains as well as the name to the right.\nA trailing \".\" is automatically added when missing.\n\nExamples:\n`*.cilium.io` matches subdomains of cilium at that level\n  www.cilium.io and blog.cilium.io match, cilium.io and google.com do not\n`*cilium.io` matches cilium.io and all subdomains ends with \"cilium.io\"\n  except those containing \".\" separator, subcilium.io and sub-cilium.io match,\n  www.cilium.io and blog.cilium.io does not\nsub*.cilium.io matches subdomains of cilium where the subdomain component\nbegins with \"sub\"\n  sub.cilium.io and subdomain.cilium.io match, www.cilium.io,\n  blog.cilium.io, cilium.io and google.com do not";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 255 types.str));
         };
       };
 
@@ -7370,7 +8218,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -7389,7 +8237,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -7427,7 +8282,7 @@ let
         };
         "serverNames" = mkOption {
           description = "ServerNames is a list of allowed TLS SNI values. If not empty, then\nTLS must be present and one of the provided SNIs must be indicated in the\nTLS handshake.";
-          type = (types.nullOr (types.listOf types.str));
+          type = (types.nullOr (types.listOf (types.withMaxLength 255 types.str)));
         };
         "terminatingTLS" = mkOption {
           description = "TerminatingTLS is the TLS context for the connection terminated by\nthe L7 proxy.  For egress policy this specifies the server-side TLS\nparameters to be applied on the connections originated from the local\nendpoint and terminated by the L7 proxy. For ingress policy this specifies\nthe server-side TLS parameters to be applied on the connections\noriginated from a remote source and terminated by the L7 proxy.";
@@ -7456,11 +8311,11 @@ let
         };
         "name" = mkOption {
           description = "Name is the name of the listener.";
-          type = types.str;
+          type = (types.withMinLength 1 types.str);
         };
         "priority" = mkOption {
           description = "Priority for this Listener that is used when multiple rules would apply different\nlisteners to a policy map entry. Behavior of this is implementation dependent.";
-          type = (types.nullOr types.int);
+          type = (types.nullOr (types.withMaximum 100 (types.withMinimum 1 types.int)));
         };
       };
 
@@ -7474,11 +8329,18 @@ let
       options = {
         "kind" = mkOption {
           description = "Kind is the resource type being referred to. Defaults to CiliumEnvoyConfig or\nCiliumClusterwideEnvoyConfig for CiliumNetworkPolicy and CiliumClusterwideNetworkPolicy,\nrespectively. The only case this is currently explicitly needed is when referring to a\nCiliumClusterwideEnvoyConfig from CiliumNetworkPolicy, as using a namespaced listener\nfrom a cluster scoped policy is not allowed.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "CiliumEnvoyConfig"
+                "CiliumClusterwideEnvoyConfig"
+              ]
+            )
+          );
         };
         "name" = mkOption {
           description = "Name is the resource name of the CiliumEnvoyConfig or CiliumClusterwideEnvoyConfig where\nthe listener is defined in.";
-          type = types.str;
+          type = (types.withMinLength 1 types.str);
         };
       };
 
@@ -7538,7 +8400,7 @@ let
       options = {
         "endPort" = mkOption {
           description = "EndPort can only be an L4 port number.";
-          type = (types.nullOr types.int);
+          type = (types.nullOr (types.withMaximum 65535 (types.withMinimum 0 types.int)));
         };
         "port" = mkOption {
           description = "Port can be an L4 port number, or a name in the form of \"http\"\nor \"http-8080\".";
@@ -7546,7 +8408,16 @@ let
         };
         "protocol" = mkOption {
           description = "Protocol is the L4 protocol. If omitted or empty, any protocol\nmatches. Accepted values: \"TCP\", \"UDP\", \"SCTP\", \"ANY\"\n\nMatching on ICMP is not supported.\n\nNamed port specified for a container may narrow this down, but may not\ncontradict this.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "TCP"
+                "UDP"
+                "SCTP"
+                "ANY"
+              ]
+            )
+          );
         };
       };
 
@@ -7607,11 +8478,11 @@ let
       options = {
         "matchName" = mkOption {
           description = "MatchName matches literal DNS names. A trailing \".\" is automatically added\nwhen missing.";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 255 types.str));
         };
         "matchPattern" = mkOption {
           description = "MatchPattern allows using wildcards to match DNS names. All wildcards are\ncase insensitive. The wildcards are:\n- \"*\" matches 0 or more DNS valid characters, and may occur anywhere in\nthe pattern. As a special case a \"*\" as the leftmost character, without a\nfollowing \".\" matches all subdomains as well as the name to the right.\nA trailing \".\" is automatically added when missing.\n\nExamples:\n`*.cilium.io` matches subdomains of cilium at that level\n  www.cilium.io and blog.cilium.io match, cilium.io and google.com do not\n`*cilium.io` matches cilium.io and all subdomains ends with \"cilium.io\"\n  except those containing \".\" separator, subcilium.io and sub-cilium.io match,\n  www.cilium.io and blog.cilium.io does not\nsub*.cilium.io matches subdomains of cilium where the subdomain component\nbegins with \"sub\"\n  sub.cilium.io and subdomain.cilium.io match, www.cilium.io,\n  blog.cilium.io, cilium.io and google.com do not";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 255 types.str));
         };
       };
 
@@ -7668,11 +8539,20 @@ let
       options = {
         "mismatch" = mkOption {
           description = "Mismatch identifies what to do in case there is no match. The default is\nto drop the request. Otherwise the overall rule is still considered as\nmatching, but the mismatches are logged in the access log.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "LOG"
+                "ADD"
+                "DELETE"
+                "REPLACE"
+              ]
+            )
+          );
         };
         "name" = mkOption {
           description = "Name identifies the header.";
-          type = types.str;
+          type = (types.withMinLength 1 types.str);
         };
         "secret" = mkOption {
           description = "Secret refers to a secret that contains the value to be matched against.\nThe secret must only contain one entry. If the referred secret does not\nexist, and there is no \"Value\" specified, the match will fail.";
@@ -7730,11 +8610,18 @@ let
         };
         "role" = mkOption {
           description = "Role is a case-insensitive string and describes a group of API keys\nnecessary to perform certain higher-level Kafka operations such as \"produce\"\nor \"consume\". A Role automatically expands into all APIKeys required\nto perform the specified higher-level operation.\n\nThe following values are supported:\n - \"produce\": Allow producing to the topics specified in the rule\n - \"consume\": Allow consuming from the topics specified in the rule\n\nThis field is incompatible with the APIKey field, i.e APIKey and Role\ncannot both be specified in the same rule.\n\nIf omitted or empty, and if APIKey is not specified, then all keys are\nallowed.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "produce"
+                "consume"
+              ]
+            )
+          );
         };
         "topic" = mkOption {
           description = "Topic is the topic name contained in the message. If a Kafka request\ncontains multiple topics, then all topics must be allowed or the\nmessage will be rejected.\n\nThis constraint is ignored if the matched request message type\ndoesn't contain any topic. Maximum size of Topic can be 249\ncharacters as per recent Kafka spec and allowed characters are\na-z, A-Z, 0-9, -, . and _.\n\nOlder Kafka versions had longer topic lengths of 255, but in Kafka 0.10\nversion the length was changed from 255 to 249. For compatibility\nreasons we are using 255.\n\nIf omitted or empty, all topics are allowed.";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 255 types.str));
         };
       };
 
@@ -7806,7 +8693,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -7825,7 +8712,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -7915,7 +8809,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -7934,7 +8828,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -7979,7 +8880,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -7998,7 +8899,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -8036,7 +8944,25 @@ let
         };
         "fromEntities" = mkOption {
           description = "FromEntities is a list of special entities which the endpoint subject\nto the rule is allowed to receive connections from. Supported entities are\n`world`, `cluster`, `host`, `remote-node`, `kube-apiserver`, `ingress`, `init`,\n`health`, `unmanaged`, `none` and `all`.";
-          type = (types.nullOr (types.listOf types.str));
+          type = (
+            types.nullOr (
+              types.listOf (
+                types.enum [
+                  "all"
+                  "world"
+                  "cluster"
+                  "host"
+                  "init"
+                  "ingress"
+                  "unmanaged"
+                  "remote-node"
+                  "health"
+                  "none"
+                  "kube-apiserver"
+                ]
+              )
+            )
+          );
         };
         "fromGroups" = mkOption {
           description = "FromGroups is a directive that allows the integration with multiple outside\nproviders. Currently, only AWS is supported, and the rule can select by\nmultiple sub directives:\n\nExample:\nFromGroups:\n- aws:\n    securityGroupsIds:\n    - 'sg-XXXXXXXXXXXXX'";
@@ -8089,7 +9015,13 @@ let
       options = {
         "mode" = mkOption {
           description = "Mode is the required authentication mode for the allowed traffic, if any.";
-          type = types.str;
+          type = (
+            types.enum [
+              "disabled"
+              "required"
+              "test-always-fail"
+            ]
+          );
         };
       };
 
@@ -8121,7 +9053,25 @@ let
         };
         "fromEntities" = mkOption {
           description = "FromEntities is a list of special entities which the endpoint subject\nto the rule is allowed to receive connections from. Supported entities are\n`world`, `cluster`, `host`, `remote-node`, `kube-apiserver`, `ingress`, `init`,\n`health`, `unmanaged`, `none` and `all`.";
-          type = (types.nullOr (types.listOf types.str));
+          type = (
+            types.nullOr (
+              types.listOf (
+                types.enum [
+                  "all"
+                  "world"
+                  "cluster"
+                  "host"
+                  "init"
+                  "ingress"
+                  "unmanaged"
+                  "remote-node"
+                  "health"
+                  "none"
+                  "kube-apiserver"
+                ]
+              )
+            )
+          );
         };
         "fromGroups" = mkOption {
           description = "FromGroups is a directive that allows the integration with multiple outside\nproviders. Currently, only AWS is supported, and the rule can select by\nmultiple sub directives:\n\nExample:\nFromGroups:\n- aws:\n    securityGroupsIds:\n    - 'sg-XXXXXXXXXXXXX'";
@@ -8181,7 +9131,7 @@ let
         };
         "cidrGroupRef" = mkOption {
           description = "CIDRGroupRef is a reference to a CiliumCIDRGroup object.\nA CiliumCIDRGroup contains a list of CIDRs that the endpoint, subject to\nthe rule, can (Ingress/Egress) or cannot (IngressDeny/EgressDeny) receive\nconnections from.";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 253 types.str));
         };
         "cidrGroupSelector" = mkOption {
           description = "CIDRGroupSelector selects CiliumCIDRGroups by their labels,\nrather than by name.";
@@ -8220,7 +9170,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -8239,7 +9189,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -8267,7 +9224,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -8286,7 +9243,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -8357,7 +9321,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -8376,7 +9340,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -8404,7 +9375,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -8423,7 +9394,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -8459,7 +9437,14 @@ let
       options = {
         "family" = mkOption {
           description = "Family is a IP address version.\nCurrently, we support `IPv4` and `IPv6`.\n`IPv4` is set as default.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "IPv4"
+                "IPv6"
+              ]
+            )
+          );
         };
         "type" = mkOption {
           description = "Type is a ICMP-type.\nIt should be an 8bit code (0-255), or it's CamelCase name (for example, \"EchoReply\").\nAllowed ICMP types are:\n    Ipv4: EchoReply | DestinationUnreachable | Redirect | Echo | EchoRequest |\n\t\t     RouterAdvertisement | RouterSelection | TimeExceeded | ParameterProblem |\n\t\t\t Timestamp | TimestampReply | Photuris | ExtendedEcho Request | ExtendedEcho Reply\n    Ipv6: DestinationUnreachable | PacketTooBig | TimeExceeded | ParameterProblem |\n\t\t\t EchoRequest | EchoReply | MulticastListenerQuery| MulticastListenerReport |\n\t\t\t MulticastListenerDone | RouterSolicitation | RouterAdvertisement | NeighborSolicitation |\n\t\t\t NeighborAdvertisement | RedirectMessage | RouterRenumbering | ICMPNodeInformationQuery |\n\t\t\t ICMPNodeInformationResponse | InverseNeighborDiscoverySolicitation | InverseNeighborDiscoveryAdvertisement |\n\t\t\t HomeAgentAddressDiscoveryRequest | HomeAgentAddressDiscoveryReply | MobilePrefixSolicitation |\n\t\t\t MobilePrefixAdvertisement | DuplicateAddressRequestCodeSuffix | DuplicateAddressConfirmationCodeSuffix |\n\t\t\t ExtendedEchoRequest | ExtendedEchoReply";
@@ -8495,7 +9480,7 @@ let
       options = {
         "endPort" = mkOption {
           description = "EndPort can only be an L4 port number.";
-          type = (types.nullOr types.int);
+          type = (types.nullOr (types.withMaximum 65535 (types.withMinimum 0 types.int)));
         };
         "port" = mkOption {
           description = "Port can be an L4 port number, or a name in the form of \"http\"\nor \"http-8080\".";
@@ -8503,7 +9488,16 @@ let
         };
         "protocol" = mkOption {
           description = "Protocol is the L4 protocol. If omitted or empty, any protocol\nmatches. Accepted values: \"TCP\", \"UDP\", \"SCTP\", \"ANY\"\n\nMatching on ICMP is not supported.\n\nNamed port specified for a container may narrow this down, but may not\ncontradict this.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "TCP"
+                "UDP"
+                "SCTP"
+                "ANY"
+              ]
+            )
+          );
         };
       };
 
@@ -8522,7 +9516,7 @@ let
         };
         "cidrGroupRef" = mkOption {
           description = "CIDRGroupRef is a reference to a CiliumCIDRGroup object.\nA CiliumCIDRGroup contains a list of CIDRs that the endpoint, subject to\nthe rule, can (Ingress/Egress) or cannot (IngressDeny/EgressDeny) receive\nconnections from.";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 253 types.str));
         };
         "cidrGroupSelector" = mkOption {
           description = "CIDRGroupSelector selects CiliumCIDRGroups by their labels,\nrather than by name.";
@@ -8559,7 +9553,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -8578,7 +9572,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -8606,7 +9607,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -8625,7 +9626,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -8694,7 +9702,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -8713,7 +9721,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -8739,7 +9754,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -8758,7 +9773,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -8792,7 +9814,14 @@ let
       options = {
         "family" = mkOption {
           description = "Family is a IP address version.\nCurrently, we support `IPv4` and `IPv6`.\n`IPv4` is set as default.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "IPv4"
+                "IPv6"
+              ]
+            )
+          );
         };
         "type" = mkOption {
           description = "Type is a ICMP-type.\nIt should be an 8bit code (0-255), or it's CamelCase name (for example, \"EchoReply\").\nAllowed ICMP types are:\n    Ipv4: EchoReply | DestinationUnreachable | Redirect | Echo | EchoRequest |\n\t\t     RouterAdvertisement | RouterSelection | TimeExceeded | ParameterProblem |\n\t\t\t Timestamp | TimestampReply | Photuris | ExtendedEcho Request | ExtendedEcho Reply\n    Ipv6: DestinationUnreachable | PacketTooBig | TimeExceeded | ParameterProblem |\n\t\t\t EchoRequest | EchoReply | MulticastListenerQuery| MulticastListenerReport |\n\t\t\t MulticastListenerDone | RouterSolicitation | RouterAdvertisement | NeighborSolicitation |\n\t\t\t NeighborAdvertisement | RedirectMessage | RouterRenumbering | ICMPNodeInformationQuery |\n\t\t\t ICMPNodeInformationResponse | InverseNeighborDiscoverySolicitation | InverseNeighborDiscoveryAdvertisement |\n\t\t\t HomeAgentAddressDiscoveryRequest | HomeAgentAddressDiscoveryReply | MobilePrefixSolicitation |\n\t\t\t MobilePrefixAdvertisement | DuplicateAddressRequestCodeSuffix | DuplicateAddressConfirmationCodeSuffix |\n\t\t\t ExtendedEchoRequest | ExtendedEchoReply";
@@ -8830,7 +9859,7 @@ let
         };
         "serverNames" = mkOption {
           description = "ServerNames is a list of allowed TLS SNI values. If not empty, then\nTLS must be present and one of the provided SNIs must be indicated in the\nTLS handshake.";
-          type = (types.nullOr (types.listOf types.str));
+          type = (types.nullOr (types.listOf (types.withMaxLength 255 types.str)));
         };
         "terminatingTLS" = mkOption {
           description = "TerminatingTLS is the TLS context for the connection terminated by\nthe L7 proxy.  For egress policy this specifies the server-side TLS\nparameters to be applied on the connections originated from the local\nendpoint and terminated by the L7 proxy. For ingress policy this specifies\nthe server-side TLS parameters to be applied on the connections\noriginated from a remote source and terminated by the L7 proxy.";
@@ -8859,11 +9888,11 @@ let
         };
         "name" = mkOption {
           description = "Name is the name of the listener.";
-          type = types.str;
+          type = (types.withMinLength 1 types.str);
         };
         "priority" = mkOption {
           description = "Priority for this Listener that is used when multiple rules would apply different\nlisteners to a policy map entry. Behavior of this is implementation dependent.";
-          type = (types.nullOr types.int);
+          type = (types.nullOr (types.withMaximum 100 (types.withMinimum 1 types.int)));
         };
       };
 
@@ -8877,11 +9906,18 @@ let
       options = {
         "kind" = mkOption {
           description = "Kind is the resource type being referred to. Defaults to CiliumEnvoyConfig or\nCiliumClusterwideEnvoyConfig for CiliumNetworkPolicy and CiliumClusterwideNetworkPolicy,\nrespectively. The only case this is currently explicitly needed is when referring to a\nCiliumClusterwideEnvoyConfig from CiliumNetworkPolicy, as using a namespaced listener\nfrom a cluster scoped policy is not allowed.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "CiliumEnvoyConfig"
+                "CiliumClusterwideEnvoyConfig"
+              ]
+            )
+          );
         };
         "name" = mkOption {
           description = "Name is the resource name of the CiliumEnvoyConfig or CiliumClusterwideEnvoyConfig where\nthe listener is defined in.";
-          type = types.str;
+          type = (types.withMinLength 1 types.str);
         };
       };
 
@@ -8941,7 +9977,7 @@ let
       options = {
         "endPort" = mkOption {
           description = "EndPort can only be an L4 port number.";
-          type = (types.nullOr types.int);
+          type = (types.nullOr (types.withMaximum 65535 (types.withMinimum 0 types.int)));
         };
         "port" = mkOption {
           description = "Port can be an L4 port number, or a name in the form of \"http\"\nor \"http-8080\".";
@@ -8949,7 +9985,16 @@ let
         };
         "protocol" = mkOption {
           description = "Protocol is the L4 protocol. If omitted or empty, any protocol\nmatches. Accepted values: \"TCP\", \"UDP\", \"SCTP\", \"ANY\"\n\nMatching on ICMP is not supported.\n\nNamed port specified for a container may narrow this down, but may not\ncontradict this.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "TCP"
+                "UDP"
+                "SCTP"
+                "ANY"
+              ]
+            )
+          );
         };
       };
 
@@ -9010,11 +10055,11 @@ let
       options = {
         "matchName" = mkOption {
           description = "MatchName matches literal DNS names. A trailing \".\" is automatically added\nwhen missing.";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 255 types.str));
         };
         "matchPattern" = mkOption {
           description = "MatchPattern allows using wildcards to match DNS names. All wildcards are\ncase insensitive. The wildcards are:\n- \"*\" matches 0 or more DNS valid characters, and may occur anywhere in\nthe pattern. As a special case a \"*\" as the leftmost character, without a\nfollowing \".\" matches all subdomains as well as the name to the right.\nA trailing \".\" is automatically added when missing.\n\nExamples:\n`*.cilium.io` matches subdomains of cilium at that level\n  www.cilium.io and blog.cilium.io match, cilium.io and google.com do not\n`*cilium.io` matches cilium.io and all subdomains ends with \"cilium.io\"\n  except those containing \".\" separator, subcilium.io and sub-cilium.io match,\n  www.cilium.io and blog.cilium.io does not\nsub*.cilium.io matches subdomains of cilium where the subdomain component\nbegins with \"sub\"\n  sub.cilium.io and subdomain.cilium.io match, www.cilium.io,\n  blog.cilium.io, cilium.io and google.com do not";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 255 types.str));
         };
       };
 
@@ -9071,11 +10116,20 @@ let
       options = {
         "mismatch" = mkOption {
           description = "Mismatch identifies what to do in case there is no match. The default is\nto drop the request. Otherwise the overall rule is still considered as\nmatching, but the mismatches are logged in the access log.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "LOG"
+                "ADD"
+                "DELETE"
+                "REPLACE"
+              ]
+            )
+          );
         };
         "name" = mkOption {
           description = "Name identifies the header.";
-          type = types.str;
+          type = (types.withMinLength 1 types.str);
         };
         "secret" = mkOption {
           description = "Secret refers to a secret that contains the value to be matched against.\nThe secret must only contain one entry. If the referred secret does not\nexist, and there is no \"Value\" specified, the match will fail.";
@@ -9133,11 +10187,18 @@ let
         };
         "role" = mkOption {
           description = "Role is a case-insensitive string and describes a group of API keys\nnecessary to perform certain higher-level Kafka operations such as \"produce\"\nor \"consume\". A Role automatically expands into all APIKeys required\nto perform the specified higher-level operation.\n\nThe following values are supported:\n - \"produce\": Allow producing to the topics specified in the rule\n - \"consume\": Allow consuming from the topics specified in the rule\n\nThis field is incompatible with the APIKey field, i.e APIKey and Role\ncannot both be specified in the same rule.\n\nIf omitted or empty, and if APIKey is not specified, then all keys are\nallowed.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "produce"
+                "consume"
+              ]
+            )
+          );
         };
         "topic" = mkOption {
           description = "Topic is the topic name contained in the message. If a Kafka request\ncontains multiple topics, then all topics must be allowed or the\nmessage will be rejected.\n\nThis constraint is ignored if the matched request message type\ndoesn't contain any topic. Maximum size of Topic can be 249\ncharacters as per recent Kafka spec and allowed characters are\na-z, A-Z, 0-9, -, . and _.\n\nOlder Kafka versions had longer topic lengths of 255, but in Kafka 0.10\nversion the length was changed from 255 to 249. For compatibility\nreasons we are using 255.\n\nIf omitted or empty, all topics are allowed.";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 255 types.str));
         };
       };
 
@@ -9224,7 +10285,7 @@ let
       options = {
         "value" = mkOption {
           description = "Value is a free-form string that is included in Hubble flows\nthat match this policy. The string is limited to 32 printable characters.";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 32 types.str));
         };
       };
 
@@ -9246,7 +10307,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -9265,7 +10326,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -9372,7 +10440,25 @@ let
         };
         "toEntities" = mkOption {
           description = "ToEntities is a list of special entities to which the endpoint subject\nto the rule is allowed to initiate connections. Supported entities are\n`world`, `cluster`, `host`, `remote-node`, `kube-apiserver`, `ingress`, `init`,\n`health`, `unmanaged`, `none` and `all`.";
-          type = (types.nullOr (types.listOf types.str));
+          type = (
+            types.nullOr (
+              types.listOf (
+                types.enum [
+                  "all"
+                  "world"
+                  "cluster"
+                  "host"
+                  "init"
+                  "ingress"
+                  "unmanaged"
+                  "remote-node"
+                  "health"
+                  "none"
+                  "kube-apiserver"
+                ]
+              )
+            )
+          );
         };
         "toFQDNs" = mkOption {
           description = "ToFQDN allows whitelisting DNS names in place of IPs. The IPs that result\nfrom DNS resolution of `ToFQDN.MatchName`s are added to the same\nEgressRule object as ToCIDRSet entries, and behave accordingly. Any L4 and\nL7 rules within this EgressRule will also apply to these IPs.\nThe DNS -> IP mapping is re-resolved periodically from within the\ncilium-agent, and the IPs in the DNS response are effected in the policy\nfor selected pods as-is (i.e. the list of IPs is not modified in any way).\nNote: An explicit rule to allow for DNS traffic is needed for the pods, as\nToFQDN counts as an egress rule and will enforce egress policy when\nPolicyEnforcment=default.\nNote: If the resolved IPs are IPs within the kubernetes cluster, the\nToFQDN rule will not apply to that IP.\nNote: ToFQDN cannot occur in the same policy as other To* rules.";
@@ -9433,7 +10519,13 @@ let
       options = {
         "mode" = mkOption {
           description = "Mode is the required authentication mode for the allowed traffic, if any.";
-          type = types.str;
+          type = (
+            types.enum [
+              "disabled"
+              "required"
+              "test-always-fail"
+            ]
+          );
         };
       };
 
@@ -9469,7 +10561,25 @@ let
         };
         "toEntities" = mkOption {
           description = "ToEntities is a list of special entities to which the endpoint subject\nto the rule is allowed to initiate connections. Supported entities are\n`world`, `cluster`, `host`, `remote-node`, `kube-apiserver`, `ingress`, `init`,\n`health`, `unmanaged`, `none` and `all`.";
-          type = (types.nullOr (types.listOf types.str));
+          type = (
+            types.nullOr (
+              types.listOf (
+                types.enum [
+                  "all"
+                  "world"
+                  "cluster"
+                  "host"
+                  "init"
+                  "ingress"
+                  "unmanaged"
+                  "remote-node"
+                  "health"
+                  "none"
+                  "kube-apiserver"
+                ]
+              )
+            )
+          );
         };
         "toGroups" = mkOption {
           description = "ToGroups is a directive that allows the integration with multiple outside\nproviders. Currently, only AWS is supported, and the rule can select by\nmultiple sub directives:\n\nExample:\ntoGroups:\n- aws:\n    securityGroupsIds:\n    - 'sg-XXXXXXXXXXXXX'";
@@ -9544,7 +10654,14 @@ let
       options = {
         "family" = mkOption {
           description = "Family is a IP address version.\nCurrently, we support `IPv4` and `IPv6`.\n`IPv4` is set as default.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "IPv4"
+                "IPv6"
+              ]
+            )
+          );
         };
         "type" = mkOption {
           description = "Type is a ICMP-type.\nIt should be an 8bit code (0-255), or it's CamelCase name (for example, \"EchoReply\").\nAllowed ICMP types are:\n    Ipv4: EchoReply | DestinationUnreachable | Redirect | Echo | EchoRequest |\n\t\t     RouterAdvertisement | RouterSelection | TimeExceeded | ParameterProblem |\n\t\t\t Timestamp | TimestampReply | Photuris | ExtendedEcho Request | ExtendedEcho Reply\n    Ipv6: DestinationUnreachable | PacketTooBig | TimeExceeded | ParameterProblem |\n\t\t\t EchoRequest | EchoReply | MulticastListenerQuery| MulticastListenerReport |\n\t\t\t MulticastListenerDone | RouterSolicitation | RouterAdvertisement | NeighborSolicitation |\n\t\t\t NeighborAdvertisement | RedirectMessage | RouterRenumbering | ICMPNodeInformationQuery |\n\t\t\t ICMPNodeInformationResponse | InverseNeighborDiscoverySolicitation | InverseNeighborDiscoveryAdvertisement |\n\t\t\t HomeAgentAddressDiscoveryRequest | HomeAgentAddressDiscoveryReply | MobilePrefixSolicitation |\n\t\t\t MobilePrefixAdvertisement | DuplicateAddressRequestCodeSuffix | DuplicateAddressConfirmationCodeSuffix |\n\t\t\t ExtendedEchoRequest | ExtendedEchoReply";
@@ -9566,7 +10683,7 @@ let
         };
         "cidrGroupRef" = mkOption {
           description = "CIDRGroupRef is a reference to a CiliumCIDRGroup object.\nA CiliumCIDRGroup contains a list of CIDRs that the endpoint, subject to\nthe rule, can (Ingress/Egress) or cannot (IngressDeny/EgressDeny) receive\nconnections from.";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 253 types.str));
         };
         "cidrGroupSelector" = mkOption {
           description = "CIDRGroupSelector selects CiliumCIDRGroups by their labels,\nrather than by name.";
@@ -9605,7 +10722,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -9624,7 +10741,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -9652,7 +10776,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -9671,7 +10795,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -9740,7 +10871,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -9759,7 +10890,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -9795,7 +10933,7 @@ let
       options = {
         "endPort" = mkOption {
           description = "EndPort can only be an L4 port number.";
-          type = (types.nullOr types.int);
+          type = (types.nullOr (types.withMaximum 65535 (types.withMinimum 0 types.int)));
         };
         "port" = mkOption {
           description = "Port can be an L4 port number, or a name in the form of \"http\"\nor \"http-8080\".";
@@ -9803,7 +10941,16 @@ let
         };
         "protocol" = mkOption {
           description = "Protocol is the L4 protocol. If omitted or empty, any protocol\nmatches. Accepted values: \"TCP\", \"UDP\", \"SCTP\", \"ANY\"\n\nMatching on ICMP is not supported.\n\nNamed port specified for a container may narrow this down, but may not\ncontradict this.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "TCP"
+                "UDP"
+                "SCTP"
+                "ANY"
+              ]
+            )
+          );
         };
       };
 
@@ -9828,7 +10975,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -9847,7 +10994,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -9939,7 +11093,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -9959,7 +11113,14 @@ let
           };
           "operator" = mkOption {
             description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-            type = types.str;
+            type = (
+              types.enum [
+                "In"
+                "NotIn"
+                "Exists"
+                "DoesNotExist"
+              ]
+            );
           };
           "values" = mkOption {
             description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -9993,7 +11154,14 @@ let
       options = {
         "family" = mkOption {
           description = "Family is a IP address version.\nCurrently, we support `IPv4` and `IPv6`.\n`IPv4` is set as default.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "IPv4"
+                "IPv6"
+              ]
+            )
+          );
         };
         "type" = mkOption {
           description = "Type is a ICMP-type.\nIt should be an 8bit code (0-255), or it's CamelCase name (for example, \"EchoReply\").\nAllowed ICMP types are:\n    Ipv4: EchoReply | DestinationUnreachable | Redirect | Echo | EchoRequest |\n\t\t     RouterAdvertisement | RouterSelection | TimeExceeded | ParameterProblem |\n\t\t\t Timestamp | TimestampReply | Photuris | ExtendedEcho Request | ExtendedEcho Reply\n    Ipv6: DestinationUnreachable | PacketTooBig | TimeExceeded | ParameterProblem |\n\t\t\t EchoRequest | EchoReply | MulticastListenerQuery| MulticastListenerReport |\n\t\t\t MulticastListenerDone | RouterSolicitation | RouterAdvertisement | NeighborSolicitation |\n\t\t\t NeighborAdvertisement | RedirectMessage | RouterRenumbering | ICMPNodeInformationQuery |\n\t\t\t ICMPNodeInformationResponse | InverseNeighborDiscoverySolicitation | InverseNeighborDiscoveryAdvertisement |\n\t\t\t HomeAgentAddressDiscoveryRequest | HomeAgentAddressDiscoveryReply | MobilePrefixSolicitation |\n\t\t\t MobilePrefixAdvertisement | DuplicateAddressRequestCodeSuffix | DuplicateAddressConfirmationCodeSuffix |\n\t\t\t ExtendedEchoRequest | ExtendedEchoReply";
@@ -10015,7 +11183,7 @@ let
         };
         "cidrGroupRef" = mkOption {
           description = "CIDRGroupRef is a reference to a CiliumCIDRGroup object.\nA CiliumCIDRGroup contains a list of CIDRs that the endpoint, subject to\nthe rule, can (Ingress/Egress) or cannot (IngressDeny/EgressDeny) receive\nconnections from.";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 253 types.str));
         };
         "cidrGroupSelector" = mkOption {
           description = "CIDRGroupSelector selects CiliumCIDRGroups by their labels,\nrather than by name.";
@@ -10052,7 +11220,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -10071,7 +11239,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -10097,7 +11272,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -10116,7 +11291,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -10134,11 +11316,11 @@ let
       options = {
         "matchName" = mkOption {
           description = "MatchName matches literal DNS names. A trailing \".\" is automatically added\nwhen missing.";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 255 types.str));
         };
         "matchPattern" = mkOption {
           description = "MatchPattern allows using wildcards to match DNS names. All wildcards are\ncase insensitive. The wildcards are:\n- \"*\" matches 0 or more DNS valid characters, and may occur anywhere in\nthe pattern. As a special case a \"*\" as the leftmost character, without a\nfollowing \".\" matches all subdomains as well as the name to the right.\nA trailing \".\" is automatically added when missing.\n\nExamples:\n`*.cilium.io` matches subdomains of cilium at that level\n  www.cilium.io and blog.cilium.io match, cilium.io and google.com do not\n`*cilium.io` matches cilium.io and all subdomains ends with \"cilium.io\"\n  except those containing \".\" separator, subcilium.io and sub-cilium.io match,\n  www.cilium.io and blog.cilium.io does not\nsub*.cilium.io matches subdomains of cilium where the subdomain component\nbegins with \"sub\"\n  sub.cilium.io and subdomain.cilium.io match, www.cilium.io,\n  blog.cilium.io, cilium.io and google.com do not";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 255 types.str));
         };
       };
 
@@ -10204,7 +11386,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -10223,7 +11405,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -10261,7 +11450,7 @@ let
         };
         "serverNames" = mkOption {
           description = "ServerNames is a list of allowed TLS SNI values. If not empty, then\nTLS must be present and one of the provided SNIs must be indicated in the\nTLS handshake.";
-          type = (types.nullOr (types.listOf types.str));
+          type = (types.nullOr (types.listOf (types.withMaxLength 255 types.str)));
         };
         "terminatingTLS" = mkOption {
           description = "TerminatingTLS is the TLS context for the connection terminated by\nthe L7 proxy.  For egress policy this specifies the server-side TLS\nparameters to be applied on the connections originated from the local\nendpoint and terminated by the L7 proxy. For ingress policy this specifies\nthe server-side TLS parameters to be applied on the connections\noriginated from a remote source and terminated by the L7 proxy.";
@@ -10290,11 +11479,11 @@ let
         };
         "name" = mkOption {
           description = "Name is the name of the listener.";
-          type = types.str;
+          type = (types.withMinLength 1 types.str);
         };
         "priority" = mkOption {
           description = "Priority for this Listener that is used when multiple rules would apply different\nlisteners to a policy map entry. Behavior of this is implementation dependent.";
-          type = (types.nullOr types.int);
+          type = (types.nullOr (types.withMaximum 100 (types.withMinimum 1 types.int)));
         };
       };
 
@@ -10308,11 +11497,18 @@ let
       options = {
         "kind" = mkOption {
           description = "Kind is the resource type being referred to. Defaults to CiliumEnvoyConfig or\nCiliumClusterwideEnvoyConfig for CiliumNetworkPolicy and CiliumClusterwideNetworkPolicy,\nrespectively. The only case this is currently explicitly needed is when referring to a\nCiliumClusterwideEnvoyConfig from CiliumNetworkPolicy, as using a namespaced listener\nfrom a cluster scoped policy is not allowed.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "CiliumEnvoyConfig"
+                "CiliumClusterwideEnvoyConfig"
+              ]
+            )
+          );
         };
         "name" = mkOption {
           description = "Name is the resource name of the CiliumEnvoyConfig or CiliumClusterwideEnvoyConfig where\nthe listener is defined in.";
-          type = types.str;
+          type = (types.withMinLength 1 types.str);
         };
       };
 
@@ -10372,7 +11568,7 @@ let
       options = {
         "endPort" = mkOption {
           description = "EndPort can only be an L4 port number.";
-          type = (types.nullOr types.int);
+          type = (types.nullOr (types.withMaximum 65535 (types.withMinimum 0 types.int)));
         };
         "port" = mkOption {
           description = "Port can be an L4 port number, or a name in the form of \"http\"\nor \"http-8080\".";
@@ -10380,7 +11576,16 @@ let
         };
         "protocol" = mkOption {
           description = "Protocol is the L4 protocol. If omitted or empty, any protocol\nmatches. Accepted values: \"TCP\", \"UDP\", \"SCTP\", \"ANY\"\n\nMatching on ICMP is not supported.\n\nNamed port specified for a container may narrow this down, but may not\ncontradict this.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "TCP"
+                "UDP"
+                "SCTP"
+                "ANY"
+              ]
+            )
+          );
         };
       };
 
@@ -10441,11 +11646,11 @@ let
       options = {
         "matchName" = mkOption {
           description = "MatchName matches literal DNS names. A trailing \".\" is automatically added\nwhen missing.";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 255 types.str));
         };
         "matchPattern" = mkOption {
           description = "MatchPattern allows using wildcards to match DNS names. All wildcards are\ncase insensitive. The wildcards are:\n- \"*\" matches 0 or more DNS valid characters, and may occur anywhere in\nthe pattern. As a special case a \"*\" as the leftmost character, without a\nfollowing \".\" matches all subdomains as well as the name to the right.\nA trailing \".\" is automatically added when missing.\n\nExamples:\n`*.cilium.io` matches subdomains of cilium at that level\n  www.cilium.io and blog.cilium.io match, cilium.io and google.com do not\n`*cilium.io` matches cilium.io and all subdomains ends with \"cilium.io\"\n  except those containing \".\" separator, subcilium.io and sub-cilium.io match,\n  www.cilium.io and blog.cilium.io does not\nsub*.cilium.io matches subdomains of cilium where the subdomain component\nbegins with \"sub\"\n  sub.cilium.io and subdomain.cilium.io match, www.cilium.io,\n  blog.cilium.io, cilium.io and google.com do not";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 255 types.str));
         };
       };
 
@@ -10502,11 +11707,20 @@ let
       options = {
         "mismatch" = mkOption {
           description = "Mismatch identifies what to do in case there is no match. The default is\nto drop the request. Otherwise the overall rule is still considered as\nmatching, but the mismatches are logged in the access log.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "LOG"
+                "ADD"
+                "DELETE"
+                "REPLACE"
+              ]
+            )
+          );
         };
         "name" = mkOption {
           description = "Name identifies the header.";
-          type = types.str;
+          type = (types.withMinLength 1 types.str);
         };
         "secret" = mkOption {
           description = "Secret refers to a secret that contains the value to be matched against.\nThe secret must only contain one entry. If the referred secret does not\nexist, and there is no \"Value\" specified, the match will fail.";
@@ -10564,11 +11778,18 @@ let
         };
         "role" = mkOption {
           description = "Role is a case-insensitive string and describes a group of API keys\nnecessary to perform certain higher-level Kafka operations such as \"produce\"\nor \"consume\". A Role automatically expands into all APIKeys required\nto perform the specified higher-level operation.\n\nThe following values are supported:\n - \"produce\": Allow producing to the topics specified in the rule\n - \"consume\": Allow consuming from the topics specified in the rule\n\nThis field is incompatible with the APIKey field, i.e APIKey and Role\ncannot both be specified in the same rule.\n\nIf omitted or empty, and if APIKey is not specified, then all keys are\nallowed.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "produce"
+                "consume"
+              ]
+            )
+          );
         };
         "topic" = mkOption {
           description = "Topic is the topic name contained in the message. If a Kafka request\ncontains multiple topics, then all topics must be allowed or the\nmessage will be rejected.\n\nThis constraint is ignored if the matched request message type\ndoesn't contain any topic. Maximum size of Topic can be 249\ncharacters as per recent Kafka spec and allowed characters are\na-z, A-Z, 0-9, -, . and _.\n\nOlder Kafka versions had longer topic lengths of 255, but in Kafka 0.10\nversion the length was changed from 255 to 249. For compatibility\nreasons we are using 255.\n\nIf omitted or empty, all topics are allowed.";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 255 types.str));
         };
       };
 
@@ -10640,7 +11861,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -10659,7 +11880,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -10749,7 +11977,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -10769,7 +11997,14 @@ let
           };
           "operator" = mkOption {
             description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-            type = types.str;
+            type = (
+              types.enum [
+                "In"
+                "NotIn"
+                "Exists"
+                "DoesNotExist"
+              ]
+            );
           };
           "values" = mkOption {
             description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -10814,7 +12049,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -10833,7 +12068,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -10873,7 +12115,25 @@ let
         };
         "fromEntities" = mkOption {
           description = "FromEntities is a list of special entities which the endpoint subject\nto the rule is allowed to receive connections from. Supported entities are\n`world`, `cluster`, `host`, `remote-node`, `kube-apiserver`, `ingress`, `init`,\n`health`, `unmanaged`, `none` and `all`.";
-          type = (types.nullOr (types.listOf types.str));
+          type = (
+            types.nullOr (
+              types.listOf (
+                types.enum [
+                  "all"
+                  "world"
+                  "cluster"
+                  "host"
+                  "init"
+                  "ingress"
+                  "unmanaged"
+                  "remote-node"
+                  "health"
+                  "none"
+                  "kube-apiserver"
+                ]
+              )
+            )
+          );
         };
         "fromGroups" = mkOption {
           description = "FromGroups is a directive that allows the integration with multiple outside\nproviders. Currently, only AWS is supported, and the rule can select by\nmultiple sub directives:\n\nExample:\nFromGroups:\n- aws:\n    securityGroupsIds:\n    - 'sg-XXXXXXXXXXXXX'";
@@ -10926,7 +12186,13 @@ let
       options = {
         "mode" = mkOption {
           description = "Mode is the required authentication mode for the allowed traffic, if any.";
-          type = types.str;
+          type = (
+            types.enum [
+              "disabled"
+              "required"
+              "test-always-fail"
+            ]
+          );
         };
       };
 
@@ -10958,7 +12224,25 @@ let
         };
         "fromEntities" = mkOption {
           description = "FromEntities is a list of special entities which the endpoint subject\nto the rule is allowed to receive connections from. Supported entities are\n`world`, `cluster`, `host`, `remote-node`, `kube-apiserver`, `ingress`, `init`,\n`health`, `unmanaged`, `none` and `all`.";
-          type = (types.nullOr (types.listOf types.str));
+          type = (
+            types.nullOr (
+              types.listOf (
+                types.enum [
+                  "all"
+                  "world"
+                  "cluster"
+                  "host"
+                  "init"
+                  "ingress"
+                  "unmanaged"
+                  "remote-node"
+                  "health"
+                  "none"
+                  "kube-apiserver"
+                ]
+              )
+            )
+          );
         };
         "fromGroups" = mkOption {
           description = "FromGroups is a directive that allows the integration with multiple outside\nproviders. Currently, only AWS is supported, and the rule can select by\nmultiple sub directives:\n\nExample:\nFromGroups:\n- aws:\n    securityGroupsIds:\n    - 'sg-XXXXXXXXXXXXX'";
@@ -11020,7 +12304,7 @@ let
         };
         "cidrGroupRef" = mkOption {
           description = "CIDRGroupRef is a reference to a CiliumCIDRGroup object.\nA CiliumCIDRGroup contains a list of CIDRs that the endpoint, subject to\nthe rule, can (Ingress/Egress) or cannot (IngressDeny/EgressDeny) receive\nconnections from.";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 253 types.str));
         };
         "cidrGroupSelector" = mkOption {
           description = "CIDRGroupSelector selects CiliumCIDRGroups by their labels,\nrather than by name.";
@@ -11059,7 +12343,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -11078,7 +12362,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -11106,7 +12397,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -11125,7 +12416,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -11196,7 +12494,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -11215,7 +12513,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -11243,7 +12548,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -11262,7 +12567,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -11298,7 +12610,14 @@ let
       options = {
         "family" = mkOption {
           description = "Family is a IP address version.\nCurrently, we support `IPv4` and `IPv6`.\n`IPv4` is set as default.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "IPv4"
+                "IPv6"
+              ]
+            )
+          );
         };
         "type" = mkOption {
           description = "Type is a ICMP-type.\nIt should be an 8bit code (0-255), or it's CamelCase name (for example, \"EchoReply\").\nAllowed ICMP types are:\n    Ipv4: EchoReply | DestinationUnreachable | Redirect | Echo | EchoRequest |\n\t\t     RouterAdvertisement | RouterSelection | TimeExceeded | ParameterProblem |\n\t\t\t Timestamp | TimestampReply | Photuris | ExtendedEcho Request | ExtendedEcho Reply\n    Ipv6: DestinationUnreachable | PacketTooBig | TimeExceeded | ParameterProblem |\n\t\t\t EchoRequest | EchoReply | MulticastListenerQuery| MulticastListenerReport |\n\t\t\t MulticastListenerDone | RouterSolicitation | RouterAdvertisement | NeighborSolicitation |\n\t\t\t NeighborAdvertisement | RedirectMessage | RouterRenumbering | ICMPNodeInformationQuery |\n\t\t\t ICMPNodeInformationResponse | InverseNeighborDiscoverySolicitation | InverseNeighborDiscoveryAdvertisement |\n\t\t\t HomeAgentAddressDiscoveryRequest | HomeAgentAddressDiscoveryReply | MobilePrefixSolicitation |\n\t\t\t MobilePrefixAdvertisement | DuplicateAddressRequestCodeSuffix | DuplicateAddressConfirmationCodeSuffix |\n\t\t\t ExtendedEchoRequest | ExtendedEchoReply";
@@ -11334,7 +12653,7 @@ let
       options = {
         "endPort" = mkOption {
           description = "EndPort can only be an L4 port number.";
-          type = (types.nullOr types.int);
+          type = (types.nullOr (types.withMaximum 65535 (types.withMinimum 0 types.int)));
         };
         "port" = mkOption {
           description = "Port can be an L4 port number, or a name in the form of \"http\"\nor \"http-8080\".";
@@ -11342,7 +12661,16 @@ let
         };
         "protocol" = mkOption {
           description = "Protocol is the L4 protocol. If omitted or empty, any protocol\nmatches. Accepted values: \"TCP\", \"UDP\", \"SCTP\", \"ANY\"\n\nMatching on ICMP is not supported.\n\nNamed port specified for a container may narrow this down, but may not\ncontradict this.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "TCP"
+                "UDP"
+                "SCTP"
+                "ANY"
+              ]
+            )
+          );
         };
       };
 
@@ -11361,7 +12689,7 @@ let
         };
         "cidrGroupRef" = mkOption {
           description = "CIDRGroupRef is a reference to a CiliumCIDRGroup object.\nA CiliumCIDRGroup contains a list of CIDRs that the endpoint, subject to\nthe rule, can (Ingress/Egress) or cannot (IngressDeny/EgressDeny) receive\nconnections from.";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 253 types.str));
         };
         "cidrGroupSelector" = mkOption {
           description = "CIDRGroupSelector selects CiliumCIDRGroups by their labels,\nrather than by name.";
@@ -11400,7 +12728,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -11419,7 +12747,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -11447,7 +12782,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -11466,7 +12801,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -11535,7 +12877,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -11554,7 +12896,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -11582,7 +12931,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -11601,7 +12950,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -11635,7 +12991,14 @@ let
       options = {
         "family" = mkOption {
           description = "Family is a IP address version.\nCurrently, we support `IPv4` and `IPv6`.\n`IPv4` is set as default.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "IPv4"
+                "IPv6"
+              ]
+            )
+          );
         };
         "type" = mkOption {
           description = "Type is a ICMP-type.\nIt should be an 8bit code (0-255), or it's CamelCase name (for example, \"EchoReply\").\nAllowed ICMP types are:\n    Ipv4: EchoReply | DestinationUnreachable | Redirect | Echo | EchoRequest |\n\t\t     RouterAdvertisement | RouterSelection | TimeExceeded | ParameterProblem |\n\t\t\t Timestamp | TimestampReply | Photuris | ExtendedEcho Request | ExtendedEcho Reply\n    Ipv6: DestinationUnreachable | PacketTooBig | TimeExceeded | ParameterProblem |\n\t\t\t EchoRequest | EchoReply | MulticastListenerQuery| MulticastListenerReport |\n\t\t\t MulticastListenerDone | RouterSolicitation | RouterAdvertisement | NeighborSolicitation |\n\t\t\t NeighborAdvertisement | RedirectMessage | RouterRenumbering | ICMPNodeInformationQuery |\n\t\t\t ICMPNodeInformationResponse | InverseNeighborDiscoverySolicitation | InverseNeighborDiscoveryAdvertisement |\n\t\t\t HomeAgentAddressDiscoveryRequest | HomeAgentAddressDiscoveryReply | MobilePrefixSolicitation |\n\t\t\t MobilePrefixAdvertisement | DuplicateAddressRequestCodeSuffix | DuplicateAddressConfirmationCodeSuffix |\n\t\t\t ExtendedEchoRequest | ExtendedEchoReply";
@@ -11673,7 +13036,7 @@ let
         };
         "serverNames" = mkOption {
           description = "ServerNames is a list of allowed TLS SNI values. If not empty, then\nTLS must be present and one of the provided SNIs must be indicated in the\nTLS handshake.";
-          type = (types.nullOr (types.listOf types.str));
+          type = (types.nullOr (types.listOf (types.withMaxLength 255 types.str)));
         };
         "terminatingTLS" = mkOption {
           description = "TerminatingTLS is the TLS context for the connection terminated by\nthe L7 proxy.  For egress policy this specifies the server-side TLS\nparameters to be applied on the connections originated from the local\nendpoint and terminated by the L7 proxy. For ingress policy this specifies\nthe server-side TLS parameters to be applied on the connections\noriginated from a remote source and terminated by the L7 proxy.";
@@ -11702,11 +13065,11 @@ let
         };
         "name" = mkOption {
           description = "Name is the name of the listener.";
-          type = types.str;
+          type = (types.withMinLength 1 types.str);
         };
         "priority" = mkOption {
           description = "Priority for this Listener that is used when multiple rules would apply different\nlisteners to a policy map entry. Behavior of this is implementation dependent.";
-          type = (types.nullOr types.int);
+          type = (types.nullOr (types.withMaximum 100 (types.withMinimum 1 types.int)));
         };
       };
 
@@ -11720,11 +13083,18 @@ let
       options = {
         "kind" = mkOption {
           description = "Kind is the resource type being referred to. Defaults to CiliumEnvoyConfig or\nCiliumClusterwideEnvoyConfig for CiliumNetworkPolicy and CiliumClusterwideNetworkPolicy,\nrespectively. The only case this is currently explicitly needed is when referring to a\nCiliumClusterwideEnvoyConfig from CiliumNetworkPolicy, as using a namespaced listener\nfrom a cluster scoped policy is not allowed.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "CiliumEnvoyConfig"
+                "CiliumClusterwideEnvoyConfig"
+              ]
+            )
+          );
         };
         "name" = mkOption {
           description = "Name is the resource name of the CiliumEnvoyConfig or CiliumClusterwideEnvoyConfig where\nthe listener is defined in.";
-          type = types.str;
+          type = (types.withMinLength 1 types.str);
         };
       };
 
@@ -11784,7 +13154,7 @@ let
       options = {
         "endPort" = mkOption {
           description = "EndPort can only be an L4 port number.";
-          type = (types.nullOr types.int);
+          type = (types.nullOr (types.withMaximum 65535 (types.withMinimum 0 types.int)));
         };
         "port" = mkOption {
           description = "Port can be an L4 port number, or a name in the form of \"http\"\nor \"http-8080\".";
@@ -11792,7 +13162,16 @@ let
         };
         "protocol" = mkOption {
           description = "Protocol is the L4 protocol. If omitted or empty, any protocol\nmatches. Accepted values: \"TCP\", \"UDP\", \"SCTP\", \"ANY\"\n\nMatching on ICMP is not supported.\n\nNamed port specified for a container may narrow this down, but may not\ncontradict this.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "TCP"
+                "UDP"
+                "SCTP"
+                "ANY"
+              ]
+            )
+          );
         };
       };
 
@@ -11853,11 +13232,11 @@ let
       options = {
         "matchName" = mkOption {
           description = "MatchName matches literal DNS names. A trailing \".\" is automatically added\nwhen missing.";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 255 types.str));
         };
         "matchPattern" = mkOption {
           description = "MatchPattern allows using wildcards to match DNS names. All wildcards are\ncase insensitive. The wildcards are:\n- \"*\" matches 0 or more DNS valid characters, and may occur anywhere in\nthe pattern. As a special case a \"*\" as the leftmost character, without a\nfollowing \".\" matches all subdomains as well as the name to the right.\nA trailing \".\" is automatically added when missing.\n\nExamples:\n`*.cilium.io` matches subdomains of cilium at that level\n  www.cilium.io and blog.cilium.io match, cilium.io and google.com do not\n`*cilium.io` matches cilium.io and all subdomains ends with \"cilium.io\"\n  except those containing \".\" separator, subcilium.io and sub-cilium.io match,\n  www.cilium.io and blog.cilium.io does not\nsub*.cilium.io matches subdomains of cilium where the subdomain component\nbegins with \"sub\"\n  sub.cilium.io and subdomain.cilium.io match, www.cilium.io,\n  blog.cilium.io, cilium.io and google.com do not";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 255 types.str));
         };
       };
 
@@ -11914,11 +13293,20 @@ let
       options = {
         "mismatch" = mkOption {
           description = "Mismatch identifies what to do in case there is no match. The default is\nto drop the request. Otherwise the overall rule is still considered as\nmatching, but the mismatches are logged in the access log.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "LOG"
+                "ADD"
+                "DELETE"
+                "REPLACE"
+              ]
+            )
+          );
         };
         "name" = mkOption {
           description = "Name identifies the header.";
-          type = types.str;
+          type = (types.withMinLength 1 types.str);
         };
         "secret" = mkOption {
           description = "Secret refers to a secret that contains the value to be matched against.\nThe secret must only contain one entry. If the referred secret does not\nexist, and there is no \"Value\" specified, the match will fail.";
@@ -11976,11 +13364,18 @@ let
         };
         "role" = mkOption {
           description = "Role is a case-insensitive string and describes a group of API keys\nnecessary to perform certain higher-level Kafka operations such as \"produce\"\nor \"consume\". A Role automatically expands into all APIKeys required\nto perform the specified higher-level operation.\n\nThe following values are supported:\n - \"produce\": Allow producing to the topics specified in the rule\n - \"consume\": Allow consuming from the topics specified in the rule\n\nThis field is incompatible with the APIKey field, i.e APIKey and Role\ncannot both be specified in the same rule.\n\nIf omitted or empty, and if APIKey is not specified, then all keys are\nallowed.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "produce"
+                "consume"
+              ]
+            )
+          );
         };
         "topic" = mkOption {
           description = "Topic is the topic name contained in the message. If a Kafka request\ncontains multiple topics, then all topics must be allowed or the\nmessage will be rejected.\n\nThis constraint is ignored if the matched request message type\ndoesn't contain any topic. Maximum size of Topic can be 249\ncharacters as per recent Kafka spec and allowed characters are\na-z, A-Z, 0-9, -, . and _.\n\nOlder Kafka versions had longer topic lengths of 255, but in Kafka 0.10\nversion the length was changed from 255 to 249. For compatibility\nreasons we are using 255.\n\nIf omitted or empty, all topics are allowed.";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 255 types.str));
         };
       };
 
@@ -12067,7 +13462,7 @@ let
       options = {
         "value" = mkOption {
           description = "Value is a free-form string that is included in Hubble flows\nthat match this policy. The string is limited to 32 printable characters.";
-          type = (types.nullOr types.str);
+          type = (types.nullOr (types.withMaxLength 32 types.str));
         };
       };
 
@@ -12089,7 +13484,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -12108,7 +13503,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -12258,7 +13660,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -12277,7 +13679,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -12305,7 +13714,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -12324,7 +13733,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -12364,23 +13780,29 @@ let
         };
         "message" = mkOption {
           description = "message is a human readable message indicating details about the transition.\nThis may be an empty string.";
-          type = types.str;
+          type = (types.withMaxLength 32768 types.str);
         };
         "observedGeneration" = mkOption {
           description = "observedGeneration represents the .metadata.generation that the condition was set based upon.\nFor instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date\nwith respect to the current state of the instance.";
-          type = (types.nullOr types.int);
+          type = (types.nullOr (types.withMinimum 0 types.int));
         };
         "reason" = mkOption {
           description = "reason contains a programmatic identifier indicating the reason for the condition's last transition.\nProducers of specific condition types may define expected values and meanings for this field,\nand whether the values are considered a guaranteed API.\nThe value should be a CamelCase string.\nThis field may not be empty.";
-          type = types.str;
+          type = (types.withMaxLength 1024 (types.withMinLength 1 types.str));
         };
         "status" = mkOption {
           description = "status of the condition, one of True, False, Unknown.";
-          type = types.str;
+          type = (
+            types.enum [
+              "True"
+              "False"
+              "Unknown"
+            ]
+          );
         };
         "type" = mkOption {
           description = "type of condition in CamelCase or in foo.example.com/CamelCase.";
-          type = types.str;
+          type = (types.withMaxLength 316 types.str);
         };
       };
 
@@ -12426,7 +13848,14 @@ let
       options = {
         "allowFirstLastIPs" = mkOption {
           description = "AllowFirstLastIPs, if set to `Yes` or undefined means that the first and last IPs of each CIDR will be allocatable.\nIf `No`, these IPs will be reserved. This field is ignored for /{31,32} and /{127,128} CIDRs since\nreserving the first and last IPs would make the CIDRs unusable.";
-          type = (types.nullOr types.str);
+          type = (
+            types.nullOr (
+              types.enum [
+                "Yes"
+                "No"
+              ]
+            )
+          );
         };
         "blocks" = mkOption {
           description = "Blocks is a list of CIDRs comprising this IP Pool";
@@ -12493,7 +13922,7 @@ let
         };
         "matchLabels" = mkOption {
           description = "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels\nmap is equivalent to an element of matchExpressions, whose key field is \"key\", the\noperator is \"In\", and the values array contains only \"value\". The requirements are ANDed.";
-          type = (types.nullOr (types.attrsOf types.str));
+          type = (types.nullOr (types.attrsOf (types.withMaxLength 63 types.str)));
         };
       };
 
@@ -12512,7 +13941,14 @@ let
         };
         "operator" = mkOption {
           description = "operator represents a key's relationship to a set of values.\nValid operators are In, NotIn, Exists and DoesNotExist.";
-          type = types.str;
+          type = (
+            types.enum [
+              "In"
+              "NotIn"
+              "Exists"
+              "DoesNotExist"
+            ]
+          );
         };
         "values" = mkOption {
           description = "values is an array of string values. If the operator is In or NotIn,\nthe values array must be non-empty. If the operator is Exists or DoesNotExist,\nthe values array must be empty. This array is replaced during a strategic\nmerge patch.";
@@ -12552,23 +13988,29 @@ let
         };
         "message" = mkOption {
           description = "message is a human readable message indicating details about the transition.\nThis may be an empty string.";
-          type = types.str;
+          type = (types.withMaxLength 32768 types.str);
         };
         "observedGeneration" = mkOption {
           description = "observedGeneration represents the .metadata.generation that the condition was set based upon.\nFor instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date\nwith respect to the current state of the instance.";
-          type = (types.nullOr types.int);
+          type = (types.nullOr (types.withMinimum 0 types.int));
         };
         "reason" = mkOption {
           description = "reason contains a programmatic identifier indicating the reason for the condition's last transition.\nProducers of specific condition types may define expected values and meanings for this field,\nand whether the values are considered a guaranteed API.\nThe value should be a CamelCase string.\nThis field may not be empty.";
-          type = types.str;
+          type = (types.withMaxLength 1024 (types.withMinLength 1 types.str));
         };
         "status" = mkOption {
           description = "status of the condition, one of True, False, Unknown.";
-          type = types.str;
+          type = (
+            types.enum [
+              "True"
+              "False"
+              "Unknown"
+            ]
+          );
         };
         "type" = mkOption {
           description = "type of condition in CamelCase or in foo.example.com/CamelCase.";
-          type = types.str;
+          type = (types.withMaxLength 316 types.str);
         };
       };
 
