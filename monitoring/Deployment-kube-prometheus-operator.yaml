@@ -8,8 +8,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: kube-prometheus-prometheus-operator
     app.kubernetes.io/part-of: kube-prometheus
-    app.kubernetes.io/version: 88.5.0
-    chart: kube-prometheus-stack-88.5.0
+    app.kubernetes.io/version: 90.0.0
+    chart: kube-prometheus-stack-90.0.0
     heritage: Helm
     release: kube-prometheus-stack
   name: kube-prometheus-operator
@@ -30,8 +30,8 @@ spec:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kube-prometheus-prometheus-operator
         app.kubernetes.io/part-of: kube-prometheus
-        app.kubernetes.io/version: 88.5.0
-        chart: kube-prometheus-stack-88.5.0
+        app.kubernetes.io/version: 90.0.0
+        chart: kube-prometheus-stack-90.0.0
         heritage: Helm
         release: kube-prometheus-stack
     spec:
@@ -48,7 +48,7 @@ spec:
             - --config-reloader-memory-request=0
             - --config-reloader-memory-limit=0
             - --thanos-default-base-image=quay.io/thanos/thanos:v0.42.4
-            - --secret-field-selector=type!=kubernetes.io/dockercfg,type!=kubernetes.io/service-account-token,type!=helm.sh/release.v1
+            - --secret-field-selector=type!=kubernetes.io/dockercfg,type!=helm.sh/release.v1
             - --web.enable-tls=true
             - --web.cert-file=/cert/cert
             - --web.key-file=/cert/key

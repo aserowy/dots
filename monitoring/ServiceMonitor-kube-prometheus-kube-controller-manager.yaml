@@ -6,19 +6,26 @@ metadata:
     app.kubernetes.io/instance: kube-prometheus-stack
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kube-prometheus
-    app.kubernetes.io/version: 88.5.0
-    chart: kube-prometheus-stack-88.5.0
+    app.kubernetes.io/version: 90.0.0
+    chart: kube-prometheus-stack-90.0.0
     heritage: Helm
     release: kube-prometheus-stack
   name: kube-prometheus-kube-controller-manager
   namespace: monitoring
 spec:
   endpoints:
-    - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+    - authorization:
+        credentials:
+          key: token
+          name: kube-prometheus-prometheus-token
+        type: Bearer
       port: http-metrics
       scheme: https
       tlsConfig:
-        caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+        ca:
+          configMap:
+            key: ca.crt
+            name: kube-root-ca.crt
         insecureSkipVerify: true
   jobLabel: jobLabel
   namespaceSelector:
