@@ -5,8 +5,8 @@ metadata:
     app.kubernetes.io/instance: valkey
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: valkey
-    app.kubernetes.io/version: 9.1.2
-    helm.sh/chart: valkey-0.12.0
+    app.kubernetes.io/version: 9.1.1
+    helm.sh/chart: valkey-0.11.0
   name: valkey
   namespace: paperless
 spec:
@@ -20,7 +20,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/initconfig: 53396f4768961f4c30f0b91d2930fe85
+        checksum/initconfig: 59b95600453bccf9bfc8aebba532c0aa
       labels:
         app.kubernetes.io/instance: valkey
         app.kubernetes.io/name: valkey
@@ -34,7 +34,7 @@ spec:
           env:
             - name: VALKEY_LOG_LEVEL
               value: notice
-          image: docker.io/valkey/valkey:9.1.2
+          image: docker.io/valkey/valkey:9.1.1
           imagePullPolicy: IfNotPresent
           livenessProbe:
             exec:
@@ -76,7 +76,7 @@ spec:
       initContainers:
         - command:
             - /scripts/init.sh
-          image: docker.io/valkey/valkey:9.1.2
+          image: docker.io/valkey/valkey:9.1.1
           imagePullPolicy: IfNotPresent
           name: valkey-init
           securityContext:
