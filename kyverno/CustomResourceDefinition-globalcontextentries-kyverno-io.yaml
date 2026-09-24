@@ -8,8 +8,8 @@ metadata:
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kyverno-crds
-    app.kubernetes.io/version: 3.9.0
-    helm.sh/chart: crds-3.9.0
+    app.kubernetes.io/version: 3.9.1
+    helm.sh/chart: crds-3.9.1
   name: globalcontextentries.kyverno.io
 spec:
   group: kyverno.io
@@ -277,6 +277,7 @@ spec:
           name: LAST REFRESH
           type: date
       deprecated: true
+      deprecationWarning: kyverno.io/v2alpha1 GlobalContextEntry is deprecated; use kyverno.io/v2 GlobalContextEntry
       name: v2alpha1
       schema:
         openAPIV3Schema:

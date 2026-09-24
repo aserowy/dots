@@ -8,8 +8,8 @@ metadata:
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kyverno-crds
-    app.kubernetes.io/version: 3.9.0
-    helm.sh/chart: crds-3.9.0
+    app.kubernetes.io/version: 3.9.1
+    helm.sh/chart: crds-3.9.1
   name: policies.kyverno.io
 spec:
   group: kyverno.io
@@ -60,6 +60,8 @@ spec:
         - jsonPath: .status.conditions[?(@.type == "Ready")].message
           name: MESSAGE
           type: string
+      deprecated: true
+      deprecationWarning: kyverno.io/v1 Policy is deprecated and will be removed in a future release; migrate to NamespacedValidatingPolicy and the other namespaced policy types (policies.kyverno.io), see https://kyverno.io/docs/guides/migration-to-cel/
       name: v1
       schema:
         openAPIV3Schema:
@@ -9451,6 +9453,8 @@ spec:
         - jsonPath: .status.conditions[?(@.type == "Ready")].message
           name: MESSAGE
           type: string
+      deprecated: true
+      deprecationWarning: kyverno.io/v2beta1 Policy is deprecated and will be removed in a future release; migrate to NamespacedValidatingPolicy and the other namespaced policy types (policies.kyverno.io), see https://kyverno.io/docs/guides/migration-to-cel/
       name: v2beta1
       schema:
         openAPIV3Schema:

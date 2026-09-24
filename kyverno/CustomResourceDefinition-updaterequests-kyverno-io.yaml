@@ -8,8 +8,8 @@ metadata:
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kyverno-crds
-    app.kubernetes.io/version: 3.9.0
-    helm.sh/chart: crds-3.9.0
+    app.kubernetes.io/version: 3.9.1
+    helm.sh/chart: crds-3.9.1
   name: updaterequests.kyverno.io
 spec:
   group: kyverno.io
@@ -50,6 +50,7 @@ spec:
           name: Age
           type: date
       deprecated: true
+      deprecationWarning: kyverno.io/v1beta1 UpdateRequest is deprecated; use kyverno.io/v2 UpdateRequest
       name: v1beta1
       schema:
         openAPIV3Schema:
