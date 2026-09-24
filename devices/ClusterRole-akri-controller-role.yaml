@@ -7,8 +7,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: akri-controller
     app.kubernetes.io/part-of: akri
-    app.kubernetes.io/version: 0.13.8
-    helm.sh/chart: akri-0.13.8
+    app.kubernetes.io/version: 0.14.0
+    helm.sh/chart: akri-0.14.0
   name: akri-controller-role
 rules:
   - apiGroups:

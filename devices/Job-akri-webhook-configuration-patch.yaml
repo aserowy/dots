@@ -9,8 +9,8 @@ metadata:
     app.kubernetes.io/instance: akri
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: akri
-    app.kubernetes.io/version: 0.13.8
-    helm.sh/chart: akri-0.13.8
+    app.kubernetes.io/version: 0.14.0
+    helm.sh/chart: akri-0.14.0
   name: akri-webhook-configuration-patch
   namespace: devices
 spec:
@@ -21,8 +21,8 @@ spec:
         app.kubernetes.io/instance: akri
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/part-of: akri
-        app.kubernetes.io/version: 0.13.8
-        helm.sh/chart: akri-0.13.8
+        app.kubernetes.io/version: 0.14.0
+        helm.sh/chart: akri-0.14.0
       name: akri-webhook-configuration-patch
     spec:
       containers:
@@ -38,7 +38,7 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
-          image: registry.k8s.io/ingress-nginx/kube-webhook-certgen:v1.1.1
+          image: registry.k8s.io/ingress-nginx/kube-webhook-certgen:v1.6.9
           imagePullPolicy: IfNotPresent
           name: patch
       restartPolicy: OnFailure

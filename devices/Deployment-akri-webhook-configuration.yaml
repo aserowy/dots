@@ -7,8 +7,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: akri-webhook-configuration
     app.kubernetes.io/part-of: akri
-    app.kubernetes.io/version: 0.13.8
-    helm.sh/chart: akri-0.13.8
+    app.kubernetes.io/version: 0.14.0
+    helm.sh/chart: akri-0.14.0
   name: akri-webhook-configuration
   namespace: devices
 spec:
@@ -26,15 +26,15 @@ spec:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: akri-webhook-configuration
         app.kubernetes.io/part-of: akri
-        app.kubernetes.io/version: 0.13.8
-        helm.sh/chart: akri-0.13.8
+        app.kubernetes.io/version: 0.14.0
+        helm.sh/chart: akri-0.14.0
     spec:
       containers:
         - args:
             - --tls-crt-file=/secrets/tls.crt
             - --tls-key-file=/secrets/tls.key
             - --port=8443
-          image: ghcr.io/project-akri/akri/webhook-configuration:v0.13.8
+          image: ghcr.io/project-akri/akri/webhook-configuration:v0.14.0
           imagePullPolicy: Always
           name: webhook
           resources:
