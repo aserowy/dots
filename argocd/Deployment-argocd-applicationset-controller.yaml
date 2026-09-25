@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/name: argocd-applicationset-controller
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v3.5.2
-    helm.sh/chart: argo-cd-10.5.0
+    helm.sh/chart: argo-cd-10.8.4
   name: argocd-applicationset-controller
   namespace: argocd
 spec:
@@ -21,7 +21,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/cmd-params: 792cd18fcb318a5fcb24b1135d78b27fafec24d251d2bd1f78387be6aa9fa49d
+        checksum/cmd-params: 7169a66dffe48e8cacc4d5fee2ffe558d692709d8ddaf19ef44fa89b031b0fe5
       labels:
         app.kubernetes.io/component: applicationset-controller
         app.kubernetes.io/instance: argocd
@@ -29,7 +29,7 @@ spec:
         app.kubernetes.io/name: argocd-applicationset-controller
         app.kubernetes.io/part-of: argocd
         app.kubernetes.io/version: v3.5.2
-        helm.sh/chart: argo-cd-10.5.0
+        helm.sh/chart: argo-cd-10.8.4
     spec:
       affinity:
         podAntiAffinity:
@@ -263,6 +263,7 @@ spec:
           name: ssh-known-hosts
         - configMap:
             name: argocd-tls-certs-cm
+            optional: true
           name: tls-certs
         - configMap:
             name: argocd-gpg-keys-cm
