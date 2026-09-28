@@ -5,7 +5,7 @@ metadata:
     app.kubernetes.io/instance: kube-prometheus-stack
     app.kubernetes.io/name: grafana
     app.kubernetes.io/version: 13.2.1
-    helm.sh/chart: grafana-13.2.2
+    helm.sh/chart: grafana-13.2.4
   name: kube-prometheus-stack-grafana
   namespace: monitoring
 spec:
@@ -20,7 +20,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: 5bceeca3808849664f09f642547ce17fdf495522238ef9ce952b20cfa36b7de5
+        checksum/config: 457c16ae5fdf9a6ab84c8aeadd5b7e2ca3e10c8b2f0e8c50a2cb40fe8ac9adf3
         checksum/sc-dashboard-provider-config: e70bf6a851099d385178a76de9757bb0bef8299da6d8443602590e44f05fdf24
         kubectl.kubernetes.io/default-container: grafana
       labels:
@@ -28,7 +28,7 @@ spec:
         app.kubernetes.io/name: grafana
         app.kubernetes.io/version: 13.2.1
         haproxy/egress: allow
-        helm.sh/chart: grafana-13.2.2
+        helm.sh/chart: grafana-13.2.4
     spec:
       automountServiceAccountToken: true
       containers:
