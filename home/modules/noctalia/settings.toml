@@ -154,21 +154,24 @@ behavior_order = [ "lock", "screen-off", "lock-and-suspend" ]
 
     [idle.behavior.lock]
     action = "lock"
-    enabled = true
+    enabled = false
     timeout = 600.0
 
     [idle.behavior.lock-and-suspend]
     action = "lock_and_suspend"
-    enabled = true
+    enabled = false
     timeout = 1800.0
 
     [idle.behavior.screen-off]
     action = "screen_off"
-    enabled = true
+    enabled = false
     timeout = 660.0
 
 [location]
 address = "Drensteinfurt, Deutschland"
+
+[lockscreen]
+transition = [ "fade" ]
 
 [lockscreen_widgets]
 enabled = true
@@ -247,7 +250,9 @@ settings_show_advanced = true
     wallpaper_position = "center"
 
     [shell.screenshot]
+    annotate = true
     directory = "/home/serowy/pictures"
+    remember_last_region = true
 
     [[shell.session.actions]]
     action = "lock"
@@ -296,16 +301,16 @@ transition = [ "fade" ]
     enabled = true
 
     [wallpaper.default]
-    path = "/home/serowy/nextcloud/Wallpapers/backiee-292979-landscape.jpg"
+    path = "/home/serowy/nextcloud/Wallpapers/backiee-234389.jpg"
 
     [wallpaper.last]
-    path = "/home/serowy/nextcloud/Wallpapers/backiee-292979-landscape.jpg"
+    path = "/home/serowy/nextcloud/Wallpapers/backiee-234389.jpg"
 
     [wallpaper.monitors.DP-2]
-    path = "/home/serowy/nextcloud/Wallpapers/backiee-292979-landscape.jpg"
+    path = "/home/serowy/nextcloud/Wallpapers/backiee-234389.jpg"
 
     [wallpaper.monitors.HDMI-A-1]
-    path = "/home/serowy/nextcloud/Wallpapers/backiee-292979-landscape.jpg"
+    path = "/home/serowy/nextcloud/Wallpapers/backiee-234389.jpg"
 
 [widget.bongocat]
 script = "scripts/bongocat.lua"
