@@ -46,6 +46,9 @@ filtering:
   parental_block_host: family-block.dns.adguard.com
   safebrowsing_enabled: false
   safebrowsing_block_host: standard-block.dns.adguard.com
+  rewrites:
+    - domain: "immich.anderwerse.de"
+      answer: "192.168.178.231"
 user_rules:
   - '@@||svc.ui.com^$important'
 clients:
