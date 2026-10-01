@@ -71,8 +71,8 @@ in
     };
 
     resources = {
-      # NOTE: patch immich deployment to enable labeled ingress in HAProxy
-      deployments.immich-server.spec.template.metadata.labels."haproxy/ingress" = "allow";
+      # Allow HAProxy's egress policy to select the Immich server as a backend.
+      deployments.immich-server.spec.template.metadata.labels."haproxy/egress" = "allow";
 
       clusters.immich-pg18 = {
         spec = {
