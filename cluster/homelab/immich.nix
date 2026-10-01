@@ -119,6 +119,24 @@ in
         };
       };
 
+      databases.immich = {
+        spec = {
+          name = "immich";
+          owner = "immich";
+          cluster.name = "immich-pg18";
+          extensions = [
+            {
+              name = "vector";
+              ensure = "present";
+            }
+            {
+              name = "vchord";
+              ensure = "present";
+            }
+          ];
+        };
+      };
+
       ingresses.immich = {
         metadata = {
           inherit namespace;
