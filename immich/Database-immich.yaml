@@ -11,5 +11,9 @@ spec:
       name: vector
     - ensure: present
       name: vchord
+    - ensure: present
+      name: cube
+    - ensure: present
+      name: earthdistance
   name: immich
   owner: immich
