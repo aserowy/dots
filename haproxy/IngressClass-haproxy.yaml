@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: kubernetes-ingress
     app.kubernetes.io/version: 3.2.15
-    helm.sh/chart: kubernetes-ingress-1.54.1
+    helm.sh/chart: kubernetes-ingress-1.54.2
   name: haproxy
 spec:
   controller: haproxy.org/ingress-controller/haproxy

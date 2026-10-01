@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/version: 3.2.15
     cilium/ippool: haproxy
     cilium/l2: announce
-    helm.sh/chart: kubernetes-ingress-1.54.1
+    helm.sh/chart: kubernetes-ingress-1.54.2
   name: kubernetes-ingress
   namespace: haproxy
 spec:
