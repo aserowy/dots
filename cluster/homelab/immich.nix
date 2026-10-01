@@ -26,7 +26,6 @@ in
 
     helm.releases.immich = {
       chart = charts.immich-app.immich;
-      extraOpts = [ "--skip-schema-validation" ];
 
       values = {
         server.controllers.main.containers.main.env = {
@@ -61,7 +60,7 @@ in
 
         machine-learning = {
           enabled = true;
-          cache.data = {
+          persistence.cache = {
             type = "persistentVolumeClaim";
             size = "10Gi";
             accessMode = "ReadWriteMany";
@@ -73,7 +72,7 @@ in
 
     resources = {
       # NOTE: patch immich deployment to enable labeled ingress in HAProxy
-      deployments.immich.spec.template.metadata.labels."haproxy/ingress" = "allow";
+      deployments.immich-server.spec.template.metadata.labels."haproxy/ingress" = "allow";
 
       clusters.immich-pg18 = {
         spec = {
@@ -141,7 +140,7 @@ in
                   pathType = "Prefix";
                   path = "/";
                   backend.service = {
-                    name = "main";
+                    name = "immich-server";
                     port.number = 2283;
                   };
                 }

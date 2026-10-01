@@ -83,16 +83,9 @@
       ...
     }:
     let
-      chartsBuilder =
-        { pkgs }:
-        let
-          kubelib = nix-kube-generators.lib { inherit pkgs; };
-        in
-        haumea.lib.load {
-          src = ./cluster/charts;
-          loader = { ... }: p: kubelib.downloadHelmChart (import p);
-          transformer = haumea.lib.transformers.liftDefault;
-        };
+      chartsBuilder = import ./cluster/build-charts.nix {
+        inherit haumea nix-kube-generators;
+      };
     in
     {
       devShells.x86_64-linux.default = import ./.dev {
