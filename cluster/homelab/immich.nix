@@ -133,6 +133,14 @@ in
               name = "vchord";
               ensure = "present";
             }
+            {
+              name = "cube";
+              ensure = "present";
+            }
+            {
+              name = "earthdistance";
+              ensure = "present";
+            }
           ];
         };
       };
