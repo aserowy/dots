@@ -20,6 +20,7 @@
     ./adguard
     ./cloudnativepg.nix
     ./homeassistant
+    ./immich.nix
     ./nextcloud
     ./paperless
     ./rustdesk.nix
