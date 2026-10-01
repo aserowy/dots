@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/instance: immich
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: server
+    app.kubernetes.io/service: immich-server
+    app.kubernetes.io/version: v3.2.0
+    helm.sh/chart: immich-0.13.2
+  name: immich-server
+  namespace: immich
+spec:
+  ports:
+    - appProtocol: kubernetes.io/ws
+      name: http
+      port: 2283
+      protocol: TCP
+      targetPort: http
+  selector:
+    app.kubernetes.io/controller: main
+    app.kubernetes.io/instance: immich
+    app.kubernetes.io/name: server
+  type: ClusterIP

@@ -1,0 +1,40 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: immich-pg18
+  namespace: immich
+spec:
+  bootstrap:
+    initdb:
+      database: immich
+      owner: immich
+      secret:
+        name: immich-pg
+  imageCatalogRef:
+    apiGroup: postgresql.cnpg.io
+    kind: ClusterImageCatalog
+    major: 18
+    name: trixie
+  instances: 1
+  managed:
+    services:
+      disabledDefaultServices:
+        - ro
+        - r
+  postgresql:
+    extensions:
+      - dynamic_library_path:
+          - /usr/lib/postgresql/18/lib
+        extension_control_path:
+          - /usr/share/postgresql/18/
+        image:
+          reference: ghcr.io/tensorchord/vchord-scratch:pg18-v1.1.1
+        name: vchord
+    shared_preload_libraries:
+      - vchord.so
+  resources:
+    requests:
+      cpu: 150m
+      memory: 400Mi
+  storage:
+    size: 1Gi
