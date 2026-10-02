@@ -55,20 +55,13 @@ in
 
         packages = with pkgs; [
           kdePackages.qt6ct
+          gnome-control-center
+          gnome-disk-utility
           niri
           nwg-look
           pwvucontrol
+          udiskie
           xrandr
-
-          (pkgs.writeShellScriptBin "outputshot" ''
-            niri msg action screenshot-screen
-          '')
-          (pkgs.writeShellScriptBin "screenshot" ''
-            niri msg action screenshot
-          '')
-          (pkgs.writeShellScriptBin "windowshot" ''
-            niri msg action screenshot-window
-          '')
         ];
       };
 
@@ -76,5 +69,6 @@ in
         enable = true;
         systemd.enable = true;
       };
+
     };
 }

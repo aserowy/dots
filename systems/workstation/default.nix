@@ -129,6 +129,8 @@
     # NOTE: to enable working with qmk on this pc
     # udev.packages = [ pkgs.qmk-udev-rules ];
 
+    udisks2.enable = true;
+
     xserver.videoDrivers = [ "amdgpu" ];
   };
 

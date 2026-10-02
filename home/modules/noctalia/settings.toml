@@ -16,6 +16,8 @@ widget_spacing = 15
 
     [bar.default.monitor.HDMI-A-1]
     enabled = false
+    end = [ "notifications", "keyboard_layout", "volume", "screenshot", "status", "tray", "spacer_clock", "clock" ]
+    start = [ "launcher" ]
 
 [[control_center.shortcuts]]
 type = "clipboard"
@@ -235,6 +237,12 @@ caffeine = false
 lock_keys = false
 wifi = false
 
+[plugin_settings."aristides/udiskie"]
+manager_position = "center"
+
+[plugins]
+enabled = [ "aristides/udiskie" ]
+
 [shell]
 font_family = "Inter"
 settings_show_advanced = true
@@ -301,16 +309,16 @@ transition = [ "fade" ]
     enabled = true
 
     [wallpaper.default]
-    path = "/home/serowy/nextcloud/Wallpapers/backiee-234389.jpg"
+    path = "/home/serowy/nextcloud/Wallpapers/backiee-204725.jpg"
 
     [wallpaper.last]
-    path = "/home/serowy/nextcloud/Wallpapers/backiee-234389.jpg"
+    path = "/home/serowy/nextcloud/Wallpapers/backiee-204725.jpg"
 
     [wallpaper.monitors.DP-2]
-    path = "/home/serowy/nextcloud/Wallpapers/backiee-234389.jpg"
+    path = "/home/serowy/nextcloud/Wallpapers/backiee-204725.jpg"
 
     [wallpaper.monitors.HDMI-A-1]
-    path = "/home/serowy/nextcloud/Wallpapers/backiee-234389.jpg"
+    path = "/home/serowy/nextcloud/Wallpapers/backiee-204725.jpg"
 
 [widget.bongocat]
 script = "scripts/bongocat.lua"
@@ -329,6 +337,9 @@ show_label = false
 [widget.spacer_clock]
 length = 25
 type = "spacer"
+
+[widget.status]
+type = "aristides/udiskie:status"
 
 [widget.tray]
 drawer = true
