@@ -5,6 +5,8 @@
     printing = {
       enable = true;
       drivers = [
+        pkgs.canon-capt
+        pkgs.epson-alc1100
         pkgs.foo2zjs
       ];
     };
