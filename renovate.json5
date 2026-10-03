@@ -20,9 +20,19 @@
       "customType": "regex",
       "managerFilePatterns": ["cluster/charts/**/*.nix"],
       "matchStrings": [
-        "repo\\s*=\\s*\"(?<registryUrl>.*?)\".*?\\n.*?chart\\s*=\\s*\"(?<depName>.*?)\".*?\\n.*?version\\s*=\\s*\"(?<currentValue>.*?)\".*?"
+        "repo\\s*=\\s*\"(?<registryUrl>https?://[^\"]+)\".*?\\n.*?chart\\s*=\\s*\"(?<depName>[^\"]+)\".*?\\n.*?version\\s*=\\s*\"(?<currentValue>[^\"]+)\""
       ],
       "datasourceTemplate": "helm"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["cluster/charts/**/*.nix"],
+      "matchStrings": [
+        "repo\\s*=\\s*\"oci://(?<registryHost>[^/\"]+)/(?<repository>[^\"]+)\".*?\\n.*?chart\\s*=\\s*\"(?<depName>[^\"]+)\".*?\\n.*?version\\s*=\\s*\"(?<currentValue>[^\"]+)\""
+      ],
+      "packageNameTemplate": "{{{registryHost}}}/{{{repository}}}/{{{depName}}}",
+      "datasourceTemplate": "docker",
+      "versioningTemplate": "helm"
     }
   ]
 }
