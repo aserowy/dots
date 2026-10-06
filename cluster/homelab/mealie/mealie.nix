@@ -96,7 +96,7 @@ in
                     }
                     {
                       name = "OIDC_AUTO_REDIRECT";
-                      value = "false";
+                      value = "true";
                     }
                     {
                       name = "OIDC_CLIENT_ID";
