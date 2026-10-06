@@ -2,5 +2,5 @@
   repo = "https://collaboraonline.github.io/online/";
   chart = "collabora-online";
   version = "1.3.4";
-  chartHash = "sha256-NXtwc861v0xrZsIq3r8tAu4GiaiNOUk1mg7/pxesYnw=";
+  chartHash = "sha256-sYgVnkLAKGXZ0YjDfAacP3ixL8sysTH6/Bgd+uJDt1Q=";
 }
