@@ -75,6 +75,10 @@ in
                       value = "false";
                     }
                     {
+                      name = "ALLOW_PASSWORD_LOGIN";
+                      value = "false";
+                    }
+                    {
                       name = "BASE_URL";
                       value = "https://mealie.anderwerse.de";
                     }
@@ -85,6 +89,44 @@ in
                     {
                       name = "PGID";
                       value = "911";
+                    }
+                    {
+                      name = "OIDC_AUTH_ENABLED";
+                      value = "true";
+                    }
+                    {
+                      name = "OIDC_AUTO_REDIRECT";
+                      value = "true";
+                    }
+                    {
+                      name = "OIDC_CLIENT_ID";
+                      valueFrom.secretKeyRef = {
+                        name = "mealie-oidc";
+                        key = "client-id";
+                      };
+                    }
+                    {
+                      name = "OIDC_CLIENT_SECRET";
+                      valueFrom.secretKeyRef = {
+                        name = "mealie-oidc";
+                        key = "client-secret";
+                      };
+                    }
+                    {
+                      name = "OIDC_CONFIGURATION_URL";
+                      value = "https://accounts.google.com/.well-known/openid-configuration";
+                    }
+                    {
+                      name = "OIDC_PROVIDER_NAME";
+                      value = "Google";
+                    }
+                    {
+                      name = "OIDC_REQUIRES_EMAIL_VERIFICATION";
+                      value = "true";
+                    }
+                    {
+                      name = "OIDC_SIGNUP_ENABLED";
+                      value = "true";
                     }
                     {
                       name = "POSTGRES_DB";
