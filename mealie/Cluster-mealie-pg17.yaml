@@ -1,0 +1,29 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: mealie-pg17
+  namespace: mealie
+spec:
+  bootstrap:
+    initdb:
+      database: mealie
+      owner: mealie
+      secret:
+        name: mealie-pg
+  imageCatalogRef:
+    apiGroup: postgresql.cnpg.io
+    kind: ClusterImageCatalog
+    major: 17
+    name: trixie
+  instances: 2
+  managed:
+    services:
+      disabledDefaultServices:
+        - ro
+        - r
+  resources:
+    requests:
+      cpu: 150m
+      memory: 300Mi
+  storage:
+    size: 2Gi

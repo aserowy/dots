@@ -1,0 +1,93 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mealie
+  namespace: mealie
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: mealie
+  serviceName: mealie
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: app
+        app.kubernetes.io/name: mealie
+    spec:
+      containers:
+        - env:
+            - name: ALLOW_SIGNUP
+              value: "false"
+            - name: BASE_URL
+              value: https://mealie.anderwerse.de
+            - name: DB_ENGINE
+              value: postgres
+            - name: PGID
+              value: "911"
+            - name: POSTGRES_DB
+              value: mealie
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: mealie-pg
+            - name: POSTGRES_PORT
+              value: "5432"
+            - name: POSTGRES_SERVER
+              value: mealie-pg17-rw.mealie.svc.cluster.local
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  key: username
+                  name: mealie-pg
+            - name: PUID
+              value: "911"
+            - name: TZ
+              value: Europe/Berlin
+          image: ghcr.io/mealie-recipes/mealie:v3.28.0
+          livenessProbe:
+            httpGet:
+              path: /api/app/about
+              port: 9000
+            periodSeconds: 30
+          name: mealie
+          ports:
+            - containerPort: 9000
+              name: http
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /api/app/about
+              port: 9000
+          resources:
+            limits:
+              memory: 1Gi
+            requests:
+              cpu: 100m
+              memory: 512Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+          startupProbe:
+            failureThreshold: 30
+            httpGet:
+              path: /api/app/about
+              port: 9000
+            periodSeconds: 10
+          volumeMounts:
+            - mountPath: /app/data
+              name: data
+      initContainers:
+        - command:
+            - sh
+            - -c
+            - until nc -z mealie-pg17-rw 5432; do echo 'waiting for postgresql.'; sleep 5; done
+          image: busybox:1.38.0
+          name: await-db-init
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: mealie-data-pvc
