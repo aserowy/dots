@@ -21,6 +21,7 @@
     ./cloudnativepg.nix
     ./homeassistant
     ./immich.nix
+    ./mealie
     ./nextcloud
     ./paperless
     ./rustdesk.nix
