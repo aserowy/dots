@@ -24,6 +24,7 @@
 
     packages = with pkgs; [
       discord
+      firefox
       nautilus
       nextcloud-client
       onlyoffice-desktopeditors
