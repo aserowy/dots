@@ -28,6 +28,7 @@
       nautilus
       nextcloud-client
       onlyoffice-desktopeditors
+      pyfa
       reaper
       rustdesk-flutter
       signal-desktop
