@@ -20,7 +20,7 @@
             containers = [
               {
                 name = "tika";
-                image = "docker.io/apache/tika:4.0.0"; # docker/apache/tika@semver-coerced
+                image = "docker.io/apache/tika:4.1.0"; # docker/apache/tika@semver-coerced
                 securityContext = {
                   allowPrivilegeEscalation = false;
                   readOnlyRootFilesystem = true;
