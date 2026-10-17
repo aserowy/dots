@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    helm.sh/hook: test
+    helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
+  labels:
+    app.kubernetes.io/instance: kube-prometheus-stack
+    app.kubernetes.io/name: grafana
+    app.kubernetes.io/version: 13.2.3
+    helm.sh/chart: grafana-13.2.7
+  name: kube-prometheus-stack-grafana-test
+  namespace: monitoring
+spec:
+  containers:
+    - command:
+        - /opt/bats/bin/bats
+        - -t
+        - /tests/run.sh
+      image: docker.io/bats/bats:1.14.0
+      imagePullPolicy: IfNotPresent
+      name: kube-prometheus-stack-test
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+            - ALL
+        privileged: false
+        readOnlyRootFilesystem: true
+        seccompProfile:
+          type: RuntimeDefault
+      volumeMounts:
+        - mountPath: /tests
+          name: tests
+          readOnly: true
+        - mountPath: /tmp
+          name: tmp
+  restartPolicy: Never
+  securityContext:
+    runAsGroup: 472
+    runAsNonRoot: true
+    runAsUser: 472
+    seccompProfile:
+      type: RuntimeDefault
+  serviceAccountName: kube-prometheus-stack-grafana-test
+  volumes:
+    - configMap:
+        name: kube-prometheus-stack-grafana-test
+      name: tests
+    - emptyDir: {}
+      name: tmp

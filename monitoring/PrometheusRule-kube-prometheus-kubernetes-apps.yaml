@@ -6,8 +6,8 @@ metadata:
     app.kubernetes.io/instance: kube-prometheus-stack
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kube-prometheus
-    app.kubernetes.io/version: 91.5.0
-    chart: kube-prometheus-stack-91.5.0
+    app.kubernetes.io/version: 91.8.2
+    chart: kube-prometheus-stack-91.8.2
     heritage: Helm
     release: kube-prometheus-stack
   name: kube-prometheus-kubernetes-apps
@@ -282,6 +282,9 @@ spec:
               -
               kube_poddisruptionbudget_status_current_healthy{job="kube-state-metrics", namespace=~".*"}
             )
+            > 0
+            and
+            kube_poddisruptionbudget_status_expected_pods{job="kube-state-metrics", namespace=~".*"}
             > 0
           for: 15m
           labels:
