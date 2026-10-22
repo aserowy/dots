@@ -7,8 +7,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-server
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.5.3
-    helm.sh/chart: argo-cd-10.9.6
+    app.kubernetes.io/version: v3.5.4
+    helm.sh/chart: argo-cd-10.10.0
   name: argocd-server
   namespace: argocd
 spec:
@@ -29,9 +29,9 @@ spec:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: argocd-server
         app.kubernetes.io/part-of: argocd
-        app.kubernetes.io/version: v3.5.3
+        app.kubernetes.io/version: v3.5.4
         haproxy/egress: allow
-        helm.sh/chart: argo-cd-10.9.6
+        helm.sh/chart: argo-cd-10.10.0
     spec:
       affinity:
         podAntiAffinity:
@@ -363,7 +363,7 @@ spec:
                   key: server.sync.replace.allowed
                   name: argocd-cmd-params-cm
                   optional: true
-          image: quay.io/argoproj/argocd:v3.5.3
+          image: quay.io/argoproj/argocd:v3.5.4
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
