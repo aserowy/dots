@@ -8,8 +8,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: kube-prometheus-prometheus-operator
     app.kubernetes.io/part-of: kube-prometheus
-    app.kubernetes.io/version: 91.8.2
-    chart: kube-prometheus-stack-91.8.2
+    app.kubernetes.io/version: 92.0.0
+    chart: kube-prometheus-stack-92.0.0
     heritage: Helm
     release: kube-prometheus-stack
   name: kube-prometheus-operator
@@ -30,8 +30,8 @@ spec:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kube-prometheus-prometheus-operator
         app.kubernetes.io/part-of: kube-prometheus
-        app.kubernetes.io/version: 91.8.2
-        chart: kube-prometheus-stack-91.8.2
+        app.kubernetes.io/version: 92.0.0
+        chart: kube-prometheus-stack-92.0.0
         heritage: Helm
         release: kube-prometheus-stack
     spec:
@@ -94,6 +94,8 @@ spec:
             - mountPath: /cert
               name: tls-secret
               readOnly: true
+      nodeSelector:
+        kubernetes.io/os: linux
       securityContext:
         fsGroup: 65534
         runAsGroup: 65534
