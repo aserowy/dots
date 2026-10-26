@@ -359,6 +359,24 @@
             }
           ];
         };
+
+        homelab-06-l570 = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            disko.nixosModules.disko
+            sops.nixosModules.sops
+            ./sops.nix
+
+            ./systems/homelab-06-l570
+            {
+              imports = [ ./users ];
+              users.root = {
+                enable = true;
+                sopsPasswordFilePath = "homelab/root_password";
+              };
+            }
+          ];
+        };
       };
 
       nixidyEnvs.x86_64-linux = nixidy.lib.mkEnvs {
