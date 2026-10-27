@@ -45,20 +45,9 @@
                     ];
                     mountpoint = "/nix";
                   };
-                  "/swap" = {
-                    mountpoint = "/.swapvol";
-                    swap = {
-                      swapfile.size = "8G";
-                    };
-                  };
                 };
 
                 mountpoint = "/partition-root";
-                swap = {
-                  swapfile = {
-                    size = "8G";
-                  };
-                };
               };
             };
           };
