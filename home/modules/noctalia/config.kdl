@@ -21,7 +21,7 @@ input {
 }
 
 output "HDMI-A-1" {
-    transform "90"
+    transform "270"
 }
 
 layout {
