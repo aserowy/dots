@@ -112,11 +112,11 @@ debug {
 }
 
 binds {
-    Mod+B { spawn "brave"; }
-    Mod+T { spawn "ghostty"; }
+    Mod+B allow-inhibiting=false { spawn "brave"; }
+    Mod+T allow-inhibiting=false { spawn "ghostty"; }
     Mod+E { spawn "ghostty" "-e" "yeet"; }
 
-    Mod+Space { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
+    Mod+Space allow-inhibiting=false { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
     Mod+V { spawn  "noctalia" "msg" "panel-toggle" "clipboard"; }
     Mod+S { spawn "noctalia" "msg" "panel-toggle" "control-center"; }
 
@@ -129,38 +129,38 @@ binds {
 
     Mod+A { spawn  "noctalia" "msg" "session" "lock"; }
 
-    Mod+Shift+C { close-window; }
+    Mod+Shift+C allow-inhibiting=false { close-window; }
 
-    Mod+H { focus-column-left; }
-    Mod+J { focus-window-or-workspace-down; }
-    Mod+K { focus-window-or-workspace-up; }
-    Mod+L { focus-column-right; }
+    Mod+H allow-inhibiting=false { focus-column-left; }
+    Mod+J allow-inhibiting=false { focus-window-or-workspace-down; }
+    Mod+K allow-inhibiting=false { focus-window-or-workspace-up; }
+    Mod+L allow-inhibiting=false { focus-column-right; }
 
-    Mod+Shift+H { move-column-left; }
-    Mod+Shift+J { move-window-down-or-to-workspace-down; }
-    Mod+Shift+K { move-window-up-or-to-workspace-up; }
-    Mod+Shift+L { move-column-right; }
+    Mod+Shift+H allow-inhibiting=false { move-column-left; }
+    Mod+Shift+J allow-inhibiting=false { move-window-down-or-to-workspace-down; }
+    Mod+Shift+K allow-inhibiting=false { move-window-up-or-to-workspace-up; }
+    Mod+Shift+L allow-inhibiting=false { move-column-right; }
 
-    Mod+Alt+Shift+J { move-workspace-down; }
-    Mod+Alt+Shift+K { move-workspace-up; }
+    Mod+Alt+Shift+J allow-inhibiting=false { move-workspace-down; }
+    Mod+Alt+Shift+K allow-inhibiting=false { move-workspace-up; }
 
-    Mod+Shift+U { consume-or-expel-window-left; }
-    Mod+Shift+I { consume-or-expel-window-right; }
+    Mod+Shift+U allow-inhibiting=false { consume-or-expel-window-left; }
+    Mod+Shift+I allow-inhibiting=false { consume-or-expel-window-right; }
     Mod+Shift+G { toggle-column-tabbed-display; }
 
-    Mod+N { focus-monitor-next; }
-    Mod+P { focus-monitor-previous; }
-    Mod+Shift+N { move-column-to-monitor-next; }
-    Mod+Shift+P { move-column-to-monitor-previous; }
+    Mod+N allow-inhibiting=false { focus-monitor-next; }
+    Mod+P allow-inhibiting=false { focus-monitor-previous; }
+    Mod+Shift+N allow-inhibiting=false { move-column-to-monitor-next; }
+    Mod+Shift+P allow-inhibiting=false { move-column-to-monitor-previous; }
 
     Mod+O { toggle-overview; }
     Mod+Z { fullscreen-window; }
 
-    Mod+Alt+Semicolon { switch-preset-column-width; }
-    Mod+Alt+H { set-column-width "-10%"; }
-    Mod+Alt+L { set-column-width "+10%"; }
-    Mod+Alt+J { set-window-height "-10%"; }
-    Mod+Alt+K { set-window-height "+10%"; }
+    Mod+Alt+Semicolon allow-inhibiting=false { switch-preset-column-width; }
+    Mod+Alt+H allow-inhibiting=false { set-column-width "-10%"; }
+    Mod+Alt+L allow-inhibiting=false { set-column-width "+10%"; }
+    Mod+Alt+J allow-inhibiting=false { set-window-height "-10%"; }
+    Mod+Alt+K allow-inhibiting=false { set-window-height "+10%"; }
 }
 
 environment {
