@@ -23,9 +23,14 @@
       # NOTE: ghostty is installed on system level with brew
       ".config/ghostty/config".source = ./components/ghostty/ghostty.config;
 
-      ".zshrc".source = builtins.toFile "user-zshrc" ''
-        export PATH="$HOME/.local/Homebrew/bin:$HOME/.bun/bin:$PATH"
+      ".zprofile".source = builtins.toFile "user-zprofile" ''
+        eval "$(/opt/homebrew/bin/brew shellenv zsh)"
 
+        export PATH="$HOME/.bun/bin:$PATH"
+
+      '';
+
+      ".zshrc".source = builtins.toFile "user-zshrc" ''
         nu; exit
       '';
     };
