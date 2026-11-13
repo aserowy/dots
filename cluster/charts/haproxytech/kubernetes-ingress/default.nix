@@ -1,6 +1,6 @@
 {
   repo = "https://haproxytech.github.io/helm-charts";
   chart = "kubernetes-ingress";
-  version = "1.54.3";
-  chartHash = "sha256-zsJyHo80hpFtNKM1IgKB7xPEdloajeKUPUI07Jgkrww=";
+  version = "1.54.4";
+  chartHash = "sha256-+1PosGzMcxQLfmjuB1XK8fKEX6b6ngYtFRp4XcmRqr8=";
 }
