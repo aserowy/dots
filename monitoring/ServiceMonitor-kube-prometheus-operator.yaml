@@ -8,8 +8,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: kube-prometheus-prometheus-operator
     app.kubernetes.io/part-of: kube-prometheus
-    app.kubernetes.io/version: 92.11.0
-    chart: kube-prometheus-stack-92.11.0
+    app.kubernetes.io/version: 92.15.0
+    chart: kube-prometheus-stack-92.15.0
     heritage: Helm
     release: kube-prometheus-stack
   name: kube-prometheus-operator
@@ -22,7 +22,7 @@ spec:
       tlsConfig:
         ca:
           secret:
-            key: ca
+            key: ca.crt
             name: kube-prometheus-admission
             optional: false
         serverName: kube-prometheus-operator

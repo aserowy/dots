@@ -8,8 +8,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: kube-prometheus-prometheus-operator
     app.kubernetes.io/part-of: kube-prometheus
-    app.kubernetes.io/version: 92.11.0
-    chart: kube-prometheus-stack-92.11.0
+    app.kubernetes.io/version: 92.15.0
+    chart: kube-prometheus-stack-92.15.0
     heritage: Helm
     release: kube-prometheus-stack
   name: kube-prometheus-operator
@@ -30,8 +30,8 @@ spec:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kube-prometheus-prometheus-operator
         app.kubernetes.io/part-of: kube-prometheus
-        app.kubernetes.io/version: 92.11.0
-        chart: kube-prometheus-stack-92.11.0
+        app.kubernetes.io/version: 92.15.0
+        chart: kube-prometheus-stack-92.15.0
         heritage: Helm
         release: kube-prometheus-stack
     spec:
@@ -42,22 +42,22 @@ spec:
             - --kubelet-endpoints=true
             - --kubelet-endpointslice=false
             - --localhost=127.0.0.1
-            - --prometheus-config-reloader=quay.io/prometheus-operator/prometheus-config-reloader:v0.94.1
+            - --prometheus-config-reloader=quay.io/prometheus-operator/prometheus-config-reloader:v0.94.2
             - --config-reloader-cpu-request=0
             - --config-reloader-cpu-limit=0
             - --config-reloader-memory-request=0
             - --config-reloader-memory-limit=0
-            - --thanos-default-base-image=quay.io/thanos/thanos:v0.42.4
+            - --thanos-default-base-image=quay.io/thanos/thanos:v0.42.5
             - --secret-field-selector=type!=kubernetes.io/dockercfg,type!=helm.sh/release.v1
             - --web.enable-tls=true
-            - --web.cert-file=/cert/cert
-            - --web.key-file=/cert/key
+            - --web.cert-file=/cert/tls.crt
+            - --web.key-file=/cert/tls.key
             - --web.listen-address=:10250
             - --web.tls-min-version=VersionTLS13
           env:
             - name: GOGC
               value: "30"
-          image: quay.io/prometheus-operator/prometheus-operator:v0.94.1
+          image: quay.io/prometheus-operator/prometheus-operator:v0.94.2
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3

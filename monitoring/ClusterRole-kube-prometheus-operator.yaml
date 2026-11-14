@@ -8,8 +8,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: kube-prometheus-prometheus-operator
     app.kubernetes.io/part-of: kube-prometheus
-    app.kubernetes.io/version: 92.11.0
-    chart: kube-prometheus-stack-92.11.0
+    app.kubernetes.io/version: 92.15.0
+    chart: kube-prometheus-stack-92.15.0
     heritage: Helm
     release: kube-prometheus-stack
   name: kube-prometheus-operator
@@ -18,9 +18,13 @@ rules:
       - monitoring.coreos.com
     resources:
       - alertmanagers
+      - alertmanagers/finalizers
       - prometheusagents
+      - prometheusagents/finalizers
       - prometheuses
+      - prometheuses/finalizers
       - thanosrulers
+      - thanosrulers/finalizers
     verbs:
       - patch
   - apiGroups:
