@@ -4934,6 +4934,10 @@ let
     "cert-manager.io.v1.CertificateStatusAcmeAri" = {
 
       options = {
+        "certID" = mkOption {
+          description = "CertID is the ARI CertID (RFC 9773) of the certificate this renewal information was\nfetched for. This is used to determine if we need to re-fetch the renewal information\nas changed cert id means that ARI fetched before is stale.";
+          type = (types.nullOr types.str);
+        };
         "explanationURL" = mkOption {
           description = "ExplanationURL is a human-readable URL that may explain why the suggested window\nhas its current value.";
           type = (types.nullOr types.str);
@@ -4957,6 +4961,7 @@ let
       };
 
       config = {
+        "certID" = mkOverride 1002 null;
         "explanationURL" = mkOverride 1002 null;
         "lastChecked" = mkOverride 1002 null;
         "lastError" = mkOverride 1002 null;
