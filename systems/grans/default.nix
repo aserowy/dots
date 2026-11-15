@@ -9,6 +9,7 @@
 
   environment.systemPackages = with pkgs; [
     deja-dup
+    digikam
   ];
 
   hardware.bluetooth.enable = true;
