@@ -8,7 +8,7 @@
   ];
 
   environment.systemPackages = with pkgs; [
-    duplicati
+    deja-dup
   ];
 
   hardware.bluetooth.enable = true;

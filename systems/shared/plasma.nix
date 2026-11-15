@@ -24,7 +24,6 @@
       ghostty
       git
       neovim
-      onedrivegui
       yeet
 
       kdePackages.discover

@@ -13,7 +13,6 @@
     ./kitty
     ./lf
     ./logseq
-    ./onedrive
     ./opencode
     ./starship
     ./swaync
