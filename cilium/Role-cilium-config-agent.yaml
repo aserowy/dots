@@ -3,7 +3,7 @@ kind: Role
 metadata:
   labels:
     app.kubernetes.io/part-of: cilium
-    helm.sh/chart: cilium-1.20.3
+    helm.sh/chart: cilium-1.20.4
   name: cilium-config-agent
   namespace: kube-system
 rules:
