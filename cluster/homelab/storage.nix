@@ -12,9 +12,6 @@ in
       chart = charts.longhorn.longhorn;
 
       values = {
-        # FIX: for longhorn/longhorn#12573
-        image.longhorn.instanceManager.tag = "v1.11.0-hotfix-1";
-
         defaultBackupStore = {
           backupTarget = "azblob://backup@core.windows.net/";
           backupTargetCredentialSecret = "longhorn-azblob-secret";
