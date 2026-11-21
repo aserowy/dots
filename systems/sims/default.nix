@@ -1,10 +1,14 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 {
   imports = [
     ../shared/plasma.nix
 
     ./disko.nix
     ./hardware-configuration.nix
+  ];
+
+  environment.systemPackages = with pkgs; [
+    nextcloud-client
   ];
 
   networking = {
