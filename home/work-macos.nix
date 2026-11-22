@@ -23,6 +23,13 @@
       # NOTE: ghostty is installed on system level with brew
       ".config/ghostty/config".source = ./components/ghostty/ghostty.config;
 
+      # NOTE: podman is installed with brew; libkrun (krunkit) exposes /dev/kvm
+      # inside the podman machine via nested virtualization, applehv does not
+      ".config/containers/containers.conf".text = ''
+        [machine]
+        provider = "libkrun"
+      '';
+
       ".zprofile".source = builtins.toFile "user-zprofile" ''
         eval "$(/opt/homebrew/bin/brew shellenv zsh)"
 
