@@ -132,11 +132,15 @@ in
       };
 
       # NOTE: longhorn requirement
-      supportedFilesystems = [ "nfs" ];
+      supportedFilesystems = [
+        "cifs"
+        "nfs"
+      ];
     };
 
     # NOTE: longhorn requirement
     environment.systemPackages = with pkgs; [
+      cifs-utils
       cryptsetup
       nfs-utils
     ];
