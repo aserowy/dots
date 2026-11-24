@@ -20,7 +20,9 @@ in
         };
 
         defaultSettings = {
+          backupConcurrentLimit = "1";
           concurrentAutomaticEngineUpgradePerNodeLimit = "1";
+          concurrentReplicaRebuildPerNodeLimit = "2";
           replicaAutoBalance = "best-effort";
           storageOverProvisioningPercentage = "75";
         };
