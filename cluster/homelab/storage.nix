@@ -13,10 +13,9 @@ in
 
       values = {
         defaultBackupStore = {
-          backupTarget = "azblob://backup@core.windows.net/";
-          backupTargetCredentialSecret = "longhorn-azblob-secret";
-          # NOTE: set intervall to two days: 60*60*24*2
-          pollInterval = "172800";
+          backupTarget = "cifs://u727322-sub1.your-storagebox.de/u727322-sub1?cifsOptions=seal,vers=3.1.1,soft";
+          backupTargetCredentialSecret = "longhorn-cifs-secret";
+          pollInterval = "3600";
         };
 
         defaultSettings = {
