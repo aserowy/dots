@@ -1,9 +1,9 @@
 apiVersion: v1
 data:
   default-resource.yaml: |-
-    backup-target: azblob://backup@core.windows.net/
-    backup-target-credential-secret: longhorn-azblob-secret
-    backupstore-poll-interval: 172800
+    backup-target: cifs://u727322-sub1.your-storagebox.de/u727322-sub1?cifsOptions=seal,vers=3.1.1,soft
+    backup-target-credential-secret: longhorn-cifs-secret
+    backupstore-poll-interval: 3600
 kind: ConfigMap
 metadata:
   labels:
